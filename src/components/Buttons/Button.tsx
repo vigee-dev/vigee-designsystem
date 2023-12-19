@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { Button as ShadButton } from "../../ui/button";
+import { Button as ShadButton } from "../ui/button";
 import { LoadingButton } from "./LoadingButton";
 
 interface ButtonProps {

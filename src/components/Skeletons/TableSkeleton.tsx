@@ -19,7 +19,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../../ui/table";
+} from "../ui/table";
 
 import React from "react";
 import { TableRowSkeleton } from "./Skeletons";
