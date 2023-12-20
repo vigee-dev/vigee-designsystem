@@ -1,14 +1,13 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
-import { useDebouncedCallback } from "use-debounce";
 import {
   Select,
   SelectGroup,
   SelectTrigger,
   SelectContent,
   SelectItem,
-} from "@/app/components/design-system/src/components/ui/select";
+} from "../ui/select";
 
 interface Item {
   value: string;

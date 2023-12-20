@@ -12,7 +12,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 
-import { Input } from "@/app/components/design-system/src/components/ui/input";
+import { Input } from "../ui/input";
 
 import {
   Table,
@@ -21,7 +21,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/app/components/design-system/src/components/ui/table";
+} from "../ui/table";
 import React from "react";
 
 interface DataTableProps<TData, TValue> {
