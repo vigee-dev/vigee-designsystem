@@ -14,7 +14,7 @@ import {
   ArrowLeftIcon,
   ArrowLeftFromLine,
 } from "lucide-react";
-import VariableLogo from "../../../../Vigee/Logos/VariableLogo";
+import VariableLogo from "../Logos/VariableLogo";
 import VigeeGrayLogo from "@/img/logos/VigeeGrayLogo.png";
 import { signout } from "@/app/lib/auth/signout";
 import { Button } from "../ui/button";
