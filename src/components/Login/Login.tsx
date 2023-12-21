@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,7 +24,7 @@ import {
 import { Input } from "../../components/ui/input";
 
 interface Props {
-  logo: string;
+  logo: StaticImageData;
 }
 
 export default function Login({ logo }: Props) {
