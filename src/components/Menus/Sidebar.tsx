@@ -15,8 +15,8 @@ import {
   ArrowLeftFromLine,
 } from "lucide-react";
 import VariableLogo from "../Logos/VariableLogo";
-import VigeeGrayLogo from "@/img/logos/VigeeGrayLogo.png";
-import { signout } from "@/app/lib/auth/signout";
+import VigeeGrayLogo from "../../img/logos/VigeeGrayLogo.png";
+// import { signout } from "@/app/lib/auth/signout";
 import { Button } from "../ui/button";
 
 function classNames(...classes: (string | boolean)[]): string {
@@ -227,7 +227,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 </ul>
               </li>
 
-              <form action={signout} className="absolute bottom-4 ">
+              {/* <form action={signout} className="absolute bottom-4 ">
                 <Button className="group bg-transparent text-md font-display text-gray-600 hover:font-bold hover:text-primary hover:bg-transparent flex gap-x-2 rounded-md p-[4px] leading-6  transform transition-all duration-100 ease-in-out items-center  ">
                   <PowerIcon
                     className={classNames(
@@ -242,7 +242,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     Déconnexion
                   </div>
                 </Button>
-              </form>
+              </form> */}
             </ul>
           </nav>
         </div>
