@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import Image from "next/image";
 import logo from "@/img/logos/logo.png";
@@ -9,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSendResetEmail } from "@/app/api/password/usePassword";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import Copyright from "../../../../Vigee/Copyright/Copyright";
+import Copyright from "./Copyright";
 
 export default function ForgotPassword() {
   type FormValues = {

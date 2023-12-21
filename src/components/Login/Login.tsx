@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import VariableLogo from "../Logos/VariableLogo";
-import Copyright from "../../../../Vigee/Copyright/Copyright";
+import Copyright from "./Copyright";
 import { authenticate } from "@/app/lib/auth/signin";
 import { useFormState, useFormStatus } from "react-dom";
 import {
