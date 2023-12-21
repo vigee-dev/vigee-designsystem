@@ -1,91 +1,131 @@
+"use client";
 import React from "react";
+import Image from "next/image";
+import logo from "@/img/logos/logoSmallColor.png";
 import Link from "next/link";
-import VariableLogo from "../Logos/VariableLogo";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import Copyright from "./Copyright";
-import { authenticate } from "@/app/lib/auth/signin";
-import { useFormState, useFormStatus } from "react-dom";
+import * as z from "zod";
+import { Button } from "../Buttons/Button";
+import { toast } from "../../components/ui/use-toast";
+import { TypographyH1 } from "../Typography/Typography";
+import { signIn } from "next-auth/react";
 import {
-  ArrowRightIcon,
-  ExclamationCircleIcon,
-} from "@heroicons/react/24/outline";
-import { Button } from "@/app/components/design-system/src/components/ui/button";
-import { InputLabel } from "../../../../Forms/InputLabel";
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../../components/ui/form";
 
-type FormData = {
-  email: string;
-  password: string;
-};
+import { Input } from "../../components/ui/input";
 
 export default function Login() {
-  const [code, action] = useFormState(authenticate, undefined);
-  const { pending } = useFormStatus();
+  const router = useRouter();
 
-  function LoginButton() {
-    const { pending } = useFormStatus();
+  type FormValues = {
+    email: string;
+    password: string;
+  };
 
-    return (
-      <Button type="submit" className="mt-4 w-full" aria-disabled={pending}>
-        Connexion
-      </Button>
-    );
-  }
+  // Schéma de validation zod
+  const schema = z.object({
+    email: z.string().email("L'adresse email est invalide."),
+    password: z.string().min(8, {
+      message: "Le mot de passe doit contenir au moins 8 caractères.",
+    }),
+  });
+
+  const form = useForm<FormValues>({
+    resolver: zodResolver(schema),
+  });
+
+  const onSubmit = async (data: FormValues) => {
+    console.log(data);
+    const result = await signIn("credentials", {
+      redirect: false,
+      email: data.email,
+      password: data.password,
+    });
+
+    if (result?.error) {
+      console.log(result.error);
+      toast({ title: "Email ou mot de passe incorrect" });
+    } else {
+      toast({ title: "Bienvenue" });
+      router.push("/");
+    }
+  };
 
   return (
     <>
-      <div className="flex flex-col h-screen justify-center items-center md:p-24 md:py-4 min-h-screen md:min-h-fit">
-        <div className="bg-white flex flex-col items-center">
-          <div className="flex justify-center">
-            <VariableLogo title="Vigee" big />
+      <div className="w-full max-w-xl space-y-6 align-center my-auto justify-start mx-auto py-40 px-8 md:p-24 md:py-4 min-h-screen md:min-h-fit ">
+        <Image
+          width={100}
+          height={100}
+          className=" mx-auto"
+          src={logo}
+          alt="Fic Expertise by Vigee"
+        />
+        <div className="flex flex-col justify-start mx-auto shadow-sm border border-gray-100 rounded-xl p-8  bg-white">
+          <div>
+            <TypographyH1 className="text-primary py-2 pt-0">
+              Connexion
+            </TypographyH1>
           </div>
-          <form className="space-y-3" action={action}>
-            <div className="flex flex-col pointer-events-none  inset-0 z-10 rounded-md gap-12 p-4 " />
 
-            <InputLabel
-              label="Email"
-              name="email"
-              type="email"
-              placeholder="Email"
-            />
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="space-y-4"
+              id="form"
+            >
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="" {...field} />
+                    </FormControl>
 
-            <InputLabel
-              label="Mot de passe"
-              name="password"
-              type="password"
-              placeholder="Mot de passe"
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <div className="flex items-center justify-center">
-              <Link
-                href="/forgot-password"
-                className="font-medium text-primary hover:text-secondary text-sm"
-              >
-                Mot de passe oublié ?
-              </Link>
-            </div>
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Mot de passe</FormLabel>
+                    <FormControl>
+                      <Input placeholder="" {...field} type="password" />
+                    </FormControl>
 
-            <LoginButton />
-
-            {code === "CredentialSignin" && (
-              <div className="flex h-8 items-end space-x-1">
-                <>
-                  <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
-                  <p aria-live="polite" className="text-sm text-red-500">
-                    Identifiants incorrects
-                  </p>
-                </>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <div className="flex flex-col items-center w-full">
+                <Link
+                  href="/forgot-password"
+                  className="font-semibold text-gray-500 text-sm hover:text-secondary flex gap-x-2 py-2"
+                >
+                  Mot de passe oublié ?
+                </Link>
+                <Button type="submit" className="w-full">
+                  Connexion
+                </Button>
               </div>
-            )}
-
-            <p className="text-center text-sm leading-6 text-gray-500 ">
-              Pas encore de compte ?{" "}
-              <Link
-                href="/sign-up"
-                className="font-medium text-sm text-secondary hover:text-primary  transform ease-in-out duration-200"
-              >
-                {"Créez votre compte gratuitement"}
-              </Link>
-            </p>
-          </form>
+            </form>
+          </Form>
         </div>
         <Copyright />
       </div>
