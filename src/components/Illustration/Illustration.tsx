@@ -14,7 +14,7 @@ export default function Illustration({
   img,
 }: IllustrationProps) {
   return (
-    <div className="flex flex-col items-center justify-center bg-dark h-screen w-full px-12 ">
+    <div className="flex flex-col items-center justify-center bg-primary h-screen w-full px-12 ">
       {img && (
         <Image
           width={200}

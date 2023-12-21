@@ -54,7 +54,7 @@ export default function ForgotPassword({ logo }: Props) {
           height={100}
           className=" mx-auto"
           src={logo}
-          alt="Fic Expertise by Vigee"
+          alt="Vigee - Make IT Simple"
         />
         <div className="flex flex-col justify-start mx-auto shadow-sm border border-gray-100 rounded-xl p-8 bg-white ">
           <div>
