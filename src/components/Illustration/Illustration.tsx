@@ -2,7 +2,7 @@ import Image, { StaticImageData } from "next/image";
 import React from "react";
 
 interface IllustrationProps {
-  title: string;
+  title?: string;
   title2?: string;
   subtitle?: string;
   img?: StaticImageData;

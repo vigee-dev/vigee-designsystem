@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import logo from "@/img/logos/logoSmallColor.png";
 import Link from "next/link";
 import { ArrowLongLeftIcon } from "@heroicons/react/24/solid";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,7 +22,11 @@ import {
 } from "../../components/ui/form";
 import { Input } from "../../components/ui/input";
 
-export default function ForgotPassword() {
+interface Props {
+  logo: string;
+}
+
+export default function ForgotPassword({ logo }: Props) {
   type FormValues = {
     email: string;
   };

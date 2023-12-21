@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import logo from "@/img/logos/logoSmallColor.png";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,7 +23,11 @@ import {
 
 import { Input } from "../../components/ui/input";
 
-export default function Login() {
+interface Props {
+  logo: string;
+}
+
+export default function Login({ logo }: Props) {
   const router = useRouter();
 
   type FormValues = {
@@ -69,7 +72,7 @@ export default function Login() {
           height={100}
           className=" mx-auto"
           src={logo}
-          alt="Fic Expertise by Vigee"
+          alt="Vigee - Make IT Simple"
         />
         <div className="flex flex-col justify-start mx-auto shadow-sm border border-gray-100 rounded-xl p-8  bg-white">
           <div>
@@ -113,10 +116,10 @@ export default function Login() {
                   </FormItem>
                 )}
               />
-              <div className="flex flex-col items-center w-full">
+              <div className="flex flex-col items-center ">
                 <Link
                   href="/forgot-password"
-                  className="font-semibold text-gray-500 text-sm hover:text-secondary flex gap-x-2 py-2"
+                  className="font-base hover:font-bold text-sm hover:text-primary flex gap-x-2 text-gray-400 transform hover:scale-105 transition duration-300 ease-in-out pb-2"
                 >
                   Mot de passe oublié ?
                 </Link>

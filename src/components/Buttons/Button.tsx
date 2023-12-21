@@ -39,7 +39,11 @@ export function Button({
   return pending ? (
     <LoadingButton variant={variant}>{children}</LoadingButton>
   ) : href && !pending ? (
-    <ShadButton asChild className="font-bold text-sm border" variant={variant}>
+    <ShadButton
+      asChild
+      className={"font-bold text-sm border " + className}
+      variant={variant}
+    >
       <Link href={href}>{children}</Link>
     </ShadButton>
   ) : (
@@ -48,7 +52,7 @@ export function Button({
       onClick={onClick}
       type={type}
       disabled={disabled}
-      className={"font-bold text-sm border"}
+      className={"font-bold text-sm border " + className}
     >
       {children}
     </ShadButton>
