@@ -1,9 +1,8 @@
-"use client";
+import React from "react";
 
 import {
   ColumnDef,
   ColumnFiltersState,
-  SortingState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -11,8 +10,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-
-import { Input } from "../ui/input";
 
 import {
   Table,
@@ -22,7 +19,6 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import React from "react";
 
 interface DataTableProps<TData, TValue> {
   title?: string;
@@ -68,19 +64,6 @@ export function DataTable<TData, TValue>({
         {title && <p>{title}</p>}
         {info && <p>{info}</p>}
       </div>
-
-      {search && (
-        <div className="flex items-center pb-4">
-          <Input
-            placeholder="Rechercher..."
-            value={globalFilter ?? ""}
-            onChange={(event) => {
-              setGlobalFilter(event.target.value || undefined);
-            }}
-            className="max-w-sm"
-          />
-        </div>
-      )}
 
       <div>
         <Table>
