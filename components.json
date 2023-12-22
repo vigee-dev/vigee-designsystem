@@ -11,6 +11,6 @@
   },
   "aliases": {
     "components": "@/app/components/design-system/src/components",
-    "utils": "@/app/components/design-system/src/lib/utils"
+    "utils": "../../lib/utils"
   }
 }
