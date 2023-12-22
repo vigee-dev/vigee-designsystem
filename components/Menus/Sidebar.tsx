@@ -140,12 +140,10 @@ const Sidebar: React.FC<SidebarProps> = ({
                 />
               )}
               {hoverMenu && !isSmallScreen && !sidebarOpen && (
-                <div className="flex shrink-0 items-center justify-left  cursor-pointer text-gray-400 hover:text-gray-800 pt-1 transform transition-all duration-300 ease-in-out">
-                  <ChevronRightIcon
-                    onClick={() => setSidebarOpen(true)}
-                    className="text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-800 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer p-1"
-                  />
-                </div>
+                <ChevronRightIcon
+                  onClick={() => setSidebarOpen(true)}
+                  className="w-12 text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-800 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer p-1"
+                />
               )}
               {isSmallScreen && (
                 <div className="flex shrink-0 items-center justify-left  cursor-pointer text-gray-400 hover:text-gray-800 pt-1 transform transition-all duration-300 ease-in-out">
@@ -249,17 +247,17 @@ const Sidebar: React.FC<SidebarProps> = ({
       <main
         className={`${
           sidebarOpen ? "lg:pl-56" : "lg:pl-16"
-        } pt-2 md:py-2 bg-light-grey  h-full min-h-screen `}
+        } pt-2 md:py-2 bg-backgroundGray  h-full min-h-screen `}
       >
         <div className="   px-4 md:px-8 md:py-6 pb-24 ">
           {!sidebarOpen && (
             <div
-              className="flex bg-light-grey  shrink-0 items-center justify-start md:justify-start "
+              className="flex shrink-0 items-center justify-start md:justify-start "
               onClick={() => setSidebarOpen(true)}
             >
-              {/* {isSmallScreen && (
+              {isSmallScreen && (
                 <ArrowLeftFromLine className="h-8 w-8 text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-800 font-bold p-2 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer " />
-              )} */}
+              )}
             </div>
           )}
 
