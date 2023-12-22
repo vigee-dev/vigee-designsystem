@@ -21,12 +21,16 @@ import {
   FormMessage,
 } from "../../components/ui/form";
 import { Input } from "../../components/ui/input";
+import { redirect } from "next/dist/server/api-utils";
+import { useRouter } from "next/navigation";
 
 interface Props {
   logo: StaticImageData;
 }
 
 export default function ForgotPassword({ logo }: Props) {
+  const router = useRouter();
+
   type FormValues = {
     email: string;
   };
@@ -40,10 +44,13 @@ export default function ForgotPassword({ logo }: Props) {
     resolver: zodResolver(schema),
   });
 
+  const email = form.watch("email");
+
   function onSubmit(data: FormValues) {
     toast({
       title: "un email de réinitialisation de mot de passe a été envoyé",
     });
+    router.push("/login");
   }
 
   return (
@@ -94,6 +101,8 @@ export default function ForgotPassword({ logo }: Props) {
               <div className="flex flex-col items-center ">
                 <div className="absolute md:relative bottom-12 md:bottom-0 w-full px-4 md:px-0 items-center gap-2 ">
                   <Button
+                    pending={form.formState.isSubmitting}
+                    disabled={!email}
                     type="submit"
                     className="w-full h-12 text-md font-bold "
                   >

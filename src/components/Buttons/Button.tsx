@@ -37,7 +37,12 @@ export function Button({
   pending,
 }: ButtonProps) {
   return pending ? (
-    <LoadingButton variant={variant}>{children}</LoadingButton>
+    <LoadingButton
+      variant={variant}
+      className={"font-bold text-sm border " + className}
+    >
+      {children}
+    </LoadingButton>
   ) : href && !pending ? (
     <ShadButton
       asChild

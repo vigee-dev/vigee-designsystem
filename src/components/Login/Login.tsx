@@ -47,6 +47,9 @@ export default function Login({ logo }: Props) {
     resolver: zodResolver(schema),
   });
 
+  const email = form.watch("email");
+  const password = form.watch("password");
+
   const onSubmit = async (data: FormValues) => {
     console.log(data);
     const result = await signIn("credentials", {
@@ -140,6 +143,8 @@ export default function Login({ logo }: Props) {
 
                 <div className="absolute md:relative bottom-12 md:bottom-0 w-full px-4 md:px-0 items-center gap-2 ">
                   <Button
+                    pending={form.formState.isSubmitting}
+                    disabled={!email || !password}
                     type="submit"
                     className="w-full h-12 text-md font-bold "
                   >

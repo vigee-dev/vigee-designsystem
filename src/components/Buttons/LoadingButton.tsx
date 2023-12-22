@@ -15,16 +15,18 @@ interface ButtonLoadingProps {
     | undefined;
 
   text?: string;
+  className?: string;
 }
 
 export function LoadingButton({
   variant = "default",
   children,
   text = "Enregistrement en cours",
+  className,
 }: ButtonLoadingProps) {
   return (
-    <Button disabled variant={variant}>
-      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+    <Button disabled variant={variant} className={className}>
+      <Loader2 className={`mr-2 h-4 w-4 animate-spin `} />
       {children}
     </Button>
   );
