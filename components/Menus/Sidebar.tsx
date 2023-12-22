@@ -142,7 +142,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               {hoverMenu && !isSmallScreen && !sidebarOpen && (
                 <ChevronRightIcon
                   onClick={() => setSidebarOpen(true)}
-                  className="w-12 mb-4 text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-800 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer p-1"
+                  className="w-12 mb-2 text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-800 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer p-1"
                 />
               )}
               {isSmallScreen && (
@@ -256,7 +256,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               onClick={() => setSidebarOpen(true)}
             >
               {isSmallScreen && (
-                <ArrowLeftFromLine className="h-8 w-8 text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-800 font-bold p-2 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer " />
+                <ArrowLeftFromLine className="h-8 w-8 mb-2 text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-800 font-bold p-2 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer " />
               )}
             </div>
           )}
