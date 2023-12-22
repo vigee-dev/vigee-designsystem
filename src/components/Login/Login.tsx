@@ -128,19 +128,16 @@ export default function Login({ logo }: Props) {
                   </FormItem>
                 )}
               />
-
-              <div className="flex flex-col items-center ">
+              <div className="flex flex-col md:items-center ">
                 <Link
                   href="/forgot-password"
-                  className="font-base hover:font-bold text-sm hover:text-primary flex gap-x-2 text-gray-00 transform hover:scale-105 transition duration-300 ease-in-out pb-2"
+                  className="font-base  hover:font-bold text-sm hover:text-primary flex gap-x-2 text-gray-500 transform hover:scale-105 transition duration-300 ease-in-out pb-2"
                 >
                   Mot de passe oublié ?
                 </Link>
+              </div>
 
-                {/* <div className="flex md:hidden items-center py-2">
-                  <Copyright />
-                </div> */}
-
+              <div className="flex flex-col items-center ">
                 <div className="absolute md:relative bottom-12 md:bottom-0 w-full px-4 md:px-0 items-center gap-2 ">
                   <Button
                     pending={form.formState.isSubmitting}
