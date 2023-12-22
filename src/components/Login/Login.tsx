@@ -94,7 +94,11 @@ export default function Login({ logo }: Props) {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="" {...field} />
+                      <Input
+                        placeholder=""
+                        {...field}
+                        className="text-[16px] md:text-sm"
+                      />
                     </FormControl>
 
                     <FormMessage />
@@ -109,7 +113,12 @@ export default function Login({ logo }: Props) {
                   <FormItem>
                     <FormLabel>Mot de passe</FormLabel>
                     <FormControl>
-                      <Input placeholder="" {...field} type="password" />
+                      <Input
+                        placeholder=""
+                        {...field}
+                        type="password"
+                        className="text-[16px] md:text-sm"
+                      />
                     </FormControl>
 
                     <FormMessage />
