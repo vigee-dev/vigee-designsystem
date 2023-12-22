@@ -133,13 +133,11 @@ const Sidebar: React.FC<SidebarProps> = ({
                   />
                 )}
               </Link>
-              {hoverMenu && !isSmallScreen && sidebarOpen && (
-                <div className="flex shrink-0 items-center justify-left  cursor-pointer text-gray-400 hover:text-gray-800 pt-1 transform transition-all duration-300 ease-in-out">
-                  <ChevronLeftIcon
-                    onClick={() => setSidebarOpen(false)}
-                    className="text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-800 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer p-1"
-                  />
-                </div>
+              {hoverMenu && !isSmallScreen && !sidebarOpen && (
+                <ChevronRightIcon
+                  onClick={() => setSidebarOpen(true)}
+                  className="w-12 text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-800 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer p-1"
+                />
               )}
               {hoverMenu && !isSmallScreen && !sidebarOpen && (
                 <div className="flex shrink-0 items-center justify-left  cursor-pointer text-gray-400 hover:text-gray-800 pt-1 transform transition-all duration-300 ease-in-out">
