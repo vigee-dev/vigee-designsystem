@@ -120,7 +120,7 @@ export default function Login({ logo }: Props) {
               <div className="flex flex-col items-center ">
                 <Link
                   href="/forgot-password"
-                  className="font-base hover:font-bold text-sm hover:text-primary flex gap-x-2 text-gray-400 transform hover:scale-105 transition duration-300 ease-in-out pb-2"
+                  className="font-base hover:font-bold text-sm hover:text-primary flex gap-x-2 text-gray-00 transform hover:scale-105 transition duration-300 ease-in-out pb-2"
                 >
                   Mot de passe oublié ?
                 </Link>
@@ -130,7 +130,10 @@ export default function Login({ logo }: Props) {
                 </div> */}
 
                 <div className="absolute md:relative bottom-8 md:bottom-0 w-full px-4 md:px-0 items-center gap-2 ">
-                  <Button type="submit" className="w-full">
+                  <Button
+                    type="submit"
+                    className="w-full h-12 text-md font-bold "
+                  >
                     Connexion
                   </Button>
                 </div>
