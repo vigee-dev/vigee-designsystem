@@ -256,7 +256,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               onClick={() => setSidebarOpen(true)}
             >
               {isSmallScreen && (
-                <p className="h-8 w-8 mb-2 text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-800 font-bold p-2 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer ">
+                <p className=" mb-2 text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-800 font-bold p-2 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer ">
                   {" "}
                   Menu{" "}
                 </p>
