@@ -129,7 +129,7 @@ export default function Login({ logo }: Props) {
                   <Copyright />
                 </div> */}
 
-                <div className="absolute md:relative bottom-8 md:bottom-0 w-full px-4 md:px-0 items-center gap-2 ">
+                <div className="absolute md:relative bottom-12 md:bottom-0 w-full px-4 md:px-0 items-center gap-2 ">
                   <Button
                     type="submit"
                     className="w-full h-12 text-md font-bold "
