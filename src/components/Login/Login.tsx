@@ -74,7 +74,7 @@ export default function Login({ logo }: Props) {
           src={logo}
           alt="Vigee - Make IT Simple"
         />
-        <div className="flex flex-col justify-start mx-auto md:shadow-sm  md:border border-gray-100 rounded-xl p-8  bg-white">
+        <div className="flex flex-col justify-start mx-auto md:shadow-sm  md:border border-gray-100 rounded-xl p-8  md:bg-white">
           <div>
             <TypographyH1 className="text-primary py-2 pt-0">
               Connexion
@@ -117,10 +117,6 @@ export default function Login({ logo }: Props) {
                 )}
               />
 
-              <div className="flex md:hidden items-center py-2">
-                <Copyright />
-              </div>
-
               <div className="flex flex-col items-center ">
                 <Link
                   href="/forgot-password"
@@ -129,7 +125,11 @@ export default function Login({ logo }: Props) {
                   Mot de passe oublié ?
                 </Link>
 
-                <div className="absolute md:relative bottom-8 md:bottom-0 w-full px-4 md:px-0 items-center gap-2">
+                {/* <div className="flex md:hidden items-center py-2">
+                  <Copyright />
+                </div> */}
+
+                <div className="absolute md:relative bottom-8 md:bottom-0 w-full px-4 md:px-0 items-center gap-2 ">
                   <Button type="submit" className="w-full">
                     Connexion
                   </Button>
