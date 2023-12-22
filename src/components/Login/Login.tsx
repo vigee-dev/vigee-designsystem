@@ -68,9 +68,9 @@ export default function Login({ logo }: Props) {
     <>
       <div className="w-full max-w-xl space-y-6 align-center my-auto justify-start mx-auto py-40 md:px-8 md:p-24 md:py-4 min-h-screen md:min-h-fit md:max-w-[480px]">
         <Image
-          width={100}
-          height={100}
-          className=" ml-8 md:ml-4 absolute md:relative top-12 md:top-0"
+          width={90}
+          height={90}
+          className=" ml-4 md:ml-4 absolute md:relative top-12 md:top-0"
           src={logo}
           alt="Vigee - Make IT Simple"
         />
