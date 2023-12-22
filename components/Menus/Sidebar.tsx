@@ -55,7 +55,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   const [hoverMenu, setHoverMenu] = useState(false);
 
   const router = usePathname();
-  const slug = router.split("/")[1];
+  const slug = router.split("/")[2];
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useEffect(() => {
