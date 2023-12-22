@@ -9,14 +9,10 @@ import {
   FormMessage,
 } from "../ui/form";
 
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/app/components/design-system/src/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
-import { Button } from "@/app/components/design-system/src/components/ui/button";
-import { cn } from "@/app/components/design-system/src/lib/utils";
+import { Button } from "../ui/button";
+import { cn } from "../../lib/utils";
 import format from "date-fns/format";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { Calendar } from "../ui/calendar";
