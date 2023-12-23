@@ -1,8 +1,20 @@
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { TypographyH2 } from "../Typography/Typography";
 
-export function RecentSales() {
+interface Data {
+  name: string;
+  avatar?: string;
+  email: string;
+  total: number;
+}
+interface Props {
+  title: string;
+}
+
+export function RecentSales({ title }: Props) {
   return (
     <div className="space-y-8 ">
+      <TypographyH2>{title}</TypographyH2>
       <div className="flex items-center">
         <Avatar className="h-9 w-9">
           <AvatarImage src="/avatars/01.png" alt="Avatar" />
