@@ -8,7 +8,6 @@ import Link from "next/link";
 import { Tooltip } from "../Tooltip/Tooltip";
 
 const SignInButton = ({ link = "/admin/dashboard" }: { link: string }) => {
-  const { data: session } = useSession();
   const router = useRouter();
 
   return (
