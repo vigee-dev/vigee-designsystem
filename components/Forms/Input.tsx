@@ -23,6 +23,7 @@ type Props<T extends z.ZodType<any, any>> = {
   className?: string;
   disabled?: boolean;
   id?: string;
+  min: number;
 };
 
 export default function Input<T extends z.ZodType<any, any, any>>({
@@ -35,6 +36,8 @@ export default function Input<T extends z.ZodType<any, any, any>>({
   descr,
   className,
   disabled,
+  id,
+  min,
 }: Props<T>) {
   return (
     <FormField
@@ -50,6 +53,8 @@ export default function Input<T extends z.ZodType<any, any, any>>({
               {...field}
               type={type}
               disabled={disabled}
+              id={id}
+              min={min}
             />
           </FormControl>
           {descr && <FormDescription>{descr}</FormDescription>}
