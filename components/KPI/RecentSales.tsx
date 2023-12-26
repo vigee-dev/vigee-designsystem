@@ -6,7 +6,7 @@ interface Data {
   avatar?: string;
   amount: number;
   currency?: string;
-  email: string;
+  subtitle: string;
 }
 interface Props {
   title: string;
@@ -27,7 +27,7 @@ export function RecentSales({ title, data }: Props) {
             </Avatar>
             <div className="ml-4 space-y-1">
               <p className="text-sm font-medium leading-none">{item.name}</p>
-              <p className="text-sm text-muted-foreground">{item.email}</p>
+              <p className="text-sm text-muted-foreground">{item.subtitle}</p>
             </div>
             <div className="ml-auto font-medium">
               {item.amount}
