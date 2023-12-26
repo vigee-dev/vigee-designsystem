@@ -19,7 +19,7 @@ import {
 
 type Props<T extends z.ZodType<any, any>> = {
   form: UseFormReturn<z.infer<T> & FieldValues>;
-  libelle: string;
+  label: string;
   placeholder?: string;
   required?: boolean;
   name: Path<z.infer<T> & FieldValues>;
@@ -30,7 +30,7 @@ type Props<T extends z.ZodType<any, any>> = {
 
 export default function Select<T extends z.ZodType<any, any, any>>({
   form,
-  libelle,
+  label,
   placeholder,
   required = true,
   name,
@@ -45,7 +45,7 @@ export default function Select<T extends z.ZodType<any, any, any>>({
       rules={{ required }}
       render={({ field }) => (
         <FormItem className={className}>
-          <FormLabel className="font-black text-primary">{libelle}</FormLabel>
+          <FormLabel className="font-black text-primary">{label}</FormLabel>
           <ShadSelect
             onValueChange={field.onChange}
             defaultValue={String(field.value)}
