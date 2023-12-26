@@ -25,7 +25,7 @@ interface Props<T extends z.ZodType<any, any>> {
   name: Path<z.infer<T> & FieldValues>;
 }
 
-export default function DatePickerForm<T extends z.ZodType<any, any, any>>({
+export default function DatePicker<T extends z.ZodType<any, any, any>>({
   libelle,
   form,
   name,
