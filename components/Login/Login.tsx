@@ -25,9 +25,10 @@ import { Input } from "../ui/input";
 
 interface Props {
   logo: StaticImageData;
+  clientName?: string;
 }
 
-export default function Login({ logo }: Props) {
+export default function Login({ logo, clientName }: Props) {
   const router = useRouter();
 
   type FormValues = {
@@ -153,7 +154,7 @@ export default function Login({ logo }: Props) {
           </Form>
         </div>
         <div className="hidden absolute md:flex items-center py-2">
-          <Copyright />
+          <Copyright clientName={clientName} />
         </div>
       </div>
     </>
