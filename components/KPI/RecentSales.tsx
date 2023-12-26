@@ -19,8 +19,8 @@ export function RecentSales({ title, data }: Props) {
       <TypographyH2 className="text-primary">{title}</TypographyH2>
 
       <div className="space-y-4">
-        {data?.map((item) => (
-          <div className="flex items-center">
+        {data?.map((item, index) => (
+          <div className="flex items-center" key={index}>
             <Avatar className="h-9 w-9">
               <AvatarImage src="/avatars/01.png" alt="Avatar" />
               <AvatarFallback>{item.name}</AvatarFallback>
