@@ -26,7 +26,7 @@ interface Props<T extends z.ZodType<any, any>> {
 }
 
 export default function DatePicker<T extends z.ZodType<any, any, any>>({
-  libelle,
+  label,
   form,
   name,
 }: Props<T>) {
@@ -36,7 +36,7 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
       name={name}
       render={({ field }) => (
         <FormItem className="flex flex-col">
-          <FormLabel>{libelle}</FormLabel>
+          <FormLabel>{label}</FormLabel>
           <Popover>
             <PopoverTrigger asChild>
               <FormControl>
