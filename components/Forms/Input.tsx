@@ -8,7 +8,7 @@ import {
   FormMessage,
 } from "../ui/form";
 
-import { Input } from "../ui/input";
+import { Input as ShadInput } from "../ui/input";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { z } from "zod";
 
@@ -25,7 +25,7 @@ type Props<T extends z.ZodType<any, any>> = {
   id?: string;
 };
 
-export default function InputForm<T extends z.ZodType<any, any, any>>({
+export default function Input<T extends z.ZodType<any, any, any>>({
   form,
   label,
   placeholder,
@@ -45,7 +45,7 @@ export default function InputForm<T extends z.ZodType<any, any, any>>({
         <FormItem className={className}>
           {label && <FormLabel>{label}</FormLabel>}
           <FormControl>
-            <Input
+            <ShadInput
               placeholder={placeholder}
               {...field}
               type={type}
