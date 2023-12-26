@@ -15,9 +15,10 @@ interface Data {
 
 interface Props {
   data: Data[];
+  color?: string;
 }
 
-export function BarChart({ data }: Props) {
+export function BarChart({ data, color = "#000" }: Props) {
   return (
     <ResponsiveContainer width="100%" height={350}>
       <BarChartRecharts data={data}>
@@ -35,7 +36,7 @@ export function BarChart({ data }: Props) {
           axisLine={false}
           tickFormatter={(value) => `${value}€`}
         />
-        <Bar dataKey="total" fill={"primary"} radius={[4, 4, 0, 0]} />
+        <Bar dataKey="total" fill={color} radius={[4, 4, 0, 0]} />
       </BarChartRecharts>
     </ResponsiveContainer>
   );
