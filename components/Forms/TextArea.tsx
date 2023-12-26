@@ -15,7 +15,7 @@ interface TextAreaVigeeProps {
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-export const TextAreaLabel = ({
+export const TextArea = ({
   id,
   name,
   label,
