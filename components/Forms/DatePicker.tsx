@@ -20,7 +20,7 @@ import { z } from "zod";
 import { enUS, fr } from "date-fns/esm/locale";
 
 interface Props<T extends z.ZodType<any, any>> {
-  libelle?: string;
+  label?: string;
   form: UseFormReturn<z.infer<T> & FieldValues>;
   name: Path<z.infer<T> & FieldValues>;
 }
