@@ -13,6 +13,7 @@ interface TextAreaVigeeProps {
   defaultValue?: string;
   minHeight?: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
 }
 
 export const TextArea = ({
@@ -24,6 +25,7 @@ export const TextArea = ({
   max,
   minHeight,
   defaultValue,
+  onBlur,
   onChange,
 }: TextAreaVigeeProps) => {
   const [charCount, setCharCount] = useState(0); // État local pour le compteur de caractères
@@ -55,6 +57,7 @@ export const TextArea = ({
         maxLength={max}
         defaultValue={defaultValue ?? ""}
         className={`min-h-${minHeight || "10"} h-${minHeight || "10"}`}
+        onBlur={onBlur}
       />
     </div>
   );

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Textarea } from "../ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { TextArea } from "../Forms/TextArea";
 
 type Note = {
   urgent: string;
@@ -40,9 +41,9 @@ const Note: React.FC<NoteProps> = ({ initialContent }) => {
         </div>
 
         <TabsContent value="urgent">
-          <Textarea
-            className="w-full"
-            value={content?.urgent || ""}
+          <TextArea
+            name="urgent"
+            defaultValue={content?.urgent || ""}
             onBlur={handleBlur}
             onChange={(event) =>
               setContent({ ...content, urgent: event.target.value })
@@ -52,9 +53,9 @@ const Note: React.FC<NoteProps> = ({ initialContent }) => {
         </TabsContent>
 
         <TabsContent value="important">
-          <Textarea
-            className="w-full"
-            value={content?.important || ""}
+          <TextArea
+            name={"important"}
+            defaultValue={content?.important || ""}
             onBlur={handleBlur}
             onChange={(event) =>
               setContent({ ...content, important: event.target.value })
@@ -64,9 +65,9 @@ const Note: React.FC<NoteProps> = ({ initialContent }) => {
         </TabsContent>
 
         <TabsContent value="not-urgent">
-          <Textarea
-            className="w-full"
-            value={content?.other || ""}
+          <TextArea
+            name={"other"}
+            defaultValue={content?.other || ""}
             onBlur={handleBlur}
             onChange={(event) =>
               setContent({ ...content, other: event.target.value })
