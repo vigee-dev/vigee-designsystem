@@ -1,5 +1,5 @@
 "use client";
-import { Textarea } from "@/app/components/design-system/components/ui/textarea";
+import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
 import { useState } from "react";
 
