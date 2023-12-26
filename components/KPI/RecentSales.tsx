@@ -16,7 +16,7 @@ interface Props {
 export function RecentSales({ title, data }: Props) {
   return (
     <div className="space-y-8 ">
-      <TypographyH2>{title}</TypographyH2>
+      <TypographyH2 className="text-primary">{title}</TypographyH2>
 
       <div className="space-y-4">
         {data?.map((item) => (
