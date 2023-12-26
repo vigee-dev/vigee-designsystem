@@ -35,7 +35,7 @@ export function BarChart({ data }: Props) {
           axisLine={false}
           tickFormatter={(value) => `${value}€`}
         />
-        <Bar dataKey="total" radius={[4, 4, 0, 0]} />
+        <Bar dataKey="total" fill={"primary"} radius={[4, 4, 0, 0]} />
       </BarChartRecharts>
     </ResponsiveContainer>
   );
