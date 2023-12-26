@@ -11,7 +11,7 @@ import {
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { z } from "zod";
 import {
-  Select,
+  Select as ShadSelect,
   SelectContent,
   SelectTrigger,
   SelectValue,
@@ -28,7 +28,7 @@ type Props<T extends z.ZodType<any, any>> = {
   className?: string;
 };
 
-export default function SelectForm<T extends z.ZodType<any, any, any>>({
+export default function Select<T extends z.ZodType<any, any, any>>({
   form,
   libelle,
   placeholder,
@@ -46,7 +46,7 @@ export default function SelectForm<T extends z.ZodType<any, any, any>>({
       render={({ field }) => (
         <FormItem className={className}>
           <FormLabel className="font-black text-primary">{libelle}</FormLabel>
-          <Select
+          <ShadSelect
             onValueChange={field.onChange}
             defaultValue={String(field.value)}
           >
@@ -56,7 +56,7 @@ export default function SelectForm<T extends z.ZodType<any, any, any>>({
               </SelectTrigger>
             </FormControl>
             <SelectContent className="max-h-[200px] ">{children}</SelectContent>
-          </Select>
+          </ShadSelect>
           {descr && <FormDescription>{descr}</FormDescription>}
           <FormMessage />
         </FormItem>
