@@ -63,7 +63,7 @@ export default function Login({ logo, clientName }: Props) {
       console.log(result.error);
       toast({
         title: "Identifiants incorrects",
-        description: "Email ou mot de passe incorrect",
+        description: "Votre email ou votre mot de passe est incorrect",
       });
     } else {
       toast({ title: "Bienvenue" });
