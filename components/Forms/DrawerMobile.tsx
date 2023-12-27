@@ -2,14 +2,6 @@
 import * as React from "react";
 import { Button } from "../ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
-import {
   Drawer,
   DrawerClose,
   DrawerContent,
@@ -34,7 +26,7 @@ interface Props {
 title="Titre"
 description="Bonjour"
 trigger={<Button variant="outline">Nouveau</Button>}
-> */
+> {children} </DrawerMobile>*/
 }
 
 export function DrawerMobile({ children, title, description, trigger }: Props) {
