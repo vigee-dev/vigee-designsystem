@@ -11,7 +11,7 @@ interface PageHeaderProps {
 }
 
 // Petite fonction pour construire le contenu
-const Content = ({ title, children, icon, background }: PageHeaderProps) => (
+const Content = ({ title, icon, background }: PageHeaderProps) => (
   <div
     className={`rounded-md h-fit p-5 mb-4 items-center bg-${background} ${
       background && "border"
@@ -33,26 +33,16 @@ const Content = ({ title, children, icon, background }: PageHeaderProps) => (
 
 export function LineContainer({
   title,
-  children,
+
   background,
   icon,
   href,
 }: PageHeaderProps) {
   return href ? (
     <Link href={href}>
-      <Content
-        title={title}
-        children={children}
-        icon={icon}
-        background={background}
-      />
+      <Content title={title} icon={icon} background={background} />
     </Link>
   ) : (
-    <Content
-      title={title}
-      children={children}
-      icon={icon}
-      background={background}
-    />
+    <Content title={title} icon={icon} background={background} />
   );
 }
