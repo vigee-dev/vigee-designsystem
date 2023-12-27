@@ -53,6 +53,7 @@
     "tailwindcss-animate": "^1.0.7",
     "tsc-init": "^2.1.0",
     "use-debounce": "^10.0.0",
+    "vaul": "^0.8.0",
     "vigee-designsystem": "^1.4.17",
     "zod": "^3.22.4"
   },
