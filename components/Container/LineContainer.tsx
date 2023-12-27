@@ -23,7 +23,7 @@ const Content = ({ title, children, icon, background }: PageHeaderProps) => (
         <TypographyH4>{title}</TypographyH4>
       </div>
       <div className="flex gap-x-4">
-        <div className="hover:border rounded-md p-1 transistion-all duration-300 hover:cursor-pointer">
+        <div className="hover:border rounded-md p-1 transistion-ease-in-out duration-100 hover:cursor-pointer">
           <ChevronRightIcon />
         </div>
       </div>
