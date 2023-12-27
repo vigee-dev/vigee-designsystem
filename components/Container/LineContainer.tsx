@@ -14,7 +14,9 @@ export function LineContainer({
 }: PageHeaderProps) {
   return (
     <div
-      className={`rounded-md h-fit p-5  border mb-4 items-center  bg-${background}`}
+      className={`rounded-md h-fit p-5 mb-4 items-center  bg-${background} ${
+        background && "border"
+      }`}
     >
       <div className="flex flex-wrap justify-between  gap-x-4 w-full items-center ">
         <TypographyH4>{title}</TypographyH4>
