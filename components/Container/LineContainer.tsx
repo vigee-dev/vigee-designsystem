@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { TypographyH3, TypographyH4 } from "../Typography/Typography";
+import { TypographyH4 } from "../Typography/Typography";
+import { ChevronRightIcon } from "../../icons/Chevrons";
 
 interface PageHeaderProps {
   title: string;
@@ -21,7 +22,9 @@ const Content = ({ title, children, icon, background }: PageHeaderProps) => (
         {icon && <div className="icon-container">{icon}</div>}
         <TypographyH4>{title}</TypographyH4>
       </div>
-      <div className="flex gap-x-4">{children}</div>
+      <div className="flex gap-x-4">
+        <ChevronRightIcon />
+      </div>
     </div>
   </div>
 );
