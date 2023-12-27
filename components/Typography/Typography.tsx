@@ -50,7 +50,7 @@ export function TypographyH3({
 
 export function TypographyH4({ children }: { children: React.ReactNode }) {
   return (
-    <h4 className="scroll-m-20 text-lg font-semibold tracking-tight">
+    <h4 className="scroll-m-20 text-md font-semibold tracking-tight">
       {children}
     </h4>
   );
