@@ -51,9 +51,9 @@ function MobileMenu({ nav }: TabProps) {
                         href={item.href}
                         className={classNames(
                           includesSlug
-                            ? "font-bold text-secondary"
-                            : "text-gray-500 hover:text-secondary  font-bold ",
-                          "group grid  p-3 text-[14px]  hover:font-bold transform transition-all duration-100 ease-in-out text-center "
+                            ? " text-secondary"
+                            : "text-gray-500 hover:text-secondary   ",
+                          "group grid  py-1 px-3 text-[11px]  hover: transform transition-all duration-100 ease-in-out text-center font-medium"
                         )}
                       >
                         {!includesSlug ? (
@@ -62,7 +62,7 @@ function MobileMenu({ nav }: TabProps) {
                               includesSlug
                                 ? " text-secondary   "
                                 : " hover:text-secondary  transform transition-all duration-300 ease-in-out ",
-                              "h-10 w-10 shrink-0 mx-auto justify-center   p-[6px] "
+                              "h-8 w-8 shrink-0 mx-auto justify-center   p-[5px] "
                             )}
                             aria-hidden="true"
                           />
@@ -72,7 +72,7 @@ function MobileMenu({ nav }: TabProps) {
                               includesSlug
                                 ? " text-secondary   "
                                 : " hover:text-secondary  transform transition-all duration-300 ease-in-out ",
-                              "h-10 w-10 shrink-0 mx-auto justify-center   p-[6px] "
+                              "h-8 w-8 shrink-0 mx-auto justify-center   p-[5px] "
                             )}
                             aria-hidden="true"
                           />
