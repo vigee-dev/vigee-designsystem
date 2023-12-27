@@ -25,6 +25,7 @@ interface SidebarProps {
     href: string;
     icon?: string;
   }[];
+  menu?: boolean;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -34,6 +35,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   background = `white`,
   text = `black`,
   logo,
+  menu = false,
 }: SidebarProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -242,10 +244,9 @@ const Sidebar: React.FC<SidebarProps> = ({
               className="flex shrink-0 items-center justify-start md:justify-start "
               onClick={() => setSidebarOpen(true)}
             >
-              {isSmallScreen && (
+              {isSmallScreen && menu && (
                 <p className=" mb-2 text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-800 font-bold p-2 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer ">
-                  {" "}
-                  Menu{" "}
+                  Menu
                 </p>
               )}
             </div>
