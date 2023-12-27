@@ -13,7 +13,7 @@ interface PageHeaderProps {
 // Petite fonction pour construire le contenu
 const Content = ({ title, children, icon, background }: PageHeaderProps) => (
   <div
-    className={`rounded-md h-fit p-5 mb-4 items-center  bg-${background} ${
+    className={`rounded-md h-fit p-5 mb-4 items-center bg-${background} ${
       background && "border"
     }`}
   >
@@ -23,7 +23,9 @@ const Content = ({ title, children, icon, background }: PageHeaderProps) => (
         <TypographyH4>{title}</TypographyH4>
       </div>
       <div className="flex gap-x-4">
-        <ChevronRightIcon />
+        <div className="hover:border rounded-md p-1 transistion-all duration-300 hover:cursor-pointer">
+          <ChevronRightIcon />
+        </div>
       </div>
     </div>
   </div>
