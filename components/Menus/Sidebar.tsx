@@ -1,42 +1,26 @@
 "use client";
 import { useState, useEffect } from "react";
 import img from "@/img/logos/logo.png";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import * as HeroIcons from "@heroicons/react/24/outline";
 import * as HeroIconsSolid from "@heroicons/react/24/solid";
-import {
-  ChevronRightIcon,
-  ChevronLeftIcon,
-  PowerIcon,
-  ArrowBigLeft,
-  ArrowLeftIcon,
-  ArrowLeftFromLine,
-} from "lucide-react";
+import { ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
 import VariableLogo from "../Logos/VariableLogo";
 import VigeeGrayLogo from "../../img/logos/VigeeGrayLogo.png";
-// import { signout } from "@/app/lib/auth/signout";
-import { Button } from "../ui/button";
 
 function classNames(...classes: (string | boolean)[]): string {
   return classes.filter(Boolean).join(" ");
 }
 
 interface SidebarProps {
+  logo?: StaticImageData;
+  background?: string;
+  text?: string;
   children: React.ReactNode;
   noLogo?: boolean;
   navigation: {
-    name: string;
-    href: string;
-    icon?: string;
-  }[];
-  navigationDown: {
-    name: string;
-    href: string;
-    icon?: string;
-  }[];
-  mobileNavigation?: {
     name: string;
     href: string;
     icon?: string;
@@ -45,10 +29,11 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({
   navigation,
-  navigationDown,
-  mobileNavigation,
   children,
   noLogo,
+  background = `white`,
+  text = `black`,
+  logo,
 }: SidebarProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -105,9 +90,9 @@ const Sidebar: React.FC<SidebarProps> = ({
               : sidebarOpen
               ? "flex pl-4"
               : "flex"
-          } grow flex-col gap-y-5 overflow-y-auto  bg-white   pb-4 shadow-md transform transition-all duration-300 ease-in-out`}
+          } grow flex-col gap-y-5 overflow-y-auto  pb-4 shadow-md transform transition-all duration-300 ease-in-out bg-${background} text-${text}`}
         >
-          <div className="flex h-16 shrink-0 items-center justify-between pt-4 w-full">
+          <div className="flex h-16 shrink-0 items-center justify-between pt-4 w-full ">
             <div
               className={`justify-between mx-auto flex w-full ${
                 isSmallScreen ? "px-4" : "px-1"
@@ -115,7 +100,11 @@ const Sidebar: React.FC<SidebarProps> = ({
             >
               <Link href={"/"}>
                 {sidebarOpen ? (
-                  <VariableLogo title="Vigee" />
+                  logo ? (
+                    <Image src={logo} alt="Vigee" width={30} height={30} />
+                  ) : (
+                    <VariableLogo title="Vigee" />
+                  )
                 ) : !hoverMenu ? (
                   <Image
                     src={VigeeGrayLogo}
@@ -155,7 +144,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               )}
             </div>
           </div>
-          <nav className="flex flex-1 flex-col w-full">
+          <nav className="flex flex-1 flex-col w-full ">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>
                 <ul role="list" className="-mx-2 space-y-0 items-center">
@@ -179,16 +168,14 @@ const Sidebar: React.FC<SidebarProps> = ({
                             href={item.href}
                             className={classNames(
                               item.href.toLocaleLowerCase().includes(slug)
-                                ? `text-primary  ${
+                                ? `  ${
                                     isSmallScreen
                                       ? "text-3xl font-bold"
-                                      : "text-md text-gray-600 font-bold"
+                                      : "text-md  font-bold"
                                   }`
-                                : "text-gray-600 hover:font-bold hover:text-primary",
-                              `group flex gap-x-2 rounded-md p-[4px] leading-6  transform transition-all duration-100 ease-in-out items-center ${
-                                isSmallScreen
-                                  ? "text-lg  "
-                                  : "text-md text-gray-600"
+                                : " hover:font-bold hover:text-primary text-gray-600",
+                              `group flex gap-x-2 rounded-md p-[4px] leading-6 transform transition-all duration-100 ease-in-out items-center ${
+                                isSmallScreen ? "text-lg  " : "text-md "
                               }`
                             )}
                           >
@@ -247,7 +234,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       <main
         className={`${
           sidebarOpen ? "lg:pl-56" : "lg:pl-16"
-        } pt-2 md:py-2 bg-backgroundGray  h-full min-h-screen `}
+        } pt-2 md:py-2 bg-gray-50  h-full min-h-screen `}
       >
         <div className="   px-4 md:px-8 md:py-6 pb-24 ">
           {!sidebarOpen && (

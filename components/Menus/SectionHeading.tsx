@@ -80,7 +80,7 @@ export default function SectionHeading({
                               href={item.href}
                               className={classNames(
                                 includesSlug
-                                  ? "font-bold text-secondary"
+                                  ? "font-bold text-primary"
                                   : "text-gray-500 hover:text-secondary  font-bold ",
                                 "group grid  p-3 text-[14px]  hover:font-bold transform transition-all duration-100 ease-in-out text-center "
                               )}
@@ -89,7 +89,7 @@ export default function SectionHeading({
                                 <IconComponent
                                   className={classNames(
                                     includesSlug
-                                      ? " text-secondary   "
+                                      ? " text-primary   "
                                       : " hover:text-secondary  transform transition-all duration-300 ease-in-out ",
                                     "h-10 w-10 shrink-0 mx-auto justify-center   p-[6px] "
                                   )}
@@ -99,7 +99,7 @@ export default function SectionHeading({
                                 <IconFillComponent
                                   className={classNames(
                                     includesSlug
-                                      ? " text-secondary   "
+                                      ? " text-primary   "
                                       : " hover:text-secondary  transform transition-all duration-300 ease-in-out ",
                                     "h-10 w-10 shrink-0 mx-auto justify-center   p-[6px] "
                                   )}

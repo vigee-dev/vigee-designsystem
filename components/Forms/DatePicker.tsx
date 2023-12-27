@@ -23,12 +23,14 @@ interface Props<T extends z.ZodType<any, any>> {
   label?: string;
   form: UseFormReturn<z.infer<T> & FieldValues>;
   name: Path<z.infer<T> & FieldValues>;
+  defaultValue?: Date;
 }
 
 export default function DatePicker<T extends z.ZodType<any, any, any>>({
   label,
   form,
   name,
+  defaultValue,
 }: Props<T>) {
   return (
     <FormField
@@ -52,6 +54,7 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
                   ) : (
                     <span>Choisir une date</span>
                   )}
+
                   <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                 </Button>
               </FormControl>
@@ -64,6 +67,7 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
                 // disabled={(date) =>
                 //   date > new Date() || date < new Date("1900-01-01")
                 // }
+                locale={fr}
                 initialFocus
               />
             </PopoverContent>

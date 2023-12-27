@@ -2,8 +2,3 @@
   font-variation-settings: "wdth" 120;
   letter-spacing: -0.03em;
 }
-
-body {
-  background: hsl(224, 100%, 41%);
-  color: hsl(210 20% 98%);
-}
