@@ -20,9 +20,10 @@ export function LineContainer({
       }`}
     >
       <div className="flex flex-wrap justify-between  gap-x-4 w-full items-center ">
-        {icon && <div className="icon-container">{icon}</div>}{" "}
-        {/* Affichage de l'icône */}
-        <TypographyH4>{title}</TypographyH4>
+        <div className="flex gap-x-4">
+          {icon && <div className="icon-container">{icon}</div>}{" "}
+          <TypographyH4>{title}</TypographyH4>
+        </div>
         <div className="flex gap-x-4">{children}</div>
       </div>
     </div>
