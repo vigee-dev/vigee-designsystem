@@ -6,7 +6,7 @@ interface Props {
 
 export function Container({ children }: Props) {
   return (
-    <div className="bg-white flex flex-col border rounded-md shadow-sm p-8 max-w-7xl justify-center  my-4 w-full">
+    <div className="bg-white flex flex-col border rounded-md shadow-sm p-8  justify-center  my-4 w-full">
       {children}
     </div>
   );
