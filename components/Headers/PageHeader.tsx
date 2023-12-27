@@ -9,7 +9,7 @@ interface PageHeaderProps {
 
 export function PageHeader({ title, children, small }: PageHeaderProps) {
   return (
-    <div className=" rounded-md h-fit bg-white p-5  border mb-4">
+    <div className=" rounded-md h-fit bg-white p-5  border mb-4 items-center ">
       <div className="flex flex-wrap justify-between  gap-x-4 w-full items-center ">
         {small ? (
           <TypographyH2>{title}</TypographyH2>
