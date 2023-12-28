@@ -45,9 +45,7 @@ export function DrawerMobile({ children, title, description, trigger }: Props) {
 
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
-            <Button type="submit" variant="outline">
-              Enregistrer
-            </Button>
+            <Button type="submit">Enregistrer</Button>
           </DrawerClose>
           <DrawerClose asChild>
             <Button variant="outline">Annuler</Button>
