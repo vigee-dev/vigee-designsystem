@@ -1,6 +1,7 @@
 "use client";
 import * as React from "react";
 import { Button } from "../ui/button";
+import { useMediaQuery } from "@react-hook/media-query";
 import {
   Drawer,
   DrawerClose,
@@ -11,6 +12,14 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "../ui/drawer";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 
 interface Props {
   title: string;
@@ -31,6 +40,22 @@ trigger={<Button variant="outline">Nouveau</Button>}
 
 export function DrawerMobile({ children, title, description, trigger }: Props) {
   const [open, setOpen] = React.useState(false);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  if (isDesktop) {
+    return (
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>{trigger}</DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>{title}</DialogTitle>
+            <DialogDescription>{description}</DialogDescription>
+          </DialogHeader>
+          {children}
+        </DialogContent>
+      </Dialog>
+    );
+  }
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
