@@ -29,7 +29,7 @@ const Note: React.FC<NoteProps> = ({ initialContent }) => {
   };
 
   return (
-    <div className="col-span-1 bg-white p-2 rounded-md  h-fit">
+    <div className="col-span-1 bg-white rounded-md  h-fit">
       <Tabs defaultValue="urgent">
         <div className="flex justify-between items-center">
           <TabsList>

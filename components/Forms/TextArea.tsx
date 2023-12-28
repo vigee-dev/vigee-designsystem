@@ -58,7 +58,7 @@ export const TextArea = ({
         defaultValue={defaultValue ?? ""}
         className={`min-h-${minHeight || "10"} h-${
           minHeight || "10"
-        } resize-none`}
+        } resize-none `}
         onBlur={onBlur}
       />
     </div>
