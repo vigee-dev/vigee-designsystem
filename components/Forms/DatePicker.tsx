@@ -23,14 +23,14 @@ interface Props<T extends z.ZodType<any, any>> {
   label?: string;
   form: UseFormReturn<z.infer<T> & FieldValues>;
   name: Path<z.infer<T> & FieldValues>;
-  defaultValue?: Date;
+  className?: string;
 }
 
 export default function DatePicker<T extends z.ZodType<any, any, any>>({
   label,
   form,
   name,
-  defaultValue,
+  className,
 }: Props<T>) {
   return (
     <FormField
@@ -45,8 +45,9 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
                 <Button
                   variant={"outline"}
                   className={cn(
-                    " pl-3 text-left font-display font-medium bg-gray-100 border-none  text-slate",
-                    !field.value && "text-muted-foreground"
+                    "min-w-[240px] pl-3 text-left font-display font-medium bg-gray-100 border-none  text-slate",
+                    !field.value && "text-muted-foreground",
+                    className
                   )}
                 >
                   {field.value ? (
