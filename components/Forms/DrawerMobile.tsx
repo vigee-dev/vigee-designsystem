@@ -93,17 +93,6 @@ export function DrawerMobile({
         </DrawerHeader>
 
         <div className="px-4">{children}</div>
-
-        <DrawerFooter className="pt-2">
-          <DrawerClose asChild>
-            <Button type="submit" disabled={disabled}>
-              Enregistrer
-            </Button>
-          </DrawerClose>
-          <DrawerClose asChild>
-            <Button variant="outline">Annuler</Button>
-          </DrawerClose>
-        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );
