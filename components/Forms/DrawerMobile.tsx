@@ -26,6 +26,7 @@ interface Props {
   description: string;
   children: React.ReactNode;
   trigger: React.ReactNode;
+  icon?: React.ReactNode;
 }
 
 // SET THE FORM AS CHILDREN
@@ -38,7 +39,13 @@ trigger={<Button variant="outline">Nouveau</Button>}
 > {children} </DrawerMobile>*/
 }
 
-export function DrawerMobile({ children, title, description, trigger }: Props) {
+export function DrawerMobile({
+  children,
+  title,
+  description,
+  trigger,
+  icon,
+}: Props) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
@@ -48,8 +55,13 @@ export function DrawerMobile({ children, title, description, trigger }: Props) {
         <DialogTrigger asChild>{trigger}</DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>{title}</DialogTitle>
-            <DialogDescription>{description}</DialogDescription>
+            <div className="flex items-center gap-4 ">
+              {icon}
+              <div className="flex flex-col ">
+                <DialogTitle>{title}</DialogTitle>
+                <DialogDescription>{description}</DialogDescription>
+              </div>
+            </div>
           </DialogHeader>
           {children}
         </DialogContent>
