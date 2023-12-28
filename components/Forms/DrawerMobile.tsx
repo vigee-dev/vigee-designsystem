@@ -57,7 +57,7 @@ export function DrawerMobile({
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>{trigger}</DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] bg-stone-50">
+        <DialogContent className="sm:max-w-[425px] ">
           <DialogHeader>
             <div className="flex items-center gap-4 ">
               {icon}
@@ -68,16 +68,6 @@ export function DrawerMobile({
             </div>
           </DialogHeader>
           {children}
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button type="submit" disabled={disabled}>
-                Enregistrer
-              </Button>
-            </DialogClose>
-            <DialogClose asChild>
-              <Button variant="outline">Annuler</Button>
-            </DialogClose>
-          </DialogFooter>
         </DialogContent>
       </Dialog>
     );
