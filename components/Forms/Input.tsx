@@ -61,7 +61,7 @@ export default function Input<T extends z.ZodType<any, any, any>>({
               min={min}
               max={max}
               step={step}
-              className="text-[16px]"
+              className="sm:text-[16px] md:text-sm"
             />
           </FormControl>
           {descr && <FormDescription>{descr}</FormDescription>}
