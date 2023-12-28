@@ -47,7 +47,7 @@ const Note: React.FC<NoteProps> = ({ initialContent }) => {
             onChange={(event) =>
               setContent({ ...content, urgent: event.target.value })
             }
-            minHeight="32"
+            minHeight="96"
           />
         </TabsContent>
 
@@ -59,7 +59,7 @@ const Note: React.FC<NoteProps> = ({ initialContent }) => {
             onChange={(event) =>
               setContent({ ...content, important: event.target.value })
             }
-            minHeight="32"
+            minHeight="96"
           />
         </TabsContent>
 
