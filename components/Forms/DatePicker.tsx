@@ -45,9 +45,8 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
                 <Button
                   variant={"outline"}
                   className={cn(
-                    " pl-3 text-left font-display font-medium bg-gray-100 border-none  text-slate",
-                    !field.value && "text-muted-foreground",
-                    className
+                    `pl-3 text-left font-display font-medium bg-gray-100 border-none  text-slate ${className}`,
+                    !field.value && "text-muted-foreground"
                   )}
                 >
                   {field.value ? (
