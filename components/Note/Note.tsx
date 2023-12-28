@@ -29,10 +29,9 @@ const Note: React.FC<NoteProps> = ({ initialContent }) => {
   };
 
   return (
-    <div className="col-span-1 bg-white p-4 rounded-md border border-slate-100 h-fit">
+    <div className="col-span-1 bg-white p-4 rounded-md  h-fit">
       <Tabs defaultValue="urgent">
         <div className="flex justify-between items-center">
-          <h2 className="font-bold text-md pb-2">{"Note"}</h2>
           <TabsList>
             <TabsTrigger value="urgent">Urgent</TabsTrigger>
             <TabsTrigger value="important">Important</TabsTrigger>
