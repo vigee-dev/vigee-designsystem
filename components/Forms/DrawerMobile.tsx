@@ -68,17 +68,17 @@ export function DrawerMobile({
             </div>
           </DialogHeader>
           {children}
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button type="submit" disabled={disabled}>
+                Enregistrer
+              </Button>
+            </DialogClose>
+            <DialogClose asChild>
+              <Button variant="outline">Annuler</Button>
+            </DialogClose>
+          </DialogFooter>
         </DialogContent>
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button type="submit" disabled={disabled}>
-              Enregistrer
-            </Button>
-          </DialogClose>
-          <DialogClose asChild>
-            <Button variant="outline">Annuler</Button>
-          </DialogClose>
-        </DialogFooter>
       </Dialog>
     );
   }
