@@ -9,6 +9,7 @@ import * as HeroIconsSolid from "@heroicons/react/24/solid";
 import { ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
 import VariableLogo from "../Logos/VariableLogo";
 import VigeeGrayLogo from "../../img/logos/VigeeGrayLogo.png";
+import SheetTriggered from "../Sheets/Sheet";
 
 function classNames(...classes: (string | boolean)[]): string {
   return classes.filter(Boolean).join(" ");
