@@ -37,7 +37,7 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
       control={form.control}
       name={name}
       render={({ field }) => (
-        <FormItem className="flex flex-col w-full">
+        <FormItem className="flex flex-col ">
           <FormLabel className="font-black text-primary">{label}</FormLabel>
           <Popover>
             <PopoverTrigger asChild>
@@ -45,7 +45,7 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-[240px] pl-3 text-left font-display font-medium bg-slate-100 border-none  text-slate",
+                    "w-[240px] pl-3 text-left font-display font-medium bg-gray-100 border-none  text-slate",
                     !field.value && "text-muted-foreground"
                   )}
                 >
