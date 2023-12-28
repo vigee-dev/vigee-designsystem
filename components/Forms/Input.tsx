@@ -50,7 +50,9 @@ export default function Input<T extends z.ZodType<any, any, any>>({
       rules={{ required }}
       render={({ field }) => (
         <FormItem className={className}>
-          {label && <FormLabel>{label}</FormLabel>}
+          {label && (
+            <FormLabel className="font-black text-primary">{label}</FormLabel>
+          )}
           <FormControl>
             <ShadInput
               placeholder={placeholder}
@@ -61,7 +63,7 @@ export default function Input<T extends z.ZodType<any, any, any>>({
               min={min}
               max={max}
               step={step}
-              className="sm:text-[16px] md:text-sm font-medium bg-slate-100 border-none"
+              className="sm:text-[16px] md:text-sm font-medium bg-gray-100 border-none"
             />
           </FormControl>
           {descr && <FormDescription>{descr}</FormDescription>}
