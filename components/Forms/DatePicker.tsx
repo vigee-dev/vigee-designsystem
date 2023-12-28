@@ -38,14 +38,14 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
       name={name}
       render={({ field }) => (
         <FormItem className="flex flex-col">
-          <FormLabel>{label}</FormLabel>
+          <FormLabel className="font-black text-primary">{label}</FormLabel>
           <Popover>
             <PopoverTrigger asChild>
               <FormControl>
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-[240px] pl-3 text-left font-display",
+                    "w-[240px] pl-3 text-left font-display font-medium bg-slate-100 border-none  text-slate",
                     !field.value && "text-muted-foreground"
                   )}
                 >
