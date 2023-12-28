@@ -14,8 +14,10 @@ import {
 } from "../ui/drawer";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -27,6 +29,7 @@ interface Props {
   children: React.ReactNode;
   trigger: React.ReactNode;
   icon?: React.ReactNode;
+  disabled?: boolean;
 }
 
 // SET THE FORM AS CHILDREN
@@ -45,6 +48,7 @@ export function DrawerMobile({
   description,
   trigger,
   icon,
+  disabled,
 }: Props) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -65,6 +69,16 @@ export function DrawerMobile({
           </DialogHeader>
           {children}
         </DialogContent>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button type="submit" disabled={disabled}>
+              Enregistrer
+            </Button>
+          </DialogClose>
+          <DialogClose asChild>
+            <Button variant="outline">Annuler</Button>
+          </DialogClose>
+        </DialogFooter>
       </Dialog>
     );
   }
@@ -80,14 +94,16 @@ export function DrawerMobile({
 
         <div className="px-4">{children}</div>
 
-        {/* <DrawerFooter className="pt-2">
+        <DrawerFooter className="pt-2">
           <DrawerClose asChild>
-            <Button type="submit">Enregistrer</Button>
+            <Button type="submit" disabled={disabled}>
+              Enregistrer
+            </Button>
           </DrawerClose>
           <DrawerClose asChild>
             <Button variant="outline">Annuler</Button>
           </DrawerClose>
-        </DrawerFooter> */}
+        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );
