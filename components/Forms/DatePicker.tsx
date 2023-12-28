@@ -8,12 +8,11 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-
+import moment from "moment";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { Button } from "../ui/button";
 import { cn } from "../../lib/utils";
-import format from "date-fns/format";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { Calendar } from "../ui/calendar";
 import { z } from "zod";
@@ -24,6 +23,7 @@ interface Props<T extends z.ZodType<any, any>> {
   form: UseFormReturn<z.infer<T> & FieldValues>;
   name: Path<z.infer<T> & FieldValues>;
   className?: string;
+  starting_date: Date;
 }
 
 export default function DatePicker<T extends z.ZodType<any, any, any>>({
@@ -31,6 +31,7 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
   form,
   name,
   className,
+  starting_date,
 }: Props<T>) {
   return (
     <FormField
@@ -50,7 +51,7 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
                   )}
                 >
                   {field.value ? (
-                    format(field.value, "PPP", { locale: fr })
+                    moment(field.value).format("DD/MM/YYYY")
                   ) : (
                     <span>Choisir une date</span>
                   )}
@@ -64,9 +65,7 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
                 mode="single"
                 selected={field.value}
                 onSelect={field.onChange}
-                // disabled={(date) =>
-                //   date > new Date() || date < new Date("1900-01-01")
-                // }
+                disabled={(date) => date < starting_date}
                 locale={fr}
                 initialFocus
               />
