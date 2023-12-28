@@ -84,11 +84,13 @@ export function DrawerMobile({
 
         <div className="px-4">{children}</div>
 
-        <DrawerClose asChild>
-          <Button type="button" variant="outline">
-            Annuler
-          </Button>
-        </DrawerClose>
+        <DrawerFooter>
+          <DrawerClose asChild>
+            <Button type="button" variant="outline">
+              Annuler
+            </Button>
+          </DrawerClose>
+        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );
