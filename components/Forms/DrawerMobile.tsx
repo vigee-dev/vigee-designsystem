@@ -68,15 +68,15 @@ export function DrawerMobile({
             </div>
           </DialogHeader>
           {children}
-        </DialogContent>
 
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button type="button" variant="outline">
-              Annuler
-            </Button>
-          </DialogClose>
-        </DialogFooter>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button type="button" variant="outline">
+                Annuler
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
       </Dialog>
     );
   }
@@ -91,15 +91,15 @@ export function DrawerMobile({
         </DrawerHeader>
 
         <div className="px-4">{children}</div>
-      </DrawerContent>
 
-      <DrawerFooter>
-        <DrawerClose asChild>
-          <Button type="button" variant="outline">
-            Annuler
-          </Button>
-        </DrawerClose>
-      </DrawerFooter>
+        <DrawerFooter>
+          <DrawerClose asChild>
+            <Button type="button" variant="outline">
+              Annuler
+            </Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
     </Drawer>
   );
 }
