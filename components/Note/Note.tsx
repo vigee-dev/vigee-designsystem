@@ -29,7 +29,7 @@ const Note: React.FC<NoteProps> = ({ initialContent }) => {
   };
 
   return (
-    <div className="col-span-1 bg-white p-4 rounded-md  h-fit">
+    <div className="col-span-1 bg-white p-2 rounded-md  h-fit">
       <Tabs defaultValue="urgent">
         <div className="flex justify-between items-center">
           <TabsList>
@@ -71,7 +71,7 @@ const Note: React.FC<NoteProps> = ({ initialContent }) => {
             onChange={(event) =>
               setContent({ ...content, other: event.target.value })
             }
-            minHeight="32"
+            minHeight="96"
           />
         </TabsContent>
       </Tabs>
