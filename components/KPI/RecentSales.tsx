@@ -14,7 +14,7 @@ interface Data {
   subtitle: string;
 }
 interface Props {
-  title: string;
+  title?: string;
   subtitle?: string;
   data: Data[];
 }
