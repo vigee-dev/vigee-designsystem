@@ -22,8 +22,10 @@ interface Props {
 export function RecentSales({ title, subtitle, data }: Props) {
   return (
     <div className="space-y-8 ">
-      <TypographyH3 className="font-bold">{title}</TypographyH3>
-      <p>{subtitle}</p>
+      <div className="flex flex-col">
+        <TypographyH3 className="font-bold">{title}</TypographyH3>
+        <p>{subtitle}</p>
+      </div>
 
       <div className="space-y-4">
         {data?.map((item, index) => (
