@@ -25,7 +25,7 @@ export function TypographyH2({
 }) {
   return (
     <h2
-      className={`scroll-m-20  pb-2 text-xl font-semibold tracking-tight first:mt-0  ${className}`}
+      className={`scroll-m-20  pb-2 text-xl  tracking-tight first:mt-0  ${className}`}
     >
       {children}
     </h2>
@@ -40,16 +40,24 @@ export function TypographyH3({
   className?: string;
 }) {
   return (
-    <h3
-      className={`scroll-m-20 text-lg font-medium tracking-tight ${className}`}
-    >
+    <h3 className={`scroll-m-20 text-lg  tracking-tight ${className}`}>
       {children}
     </h3>
   );
 }
 
-export function TypographyH4({ children }: { children: React.ReactNode }) {
-  return <h4 className="scroll-m-20 text-md  tracking-tight">{children}</h4>;
+export function TypographyH4({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <h4 className={`scroll-m-20 text-md  tracking-tight ${className}`}>
+      {children}
+    </h4>
+  );
 }
 
 export function TypographyBlockquote({

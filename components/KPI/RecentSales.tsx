@@ -1,5 +1,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { TypographyH2 } from "../Typography/Typography";
+import {
+  TypographyH2,
+  TypographyH3,
+  TypographyH4,
+} from "../Typography/Typography";
 import { UserIcon } from "../../icons/User";
 
 interface Data {
@@ -11,13 +15,15 @@ interface Data {
 }
 interface Props {
   title: string;
+  subtitle?: string;
   data: Data[];
 }
 
-export function RecentSales({ title, data }: Props) {
+export function RecentSales({ title, subtitle, data }: Props) {
   return (
     <div className="space-y-8 ">
-      <TypographyH2 className="text-primary">{title}</TypographyH2>
+      <TypographyH4>{title}</TypographyH4>
+      <p>{subtitle}</p>
 
       <div className="space-y-4">
         {data?.map((item, index) => (

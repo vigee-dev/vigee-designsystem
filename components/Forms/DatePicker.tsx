@@ -53,7 +53,7 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
                   {field.value ? (
                     moment(field.value).format("DD/MM/YYYY")
                   ) : (
-                    <span>Choisir une date</span>
+                    <span>Choisir une période</span>
                   )}
 
                   <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
