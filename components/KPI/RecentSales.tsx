@@ -22,7 +22,7 @@ interface Props {
 export function RecentSales({ title, subtitle, data }: Props) {
   return (
     <div className="space-y-8 ">
-      <TypographyH4>{title}</TypographyH4>
+      <TypographyH3 className="font-bold">{title}</TypographyH3>
       <p>{subtitle}</p>
 
       <div className="space-y-4">
