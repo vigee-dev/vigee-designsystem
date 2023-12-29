@@ -27,7 +27,7 @@ const NumberKPI = ({ stats }: NumberKPIProps) => {
 
   return (
     <div className="my-2">
-      <dl className="grid grid-cols-1 divide-y divide-gray-100 overflow-hidden rounded-md shadow-sm md:grid-cols-3 md:divide-x md:divide-gray-100 md:divide-y-0  bg-white border border-gray-100">
+      <dl className="grid grid-cols-1 divide-y divide-gray-100 overflow-hidden rounded-md shadow-sm md:grid-cols-3 md:divide-x md:divide-gray-100 md:divide-y-0  bg-white border border-gray-50">
         {stats.map((item) => (
           <div key={item.name} className="px-4 py-5 sm:p-6">
             <dt className="text-base font-medium text-gray-400">{item.name}</dt>
