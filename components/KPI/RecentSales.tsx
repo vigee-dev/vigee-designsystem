@@ -24,7 +24,7 @@ export function RecentSales({ title, subtitle, data }: Props) {
     <div className="space-y-8 ">
       <div className="flex flex-col">
         <TypographyH3 className="font-bold">{title}</TypographyH3>
-        <p>{subtitle}</p>
+        <p className="text-gray-500 text-sm">{subtitle}</p>
       </div>
 
       <div className="space-y-4">
