@@ -38,7 +38,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import logo from "../../img/logos/vigee.png";
 
 const groups = [
   {
@@ -73,7 +72,7 @@ type PopoverTriggerProps = React.ComponentPropsWithoutRef<
 
 interface TeamSwitcherProps extends PopoverTriggerProps {}
 
-export default function TeamSwitcher({ className }: TeamSwitcherProps) {
+export default function SelectSearch({ className }: TeamSwitcherProps) {
   const [open, setOpen] = React.useState(false);
   const [showNewTeamDialog, setShowNewTeamDialog] = React.useState(false);
   const [selectedTeam, setSelectedTeam] = React.useState<Team>(
