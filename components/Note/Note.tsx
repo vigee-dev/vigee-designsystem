@@ -13,12 +13,11 @@ type Note = {
 };
 
 type Props = {
-  name: Path<Note>;
   form: UseFormReturn<Note>;
   initialContent: Note;
 };
 
-export default function Note({ form, initialContent, name }: Props) {
+export default function Note({ form, initialContent }: Props) {
   const [content, setContent] = useState<Note>({
     urgent: initialContent?.urgent,
     important: initialContent?.important,
