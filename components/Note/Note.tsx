@@ -1,10 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { Textarea } from "../ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import TextArea from "../Forms/TextArea";
-import { UseFormReturn, FieldValues, Path } from "react-hook-form";
-import { z } from "zod";
+import { UseFormReturn } from "react-hook-form";
+import { Form } from "../ui/form";
 
 type Note = {
   urgent: string;
@@ -15,9 +14,10 @@ type Note = {
 type Props = {
   form: UseFormReturn<Note>;
   initialContent: Note;
+  onSubmit: () => void;
 };
 
-export default function Note({ form, initialContent }: Props) {
+export default function Note({ form, initialContent, onSubmit }: Props) {
   const [content, setContent] = useState<Note>({
     urgent: initialContent?.urgent,
     important: initialContent?.important,
@@ -49,19 +49,30 @@ export default function Note({ form, initialContent }: Props) {
           </TabsList>
         </div>
 
-        {noteCategories.map((category) => (
-          <TabsContent key={category.key} value={category.key}>
-            <TextArea
-              form={form}
-              name={category.key}
-              onBlur={handleBlur}
-              onChange={(event) =>
-                setContent({ ...content, [category.key]: event.target.value })
-              }
-              minHeight="96"
-            />
-          </TabsContent>
-        ))}
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-4 "
+            id="form"
+          >
+            {noteCategories.map((category) => (
+              <TabsContent key={category.key} value={category.key}>
+                <TextArea
+                  form={form}
+                  name={category.key}
+                  onBlur={handleBlur}
+                  onChange={(event) =>
+                    setContent({
+                      ...content,
+                      [category.key]: event.target.value,
+                    })
+                  }
+                  minHeight="96"
+                />
+              </TabsContent>
+            ))}
+          </form>
+        </Form>
       </Tabs>
     </div>
   );
