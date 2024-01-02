@@ -72,7 +72,7 @@ export default function TextArea<T extends z.ZodType<any, any, any>>({
             defaultValue={defaultValue ?? ""}
             className={`min-h-${minHeight || "10"} h-${
               minHeight || "10"
-            } resize-none font-medium bg-gray-100 border-none`}
+            } resize-none font-medium bg-input border-none`}
             onBlur={onBlur}
           />
           {descr && <FormDescription>{descr}</FormDescription>}
