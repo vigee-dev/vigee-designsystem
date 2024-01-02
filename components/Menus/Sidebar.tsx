@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import * as HeroIcons from "@heroicons/react/24/outline";
 import * as HeroIconsSolid from "@heroicons/react/24/solid";
-
+import { UserUser } from "../../icons/PikaIcons";
 import { ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
 import VariableLogo from "../Logos/VariableLogo";
 import VigeeGrayLogo from "../../img/logos/VigeeGrayLogo.png";
@@ -196,7 +196,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                           >
                             {item.href.toLocaleLowerCase().includes(slug) ||
                             hoveredIndex === index ? (
-                              <IconFillComponent
+                              <UserUser
+                                variant="solid"
                                 className={classNames(
                                   `${
                                     text === "white"
