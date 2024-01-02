@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import * as HeroIcons from "@heroicons/react/24/outline";
 import * as HeroIconsSolid from "@heroicons/react/24/solid";
+
 import { ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
 import VariableLogo from "../Logos/VariableLogo";
 import VigeeGrayLogo from "../../img/logos/VigeeGrayLogo.png";
