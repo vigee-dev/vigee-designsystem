@@ -181,12 +181,12 @@ const Sidebar: React.FC<SidebarProps> = ({
                                       ? "text-3xl bg-white/20 p-2 "
                                       : "text-md  bg-white/20 p-2"
                                   }`
-                                : `hover:bg-white/20 p-2  ${
+                                : ` p-2  ${
                                     text === "white"
-                                      ? "text-gray-100 hover:text-white"
-                                      : "text-gray-600 hover:text-primary"
+                                      ? "text-gray-100 hover:text-white hover:bg-black/20"
+                                      : "text-gray-600 hover:text-primary hover:bg-white/20"
                                   } `,
-                              `group flex gap-x-2 rounded-md p-[4px] leading-6 transform transition-all duration-100 ease-in-out items-center mx-1 ${
+                              `group flex gap-x-2 rounded-md p-[4px] leading-6 transform transition-all duration-100 ease-in-out items-center mx-1 my-1 ${
                                 isSmallScreen ? "text-lg  " : "text-md "
                               }`
                             )}
