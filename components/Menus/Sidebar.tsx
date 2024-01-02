@@ -178,10 +178,10 @@ const Sidebar: React.FC<SidebarProps> = ({
                               item.href.toLocaleLowerCase().includes(slug)
                                 ? `  ${
                                     isSmallScreen
-                                      ? "text-3xl font-bold"
-                                      : "text-md  font-bold"
+                                      ? "text-3xl bg-gray-100 p-2"
+                                      : "text-md  bg-gray-100 p-2"
                                   }`
-                                : `hover:font-bold  ${
+                                : `hover:bg-gray-100 p-2  ${
                                     text === "white"
                                       ? "text-gray-100 hover:text-white"
                                       : "text-gray-600 hover:text-primary"
