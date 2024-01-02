@@ -160,7 +160,7 @@ export function LogOutRight(props: JSX.IntrinsicElements["svg"]) {
   );
 }
 
-function PhoneOutgoing(props: JSX.IntrinsicElements["svg"]) {
+export function PhoneOutgoing(props: JSX.IntrinsicElements["svg"]) {
   return (
     <svg
       {...props}
