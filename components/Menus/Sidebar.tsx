@@ -93,7 +93,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               : sidebarOpen
               ? "flex pl-4"
               : "flex"
-          } grow flex-col gap-y-5 overflow-y-auto  pb-4 shadow-md transform transition-all duration-300 ease-in-out bg-[${background}] text-${text}`}
+          } grow flex-col gap-y-5 overflow-y-auto  pb-4 shadow-md transform transition-all duration-300 ease-in-out bg-${background} text-${text}`}
         >
           <div className="flex h-16 shrink-0 items-center justify-between pt-4 w-full ">
             <div
