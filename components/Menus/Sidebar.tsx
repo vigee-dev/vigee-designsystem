@@ -178,15 +178,15 @@ const Sidebar: React.FC<SidebarProps> = ({
                               item.href.toLocaleLowerCase().includes(slug)
                                 ? `  ${
                                     isSmallScreen
-                                      ? "text-3xl bg-gray-100 p-2"
-                                      : "text-md  bg-gray-100 p-2"
+                                      ? "text-3xl bg-primary-foreground p-2 "
+                                      : "text-md  bg-primary-foreground p-2"
                                   }`
-                                : `hover:bg-gray-100 p-2  ${
+                                : `hover:bg-primary-foreground p-2  ${
                                     text === "white"
                                       ? "text-gray-100 hover:text-white"
                                       : "text-gray-600 hover:text-primary"
                                   } `,
-                              `group flex gap-x-2 rounded-md p-[4px] leading-6 transform transition-all duration-100 ease-in-out items-center ${
+                              `group flex gap-x-2 rounded-md p-[4px] leading-6 transform transition-all duration-100 ease-in-out items-center mx-1 ${
                                 isSmallScreen ? "text-lg  " : "text-md "
                               }`
                             )}
