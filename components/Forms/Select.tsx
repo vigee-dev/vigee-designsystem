@@ -55,7 +55,9 @@ export default function Select<T extends z.ZodType<any, any, any>>({
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
             </FormControl>
-            <SelectContent className="max-h-[200px] ">{children}</SelectContent>
+            <SelectContent className="max-h-[200px] font-medium">
+              {children}
+            </SelectContent>
           </ShadSelect>
           {descr && <FormDescription>{descr}</FormDescription>}
           <FormMessage />
