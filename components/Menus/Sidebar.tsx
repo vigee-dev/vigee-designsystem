@@ -93,7 +93,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               : sidebarOpen
               ? "flex pl-4"
               : "flex"
-          } grow flex-col gap-y-5 overflow-y-auto  pb-4 shadow-md transform transition-all duration-300 ease-in-out bg-${background} text-${text}`}
+          } grow flex-col gap-y-5 overflow-y-auto  pb-4 shadow-md transform transition-all duration-300 ease-in-out bg-["${background}"] text-${text}`}
         >
           <div className="flex h-16 shrink-0 items-center justify-between pt-4 w-full ">
             <div
@@ -176,7 +176,11 @@ const Sidebar: React.FC<SidebarProps> = ({
                                       ? "text-3xl font-bold"
                                       : "text-md  font-bold"
                                   }`
-                                : " hover:font-bold hover:text-primary text-gray-600",
+                                : `hover:font-bold hover:text-primary ${
+                                    text === "white"
+                                      ? "text-gray-100"
+                                      : "text-gray-600"
+                                  } `,
                               `group flex gap-x-2 rounded-md p-[4px] leading-6 transform transition-all duration-100 ease-in-out items-center ${
                                 isSmallScreen ? "text-lg  " : "text-md "
                               }`
@@ -186,7 +190,11 @@ const Sidebar: React.FC<SidebarProps> = ({
                             hoveredIndex === index ? (
                               <IconFillComponent
                                 className={classNames(
-                                  "text-primary group-hover:text-primary  group-hover:scale-105 transform transition-all duration-500 ease-in-out ",
+                                  `${
+                                    text === "white"
+                                      ? "text-white group-hover:text-white"
+                                      : "text-primary group-hover:text-primary"
+                                  }   group-hover:scale-105 transform transition-all duration-500 ease-in-out `,
                                   `h-${isSmallScreen ? "10" : "8"} w-${
                                     isSmallScreen ? "8" : "8"
                                   } shrink-0  my-auto ml-1 rounded-full p-[4px]`
@@ -196,7 +204,11 @@ const Sidebar: React.FC<SidebarProps> = ({
                             ) : (
                               <IconComponent
                                 className={classNames(
-                                  " group-hover:text-primary group-hover:scale-105 transform transition-all duration-500 ease-in-out",
+                                  `${
+                                    text === "white"
+                                      ? "text-white group-hover:text-white"
+                                      : "text-primary group-hover:text-primary"
+                                  } group-hover:scale-105 transform transition-all duration-500 ease-in-out`,
                                   `h-${isSmallScreen ? "9" : "8"} w-${
                                     isSmallScreen ? "8" : "8"
                                   } shrink-0  my-auto ml-1  p-[5px]`
