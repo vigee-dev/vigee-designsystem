@@ -89,7 +89,7 @@ export default function SelectSearch({ className }: TeamSwitcherProps) {
             aria-expanded={open}
             aria-label="Select a team"
             className={cn(
-              "w-[200px] justify-between bg-gray-50 border-0",
+              "w-[200px] justify-between bg-input border-0",
               className
             )}
           >

@@ -51,7 +51,7 @@ export default function Select<T extends z.ZodType<any, any, any>>({
             defaultValue={String(field.value)}
           >
             <FormControl>
-              <SelectTrigger className="font-medium bg-gray-100 border-none  ">
+              <SelectTrigger className="font-medium bg-input border-none  ">
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
             </FormControl>
