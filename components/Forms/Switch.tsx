@@ -41,10 +41,8 @@ export default function Select<T extends z.ZodType<any, any, any>>({
       render={({ field }) => (
         <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 bg-input">
           <div className="space-y-0.5">
-            <FormLabel className="text-base">Marketing emails</FormLabel>
-            <FormDescription>
-              Receive emails about new products, features, and more.
-            </FormDescription>
+            <FormLabel className="text-base">{label}</FormLabel>
+            <FormDescription>{descr}</FormDescription>
           </div>
           <FormControl>
             <Switch checked={field.value} onCheckedChange={field.onChange} />

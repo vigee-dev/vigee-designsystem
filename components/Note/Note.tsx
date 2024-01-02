@@ -2,7 +2,9 @@
 import React, { useState } from "react";
 import { Textarea } from "../ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import { TextArea } from "../Forms/TextArea";
+import TextArea from "../Forms/TextArea";
+import { UseFormReturn, FieldValues, Path } from "react-hook-form";
+import { z } from "zod";
 
 type Note = {
   urgent: string;
@@ -10,73 +12,58 @@ type Note = {
   other: string;
 };
 
-interface NoteProps {
+type Props = {
+  name: Path<Note>;
+  form: UseFormReturn<Note>;
   initialContent: Note;
-}
+};
 
-const Note: React.FC<NoteProps> = ({ initialContent }) => {
-  const [content, setContent] = useState({
+export default function Note({ form, initialContent, name }: Props) {
+  const [content, setContent] = useState<Note>({
     urgent: initialContent?.urgent,
     important: initialContent?.important,
     other: initialContent?.other,
   });
 
   const handleBlur = async (event: React.FocusEvent<HTMLTextAreaElement>) => {
-    const updatedContent = event.target.value;
-    setContent((prev) => ({ ...prev, [event.target.name]: updatedContent }));
-
+    const { name, value } = event.target;
+    setContent((prev) => ({ ...prev, [name]: value }));
     // ACTION
   };
 
+  const noteCategories = [
+    { label: "Urgent", key: "urgent" },
+    { label: "Important", key: "important" },
+    { label: "Autres", key: "other" },
+  ];
+
   return (
-    <div className="col-span-1 bg-white rounded-md  h-fit">
+    <div className="col-span-1 bg-white rounded-md h-fit">
       <Tabs defaultValue="urgent">
         <div className="flex justify-between items-center">
           <TabsList>
-            <TabsTrigger value="urgent">Urgent</TabsTrigger>
-            <TabsTrigger value="important">Important</TabsTrigger>
-            <TabsTrigger value="not-urgent">Autres</TabsTrigger>
+            {noteCategories.map((category) => (
+              <TabsTrigger key={category.key} value={category.key}>
+                {category.label}
+              </TabsTrigger>
+            ))}
           </TabsList>
         </div>
 
-        <TabsContent value="urgent">
-          <TextArea
-            name="urgent"
-            defaultValue={content?.urgent || ""}
-            onBlur={handleBlur}
-            onChange={(event) =>
-              setContent({ ...content, urgent: event.target.value })
-            }
-            minHeight="96"
-          />
-        </TabsContent>
-
-        <TabsContent value="important">
-          <TextArea
-            name={"important"}
-            defaultValue={content?.important || ""}
-            onBlur={handleBlur}
-            onChange={(event) =>
-              setContent({ ...content, important: event.target.value })
-            }
-            minHeight="96"
-          />
-        </TabsContent>
-
-        <TabsContent value="not-urgent">
-          <TextArea
-            name={"other"}
-            defaultValue={content?.other || ""}
-            onBlur={handleBlur}
-            onChange={(event) =>
-              setContent({ ...content, other: event.target.value })
-            }
-            minHeight="96"
-          />
-        </TabsContent>
+        {noteCategories.map((category) => (
+          <TabsContent key={category.key} value={category.key}>
+            <TextArea
+              form={form}
+              name={category.key}
+              onBlur={handleBlur}
+              onChange={(event) =>
+                setContent({ ...content, [category.key]: event.target.value })
+              }
+              minHeight="96"
+            />
+          </TabsContent>
+        ))}
       </Tabs>
     </div>
   );
-};
-
-export default Note;
+}

@@ -46,14 +46,14 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
                 <Button
                   variant={"outline"}
                   className={cn(
-                    `pl-3 text-left font-display font-medium bg-input border-none  text-slate ${className}`,
+                    `pl-3 text-left font-display font-medium bg-input border-none  ${className}`,
                     !field.value && "text-muted-foreground"
                   )}
                 >
                   {field.value ? (
                     moment(field.value).format("DD/MM/YYYY")
                   ) : (
-                    <span>Choisir une période</span>
+                    <span>Choisir une date</span>
                   )}
 
                   <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
