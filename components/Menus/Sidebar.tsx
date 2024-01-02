@@ -18,6 +18,7 @@ function classNames(...classes: (string | boolean)[]): string {
 interface SidebarProps {
   logo?: StaticImageData;
   background?: string;
+  dark?: boolean;
   text?: string;
   children: React.ReactNode;
   noLogo?: boolean;
@@ -33,6 +34,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   navigation,
   children,
   noLogo,
+  dark,
   background = `white`,
   text = `black`,
   logo,
@@ -93,7 +95,9 @@ const Sidebar: React.FC<SidebarProps> = ({
               : sidebarOpen
               ? "flex pl-4"
               : "flex"
-          } grow flex-col gap-y-5 overflow-y-auto  pb-4 shadow-md transform transition-all duration-300 ease-in-out bg-${background} text-${text}`}
+          } grow flex-col gap-y-5 overflow-y-auto  pb-4 shadow-md transform transition-all duration-300 ease-in-out ${
+            dark ? "bg-[#0E0E0E]" : "bg-white"
+          } text-${text}`}
         >
           <div className="flex h-16 shrink-0 items-center justify-between pt-4 w-full ">
             <div
@@ -176,10 +180,10 @@ const Sidebar: React.FC<SidebarProps> = ({
                                       ? "text-3xl font-bold"
                                       : "text-md  font-bold"
                                   }`
-                                : `hover:font-bold hover:text-primary ${
+                                : `hover:font-bold  ${
                                     text === "white"
-                                      ? "text-gray-100"
-                                      : "text-gray-600"
+                                      ? "text-gray-100 hover:text-white"
+                                      : "text-gray-600 hover:text-primary"
                                   } `,
                               `group flex gap-x-2 rounded-md p-[4px] leading-6 transform transition-all duration-100 ease-in-out items-center ${
                                 isSmallScreen ? "text-lg  " : "text-md "
