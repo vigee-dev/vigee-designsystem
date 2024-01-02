@@ -14,7 +14,7 @@ type Note = {
 type Props = {
   form: UseFormReturn<Note>;
   initialContent: Note;
-  onSubmit: () => void;
+  onSubmit: () => Promise<void>;
 };
 
 export default function Note({ form, initialContent, onSubmit }: Props) {
@@ -27,7 +27,6 @@ export default function Note({ form, initialContent, onSubmit }: Props) {
   const handleBlur = async (event: React.FocusEvent<HTMLTextAreaElement>) => {
     const { name, value } = event.target;
     setContent((prev) => ({ ...prev, [name]: value }));
-    // ACTION
   };
 
   const noteCategories = [
