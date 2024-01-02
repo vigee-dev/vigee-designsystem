@@ -163,7 +163,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                       HeroIconsSolid[item.icon as keyof typeof HeroIconsSolid];
 
                     // Fonction pour déterminer la classe de base
-                    const baseClass = `group flex gap-x-2 rounded-md p-[4px] leading-6 transform transition-all duration-100 ease-in-out items-center mx-1 my-1 ${
+                    const baseClass = `group flex gap-x-2 rounded-md p-[4px] leading-6 transform transition-all duration-100 ease-in-out items-center mx-1 my-1 mr-2 ${
                       isSmallScreen ? "text-lg" : "text-md"
                     }`;
 
