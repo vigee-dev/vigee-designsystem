@@ -14,7 +14,7 @@ type Note = {
 type Props = {
   form: UseFormReturn<Note>;
   initialContent: Note;
-  onSubmit: () => Promise<void>;
+  onSubmit: (data: Note) => Promise<void>;
 };
 
 export default function Note({ form, initialContent, onSubmit }: Props) {
