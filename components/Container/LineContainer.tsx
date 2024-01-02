@@ -13,9 +13,7 @@ interface PageHeaderProps {
 // Petite fonction pour construire le contenu
 const Content = ({ title, icon, background }: PageHeaderProps) => (
   <div
-    className={`rounded-md h-fit p-5 mb-4 items-center bg-${background} ${
-      background && "border"
-    }`}
+    className={`rounded-md h-fit p-5 mb-4 items-center bg-${background} border border-slate-200`}
   >
     <div className="flex flex-wrap justify-between gap-x-4 w-full items-center">
       <div className="flex gap-x-4">
