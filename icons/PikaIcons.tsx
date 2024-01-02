@@ -203,7 +203,7 @@ export function CalendarCheck(props: JSX.IntrinsicElements["svg"]) {
   return (
     <svg
       {...props}
-      style={{ color: "888" }}
+      style={{ color: "94a3b8" }}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       width="24"
