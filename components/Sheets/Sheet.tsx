@@ -26,7 +26,7 @@ export default function SheetTriggered({
   return (
     <div className="fixed bottom-4 right-4">
       <Sheet>
-        <SheetTrigger asChild>
+        <SheetTrigger asChild className="bg-black text-white">
           <Button className="rounded-full" variant="outline">
             <PlusIcon className="h-6 w-6" />
           </Button>
