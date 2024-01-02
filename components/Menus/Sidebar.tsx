@@ -174,7 +174,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                       ? isSmallScreen
                         ? "text-3xl p-2"
                         : "text-md bg-white/10 p-2"
-                      : `p-2 ${
+                      : `px-2 ${
                           text === "white"
                             ? "text-gray-100 hover:text-white hover:bg-white/10"
                             : "text-gray-600 hover:text-primary hover:bg-black/10"
