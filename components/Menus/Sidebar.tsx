@@ -154,8 +154,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                                 className={classNames(
                                   `${
                                     text === "white"
-                                      ? "text-gray-400 group-hover:text-gray-400"
-                                      : "text-primary group-hover:text-primary"
+                                      ? "text-gray-500 group-hover:text-gray-500"
+                                      : "text-gray-600 group-hover:text-gray-600"
                                   } group-hover:scale-105 transform transition-all duration-300 ease-in-out`,
                                   `h-${"8"} w-${"8"} shrink-0  my-auto ml-1  p-[5px]`
                                 )}
