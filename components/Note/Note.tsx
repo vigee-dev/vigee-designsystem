@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import TextArea from "../Forms/TextArea";
-import { UseFormReturn } from "react-hook-form";
 import { Form } from "../ui/form";
+import { useForm } from "react-hook-form";
 
 type Note = {
   urgent: string;
@@ -12,12 +12,17 @@ type Note = {
 };
 
 type Props = {
-  form: UseFormReturn<Note>;
+  // form: UseFormReturn<Note>;
   initialContent: Note;
-  onSubmit: (data: Note) => Promise<void>;
 };
 
-export default function Note({ form, initialContent, onSubmit }: Props) {
+export default function Notes({ initialContent }: Props) {
+  const form = useForm<Note>({
+    defaultValues: {
+      ...initialContent,
+    },
+  });
+
   const [content, setContent] = useState<Note>({
     urgent: initialContent?.urgent,
     important: initialContent?.important,
@@ -35,6 +40,10 @@ export default function Note({ form, initialContent, onSubmit }: Props) {
     { label: "Autres", key: "other" },
   ];
 
+  const onSubmit = async (data: Note) => {
+    console.log(data);
+  };
+
   return (
     <div className="col-span-1 bg-white rounded-md h-fit">
       <Tabs defaultValue="urgent">
@@ -49,11 +58,7 @@ export default function Note({ form, initialContent, onSubmit }: Props) {
         </div>
 
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 "
-            id="form"
-          >
+          <form className="space-y-4 " id="form">
             {noteCategories.map((category) => (
               <TabsContent key={category.key} value={category.key}>
                 <TextArea

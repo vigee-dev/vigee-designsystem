@@ -5,9 +5,6 @@ import { Button } from "../Buttons/Button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import * as HeroIcons from "@heroicons/react/24/outline";
-import * as HeroIconsSolid from "@heroicons/react/24/solid";
-
 function classNames(...classes: (string | boolean)[]): string {
   return classes.filter(Boolean).join(" ");
 }
@@ -17,7 +14,8 @@ interface MenuItem {
   slug?: string;
   href?: string;
   color?: string;
-  icon?: string;
+  icon?: React.ReactNode;
+  iconFill?: React.ReactNode;
 }
 
 interface TabProps {
@@ -39,11 +37,6 @@ function MobileMenu({ nav }: TabProps) {
                   .toLocaleLowerCase()
                   .match(item.slug ? item.slug : "//");
 
-                const IconComponent =
-                  HeroIcons[item.icon as keyof typeof HeroIcons];
-                const IconFillComponent =
-                  HeroIconsSolid[item.icon as keyof typeof HeroIconsSolid];
-
                 return (
                   <li key={item.name}>
                     {item.href && (
@@ -57,7 +50,7 @@ function MobileMenu({ nav }: TabProps) {
                         )}
                       >
                         {!includesSlug ? (
-                          <IconComponent
+                          <div
                             className={classNames(
                               includesSlug
                                 ? " text-secondary   "
@@ -65,9 +58,12 @@ function MobileMenu({ nav }: TabProps) {
                               "h-8 w-8 shrink-0 mx-auto justify-center   p-[5px] "
                             )}
                             aria-hidden="true"
-                          />
+                          >
+                            {" "}
+                            {item.icon}
+                          </div>
                         ) : (
-                          <IconFillComponent
+                          <div
                             className={classNames(
                               includesSlug
                                 ? " text-secondary   "
@@ -75,7 +71,10 @@ function MobileMenu({ nav }: TabProps) {
                               "h-8 w-8 shrink-0 mx-auto justify-center   p-[5px] "
                             )}
                             aria-hidden="true"
-                          />
+                          >
+                            {" "}
+                            {item.iconFill}
+                          </div>
                         )}
                         {item.name}
                       </Link>
