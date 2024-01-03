@@ -108,7 +108,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 <ul role="list" className="-mx-2 space-y-0 items-center">
                   {navigation.map((item, index) => {
                     // Fonction pour déterminer la classe de base
-                    const baseClass = `group flex gap-x-2 rounded-md p-[4px] leading-6 transform transition-all duration-100 ease-in-out items-center mx-1 my-1  ${"text-md"}`;
+                    const baseClass = `group flex gap-x-2 rounded-md p-[3px] leading-6 transform transition-all duration-100 ease-in-out items-center mx-1 my-1  ${"text-md"}`;
 
                     // Fonction pour déterminer la classe de texte et de fond
                     const textAndBgClass = router.includes(item.slug)
