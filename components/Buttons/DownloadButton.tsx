@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "./Button";
-import { PiCloudArrowDownloadStroke } from "../../icons/pikaicons";
+import { PiCloudArrowDownloadStroke } from "../../icons/PikaIcons";
 
 interface DownloadButtonProps {
   onClick?: () => void;
