@@ -147,7 +147,6 @@ const Sidebar: React.FC<SidebarProps> = ({
                                 )}
                                 aria-hidden="true"
                               >
-                                {" "}
                                 {item.iconFill ? item.iconFill : item.icon}
                               </div>
                             ) : (
@@ -155,7 +154,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                                 className={classNames(
                                   `${
                                     text === "white"
-                                      ? "text-white group-hover:text-white"
+                                      ? "text-gray-100 group-hover:text-gray-100"
                                       : "text-primary group-hover:text-primary"
                                   } group-hover:scale-105 transform transition-all duration-300 ease-in-out`,
                                   `h-${"8"} w-${"8"} shrink-0  my-auto ml-1  p-[5px]`
