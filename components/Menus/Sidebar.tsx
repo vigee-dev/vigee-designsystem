@@ -59,7 +59,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         onMouseLeave={() => setHoverMenu(false)}
       >
         <div
-          className={`${"flex px-3"} grow flex-col gap-y-5 overflow-y-auto  pb-4 shadow-md transform transition-all duration-300 ease-in-out ${
+          className={`${"flex px-3"} grow flex-col gap-y-5 overflow-y-auto  shadow-md transform transition-all duration-300 ease-in-out ${
             dark ? "bg-[#0E0E0E]" : "bg-white"
           } text-${text}`}
         >
