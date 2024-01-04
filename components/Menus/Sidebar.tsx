@@ -27,6 +27,7 @@ interface SidebarProps {
   }[];
   menu?: boolean;
   logoSmall?: StaticImageData;
+  title?: string;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -39,6 +40,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   logo,
   menu = false,
   logoSmall,
+  title,
 }: SidebarProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [hoverMenu, setHoverMenu] = useState(false);
@@ -78,13 +80,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                     height={30}
                   />
                 ) : (
-                  <Image
-                    src={VigeeGrayLogo}
-                    alt="Vigee"
-                    width={0}
-                    height={0}
-                    className="hidden"
-                  />
+                  title && (
+                    <p className="text-gray-500 text-3xl font-bold">{title}</p>
+                  )
                 )}
               </Link>
               {hoverMenu && !sidebarOpen && (
