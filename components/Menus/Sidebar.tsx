@@ -80,7 +80,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                     height={30}
                   />
                 ) : (
-                  title && (
+                  title &&
+                  sidebarOpen && (
                     <p className="text-primary text-xl font-bold">{title}</p>
                   )
                 )}
