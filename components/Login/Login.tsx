@@ -26,9 +26,10 @@ import { Input } from "../ui/input";
 interface Props {
   logo: StaticImageData;
   clientName?: string;
+  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost";
 }
 
-export default function Login({ logo, clientName }: Props) {
+export default function Login({ logo, clientName, variant }: Props) {
   const router = useRouter();
 
   type FormValues = {
@@ -83,7 +84,7 @@ export default function Login({ logo, clientName }: Props) {
         />
         <div className="flex flex-col justify-start mx-auto md:shadow-sm  md:border border-gray-100 rounded-xl px-4 md:p-8  md:bg-white">
           <div>
-            <TypographyH1 className="text-secondary py-2 pt-0">
+            <TypographyH1 className="text-primary py-2 pt-0">
               Connexion
             </TypographyH1>
           </div>
@@ -147,7 +148,8 @@ export default function Login({ logo, clientName }: Props) {
                     pending={form.formState.isSubmitting}
                     disabled={!email || !password}
                     type="submit"
-                    className="w-full h-12 text-md font-bold bg-secondary"
+                    variant={variant ? variant : "default"}
+                    className="w-full h-12 text-md font-bold"
                   >
                     Connexion
                   </Button>
