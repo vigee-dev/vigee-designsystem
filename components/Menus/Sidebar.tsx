@@ -66,7 +66,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               <Link href={"/"}>
                 {sidebarOpen ? (
                   logo ? (
-                    <Image src={logo} alt="Vigee" width={150} height={80} />
+                    <Image src={logo} alt="Vigee" width={100} height={60} />
                   ) : (
                     <VariableLogo title="Vigee" />
                   )
