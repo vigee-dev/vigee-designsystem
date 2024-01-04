@@ -30,6 +30,8 @@ interface Props {
   trigger: React.ReactNode;
   icon?: React.ReactNode;
   disabled?: boolean;
+  openForced?: boolean;
+  setOpenForced?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // SET THE FORM AS CHILDREN
@@ -49,13 +51,18 @@ export function DrawerMobile({
   trigger,
   icon,
   disabled,
+  openForced,
+  setOpenForced,
 }: Props) {
   const [open, setOpen] = React.useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   if (isDesktop) {
     return (
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog
+        open={openForced ? openForced : open}
+        onOpenChange={setOpenForced ? setOpenForced : setOpen}
+      >
         <DialogTrigger asChild>{trigger}</DialogTrigger>
         <DialogContent className="sm:max-w-[425px] ">
           <DialogHeader>
@@ -74,7 +81,10 @@ export function DrawerMobile({
   }
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer
+      open={openForced ? openForced : open}
+      onOpenChange={setOpenForced ? setOpenForced : setOpen}
+    >
       <DrawerTrigger asChild>{trigger}</DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
