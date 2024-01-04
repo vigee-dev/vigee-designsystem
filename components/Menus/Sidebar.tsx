@@ -81,7 +81,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                   />
                 ) : (
                   title && (
-                    <p className="text-gray-500 text-3xl font-bold">{title}</p>
+                    <p className="text-gray-500 text-xl font-bold">{title}</p>
                   )
                 )}
               </Link>
