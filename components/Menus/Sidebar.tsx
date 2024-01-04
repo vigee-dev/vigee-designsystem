@@ -64,13 +64,13 @@ const Sidebar: React.FC<SidebarProps> = ({
           <div className="flex h-16 shrink-0 items-center justify-between pt-4 w-full ">
             <div className={`justify-between mx-auto flex w-full px-1`}>
               <Link href={"/"}>
-                {sidebarOpen ? (
+                {sidebarOpen && !noLogo ? (
                   logo ? (
                     <Image src={logo} alt="Vigee" width={100} height={60} />
                   ) : (
                     <VariableLogo title="Vigee" />
                   )
-                ) : !hoverMenu ? (
+                ) : !hoverMenu && !noLogo ? (
                   <Image
                     src={logoSmall ? logoSmall : VigeeGrayLogo}
                     alt="Vigee"
@@ -90,7 +90,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               {hoverMenu && !sidebarOpen && (
                 <ChevronRightIcon
                   onClick={() => setSidebarOpen(true)}
-                  className="w-12 text-secondary bg-gray-200 hover:bg-gray-300 hover:text-gray-800 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer p-1"
+                  className="w-12 text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-800 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer p-1"
                 />
               )}
 
@@ -98,7 +98,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 <div className="flex shrink-0 items-center justify-left  cursor-pointer text-gray-400 hover:text-gray-800 pt-1 transform transition-all duration-300 ease-in-out">
                   <ChevronLeftIcon
                     onClick={() => setSidebarOpen(false)}
-                    className="text-secondary bg-gray-200 hover:bg-gray-300 hover:text-gray-800 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer p-1"
+                    className="text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-800 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer p-1"
                   />
                 </div>
               )}
@@ -156,7 +156,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                                 className={classNames(
                                   `${
                                     text === "white"
-                                      ? "text-secondary group-hover:text-secondary"
+                                      ? "text-gray-500 group-hover:text-gray-500"
                                       : "text-gray-600 group-hover:text-gray-600"
                                   } group-hover:scale-105 transform transition-all duration-300 ease-in-out`,
                                   `h-${"8"} w-${"8"} shrink-0  my-auto ml-1  p-[5px]`
@@ -191,7 +191,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               onClick={() => setSidebarOpen(true)}
             >
               {menu && (
-                <p className=" mb-2 text-secondary bg-gray-200 hover:bg-gray-300 hover:text-gray-800 font-bold p-2 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer ">
+                <p className=" mb-2 text-gray-500 bg-gray-200 hover:bg-gray-300 hover:text-gray-800 font-bold p-2 rounded-lg transform transition-all duration-300 ease-in-out cursor-pointer ">
                   Menu
                 </p>
               )}
