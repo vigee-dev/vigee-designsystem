@@ -115,12 +115,12 @@ const Sidebar: React.FC<SidebarProps> = ({
                       ? `text-md  p-2  ${
                           text === "white"
                             ? "text-gray-100 text-white bg-white/10"
-                            : "text-gray-600 text-secondary bg-black/5"
+                            : "text-gray-600 text-primary bg-black/5"
                         }`
                       : `p-2 ${
                           text === "white"
                             ? "text-gray-100 hover:text-white hover:bg-white/10"
-                            : "text-gray-600 hover:text-secondary hover:bg-black/5"
+                            : "text-gray-600 hover:text-primary hover:bg-black/5"
                         }`;
 
                     return (
@@ -141,7 +141,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                                   `${
                                     text === "white"
                                       ? "text-white group-hover:text-white"
-                                      : "text-secondary group-hover:text-secondary"
+                                      : "text-primary group-hover:text-primary"
                                   }   group-hover:scale-105 transform transition-all duration-300 ease-in-out `,
                                   `h-${"8"} w-${"8"} shrink-0  my-auto ml-1 rounded-full p-[4px]`
                                 )}
