@@ -107,3 +107,27 @@ export const matchStatus = (status: string) => {
 
   return { color, text };
 };
+
+export const matchRolesStatus = (status: string) => {
+  let color = "bg-gray-200 text-gray-600";
+  let text = "admin";
+
+  switch (status) {
+    case "admin":
+      color = "bg-sky-200 text-sky-600";
+      text = "Admin";
+      break;
+
+    case "client":
+      color = "bg-green-200 text-green-600";
+      text = "Client";
+      break;
+
+    case "user":
+      color = "bg-yellow-200 text-yellow-600";
+      text = "utilisateur";
+      break;
+  }
+
+  return { color, text };
+};
