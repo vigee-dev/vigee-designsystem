@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   AlertDialog as Alert,
@@ -17,6 +18,7 @@ type Props = {
   onClick: () => void;
   colorBtn?: "outline" | "destructive";
   trigger: React.ReactNode;
+  btnQuestion: string;
 };
 
 type DrawerContextType = {
@@ -39,7 +41,6 @@ export function useAlertContext() {
 }
 
 export function AlertDialog({
-  btnText,
   btnQuestion,
   btnSubAlert,
   colorBtn = "outline",
