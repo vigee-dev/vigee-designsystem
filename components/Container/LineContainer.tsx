@@ -11,7 +11,7 @@ interface PageHeaderProps {
 }
 
 // Petite fonction pour construire le contenu
-const Content = ({ title, icon, background }: PageHeaderProps) => (
+const Content = ({ title, icon, background, children }: PageHeaderProps) => (
   <div
     className={`rounded-md h-fit p-5 mb-4 items-center bg-${background} border border-slate-200 hover:bg-slate-50`}
   >
@@ -22,7 +22,7 @@ const Content = ({ title, icon, background }: PageHeaderProps) => (
       </div>
       <div className="flex gap-x-4">
         <div className="hover:border rounded-md p-1 transistion-ease-in-out duration-100 hover:cursor-pointer">
-          <ChevronRightIcon />
+          {children ? children : <ChevronRightIcon />}
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@ const Content = ({ title, icon, background }: PageHeaderProps) => (
 
 export function LineContainer({
   title,
-
+  children,
   background,
   icon,
   href,
@@ -40,6 +40,10 @@ export function LineContainer({
     <Link href={href}>
       <Content title={title} icon={icon} background={background} />
     </Link>
+  ) : children ? (
+    <Content title={title} icon={icon} background={background}>
+      {children}
+    </Content>
   ) : (
     <Content title={title} icon={icon} background={background} />
   );
