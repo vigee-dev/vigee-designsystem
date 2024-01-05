@@ -27,9 +27,15 @@ interface Props {
   logo: StaticImageData;
   clientName?: string;
   variant?: "default" | "destructive" | "outline" | "secondary" | "ghost";
+  callbackUrl?: string;
 }
 
-export default function Login({ logo, clientName, variant }: Props) {
+export default function Login({
+  logo,
+  clientName,
+  variant,
+  callbackUrl = "/",
+}: Props) {
   const router = useRouter();
 
   type FormValues = {
@@ -53,9 +59,9 @@ export default function Login({ logo, clientName, variant }: Props) {
   const password = form.watch("password");
 
   const onSubmit = async (data: FormValues) => {
-    console.log(data);
     const result = await signIn("credentials", {
-      redirect: false,
+      redirect: true,
+      callbackUrl: callbackUrl,
       email: data.email,
       password: data.password,
     });
@@ -67,8 +73,7 @@ export default function Login({ logo, clientName, variant }: Props) {
         description: "Votre email ou votre mot de passe est incorrect",
       });
     } else {
-      toast({ title: "Bienvenue" });
-      router.push("/");
+      toast({ title: "Vous êtes connecté" });
     }
   };
 
