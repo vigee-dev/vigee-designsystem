@@ -18,6 +18,7 @@ type Props = {
   btnSubAlert?: string;
   onClick: () => void;
   colorBtn?: "outline" | "destructive";
+  trigger: React.ReactNode;
 };
 
 type DrawerContextType = {
@@ -45,6 +46,7 @@ export function AlertDialog({
   btnSubAlert,
   colorBtn = "outline",
   onClick,
+  trigger,
 }: Props) {
   const [open, setOpen] = React.useState(false);
   const contextValue: DrawerContextType = {
@@ -54,9 +56,7 @@ export function AlertDialog({
 
   return (
     <Alert>
-      <AlertDialogTrigger asChild>
-        <Button variant={colorBtn}>{btnText}</Button>
-      </AlertDialogTrigger>
+      <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
       <AlertDialogContent className="z-[1000]">
         <AlertDialogHeader>
           <AlertDialogTitle>{btnQuestion}</AlertDialogTitle>
