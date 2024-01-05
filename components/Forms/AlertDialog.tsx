@@ -64,7 +64,10 @@ export function AlertDialog({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Annuler</AlertDialogCancel>
-          <AlertDialogAction onClick={onClick} className="text-white">
+          <AlertDialogAction
+            onClick={onClick}
+            className="text-white bg-red-500"
+          >
             Confirmer
           </AlertDialogAction>
         </AlertDialogFooter>
