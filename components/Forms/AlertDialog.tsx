@@ -13,8 +13,6 @@ import {
 import { Button } from "../../components/ui/button";
 
 type Props = {
-  btnText: string;
-  btnQuestion: string;
   btnSubAlert?: string;
   onClick: () => void;
   colorBtn?: "outline" | "destructive";
