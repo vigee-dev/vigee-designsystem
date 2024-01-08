@@ -50,9 +50,7 @@ export default function Input<T extends z.ZodType<any, any, any>>({
       rules={{ required }}
       render={({ field }) => (
         <FormItem className={className}>
-          {label && (
-            <FormLabel className="font-black text-primary">{label}</FormLabel>
-          )}
+          {label && <FormLabel className="font-black">{label}</FormLabel>}
           <FormControl>
             <ShadInput
               placeholder={placeholder}
