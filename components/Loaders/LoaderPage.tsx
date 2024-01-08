@@ -8,7 +8,7 @@ interface Props {
   borderColor?: String;
 }
 
-export const Loader = ({ text, logo, borderColor }: Props) => {
+export const LoaderPage = ({ text, logo, borderColor }: Props) => {
   return (
     <div className="flex flex-col justify-center items-center gap-y-2 p-12 h-screen">
       <div className="relative flex items-center justify-center">
