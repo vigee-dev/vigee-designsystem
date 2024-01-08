@@ -10,7 +10,7 @@ interface Props {
 
 export const Loader = ({ text, logo, borderColor }: Props) => {
   return (
-    <div className="flex flex-col justify-center items-center gap-y-2 p-12">
+    <div className="flex flex-col justify-center items-center gap-y-2 p-12 h-screen">
       <div className="relative flex items-center justify-center">
         <div
           className={`absolute h-28 w-28 border-2 ${
