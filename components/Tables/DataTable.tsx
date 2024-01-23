@@ -123,8 +123,8 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
 
-        {rowSelection && (
-          <div className="flex-1 text-sm text-muted-foreground">
+        {table.getFilteredRowModel().rows.length > 0 && (
+          <div className="flex-1 text-sm text-muted-foreground mt-2">
             {table.getFilteredSelectedRowModel().rows.length} sur{" "}
             {table.getFilteredRowModel().rows.length} lignes(s) sélectionnée(s)
           </div>
