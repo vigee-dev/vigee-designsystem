@@ -123,10 +123,11 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
 
-        {table.getFilteredRowModel().rows.length > 0 && (
+        {table.getFilteredSelectedRowModel().rows.length > 0 && (
           <div className="flex-1 text-sm text-muted-foreground mt-2">
-            {table.getFilteredSelectedRowModel().rows.length} sur{" "}
-            {table.getFilteredRowModel().rows.length} lignes(s) sélectionnée(s)
+            {table.getFilteredSelectedRowModel().rows.length.toLocaleString()}{" "}
+            sur {table.getFilteredRowModel().rows.length.toLocaleString()}{" "}
+            lignes(s) sélectionnée(s)
           </div>
         )}
       </div>
