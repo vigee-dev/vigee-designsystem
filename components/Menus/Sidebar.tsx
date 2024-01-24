@@ -28,6 +28,8 @@ interface SidebarProps {
   menu?: boolean;
   logoSmall?: StaticImageData;
   title?: string;
+  width?: number;
+  height?: number;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -41,6 +43,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   menu = false,
   logoSmall,
   title,
+  width,
+  height,
 }: SidebarProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [hoverMenu, setHoverMenu] = useState(false);
@@ -68,7 +72,12 @@ const Sidebar: React.FC<SidebarProps> = ({
               <Link href={"/"}>
                 {sidebarOpen && !noLogo ? (
                   logo ? (
-                    <Image src={logo} alt="Vigee" width={100} height={60} />
+                    <Image
+                      src={logo}
+                      alt="Vigee"
+                      width={width ? width : 100}
+                      height={height ? height : 60}
+                    />
                   ) : (
                     <VariableLogo title="Vigee" />
                   )
