@@ -24,6 +24,7 @@ interface Props<T extends z.ZodType<any, any>> {
   name: Path<z.infer<T> & FieldValues>;
   className?: string;
   starting_date?: Date;
+  disabled?: boolean;
 }
 
 export default function DatePicker<T extends z.ZodType<any, any, any>>({
@@ -32,6 +33,7 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
   name,
   className,
   starting_date,
+  disabled,
 }: Props<T>) {
   return (
     <FormField
@@ -68,6 +70,9 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
                 disabled={(date) => {
                   if (starting_date) {
                     return date < starting_date;
+                  }
+                  if (disabled) {
+                    return true;
                   }
                   return false;
                 }}
