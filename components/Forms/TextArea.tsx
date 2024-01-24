@@ -28,6 +28,7 @@ type Props<T extends z.ZodType<any, any>> = {
   defaultValue?: string;
   className?: string;
   minHeight?: string;
+  disabled?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
 };
@@ -47,6 +48,7 @@ export default function TextArea<T extends z.ZodType<any, any, any>>({
   onChange,
   className,
   descr,
+  disabled,
 }: Props<T>) {
   const [charCount, setCharCount] = useState(0); // État local pour le compteur de caractères
 
@@ -74,6 +76,7 @@ export default function TextArea<T extends z.ZodType<any, any, any>>({
               minHeight || "10"
             } resize-none font-medium bg-input border-none`}
             onBlur={onBlur}
+            disabled={disabled}
           />
           {descr && <FormDescription>{descr}</FormDescription>}
           <FormMessage />
