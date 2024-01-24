@@ -46,6 +46,7 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
             <PopoverTrigger asChild>
               <FormControl>
                 <Button
+                  disabled={disabled}
                   variant={"outline"}
                   className={cn(
                     `pl-3 text-left font-display font-medium bg-input border-none  ${className}`,
@@ -71,9 +72,7 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
                   if (starting_date) {
                     return date < starting_date;
                   }
-                  if (disabled) {
-                    return true;
-                  }
+
                   return false;
                 }}
                 locale={fr}
