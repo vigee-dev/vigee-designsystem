@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import Copyright from "./Copyright";
 import * as z from "zod";
 import { Button } from "../Buttons/Button";
-import { toast } from "../ui/use-toast";
+import { toast } from "sonner";
 import { TypographyH1 } from "../Typography/Typography";
 
 import {
@@ -47,9 +47,7 @@ export default function ForgotPassword({ logo }: Props) {
   const email = form.watch("email");
 
   function onSubmit(data: FormValues) {
-    toast({
-      title: "un email de réinitialisation de mot de passe a été envoyé",
-    });
+    toast("un email de réinitialisation de mot de passe a été envoyé");
     router.push("/login");
   }
 

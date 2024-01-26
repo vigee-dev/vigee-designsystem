@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import Copyright from "./Copyright";
 import * as z from "zod";
 import { Button } from "../Buttons/Button";
-import { toast } from "../ui/use-toast";
+import { toast } from "sonner";
 import { TypographyH1 } from "../Typography/Typography";
 import { signIn } from "next-auth/react";
 import {
@@ -68,12 +68,9 @@ export default function Login({
 
     if (result?.error) {
       console.log(result.error);
-      toast({
-        title: "Identifiants incorrects",
-        description: "Votre email ou votre mot de passe est incorrect",
-      });
+      toast("Votre email ou votre mot de passe est incorrect");
     } else {
-      toast({ title: "Vous êtes connecté" });
+      toast("Vous êtes connecté");
     }
   };
 
