@@ -25,9 +25,9 @@ export const IconButton = ({ icon, iconHover }: Props) => {
   };
 
   const iconClasses =
-    "w-8 h-8 text-gray-400  cursor-pointercursor-pointer transform ease-in-out duration-200";
+    "w-8 h-8 text-gray-400  cursor-pointer cursor-pointer transform ease-in-out duration-200";
   const iconHoverClasses =
-    " w-8 h-8 text-primary cursor-pointercursor-pointer transform ease-in-out duration-200";
+    " w-8 h-8 text-primary cursor-pointer cursor-pointer transform ease-in-out duration-200";
 
   return (
     <div
