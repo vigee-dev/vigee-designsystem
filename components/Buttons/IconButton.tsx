@@ -13,7 +13,7 @@ export const IconButton = ({ icon, iconHover }: Props) => {
     <div
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
-      className="flex items-center justify-center w-8 h-8 p-2 rounded-full bg-gray-100 hover:bg-primary cursor-pointer trasnform ease-in-out duration-200"
+      className="flex items-center justify-center w-8 h-8  text-gray-400 hover:text-primary cursor-pointer transform ease-in-out duration-200"
     >
       {isHover ? iconHover : icon}
     </div>
