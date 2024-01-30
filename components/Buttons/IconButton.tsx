@@ -1,9 +1,9 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 
 interface Props {
-  icon?: string;
-  iconHover?: string;
+  icon?: React.ReactNode;
+  iconHover?: React.ReactNode;
 }
 
 export const IconButton = ({ icon, iconHover }: Props) => {
