@@ -31,6 +31,7 @@ interface Props {
   icon?: React.ReactNode;
   disabled?: boolean;
   openForced?: boolean;
+  cancelButton?: boolean;
   setOpenForced?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -59,7 +60,7 @@ export function DrawerMobile({
   description,
   trigger,
   icon,
-  disabled,
+  cancelButton,
 }: Props) {
   const [open, setOpen] = React.useState(false);
 
@@ -104,13 +105,15 @@ export function DrawerMobile({
 
           <div className="px-4">{children}</div>
 
-          <DrawerFooter>
-            <DrawerClose asChild>
-              <Button type="button" variant="outline">
-                Annuler
-              </Button>
-            </DrawerClose>
-          </DrawerFooter>
+          {cancelButton && (
+            <DrawerFooter>
+              <DrawerClose asChild>
+                <Button type="button" variant="outline">
+                  Annuler
+                </Button>
+              </DrawerClose>
+            </DrawerFooter>
+          )}
         </DrawerContent>
       </Drawer>
     </DrawerContext.Provider>
