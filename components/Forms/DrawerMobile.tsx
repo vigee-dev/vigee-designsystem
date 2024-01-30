@@ -105,15 +105,15 @@ export function DrawerMobile({
 
           <div className="px-4">{children}</div>
 
-          {cancelButton && (
-            <DrawerFooter>
+          <DrawerFooter>
+            {cancelButton && (
               <DrawerClose asChild>
                 <Button type="button" variant="outline">
                   Annuler
                 </Button>
               </DrawerClose>
-            </DrawerFooter>
-          )}
+            )}
+          </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </DrawerContext.Provider>
