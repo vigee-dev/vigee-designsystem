@@ -60,17 +60,21 @@ export default function Login({
 
   const onSubmit = async (data: FormValues) => {
     const result = await signIn("credentials", {
-      redirect: true,
+      redirect: false,
       callbackUrl: callbackUrl,
       email: data.email,
       password: data.password,
     });
 
-    if (result?.error) {
-      console.log(result.error);
-      toast("Votre email ou votre mot de passe est incorrect");
+    if (result) {
+      if (result.ok) {
+        toast("Vous êtes connecté.");
+        router.push("/app/dashboard");
+      } else {
+        toast(result.error);
+      }
     } else {
-      toast("Vous êtes connecté");
+      toast("Une erreur est survenue, veuillez réesayer ultérieurement.");
     }
   };
 
