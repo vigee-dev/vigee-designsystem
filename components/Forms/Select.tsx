@@ -19,7 +19,7 @@ import {
 
 type Props<T extends z.ZodType<any, any>> = {
   form: UseFormReturn<z.infer<T> & FieldValues>;
-  label: string;
+  label?: string;
   placeholder?: string;
   required?: boolean;
   name: Path<z.infer<T> & FieldValues>;
