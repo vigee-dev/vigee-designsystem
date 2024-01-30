@@ -25,15 +25,15 @@ export const IconButton = ({ icon, iconHover }: Props) => {
   };
 
   const iconClasses =
-    "text-gray-400 hover:bg-primary cursor-pointercursor-pointer";
+    "w-8 h-8 text-gray-400  cursor-pointercursor-pointer transform ease-in-out duration-200";
   const iconHoverClasses =
-    "text-primary hover:bg-primary cursor-pointercursor-pointer";
+    " w-8 h-8 text-primary cursor-pointercursor-pointer transform ease-in-out duration-200";
 
   return (
     <div
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
-      className="flex items-center justify-center w-8 h-8 p-2 rounded-full  transform ease-in-out duration-200"
+      className="flex items-center justify-center  rounded-full  "
     >
       {isHover
         ? getStyledIcon(iconHover, iconHoverClasses)
