@@ -60,10 +60,10 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
 };
 
 export const truncateText = ({
-  email,
+  email = "",
   length = 20,
 }: {
-  email: string;
+  email?: string;
   length?: number;
 }) => {
   if (email.length > length) {
