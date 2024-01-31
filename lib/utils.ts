@@ -64,7 +64,7 @@ export const truncateText = ({
   length = 20,
 }: {
   email: string;
-  length: number;
+  length?: number;
 }) => {
   if (email.length > length) {
     return email.substring(0, length) + "...";
