@@ -45,7 +45,7 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
   const [open, setOpen] = React.useState(false);
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={setOpen} className="pt-2">
       {label && (
         <FormLabel className="font-black text-primary p-0 mt-2">
           {label}
@@ -57,7 +57,7 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between mt-0 pt-0"
+          className="w-full justify-between"
         >
           {value
             ? items.find((item) => item.value === value)?.label
