@@ -59,17 +59,11 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   ];
 };
 
-export const truncateText = ({
-  email = "-",
-  length = 20,
-}: {
-  email?: string;
-  length?: number;
-}) => {
-  if (email.length > length) {
-    return email.substring(0, length) + "...";
+export const truncateText = (text: string, length: number = 20) => {
+  if (text.length > length) {
+    return text.substring(0, length) + "...";
   }
-  return email;
+  return text;
 };
 
 export const matchStatus = (status: string) => {
