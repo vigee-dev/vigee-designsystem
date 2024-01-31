@@ -59,6 +59,19 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   ];
 };
 
+export const truncateText = ({
+  email,
+  length = 20,
+}: {
+  email: string;
+  length: number;
+}) => {
+  if (email.length > length) {
+    return email.substring(0, length) + "...";
+  }
+  return email;
+};
+
 export const matchStatus = (status: string) => {
   let color = "bg-gray-200 text-gray-600";
   let text = "Brouillon";
