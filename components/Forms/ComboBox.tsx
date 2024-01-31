@@ -58,7 +58,7 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
-        <Command>
+        <Command className="w-full">
           <CommandInput placeholder="Rechercher..." />
           <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
           <CommandGroup>
