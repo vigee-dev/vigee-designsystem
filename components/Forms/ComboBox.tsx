@@ -15,7 +15,7 @@ import {
   PopoverTrigger,
 } from "../../components/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 interface Item {
   value: string;
