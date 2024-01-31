@@ -49,7 +49,7 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-full justify-between"
         >
           {value
             ? items.find((item) => item.value === value)?.label
@@ -57,8 +57,8 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-0">
-        <Command className="w-full">
+      <PopoverContent className="w-fit p-0">
+        <Command>
           <CommandInput placeholder="Rechercher..." />
           <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
           <CommandGroup>
