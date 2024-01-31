@@ -57,7 +57,7 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-fit p-0">
+      <PopoverContent className="w-full p-0">
         <Command>
           <CommandInput placeholder="Rechercher..." />
           <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
