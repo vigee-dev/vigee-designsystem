@@ -16,6 +16,7 @@ import {
 } from "../../components/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "../../lib/utils";
+import { Label } from "../ui/label";
 
 interface Item {
   value: string;
@@ -44,6 +45,7 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
+      {label && <Label className="font-black text-primary">{label}</Label>}
       <PopoverTrigger asChild>
         <Button
           variant="outline"
