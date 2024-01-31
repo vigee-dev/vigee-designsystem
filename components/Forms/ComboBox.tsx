@@ -45,11 +45,9 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
   const [open, setOpen] = React.useState(false);
 
   return (
-    <Popover open={open} onOpenChange={setOpen} className="pt-2">
+    <Popover open={open} onOpenChange={setOpen}>
       {label && (
-        <FormLabel className="font-black text-primary p-0 mt-2">
-          {label}
-        </FormLabel>
+        <FormLabel className="font-black text-primary">{label}</FormLabel>
       )}
 
       <PopoverTrigger asChild>
@@ -66,7 +64,7 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
-        <Command>
+        <Command className="w-full">
           <CommandInput placeholder="Rechercher..." />
           <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
           <CommandGroup>
