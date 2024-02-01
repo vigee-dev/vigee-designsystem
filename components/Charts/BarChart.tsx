@@ -19,11 +19,22 @@ interface Props {
   subtitle?: string;
   data: Data[];
   color?: string;
+  container?: boolean;
 }
 
-export function BarChart({ data, color = "#000", title, subtitle }: Props) {
+export function BarChart({
+  data,
+  color = "#000",
+  title,
+  subtitle,
+  container,
+}: Props) {
   return (
-    <div className=" bg-white p-8 rounded-md border border-gray-100 items-center mb-2 shadow-sm">
+    <div
+      className={`${
+        container && "bg-white p-8 rounded-md border border-gray-100 shadow-sm"
+      } items-center mb-2 `}
+    >
       <div className="flex flex-col pb-12">
         <TypographyH3 className="font-bold">{title}</TypographyH3>
         <p className="text-gray-500 text-sm">{subtitle}</p>
