@@ -51,7 +51,7 @@ export function ComboBox({
           className="w-full justify-between"
         >
           {value
-            ? items.find((item) => item.value === value)?.label
+            ? items.find((item) => item.label === value)?.label
             : placeholder}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -73,7 +73,7 @@ export function ComboBox({
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    value === item.value ? "opacity-100" : "opacity-0"
+                    value === item.label ? "opacity-100" : "opacity-0"
                   )}
                 />
                 {item.label}
