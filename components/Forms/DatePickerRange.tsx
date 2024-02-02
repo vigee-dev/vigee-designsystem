@@ -2,22 +2,25 @@
 
 import * as React from "react";
 import { CalendarIcon } from "@radix-ui/react-icons";
-import { addDays, format } from "date-fns";
+import { format } from "date-fns";
 import { DateRange } from "react-day-picker";
-import { enUS, fr } from "date-fns/esm/locale";
+import { fr } from "date-fns/esm/locale";
 import { cn } from "../../lib/utils";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
+interface DatePickerRangeProps extends React.HTMLAttributes<HTMLDivElement> {
+  date: DateRange | undefined; // État externe pour la sélection de la date
+  setDate: (newDate: DateRange | undefined) => void; // Fonction pour mettre à jour l'état externe
+  className?: string;
+}
+
 export function DatePickerRange({
   className,
-}: React.HTMLAttributes<HTMLDivElement>) {
-  const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(2023, 0, 20),
-    to: addDays(new Date(2023, 0, 20), 20),
-  });
-
+  date,
+  setDate,
+}: DatePickerRangeProps) {
   return (
     <div className={cn("grid gap-2", className)}>
       <Popover>
@@ -34,11 +37,11 @@ export function DatePickerRange({
             {date?.from ? (
               date.to ? (
                 <>
-                  {format(date.from, "dd LLL y")} -{" "}
-                  {format(date.to, "dd LLL y")}
+                  {format(date.from, "dd LLL y", { locale: fr })} -{" "}
+                  {format(date.to, "dd LLL y", { locale: fr })}
                 </>
               ) : (
-                format(date.from, "LLL dd, y")
+                format(date.from, "LLL dd, y", { locale: fr })
               )
             ) : (
               <span>Choisir une période</span>
@@ -51,7 +54,9 @@ export function DatePickerRange({
             mode="range"
             defaultMonth={date?.from}
             selected={date}
-            onSelect={setDate}
+            onSelect={(selectedDate: DateRange | undefined) =>
+              setDate(selectedDate)
+            }
             numberOfMonths={2}
             locale={fr}
           />
