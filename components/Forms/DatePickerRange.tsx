@@ -115,20 +115,19 @@ export function DatePickerRange({
                   </SelectContent>
                 </Select>
               )}
-
-              <Calendar
-                initialFocus
-                mode="range"
-                defaultMonth={date?.from}
-                selected={date}
-                onSelect={(selectedDate: DateRange | undefined) => {
-                  setDate(selectedDate);
-                  setIsOpen(false);
-                }}
-                numberOfMonths={2}
-                locale={fr}
-              />
             </PopoverClose>
+
+            <Calendar
+              initialFocus
+              mode="range"
+              defaultMonth={date?.from}
+              selected={date}
+              onSelect={(selectedDate: DateRange | undefined) => {
+                setDate(selectedDate);
+              }}
+              numberOfMonths={2}
+              locale={fr}
+            />
           </div>
         </PopoverContent>
       </Popover>
