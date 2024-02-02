@@ -63,7 +63,10 @@ export function DatePickerRange({
         });
         break;
       case "allTime":
-        setDate(undefined);
+        setDate({
+          from: undefined,
+          to: undefined,
+        });
         break;
       default:
         break;
