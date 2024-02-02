@@ -113,7 +113,9 @@ export function DatePickerRange({
                     <SelectItem value="thisWeek">Cette semaine</SelectItem>
                     <SelectItem value="thisMonth">Ce mois-ci</SelectItem>
                     <SelectItem value="thisYear">Cette année</SelectItem>
-                    <SelectItem value="lastYear">L'année dernière</SelectItem>
+                    <SelectItem value="lastYear">
+                      {"L'année dernière"}
+                    </SelectItem>
                     <SelectItem value="allTime">Depuis le début</SelectItem>
                   </SelectContent>
                 </Select>
