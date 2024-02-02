@@ -39,6 +39,7 @@ export function DatePickerRange({
   select,
 }: DatePickerRangeProps) {
   const handleSelectChange = (value: string) => {
+    const lastYear = new Date().getFullYear() - 1;
     switch (value) {
       case "thisWeek":
         setDate({
@@ -54,8 +55,8 @@ export function DatePickerRange({
         break;
       case "lastYear":
         setDate({
-          from: startOfYear(new Date(new Date().getFullYear() - 1)),
-          to: endOfYear(new Date(new Date().getFullYear() - 1)),
+          from: startOfYear(new Date(lastYear, 0, 1)), // Début de l'année dernière
+          to: endOfYear(new Date(lastYear, 11, 31)), // Fin de l'année dernière
         });
         break;
       case "allTime":
@@ -98,7 +99,7 @@ export function DatePickerRange({
             {select && (
               <Select onValueChange={handleSelectChange}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Périodes" />
+                  <SelectValue placeholder="Choisir une période" />
                 </SelectTrigger>
                 <SelectContent position="popper">
                   <SelectItem value="thisWeek">Cette semaine</SelectItem>
