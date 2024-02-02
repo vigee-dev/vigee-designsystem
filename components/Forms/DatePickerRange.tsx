@@ -52,6 +52,12 @@ export function DatePickerRange({
       case "thisYear":
         setDate({ from: startOfYear(new Date()), to: endOfYear(new Date()) });
         break;
+      case "lastYear":
+        setDate({
+          from: startOfYear(new Date(new Date().getFullYear() - 1)),
+          to: endOfYear(new Date(new Date().getFullYear() - 1)),
+        });
+        break;
       case "allTime":
         setDate(undefined);
         break;
@@ -89,17 +95,20 @@ export function DatePickerRange({
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="end">
           <div className="flex flex-col p-2">
-            <Select onValueChange={handleSelectChange}>
-              <SelectTrigger>
-                <SelectValue placeholder="Préréglages" />
-              </SelectTrigger>
-              <SelectContent position="popper">
-                <SelectItem value="thisWeek">Cette semaine</SelectItem>
-                <SelectItem value="thisMonth">Ce mois-ci</SelectItem>
-                <SelectItem value="thisYear">Cette année</SelectItem>
-                <SelectItem value="allTime">Depuis le début</SelectItem>
-              </SelectContent>
-            </Select>
+            {select && (
+              <Select onValueChange={handleSelectChange}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Périodes" />
+                </SelectTrigger>
+                <SelectContent position="popper">
+                  <SelectItem value="thisWeek">Cette semaine</SelectItem>
+                  <SelectItem value="thisMonth">Ce mois-ci</SelectItem>
+                  <SelectItem value="thisYear">Cette année</SelectItem>
+                  <SelectItem value="lastYear">L'année dernière</SelectItem>
+                  <SelectItem value="allTime">Depuis le début</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
 
             <Calendar
               initialFocus
