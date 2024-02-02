@@ -82,7 +82,10 @@ export function LatestInvoicesSkeleton() {
   );
 }
 
-export default function DashboardSkeleton(noTop?: boolean) {
+interface DashboardSkeletonProps {
+  noTop?: boolean;
+}
+export default function DashboardSkeleton({ noTop }: DashboardSkeletonProps) {
   return (
     <>
       {noTop && (
