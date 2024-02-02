@@ -5,6 +5,7 @@ import {
   TypographyH4,
 } from "../Typography/Typography";
 import { UserIcon } from "../../icons/User";
+import { PiUserCircleDuoStroke } from "../../icons/PikaIcons";
 
 interface Data {
   name: string;
@@ -19,7 +20,7 @@ interface Props {
   data: Data[];
 }
 
-export function RecentSales({ title, subtitle, data }: Props) {
+export function Ranking({ title, subtitle, data }: Props) {
   return (
     <div className="space-y-8 ">
       <div className="flex flex-col">
@@ -33,7 +34,7 @@ export function RecentSales({ title, subtitle, data }: Props) {
             <Avatar className="h-9 w-9">
               <AvatarImage src="/avatars/01.png" alt="Avatar" />
               <AvatarFallback>
-                <UserIcon />
+                <PiUserCircleDuoStroke />
               </AvatarFallback>
             </Avatar>
             <div className="ml-4 space-y-1">
