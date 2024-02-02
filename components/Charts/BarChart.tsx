@@ -25,7 +25,7 @@ interface Props {
   data: Data[];
   color?: string;
   container?: boolean;
-  keys: Key[];
+  keys?: Key[];
 }
 
 export function BarChart({
