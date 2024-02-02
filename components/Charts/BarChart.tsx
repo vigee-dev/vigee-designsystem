@@ -11,7 +11,7 @@ import { TypographyH3 } from "../Typography/Typography";
 
 interface Data {
   name: string;
-  total: number;
+  total?: number;
 }
 
 interface Key {
