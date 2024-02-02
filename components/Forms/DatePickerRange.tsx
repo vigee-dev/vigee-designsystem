@@ -2,25 +2,64 @@
 
 import * as React from "react";
 import { CalendarIcon } from "@radix-ui/react-icons";
-import { format } from "date-fns";
 import { DateRange } from "react-day-picker";
 import { fr } from "date-fns/esm/locale";
 import { cn } from "../../lib/utils";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import {
+  format,
+  startOfWeek,
+  endOfWeek,
+  startOfMonth,
+  endOfMonth,
+  startOfYear,
+  endOfYear,
+} from "date-fns";
 
 interface DatePickerRangeProps extends React.HTMLAttributes<HTMLDivElement> {
   date: DateRange | undefined; // État externe pour la sélection de la date
   setDate: (newDate: DateRange | undefined) => void; // Fonction pour mettre à jour l'état externe
   className?: string;
+  select?: boolean;
 }
 
 export function DatePickerRange({
   className,
   date,
   setDate,
+  select,
 }: DatePickerRangeProps) {
+  const handleSelectChange = (value: string) => {
+    switch (value) {
+      case "thisWeek":
+        setDate({
+          from: startOfWeek(new Date(), { weekStartsOn: 1 }),
+          to: endOfWeek(new Date(), { weekStartsOn: 1 }),
+        });
+        break;
+      case "thisMonth":
+        setDate({ from: startOfMonth(new Date()), to: endOfMonth(new Date()) });
+        break;
+      case "thisYear":
+        setDate({ from: startOfYear(new Date()), to: endOfYear(new Date()) });
+        break;
+      case "allTime":
+        setDate(undefined);
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div className={cn("grid gap-2", className)}>
       <Popover>
@@ -49,17 +88,31 @@ export function DatePickerRange({
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="end">
-          <Calendar
-            initialFocus
-            mode="range"
-            defaultMonth={date?.from}
-            selected={date}
-            onSelect={(selectedDate: DateRange | undefined) =>
-              setDate(selectedDate)
-            }
-            numberOfMonths={2}
-            locale={fr}
-          />
+          <div className="flex flex-col p-2">
+            <Select onValueChange={handleSelectChange}>
+              <SelectTrigger>
+                <SelectValue placeholder="Préréglages" />
+              </SelectTrigger>
+              <SelectContent position="popper">
+                <SelectItem value="thisWeek">Cette semaine</SelectItem>
+                <SelectItem value="thisMonth">Ce mois-ci</SelectItem>
+                <SelectItem value="thisYear">Cette année</SelectItem>
+                <SelectItem value="allTime">Depuis le début</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Calendar
+              initialFocus
+              mode="range"
+              defaultMonth={date?.from}
+              selected={date}
+              onSelect={(selectedDate: DateRange | undefined) =>
+                setDate(selectedDate)
+              }
+              numberOfMonths={2}
+              locale={fr}
+            />
+          </div>
         </PopoverContent>
       </Popover>
     </div>
