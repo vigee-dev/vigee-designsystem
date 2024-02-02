@@ -1,7 +1,5 @@
 "use client";
-import React from "react";
-import { UseFormReturn, FieldValues, Path } from "react-hook-form";
-import { z } from "zod";
+import React, { useState } from "react";
 import { Button } from "../../components/ui/button";
 import {
   Command,
@@ -18,38 +16,32 @@ import {
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { Label } from "../ui/label";
-import { FormLabel } from "../ui/form";
 
 interface Item {
   value: string;
   label: string;
 }
-type ComboBoxProps<T extends z.ZodType<any, any>> = {
-  form: UseFormReturn<z.infer<T> & FieldValues>;
-  name: Path<z.infer<T> & FieldValues>;
+
+interface ComboBoxProps {
+  value?: string; // La valeur actuellement sélectionnée
+  onChange: (value: string | undefined) => void; // Fonction pour mettre à jour l'état externe
   label?: string;
   placeholder?: string;
-  required?: boolean;
   items: Item[];
-};
+}
 
-export function ComboBox<T extends z.ZodType<any, any, any>>({
+export function ComboBox({
   items,
-  form,
-  name,
+  value,
+  onChange,
   label,
   placeholder = "Sélectionnez...",
-  required = true,
-}: ComboBoxProps<T>) {
-  const { control, setValue, watch } = form;
-  const value = watch(name);
-  const [open, setOpen] = React.useState(false);
+}: ComboBoxProps) {
+  const [open, setOpen] = useState(false);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      {label && (
-        <FormLabel className="font-black text-primary">{label}</FormLabel>
-      )}
+      {label && <Label className="font-black text-primary">{label}</Label>}
 
       <PopoverTrigger asChild>
         <Button
@@ -73,14 +65,8 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
               <CommandItem
                 key={item.value}
                 value={item.value}
-                onSelect={(currentValue) => {
-                  const valueToUpdate =
-                    currentValue === value ? undefined : currentValue;
-                  // Assurez-vous que la mise à jour respecte le type attendu par le schéma Zod.
-                  setValue(
-                    name as Path<z.infer<T> & FieldValues>,
-                    valueToUpdate as any
-                  );
+                onSelect={() => {
+                  onChange(item.value === value ? undefined : item.value);
                   setOpen(false);
                 }}
               >
