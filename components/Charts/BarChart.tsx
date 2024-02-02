@@ -14,12 +14,18 @@ interface Data {
   total: number;
 }
 
+interface Key {
+  dataKey: string;
+  color: string;
+}
+
 interface Props {
   title?: string;
   subtitle?: string;
   data: Data[];
   color?: string;
   container?: boolean;
+  keys: Key[];
 }
 
 export function BarChart({
@@ -28,6 +34,7 @@ export function BarChart({
   title,
   subtitle,
   container,
+  keys,
 }: Props) {
   return (
     <div
@@ -56,7 +63,19 @@ export function BarChart({
             axisLine={false}
             tickFormatter={(value) => `${value}€`}
           />
-          <Bar dataKey="total" fill={color} radius={[4, 4, 0, 0]} />
+
+          {keys ? (
+            keys.map((key, index) => (
+              <Bar
+                key={index}
+                dataKey={key.dataKey}
+                fill={key.color}
+                radius={[4, 4, 0, 0]}
+              />
+            ))
+          ) : (
+            <Bar dataKey="total" fill={color} radius={[4, 4, 0, 0]} />
+          )}
         </BarChartRecharts>
       </ResponsiveContainer>
     </div>
