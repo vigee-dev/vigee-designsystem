@@ -88,7 +88,7 @@ interface DashboardSkeletonProps {
 export default function DashboardSkeleton({ noTop }: DashboardSkeletonProps) {
   return (
     <>
-      {noTop && (
+      {!noTop && (
         <div
           className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`}
         />
