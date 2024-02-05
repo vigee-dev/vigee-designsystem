@@ -7,7 +7,7 @@ interface Props {
   className?: string;
 }
 
-export const EditIcon = ({ onClick, className }: Props) => {
+export const DeleteIcon = ({ onClick, className }: Props) => {
   return (
     <PiDeleteDustbin01DuoStroke
       className={cn(
