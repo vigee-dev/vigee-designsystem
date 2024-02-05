@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "../../components/ui/button";
 import {
   Command,
@@ -42,7 +42,6 @@ export function ComboBox({
   const [open, setOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
 
-  // Filtrer les items basés sur le texte de recherche
   const filteredItems = items.filter((item) =>
     item.label.toLowerCase().includes(searchText.toLowerCase())
   );
@@ -61,7 +60,7 @@ export function ComboBox({
           >
             {icon && icon}
             {value
-              ? items.find((item) => item.value === value)?.label
+              ? filteredItems.find((item) => item.value === value)?.label
               : placeholder}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
@@ -74,7 +73,7 @@ export function ComboBox({
             />
             <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
             <CommandGroup>
-              {filteredItems.map((item) => (
+              {filteredItems?.map((item) => (
                 <CommandItem
                   key={item.value}
                   value={item.value}
