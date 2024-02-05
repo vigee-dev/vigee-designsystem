@@ -23,8 +23,8 @@ interface Item {
 }
 
 interface ComboBoxProps {
-  value?: string; // La valeur actuellement sélectionnée
-  onChange: (value: string | undefined) => void; // Fonction pour mettre à jour l'état externe
+  value?: string;
+  onChange: (value: string | undefined) => void;
   label?: string;
   placeholder?: string;
   items: Item[];
@@ -40,10 +40,16 @@ export function ComboBox({
   icon,
 }: ComboBoxProps) {
   const [open, setOpen] = useState(false);
+  const [searchText, setSearchText] = useState(""); // Ajout d'un état pour le texte de recherche
+
+  // Filtrer les items basés sur le texte de recherche
+  const filteredItems = items.filter((item) =>
+    item.label.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <div className="flex flex-col  w-full">
+      <div className="flex flex-col w-full">
         <Label className="font-bold text-primary-light">{label}</Label>
 
         <PopoverTrigger asChild>
@@ -62,27 +68,34 @@ export function ComboBox({
         </PopoverTrigger>
         <PopoverContent className="w-full p-0">
           <Command>
-            <CommandInput placeholder="Rechercher..." />
+            <CommandInput
+              placeholder="Rechercher..."
+              onValueChange={(e) => setSearchText(e)} // Utiliser onValueChange pour mettre à jour searchText
+            />
             <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
             <CommandGroup>
-              {items.map((item) => (
-                <CommandItem
-                  key={item.value}
-                  value={item.value}
-                  onSelect={() => {
-                    onChange(item.value === value ? undefined : item.value);
-                    setOpen(false);
-                  }}
-                >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      value === item.value ? "opacity-100" : "opacity-0"
-                    )}
-                  />
-                  {item.label}
-                </CommandItem>
-              ))}
+              {filteredItems.map(
+                (
+                  item // Utiliser filteredItems ici
+                ) => (
+                  <CommandItem
+                    key={item.value}
+                    value={item.value}
+                    onSelect={() => {
+                      onChange(item.value === value ? undefined : item.value);
+                      setOpen(false);
+                    }}
+                  >
+                    <Check
+                      className={cn(
+                        "mr-2 h-4 w-4",
+                        value === item.value ? "opacity-100" : "opacity-0"
+                      )}
+                    />
+                    {item.label}
+                  </CommandItem>
+                )
+              )}
             </CommandGroup>
           </Command>
         </PopoverContent>
