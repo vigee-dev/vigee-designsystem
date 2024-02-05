@@ -26,7 +26,10 @@ import {
 } from "date-fns";
 import { PopoverClose } from "@radix-ui/react-popover";
 import { Label } from "../ui/label";
-import { PiCalendarCheckSolid } from "../../icons/PikaIcons";
+import {
+  PiCalendarCheckContrast,
+  PiCalendarCheckSolid,
+} from "../../icons/PikaIcons";
 
 interface DatePickerRangeProps extends React.HTMLAttributes<HTMLDivElement> {
   date: DateRange | undefined; // État externe pour la sélection de la date
@@ -94,7 +97,7 @@ export function DatePickerRange({
                 !date && "text-muted-foreground"
               )}
             >
-              <PiCalendarCheckSolid className="mr-2 h-4 w-4" />
+              <PiCalendarCheckContrast className="mr-2 h-4 w-4" />
               {date?.from ? (
                 date.to ? (
                   <>
