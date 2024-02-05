@@ -28,6 +28,7 @@ import { PopoverClose } from "@radix-ui/react-popover";
 import { Label } from "../ui/label";
 import {
   PiCalendarCheckContrast,
+  PiCalendarCheckDuoSolid,
   PiCalendarCheckDuoStroke,
   PiCalendarCheckSolid,
 } from "../../icons/PikaIcons";
@@ -98,7 +99,7 @@ export function DatePickerRange({
                 !date && "text-muted-foreground"
               )}
             >
-              <PiCalendarCheckDuoStroke className="mr-2 h-4 w-4 text-primary-light" />
+              <PiCalendarCheckDuoSolid className="mr-2 h-4 w-4 text-primary-light" />
               {date?.from ? (
                 date.to ? (
                   <>
