@@ -73,27 +73,31 @@ export function ComboBox({
               placeholder="Rechercher..."
               onValueChange={(value) => setSearchText(value)} // Utiliser onValueChange pour mettre à jour searchText
             />
-            <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
-            <CommandGroup>
-              {filteredItems?.map((item) => (
-                <CommandItem
-                  key={item.value}
-                  value={item.value}
-                  onSelect={() => {
-                    onChange(item.value === value ? undefined : item.value);
-                    setOpen(false);
-                  }}
-                >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      value === item.value ? "opacity-100" : "opacity-0"
-                    )}
-                  />
-                  {item.label}
-                </CommandItem>
-              ))}
-            </CommandGroup>
+
+            {filteredItems.length > 0 ? (
+              <CommandGroup>
+                {filteredItems?.map((item) => (
+                  <CommandItem
+                    key={item.value}
+                    value={item.value}
+                    onSelect={() => {
+                      onChange(item.value === value ? undefined : item.value);
+                      setOpen(false);
+                    }}
+                  >
+                    <Check
+                      className={cn(
+                        "mr-2 h-4 w-4",
+                        value === item.value ? "opacity-100" : "opacity-0"
+                      )}
+                    />
+                    {item.label}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            ) : (
+              <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
+            )}
           </Command>
         </PopoverContent>
       </div>
