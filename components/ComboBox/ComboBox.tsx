@@ -40,7 +40,8 @@ export function ComboBox({
   icon,
 }: ComboBoxProps) {
   const [open, setOpen] = useState(false);
-  const [searchText, setSearchText] = useState(""); // Ajout d'un état pour le texte de recherche
+  const [searchText, setSearchText] = useState("");
+  console.log("searchText", searchText);
 
   // Filtrer les items basés sur le texte de recherche
   const filteredItems = items.filter((item) =>
