@@ -28,6 +28,7 @@ interface ComboBoxProps {
   label?: string;
   placeholder?: string;
   items: Item[];
+  icon?: React.ReactNode;
 }
 
 export function ComboBox({
@@ -36,6 +37,7 @@ export function ComboBox({
   onChange,
   label,
   placeholder = "Sélectionnez...",
+  icon,
 }: ComboBoxProps) {
   const [open, setOpen] = useState(false);
 
@@ -51,6 +53,7 @@ export function ComboBox({
             aria-expanded={open}
             className="w-full justify-between bg-input border-0"
           >
+            {icon && icon}
             {value
               ? items.find((item) => item.value === value)?.label
               : placeholder}
