@@ -11,7 +11,7 @@ import {
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { z } from "zod";
 
-import { Switch } from "../ui/switch";
+import { Switch as SwitchShadcn } from "../ui/switch";
 
 type Props<T extends z.ZodType<any, any>> = {
   form: UseFormReturn<z.infer<T> & FieldValues>;
@@ -24,7 +24,7 @@ type Props<T extends z.ZodType<any, any>> = {
   className?: string;
 };
 
-export default function Select<T extends z.ZodType<any, any, any>>({
+export default function Switch<T extends z.ZodType<any, any, any>>({
   form,
   label,
   placeholder,
@@ -45,7 +45,10 @@ export default function Select<T extends z.ZodType<any, any, any>>({
             <FormDescription>{descr}</FormDescription>
           </div>
           <FormControl>
-            <Switch checked={field.value} onCheckedChange={field.onChange} />
+            <SwitchShadcn
+              checked={field.value}
+              onCheckedChange={field.onChange}
+            />
           </FormControl>
         </FormItem>
       )}
