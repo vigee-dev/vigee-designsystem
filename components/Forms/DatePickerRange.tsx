@@ -25,12 +25,14 @@ import {
   endOfYear,
 } from "date-fns";
 import { PopoverClose } from "@radix-ui/react-popover";
+import { Label } from "../ui/label";
 
 interface DatePickerRangeProps extends React.HTMLAttributes<HTMLDivElement> {
   date: DateRange | undefined; // État externe pour la sélection de la date
   setDate: (newDate: DateRange | undefined) => void; // Fonction pour mettre à jour l'état externe
   className?: string;
   select?: boolean;
+  label?: string;
 }
 
 export function DatePickerRange({
@@ -38,6 +40,7 @@ export function DatePickerRange({
   date,
   setDate,
   select,
+  label,
 }: DatePickerRangeProps) {
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -77,64 +80,67 @@ export function DatePickerRange({
   return (
     <div className={cn("grid gap-2", className)}>
       <Popover open={isOpen} onOpenChange={setIsOpen}>
-        <PopoverTrigger asChild>
-          <Button
-            id="date"
-            variant={"outline"}
-            className={cn(
-              "md:w-[260px] justify-start text-left font-normal w-full bg-input border-0",
-              !date && "text-muted-foreground"
-            )}
-          >
-            <CalendarIcon className="mr-2 h-4 w-4" />
-            {date?.from ? (
-              date.to ? (
-                <>
-                  {format(date.from, "dd LLL y", { locale: fr })} -{" "}
-                  {format(date.to, "dd LLL y", { locale: fr })}
-                </>
-              ) : (
-                format(date.from, "LLL dd, y", { locale: fr })
-              )
-            ) : (
-              <span>Choisir une période</span>
-            )}
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="end">
-          <div className="flex flex-col p-2">
-            <PopoverClose>
-              {select && (
-                <Select onValueChange={handleSelectChange}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Choisir une période" />
-                  </SelectTrigger>
-                  <SelectContent position="popper">
-                    <SelectItem value="thisWeek">Cette semaine</SelectItem>
-                    <SelectItem value="thisMonth">Ce mois-ci</SelectItem>
-                    <SelectItem value="thisYear">Cette année</SelectItem>
-                    <SelectItem value="lastYear">
-                      {"L'année dernière"}
-                    </SelectItem>
-                    <SelectItem value="allTime">Depuis le début</SelectItem>
-                  </SelectContent>
-                </Select>
+        <div className="flex flex-col gap-y-1 w-full">
+          {label && <Label className="font-black text-primary">{label}</Label>}
+          <PopoverTrigger asChild>
+            <Button
+              id="date"
+              variant={"outline"}
+              className={cn(
+                "md:w-[260px] justify-start text-left font-normal w-full bg-input border-0",
+                !date && "text-muted-foreground"
               )}
-            </PopoverClose>
+            >
+              <CalendarIcon className="mr-2 h-4 w-4" />
+              {date?.from ? (
+                date.to ? (
+                  <>
+                    {format(date.from, "dd LLL y", { locale: fr })} -{" "}
+                    {format(date.to, "dd LLL y", { locale: fr })}
+                  </>
+                ) : (
+                  format(date.from, "LLL dd, y", { locale: fr })
+                )
+              ) : (
+                <span>Choisir une période</span>
+              )}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="end">
+            <div className="flex flex-col p-2">
+              <PopoverClose>
+                {select && (
+                  <Select onValueChange={handleSelectChange}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choisir une période" />
+                    </SelectTrigger>
+                    <SelectContent position="popper">
+                      <SelectItem value="thisWeek">Cette semaine</SelectItem>
+                      <SelectItem value="thisMonth">Ce mois-ci</SelectItem>
+                      <SelectItem value="thisYear">Cette année</SelectItem>
+                      <SelectItem value="lastYear">
+                        {"L'année dernière"}
+                      </SelectItem>
+                      <SelectItem value="allTime">Depuis le début</SelectItem>
+                    </SelectContent>
+                  </Select>
+                )}
+              </PopoverClose>
 
-            <Calendar
-              initialFocus
-              mode="range"
-              defaultMonth={date?.from}
-              selected={date}
-              onSelect={(selectedDate: DateRange | undefined) => {
-                setDate(selectedDate);
-              }}
-              numberOfMonths={2}
-              locale={fr}
-            />
-          </div>
-        </PopoverContent>
+              <Calendar
+                initialFocus
+                mode="range"
+                defaultMonth={date?.from}
+                selected={date}
+                onSelect={(selectedDate: DateRange | undefined) => {
+                  setDate(selectedDate);
+                }}
+                numberOfMonths={2}
+                locale={fr}
+              />
+            </div>
+          </PopoverContent>
+        </div>
       </Popover>
     </div>
   );
