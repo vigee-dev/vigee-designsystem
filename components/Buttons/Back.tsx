@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 interface BackProps {
-  href: string;
+  href?: string;
   where?: string;
   onClick?: () => void;
 }
