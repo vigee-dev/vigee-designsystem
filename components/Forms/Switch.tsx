@@ -20,7 +20,7 @@ type Props<T extends z.ZodType<any, any>> = {
   required?: boolean;
   name: Path<z.infer<T> & FieldValues>;
   descr?: string;
-  children: React.ReactNode;
+
   className?: string;
 };
 
@@ -31,7 +31,7 @@ export default function Switch<T extends z.ZodType<any, any, any>>({
   required = true,
   name,
   descr,
-  children,
+
   className,
 }: Props<T>) {
   return (
