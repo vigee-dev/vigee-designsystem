@@ -41,7 +41,7 @@ export function ComboBox({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col gap-y-1 w-full">
         {label && <Label className="font-black text-primary">{label}</Label>}
 
         <PopoverTrigger asChild>
