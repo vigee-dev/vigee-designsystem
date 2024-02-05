@@ -61,7 +61,7 @@ export function ComboBox({
           >
             {icon && icon}
             {value
-              ? filteredItems.find((item) => item.value === value)?.label
+              ? items.find((item) => item.value === value)?.label
               : placeholder}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
@@ -70,7 +70,7 @@ export function ComboBox({
           <Command>
             <CommandInput
               placeholder="Rechercher..."
-              onValueChange={(e) => setSearchText(e.toString())} // Utiliser onValueChange pour mettre à jour searchText
+              onValueChange={(value) => setSearchText(value)} // Utiliser onValueChange pour mettre à jour searchText
             />
             <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
             <CommandGroup>
