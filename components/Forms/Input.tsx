@@ -23,8 +23,8 @@ type Props<T extends z.ZodType<any, any>> = {
   className?: string;
   disabled?: boolean;
   id?: string;
-  min?: number;
-  max?: number;
+  min?: number | string;
+  max?: number | string;
   step?: number;
 };
 
