@@ -1,16 +1,29 @@
 import React from "react";
 import { TypographyH1, TypographyH2 } from "../Typography/Typography";
+import { cn } from "../../lib/utils";
 
 interface PageHeaderProps {
   title: string;
   children?: React.ReactNode;
   small?: boolean;
   icon?: React.ReactNode;
+  className?: string;
 }
 
-export function PageHeader({ title, children, small, icon }: PageHeaderProps) {
+export function PageHeader({
+  title,
+  children,
+  small,
+  icon,
+  className,
+}: PageHeaderProps) {
   return (
-    <div className=" rounded-md h-fit bg-white p-5  border mb-4 items-center ">
+    <div
+      className={cn(
+        "rounded-md h-fit bg-white p-5  border mb-4 items-center",
+        className
+      )}
+    >
       <div className="flex flex-wrap justify-between  gap-x-4 w-full items-center ">
         <div className="flex items-center gap-4 ">
           {" "}

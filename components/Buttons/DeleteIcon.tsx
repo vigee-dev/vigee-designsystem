@@ -1,5 +1,5 @@
 import React from "react";
-import { PiPencilEditBoxStroke } from "../../icons/PikaIcons";
+import { PiDeleteDustbin01DuoStroke } from "../../icons/PikaIcons";
 import { cn } from "../../lib/utils";
 
 interface Props {
@@ -9,9 +9,9 @@ interface Props {
 
 export const EditIcon = ({ onClick, className }: Props) => {
   return (
-    <PiPencilEditBoxStroke
+    <PiDeleteDustbin01DuoStroke
       className={cn(
-        "text-primary-light hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out",
+        "text-primary-light hover:text-red-600 hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out",
         className
       )}
       onClick={onClick}
