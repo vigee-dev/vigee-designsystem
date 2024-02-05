@@ -41,7 +41,6 @@ export function ComboBox({
 }: ComboBoxProps) {
   const [open, setOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
-  console.log("searchText", searchText);
 
   // Filtrer les items basés sur le texte de recherche
   const filteredItems = items.filter((item) =>
@@ -71,7 +70,7 @@ export function ComboBox({
           <Command>
             <CommandInput
               placeholder="Rechercher..."
-              onValueChange={(e) => setSearchText(e)} // Utiliser onValueChange pour mettre à jour searchText
+              onValueChange={(e) => setSearchText(e.toString())} // Utiliser onValueChange pour mettre à jour searchText
             />
             <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
             <CommandGroup>
