@@ -98,7 +98,7 @@ export function DatePickerRange({
                 !date && "text-muted-foreground"
               )}
             >
-              <PiCalendarCheckDuoStroke className="mr-2 h-4 w-4" />
+              <PiCalendarCheckDuoStroke className="mr-2 h-4 w-4 text-primary-light" />
               {date?.from ? (
                 date.to ? (
                   <>
