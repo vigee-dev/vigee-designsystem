@@ -46,6 +46,8 @@ export function ComboBox({
     item.label.toLowerCase().includes(searchText.toLowerCase())
   );
 
+  console.log(filteredItems);
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <div className="flex flex-col w-full">
