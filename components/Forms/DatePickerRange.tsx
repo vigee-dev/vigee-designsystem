@@ -81,7 +81,9 @@ export function DatePickerRange({
     <div className={cn("grid gap-2", className)}>
       <Popover open={isOpen} onOpenChange={setIsOpen}>
         <div className="flex flex-col gap-y-1 w-full">
-          {label && <Label className="font-black text-gray-400">{label}</Label>}
+          {label && (
+            <Label className="font-bold text-primary-light">{label}</Label>
+          )}
           <PopoverTrigger asChild>
             <Button
               id="date"
