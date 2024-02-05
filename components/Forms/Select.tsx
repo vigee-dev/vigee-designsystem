@@ -26,6 +26,7 @@ type Props<T extends z.ZodType<any, any>> = {
   descr?: string;
   children: React.ReactNode;
   className?: string;
+  disabled?: boolean
 };
 
 export default function Select<T extends z.ZodType<any, any, any>>({
@@ -37,6 +38,7 @@ export default function Select<T extends z.ZodType<any, any, any>>({
   descr,
   children,
   className,
+  disabled
 }: Props<T>) {
   return (
     <FormField
@@ -48,7 +50,8 @@ export default function Select<T extends z.ZodType<any, any, any>>({
           <FormLabel className="font-black text-primary">{label}</FormLabel>
           <ShadSelect
             onValueChange={field.onChange}
-            defaultValue={String(field.value)}
+            value={String(field.value)}
+            disabled={disabled}
           >
             <FormControl>
               <SelectTrigger className="font-medium bg-input border-none  ">
