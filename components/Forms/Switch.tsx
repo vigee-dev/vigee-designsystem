@@ -39,7 +39,7 @@ export default function Switch<T extends z.ZodType<any, any, any>>({
       control={form.control}
       name={name}
       render={({ field }) => (
-        <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 bg-input">
+        <FormItem className="flex flex-row items-center justify-between  p-4 ">
           <div className="space-y-0.5">
             <FormLabel className="text-base">{label}</FormLabel>
             <FormDescription>{descr}</FormDescription>
