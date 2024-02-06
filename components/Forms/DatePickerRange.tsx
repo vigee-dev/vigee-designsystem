@@ -75,7 +75,10 @@ export function DatePickerRange({
       };
       break;
     case "allTime":
-      newDate = undefined;
+    newDate = {
+        from: undefined,
+        to:undefined,
+      };
       break;
     default:
       return; // S'assurer que la fonction s'arrête si aucune correspondance n'est trouvée
