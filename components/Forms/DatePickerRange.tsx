@@ -39,7 +39,7 @@ interface DatePickerRangeProps  {
   className?: string;
   select?: boolean;
   label?: string;
-  onChange?: (date : DateRange | undefined) => void;
+  onChange?: (date : DateRange) => void;
 }
 
 export function DatePickerRange({
@@ -82,7 +82,7 @@ export function DatePickerRange({
       default:
         break;
     }
-    onChange && onChange(date);
+    onChange && date && onChange(date);
     setIsOpen(false);
   };
 
