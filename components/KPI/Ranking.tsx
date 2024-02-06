@@ -18,9 +18,10 @@ interface Props {
   title?: string;
   subtitle?: string;
   data: Data[];
+  icon?: React.ReactNode;
 }
 
-export function Ranking({ title, subtitle, data }: Props) {
+export function Ranking({ title, subtitle, data, icon }: Props) {
   return (
     <div className="space-y-8 ">
       <div className="flex flex-col">
@@ -34,7 +35,7 @@ export function Ranking({ title, subtitle, data }: Props) {
             <Avatar className="h-9 w-9">
               <AvatarImage src="/avatars/01.png" alt="Avatar" />
               <AvatarFallback>
-                <PiUserCircleDuoStroke />
+           {icon ? icon : <PiUserCircleDuoStroke />}
               </AvatarFallback>
             </Avatar>
             <div className="ml-4 space-y-1">
