@@ -33,12 +33,13 @@ import {
   PiCalendarCheckSolid,
 } from "../../icons/PikaIcons";
 
-interface DatePickerRangeProps extends React.HTMLAttributes<HTMLDivElement> {
-  date: DateRange | undefined; // État externe pour la sélection de la date
+interface DatePickerRangeProps  {
+  date: DateRange | undefined; 
   setDate: (newDate: DateRange | undefined) => void; // Fonction pour mettre à jour l'état externe
   className?: string;
   select?: boolean;
   label?: string;
+  onChange?: (date : DateRange | undefined) => void;
 }
 
 export function DatePickerRange({
@@ -47,6 +48,7 @@ export function DatePickerRange({
   setDate,
   select,
   label,
+  onChange,
 }: DatePickerRangeProps) {
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -80,6 +82,7 @@ export function DatePickerRange({
       default:
         break;
     }
+    onChange && onChange(date);
     setIsOpen(false);
   };
 
