@@ -6,12 +6,14 @@ interface IllustrationProps {
   title2?: string;
   subtitle?: string;
   img?: StaticImageData;
+  children?: React.ReactNode;
 }
 export default function Illustration({
   title,
   title2,
   subtitle,
   img,
+  children,
 }: IllustrationProps) {
   return (
     <div className="flex flex-col items-center justify-center bg-primary h-screen w-full px-12 ">
@@ -37,6 +39,9 @@ export default function Illustration({
           {subtitle}{" "}
         </p>
       )}
+
+      
+      {children}
     </div>
   );
 }
