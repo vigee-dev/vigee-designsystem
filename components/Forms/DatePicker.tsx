@@ -66,7 +66,7 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
                 mode="single"
-                selected={field.value}
+                selected={new Date(field.value)}
                 onSelect={field.onChange}
                 disabled={(date) => {
                   if (starting_date) {
