@@ -66,9 +66,9 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
                 mode="single"
-                selected={new Date(field.value)}
+                selected={field.value}
                 onSelect={(date) => {
-                  const formatted_date = date?.toISOString().split("T")[0];
+                  const formatted_date = moment(date).format("YYYY-MM-DD");
                   field.onChange(formatted_date);
                 }}
                 disabled={(date) => {
