@@ -11,6 +11,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../../components/ui/alert-dialog";
+import { Button } from "../Buttons/Button";
 
 type Props = {
   btnSubAlert?: string;
@@ -18,6 +19,7 @@ type Props = {
   colorBtn?: "outline" | "destructive";
   trigger: React.ReactNode;
   btnQuestion: string;
+  isPending?: boolean;
 };
 
 type DrawerContextType = {
@@ -45,6 +47,7 @@ export function AlertDialog({
   colorBtn = "outline",
   onClick,
   trigger,
+  isPending,
 }: Props) {
   const [open, setOpen] = React.useState(false);
   const contextValue: DrawerContextType = {
@@ -64,12 +67,15 @@ export function AlertDialog({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Annuler</AlertDialogCancel>
-          <AlertDialogAction
+          {isPending ? <AlertDialogAction
             onClick={onClick}
             className="text-white bg-red-500"
+            disabled={isPending}
           >
             Confirmer
-          </AlertDialogAction>
+          </AlertDialogAction> : <Button onClick={onClick} variant={colorBtn} pending>
+            Confirmer
+          </Button>}
         </AlertDialogFooter>
       </AlertDialogContent>
     </Alert>
