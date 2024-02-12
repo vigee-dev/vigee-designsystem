@@ -2,7 +2,7 @@ import React from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
+import { toast } from "sonner";
 import { useResetPassword } from "@/app/api/password/usePassword";
 
 type ResetPasswordProps = {
