@@ -5,7 +5,7 @@ import {
 } from "../../icons/PikaIcons";
 
 interface Props {
-  href: string;
+  href?: string;
 }
 
 export const PlusButton = ({ href }: Props) => {
