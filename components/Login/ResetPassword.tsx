@@ -7,9 +7,10 @@ import { useResetPassword } from "@/app/api/password/usePassword";
 
 type ResetPasswordProps = {
     token: string;
+
 };
 
-export default function ResetPassword({ token }: ResetPasswordProps) {
+export default function ResetPassword({ token, }: ResetPasswordProps) {
     type FormValues = {
         password: string;
         password_confirmation: string;
