@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { PiPlusSquareDuoStroke } from "../../icons/PikaIcons";
-import Tooltip from "@/app/components/Tooltip/Tooltip";
+import Tooltip from "../../../Tooltip/Tooltip";
 
 interface Props {
   href?: string;
