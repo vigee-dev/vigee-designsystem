@@ -67,15 +67,19 @@ export function AlertDialog({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Annuler</AlertDialogCancel>
-          {isPending ? <AlertDialogAction
-            onClick={onClick}
-            className="text-white bg-red-500"
-            disabled={isPending}
-          >
-            Confirmer
-          </AlertDialogAction> : <Button onClick={onClick} variant={colorBtn} pending>
-            Confirmer
-          </Button>}
+          {!isPending ? (
+            <AlertDialogAction
+              onClick={onClick}
+              className="text-white bg-red-500"
+              disabled={isPending}
+            >
+              Confirmer
+            </AlertDialogAction>
+          ) : (
+            <Button onClick={onClick} variant={colorBtn} pending>
+              Confirmer
+            </Button>
+          )}
         </AlertDialogFooter>
       </AlertDialogContent>
     </Alert>
