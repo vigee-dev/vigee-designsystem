@@ -3,14 +3,13 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { useResetPassword } from "@/app/api/password/usePassword";
+import { useResetPassword } from "../../hooks/password/usePassword";
 
 type ResetPasswordProps = {
   token: string;
-  mutation: ReturnType<typeof useResetPassword>;
 };
 
-export default function ResetPassword({ token, mutation }: ResetPasswordProps) {
+export default function ResetPassword({ token }: ResetPasswordProps) {
   type FormValues = {
     password: string;
     password_confirmation: string;
@@ -36,6 +35,8 @@ export default function ResetPassword({ token, mutation }: ResetPasswordProps) {
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
   });
+
+  const mutation = useResetPassword();
 
   const onSubmit = async (data: FormValues) => {
     try {
