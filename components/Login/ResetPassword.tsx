@@ -3,13 +3,14 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { useResetPassword } from "@/app/api/password/usePassword";
 
 type ResetPasswordProps = {
   token: string;
-  onSubmit: (data: { password: string; password_confirmation: string }) => void;
+  mutation: ReturnType<typeof useResetPassword>;
 };
 
-export default function ResetPassword({ token, onSubmit }: ResetPasswordProps) {
+export default function ResetPassword({ token, mutation }: ResetPasswordProps) {
   type FormValues = {
     password: string;
     password_confirmation: string;
@@ -36,15 +37,17 @@ export default function ResetPassword({ token, onSubmit }: ResetPasswordProps) {
     resolver: zodResolver(schema),
   });
 
-  // const onSubmit = async (data: FormValues) => {
-  //     try {
-  //         await mutation.mutateAsync({ ...data, token });
-  //         toast.success("Mot de passe réinitialisé avec succès !");
-  //         reset();
-  //     } catch (error) {
-  //         toast.error("Une erreur est survenue lors de la réinitialisation du mot de passe.");
-  //     }
-  // };
+  const onSubmit = async (data: FormValues) => {
+    try {
+      await mutation.mutateAsync({ ...data, token });
+      toast.success("Mot de passe réinitialisé avec succès !");
+      reset();
+    } catch (error) {
+      toast.error(
+        "Une erreur est survenue lors de la réinitialisation du mot de passe."
+      );
+    }
+  };
 
   return (
     <div className="w-full max-w-sm space-y-6 align-center my-auto justify-center mx-auto">
@@ -88,6 +91,7 @@ export default function ResetPassword({ token, onSubmit }: ResetPasswordProps) {
         <div>
           <button
             type="submit"
+            disabled={mutation.isLoading}
             className="flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm font-semibold leading-6 text-white hover:bg-secondary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             Réinitialiser mon mot de passe
