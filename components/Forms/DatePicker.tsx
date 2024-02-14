@@ -67,7 +67,10 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
               <Calendar
                 mode="single"
                 selected={field.value}
-                onSelect={field.onChange}
+                onSelect={(date) => {
+                  const formatted_date = moment(date).format("YYYY-MM-DD");
+                  field.onChange(formatted_date);
+                }}
                 disabled={(date) => {
                   if (starting_date) {
                     return date < starting_date;

@@ -111,6 +111,14 @@ export default function DashboardSkeleton({ noTop }: DashboardSkeletonProps) {
   );
 }
 
+export function TitleSkeleton() {
+  return (
+    <div
+      className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`}
+    />
+  );
+}
+
 export function TableRowSkeleton() {
   return (
     <tr className="w-full border-b border-gray-100 last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg">
