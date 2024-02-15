@@ -103,9 +103,10 @@ export function DrawerMobile({
             <DrawerDescription>{description}</DrawerDescription>
           </DrawerHeader>
 
-          <ScrollArea className="h-fit  p-4">
-            <div className="px-4">{children}</div>
-          </ScrollArea>
+          <div className="px-4">
+            {" "}
+            <ScrollArea className="h-[800px]  p-4">{children} </ScrollArea>
+          </div>
 
           <DrawerFooter>
             {cancelButton && (
