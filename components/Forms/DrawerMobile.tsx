@@ -104,8 +104,9 @@ export function DrawerMobile({
           </DrawerHeader>
 
           <div className="px-4">
-            {" "}
-            <ScrollArea className="h-[800px]  p-4">{children} </ScrollArea>
+            <ScrollArea className="max-h-[800px] h-fit p-4">
+              {children}{" "}
+            </ScrollArea>
           </div>
 
           <DrawerFooter>
