@@ -20,11 +20,13 @@ interface SearchSelectAsyncInterface<Option, T extends z.ZodType<any, any>> {
   isClearable?: boolean
   preprocessOnChange?: (e: SingleValue<Option>) => any
   defaultOptions?: Option[]
+  label?: string
 }
 
 // TODO Better way to handle isMulti, Option type etc ...
 export default function SearchSelectAsync<Option, T extends z.ZodType<any, any, any>>({
   name,
+  label,
   form,
   placeholder = "Rechercher...",
   loadOptions,
@@ -38,7 +40,7 @@ export default function SearchSelectAsync<Option, T extends z.ZodType<any, any, 
     name={name}
     render={({ field }) => (
       <FormItem>
-        <FormLabel className="font-black text-primary">Second commercial</FormLabel>
+        {label && <FormLabel className="font-black text-primary">{label}</FormLabel>}
         <FormControl>
           {/* TODO Debounce loadoptions ? */}
           {/* TODO typeof isMulti ?*/}
