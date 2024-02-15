@@ -10,15 +10,14 @@ import {
 
 import { Input as ShadInput } from "../ui/input";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
-import { z } from "zod";
 
-type Props<T extends z.ZodType<any, any>> = {
-  form?: UseFormReturn<z.infer<T> & FieldValues>;
+type Props<T extends FieldValues> = {
+  form?: UseFormReturn<T>;
   label?: string;
   placeholder?: string;
   type?: string;
   required?: boolean;
-  name: Path<z.infer<T> & FieldValues>;
+  name: Path<T>;
   descr?: string;
   className?: string;
   disabled?: boolean;
@@ -28,7 +27,7 @@ type Props<T extends z.ZodType<any, any>> = {
   step?: number;
 };
 
-export default function Input<T extends z.ZodType<any, any, any>>({
+export default function Input<T extends FieldValues>({
   form,
   label,
   placeholder,
