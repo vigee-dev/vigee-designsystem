@@ -22,7 +22,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-
+import { ScrollArea } from "../ui/scroll-area";
 interface Props {
   title: string;
   description: string;
@@ -103,7 +103,9 @@ export function DrawerMobile({
             <DrawerDescription>{description}</DrawerDescription>
           </DrawerHeader>
 
-          <div className="px-4">{children}</div>
+          <div className="px-4 max-h-fit ">
+            <ScrollArea className="h-[800px]  p-4">{children} </ScrollArea>
+          </div>
 
           <DrawerFooter>
             {cancelButton && (
