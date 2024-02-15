@@ -25,7 +25,6 @@ interface Props<T extends z.ZodType<any, any>> {
   className?: string;
   starting_date?: Date;
   disabled?: boolean;
-  returnString?: boolean;
 }
 
 export default function DatePicker<T extends z.ZodType<any, any, any>>({
@@ -35,7 +34,6 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
   className,
   starting_date,
   disabled,
-  returnString,
 }: Props<T>) {
   return (
     <FormField
@@ -69,15 +67,10 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
               <Calendar
                 mode="single"
                 selected={field.value}
-                onSelect={
-                  returnString
-                    ? date => {
-                        const formatted_date =
-                          moment(date).format("YYYY-MM-DD");
-                        field.onChange(formatted_date);
-                      }
-                    : field.onChange
-                } // Conditional onSelect
+                onSelect={date => {
+                  const formatted_date = moment(date).format("YYYY-MM-DD");
+                  field.onChange(formatted_date);
+                }}
                 disabled={date => {
                   if (starting_date) {
                     return date < starting_date;

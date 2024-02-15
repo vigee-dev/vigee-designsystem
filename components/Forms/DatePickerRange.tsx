@@ -26,20 +26,15 @@ import {
 } from "date-fns";
 import { PopoverClose } from "@radix-ui/react-popover";
 import { Label } from "../ui/label";
-import {
-  PiCalendarCheckContrast,
-  PiCalendarCheckDuoSolid,
-  PiCalendarCheckDuoStroke,
-  PiCalendarCheckSolid,
-} from "../../icons/PikaIcons";
+import { PiCalendarCheckDuoSolid } from "../../icons/PikaIcons";
 
-interface DatePickerRangeProps  {
-  date: DateRange | undefined; 
+interface DatePickerRangeProps {
+  date: DateRange | undefined;
   setDate: (newDate: DateRange | undefined) => void; // Fonction pour mettre à jour l'état externe
   className?: string;
   select?: boolean;
   label?: string;
-  onChange?: (date : DateRange) => void;
+  onChange?: (date: DateRange) => void;
 }
 
 export function DatePickerRange({
@@ -52,45 +47,47 @@ export function DatePickerRange({
 }: DatePickerRangeProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   let newDate: DateRange | undefined;
-  
+
   const handleSelectChange = (value: string) => {
     const lastYear = new Date().getFullYear() - 1;
-   switch (value) {
-    case "thisWeek":
-      newDate = {
-        from: startOfWeek(new Date(), { weekStartsOn: 1 }),
-        to: endOfWeek(new Date(), { weekStartsOn: 1 }),
-      };
-      break;
-    case "thisMonth":
-      newDate = { from: startOfMonth(new Date()), to: endOfMonth(new Date()) };
-      break;
-    case "thisYear":
-      newDate = { from: startOfYear(new Date()), to: endOfYear(new Date()) };
-      break;
-    case "lastYear":
-      newDate = {
-        from: startOfYear(new Date(new Date().getFullYear() - 1, 0, 1)), // Début de l'année dernière
-        to: endOfYear(new Date(new Date().getFullYear() - 1, 11, 31)), // Fin de l'année dernière
-      };
-      break;
-    case "allTime":
-    newDate = {
-        from: undefined,
-        to:undefined,
-      };
-      break;
-    default:
-      return; // S'assurer que la fonction s'arrête si aucune correspondance n'est trouvée
-  }
+    switch (value) {
+      case "thisWeek":
+        newDate = {
+          from: startOfWeek(new Date(), { weekStartsOn: 1 }),
+          to: endOfWeek(new Date(), { weekStartsOn: 1 }),
+        };
+        break;
+      case "thisMonth":
+        newDate = {
+          from: startOfMonth(new Date()),
+          to: endOfMonth(new Date()),
+        };
+        break;
+      case "thisYear":
+        newDate = { from: startOfYear(new Date()), to: endOfYear(new Date()) };
+        break;
+      case "lastYear":
+        newDate = {
+          from: startOfYear(new Date(new Date().getFullYear() - 1, 0, 1)), // Début de l'année dernière
+          to: endOfYear(new Date(new Date().getFullYear() - 1, 11, 31)), // Fin de l'année dernière
+        };
+        break;
+      case "allTime":
+        newDate = {
+          from: undefined,
+          to: undefined,
+        };
+        break;
+      default:
+        return; // S'assurer que la fonction s'arrête si aucune correspondance n'est trouvée
+    }
 
-  setDate(newDate); // Met à jour l'état avec la nouvelle plage de dates
-  if (onChange && newDate) {
-    onChange(newDate); // Appelle onChange avec la nouvelle valeur directement
-  }
-  setIsOpen(false); // Ferme le Popover
-};
-
+    setDate(newDate); // Met à jour l'état avec la nouvelle plage de dates
+    if (onChange && newDate) {
+      onChange(newDate); // Appelle onChange avec la nouvelle valeur directement
+    }
+    setIsOpen(false); // Ferme le Popover
+  };
 
   return (
     <div className={cn("grid gap-2", className)}>
