@@ -60,12 +60,12 @@ export default function TextArea<T extends FieldValues>({
           <Textarea
             {...field}
             placeholder={placeholder ?? ""}
-            onChange={e => {
-              if (count) {
-                setCharCount(e.target.value.length); // Mise à jour du compteur de caractères
-              }
-              onChange && onChange(e);
-            }}
+            // onChange={e => {
+            //   if (count) {
+            //     setCharCount(e.target.value.length); // Mise à jour du compteur de caractères
+            //   }
+            //   onChange && onChange(e);
+            // }}
             className={`min-h-${minHeight || "10"} h-${
               minHeight || "10"
             } resize-none font-medium bg-input border-none`}
