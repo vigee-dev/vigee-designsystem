@@ -43,10 +43,6 @@ export function ComboBox({
   const [open, setOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
 
-  const filteredItems = items.filter(item =>
-    item.label.toLowerCase().includes(searchText.toLowerCase())
-  );
-
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <div className="flex flex-col w-full">
@@ -61,22 +57,18 @@ export function ComboBox({
           >
             {icon && icon}
             {value
-              ? filteredItems.find(item => item.value === value)?.label
+              ? items.find(item => item.value === value)?.label
               : placeholder}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-full p-0">
           <Command>
-            <CommandInput
-              placeholder="Rechercher..."
-              value={searchText} // Ajoutez cette ligne pour contrôler la valeur
-              onValueChange={e => setSearchText(e)} // Mettez à jour searchText basé sur l'entrée de l'utilisateur
-            />
+            <CommandInput placeholder="Rechercher..." />
             <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
             <CommandGroup className="max-h-[200px]">
               <ScrollArea className="h-[200px]">
-                {filteredItems?.map(item => (
+                {items?.map(item => (
                   <CommandItem
                     key={item.value}
                     value={item.value}
