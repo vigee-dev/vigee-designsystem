@@ -61,12 +61,14 @@ export function ComboBox({
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-full flex gap-x-2 bg-input border-0 justify-start"
+            className="w-full flex gap-x-2 bg-input border-0 justify-between"
           >
-            {icon && icon}
-            {value
-              ? items.find(item => item.value === value)?.label
-              : placeholder}
+            <div>
+              {icon && icon}
+              {value
+                ? items.find(item => item.value === value)?.label
+                : placeholder}
+            </div>
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
