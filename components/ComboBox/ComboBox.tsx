@@ -86,7 +86,7 @@ export function ComboBox({
                       key={item.value}
                       value={item.value}
                       onSelect={value => {
-                        onChange(value);
+                        onChange(item.value === value ? undefined : item.value);
                         setOpen(false);
                       }}
                     >
