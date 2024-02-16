@@ -81,7 +81,7 @@ export function ComboBox({
               <ScrollArea className="h-[200px]">
                 {filteredItems.length > 0 &&
                   filteredItems.map(item => {
-                    console.log("item", item);
+                    console.log("item", item.value, item.label);
                     return (
                       <CommandItem
                         key={item.value}
