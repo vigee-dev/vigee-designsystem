@@ -50,6 +50,8 @@ export function ComboBox({
         )
       : items;
 
+  console.log(filteredItems);
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <div className="flex flex-col w-full">
