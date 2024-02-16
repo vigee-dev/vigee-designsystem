@@ -76,7 +76,7 @@ export function DrawerMobile({
       <DrawerContext.Provider value={contextValue}>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>{trigger}</DialogTrigger>
-          <DialogContent className="sm:max-w-[425px] ">
+          <DialogContent className="max-w-[425px] md:max-w-[800px] lg:md:max-w-[900px]">
             <DialogHeader>
               <div className="flex items-center gap-4 ">
                 {icon}
