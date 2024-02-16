@@ -19,6 +19,7 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { Label } from "../ui/label";
 import { FormLabel } from "../ui/form";
+import { ScrollArea } from "../ui/scroll-area";
 
 interface Item {
   value: string;
@@ -59,7 +60,7 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
           className="w-full justify-between"
         >
           {value
-            ? items.find((item) => item.value === value)?.label
+            ? items.find(item => item.value === value)?.label
             : placeholder}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -69,11 +70,12 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
           <CommandInput placeholder="Rechercher..." />
           <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
           <CommandGroup>
-            {items.map((item) => (
+            {items.map(item => (
               <CommandItem
+                className="max-h-[200px]"
                 key={item.value}
                 value={item.value}
-                onSelect={(currentValue) => {
+                onSelect={currentValue => {
                   const valueToUpdate =
                     currentValue === value ? undefined : currentValue;
                   // Assurez-vous que la mise à jour respecte le type attendu par le schéma Zod.
@@ -84,13 +86,15 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
                   setOpen(false);
                 }}
               >
-                <Check
-                  className={cn(
-                    "mr-2 h-4 w-4",
-                    value === item.value ? "opacity-100" : "opacity-0"
-                  )}
-                />
-                {item.label}
+                <ScrollArea className="h-[200px]">
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4",
+                      value === item.value ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+                  {item.label}
+                </ScrollArea>
               </CommandItem>
             ))}
           </CommandGroup>
