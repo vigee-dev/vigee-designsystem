@@ -99,7 +99,7 @@ export function ComboBox({
                             value === item.value ? "opacity-100" : "opacity-0"
                           )}
                         />
-                        {item.label}
+                        {item.label} {item.value}
                       </CommandItem>
                     );
                   })}
