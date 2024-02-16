@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "../../components/ui/button";
 import {
   Command,
@@ -13,7 +13,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "../../components/ui/popover";
-import { ChevronsUpDown } from "lucide-react";
+import { Check, ChevronsUpDown } from "lucide-react";
+import { cn } from "../../lib/utils";
 import { Label } from "../ui/label";
 import { ScrollArea } from "../ui/scroll-area";
 
@@ -40,11 +41,21 @@ export function ComboBox({
   icon,
 }: ComboBoxProps) {
   const [open, setOpen] = useState(false);
+  const [searchText, setSearchText] = useState("");
+
+  // Fonction de filtrage personnalisée
+  const filterItems = (value = "", search = "") => {
+    // Votre logique de filtrage ici, retournez 1 pour un match, 0 sinon.
+    // Par exemple, filtrer sur le label des items
+    if (value.toLowerCase().includes(search.toLowerCase())) return 1;
+    return 0;
+  };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <div className="flex flex-col w-full">
         <Label className="font-bold text-primary-light">{label}</Label>
+
         <PopoverTrigger asChild>
           <Button
             variant="outline"
@@ -60,23 +71,31 @@ export function ComboBox({
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-full p-0">
-          <Command>
+          <Command filter={filterItems}>
             <CommandInput placeholder="Rechercher..." autoFocus />
             <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
-            <CommandGroup>
-              <ScrollArea>
-                {items.map(item => (
-                  <CommandItem
-                    key={item.value}
-                    value={item.value}
-                    onSelect={() => {
-                      onChange(item.value === value ? undefined : item.value);
-                      setOpen(false);
-                    }}
-                  >
-                    {item.label}
-                  </CommandItem>
-                ))}
+            <CommandGroup className="max-h-[200px]">
+              <ScrollArea className="h-[200px]">
+                {items.map(item => {
+                  return (
+                    <CommandItem
+                      key={item.value}
+                      value={item.label}
+                      onSelect={() => {
+                        onChange(item.value === value ? undefined : item.value);
+                        setOpen(false);
+                      }}
+                    >
+                      <Check
+                        className={cn(
+                          "mr-2 h-4 w-4",
+                          value === item.value ? "opacity-100" : "opacity-0"
+                        )}
+                      />
+                      {item.label}
+                    </CommandItem>
+                  );
+                })}
               </ScrollArea>
             </CommandGroup>
           </Command>
