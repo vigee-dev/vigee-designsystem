@@ -15,10 +15,10 @@ import {
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { z } from "zod";
 
-type Props<T extends z.ZodType<any, any>> = {
-  form: UseFormReturn<z.infer<T> & FieldValues>;
+type Props<T extends FieldValues> = {
+  form?: UseFormReturn<T>;
   id?: string;
-  name: Path<z.infer<T> & FieldValues>;
+  name: Path<T>;
   label?: string;
   required?: boolean;
   placeholder?: string;
@@ -33,7 +33,7 @@ type Props<T extends z.ZodType<any, any>> = {
   onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
 };
 
-export default function TextArea<T extends z.ZodType<any, any, any>>({
+export default function TextArea<T extends FieldValues>({
   form,
   id,
   name,
@@ -54,7 +54,7 @@ export default function TextArea<T extends z.ZodType<any, any, any>>({
 
   return (
     <FormField
-      control={form.control}
+      control={form?.control}
       name={name}
       rules={{ required }}
       render={({ field }) => (
@@ -64,7 +64,7 @@ export default function TextArea<T extends z.ZodType<any, any, any>>({
             name={name}
             id={id}
             placeholder={placeholder ?? ""}
-            onChange={(e) => {
+            onChange={e => {
               if (count) {
                 setCharCount(e.target.value.length); // Mise à jour du compteur de caractères
               }
