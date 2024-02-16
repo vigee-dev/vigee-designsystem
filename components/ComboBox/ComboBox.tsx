@@ -75,6 +75,7 @@ export function ComboBox({
               value={searchText}
               placeholder="Rechercher..."
               autoFocus
+              onValueChange={text => setSearchText(text)}
             />
             <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
             <CommandGroup className="max-h-[200px]">
