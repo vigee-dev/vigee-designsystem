@@ -63,7 +63,7 @@ export function ComboBox({
             aria-expanded={open}
             className="w-full flex gap-x-2 bg-input border-0 justify-between"
           >
-            <div>
+            <div className="flex gap-x-2">
               {icon && icon}
               {value
                 ? items.find(item => item.value === value)?.label
