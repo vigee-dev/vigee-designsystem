@@ -4,6 +4,7 @@ import { Label } from "../ui/label";
 import { useState } from "react";
 
 import {
+  FormControl,
   FormDescription,
   FormField,
   FormItem,
@@ -13,7 +14,7 @@ import {
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 
 type Props<T extends FieldValues> = {
-  form?: UseFormReturn<T>;
+  form: UseFormReturn<T>;
   id?: string;
   name: Path<T>;
   label?: string;
@@ -51,29 +52,28 @@ export default function TextArea<T extends FieldValues>({
 
   return (
     <FormField
-      control={form?.control}
+      control={form.control}
       name={name}
       rules={{ required }}
       render={({ field }) => (
-        <FormItem className={className}>
-          <FormLabel className="font-black text-primary">{label}</FormLabel>
-          <Textarea
-            {...field}
-            placeholder={placeholder ?? ""}
-            // onChange={e => {
-            //   if (count) {
-            //     setCharCount(e.target.value.length); // Mise à jour du compteur de caractères
-            //   }
-            //   onChange && onChange(e);
-            // }}
-            className={`min-h-${minHeight || "10"} h-${
-              minHeight || "10"
-            } resize-none font-medium bg-input border-none`}
-            disabled={disabled}
-          />
-          {descr && <FormDescription>{descr}</FormDescription>}
-          <FormMessage />
-        </FormItem>
+        <FormField
+          control={form?.control}
+          name={name}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{label}</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder={placeholder}
+                  className="resize-none"
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription>{descr}</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
       )}
     />
   );
