@@ -72,37 +72,32 @@ export function ComboBox({
         <PopoverContent className="w-full p-0">
           <Command>
             <CommandInput
+              value={searchText}
               placeholder="Rechercher..."
               autoFocus
-              onValueChange={text => setSearchText(text)}
             />
             <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
             <CommandGroup className="max-h-[200px]">
               <ScrollArea className="h-[200px]">
                 {filteredItems.length > 0 &&
-                  filteredItems.map(item => {
-                    console.log("item", item.value, item.label);
-                    return (
-                      <CommandItem
-                        key={item.value}
-                        value={item.value}
-                        onSelect={() => {
-                          onChange(
-                            item.value === value ? undefined : item.value
-                          );
-                          setOpen(false);
-                        }}
-                      >
-                        <Check
-                          className={cn(
-                            "mr-2 h-4 w-4",
-                            value === item.value ? "opacity-100" : "opacity-0"
-                          )}
-                        />
-                        {item.label} {item.value}
-                      </CommandItem>
-                    );
-                  })}
+                  filteredItems.map(item => (
+                    <CommandItem
+                      key={item.value}
+                      value={item.value}
+                      onSelect={() => {
+                        onChange(item.value === value ? undefined : item.value);
+                        setOpen(false);
+                      }}
+                    >
+                      <Check
+                        className={cn(
+                          "mr-2 h-4 w-4",
+                          value === item.value ? "opacity-100" : "opacity-0"
+                        )}
+                      />
+                      {item.label}
+                    </CommandItem>
+                  ))}
               </ScrollArea>
             </CommandGroup>
           </Command>
