@@ -50,8 +50,6 @@ export function ComboBox({
         )
       : items;
 
-  console.log(filteredItems);
-
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <div className="flex flex-col w-full">
@@ -82,24 +80,29 @@ export function ComboBox({
             <CommandGroup className="max-h-[200px]">
               <ScrollArea className="h-[200px]">
                 {filteredItems.length > 0 &&
-                  filteredItems.map(item => (
-                    <CommandItem
-                      key={item.value}
-                      value={item.value}
-                      onSelect={() => {
-                        onChange(item.value === value ? undefined : item.value);
-                        setOpen(false);
-                      }}
-                    >
-                      <Check
-                        className={cn(
-                          "mr-2 h-4 w-4",
-                          value === item.value ? "opacity-100" : "opacity-0"
-                        )}
-                      />
-                      {item.label}
-                    </CommandItem>
-                  ))}
+                  filteredItems.map(item => {
+                    console.log("item", item);
+                    return (
+                      <CommandItem
+                        key={item.value}
+                        value={item.value}
+                        onSelect={() => {
+                          onChange(
+                            item.value === value ? undefined : item.value
+                          );
+                          setOpen(false);
+                        }}
+                      >
+                        <Check
+                          className={cn(
+                            "mr-2 h-4 w-4",
+                            value === item.value ? "opacity-100" : "opacity-0"
+                          )}
+                        />
+                        {item.label}
+                      </CommandItem>
+                    );
+                  })}
               </ScrollArea>
             </CommandGroup>
           </Command>
