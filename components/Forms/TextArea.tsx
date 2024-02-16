@@ -58,21 +58,17 @@ export default function TextArea<T extends FieldValues>({
         <FormItem className={className}>
           <FormLabel className="font-black text-primary">{label}</FormLabel>
           <Textarea
-            name={name}
-            id={id}
+            {...field}
             placeholder={placeholder ?? ""}
-            // onChange={e => {
-            //   if (count) {
-            //     setCharCount(e.target.value.length); // Mise à jour du compteur de caractères
-            //   }
-            //   onChange && onChange(e);
-            // }}
-            maxLength={max}
-            defaultValue={defaultValue ?? ""}
+            onChange={e => {
+              if (count) {
+                setCharCount(e.target.value.length); // Mise à jour du compteur de caractères
+              }
+              onChange && onChange(e);
+            }}
             className={`min-h-${minHeight || "10"} h-${
               minHeight || "10"
             } resize-none font-medium bg-input border-none`}
-            onBlur={onBlur}
             disabled={disabled}
           />
           {descr && <FormDescription>{descr}</FormDescription>}
