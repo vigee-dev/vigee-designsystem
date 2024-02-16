@@ -70,7 +70,11 @@ export function ComboBox({
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-full p-0">
-          <Command>
+          <Command
+            filter={(value, search) =>
+              value.toLowerCase().includes(search.toLowerCase()) ? 1 : 0
+            }
+          >
             <CommandInput
               value={searchText}
               placeholder="Rechercher..."
