@@ -68,7 +68,11 @@ export function ComboBox({
         </PopoverTrigger>
         <PopoverContent className="w-full p-0">
           <Command>
-            <CommandInput placeholder="Rechercher..." />
+            <CommandInput
+              placeholder="Rechercher..."
+              value={searchText} // Ajoutez cette ligne pour contrôler la valeur
+              onChange={e => setSearchText(e.target.value)} // Mettez à jour searchText basé sur l'entrée de l'utilisateur
+            />
             <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
             <CommandGroup className="max-h-[200px]">
               <ScrollArea className="h-[200px]">
