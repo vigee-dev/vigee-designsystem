@@ -44,7 +44,7 @@ export function ComboBox({
   const [searchText, setSearchText] = useState("");
 
   const filteredItems = items.filter(item =>
-    item.label.toLowerCase().includes(searchText.toLowerCase())
+    item.value.toLowerCase().includes(searchText.toLowerCase())
   );
 
   return (
