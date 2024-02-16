@@ -43,13 +43,9 @@ export function ComboBox({
   const [open, setOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
 
-  let filteredItems = items;
-
-  useEffect(() => {
-    filteredItems = items.filter(item =>
-      item.label.toLowerCase().includes(searchText.toLowerCase())
-    );
-  }, [searchText]);
+  const filteredItems = items.filter(item =>
+    item.label.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -72,10 +68,7 @@ export function ComboBox({
         </PopoverTrigger>
         <PopoverContent className="w-full p-0">
           <Command>
-            <CommandInput
-              placeholder="Rechercher..."
-              onValueChange={value => setSearchText(value)}
-            />
+            <CommandInput placeholder="Rechercher..." />
             <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
             <CommandGroup className="max-h-[200px]">
               <ScrollArea className="h-[200px]">
