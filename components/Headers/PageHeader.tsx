@@ -26,7 +26,6 @@ export function PageHeader({
     >
       <div className="flex flex-wrap justify-between  gap-x-4 w-full items-center ">
         <div className="flex items-center gap-4 ">
-          {" "}
           {icon}
           {small ? (
             <TypographyH2>{title}</TypographyH2>

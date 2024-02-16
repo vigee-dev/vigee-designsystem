@@ -61,7 +61,7 @@ export function ComboBox({
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-full justify-between bg-input border-0 gap-x-2 items-center"
+            className="w-full flex gap-x-2 bg-input border-0"
           >
             {icon && icon}
             {value
