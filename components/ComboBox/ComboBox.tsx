@@ -82,7 +82,14 @@ export function ComboBox({
               <ScrollArea className="h-[200px]">
                 {filteredItems.length > 0 &&
                   filteredItems.map(item => (
-                    <CommandItem key={item.value} value={item.value}>
+                    <CommandItem
+                      key={item.value}
+                      value={item.value}
+                      onSelect={value => {
+                        onChange(item.value === value ? undefined : item.value);
+                        setOpen(false);
+                      }}
+                    >
                       <Check
                         className={cn(
                           "mr-2 h-4 w-4",
