@@ -32,6 +32,7 @@ type ComboBoxProps<T extends z.ZodType<any, any>> = {
   placeholder?: string;
   required?: boolean;
   items: Item[];
+  icon?: React.ReactNode;
 };
 
 export function ComboBox<T extends z.ZodType<any, any, any>>({
@@ -41,6 +42,7 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
   label,
   placeholder = "Sélectionnez...",
   required = true,
+  icon,
 }: ComboBoxProps<T>) {
   const { control, setValue, watch } = form;
   const value = watch(name);
@@ -57,11 +59,14 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between"
+          className="w-full flex gap-x-2 bg-input border-0 justify-between"
         >
-          {value
-            ? items.find(item => item.value === value)?.label
-            : placeholder}
+          <div className="flex gap-x-2 items-center">
+            {icon && icon}
+            {value
+              ? items.find(item => item.value === value)?.label
+              : placeholder}
+          </div>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -69,24 +74,24 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
         <Command>
           <CommandInput placeholder="Rechercher..." />
           <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
-          <CommandGroup>
-            {items.map(item => (
-              <CommandItem
-                className="max-h-[200px]"
-                key={item.value}
-                value={item.value}
-                onSelect={currentValue => {
-                  const valueToUpdate =
-                    currentValue === value ? undefined : currentValue;
-                  // Assurez-vous que la mise à jour respecte le type attendu par le schéma Zod.
-                  setValue(
-                    name as Path<z.infer<T> & FieldValues>,
-                    valueToUpdate as any
-                  );
-                  setOpen(false);
-                }}
-              >
-                <ScrollArea className="h-[200px]">
+          <CommandGroup className="max-h-[200px]">
+            <ScrollArea className="h-[200px]">
+              {items.map(item => (
+                <CommandItem
+                  className="max-h-[200px]"
+                  key={item.value}
+                  value={item.value}
+                  onSelect={currentValue => {
+                    const valueToUpdate =
+                      currentValue === value ? undefined : currentValue;
+                    // Assurez-vous que la mise à jour respecte le type attendu par le schéma Zod.
+                    setValue(
+                      name as Path<z.infer<T> & FieldValues>,
+                      valueToUpdate as any
+                    );
+                    setOpen(false);
+                  }}
+                >
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
@@ -94,9 +99,9 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
                     )}
                   />
                   {item.label}
-                </ScrollArea>
-              </CommandItem>
-            ))}
+                </CommandItem>
+              ))}
+            </ScrollArea>
           </CommandGroup>
         </Command>
       </PopoverContent>
