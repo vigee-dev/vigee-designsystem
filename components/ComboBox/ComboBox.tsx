@@ -43,6 +43,13 @@ export function ComboBox({
   const [open, setOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
 
+  const filteredItems =
+    searchText.length > 0
+      ? items.filter(item =>
+          item.label.toLowerCase().includes(searchText.toLowerCase())
+        )
+      : items;
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <div className="flex flex-col w-full">
@@ -64,28 +71,33 @@ export function ComboBox({
         </PopoverTrigger>
         <PopoverContent className="w-full p-0">
           <Command>
-            <CommandInput placeholder="Rechercher..." />
+            <CommandInput
+              placeholder="Rechercher..."
+              autoFocus
+              onValueChange={text => setSearchText(text)}
+            />
             <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
             <CommandGroup className="max-h-[200px]">
               <ScrollArea className="h-[200px]">
-                {items?.map(item => (
-                  <CommandItem
-                    key={item.value}
-                    value={item.value}
-                    onSelect={() => {
-                      onChange(item.value === value ? undefined : item.value);
-                      setOpen(false);
-                    }}
-                  >
-                    <Check
-                      className={cn(
-                        "mr-2 h-4 w-4",
-                        value === item.value ? "opacity-100" : "opacity-0"
-                      )}
-                    />
-                    {item.label}
-                  </CommandItem>
-                ))}
+                {filteredItems.length > 0 &&
+                  filteredItems.map(item => (
+                    <CommandItem
+                      key={item.value}
+                      value={item.value}
+                      onSelect={() => {
+                        onChange(item.value === value ? undefined : item.value);
+                        setOpen(false);
+                      }}
+                    >
+                      <Check
+                        className={cn(
+                          "mr-2 h-4 w-4",
+                          value === item.value ? "opacity-100" : "opacity-0"
+                        )}
+                      />
+                      {item.label}
+                    </CommandItem>
+                  ))}
               </ScrollArea>
             </CommandGroup>
           </Command>
