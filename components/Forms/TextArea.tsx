@@ -4,8 +4,6 @@ import { Label } from "../ui/label";
 import { useState } from "react";
 
 import {
-  Form,
-  FormControl,
   FormDescription,
   FormField,
   FormItem,
@@ -13,7 +11,6 @@ import {
   FormMessage,
 } from "../ui/form";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
-import { z } from "zod";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -64,12 +61,12 @@ export default function TextArea<T extends FieldValues>({
             name={name}
             id={id}
             placeholder={placeholder ?? ""}
-            onChange={e => {
-              if (count) {
-                setCharCount(e.target.value.length); // Mise à jour du compteur de caractères
-              }
-              onChange && onChange(e);
-            }}
+            // onChange={e => {
+            //   if (count) {
+            //     setCharCount(e.target.value.length); // Mise à jour du compteur de caractères
+            //   }
+            //   onChange && onChange(e);
+            // }}
             maxLength={max}
             defaultValue={defaultValue ?? ""}
             className={`min-h-${minHeight || "10"} h-${
