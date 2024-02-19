@@ -15,7 +15,7 @@ interface SearchSelectAsyncInterface<
   IsMulti extends boolean = false,
 > {
   name: Path<T>;
-  form?: UseFormReturn<T>;
+  form: UseFormReturn<T>;
   disabled?: boolean;
   placeholder?: string;
   loadOptions: (query: string) => Promise<Option[]>;
@@ -23,10 +23,11 @@ interface SearchSelectAsyncInterface<
   preprocessOnChange?: (e: OnChangeValue<Option, IsMulti>) => any;
   defaultOptions?: Option[];
   label?: string;
+  isMulti?: IsMulti
 }
 
 // TODO Better way to handle isMulti, Option type etc ...
-export default function SearchSelectAsync<T extends FieldValues, Option, IsMulti extends boolean>({
+export default function SearchSelectAsync<T extends FieldValues, Option, IsMulti extends boolean = false>({
   name,
   label,
   form,
@@ -35,7 +36,8 @@ export default function SearchSelectAsync<T extends FieldValues, Option, IsMulti
   disabled = false,
   isClearable = true,
   preprocessOnChange,
-  defaultOptions
+  defaultOptions,
+  isMulti
 }: SearchSelectAsyncInterface<T, Option, IsMulti>) {
   return (
     <FormField
@@ -43,9 +45,7 @@ export default function SearchSelectAsync<T extends FieldValues, Option, IsMulti
       name={name}
       render={({ field }) => (
         <FormItem>
-          {label && (
-            <FormLabel className="font-black text-primary">{label}</FormLabel>
-          )}
+          {label && (<FormLabel className="font-black text-primary">{label}</FormLabel>)}
           <FormControl>
             {/* TODO Debounce loadoptions ? */}
             {/* TODO typeof isMulti ?*/}
@@ -63,6 +63,7 @@ export default function SearchSelectAsync<T extends FieldValues, Option, IsMulti
               defaultOptions={defaultOptions || []}
               loadOptions={loadOptions}
               ref={field.ref}
+              isMulti={isMulti}
             />
           </FormControl>
           <FormMessage />
