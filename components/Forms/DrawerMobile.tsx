@@ -33,6 +33,7 @@ interface Props {
   openForced?: boolean;
   cancelButton?: boolean;
   setOpenForced?: React.Dispatch<React.SetStateAction<boolean>>;
+  size?: "sm" | "md" | "lg";
 }
 
 type DrawerContextType = {
@@ -61,6 +62,7 @@ export function DrawerMobile({
   trigger,
   icon,
   cancelButton,
+  size = "sm",
 }: Props) {
   const [open, setOpen] = React.useState(false);
 
@@ -76,7 +78,15 @@ export function DrawerMobile({
       <DrawerContext.Provider value={contextValue}>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>{trigger}</DialogTrigger>
-          <DialogContent className="sm:max-w-[425px] ">
+          <DialogContent
+            className={`max-w-[425px] ${
+              size === "sm"
+                ? "md:max-w-[425px]"
+                : size === "md"
+                ? "md:max-w-[650px]"
+                : "md:max-w-[1080px]"
+            } `}
+          >
             <DialogHeader>
               <div className="flex items-center gap-4 ">
                 {icon}
