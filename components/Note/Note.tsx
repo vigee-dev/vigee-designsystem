@@ -31,10 +31,15 @@ export default function Notes({ initialContent }: Props) {
 
   const handleBlur = async (event: React.FocusEvent<HTMLTextAreaElement>) => {
     const { name, value } = event.target;
-    setContent((prev) => ({ ...prev, [name]: value }));
+    setContent(prev => ({ ...prev, [name]: value }));
   };
 
-  const noteCategories = [
+  type Category = {
+    label: string;
+    key: "urgent" | "important" | "other";
+  };
+
+  const noteCategories: Category[] = [
     { label: "Urgent", key: "urgent" },
     { label: "Important", key: "important" },
     { label: "Autres", key: "other" },
@@ -49,7 +54,7 @@ export default function Notes({ initialContent }: Props) {
       <Tabs defaultValue="urgent">
         <div className="flex justify-between items-center">
           <TabsList>
-            {noteCategories.map((category) => (
+            {noteCategories.map(category => (
               <TabsTrigger key={category.key} value={category.key}>
                 {category.label}
               </TabsTrigger>
@@ -59,13 +64,13 @@ export default function Notes({ initialContent }: Props) {
 
         <Form {...form}>
           <form className="space-y-4 " id="form">
-            {noteCategories.map((category) => (
+            {noteCategories.map(category => (
               <TabsContent key={category.key} value={category.key}>
                 <TextArea
                   form={form}
                   name={category.key}
                   onBlur={handleBlur}
-                  onChange={(event) =>
+                  onChange={event =>
                     setContent({
                       ...content,
                       [category.key]: event.target.value,
