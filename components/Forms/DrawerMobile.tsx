@@ -62,7 +62,7 @@ export function DrawerMobile({
   trigger,
   icon,
   cancelButton,
-  size,
+  size = "sm",
 }: Props) {
   const [open, setOpen] = React.useState(false);
 
