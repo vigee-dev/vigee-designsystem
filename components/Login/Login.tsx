@@ -88,7 +88,7 @@ export default function Login({
           src={logo}
           alt="Vigee - Make IT Simple"
         />
-        <div className="flex flex-col justify-start mx-auto md:shadow-sm  md:border border-gray-100 rounded-xl px-4 md:p-8  md:bg-white">
+        <div className="flex flex-col justify-start mx-auto md:shadow-sm  md:border border-gray-100 rounded-xl px-4 md:p-8  bg-white dark:bg-slate-950">
           <div>
             <TypographyH1 className="text-primary py-2 pt-0">
               Connexion
