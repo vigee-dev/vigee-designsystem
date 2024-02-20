@@ -20,7 +20,7 @@ export function PageHeader({
   return (
     <div
       className={cn(
-        "rounded-md h-fit bg-white p-5  border items-center my-4",
+        "rounded-md h-fit bg-white p-5  border items-center mb-4",
         className
       )}
     >
