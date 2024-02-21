@@ -18,17 +18,17 @@ import { Calendar } from "../ui/calendar";
 import { z } from "zod";
 import { enUS, fr } from "date-fns/esm/locale";
 
-interface Props<T extends z.ZodType<any, any>> {
+interface Props<T extends FieldValues> {
   label?: string;
-  form: UseFormReturn<z.infer<T> & FieldValues>;
-  name: Path<z.infer<T> & FieldValues>;
+  form: UseFormReturn<T>;
+  name: Path<T>;
   className?: string;
   starting_date?: Date;
   disabled?: boolean;
   returnString?: boolean;
 }
 
-export default function DatePicker<T extends z.ZodType<any, any, any>>({
+export default function DatePicker<T extends FieldValues>({
   label,
   form,
   name,

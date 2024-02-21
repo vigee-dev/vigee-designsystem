@@ -17,19 +17,19 @@ import {
   SelectValue,
 } from "../ui/select";
 
-type Props<T extends z.ZodType<any, any>> = {
-  form: UseFormReturn<z.infer<T> & FieldValues>;
+type Props<T extends FieldValues> = {
+  form: UseFormReturn<T>;
   label?: string;
   placeholder?: string;
   required?: boolean;
-  name: Path<z.infer<T> & FieldValues>;
+  name: Path<T>;
   descr?: string;
   children: React.ReactNode;
   className?: string;
   disabled?: boolean
 };
 
-export default function Select<T extends z.ZodType<any, any, any>>({
+export default function Select<T extends FieldValues>({
   form,
   label,
   placeholder,

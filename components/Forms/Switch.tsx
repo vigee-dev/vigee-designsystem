@@ -12,26 +12,26 @@ import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { z } from "zod";
 
 import { Switch as SwitchShadcn } from "../ui/switch";
+import {cn} from "@/app/components/vigee-designsystem/lib/utils";
 
-type Props<T extends z.ZodType<any, any>> = {
-  form: UseFormReturn<z.infer<T> & FieldValues>;
+type Props<T extends FieldValues> = {
+  form: UseFormReturn<T>;
   label: string;
   placeholder?: string;
   required?: boolean;
-  name: Path<z.infer<T> & FieldValues>;
+  name: Path<T>;
   descr?: string;
 
   className?: string;
 };
 
-export default function Switch<T extends z.ZodType<any, any, any>>({
+export default function Switch<T extends FieldValues>({
   form,
   label,
   placeholder,
   required = true,
   name,
   descr,
-
   className,
 }: Props<T>) {
   return (
@@ -39,7 +39,7 @@ export default function Switch<T extends z.ZodType<any, any, any>>({
       control={form.control}
       name={name}
       render={({ field }) => (
-        <FormItem className="flex flex-row items-center justify-between  p-4 ">
+        <FormItem className={cn("flex flex-row items-center justify-between", className)}>
           <div className="space-y-0.5">
             <FormLabel className="text-base">{label}</FormLabel>
             <FormDescription>{descr}</FormDescription>
