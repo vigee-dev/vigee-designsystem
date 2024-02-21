@@ -23,6 +23,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { ScrollArea } from "../ui/scroll-area";
+
 interface Props {
   title: string;
   description: string;
@@ -41,16 +42,12 @@ type DrawerContextType = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const DrawerContext = React.createContext<DrawerContextType | undefined>(
-  undefined
-);
+const DrawerContext = React.createContext<DrawerContextType | undefined>(undefined);
 
 export function useDrawerContext() {
   const context = React.useContext(DrawerContext);
   if (context === undefined) {
-    throw new Error(
-      "useDrawerContext doit être utilisé à l'intérieur d'un DrawerContext.Provider"
-    );
+    throw new Error("useDrawerContext doit être utilisé à l'intérieur d'un DrawerContext.Provider");
   }
   return context;
 }
@@ -83,8 +80,8 @@ export function DrawerMobile({
               size === "sm"
                 ? "md:max-w-[425px]"
                 : size === "md"
-                ? "md:max-w-[650px]"
-                : "md:max-w-[1080px]"
+                  ? "md:max-w-[650px]"
+                  : "md:max-w-[1080px]"
             } `}
           >
             <DialogHeader>
@@ -113,19 +110,17 @@ export function DrawerMobile({
             <DrawerDescription>{description}</DrawerDescription>
           </DrawerHeader>
 
-          <div className="px-4 max-h-fit ">
-            <ScrollArea className="h-[800px] p-4">{children} </ScrollArea>
-          </div>
+          {/*<div className="h-2 mx-4 w-fit rounded-full bg-muted" />*/}
 
-          <DrawerFooter>
-            {cancelButton && (
-              <DrawerClose asChild>
-                <Button type="button" variant="outline">
-                  Annuler
-                </Button>
-              </DrawerClose>
-            )}
-          </DrawerFooter>
+          <ScrollArea className="h-100 px-8 pb-8">{children} </ScrollArea>
+
+          {cancelButton && <DrawerFooter>
+            <DrawerClose asChild>
+              <Button type="button" variant="outline">
+                Annuler
+              </Button>
+            </DrawerClose>
+          </DrawerFooter>}
         </DrawerContent>
       </Drawer>
     </DrawerContext.Provider>
