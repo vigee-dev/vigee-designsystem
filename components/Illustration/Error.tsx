@@ -2,6 +2,7 @@ import Image, { StaticImageData } from "next/image";
 import React from "react";
 import error from "../../img/error/error.svg";
 import Link from "next/link";
+import { PiEnvelopeArrowRightDuoSolid } from "../../icons/PikaIcons";
 
 interface IllustrationProps {
   title?: string;
@@ -28,17 +29,17 @@ export default function ErrorIllustration({
       )}
       <h1
         className={
-          "text-xl text-gray-300 font-black text-center pt-6 font-display"
+          "text-xl text-gray-600 font-bold text-center pt-6 font-display"
         }
       >
         Une erreur s'est produite.
       </h1>
 
       <Link
-        className="text-xl text-slate-500   text-center font-display"
+        className="text-xs text-gray-500  flex gap-x-2 items-center text-center font-display"
         href={"mailto:support@vigee.fr"}
       >
-        Contacter le support
+        Contacter le support <PiEnvelopeArrowRightDuoSolid />
       </Link>
 
       {children}
