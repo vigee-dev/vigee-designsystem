@@ -7,12 +7,12 @@ import {
 } from "../../components/ui/form";
 import SelectAndSearchAsync from "react-select/async";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
-import {GroupBase, OnChangeValue} from "react-select";
+import { GroupBase, OnChangeValue } from "react-select";
 
 interface SearchSelectAsyncInterface<
   T extends FieldValues,
   Option,
-  IsMulti extends boolean = false,
+  IsMulti extends boolean = false
 > {
   name: Path<T>;
   form: UseFormReturn<T>;
@@ -23,11 +23,15 @@ interface SearchSelectAsyncInterface<
   preprocessOnChange?: (e: OnChangeValue<Option, IsMulti>) => any;
   defaultOptions?: Option[];
   label?: string;
-  isMulti?: IsMulti
+  isMulti?: IsMulti;
 }
 
 // TODO Better way to handle isMulti, Option type etc ...
-export default function SearchSelectAsync<T extends FieldValues, Option, IsMulti extends boolean = false>({
+export default function SearchSelectAsync<
+  T extends FieldValues,
+  Option,
+  IsMulti extends boolean = false
+>({
   name,
   label,
   form,
@@ -37,7 +41,7 @@ export default function SearchSelectAsync<T extends FieldValues, Option, IsMulti
   isClearable = true,
   preprocessOnChange,
   defaultOptions,
-  isMulti
+  isMulti,
 }: SearchSelectAsyncInterface<T, Option, IsMulti>) {
   return (
     <FormField
@@ -45,11 +49,70 @@ export default function SearchSelectAsync<T extends FieldValues, Option, IsMulti
       name={name}
       render={({ field }) => (
         <FormItem>
-          {label && (<FormLabel className="font-black text-primary">{label}</FormLabel>)}
+          {label && (
+            <FormLabel className="font-black text-primary">{label}</FormLabel>
+          )}
           <FormControl>
             {/* TODO Debounce loadoptions ? */}
             {/* TODO typeof isMulti ?*/}
             <SelectAndSearchAsync<Option, IsMulti, GroupBase<Option>>
+              theme={theme => ({
+                ...theme,
+                borderRadius: 0,
+                colors: {
+                  ...theme.colors,
+
+                  primary: "#f3f4f6",
+                },
+              })}
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  border: 0,
+                  backgroundColor: "#f3f4f6",
+                  borderRadius: "0.4rem",
+                  fontSize: "14px",
+                  borderColor: "#f3f4f6",
+                }),
+
+                option: (baseStyles, state) => ({
+                  ...baseStyles,
+                  cursor: "pointer",
+                  fontSize: "14px",
+                  backgroundColor: "#FFFFFF",
+                  ":hover": {
+                    backgroundColor: "#EEEEEE",
+                  },
+                  border: 0,
+                }),
+                singleValue: (baseStyles, state) => ({
+                  ...baseStyles,
+                  cursor: "pointer",
+                  backgroundColor: "#111111",
+                  fontSize: "14px",
+                }),
+                multiValue: (baseStyles, state) => ({
+                  ...baseStyles,
+                  cursor: "pointer",
+                  backgroundColor: "#FFF",
+                  color: "#000",
+                  borderRadius: "0.4rem",
+                  fontSize: "16px",
+                }),
+                multiValueLabel: (styles, { data }) => ({
+                  ...styles,
+                  color: "#111",
+                }),
+                multiValueRemove: (styles, { data }) => ({
+                  ...styles,
+                  color: "#111",
+                  borderRadius: "0.4rem",
+                  ":hover": {
+                    backgroundColor: "#DDD",
+                    color: "#111",
+                  },
+                }),
+              }}
               isClearable={isClearable}
               placeholder={placeholder}
               isDisabled={disabled} //TODO pass disabled from field.disabled ?
