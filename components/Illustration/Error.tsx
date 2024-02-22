@@ -1,6 +1,6 @@
 import Image, { StaticImageData } from "next/image";
 import React from "react";
-import error from "../../../../../img/error.svg";
+import error from "../../img/error/error.svg";
 import Link from "next/link";
 
 interface IllustrationProps {
