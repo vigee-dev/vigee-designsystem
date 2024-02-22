@@ -3,6 +3,7 @@ import React from "react";
 import error from "../../img/error/error.svg";
 import Link from "next/link";
 import { PiEnvelopeArrowRightDuoSolid } from "../../icons/PikaIcons";
+import { Button } from "../Buttons/Button";
 
 interface IllustrationProps {
   title?: string;
@@ -36,10 +37,12 @@ export default function ErrorIllustration({
       </h1>
 
       <Link
-        className="text-xs text-gray-500  flex gap-x-2 items-center text-center font-display"
+        className="text-sm text-gray-500  flex gap-x-2 items-center text-center font-display"
         href={"mailto:support@vigee.fr"}
       >
-        Contacter le support <PiEnvelopeArrowRightDuoSolid />
+        <Button variant="outline">
+          Contacter le support <PiEnvelopeArrowRightDuoSolid />
+        </Button>
       </Link>
 
       {children}
