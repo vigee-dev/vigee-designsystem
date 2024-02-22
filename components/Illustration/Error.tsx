@@ -23,7 +23,7 @@ export default function ErrorIllustration({
         <Image
           width={400}
           height={400}
-          className="mx-auto h-40 w-auto"
+          className="mx-auto h-42 w-auto"
           src={error}
           alt="Erreur"
         />
