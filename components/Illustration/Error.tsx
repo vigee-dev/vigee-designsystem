@@ -30,7 +30,7 @@ export default function ErrorIllustration({
       )}
       <h1
         className={
-          "text-xl text-gray-600 font-bold text-center pt-6 font-display"
+          "text-xl text-primary font-bold text-center pt-6 font-display"
         }
       >
         Une erreur s'est produite.
