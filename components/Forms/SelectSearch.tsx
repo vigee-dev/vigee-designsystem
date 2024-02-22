@@ -23,6 +23,7 @@ interface SearchSelectInterface<
   options: Option[];
   label?: string;
   isMulti?: IsMulti;
+  defaultOptions?: Option[];
 }
 
 // TODO Better way to handle isMulti, Option type etc ...
@@ -40,6 +41,7 @@ export default function SelectSearch<
   preprocessOnChange,
   options,
   isMulti,
+  defaultOptions,
 }: SearchSelectInterface<T, Option, IsMulti>) {
   return (
     <FormField

@@ -61,7 +61,6 @@ export default function SearchSelectAsync<
                 borderRadius: 0,
                 colors: {
                   ...theme.colors,
-
                   primary: "#f3f4f6",
                 },
               })}

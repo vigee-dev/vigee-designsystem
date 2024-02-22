@@ -33,7 +33,7 @@ export default function ErrorIllustration({
           "text-xl text-primary font-bold text-center pt-6 font-display"
         }
       >
-        Une erreur s'est produite.
+        {"Une erreur s'est produite."}
       </h1>
 
       <Link
