@@ -9,7 +9,7 @@ interface IllustrationProps {
   subtitle?: string;
   children?: React.ReactNode;
 }
-export default function Illustration({
+export default function ErrorIllustration({
   title,
   title2,
   subtitle,
