@@ -5,11 +5,11 @@ import {
   FormLabel,
   FormMessage,
 } from "../../components/ui/form";
-import SelectAndSearchAsync from "react-select/async";
+import SelectAndSearch from "react-select";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import {GroupBase, OnChangeValue} from "react-select";
 
-interface SearchSelectAsyncInterface<
+interface SearchSelectInterface<
   T extends FieldValues,
   Option,
   IsMulti extends boolean = false,
@@ -18,27 +18,25 @@ interface SearchSelectAsyncInterface<
   form: UseFormReturn<T>;
   disabled?: boolean;
   placeholder?: string;
-  loadOptions: (query: string) => Promise<Option[]>;
   isClearable?: boolean;
   preprocessOnChange?: (e: OnChangeValue<Option, IsMulti>) => any;
-  defaultOptions?: Option[];
+  options: Option[];
   label?: string;
   isMulti?: IsMulti
 }
 
 // TODO Better way to handle isMulti, Option type etc ...
-export default function SearchSelectAsync<T extends FieldValues, Option, IsMulti extends boolean = false>({
-                                                                                                            name,
-                                                                                                            label,
-                                                                                                            form,
-                                                                                                            placeholder = "Rechercher...",
-                                                                                                            loadOptions,
-                                                                                                            disabled = false,
-                                                                                                            isClearable = true,
-                                                                                                            preprocessOnChange,
-                                                                                                            defaultOptions,
-                                                                                                            isMulti
-                                                                                                          }: SearchSelectAsyncInterface<T, Option, IsMulti>) {
+export default function SelectSearch<T extends FieldValues, Option, IsMulti extends boolean = false>({
+ name,
+ label,
+ form,
+ placeholder = "Rechercher...",
+ disabled = false,
+ isClearable = true,
+ preprocessOnChange,
+ options,
+ isMulti
+}: SearchSelectInterface<T, Option, IsMulti>) {
   return (
     <FormField
       control={form?.control}
@@ -49,7 +47,7 @@ export default function SearchSelectAsync<T extends FieldValues, Option, IsMulti
           <FormControl>
             {/* TODO Debounce loadoptions ? */}
             {/* TODO typeof isMulti ?*/}
-            <SelectAndSearchAsync<Option, IsMulti, GroupBase<Option>>
+            <SelectAndSearch<Option, IsMulti, GroupBase<Option>>
               isClearable={isClearable}
               placeholder={placeholder}
               isDisabled={disabled} //TODO pass disabled from field.disabled ?
@@ -60,8 +58,7 @@ export default function SearchSelectAsync<T extends FieldValues, Option, IsMulti
                 } else return field.onChange(e);
               }}
               onBlur={field.onBlur}
-              defaultOptions={defaultOptions || []}
-              loadOptions={loadOptions}
+              options={options}
               ref={field.ref}
               isMulti={isMulti}
             />
