@@ -12,7 +12,7 @@ interface IllustrationProps {
   children?: React.ReactNode;
   supportEmail?: string;
 }
-export default function ErrorIllustration({
+export default function Error({
   title,
   title2,
   subtitle,
