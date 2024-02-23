@@ -8,6 +8,7 @@ import {
 import SelectAndSearchAsync from "react-select/async";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { GroupBase, OnChangeValue } from "react-select";
+import {MultiValue, SingleValue} from "react-select";
 
 interface SearchSelectAsyncInterface<
   T extends FieldValues,
@@ -22,8 +23,10 @@ interface SearchSelectAsyncInterface<
   isClearable?: boolean;
   preprocessOnChange?: (e: OnChangeValue<Option, IsMulti>) => any;
   defaultOptions?: Option[];
+  defaultValue?: IsMulti extends true ? MultiValue<Option> : SingleValue<Option>
   label?: string;
   isMulti?: IsMulti;
+  noOptionsMessage?: string
 }
 
 // TODO Better way to handle isMulti, Option type etc ...
@@ -42,6 +45,8 @@ export default function SearchSelectAsync<
   preprocessOnChange,
   defaultOptions,
   isMulti,
+  noOptionsMessage = "Aucun résultat",
+  defaultValue
 }: SearchSelectAsyncInterface<T, Option, IsMulti>) {
   return (
     <FormField
@@ -123,6 +128,8 @@ export default function SearchSelectAsync<
               }}
               onBlur={field.onBlur}
               defaultOptions={defaultOptions || []}
+              defaultValue={defaultValue}
+              noOptionsMessage={() => noOptionsMessage}
               loadOptions={loadOptions}
               ref={field.ref}
               isMulti={isMulti}
