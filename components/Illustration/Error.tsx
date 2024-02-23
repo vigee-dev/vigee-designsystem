@@ -10,12 +10,14 @@ interface IllustrationProps {
   title2?: string;
   subtitle?: string;
   children?: React.ReactNode;
+  supportEmail?: string;
 }
 export default function ErrorIllustration({
   title,
   title2,
   subtitle,
   children,
+  supportEmail = "support@vigee.fr",
 }: IllustrationProps) {
   return (
     <div className="flex flex-col items-center justify-center  w-full px-12 ">
@@ -37,10 +39,10 @@ export default function ErrorIllustration({
       </h1>
 
       <Link
-        className="text-sm text-gray-500  flex gap-x-2 items-center text-center font-display"
-        href={"mailto:support@vigee.fr"}
+        className="text-sm text-gray-500  items-center text-center font-display"
+        href={supportEmail ? `mailto:${supportEmail}` : "/"}
       >
-        <Button variant="outline">
+        <Button variant="outline" className=" flex gap-x-2">
           Contacter le support <PiEnvelopeArrowRightDuoSolid />
         </Button>
       </Link>
