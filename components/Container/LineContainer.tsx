@@ -22,7 +22,7 @@ const Content = ({ title, icon, background, children }: PageHeaderProps) => (
   >
     <div className="flex flex-wrap justify-between gap-x-4 w-full items-center">
       <div className="flex gap-x-4">
-        {icon && <div className="icon-container">{icon}</div>}
+        {icon && <div className="icon-container text-gray-400">{icon}</div>}
         <TypographyH4>{title}</TypographyH4>
       </div>
       <div className="flex gap-x-4">
