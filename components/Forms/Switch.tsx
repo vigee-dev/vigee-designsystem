@@ -41,7 +41,7 @@ export default function Switch<T extends FieldValues>({
       render={({ field }) => (
         <FormItem className={cn("flex flex-row items-center justify-between", className)}>
           <div className="space-y-0.5">
-            <FormLabel className="text-base">{label}</FormLabel>
+            <FormLabel className="text-base ">{label}</FormLabel>
             <FormDescription>{descr}</FormDescription>
           </div>
           <FormControl>
