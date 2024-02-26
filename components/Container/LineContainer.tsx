@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { TypographyH4 } from "../Typography/Typography";
 import { ChevronRightIcon } from "../../icons/Chevrons";
+import { PiChevronRightSolid } from "../../icons/PikaIcons";
 
 interface PageHeaderProps {
   title: string;
@@ -21,8 +22,12 @@ const Content = ({ title, icon, background, children }: PageHeaderProps) => (
         <TypographyH4>{title}</TypographyH4>
       </div>
       <div className="flex gap-x-4">
-        <div className="hover:border rounded-md p-1 transistion-ease-in-out duration-100 hover:cursor-pointer">
-          {children ? children : <ChevronRightIcon />}
+        <div className="rounded-md p-1 transistion-ease-in-out duration-100 hover:cursor-pointer">
+          {children ? (
+            children
+          ) : (
+            <PiChevronRightSolid className="text-gray-400 hover:text-primary transform ease-in-out duration-300" />
+          )}
         </div>
       </div>
     </div>
