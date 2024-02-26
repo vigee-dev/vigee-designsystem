@@ -2,6 +2,7 @@ import Link from "next/link";
 import { TypographyH4 } from "../Typography/Typography";
 import { ChevronRightIcon } from "../../icons/Chevrons";
 import {
+  PiChevronBigRightStroke,
   PiChevronRightSolid,
   PiChevronRightStroke,
 } from "../../icons/PikaIcons";
@@ -29,7 +30,7 @@ const Content = ({ title, icon, background, children }: PageHeaderProps) => (
           {children ? (
             children
           ) : (
-            <PiChevronRightStroke className="text-gray-400 hover:text-primary transform ease-in-out duration-300" />
+            <PiChevronBigRightStroke className="text-gray-400 hover:text-primary transform ease-in-out duration-300" />
           )}
         </div>
       </div>
