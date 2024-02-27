@@ -18,15 +18,17 @@ import {
 } from "../ui/select";
 
 type Props<T extends FieldValues> = {
-  form: UseFormReturn<T>;
+  form?: UseFormReturn<T>;
   label?: string;
   placeholder?: string;
   required?: boolean;
-  name: Path<T>;
+  name?: Path<T>;
   descr?: string;
   children: React.ReactNode;
   className?: string;
   disabled?: boolean
+  onChange?: (value: string) => void
+  value?: string
 };
 
 export default function Select<T extends FieldValues>({
@@ -38,10 +40,12 @@ export default function Select<T extends FieldValues>({
   descr,
   children,
   className,
-  disabled
+  disabled,
+  onChange,
+  value
 }: Props<T>) {
   return (
-    <FormField
+    (form?.control && name ) ? <FormField
       control={form.control}
       name={name}
       rules={{ required }}
@@ -66,6 +70,24 @@ export default function Select<T extends FieldValues>({
           <FormMessage />
         </FormItem>
       )}
-    />
+    /> : <FormItem className={className}>
+      <FormLabel className="font-black text-primary">{label}</FormLabel>
+      <ShadSelect
+        onValueChange={onChange}
+        value={String(value)}
+        disabled={disabled}
+      >
+        <FormControl>
+          <SelectTrigger className="font-medium bg-input border-none  ">
+            <SelectValue placeholder={placeholder} />
+          </SelectTrigger>
+        </FormControl>
+        <SelectContent className="max-h-[200px] font-medium">
+          {children}
+        </SelectContent>
+      </ShadSelect>
+      {descr && <FormDescription>{descr}</FormDescription>}
+      <FormMessage />
+    </FormItem>
   );
 }
