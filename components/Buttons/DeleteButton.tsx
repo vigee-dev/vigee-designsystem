@@ -13,18 +13,19 @@ export const DeleteButton = ({ onClick, className }: Props) => {
     <Button
       variant="outline"
       className={cn(
-        "w-full hover:bg-red-500 hover:text-white transformation ease-in-out duration-300",
+        "flex text-gray-600 gap-x-4 w-full hover:bg-red-500 hover:text-white transformation ease-in-out duration-300",
         className
       )}
     >
+      {" "}
+      Supprimer
       <PiDeleteDustbin01DuoStroke
         className={cn(
-          "w-full hover:bg-red-500 hover:text-white transformation ease-in-out duration-300",
+          " hover:bg-red-500 hover:text-white transformation ease-in-out w-5 h-5",
           className
         )}
         onClick={onClick}
       />
-      Supprimer
     </Button>
   );
 };
