@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { CalendarIcon } from "@radix-ui/react-icons";
-import { DateRange } from "react-day-picker";
+import {DateRange, Matcher} from "react-day-picker";
 import { fr } from "date-fns/esm/locale";
 import { cn } from "../../lib/utils";
 import { Button } from "../ui/button";
@@ -29,22 +29,24 @@ import { Label } from "../ui/label";
 import { PiCalendarCheckDuoSolid } from "../../icons/PikaIcons";
 
 interface DatePickerRangeProps {
-  date: DateRange | undefined;
-  setDate: (newDate: DateRange | undefined) => void; // Fonction pour mettre à jour l'état externe
-  className?: string;
-  select?: boolean;
-  label?: string;
-  onChange?: (date: DateRange) => void;
+  date: DateRange | undefined
+  setDate: React.Dispatch<React.SetStateAction<DateRange | undefined>> // Fonction pour mettre à jour l'état externe
+  className?: string
+  select?: boolean
+  label?: string
+  onChange?: (date: DateRange) => void
+  disabledDays?: Matcher | Matcher[] | undefined
 }
 
-export function DatePickerRange({
+const DatePickerRange = ({
   className,
   date,
   setDate,
   select,
   label,
   onChange,
-}: DatePickerRangeProps) {
+  disabledDays
+}: DatePickerRangeProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
   let newDate: DateRange | undefined;
 
@@ -142,16 +144,17 @@ export function DatePickerRange({
               </PopoverClose>
 
               <Calendar
+                disabled={disabledDays}
                 initialFocus
                 mode="range"
                 defaultMonth={date?.from}
                 selected={date}
-                onSelect={(selectedDate: DateRange | undefined) => {
-                  setDate(selectedDate);
-                }}
+                onSelect={setDate}
                 numberOfMonths={2}
                 locale={fr}
               />
+
+
             </div>
           </PopoverContent>
         </div>
@@ -159,3 +162,5 @@ export function DatePickerRange({
     </div>
   );
 }
+
+export default DatePickerRange
