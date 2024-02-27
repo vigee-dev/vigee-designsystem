@@ -7,7 +7,7 @@ import {
 } from "../../components/ui/form";
 import SelectAndSearch from "react-select";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
-import { GroupBase, OnChangeValue } from "react-select";
+import { GroupBase, OnChangeValue, MultiValue, SingleValue } from "react-select";
 
 interface SearchSelectInterface<
   T extends FieldValues,
@@ -24,6 +24,7 @@ interface SearchSelectInterface<
   label?: string;
   isMulti?: IsMulti;
   defaultOptions?: Option[];
+  defaultValue?: IsMulti extends true ? MultiValue<Option> : SingleValue<Option>
 }
 
 // TODO Better way to handle isMulti, Option type etc ...
@@ -42,6 +43,7 @@ export default function SelectSearch<
   options,
   isMulti,
   defaultOptions,
+  defaultValue
 }: SearchSelectInterface<T, Option, IsMulti>) {
   return (
     <FormField
@@ -126,6 +128,7 @@ export default function SelectSearch<
               options={options}
               ref={field.ref}
               isMulti={isMulti}
+              defaultValue={defaultValue}
             />
           </FormControl>
           <FormMessage />
