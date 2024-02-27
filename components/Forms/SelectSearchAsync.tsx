@@ -128,7 +128,7 @@ export default function SearchSelectAsync<
               }}
               onBlur={field.onBlur}
               defaultOptions={defaultOptions || []}
-              defaultValue={defaultValue}
+              defaultValue={defaultValue || field.value}
               noOptionsMessage={() => noOptionsMessage}
               loadOptions={loadOptions}
               ref={field.ref}

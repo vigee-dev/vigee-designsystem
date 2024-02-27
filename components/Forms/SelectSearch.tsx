@@ -51,9 +51,7 @@ export default function SelectSearch<
       name={name}
       render={({ field }) => (
         <FormItem>
-          {label && (
-            <FormLabel className="font-black text-primary">{label}</FormLabel>
-          )}
+          {label && (<FormLabel className="font-black text-primary">{label}</FormLabel>)}
           <FormControl>
             {/* TODO Debounce loadoptions ? */}
             {/* TODO typeof isMulti ?*/}
@@ -128,7 +126,7 @@ export default function SelectSearch<
               options={options}
               ref={field.ref}
               isMulti={isMulti}
-              defaultValue={defaultValue}
+              defaultValue={defaultValue || field.value}
             />
           </FormControl>
           <FormMessage />
