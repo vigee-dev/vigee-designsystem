@@ -54,7 +54,6 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
     value = watch(name);
   }
   const [open, setOpen] = React.useState(false);
-  const [searchText, setSearchText] = React.useState("");
 
   // Fonction de filtrage personnalisée
   const filterItems = (value = "", search = "") => {
@@ -96,11 +95,11 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
                 <CommandItem
                   className="max-h-[200px]"
                   key={item.value}
-                  value={item.value}
+                  value={item.label}
                   onSelect={currentValue => {
                     const valueToUpdate =
                       currentValue === value ? undefined : currentValue;
-                    // Assurez-vous que la mise à jour respecte le type attendu par le schéma Zod.
+
                     if (form) {
                       form.setValue(
                         name as Path<z.infer<T> & FieldValues>,
