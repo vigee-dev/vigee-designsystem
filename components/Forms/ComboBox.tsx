@@ -55,7 +55,7 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
   return (
     <Popover open={open} onOpenChange={setOpen}>
       {label && (
-        <FormLabel className="font-black text-primary">{label}</FormLabel>
+        <FormLabel className="font-black text-primary pb-2">{label}</FormLabel>
       )}
 
       <PopoverTrigger asChild>
