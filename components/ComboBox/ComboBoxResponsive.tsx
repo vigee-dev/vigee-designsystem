@@ -30,14 +30,17 @@ type Status = {
 interface ComboBoxProps {
   statuses: Status[];
   text: string;
+  selectedStatus: Status | null;
+  setSelectedStatus: (status: Status | null) => void;
 }
 
-export function ComboBoxResponsive({ statuses, text }: ComboBoxProps) {
+export function ComboBoxResponsive({
+  statuses,
+  text,
+  selectedStatus,
+  setSelectedStatus,
+}: ComboBoxProps) {
   const [open, setOpen] = React.useState(false);
-
-  const [selectedStatus, setSelectedStatus] = React.useState<Status | null>(
-    null
-  );
 
   return (
     <>
@@ -50,6 +53,7 @@ export function ComboBoxResponsive({ statuses, text }: ComboBoxProps) {
           </PopoverTrigger>
           <PopoverContent className="w-[200px] p-0" align="start">
             <StatusList
+              statuses={statuses}
               setOpen={setOpen}
               setSelectedStatus={setSelectedStatus}
             />
