@@ -26,7 +26,7 @@ interface Item {
   label: string;
 }
 type ComboBoxProps<T extends z.ZodType<any, any>> = {
-  form: UseFormReturn<z.infer<T> & FieldValues>;
+  form?: UseFormReturn<z.infer<T> & FieldValues>;
   name: Path<z.infer<T> & FieldValues>;
   label?: string;
   placeholder?: string;
@@ -44,8 +44,12 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
   required = true,
   icon,
 }: ComboBoxProps<T>) {
-  const { control, setValue, watch } = form;
-  const value = watch(name);
+  let value: string | undefined;
+
+  if (form) {
+    const { control, setValue, watch } = form || {};
+    value = watch(name);
+  }
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -85,10 +89,13 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
                     const valueToUpdate =
                       currentValue === value ? undefined : currentValue;
                     // Assurez-vous que la mise à jour respecte le type attendu par le schéma Zod.
-                    setValue(
-                      name as Path<z.infer<T> & FieldValues>,
-                      valueToUpdate as any
-                    );
+                    if (form) {
+                      form.setValue(
+                        name as Path<z.infer<T> & FieldValues>,
+                        valueToUpdate as any
+                      );
+                    }
+
                     setOpen(false);
                   }}
                 >
