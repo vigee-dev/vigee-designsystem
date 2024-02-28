@@ -28,14 +28,14 @@ type Status = {
 };
 
 interface ComboBoxProps {
-  statuses: Status[];
+  items: Status[];
   text: string;
   selectedStatus: Status | null;
   setSelectedStatus: (status: Status | null) => void;
 }
 
 export function ComboBoxResponsive({
-  statuses,
+  items,
   text,
   selectedStatus,
   setSelectedStatus,
@@ -53,7 +53,7 @@ export function ComboBoxResponsive({
           </PopoverTrigger>
           <PopoverContent className="w-[200px] p-0" align="start">
             <StatusList
-              statuses={statuses}
+              statuses={items}
               setOpen={setOpen}
               setSelectedStatus={setSelectedStatus}
             />
@@ -71,7 +71,7 @@ export function ComboBoxResponsive({
           <DrawerContent>
             <div className="mt-4 border-t">
               <StatusList
-                statuses={statuses}
+                statuses={items}
                 setOpen={setOpen}
                 setSelectedStatus={setSelectedStatus}
               />
