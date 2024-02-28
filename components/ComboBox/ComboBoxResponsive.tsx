@@ -67,8 +67,8 @@ export function ComboBoxResponsive({
 
       <div className="md:hidden">
         <Drawer open={open} onOpenChange={setOpen}>
+          <Label className="font-bold text-primary">{label}</Label>
           <DrawerTrigger asChild>
-            <Label className="font-bold text-primary">{label}</Label>
             <Button variant="outline" className="w-[150px] justify-start">
               {selectedStatus ? <>{selectedStatus.label}</> : <>{text}</>}
             </Button>
