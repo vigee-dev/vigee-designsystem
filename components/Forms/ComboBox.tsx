@@ -25,6 +25,7 @@ interface Item {
   value: string;
   label: string;
 }
+
 type ComboBoxProps<T extends z.ZodType<any, any>> = {
   form?: UseFormReturn<z.infer<T> & FieldValues>;
   name: Path<z.infer<T> & FieldValues>;
@@ -33,6 +34,7 @@ type ComboBoxProps<T extends z.ZodType<any, any>> = {
   required?: boolean;
   items: Item[];
   icon?: React.ReactNode;
+  onChange: (value: string | undefined) => void;
 };
 
 export function ComboBox<T extends z.ZodType<any, any, any>>({
@@ -43,6 +45,7 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
   placeholder = "Sélectionnez...",
   required = true,
   icon,
+  onChange,
 }: ComboBoxProps<T>) {
   let value: string | undefined;
 
@@ -51,6 +54,15 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
     value = watch(name);
   }
   const [open, setOpen] = React.useState(false);
+  const [searchText, setSearchText] = React.useState("");
+
+  // Fonction de filtrage personnalisée
+  const filterItems = (value = "", search = "") => {
+    // Votre logique de filtrage ici, retournez 1 pour un match, 0 sinon.
+    // Par exemple, filtrer sur le label des items
+    if (value.toLowerCase().includes(search.toLowerCase())) return 1;
+    return 0;
+  };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -75,7 +87,7 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
-        <Command>
+        <Command filter={filterItems}>
           <CommandInput placeholder="Rechercher..." />
           <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
           <CommandGroup className="max-h-[200px]">
