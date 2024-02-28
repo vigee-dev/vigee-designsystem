@@ -56,10 +56,10 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
   const [open, setOpen] = React.useState(false);
 
   // Fonction de filtrage personnalisée
-  const filterItems = (value = "", search = "") => {
+  const filterItems = (label = "", search = "") => {
     // Votre logique de filtrage ici, retournez 1 pour un match, 0 sinon.
     // Par exemple, filtrer sur le label des items
-    if (value.toLowerCase().includes(search.toLowerCase())) return 1;
+    if (label.toLowerCase().includes(search.toLowerCase())) return 1;
     return 0;
   };
 
@@ -95,7 +95,7 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
                 <CommandItem
                   className="max-h-[200px]"
                   key={item.value}
-                  value={item.label}
+                  value={item.value}
                   onSelect={currentValue => {
                     const valueToUpdate =
                       currentValue === value ? undefined : currentValue;
