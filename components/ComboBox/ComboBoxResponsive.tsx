@@ -21,6 +21,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "../../components/ui/popover";
+import { Label } from "../ui/label";
 
 type Status = {
   value: string;
@@ -28,6 +29,7 @@ type Status = {
 };
 
 interface ComboBoxProps {
+  label: string;
   items: Status[];
   text: string;
   selectedStatus: Status | null;
@@ -35,6 +37,7 @@ interface ComboBoxProps {
 }
 
 export function ComboBoxResponsive({
+  label,
   items,
   text,
   selectedStatus,
@@ -46,6 +49,7 @@ export function ComboBoxResponsive({
     <>
       <div className="hidden md:block">
         <Popover open={open} onOpenChange={setOpen}>
+          <Label className="font-bold text-primary">{label}</Label>
           <PopoverTrigger asChild>
             <Button variant="outline" className="w-[150px] justify-start">
               {selectedStatus ? <>{selectedStatus.label}</> : <>{text}</>}
@@ -64,6 +68,7 @@ export function ComboBoxResponsive({
       <div className="md:hidden">
         <Drawer open={open} onOpenChange={setOpen}>
           <DrawerTrigger asChild>
+            <Label className="font-bold text-primary">{label}</Label>
             <Button variant="outline" className="w-[150px] justify-start">
               {selectedStatus ? <>{selectedStatus.label}</> : <>{text}</>}
             </Button>
