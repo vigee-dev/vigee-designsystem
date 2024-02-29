@@ -150,7 +150,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                             className={`${baseClass} ${textAndBgClass}`}
                           >
                             <div className="flex justify-between items-center">
-                              <div>
+                              <div className="flex">
                                 {router.includes(item.slug) ||
                                 hoveredIndex === index ||
                                 item.highlight ? (
