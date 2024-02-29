@@ -24,6 +24,7 @@ interface SidebarProps {
     icon: React.ReactNode;
     iconFill?: React.ReactNode;
     slug: string;
+    highlight?: boolean;
   }[];
   menu?: boolean;
   logoSmall?: StaticImageData;
@@ -118,7 +119,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                 <ul role="list" className="-mx-2 space-y-0 items-center">
                   {navigation.map((item, index) => {
                     // Fonction pour déterminer la classe de base
-                    const baseClass = `group flex gap-x-2 rounded-md p-[3px] leading-6 transform transition-all duration-100 ease-in-out items-center mx-1 my-1  ${"text-md"}`;
+                    const baseClass = item.highlight
+                      ? `group flex gap-x-2 rounded-md p-[3px] text-primary  leading-6 transform transition-all bg-white border border-gray-200  duration-100 ease-in-out items-center mx-1 my-1  shadow-sm hover:scale-105 ${"text-md"} `
+                      : `group flex gap-x-2 rounded-md p-[3px] leading-6 transform transition-all duration-100 ease-in-out items-center mx-1 my-1  ${"text-md"}`;
 
                     // Fonction pour déterminer la classe de texte et de fond
                     const textAndBgClass = router.includes(item.slug)
@@ -145,14 +148,15 @@ const Sidebar: React.FC<SidebarProps> = ({
                             className={`${baseClass} ${textAndBgClass}`}
                           >
                             {router.includes(item.slug) ||
-                            hoveredIndex === index ? (
+                            hoveredIndex === index ||
+                            item.highlight ? (
                               <div
                                 className={classNames(
                                   `${
                                     text === "white"
                                       ? "text-white group-hover:text-white"
                                       : "text-primary group-hover:text-primary"
-                                  }   group-hover:scale-105 transform transition-all duration-300 ease-in-out `,
+                                  }   group-hover:scale-105  transform transition-all duration-300 ease-in-out `,
                                   `h-${"8"} w-${"8"} shrink-0  my-auto ml-1 rounded-full p-[4px]`
                                 )}
                                 aria-hidden="true"
@@ -166,8 +170,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                                     text === "white"
                                       ? "text-gray-500 group-hover:text-gray-500"
                                       : "text-gray-600 group-hover:text-gray-600"
-                                  } group-hover:scale-105 transform transition-all duration-300 ease-in-out`,
-                                  `h-${"8"} w-${"8"} shrink-0  my-auto ml-1  p-[5px]`
+                                  } group-hover:scale-105  transform transition-all duration-300 ease-in-out `,
+                                  `h-${"8"} w-${"8"} shrink-0  my-auto ml-1  p-[5px] `
                                 )}
                                 aria-hidden="true"
                               >
