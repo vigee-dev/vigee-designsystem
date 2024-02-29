@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Form,
   FormControl,
@@ -17,6 +17,11 @@ import { CalendarIcon } from "@radix-ui/react-icons";
 import { Calendar } from "../ui/calendar";
 import { z } from "zod";
 import { enUS, fr } from "date-fns/esm/locale";
+import SelectSearch from "./SelectSearch";
+import { PopoverClose } from "@radix-ui/react-popover";
+import { ComboBox } from "../ComboBox/ComboBox";
+import { ComboBoxResponsive } from "../ComboBox/ComboBoxResponsive";
+import { set } from "date-fns";
 
 interface Props<T extends FieldValues> {
   label?: string;
@@ -26,7 +31,13 @@ interface Props<T extends FieldValues> {
   starting_date?: Date;
   disabled?: boolean;
   returnString?: boolean;
+  years?: boolean;
 }
+
+type Status = {
+  value: string;
+  label: string;
+};
 
 export default function DatePicker<T extends FieldValues>({
   label,
@@ -36,7 +47,21 @@ export default function DatePicker<T extends FieldValues>({
   starting_date,
   disabled,
   returnString,
+  years,
 }: Props<T>) {
+  const [selectedYear, setSelectedYear] = useState(moment().year().toString());
+  const calendarRef = React.useRef(null);
+
+  const generateYearOptions = () => {
+    const currentYear = new Date().getFullYear();
+    const startingYear = currentYear - 99;
+    const years = Array.from({ length: 100 }, (_, i) => startingYear + i);
+    return years.map(year => ({
+      value: year.toString(),
+      label: year.toString(),
+    }));
+  };
+
   return (
     <FormField
       control={form.control}
@@ -66,9 +91,27 @@ export default function DatePicker<T extends FieldValues>({
               </FormControl>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
+              {years && (
+                <div className="p-2 w-full">
+                  <ComboBox
+                    label=""
+                    items={generateYearOptions()}
+                    onChange={e => {
+                      setSelectedYear(e as string);
+                    }}
+                    value={selectedYear}
+                  />
+                </div>
+              )}
+
               <Calendar
+                key={selectedYear}
                 mode="single"
-                selected={field.value}
+                selected={
+                  selectedYear
+                    ? moment(field.value).year(Number(selectedYear)).toDate()
+                    : moment().toDate()
+                }
                 onSelect={
                   returnString
                     ? date => {
@@ -87,6 +130,9 @@ export default function DatePicker<T extends FieldValues>({
                 }}
                 locale={fr}
                 initialFocus
+                defaultMonth={moment(field.value)
+                  .year(Number(selectedYear))
+                  .toDate()}
               />
             </PopoverContent>
           </Popover>

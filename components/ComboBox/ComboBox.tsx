@@ -1,147 +1,108 @@
-import React, { useState } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
+import { Button } from "../../components/ui/button";
 import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form";
-import moment from "moment";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { FieldValues, Path, UseFormReturn } from "react-hook-form";
-import { Button } from "../ui/button";
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from "../../components/ui/command";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "../../components/ui/popover";
+import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "../../lib/utils";
-import { CalendarIcon } from "@radix-ui/react-icons";
-import { Calendar } from "../ui/calendar";
-import { z } from "zod";
-import { enUS, fr } from "date-fns/esm/locale";
-import SelectSearch from "./SelectSearch";
-import { PopoverClose } from "@radix-ui/react-popover";
-import { ComboBox } from "../ComboBox/ComboBox";
-import { ComboBoxResponsive } from "../ComboBox/ComboBoxResponsive";
-import { set } from "date-fns";
+import { Label } from "../ui/label";
+import { ScrollArea } from "../ui/scroll-area";
 
-interface Props<T extends FieldValues> {
-  label?: string;
-  form: UseFormReturn<T>;
-  name: Path<T>;
-  className?: string;
-  starting_date?: Date;
-  disabled?: boolean;
-  returnString?: boolean;
-  years?: boolean;
-}
-
-type Status = {
+interface Item {
   value: string;
   label: string;
-};
+}
 
-export default function DatePicker<T extends FieldValues>({
+interface ComboBoxProps {
+  value?: string;
+  onChange: (value: string | undefined) => void;
+  label?: string;
+  placeholder?: string;
+  items: Item[];
+  icon?: React.ReactNode;
+}
+
+export function ComboBox({
+  items,
+  value,
+  onChange,
   label,
-  form,
-  name,
-  className,
-  starting_date,
-  disabled,
-  returnString,
-  years,
-}: Props<T>) {
-  const [selectedYear, setSelectedYear] = useState(moment().year().toString());
-  const calendarRef = React.useRef(null);
+  placeholder = "Sélectionnez...",
+  icon,
+}: ComboBoxProps) {
+  const [open, setOpen] = useState(false);
+  const [searchText, setSearchText] = useState("");
 
-  const generateYearOptions = () => {
-    const currentYear = new Date().getFullYear();
-    const startingYear = currentYear - 99;
-    const years = Array.from({ length: 100 }, (_, i) => startingYear + i);
-    return years.map(year => ({
-      value: year.toString(),
-      label: year.toString(),
-    }));
+  // Fonction de filtrage personnalisée
+  const filterItems = (value = "", search = "") => {
+    // Votre logique de filtrage ici, retournez 1 pour un match, 0 sinon.
+    // Par exemple, filtrer sur le label des items
+    if (value.toLowerCase().includes(search.toLowerCase())) return 1;
+    return 0;
   };
 
-  console.log("selectedYear", selectedYear);
-
   return (
-    <FormField
-      control={form.control}
-      name={name}
-      render={({ field }) => (
-        <FormItem className="flex flex-col py-2">
-          <FormLabel className="font-black text-primary">{label}</FormLabel>
-          <Popover>
-            <PopoverTrigger asChild>
-              <FormControl>
-                <Button
-                  disabled={disabled}
-                  variant={"outline"}
-                  className={cn(
-                    `pl-3 text-left font-display font-medium bg-input border-none  ${className}`,
-                    !field.value && "text-muted-foreground"
-                  )}
-                >
-                  {field.value ? (
-                    moment(field.value).format("DD/MM/YYYY")
-                  ) : (
-                    <span>Choisir une date</span>
-                  )}
+    <Popover open={open} onOpenChange={setOpen}>
+      <div className="flex flex-col w-full">
+        <Label className="font-bold text-primary-light">{label}</Label>
 
-                  <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                </Button>
-              </FormControl>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
-              {years && (
-                <div className="p-2 w-full">
-                  <ComboBox
-                    label=""
-                    items={generateYearOptions()}
-                    onChange={e => {
-                      setSelectedYear(e as string);
-                    }}
-                    value={selectedYear}
-                  />
-                </div>
-              )}
-
-              <Calendar
-                key={selectedYear}
-                mode="single"
-                selected={
-                  selectedYear
-                    ? moment(field.value).year(Number(selectedYear)).toDate()
-                    : moment().toDate()
-                }
-                onSelect={
-                  returnString
-                    ? date => {
-                        const formatted_date =
-                          moment(date).format("YYYY-MM-DD");
-                        field.onChange(formatted_date);
-                      }
-                    : field.onChange
-                } // Conditional onSelect
-                disabled={date => {
-                  if (starting_date) {
-                    return date < starting_date;
-                  }
-
-                  return false;
-                }}
-                locale={fr}
-                initialFocus
-                defaultMonth={moment(field.value)
-                  .year(Number(selectedYear))
-                  .toDate()}
-              />
-            </PopoverContent>
-          </Popover>
-          <FormDescription></FormDescription>
-          <FormMessage />
-        </FormItem>
-      )}
-    />
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            className="w-full flex gap-x-2 bg-input border-0 justify-between"
+          >
+            <div className="flex gap-x-2 items-center">
+              {icon && icon}
+              {value
+                ? items.find(item => item.value === value)?.label
+                : placeholder}
+            </div>
+            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-full p-0">
+          <Command filter={filterItems}>
+            <CommandInput placeholder="Rechercher..." autoFocus />
+            <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
+            <CommandGroup className="max-h-[200px]">
+              <ScrollArea className="h-[200px]">
+                {items.map(item => {
+                  return (
+                    <CommandItem
+                      key={item.value}
+                      value={item.label}
+                      onSelect={() => {
+                        onChange(item.value === value ? undefined : item.value);
+                        setOpen(false);
+                      }}
+                    >
+                      <Check
+                        className={cn(
+                          "mr-2 h-4 w-4",
+                          value === item.value ? "opacity-100" : "opacity-0"
+                        )}
+                      />
+                      {item.label}
+                    </CommandItem>
+                  );
+                })}
+              </ScrollArea>
+            </CommandGroup>
+          </Command>
+        </PopoverContent>
+      </div>
+    </Popover>
   );
 }
