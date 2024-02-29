@@ -149,8 +149,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                             href={item.href}
                             className={`${baseClass} ${textAndBgClass}`}
                           >
-                            <div className="flex justify-between items-center">
-                              <div className="flex">
+                            <div className="flex justify-between w-full pr-2">
+                              <div className="flex items-center gap-x-2">
                                 {router.includes(item.slug) ||
                                 hoveredIndex === index ||
                                 item.highlight ? (
@@ -185,9 +185,11 @@ const Sidebar: React.FC<SidebarProps> = ({
                                 {sidebarOpen && item.name}
                               </div>
                               {item?.notifications && (
-                                <Badge className="bg-primary text-white p-2 rounded-full">
-                                  {item?.notifications}
-                                </Badge>
+                                <div className="flex items-center">
+                                  <Badge className="bg-primary text-white opacity-90 p-1 w-[20px] h-[20px] items-center flex justify-center hover:text-white">
+                                    {item?.notifications}
+                                  </Badge>
+                                </div>
                               )}
                             </div>
                           </Link>
