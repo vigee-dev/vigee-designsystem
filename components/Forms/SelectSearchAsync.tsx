@@ -8,7 +8,7 @@ import {
 import SelectAndSearchAsync from "react-select/async";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { GroupBase, OnChangeValue } from "react-select";
-import {MultiValue, SingleValue} from "react-select";
+import { MultiValue, SingleValue } from "react-select";
 
 interface SearchSelectAsyncInterface<
   T extends FieldValues,
@@ -23,10 +23,12 @@ interface SearchSelectAsyncInterface<
   isClearable?: boolean;
   preprocessOnChange?: (e: OnChangeValue<Option, IsMulti>) => any;
   defaultOptions?: Option[];
-  defaultValue?: IsMulti extends true ? MultiValue<Option> : SingleValue<Option>
+  defaultValue?: IsMulti extends true
+    ? MultiValue<Option>
+    : SingleValue<Option>;
   label?: string;
   isMulti?: IsMulti;
-  noOptionsMessage?: string
+  noOptionsMessage?: string;
 }
 
 // TODO Better way to handle isMulti, Option type etc ...
@@ -46,7 +48,7 @@ export default function SearchSelectAsync<
   defaultOptions,
   isMulti,
   noOptionsMessage = "Aucun résultat",
-  defaultValue
+  defaultValue,
 }: SearchSelectAsyncInterface<T, Option, IsMulti>) {
   return (
     <FormField
@@ -63,7 +65,7 @@ export default function SearchSelectAsync<
             <SelectAndSearchAsync<Option, IsMulti, GroupBase<Option>>
               theme={theme => ({
                 ...theme,
-                borderRadius: 0,
+
                 colors: {
                   ...theme.colors,
                   primary: "#f3f4f6",
@@ -92,9 +94,13 @@ export default function SearchSelectAsync<
                 singleValue: (baseStyles, state) => ({
                   ...baseStyles,
                   cursor: "pointer",
-                  backgroundColor: "#111111",
+                  backgroundColor: "#FFF",
+                  padding: "0.2rem",
+                  boxShadow: "0 0 0 1px #EEE",
                   fontSize: "14px",
+                  borderRadius: "0.4rem",
                 }),
+
                 multiValue: (baseStyles, state) => ({
                   ...baseStyles,
                   cursor: "pointer",
