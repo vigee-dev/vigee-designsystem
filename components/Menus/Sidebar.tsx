@@ -145,11 +145,11 @@ const Sidebar: React.FC<SidebarProps> = ({
                         onMouseLeave={() => setHoveredIndex(null)}
                       >
                         <li key={item.name}>
-                          <div className="flex justify-between items-center gap-x-2">
-                            <Link
-                              href={item.href}
-                              className={`${baseClass} ${textAndBgClass}`}
-                            >
+                          <Link
+                            href={item.href}
+                            className={`${baseClass} ${textAndBgClass}`}
+                          >
+                            <div className="flex justify-between">
                               {router.includes(item.slug) ||
                               hoveredIndex === index ||
                               item.highlight ? (
@@ -182,14 +182,14 @@ const Sidebar: React.FC<SidebarProps> = ({
                                 </div>
                               )}
                               {sidebarOpen && item.name}
-                            </Link>
 
-                            {item?.notification && (
-                              <Badge className="bg-primary text-white p-1 rounded-full">
-                                {item?.notification}
-                              </Badge>
-                            )}
-                          </div>
+                              {item?.notification && (
+                                <Badge className="bg-primary text-white p-1 rounded-full">
+                                  {item?.notification}
+                                </Badge>
+                              )}
+                            </div>
+                          </Link>
                         </li>
                       </div>
                     );
