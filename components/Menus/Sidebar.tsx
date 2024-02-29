@@ -26,7 +26,7 @@ interface SidebarProps {
     iconFill?: React.ReactNode;
     slug: string;
     highlight?: boolean;
-    notification?: number;
+    notifications?: number;
   }[];
   menu?: boolean;
   logoSmall?: StaticImageData;
@@ -149,7 +149,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                             href={item.href}
                             className={`${baseClass} ${textAndBgClass}`}
                           >
-                            <div className="flex justify-between">
+                            <div className="flex justify-between items-center">
                               {router.includes(item.slug) ||
                               hoveredIndex === index ||
                               item.highlight ? (
@@ -183,9 +183,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                               )}
                               {sidebarOpen && item.name}
 
-                              {item?.notification && (
+                              {item?.notifications && (
                                 <Badge className="bg-primary text-white p-1 rounded-full">
-                                  {item?.notification}
+                                  {item?.notifications}
                                 </Badge>
                               )}
                             </div>
