@@ -50,7 +50,6 @@ export default function DatePicker<T extends FieldValues>({
   years,
 }: Props<T>) {
   const [selectedYear, setSelectedYear] = useState(moment().year().toString());
-  const calendarRef = React.useRef(null);
 
   const generateYearOptions = () => {
     const currentYear = new Date().getFullYear();

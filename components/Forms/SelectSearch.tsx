@@ -20,7 +20,7 @@ interface SearchSelectInterface<
   IsMulti extends boolean = false
 > {
   name: Path<T>;
-  form: UseFormReturn<T>;
+  form?: UseFormReturn<T>;
   disabled?: boolean;
   placeholder?: string;
   isClearable?: boolean;
