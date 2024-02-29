@@ -150,41 +150,42 @@ const Sidebar: React.FC<SidebarProps> = ({
                             className={`${baseClass} ${textAndBgClass}`}
                           >
                             <div className="flex justify-between items-center">
-                              {router.includes(item.slug) ||
-                              hoveredIndex === index ||
-                              item.highlight ? (
-                                <div
-                                  className={classNames(
-                                    `${
-                                      text === "white"
-                                        ? "text-white group-hover:text-white"
-                                        : "text-primary group-hover:text-primary"
-                                    }   group-hover:scale-105  transform transition-all duration-300 ease-in-out `,
-                                    `h-${"8"} w-${"8"} shrink-0  my-auto ml-1 rounded-full p-[4px]`
-                                  )}
-                                  aria-hidden="true"
-                                >
-                                  {item.iconFill ? item.iconFill : item.icon}
-                                </div>
-                              ) : (
-                                <div
-                                  className={classNames(
-                                    `${
-                                      text === "white"
-                                        ? "text-gray-500 group-hover:text-gray-500"
-                                        : "text-gray-600 group-hover:text-gray-600"
-                                    } group-hover:scale-105  transform transition-all duration-300 ease-in-out `,
-                                    `h-${"8"} w-${"8"} shrink-0  my-auto ml-1  p-[5px] `
-                                  )}
-                                  aria-hidden="true"
-                                >
-                                  {item.icon}
-                                </div>
-                              )}
-                              {sidebarOpen && item.name}
-
+                              <div>
+                                {router.includes(item.slug) ||
+                                hoveredIndex === index ||
+                                item.highlight ? (
+                                  <div
+                                    className={classNames(
+                                      `${
+                                        text === "white"
+                                          ? "text-white group-hover:text-white"
+                                          : "text-primary group-hover:text-primary"
+                                      }   group-hover:scale-105  transform transition-all duration-300 ease-in-out `,
+                                      `h-${"8"} w-${"8"} shrink-0  my-auto ml-1 rounded-full p-[4px]`
+                                    )}
+                                    aria-hidden="true"
+                                  >
+                                    {item.iconFill ? item.iconFill : item.icon}
+                                  </div>
+                                ) : (
+                                  <div
+                                    className={classNames(
+                                      `${
+                                        text === "white"
+                                          ? "text-gray-500 group-hover:text-gray-500"
+                                          : "text-gray-600 group-hover:text-gray-600"
+                                      } group-hover:scale-105  transform transition-all duration-300 ease-in-out `,
+                                      `h-${"8"} w-${"8"} shrink-0  my-auto ml-1  p-[5px] `
+                                    )}
+                                    aria-hidden="true"
+                                  >
+                                    {item.icon}
+                                  </div>
+                                )}
+                                {sidebarOpen && item.name}
+                              </div>
                               {item?.notifications && (
-                                <Badge className="bg-primary text-white p-1 rounded-full">
+                                <Badge className="bg-primary text-white p-2 rounded-full">
                                   {item?.notifications}
                                 </Badge>
                               )}
