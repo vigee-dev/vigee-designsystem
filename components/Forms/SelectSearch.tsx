@@ -67,10 +67,9 @@ export default function SelectSearch<
             <SelectAndSearch<Option, IsMulti, GroupBase<Option>>
               theme={theme => ({
                 ...theme,
-                borderRadius: 0,
+
                 colors: {
                   ...theme.colors,
-
                   primary: "#f3f4f6",
                 },
               })}
@@ -97,8 +96,10 @@ export default function SelectSearch<
                 singleValue: (baseStyles, state) => ({
                   ...baseStyles,
                   cursor: "pointer",
-                  backgroundColor: "#111111",
+                  backgroundColor: "#FFF",
                   fontSize: "14px",
+                  borderRadius: "0.4rem",
+                  padding: "0.2rem",
                 }),
                 multiValue: (baseStyles, state) => ({
                   ...baseStyles,
