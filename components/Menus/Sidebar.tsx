@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
 import VariableLogo from "../Logos/VariableLogo";
 import VigeeGrayLogo from "../../img/logos/VigeeGrayLogo.png";
+import { Badge } from "../ui/badge";
 
 function classNames(...classes: (string | boolean)[]): string {
   return classes.filter(Boolean).join(" ");
@@ -25,6 +26,7 @@ interface SidebarProps {
     iconFill?: React.ReactNode;
     slug: string;
     highlight?: boolean;
+    notification?: number;
   }[];
   menu?: boolean;
   logoSmall?: StaticImageData;
@@ -143,43 +145,51 @@ const Sidebar: React.FC<SidebarProps> = ({
                         onMouseLeave={() => setHoveredIndex(null)}
                       >
                         <li key={item.name}>
-                          <Link
-                            href={item.href}
-                            className={`${baseClass} ${textAndBgClass}`}
-                          >
-                            {router.includes(item.slug) ||
-                            hoveredIndex === index ||
-                            item.highlight ? (
-                              <div
-                                className={classNames(
-                                  `${
-                                    text === "white"
-                                      ? "text-white group-hover:text-white"
-                                      : "text-primary group-hover:text-primary"
-                                  }   group-hover:scale-105  transform transition-all duration-300 ease-in-out `,
-                                  `h-${"8"} w-${"8"} shrink-0  my-auto ml-1 rounded-full p-[4px]`
-                                )}
-                                aria-hidden="true"
-                              >
-                                {item.iconFill ? item.iconFill : item.icon}
-                              </div>
-                            ) : (
-                              <div
-                                className={classNames(
-                                  `${
-                                    text === "white"
-                                      ? "text-gray-500 group-hover:text-gray-500"
-                                      : "text-gray-600 group-hover:text-gray-600"
-                                  } group-hover:scale-105  transform transition-all duration-300 ease-in-out `,
-                                  `h-${"8"} w-${"8"} shrink-0  my-auto ml-1  p-[5px] `
-                                )}
-                                aria-hidden="true"
-                              >
-                                {item.icon}
-                              </div>
+                          <div className="flex justify-between items-center gap-x-2">
+                            <Link
+                              href={item.href}
+                              className={`${baseClass} ${textAndBgClass}`}
+                            >
+                              {router.includes(item.slug) ||
+                              hoveredIndex === index ||
+                              item.highlight ? (
+                                <div
+                                  className={classNames(
+                                    `${
+                                      text === "white"
+                                        ? "text-white group-hover:text-white"
+                                        : "text-primary group-hover:text-primary"
+                                    }   group-hover:scale-105  transform transition-all duration-300 ease-in-out `,
+                                    `h-${"8"} w-${"8"} shrink-0  my-auto ml-1 rounded-full p-[4px]`
+                                  )}
+                                  aria-hidden="true"
+                                >
+                                  {item.iconFill ? item.iconFill : item.icon}
+                                </div>
+                              ) : (
+                                <div
+                                  className={classNames(
+                                    `${
+                                      text === "white"
+                                        ? "text-gray-500 group-hover:text-gray-500"
+                                        : "text-gray-600 group-hover:text-gray-600"
+                                    } group-hover:scale-105  transform transition-all duration-300 ease-in-out `,
+                                    `h-${"8"} w-${"8"} shrink-0  my-auto ml-1  p-[5px] `
+                                  )}
+                                  aria-hidden="true"
+                                >
+                                  {item.icon}
+                                </div>
+                              )}
+                              {sidebarOpen && item.name}
+                            </Link>
+
+                            {item?.notification && (
+                              <Badge className="bg-primary text-white p-1 rounded-full">
+                                {item?.notification}
+                              </Badge>
                             )}
-                            {sidebarOpen && item.name}
-                          </Link>
+                          </div>
                         </li>
                       </div>
                     );
