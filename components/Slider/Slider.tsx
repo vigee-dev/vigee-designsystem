@@ -8,11 +8,9 @@ export function Slider({ className, ...props }: SliderProps) {
   return (
     <div className="flex flex-col items-center">
       <div className="flex justify-between w-[60%]">
-        <TypographyH2 className="text-primary-light text-sm">
-          {props.title}
-        </TypographyH2>
+        <p className="text-primary-light text-sm">{props.title}</p>
         <TypographyH2 className="text-primary font-bold">
-          {props.value}
+          {props.value}%
         </TypographyH2>
       </div>
       <ShadSlider
