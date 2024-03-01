@@ -13,6 +13,11 @@ import {
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "../ui/hover-card";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -30,7 +35,7 @@ type Props<T extends FieldValues> = {
   disabled?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
-  helpText?: string;
+  helpComponent?: React.ReactNode;
 };
 
 export default function TextArea<T extends FieldValues>({
@@ -49,7 +54,7 @@ export default function TextArea<T extends FieldValues>({
   className,
   descr,
   disabled,
-  helpText,
+  helpComponent,
 }: Props<T>) {
   const [charCount, setCharCount] = useState(0); // État local pour le compteur de caractères
 
@@ -60,23 +65,26 @@ export default function TextArea<T extends FieldValues>({
       rules={{ required }}
       render={({ field }) => (
         <FormItem className={className}>
-          {helpText ? (
-            <Tooltip message={helpText}>
-              <div className="flex items-center justify-between ">
-                {label && (
-                  <FormLabel className="font-black text-primary">
-                    {label}
-                  </FormLabel>
-                )}
+          <HoverCard>
+            <div className="flex items-center justify-between ">
+              {label && (
+                <FormLabel className="font-black text-primary">
+                  {label}
+                </FormLabel>
+              )}
+              {helpComponent && (
+                <HoverCardTrigger>
+                  <PiQuestionMarkCircleDuoStroke className="w-6 h-6 hover:text-primary hover:cursor-pointer text-gray-400" />
+                </HoverCardTrigger>
+              )}
+            </div>
 
-                <PiQuestionMarkCircleDuoStroke className="w-6 h-6 hover:text-primary hover:cursor-pointer text-gray-400" />
-              </div>
-            </Tooltip>
-          ) : (
-            label && (
-              <FormLabel className="font-black text-primary">{label}</FormLabel>
-            )
-          )}
+            {helpComponent && (
+              <HoverCardContent>
+                <div className="p-2">{helpComponent}</div>
+              </HoverCardContent>
+            )}
+          </HoverCard>
           <Textarea
             {...field}
             placeholder={placeholder ?? ""}
