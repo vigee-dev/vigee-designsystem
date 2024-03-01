@@ -67,7 +67,7 @@ export default function Input<T extends FieldValues>({
               )}
               {helpComponent && (
                 <HoverCardTrigger>
-                  <PiQuestionMarkCircleDuoStroke className="w-6 h-6 hover:text-primary hover:cursor-pointer text-gray-400" />
+                  <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
                 </HoverCardTrigger>
               )}
             </div>
