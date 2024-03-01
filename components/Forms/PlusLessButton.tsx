@@ -26,7 +26,7 @@ export function PlusLessButton<T extends FieldValues>({
   form,
   name,
 }: Props<T>) {
-  const [goal, setGoal] = React.useState<number>(start);
+  const [goal, setGoal] = React.useState<number>(form?.getValues(name) ? form.getValues(name) : start);
 
   function onClick(adjustment: number) {
     setGoal(prev =>  Math.max(min, Math.min(max, prev + adjustment)));
