@@ -61,7 +61,7 @@ export default function Input<T extends FieldValues>({
           <HoverCard>
             <div className="flex items-center justify-between ">
               {label && (
-                <FormLabel className="font-black text-primary">
+                <FormLabel className="font-black text-primary mt-2">
                   {label}
                 </FormLabel>
               )}
@@ -77,22 +77,21 @@ export default function Input<T extends FieldValues>({
                 <div className="p-2">{helpComponent}</div>
               </HoverCardContent>
             )}
+
+            <FormControl>
+              <ShadInput
+                placeholder={placeholder}
+                {...field}
+                type={type}
+                disabled={disabled}
+                id={id}
+                min={min}
+                max={max}
+                step={step}
+                className="sm:text-[16px] md:text-sm font-medium bg-input border-none"
+              />
+            </FormControl>
           </HoverCard>
-
-          <FormControl>
-            <ShadInput
-              placeholder={placeholder}
-              {...field}
-              type={type}
-              disabled={disabled}
-              id={id}
-              min={min}
-              max={max}
-              step={step}
-              className="sm:text-[16px] md:text-sm font-medium bg-input border-none"
-            />
-          </FormControl>
-
           {descr && <FormDescription>{descr}</FormDescription>}
           <FormMessage />
         </FormItem>

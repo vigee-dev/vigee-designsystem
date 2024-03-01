@@ -63,7 +63,7 @@ export default function Select<T extends FieldValues>({
           <HoverCard>
             <div className="flex items-center justify-between ">
               {label && (
-                <FormLabel className="font-black text-primary">
+                <FormLabel className="font-black text-primary mt-2">
                   {label}
                 </FormLabel>
               )}
