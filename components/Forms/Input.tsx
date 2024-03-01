@@ -10,6 +10,8 @@ import {
 
 import { Input as ShadInput } from "../ui/input";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
+import { PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
+import { Tooltip } from "../Tooltip/Tooltip";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -25,6 +27,7 @@ type Props<T extends FieldValues> = {
   min?: number | string;
   max?: number | string;
   step?: number;
+  helpText?: string;
 };
 
 export default function Input<T extends FieldValues>({
@@ -41,6 +44,7 @@ export default function Input<T extends FieldValues>({
   min,
   max,
   step,
+  helpText,
 }: Props<T>) {
   return (
     <FormField
@@ -49,9 +53,24 @@ export default function Input<T extends FieldValues>({
       rules={{ required }}
       render={({ field }) => (
         <FormItem className={className}>
-          {label && (
-            <FormLabel className="font-black text-primary">{label}</FormLabel>
+          {helpText ? (
+            <Tooltip message={helpText}>
+              <div className="flex items-center justify-between ">
+                {label && (
+                  <FormLabel className="font-black text-primary">
+                    {label}
+                  </FormLabel>
+                )}
+
+                <PiQuestionMarkCircleDuoStroke className="w-6 h-6 hover:text-primary hover:cursor-pointer text-gray-400" />
+              </div>
+            </Tooltip>
+          ) : (
+            label && (
+              <FormLabel className="font-black text-primary">{label}</FormLabel>
+            )
           )}
+
           <FormControl>
             <ShadInput
               placeholder={placeholder}
@@ -65,6 +84,7 @@ export default function Input<T extends FieldValues>({
               className="sm:text-[16px] md:text-sm font-medium bg-input border-none"
             />
           </FormControl>
+
           {descr && <FormDescription>{descr}</FormDescription>}
           <FormMessage />
         </FormItem>

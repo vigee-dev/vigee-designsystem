@@ -16,6 +16,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
+import { Tooltip } from "../Tooltip/Tooltip";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -26,9 +28,10 @@ type Props<T extends FieldValues> = {
   descr?: string;
   children: React.ReactNode;
   className?: string;
-  disabled?: boolean
-  onChange?: (value: string) => void
-  value?: string
+  disabled?: boolean;
+  onChange?: (value: string) => void;
+  value?: string;
+  helpText?: string;
 };
 
 export default function Select<T extends FieldValues>({
@@ -42,16 +45,33 @@ export default function Select<T extends FieldValues>({
   className,
   disabled,
   onChange,
-  value
+  value,
+  helpText,
 }: Props<T>) {
-  return (
-    (form?.control && name ) ? <FormField
+  return form?.control && name ? (
+    <FormField
       control={form.control}
       name={name}
       rules={{ required }}
       render={({ field }) => (
         <FormItem className={className}>
-          <FormLabel className="font-black text-primary">{label}</FormLabel>
+          {helpText ? (
+            <Tooltip message={helpText}>
+              <div className="flex items-center justify-between ">
+                {label && (
+                  <FormLabel className="font-black text-primary">
+                    {label}
+                  </FormLabel>
+                )}
+
+                <PiQuestionMarkCircleDuoStroke className="w-6 h-6 hover:text-primary hover:cursor-pointer text-gray-400" />
+              </div>
+            </Tooltip>
+          ) : (
+            label && (
+              <FormLabel className="font-black text-primary">{label}</FormLabel>
+            )
+          )}
           <ShadSelect
             onValueChange={field.onChange}
             value={String(field.value)}
@@ -70,7 +90,9 @@ export default function Select<T extends FieldValues>({
           <FormMessage />
         </FormItem>
       )}
-    /> : <FormItem className={className}>
+    />
+  ) : (
+    <FormItem className={className}>
       <FormLabel className="font-black text-primary">{label}</FormLabel>
       <ShadSelect
         onValueChange={onChange}

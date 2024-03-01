@@ -11,6 +11,8 @@ import {
   FormMessage,
 } from "../ui/form";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
+import { PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
+import { Tooltip } from "../Tooltip/Tooltip";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -28,6 +30,7 @@ type Props<T extends FieldValues> = {
   disabled?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
+  helpText?: string;
 };
 
 export default function TextArea<T extends FieldValues>({
@@ -46,6 +49,7 @@ export default function TextArea<T extends FieldValues>({
   className,
   descr,
   disabled,
+  helpText,
 }: Props<T>) {
   const [charCount, setCharCount] = useState(0); // État local pour le compteur de caractères
 
@@ -56,7 +60,23 @@ export default function TextArea<T extends FieldValues>({
       rules={{ required }}
       render={({ field }) => (
         <FormItem className={className}>
-          <FormLabel className="font-black text-primary">{label}</FormLabel>
+          {helpText ? (
+            <Tooltip message={helpText}>
+              <div className="flex items-center justify-between ">
+                {label && (
+                  <FormLabel className="font-black text-primary">
+                    {label}
+                  </FormLabel>
+                )}
+
+                <PiQuestionMarkCircleDuoStroke className="w-6 h-6 hover:text-primary hover:cursor-pointer text-gray-400" />
+              </div>
+            </Tooltip>
+          ) : (
+            label && (
+              <FormLabel className="font-black text-primary">{label}</FormLabel>
+            )
+          )}
           <Textarea
             {...field}
             placeholder={placeholder ?? ""}
