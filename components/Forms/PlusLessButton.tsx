@@ -16,6 +16,8 @@ type Props<T extends FieldValues> = {
   name: Path<T>;
 };
 
+// TODO rethink the way this component handle changes
+// TODO add onChange prop to handleChange withouth RHF
 export function PlusLessButton<T extends FieldValues>({
   title,
   unit,
