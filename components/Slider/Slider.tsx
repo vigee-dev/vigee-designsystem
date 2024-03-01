@@ -7,7 +7,14 @@ type SliderProps = React.ComponentProps<typeof ShadSlider>;
 export function Slider({ className, ...props }: SliderProps) {
   return (
     <div className="flex flex-col items-center">
-      <TypographyH2 className="text-primary-light">{props.title}</TypographyH2>
+      <div className="flex justify-between w-full">
+        <TypographyH2 className="text-primary-light text-sm">
+          {props.title}
+        </TypographyH2>
+        <TypographyH2 className="text-primary font-bold">
+          {props.value}
+        </TypographyH2>
+      </div>
       <ShadSlider
         defaultValue={props.defaultValue}
         max={props.max}
