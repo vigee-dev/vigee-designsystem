@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { Slider as ShadSlider } from "../../components/ui/slider";
 import { TypographyH2 } from "../Typography/Typography";
 
