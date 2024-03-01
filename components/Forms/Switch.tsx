@@ -12,7 +12,7 @@ import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { z } from "zod";
 
 import { Switch as SwitchShadcn } from "../ui/switch";
-import {cn} from "@/app/components/vigee-designsystem/lib/utils";
+import { cn } from "../../lib/utils";
 
 type Props<T extends FieldValues> = {
   form: UseFormReturn<T>;
@@ -39,7 +39,12 @@ export default function Switch<T extends FieldValues>({
       control={form.control}
       name={name}
       render={({ field }) => (
-        <FormItem className={cn("flex flex-row items-center justify-between", className)}>
+        <FormItem
+          className={cn(
+            "flex flex-row items-center justify-between",
+            className
+          )}
+        >
           <div className="space-y-0.5">
             <FormLabel className="text-base ">{label}</FormLabel>
             <FormDescription>{descr}</FormDescription>
