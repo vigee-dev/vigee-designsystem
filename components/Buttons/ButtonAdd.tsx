@@ -13,7 +13,7 @@ interface AddButtonProps extends React.HTMLProps<HTMLButtonElement> {
 const ButtonAdd: React.FC<AddButtonProps> = ({
   text,
   icon,
-  type,
+  type = "button",
   className,
   onClick,
 }) => {
@@ -21,7 +21,7 @@ const ButtonAdd: React.FC<AddButtonProps> = ({
     <button
       type={type}
       className={cn(
-        `flex flex-col text-gray-400 items-center pt-2 hover:text-sky-600 transform ease-in-out duration-200 cursor-pointer `,
+        `flex flex-col text-gray-400 items-center pt-2 hover:text-primary transform ease-in-out duration-200 cursor-pointer `,
         className
       )}
       onClick={onClick}
