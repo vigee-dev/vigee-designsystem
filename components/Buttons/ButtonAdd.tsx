@@ -5,7 +5,7 @@ import { cn } from "../../lib/utils";
 interface AddButtonProps extends React.HTMLProps<HTMLButtonElement> {
   text: string;
   icon: React.ReactNode;
-  type: "button" | "submit" | "reset";
+  type?: "button" | "submit" | "reset";
   onClick?: () => void;
   className?: string;
 }
