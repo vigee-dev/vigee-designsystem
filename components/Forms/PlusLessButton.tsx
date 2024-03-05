@@ -16,6 +16,8 @@ type Props<T extends FieldValues> = {
   name: Path<T>;
 };
 
+// TODO rethink the way this component handle changes
+// TODO add onChange prop to handleChange withouth RHF
 export function PlusLessButton<T extends FieldValues>({
   title,
   unit,
@@ -26,7 +28,7 @@ export function PlusLessButton<T extends FieldValues>({
   form,
   name,
 }: Props<T>) {
-  const [goal, setGoal] = React.useState<number>(start);
+  const [goal, setGoal] = React.useState<number>(form?.getValues(name) ? form.getValues(name) : start);
 
   function onClick(adjustment: number) {
     setGoal(prev =>  Math.max(min, Math.min(max, prev + adjustment)));
