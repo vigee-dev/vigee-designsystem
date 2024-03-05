@@ -5,11 +5,9 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "../ui/form";
 
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
-import { z } from "zod";
 
 import { Switch as SwitchShadcn } from "../ui/switch";
 import { cn } from "../../lib/utils";
@@ -29,8 +27,6 @@ type Props<T extends FieldValues> = {
 export default function Switch<T extends FieldValues>({
   form,
   label,
-  placeholder,
-  required = true,
   name,
   descr,
   className,
