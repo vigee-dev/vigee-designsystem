@@ -93,7 +93,9 @@ export function DrawerMobile({
                 </div>
               </div>
             </DialogHeader>
-            {children}
+
+            <ScrollArea className="max-h-[80vh] px-8 pb-8">{children} </ScrollArea>
+
           </DialogContent>
         </Dialog>
       </DrawerContext.Provider>
@@ -109,10 +111,8 @@ export function DrawerMobile({
             <DrawerTitle>{title}</DrawerTitle>
             <DrawerDescription>{description}</DrawerDescription>
           </DrawerHeader>
-
-          {/*<div className="h-2 mx-4 w-fit rounded-full bg-muted" />*/}
-
-          <ScrollArea className="h-100 px-8 pb-8">{children} </ScrollArea>
+          
+          <ScrollArea className="max-h-[80vh] px-8 pb-8">{children} </ScrollArea>
 
           {cancelButton && <DrawerFooter>
             <DrawerClose asChild>
