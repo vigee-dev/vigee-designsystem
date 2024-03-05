@@ -10,7 +10,7 @@ interface AddButtonProps extends React.HTMLProps<HTMLButtonElement> {
   className?: string;
 }
 
-const AddButton: React.FC<AddButtonProps> = ({
+const ButtonAdd: React.FC<AddButtonProps> = ({
   text,
   icon,
   type,
@@ -32,4 +32,4 @@ const AddButton: React.FC<AddButtonProps> = ({
   );
 };
 
-export default AddButton;
+export default ButtonAdd;
