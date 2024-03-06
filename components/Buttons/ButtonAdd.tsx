@@ -1,6 +1,7 @@
 import React from "react";
 import { TypographyH2 } from "../Typography/Typography";
 import { cn } from "../../lib/utils";
+import Link from "next/link";
 
 interface AddButtonProps extends React.HTMLProps<HTMLButtonElement> {
   text: string;
@@ -8,6 +9,7 @@ interface AddButtonProps extends React.HTMLProps<HTMLButtonElement> {
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
   className?: string;
+  href?: string;
 }
 
 const ButtonAdd: React.FC<AddButtonProps> = ({
@@ -16,8 +18,22 @@ const ButtonAdd: React.FC<AddButtonProps> = ({
   type = "button",
   className,
   onClick,
+  href,
 }) => {
-  return (
+  return href ? (
+    <Link href={href}>
+      <button
+        type={type}
+        className={cn(
+          `flex flex-col text-gray-400 items-center pt-2 hover:text-primary transform ease-in-out duration-200 cursor-pointer `,
+          className
+        )}
+      >
+        {icon}
+        <TypographyH2>{text}</TypographyH2>
+      </button>
+    </Link>
+  ) : (
     <button
       type={type}
       className={cn(
