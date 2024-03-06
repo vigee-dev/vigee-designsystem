@@ -4,19 +4,27 @@ import {
   PiCloudArrowDownloadStroke,
   PiDownloadDownDuoSolid,
 } from "../../icons/PikaIcons";
+import { cn } from "../../lib/utils";
 
 interface DownloadButtonProps {
   onClick?: () => void;
   noText?: boolean;
+  className?: string;
 }
 
-const DownloadButton = ({ onClick, noText }: DownloadButtonProps) => {
+const DownloadButton = ({
+  onClick,
+  noText,
+  className,
+}: DownloadButtonProps) => {
   return noText ? (
-    <PiDownloadDownDuoSolid className=" text-gray-500 mx-2" />
+    <PiDownloadDownDuoSolid className={cn(" text-gray-500 mx-2", className)} />
   ) : (
     <Button onClick={onClick} variant="outline">
       Télécharger
-      <PiCloudArrowDownloadStroke className=" text-gray-500 mx-2" />
+      <PiCloudArrowDownloadStroke
+        className={cn(" text-gray-500 mx-2", className)}
+      />
     </Button>
   );
 };
