@@ -24,7 +24,6 @@ export const DeleteButton = ({
       )}
       onClick={onClick}
     >
-      {" "}
       Supprimer
       <PiDeleteDustbin01DuoStroke
         className={cn(
