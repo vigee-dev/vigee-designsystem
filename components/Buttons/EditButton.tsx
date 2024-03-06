@@ -17,7 +17,7 @@ export const EditButton = ({ onClick, className, href }: Props) => {
     <Link href={href}>
       <PiPencilEditBoxDuoSolid
         className={cn(
-          "text-primary-light hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out",
+          " hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
           className
         )}
       />
@@ -25,7 +25,7 @@ export const EditButton = ({ onClick, className, href }: Props) => {
   ) : (
     <PiPencilEditBoxDuoSolid
       className={cn(
-        "text-primary-light hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out",
+        " hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
         className
       )}
       onClick={onClick}
