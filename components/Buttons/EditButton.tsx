@@ -9,7 +9,7 @@ interface Props {
   href?: string;
 }
 
-export const EditIcon = ({ onClick, className, href }: Props) => {
+export const EditButton = ({ onClick, className, href }: Props) => {
   return href ? (
     <Link href={href}>
       <PiPencilEditBoxStroke
