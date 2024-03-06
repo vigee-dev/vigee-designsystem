@@ -18,12 +18,20 @@ const DownloadButton = ({
   className,
 }: DownloadButtonProps) => {
   return noText ? (
-    <PiDownloadDownDuoSolid className={cn(" text-gray-500 mx-2", className)} />
+    <PiDownloadDownDuoSolid
+      className={cn(
+        " text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out",
+        className
+      )}
+    />
   ) : (
     <Button onClick={onClick} variant="outline">
       Télécharger
       <PiCloudArrowDownloadStroke
-        className={cn(" text-gray-500 mx-2", className)}
+        className={cn(
+          " text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out",
+          className
+        )}
       />
     </Button>
   );
