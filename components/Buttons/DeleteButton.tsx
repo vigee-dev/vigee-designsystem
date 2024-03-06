@@ -21,7 +21,7 @@ export const DeleteButton = ({
       type={type}
       variant="outline"
       className={cn(
-        "flex text-gray-600 gap-x-4 w-full hover:bg-red-500 hover:text-white transformation ease-in-out duration-300",
+        "flex text-gray-600 gap-x-4  hover:bg-red-500 hover:text-white transformation ease-in-out duration-300",
         className
       )}
       onClick={onClick}
