@@ -7,12 +7,14 @@ interface Props {
   onClick?: () => void;
   className?: string;
   type?: "button" | "submit" | "reset";
+  noText?: boolean;
 }
 
 export const DeleteButton = ({
   onClick,
   className,
   type = "button",
+  noText,
 }: Props) => {
   return (
     <Button
@@ -24,7 +26,7 @@ export const DeleteButton = ({
       )}
       onClick={onClick}
     >
-      Supprimer
+      {!noText && <p>Supprimer</p>}
       <PiDeleteDustbin01DuoStroke
         className={cn(
           " hover:bg-red-500 hover:text-white transformation ease-in-out w-5 h-5",
