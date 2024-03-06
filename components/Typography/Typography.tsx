@@ -1,4 +1,5 @@
 import React from "react";
+import { cn } from "../../lib/utils";
 
 export function TypographyH1({
   children,
@@ -25,7 +26,10 @@ export function TypographyH2({
 }) {
   return (
     <h2
-      className={`scroll-m-20  pb-2 text-xl  tracking-tight first:mt-0  ${className}`}
+      className={cn(
+        `scroll-m-20  pb-2 text-xl  tracking-tight first:mt-0`,
+        className
+      )}
     >
       {children}
     </h2>
