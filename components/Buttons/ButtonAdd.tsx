@@ -30,7 +30,7 @@ const ButtonAdd: React.FC<AddButtonProps> = ({
         )}
       >
         {icon}
-        <TypographyH2>{text}</TypographyH2>
+        <TypographyH2 className="text-md">{text}</TypographyH2>
       </button>
     </Link>
   ) : (
@@ -43,7 +43,7 @@ const ButtonAdd: React.FC<AddButtonProps> = ({
       onClick={onClick}
     >
       {icon}
-      <TypographyH2>{text}</TypographyH2>
+      <TypographyH2 className="text-md">{text}</TypographyH2>
     </button>
   );
 };
