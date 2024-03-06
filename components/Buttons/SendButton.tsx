@@ -1,5 +1,8 @@
 import React from "react";
-import { PiEye02OnDuoStroke } from "../../icons/PikaIcons";
+import {
+  PiEye02OnDuoStroke,
+  PiSendPlaneHorizontalDuoSolid,
+} from "../../icons/PikaIcons";
 import { cn } from "../../lib/utils";
 import Link from "next/link";
 import { Tooltip } from "../Tooltip/Tooltip";
@@ -23,7 +26,7 @@ export const SendButton = ({
     <Tooltip message={tooltip}>
       <Link href={href} className="flex items-center gap-x-2">
         {text}{" "}
-        <PiEye02OnDuoStroke
+        <PiSendPlaneHorizontalDuoSolid
           className={cn(
             "text-gray-400 hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
             className
@@ -35,7 +38,7 @@ export const SendButton = ({
     <Tooltip message={tooltip}>
       <div className="flex items-center gap-x-2">
         {text}
-        <PiEye02OnDuoStroke
+        <PiSendPlaneHorizontalDuoSolid
           className={cn(
             "text-gray-400 hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
             className
