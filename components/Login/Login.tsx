@@ -68,10 +68,10 @@ export default function Login({
 
     if (result) {
       if (result.ok) {
-        toast("Vous êtes connecté.");
+        toast.success("Vous êtes connecté.");
         router.push(callbackUrl);
       } else {
-        toast(result.error);
+        toast.error("Mot de passe ou identifiant incorrect");
       }
     } else {
       toast("Une erreur est survenue, veuillez réesayer ultérieurement.");
