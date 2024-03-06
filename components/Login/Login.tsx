@@ -69,7 +69,7 @@ export default function Login({
     if (result) {
       if (result.ok) {
         toast("Vous êtes connecté.");
-        router.push("/app/dashboard");
+        router.push(callbackUrl);
       } else {
         toast(result.error);
       }
