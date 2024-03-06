@@ -23,7 +23,7 @@ const Back: React.FC<BackProps> = ({ href, where, onClick }) => {
         <Button
           variant="ghost"
           onClick={onClick}
-          className="flex flex-grid text-gray-400 pb-1 hover:text-primary transform ease-in-out duration-200 hover:font-bold "
+          className="flex flex-grid text-gray-400 pb-1 hover:text-primary transform ease-in-out duration-200 hover:font-bold border-0"
         >
           <ArrowLeftIcon width={15} />
           <p className="mx-1 text-sm "> {where}</p>
