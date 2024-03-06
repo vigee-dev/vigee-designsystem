@@ -12,7 +12,7 @@ interface DownloadButtonProps {
   className?: string;
 }
 
-const DownloadButton = ({
+export const DownloadButton = ({
   onClick,
   noText,
   className,
@@ -36,5 +36,3 @@ const DownloadButton = ({
     </Button>
   );
 };
-
-export default DownloadButton;

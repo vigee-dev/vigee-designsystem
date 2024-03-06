@@ -13,7 +13,11 @@ interface DownloadButtonProps {
   className?: string;
 }
 
-const UploadButton = ({ onClick, noText, className }: DownloadButtonProps) => {
+export const UploadButton = ({
+  onClick,
+  noText,
+  className,
+}: DownloadButtonProps) => {
   return noText ? (
     <PiUploadUpDuoSolid
       className={cn(
@@ -33,5 +37,3 @@ const UploadButton = ({ onClick, noText, className }: DownloadButtonProps) => {
     </Button>
   );
 };
-
-export default UploadButton;
