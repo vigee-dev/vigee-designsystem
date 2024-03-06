@@ -1,5 +1,9 @@
 import React from "react";
-import { PiEye02OnSolid, PiPencilEditBoxDuoSolid } from "../../icons/PikaIcons";
+import {
+  PiEye02OnDuoStroke,
+  PiEye02OnSolid,
+  PiPencilEditBoxDuoSolid,
+} from "../../icons/PikaIcons";
 import { cn } from "../../lib/utils";
 import Link from "next/link";
 import { Tooltip } from "../Tooltip/Tooltip";
@@ -20,9 +24,9 @@ export const SeeButton = ({
   return href ? (
     <Tooltip message={tooltip}>
       <Link href={href}>
-        <PiEye02OnSolid
+        <PiEye02OnDuoStroke
           className={cn(
-            " hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+            "text-gray-400 hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
             className
           )}
         />
@@ -30,9 +34,9 @@ export const SeeButton = ({
     </Tooltip>
   ) : (
     <Tooltip message={tooltip}>
-      <PiEye02OnSolid
+      <PiEye02OnDuoStroke
         className={cn(
-          " hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+          "text-gray-400 hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
           className
         )}
         onClick={onClick}
