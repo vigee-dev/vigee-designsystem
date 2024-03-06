@@ -17,7 +17,9 @@ export function Tooltip({ message, children }: TooltipProps) {
       <TooltipProvider>
         <TootltipShad>
           <TooltipTrigger asChild>{children}</TooltipTrigger>
-          <TooltipContent>{message}</TooltipContent>
+          <TooltipContent>
+            <p>{message}</p>
+          </TooltipContent>
         </TootltipShad>
       </TooltipProvider>
     </div>

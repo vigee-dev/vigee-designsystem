@@ -1,38 +1,42 @@
 import React from "react";
-import { Button } from "./Button";
-import {
-  PiCloudArrowDownloadStroke,
-  PiDownloadDownDuoSolid,
-  PiUploadUpDuoSolid,
-} from "../../icons/PikaIcons";
+import { PiEye02OnSolid, PiPencilEditBoxDuoSolid } from "../../icons/PikaIcons";
 import { cn } from "../../lib/utils";
-import { PiEyedropperDuotone } from "react-icons/pi";
+import Link from "next/link";
+import { Tooltip } from "../Tooltip/Tooltip";
 
-interface DownloadButtonProps {
+interface Props {
   onClick?: () => void;
-  noText?: boolean;
   className?: string;
+  href?: string;
+  tooltip?: string;
 }
 
-const SeeButton = ({ onClick, noText, className }: DownloadButtonProps) => {
-  return noText ? (
-    <PiEyedropperDuotone
-      className={cn(
-        " text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out",
-        className
-      )}
-    />
+export const SeeButton = ({
+  onClick,
+  className,
+  href,
+  tooltip = "Voir",
+}: Props) => {
+  return href ? (
+    <Tooltip message={tooltip}>
+      <Link href={href}>
+        <PiEye02OnSolid
+          className={cn(
+            " hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+            className
+          )}
+        />
+      </Link>
+    </Tooltip>
   ) : (
-    <Button onClick={onClick} variant="outline">
-      Uploader
-      <PiEyedropperDuotone
+    <Tooltip message={tooltip}>
+      <PiEye02OnSolid
         className={cn(
-          " text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out",
+          " hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
           className
         )}
+        onClick={onClick}
       />
-    </Button>
+    </Tooltip>
   );
 };
-
-export default SeeButton;
