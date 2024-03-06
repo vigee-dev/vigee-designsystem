@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  PiEye02OnDuoStroke,
-  PiEye02OnSolid,
-  PiPencilEditBoxDuoSolid,
-} from "../../icons/PikaIcons";
+import { PiEye02OnDuoStroke } from "../../icons/PikaIcons";
 import { cn } from "../../lib/utils";
 import Link from "next/link";
 import { Tooltip } from "../Tooltip/Tooltip";
