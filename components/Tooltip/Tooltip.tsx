@@ -13,11 +13,13 @@ interface TooltipProps {
 
 export function Tooltip({ message, children }: TooltipProps) {
   return (
-    <TooltipProvider>
-      <TootltipShad>
-        <TooltipTrigger asChild>{children}</TooltipTrigger>
-        <TooltipContent>{message}</TooltipContent>
-      </TootltipShad>
-    </TooltipProvider>
+    <div className="relative">
+      <TooltipProvider>
+        <TootltipShad>
+          <TooltipTrigger asChild>{children}</TooltipTrigger>
+          <TooltipContent>{message}</TooltipContent>
+        </TootltipShad>
+      </TooltipProvider>
+    </div>
   );
 }
