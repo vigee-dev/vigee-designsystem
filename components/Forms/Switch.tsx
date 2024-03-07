@@ -19,8 +19,8 @@ type Props<T extends FieldValues> = {
   required?: boolean;
   name?: Path<T>;
   descr?: string;
-  onChange?: (value: boolean) => void
-  value?: boolean
+  onChange?: (value: boolean) => void;
+  value?: boolean;
   className?: string;
 };
 
@@ -31,33 +31,46 @@ export default function Switch<T extends FieldValues>({
   descr,
   className,
   onChange,
-  value
+  value,
 }: Props<T>) {
   return form?.control && name ? (
     <FormField
       control={form.control}
       name={name}
       render={({ field }) => (
-        <FormItem className={cn("flex flex-row items-center justify-between", className)}>
+        <FormItem
+          className={cn(
+            "flex flex-row items-center justify-between py-4 border rounded-xl p-4  text-primary",
+            className
+          )}
+        >
           <div className="space-y-0.5">
             <FormLabel className="text-base ">{label}</FormLabel>
             <FormDescription>{descr}</FormDescription>
           </div>
           <FormControl>
-            <SwitchShadcn checked={field.value} onCheckedChange={field.onChange} />
+            <SwitchShadcn
+              checked={field.value}
+              onCheckedChange={field.onChange}
+            />
           </FormControl>
         </FormItem>
       )}
     />
   ) : (
-    <FormItem className={cn("flex flex-row items-center justify-between", className)}>
+    <FormItem
+      className={cn(
+        "flex flex-row items-center justify-between py-4 border rounded-xl p-4  text-primary",
+        className
+      )}
+    >
       <div className="space-y-0.5">
         <FormLabel className="text-base ">{label}</FormLabel>
         <FormDescription>{descr}</FormDescription>
       </div>
       <FormControl>
-        <SwitchShadcn checked={value} onCheckedChange={onChange}/>
+        <SwitchShadcn checked={value} onCheckedChange={onChange} />
       </FormControl>
     </FormItem>
-  )
+  );
 }
