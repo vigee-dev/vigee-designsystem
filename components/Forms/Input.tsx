@@ -11,7 +11,7 @@ import {
 import { Input as ShadInput } from "../ui/input";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
-import { Tooltip } from "../Tooltip/Tooltip";
+
 import {
   HoverCard,
   HoverCardTrigger,
