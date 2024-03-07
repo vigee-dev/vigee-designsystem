@@ -70,7 +70,7 @@ export function PlusLessButton<T extends FieldValues>({
                 <span className="sr-only">Diminuer</span>
               </Button>
               <div className="flex-1 text-center">
-                <div className="text-3xl font-bold tracking-tighter">
+                <div className="text-3xl font-bold tracking-tighter text-primary">
                   {goal}
                 </div>
                 <div className="text-[0.70rem] uppercase text-muted-foreground">
