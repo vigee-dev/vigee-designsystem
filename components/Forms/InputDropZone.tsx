@@ -2,6 +2,13 @@ import React from "react";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { useRef, useState } from "react";
 import { Button } from "../../components/Buttons/Button";
+import {Drawer} from "@/app/components/vigee-designsystem/components/ui/drawer";
+import {PencilIcon} from "@/app/components/vigee-designsystem/icons/Pencil";
+import {PiPencilEditBoxDuoStroke} from "@/app/components/vigee-designsystem/icons/PikaIcons";
+import ConstructionOrderCreateClientForm
+  from "@/app/components/ConstructionOrder/Form/ConstructionOrderCreateClientForm";
+import {DrawerMobile} from "@/app/components/vigee-designsystem/components/Forms/DrawerMobile";
+import {EyeIcon} from "@heroicons/react/24/outline";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -10,6 +17,7 @@ type Props<T extends FieldValues> = {
   multiple?: boolean;
 };
 
+// TODO styles @vigee
 export default function InputDropZoneFile<T extends FieldValues>({
   form,
   name,
@@ -31,35 +39,33 @@ export default function InputDropZoneFile<T extends FieldValues>({
 
   const [dragActive, setDragActive] = useState<boolean>(false);
   const inputRef = useRef<any>(null);
-  const [files, setFiles] = useState<any>([]);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
 
-  function handleChange(e: any) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
+    const files = e.target.files
+    if (files) {
+      if (multiple) setFiles(prevState => [...prevState, ...Array.from(files)])
+      else setFiles(Array.from(files))
 
-    if (e.target.files && e.target.files[0]) {
-      console.log(e.target.files);
-      for (let i = 0; i < e.target.files["length"]; i++) {
-        setFiles((prevState: any) => [e.target.files[i]]);
-      }
-      form?.setValue(name, e.target.files);
-      const fileUrl = URL.createObjectURL(e.target.files[0]);
-      setPreviewUrl(fileUrl); // Stocker l'URL pour l'aperçu
+      // @ts-ignore TOIMPROVE remove ts-ignore and find a way to fix the type error
+      if (form) form.setValue(name, files)
     }
   }
 
-  function handleDrop(e: any) {
+  function handleDrop(e: React.DragEvent<HTMLDivElement>) {
     e.preventDefault();
     e.stopPropagation();
 
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      for (let i = 0; i < e.dataTransfer.files["length"]; i++) {
-        setFiles((prevState: any) => [e.dataTransfer.files[i]]);
-      }
+    const files = e.dataTransfer.files
+
+    if (files) {
+      if (multiple) setFiles(prevState => [...prevState, ...Array.from(files)])
+      else setFiles(Array.from(files))
+
+      // @ts-ignore TOIMPROVE remove ts-ignore and find a way to fix the type error
+      if (form) form.setValue(name, files)
     }
-    form?.setValue(name, e.dataTransfer.files);
-    const fileUrl = URL.createObjectURL(e.dataTransfer.files[0]);
-    setPreviewUrl(fileUrl); // Stocker l'URL pour l'aperçu
   }
 
   function handleDragLeave(e: any) {
@@ -80,12 +86,13 @@ export default function InputDropZoneFile<T extends FieldValues>({
     setDragActive(true);
   }
 
-  function removeFile(fileName: any, idx: any) {
+  function handleRemoveFile(e: React.MouseEvent, fileName: any, idx: any) {
+    e.preventDefault()
+    e.stopPropagation()
     const newArr = [...files];
     newArr.splice(idx, 1);
     setFiles([]);
     setFiles(newArr);
-    setPreviewUrl(null);
   }
 
   function openFileExplorer() {
@@ -117,7 +124,7 @@ export default function InputDropZoneFile<T extends FieldValues>({
           accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
         />
 
-        {!previewUrl ? (
+        {!(files.length > 0 )? (
           <svg
             className="w-8 h-8 mb-4 text-gray-400 dark:text-gray-400"
             aria-hidden="true"
@@ -127,19 +134,30 @@ export default function InputDropZoneFile<T extends FieldValues>({
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
             />
           </svg>
-        ) : (
-          <img
-            src={previewUrl}
+        ) : (files.map((file, index) => <DrawerMobile
+          key={index}
+          title={'Preview'}
+          description={''}
+          icon={<EyeIcon width={32} height={32} className={"text-gray-400"}/>}
+          trigger={<img
+            key={index}
+            src={URL.createObjectURL(file)}
             alt="Aperçu du fichier"
             className="h-32 w-32 rounded-lg"
-          />
-        )}
+          />}>
+            <img
+              src={URL.createObjectURL(file)}
+              alt="Aperçu du fichier"
+              className="h-full w-fit rounded-lg"
+            />
+        </DrawerMobile>
+        ))}
 
         {files?.length === 0 && (
           <p>
@@ -152,15 +170,10 @@ export default function InputDropZoneFile<T extends FieldValues>({
         )}
 
         <div className="flex flex-col items-center p-3">
-          {files.map((file: any, idx: any) => (
-            <div key={idx} className="flex flex-row space-x-5">
+          {files.map((file, index) => (
+            <div key={index} className="flex flex-row space-x-5">
               <span>{file.name}</span>
-              <span
-                className="text-red-500 cursor-pointer"
-                onClick={() => removeFile(file.name, idx)}
-              >
-                supprimer
-              </span>
+              <span className="text-red-500 cursor-pointer" onClick={(e) => handleRemoveFile(e,file.name, index)}>supprimer</span>
             </div>
           ))}
         </div>
