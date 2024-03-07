@@ -1,9 +1,13 @@
 "use client";
 import * as React from "react";
-import {MinusIcon, PlusIcon} from "@radix-ui/react-icons";
-import {Button} from "../../components/ui/button";
-import {FieldValues, Path, PathValue, UseFormReturn} from "react-hook-form";
-import {FormField, FormItem, FormLabel} from "@/app/components/vigee-designsystem/components/ui/form";
+import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
+import { Button } from "../../components/ui/button";
+import { FieldValues, Path, PathValue, UseFormReturn } from "react-hook-form";
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/app/components/vigee-designsystem/components/ui/form";
 
 type Props<T extends FieldValues> = {
   title?: string;
@@ -28,10 +32,12 @@ export function PlusLessButton<T extends FieldValues>({
   form,
   name,
 }: Props<T>) {
-  const [goal, setGoal] = React.useState<number>(form?.getValues(name) ? form.getValues(name) : start);
+  const [goal, setGoal] = React.useState<number>(
+    form?.getValues(name) ? form.getValues(name) : start
+  );
 
   function onClick(adjustment: number) {
-    setGoal(prev =>  Math.max(min, Math.min(max, prev + adjustment)));
+    setGoal(prev => Math.max(min, Math.min(max, prev + adjustment)));
   }
 
   React.useEffect(() => {
@@ -47,7 +53,9 @@ export function PlusLessButton<T extends FieldValues>({
       name={name}
       render={({ field }) => (
         <FormItem className="mx-auto w-full max-w-sm">
-          {title && <FormLabel className="font-black text-lg text-primary">{title}</FormLabel>}
+          {title && (
+            <FormLabel className="font-black text-primary">{title}</FormLabel>
+          )}
           <div className="p-4 pb-0">
             <div className="flex items-center justify-center space-x-2">
               <Button
@@ -62,7 +70,9 @@ export function PlusLessButton<T extends FieldValues>({
                 <span className="sr-only">Diminuer</span>
               </Button>
               <div className="flex-1 text-center">
-                <div className="text-3xl font-bold tracking-tighter">{goal}</div>
+                <div className="text-3xl font-bold tracking-tighter">
+                  {goal}
+                </div>
                 <div className="text-[0.70rem] uppercase text-muted-foreground">
                   {unit}
                 </div>
