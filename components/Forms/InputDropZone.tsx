@@ -12,12 +12,7 @@ type Props<T extends FieldValues> = {
 };
 
 // TODO styles @vigee
-export default function InputDropZoneFile<T extends FieldValues>({
-  form,
-  name,
-  extensions,
-  multiple = false,
-}: Props<T>) {
+export default function InputDropZoneFile<T extends FieldValues>({form, name, extensions, multiple = false}: Props<T>) {
   function getPossibleExtensions(strings: string[] | undefined): string {
     // Déterminer les extensions possibles
     const extensions = strings || [];
@@ -35,16 +30,24 @@ export default function InputDropZoneFile<T extends FieldValues>({
   const inputRef = useRef<any>(null);
   const [files, setFiles] = useState<File[]>([]);
 
+  const handleFiles = (newFiles: File[]) => {
+    if (multiple) {
+      const updatedFiles = [...files, ...newFiles]
+      setFiles(updatedFiles)
+      // @ts-ignore TOIMPROVE remove ts-ignore and find a way to fix the type error
+      if (form) form.setValue(name, updatedFiles)
+    } else {
+      setFiles(Array.from(newFiles))
+      // @ts-ignore TOIMPROVE remove ts-ignore and find a way to fix the type error
+      if (form) form.setValue(name, Array.from(newFiles))
+    }
+  }
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
-    const files = e.target.files
-    if (files) {
-      if (multiple) setFiles(prevState => [...prevState, ...Array.from(files)])
-      else setFiles(Array.from(files))
 
-      // @ts-ignore TOIMPROVE remove ts-ignore and find a way to fix the type error
-      if (form) form.setValue(name, files)
-    }
+    const files = e.target.files
+    if (files) handleFiles(Array.from(files))
   }
 
   function handleDrop(e: React.DragEvent<HTMLDivElement>) {
@@ -52,14 +55,7 @@ export default function InputDropZoneFile<T extends FieldValues>({
     e.stopPropagation();
 
     const files = e.dataTransfer.files
-
-    if (files) {
-      if (multiple) setFiles(prevState => [...prevState, ...Array.from(files)])
-      else setFiles(Array.from(files))
-
-      // @ts-ignore TOIMPROVE remove ts-ignore and find a way to fix the type error
-      if (form) form.setValue(name, files)
-    }
+    if (files) handleFiles(Array.from(files))
   }
 
   function handleDragLeave(e: any) {
@@ -80,13 +76,16 @@ export default function InputDropZoneFile<T extends FieldValues>({
     setDragActive(true);
   }
 
-  function handleRemoveFile(e: React.MouseEvent, fileName: any, idx: any) {
+  function handleRemoveFile(e: React.MouseEvent, id: any) {
     e.preventDefault()
     e.stopPropagation()
-    const newArr = [...files];
-    newArr.splice(idx, 1);
-    setFiles([]);
-    setFiles(newArr);
+
+    const updatedFiles = files
+    updatedFiles.splice(id, 1);
+    setFiles(updatedFiles);
+
+    // @ts-ignore TOIMPROVE remove ts-ignore and find a way to fix the type error
+    if (form) form.setValue(name, updatedFiles)
   }
 
   function openFileExplorer() {
@@ -167,7 +166,7 @@ export default function InputDropZoneFile<T extends FieldValues>({
           {files.map((file, index) => (
             <div key={index} className="flex flex-row space-x-5">
               <span>{file.name}</span>
-              <span className="text-red-500 cursor-pointer" onClick={(e) => handleRemoveFile(e,file.name, index)}>supprimer</span>
+              <span className="text-red-500 cursor-pointer" onClick={(e) => handleRemoveFile(e, index)}>supprimer</span>
             </div>
           ))}
         </div>
