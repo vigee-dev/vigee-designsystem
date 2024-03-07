@@ -56,7 +56,7 @@ export function PlusLessButton<T extends FieldValues>({
           {title && (
             <FormLabel className="font-black text-primary">{title}</FormLabel>
           )}
-          <div className="p-4 pb-0">
+          <div className=" pb-0">
             <div className="flex items-center justify-center space-x-2">
               <Button
                 type="button"
