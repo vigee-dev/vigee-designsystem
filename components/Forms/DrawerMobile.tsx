@@ -92,7 +92,7 @@ export function DrawerMobile({
               <div className="flex items-center gap-x-4 p-4 py-2">
                 {icon}
                 <div className="flex flex-col ">
-                  <DialogTitle>{title}</DialogTitle>
+                  <DialogTitle className="text-primary">{title}</DialogTitle>
                   <DialogDescription>{description}</DialogDescription>
                 </div>
               </div>
@@ -114,7 +114,7 @@ export function DrawerMobile({
         <DrawerTrigger asChild>{trigger}</DrawerTrigger>
         <DrawerContent>
           <DrawerHeader className="text-left">
-            <DrawerTitle>{title}</DrawerTitle>
+            <DrawerTitle className="text-primary">{title}</DrawerTitle>
             <DrawerDescription>{description}</DrawerDescription>
           </DrawerHeader>
 
