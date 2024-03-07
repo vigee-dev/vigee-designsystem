@@ -10,7 +10,7 @@ export function Container({ children, className }: Props) {
   return (
     <div
       className={cn(
-        `bg-white flex flex-col border rounded-md  justify-center  mb-4 w-full`,
+        `bg-white flex flex-col border rounded-md  justify-center  my-4 w-full`,
         className
       )}
     >
