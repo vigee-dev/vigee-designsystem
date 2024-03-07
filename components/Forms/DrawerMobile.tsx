@@ -42,12 +42,16 @@ type DrawerContextType = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const DrawerContext = React.createContext<DrawerContextType | undefined>(undefined);
+const DrawerContext = React.createContext<DrawerContextType | undefined>(
+  undefined
+);
 
 export function useDrawerContext() {
   const context = React.useContext(DrawerContext);
   if (context === undefined) {
-    throw new Error("useDrawerContext doit être utilisé à l'intérieur d'un DrawerContext.Provider");
+    throw new Error(
+      "useDrawerContext doit être utilisé à l'intérieur d'un DrawerContext.Provider"
+    );
   }
   return context;
 }
@@ -76,16 +80,16 @@ export function DrawerMobile({
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>{trigger}</DialogTrigger>
           <DialogContent
-            className={`max-w-[425px] ${
+            className={`max-w-[425px]  ${
               size === "sm"
                 ? "md:max-w-[425px]"
                 : size === "md"
-                  ? "md:max-w-[650px]"
-                  : "md:max-w-[1080px]"
+                ? "md:max-w-[650px]"
+                : "md:max-w-[1080px]"
             } `}
           >
             <DialogHeader>
-              <div className="flex items-center gap-4 ">
+              <div className="flex items-center  p-4 py-2">
                 {icon}
                 <div className="flex flex-col ">
                   <DialogTitle>{title}</DialogTitle>
@@ -94,8 +98,10 @@ export function DrawerMobile({
               </div>
             </DialogHeader>
 
-            <ScrollArea className="max-h-[80vh] px-8 pb-8">{children} </ScrollArea>
-
+            <ScrollArea className="max-h-[80vh] ">
+              {" "}
+              <div className="p-4">{children}</div>
+            </ScrollArea>
           </DialogContent>
         </Dialog>
       </DrawerContext.Provider>
@@ -111,16 +117,20 @@ export function DrawerMobile({
             <DrawerTitle>{title}</DrawerTitle>
             <DrawerDescription>{description}</DrawerDescription>
           </DrawerHeader>
-          
-          <ScrollArea className="max-h-[80vh] px-8 pb-8">{children} </ScrollArea>
 
-          {cancelButton && <DrawerFooter>
-            <DrawerClose asChild>
-              <Button type="button" variant="outline">
-                Annuler
-              </Button>
-            </DrawerClose>
-          </DrawerFooter>}
+          <ScrollArea className="max-h-[80vh] px-8 pb-8">
+            {children}{" "}
+          </ScrollArea>
+
+          {cancelButton && (
+            <DrawerFooter>
+              <DrawerClose asChild>
+                <Button type="button" variant="outline">
+                  Annuler
+                </Button>
+              </DrawerClose>
+            </DrawerFooter>
+          )}
         </DrawerContent>
       </Drawer>
     </DrawerContext.Provider>
