@@ -67,10 +67,7 @@ export function DrawerMobile({
 }: Props) {
   const [open, setOpen] = React.useState(false);
 
-  const contextValue: DrawerContextType = {
-    open,
-    setOpen,
-  };
+  const contextValue: DrawerContextType = {open, setOpen};
 
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
@@ -78,30 +75,28 @@ export function DrawerMobile({
     return (
       <DrawerContext.Provider value={contextValue}>
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>{trigger}</DialogTrigger>
+          <DialogTrigger onClick={e => e.stopPropagation()} asChild>{trigger}</DialogTrigger>
           <DialogContent
+            onClick={e => e.stopPropagation()}
             className={`max-w-[425px]  ${
               size === "sm"
                 ? "md:max-w-[425px]"
                 : size === "md"
-                ? "md:max-w-[650px]"
-                : "md:max-w-[1080px]"
+                  ? "md:max-w-[650px]"
+                  : "md:max-w-[1080px]"
             } `}
           >
             <DialogHeader>
               <div className="flex items-center gap-x-4 p-4 py-2">
                 {icon}
-                <div className="flex flex-col ">
+                <div className="flex flex-col">
                   <DialogTitle className="text-primary">{title}</DialogTitle>
                   <DialogDescription>{description}</DialogDescription>
                 </div>
               </div>
             </DialogHeader>
 
-            <ScrollArea className="max-h-[80vh] ">
-              {" "}
-              <div className="p-4">{children}</div>
-            </ScrollArea>
+            <ScrollArea className="max-h-[80vh] ">{" "}<div className="p-4">{children}</div></ScrollArea>
           </DialogContent>
         </Dialog>
       </DrawerContext.Provider>
@@ -111,8 +106,9 @@ export function DrawerMobile({
   return (
     <DrawerContext.Provider value={contextValue}>
       <Drawer open={open} onOpenChange={setOpen}>
-        <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-        <DrawerContent>
+        <DrawerTrigger onClick={e => e.stopPropagation()} asChild>{trigger}</DrawerTrigger>
+        <DrawerContent onClick={e => e.stopPropagation()}>
+
           <DrawerHeader className="text-left">
             <DrawerTitle className="text-primary">{title}</DrawerTitle>
             <DrawerDescription>{description}</DrawerDescription>
@@ -122,15 +118,12 @@ export function DrawerMobile({
             <div className="p-4">{children}</div>
           </ScrollArea>
 
-          {cancelButton && (
-            <DrawerFooter>
-              <DrawerClose asChild>
-                <Button type="button" variant="outline">
-                  Annuler
-                </Button>
-              </DrawerClose>
-            </DrawerFooter>
-          )}
+          {cancelButton && (<DrawerFooter>
+            <DrawerClose asChild>
+              <Button type="button" variant="outline">Annuler</Button>
+            </DrawerClose>
+          </DrawerFooter>)}
+
         </DrawerContent>
       </Drawer>
     </DrawerContext.Provider>
