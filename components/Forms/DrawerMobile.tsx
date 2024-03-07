@@ -89,7 +89,7 @@ export function DrawerMobile({
             } `}
           >
             <DialogHeader>
-              <div className="flex items-center  p-4 py-2">
+              <div className="flex items-center gap-x-4 p-4 py-2">
                 {icon}
                 <div className="flex flex-col ">
                   <DialogTitle>{title}</DialogTitle>
