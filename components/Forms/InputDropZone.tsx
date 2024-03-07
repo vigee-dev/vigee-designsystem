@@ -1,12 +1,6 @@
 import React from "react";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { useRef, useState } from "react";
-import { Button } from "../../components/Buttons/Button";
-import {Drawer} from "@/app/components/vigee-designsystem/components/ui/drawer";
-import {PencilIcon} from "@/app/components/vigee-designsystem/icons/Pencil";
-import {PiPencilEditBoxDuoStroke} from "@/app/components/vigee-designsystem/icons/PikaIcons";
-import ConstructionOrderCreateClientForm
-  from "@/app/components/ConstructionOrder/Form/ConstructionOrderCreateClientForm";
 import {DrawerMobile} from "@/app/components/vigee-designsystem/components/Forms/DrawerMobile";
 import {EyeIcon} from "@heroicons/react/24/outline";
 
