@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { useRef, useState } from "react";
@@ -28,7 +30,7 @@ export default function InputDropZoneFile<T extends FieldValues>({form, name, ex
 
   const [dragActive, setDragActive] = useState<boolean>(false);
   const inputRef = useRef<any>(null);
-  const [files, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = useState<File[]>(form?.getValues(name) ? form?.getValues(name) : []);
 
   const handleFiles = (newFiles: File[]) => {
     if (multiple) {
