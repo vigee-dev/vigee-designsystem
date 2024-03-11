@@ -67,9 +67,7 @@ export default function DatePicker<T extends FieldValues>({
       name={name}
       render={({ field }) => (
         <FormItem className="flex flex-col py-2">
-          <FormLabel className="font-black text-primary mt-2">
-            {label}
-          </FormLabel>
+          <FormLabel className="font-black text-primary">{label}</FormLabel>
           <Popover>
             <PopoverTrigger asChild>
               <FormControl>
