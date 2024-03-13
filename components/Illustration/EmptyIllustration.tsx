@@ -40,6 +40,8 @@ export default function EmptyIllustration({
         {text}
       </h1>
 
+      <p className="text-gray-400">{subtitle}</p>
+
       {buttonLink && (
         <Link
           className="text-sm text-gray-500  items-center text-center font-display"
