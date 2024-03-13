@@ -13,7 +13,7 @@ interface IllustrationProps {
   children?: React.ReactNode;
   supportEmail?: string;
 }
-export default function Error({
+export default function EmptyIllustration({
   text,
   subtitle,
   buttonLink,
