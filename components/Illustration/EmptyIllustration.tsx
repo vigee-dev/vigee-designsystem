@@ -49,9 +49,13 @@ export default function EmptyIllustration({
           className="text-sm text-gray-500  items-center text-center font-display pt-2"
           href={`${buttonLink}`}
         >
-          <Button variant="outline" className="flex gap-x-2">
-            {buttonText ? buttonText : <PlusButton />}
-          </Button>
+          {buttonText ? (
+            <Button variant="outline" className="flex gap-x-2">
+              {buttonText}
+            </Button>
+          ) : (
+            <PlusButton />
+          )}
         </Link>
       )}
 
