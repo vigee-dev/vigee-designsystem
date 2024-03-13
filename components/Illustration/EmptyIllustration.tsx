@@ -4,6 +4,8 @@ import emptyMan from "../../img/empty/empty-man.svg";
 import emptyIdeas from "../../img/empty/empty-ideas.svg";
 import Link from "next/link";
 import { Button } from "../Buttons/Button";
+import { PiPlusCircleContrast } from "../../icons/PikaIcons";
+import { PlusButton } from "../Buttons/PlusButton";
 
 interface IllustrationProps {
   text?: string;
@@ -48,7 +50,7 @@ export default function EmptyIllustration({
           href={`${buttonLink}`}
         >
           <Button variant="outline" className="flex gap-x-2">
-            {buttonText}
+            {buttonText ? buttonText : <PlusButton />}
           </Button>
         </Link>
       )}
