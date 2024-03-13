@@ -11,12 +11,14 @@ import moment from "moment";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { cn } from "../../lib/utils";
-
+import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
-
 import { fr } from "date-fns/esm/locale";
-
 import { Input } from "../ui/input";
+import {
+  PiCalendarCheckContrast,
+  PiCalendarFilledContrast,
+} from "../../icons/PikaIcons";
 
 interface Props<T extends FieldValues> {
   label?: string;
@@ -25,6 +27,7 @@ interface Props<T extends FieldValues> {
   className?: string;
   starting_date?: Date;
   disabled?: boolean;
+  disabledKeys?: boolean;
   returnString?: boolean;
   years?: boolean;
 }
@@ -36,8 +39,8 @@ export default function DatePicker<T extends FieldValues>({
   className,
   starting_date,
   disabled,
+  disabledKeys,
   returnString,
-  years,
 }: Props<T>) {
   const [selectedYear, setSelectedYear] = useState(moment().year().toString());
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
@@ -90,17 +93,37 @@ export default function DatePicker<T extends FieldValues>({
           <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
             <PopoverTrigger asChild>
               <FormControl>
-                <Input
-                  value={inputValue}
-                  onChange={handleInputChange}
-                  placeholder="Choisir une date"
-                  className={cn(
-                    "pl-3 text-left font-display font-medium bg-input border-none",
-                    !field.value && "text-muted-foreground",
-                    className
-                  )}
-                  type="text"
-                />
+                {!disabledKeys ? (
+                  <Input
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    placeholder="Choisir une date"
+                    className={cn(
+                      "pl-3 text-left font-display font-medium bg-input border-none",
+                      !field.value && "text-muted-foreground",
+                      className
+                    )}
+                    type="text"
+                  />
+                ) : (
+                  <Button
+                    disabled={disabled}
+                    variant={"outline"}
+                    className={cn(
+                      `pl-3 text-left font-display font-medium bg-input border-none`,
+                      !field.value && "text-muted-foreground",
+                      className
+                    )}
+                  >
+                    {field.value ? (
+                      moment(field.value).format("DD/MM/YYYY")
+                    ) : (
+                      <span>Choisir une date</span>
+                    )}
+
+                    <PiCalendarFilledContrast className="ml-auto h-4 w-4 opacity-50" />
+                  </Button>
+                )}
               </FormControl>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
