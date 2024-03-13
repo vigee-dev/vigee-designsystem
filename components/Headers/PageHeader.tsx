@@ -28,9 +28,9 @@ export function PageHeader({
         <div className="flex items-center gap-4 ">
           {icon}
           {small ? (
-            <TypographyH2>{title}</TypographyH2>
+            <TypographyH2 className="text-primary">{title}</TypographyH2>
           ) : (
-            <TypographyH1>{title}</TypographyH1>
+            <TypographyH1 className="text-primary">{title}</TypographyH1>
           )}
         </div>
         <div className="flex gap-x-4">{children}</div>
