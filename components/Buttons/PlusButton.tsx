@@ -1,9 +1,5 @@
 import Link from "next/link";
-import {
-  PiPlusSquareContrast,
-  PiPlusSquareDuoSolid,
-  PiPlusSquareDuoStroke,
-} from "../../icons/PikaIcons";
+import { PiPlusSquareDuoSolid } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 
 interface Props {
