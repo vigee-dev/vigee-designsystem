@@ -1,5 +1,8 @@
 import React from "react";
-import { PiPencilEditBoxDuoSolid } from "../../icons/PikaIcons";
+import {
+  PiPencilEditBoxContrast,
+  PiPencilEditBoxDuoSolid,
+} from "../../icons/PikaIcons";
 import { cn } from "../../lib/utils";
 import Link from "next/link";
 import { Tooltip } from "../Tooltip/Tooltip";
@@ -20,9 +23,9 @@ export const EditButton = ({
   return href ? (
     <Tooltip message={tooltip}>
       <Link href={href}>
-        <PiPencilEditBoxDuoSolid
+        <PiPencilEditBoxContrast
           className={cn(
-            " hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+            "text-gray-400 hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
             className
           )}
         />
@@ -32,7 +35,7 @@ export const EditButton = ({
     <Tooltip message={tooltip}>
       <PiPencilEditBoxDuoSolid
         className={cn(
-          " hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+          "text-gray-400 hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
           className
         )}
         onClick={onClick}
