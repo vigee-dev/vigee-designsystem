@@ -1,8 +1,8 @@
 import Image, { StaticImageData } from "next/image";
 import React from "react";
-import empty from "../../img/empty/empty.svg";
+import emptyMan from "../../img/empty/empty-man.svg";
+import emptyIdeas from "../../img/empty/empty-ideas.svg";
 import Link from "next/link";
-import { PiEnvelopeArrowRightDuoSolid } from "../../icons/PikaIcons";
 import { Button } from "../Buttons/Button";
 
 interface IllustrationProps {
@@ -12,6 +12,7 @@ interface IllustrationProps {
   subtitle?: string;
   children?: React.ReactNode;
   supportEmail?: string;
+  type?: "emptyMan" | "emptyIdeas";
 }
 export default function EmptyIllustration({
   text,
@@ -19,19 +20,18 @@ export default function EmptyIllustration({
   buttonLink,
   buttonText,
   children,
-  supportEmail = "support@vigee.fr",
+  type = "emptyIdeas",
 }: IllustrationProps) {
   return (
     <div className="flex flex-col items-center justify-center  w-full px-12 ">
-      {empty && (
-        <Image
-          width={400}
-          height={400}
-          className="mx-auto w-64 h-auto"
-          src={empty}
-          alt="Erreur"
-        />
-      )}
+      <Image
+        width={400}
+        height={400}
+        className="mx-auto w-64 h-auto"
+        src={type === "emptyIdeas" ? emptyIdeas : emptyMan}
+        alt="Empty list"
+      />
+
       <h1
         className={
           "text-xl text-primary font-bold text-center pt-6 font-display"
@@ -44,10 +44,10 @@ export default function EmptyIllustration({
 
       {buttonLink && (
         <Link
-          className="text-sm text-gray-500  items-center text-center font-display"
+          className="text-sm text-gray-500  items-center text-center font-display pt-2"
           href={`${buttonLink}`}
         >
-          <Button variant="default" className=" flex gap-x-2">
+          <Button variant="outline" className="flex gap-x-2">
             {buttonText}
           </Button>
         </Link>
