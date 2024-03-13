@@ -1,27 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  Form,
-  FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
+  FormDescription,
   FormMessage,
+  FormControl,
 } from "../ui/form";
 import moment from "moment";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
-import { Button } from "../ui/button";
 import { cn } from "../../lib/utils";
-import { CalendarIcon } from "@radix-ui/react-icons";
+
 import { Calendar } from "../ui/calendar";
-import { z } from "zod";
-import { enUS, fr } from "date-fns/esm/locale";
-import SelectSearch from "./SelectSearch";
-import { PopoverClose } from "@radix-ui/react-popover";
-import { ComboBox } from "../ComboBox/ComboBox";
-import { ComboBoxResponsive } from "../ComboBox/ComboBoxResponsive";
-import { set } from "date-fns";
+
+import { fr } from "date-fns/esm/locale";
+
+import { Input } from "../ui/input";
 
 interface Props<T extends FieldValues> {
   label?: string;
@@ -34,11 +29,6 @@ interface Props<T extends FieldValues> {
   years?: boolean;
 }
 
-type Status = {
-  value: string;
-  label: string;
-};
-
 export default function DatePicker<T extends FieldValues>({
   label,
   form,
@@ -50,89 +40,87 @@ export default function DatePicker<T extends FieldValues>({
   years,
 }: Props<T>) {
   const [selectedYear, setSelectedYear] = useState(moment().year().toString());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+  const [inputValue, setInputValue] = useState("");
+  const [popoverOpen, setPopoverOpen] = useState(false);
 
-  const generateYearOptions = () => {
-    const currentYear = new Date().getFullYear();
-    const startingYear = currentYear - 99;
-    const years = Array.from({ length: 100 }, (_, i) => startingYear + i);
-    return years.map(year => ({
-      value: year.toString(),
-      label: year.toString(),
-    }));
+  const formatInputDate = (value: string) => {
+    // Supprime tout caractère non numérique
+    const numbers = value.replace(/\D/g, "");
+
+    // Insère les '/' après le jour et le mois si la longueur de la chaîne le permet
+    let formattedValue = numbers;
+    if (numbers.length > 2) {
+      formattedValue = numbers.substring(0, 2) + "/" + numbers.substring(2);
+    }
+    if (numbers.length > 4) {
+      formattedValue =
+        formattedValue.substring(0, 5) + "/" + formattedValue.substring(5);
+    }
+    // Limite la longueur de la chaîne à 10 caractères pour correspondre au format DD/MM/YYYY
+    return formattedValue.substring(0, 10);
   };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formattedInputValue = formatInputDate(e.target.value);
+    setInputValue(formattedInputValue);
+
+    // Tente de convertir la chaîne formatée en un objet Date, si valide
+    const date = moment(formattedInputValue, "DD/MM/YYYY", true);
+    if (date.isValid()) {
+      setSelectedDate(date.toDate());
+    } else {
+      setSelectedDate(null);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedDate) {
+      setInputValue(moment(selectedDate).format("DD/MM/YYYY"));
+    }
+  }, [selectedDate]);
 
   return (
     <FormField
       control={form.control}
       name={name}
       render={({ field }) => (
-        <FormItem className="flex flex-col py-2">
+        <FormItem className="flex flex-col py-2 mt-4">
           <FormLabel className="font-black text-primary">{label}</FormLabel>
-          <Popover>
+          <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
             <PopoverTrigger asChild>
               <FormControl>
-                <Button
-                  disabled={disabled}
-                  variant={"outline"}
+                <Input
+                  value={inputValue}
+                  onChange={handleInputChange}
+                  placeholder="Choisir une date"
                   className={cn(
-                    `pl-3 text-left font-display font-medium bg-input border-none`,
+                    "pl-3 text-left font-display font-medium bg-input border-none",
                     !field.value && "text-muted-foreground",
                     className
                   )}
-                >
-                  {field.value ? (
-                    moment(field.value).format("DD/MM/YYYY")
-                  ) : (
-                    <span>Choisir une date</span>
-                  )}
-
-                  <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                </Button>
+                  type="text"
+                />
               </FormControl>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
-              {years && (
-                <div className="p-2 w-full">
-                  <ComboBox
-                    label=""
-                    items={generateYearOptions()}
-                    onChange={e => {
-                      setSelectedYear(e as string);
-                    }}
-                    value={selectedYear}
-                  />
-                </div>
-              )}
-
               <Calendar
                 key={selectedYear}
                 mode="single"
-                selected={
-                  selectedYear
-                    ? moment(field.value).year(Number(selectedYear)).toDate()
-                    : moment().toDate()
-                }
-                onSelect={
-                  returnString
-                    ? date => {
-                        const formatted_date =
-                          moment(date).format("YYYY-MM-DD");
-                        field.onChange(formatted_date);
-                      }
-                    : field.onChange
-                } // Conditional onSelect
-                disabled={date => {
-                  if (starting_date) {
-                    return date < starting_date;
-                  }
-
-                  return false;
+                selected={selectedDate ?? undefined}
+                onSelect={date => {
+                  setSelectedDate(date ?? null);
+                  setPopoverOpen(false); // Ferme le Popover après la sélection d'une date
+                  field.onChange(
+                    returnString ? moment(date).format("YYYY-MM-DD") : date
+                  );
                 }}
+                disabled={date =>
+                  starting_date ? date < starting_date : false
+                }
                 locale={fr}
                 initialFocus
-                defaultMonth={moment(field.value)
-                  .year(Number(selectedYear))
-                  .toDate()}
+                defaultMonth={selectedDate || new Date()}
               />
             </PopoverContent>
           </Popover>
