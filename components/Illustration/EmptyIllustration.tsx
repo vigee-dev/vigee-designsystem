@@ -45,10 +45,10 @@ export default function EmptyIllustration({
       {buttonLink && (
         <Link
           className="text-sm text-gray-500  items-center text-center font-display"
-          href={buttonLink ? `mailto:${buttonLink}` : "/"}
+          href={`${buttonLink}`}
         >
-          <Button variant="outline" className=" flex gap-x-2">
-            {buttonText} <PiEnvelopeArrowRightDuoSolid />
+          <Button variant="default" className=" flex gap-x-2">
+            {buttonText}
           </Button>
         </Link>
       )}
