@@ -6,10 +6,9 @@ import { VariantProps } from "class-variance-authority";
 
 import { cn } from "../../lib/utils";
 import { toggleVariants } from "./toggle";
+import {ReactElement} from "react";
 
-const ToggleGroupContext = React.createContext<
-  VariantProps<typeof toggleVariants>
->({
+const ToggleGroupContext = React.createContext<VariantProps<typeof toggleVariants>>({
   size: "default",
   variant: "default",
 });
@@ -19,13 +18,9 @@ const ToggleGroup = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &
     VariantProps<typeof toggleVariants>
 >(({ className, variant, size, children, ...props }, ref) => (
-  <ToggleGroupPrimitive.Root
-    ref={ref}
-    className={cn("flex items-center justify-center gap-1", className)}
-    {...props}
-  >
+  <ToggleGroupPrimitive.Root ref={ref} className={cn("flex items-center justify-center gap-1", className)}{...props}>
     <ToggleGroupContext.Provider value={{ variant, size }}>
-      {children}
+      {children as ReactElement} {/* TOIMPROVE why type assertion is needed here ? */}
     </ToggleGroupContext.Provider>
   </ToggleGroupPrimitive.Root>
 ));
