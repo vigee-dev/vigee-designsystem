@@ -17,7 +17,7 @@ export default function Error({
   title2,
   subtitle,
   children,
-  supportEmail = "support@vigee.fr",
+  supportEmail,
 }: IllustrationProps) {
   return (
     <div className="flex flex-col items-center justify-center  w-full px-12 ">
@@ -25,7 +25,7 @@ export default function Error({
         <Image
           width={400}
           height={400}
-          className="mx-auto  w-44 h-auto"
+          className="mx-auto w-44 h-auto"
           src={error}
           alt="Erreur"
         />
