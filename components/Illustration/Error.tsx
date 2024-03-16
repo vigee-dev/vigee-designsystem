@@ -38,7 +38,7 @@ export default function Error({
         {title ? title : "Une erreur s'est produite."}
       </h1>
 
-      {subtitle && <p>{subtitle}</p>}
+      {subtitle && <p className="text-gray-400">{subtitle}</p>}
 
       {supportEmail && (
         <Link
