@@ -40,14 +40,16 @@ export default function Error({
 
       {subtitle && <p>{subtitle}</p>}
 
-      <Link
-        className="text-sm text-gray-500  items-center text-center font-display"
-        href={supportEmail ? `mailto:${supportEmail}` : "/"}
-      >
-        <Button variant="outline" className=" flex gap-x-2">
-          Contacter le support <PiEnvelopeArrowRightDuoSolid />
-        </Button>
-      </Link>
+      {supportEmail && (
+        <Link
+          className="text-sm text-gray-500  items-center text-center font-display"
+          href={supportEmail ? `mailto:${supportEmail}` : "/"}
+        >
+          <Button variant="outline" className=" flex gap-x-2">
+            Contacter le support <PiEnvelopeArrowRightDuoSolid />
+          </Button>
+        </Link>
+      )}
 
       {children}
     </div>
