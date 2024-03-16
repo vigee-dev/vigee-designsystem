@@ -35,8 +35,10 @@ export default function Error({
           "text-xl text-primary font-bold text-center pt-6 font-display"
         }
       >
-        {"Une erreur s'est produite."}
+        {title ? title : "Une erreur s'est produite."}
       </h1>
+
+      {subtitle && <p>{subtitle}</p>}
 
       <Link
         className="text-sm text-gray-500  items-center text-center font-display"
