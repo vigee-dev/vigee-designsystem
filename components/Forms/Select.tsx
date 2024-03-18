@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
-import { Tooltip } from "../Tooltip/Tooltip";
+
 import {
   HoverCard,
   HoverCardContent,
@@ -37,6 +37,7 @@ type Props<T extends FieldValues> = {
   onChange?: (value: string) => void;
   value?: string;
   helpComponent?: React.ReactNode;
+  isBoolean?: boolean;
 };
 
 export default function Select<T extends FieldValues>({
@@ -52,6 +53,7 @@ export default function Select<T extends FieldValues>({
   onChange,
   value,
   helpComponent,
+  isBoolean = false,
 }: Props<T>) {
   return form?.control && name ? (
     <FormField
@@ -81,7 +83,14 @@ export default function Select<T extends FieldValues>({
             )}
           </HoverCard>
           <ShadSelect
-            onValueChange={field.onChange}
+            onValueChange={e => {
+              if (!isBoolean) {
+                field.onChange(e);
+              } else {
+                let eBoolean = e === "true";
+                field.onChange(eBoolean);
+              }
+            }}
             value={String(field.value)}
             disabled={disabled}
           >
