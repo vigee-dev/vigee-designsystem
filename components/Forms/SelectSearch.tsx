@@ -13,6 +13,7 @@ import {
   MultiValue,
   SingleValue,
 } from "react-select";
+import { cn } from "../../lib/utils";
 
 interface SearchSelectInterface<
   T extends FieldValues,
@@ -32,6 +33,7 @@ interface SearchSelectInterface<
   defaultValue?: IsMulti extends true
     ? MultiValue<Option>
     : SingleValue<Option>;
+  classNameContainer?: string;
 }
 
 // TODO Better way to handle isMulti, Option type etc ...
@@ -51,13 +53,14 @@ export default function SelectSearch<
   isMulti,
   defaultOptions,
   defaultValue,
+  classNameContainer,
 }: SearchSelectInterface<T, Option, IsMulti>) {
   return (
     <FormField
       control={form?.control}
       name={name}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className={cn(classNameContainer)}>
           {label && (
             <FormLabel className="font-black text-primary">{label}</FormLabel>
           )}
