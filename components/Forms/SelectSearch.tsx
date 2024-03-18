@@ -140,6 +140,7 @@ export default function SelectSearch<
               ref={field.ref}
               isMulti={isMulti}
               defaultValue={defaultValue || field.value}
+              value={field.value}
             />
           </FormControl>
           <FormMessage />
