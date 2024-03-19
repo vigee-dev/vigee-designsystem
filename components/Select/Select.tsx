@@ -21,6 +21,7 @@ interface SelectScrollableProps {
   placeholder?: string;
   onChange: (value: string | undefined) => void;
   className?: string;
+  disabled?: boolean;
 }
 
 export function Select({
@@ -28,6 +29,7 @@ export function Select({
   placeholder = "Sélectionnez une valeur",
   onChange,
   className,
+  disabled,
 }: SelectScrollableProps) {
   const [selectedValue, setSelectedValue] = React.useState<string | undefined>(
     undefined
@@ -46,13 +48,10 @@ export function Select({
   );
 
   const handleValueChange = (newValue: string) => {
-    // Check if the new value is the same as the current selected value
-    if (newValue === selectedValue) {
-      // If it is, reset the selection
+    if (newValue === String(selectedValue)) {
       setSelectedValue(undefined);
-      onChange(undefined); // Reset to initial state or pass a specific "reset" value if needed
+      onChange(undefined);
     } else {
-      // If not, update the selected value and propagate the change
       setSelectedValue(newValue);
       onChange(newValue);
     }
@@ -61,7 +60,8 @@ export function Select({
   return (
     <SelectShadCn
       onValueChange={handleValueChange}
-      key={selectedValue || "default"}
+      defaultValue={selectedValue || undefined}
+      disabled={disabled}
     >
       <SelectTrigger
         className={cn("w-[280px] font-medium bg-input border-none", className)}
