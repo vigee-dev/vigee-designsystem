@@ -19,7 +19,7 @@ interface Option {
 interface SelectScrollableProps {
   options: Option[];
   placeholder?: string;
-  onChange: (value: string) => void;
+  onChange: (value: string | undefined) => void;
   className?: string;
 }
 
@@ -29,6 +29,10 @@ export function Select({
   onChange,
   className,
 }: SelectScrollableProps) {
+  const [selectedValue, setSelectedValue] = React.useState<string | undefined>(
+    undefined
+  );
+
   const groupedOptions = options.reduce<Record<string, Option[]>>(
     (acc, option) => {
       const group = option.group || "Ungrouped"; // Default group name for ungrouped items
@@ -41,8 +45,21 @@ export function Select({
     {}
   );
 
+  const handleValueChange = (newValue: string) => {
+    // Check if the new value is the same as the current selected value
+    if (newValue === selectedValue) {
+      // If it is, reset the selection
+      setSelectedValue(undefined);
+      onChange(undefined); // Reset to initial state or pass a specific "reset" value if needed
+    } else {
+      // If not, update the selected value and propagate the change
+      setSelectedValue(newValue);
+      onChange(newValue);
+    }
+  };
+
   return (
-    <SelectShadCn onValueChange={onChange}>
+    <SelectShadCn onValueChange={handleValueChange}>
       <SelectTrigger
         className={cn("w-[280px] font-medium bg-input border-none", className)}
       >
