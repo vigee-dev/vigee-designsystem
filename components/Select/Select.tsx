@@ -1,6 +1,6 @@
 import * as React from "react";
 import {
-  Select,
+  Select as SelectShadCn,
   SelectContent,
   SelectGroup,
   SelectItem,
@@ -23,7 +23,7 @@ interface SelectScrollableProps {
   className?: string;
 }
 
-export function SelectScrollable({
+export function Select({
   options,
   placeholder = "Sélectionnez une valeur",
   onChange,
@@ -42,11 +42,13 @@ export function SelectScrollable({
   );
 
   return (
-    <Select onValueChange={onChange}>
-      <SelectTrigger className={cn("w-[280px]", className)}>
+    <SelectShadCn onValueChange={onChange}>
+      <SelectTrigger
+        className={cn("w-[280px] font-medium bg-input border-none", className)}
+      >
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
-      <SelectContent className={cn(className)}>
+      <SelectContent className={cn("max-h-[200px] font-medium", className)}>
         {Object.entries(groupedOptions).map(([groupName, groupOptions]) => (
           <SelectGroup key={groupName}>
             {/* Only render the SelectLabel if the group name is not 'Ungrouped' */}
@@ -61,6 +63,6 @@ export function SelectScrollable({
           </SelectGroup>
         ))}
       </SelectContent>
-    </Select>
+    </SelectShadCn>
   );
 }
