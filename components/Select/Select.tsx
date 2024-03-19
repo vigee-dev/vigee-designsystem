@@ -59,7 +59,10 @@ export function Select({
   };
 
   return (
-    <SelectShadCn onValueChange={handleValueChange}>
+    <SelectShadCn
+      onValueChange={handleValueChange}
+      key={selectedValue || "default"}
+    >
       <SelectTrigger
         className={cn("w-[280px] font-medium bg-input border-none", className)}
       >
