@@ -14,6 +14,7 @@ type Props<T extends FieldValues> = {
 };
 
 // TODO styles @vigee
+// TODO icon display instead of image for images files @vigee
 export default function InputDropZoneFile<T extends FieldValues>({form, name, extensions, multiple = false}: Props<T>) {
   function getPossibleExtensions(strings: string[] | undefined): string {
     // Déterminer les extensions possibles
