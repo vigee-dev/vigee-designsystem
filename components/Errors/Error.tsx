@@ -11,6 +11,7 @@ interface IllustrationProps {
   subtitle?: string;
   children?: React.ReactNode;
   supportEmail?: string;
+  onClick: () => void;
 }
 export default function Error({
   title,
@@ -18,9 +19,13 @@ export default function Error({
   subtitle,
   children,
   supportEmail,
+  onClick,
 }: IllustrationProps) {
   return (
-    <div className="flex flex-col items-center justify-center  w-full px-12 ">
+    <div
+      className="flex flex-col items-center justify-center  w-full px-12 "
+      onClick={onClick}
+    >
       {error && (
         <Image
           width={400}
