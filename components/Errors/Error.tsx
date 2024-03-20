@@ -11,7 +11,7 @@ interface IllustrationProps {
   subtitle?: string;
   children?: React.ReactNode;
   supportEmail?: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 export function Error({
   title,
