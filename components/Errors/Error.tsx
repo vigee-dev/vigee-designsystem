@@ -13,7 +13,7 @@ interface IllustrationProps {
   supportEmail?: string;
   onClick: () => void;
 }
-export default function Error({
+export function Error({
   title,
   title2,
   subtitle,
