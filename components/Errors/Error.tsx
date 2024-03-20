@@ -22,10 +22,7 @@ export function Error({
   onClick,
 }: IllustrationProps) {
   return (
-    <div
-      className="flex flex-col items-center justify-center  w-full px-12 "
-      onClick={onClick}
-    >
+    <div className="flex flex-col items-center justify-center  w-full px-12 ">
       {error && (
         <Image
           width={400}
@@ -57,6 +54,10 @@ export function Error({
       )}
 
       {children}
+
+      <Button onClick={onClick} className="py-2">
+        Rééssayer
+      </Button>
     </div>
   );
 }
