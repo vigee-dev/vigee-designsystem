@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import React from "react";
 import error from "../../img/error/error.svg";
 import Link from "next/link";
@@ -7,7 +7,6 @@ import { Button } from "../Buttons/Button";
 
 interface IllustrationProps {
   title?: string;
-  title2?: string;
   subtitle?: string;
   children?: React.ReactNode;
   supportEmail?: string;
@@ -15,7 +14,6 @@ interface IllustrationProps {
 }
 export function Error({
   title,
-  title2,
   subtitle,
   children,
   supportEmail,
