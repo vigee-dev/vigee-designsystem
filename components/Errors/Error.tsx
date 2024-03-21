@@ -55,9 +55,9 @@ export function Error({
 
       {children}
 
-      <Button onClick={onClick} className="py-2">
+      {onClick && <Button onClick={onClick} className="py-2">
         Rééssayer
-      </Button>
+      </Button>}
     </div>
   );
 }
