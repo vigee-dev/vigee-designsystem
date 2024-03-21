@@ -13,16 +13,33 @@ interface Props {
   onClick?: () => void;
   className?: string;
   tooltip?: string;
+  href?: string;
+  text?: string;
 }
 
 export const SignatureElecButton = ({
   onClick,
   className,
   tooltip = "Envoyer en signature électronique",
+  href,
+  text,
 }: Props) => {
-  return (
+  return href ? (
     <Tooltip message={tooltip}>
-      <Button onClick={onClick} className={className}>
+      <Link href={href} className="flex items-center gap-x-2">
+        {text}
+        <PiPencilEraserEditSwooshDuoStroke
+          className={cn(
+            "text-gray-400 hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+            className
+          )}
+        />
+      </Link>
+    </Tooltip>
+  ) : (
+    <Tooltip message={tooltip}>
+      <div className="flex items-center gap-x-2">
+        {text}
         <PiPencilEraserEditSwooshDuoStroke
           className={cn(
             "text-gray-400 hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
@@ -30,7 +47,7 @@ export const SignatureElecButton = ({
           )}
           onClick={onClick}
         />
-      </Button>
+      </div>
     </Tooltip>
   );
 };
