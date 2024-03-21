@@ -88,7 +88,7 @@ export default function DatePicker<T extends FieldValues>({
       control={form.control}
       name={name}
       render={({ field }) => (
-        <FormItem className="flex flex-col py-2 mt-4">
+        <FormItem className="flex flex-col py-2">
           <FormLabel className="font-black text-primary">{label}</FormLabel>
           <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
             <PopoverTrigger asChild>
