@@ -8,31 +8,33 @@ interface Props {
   className?: string;
   type?: "button" | "submit" | "reset";
   noText?: boolean;
+  fullWidth?: boolean;
 }
 
 export const DeleteButton = ({
-  onClick,
-  className,
-  type = "button",
-  noText,
-}: Props) => {
+                               onClick,
+                               className,
+                               type = "button",
+                               noText,
+                               fullWidth = false,
+                             }: Props) => {
   return (
-    <Button
-      type={type}
-      variant="outline"
-      className={cn(
-        "flex text-gray-600 gap-x-4  hover:bg-red-500 hover:text-white transformation ease-in-out duration-300",
-        className
-      )}
-      onClick={onClick}
-    >
-      {!noText && <p>Supprimer</p>}
-      <PiDeleteDustbin01DuoStroke
-        className={cn(
-          " hover:bg-red-500 hover:text-white transformation ease-in-out w-5 h-5",
-          className
-        )}
-      />
-    </Button>
+      <Button
+          type={type}
+          variant="outline"
+          className={cn(
+              "flex text-gray-600 gap-x-4  hover:bg-red-500 hover:text-white transformation ease-in-out duration-300",
+              fullWidth && "w-full",
+              className
+          )}
+          onClick={onClick}
+      >
+        {!noText && <p>Supprimer</p>}
+        <PiDeleteDustbin01DuoStroke
+            className={cn(
+                "transformation ease-in-out w-5 h-5",
+            )}
+        />
+      </Button>
   );
 };
