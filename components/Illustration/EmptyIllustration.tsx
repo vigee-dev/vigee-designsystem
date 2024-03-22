@@ -22,7 +22,7 @@ export default function EmptyIllustration({
   buttonLink,
   buttonText,
   children,
-  type = "emptyIdeas",
+  type = "emptyMan",
 }: IllustrationProps) {
   return (
     <div className="flex flex-col items-center justify-center  w-full px-12 ">
