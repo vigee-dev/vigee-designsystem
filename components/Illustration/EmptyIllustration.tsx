@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "../Buttons/Button";
 import { PiPlusCircleContrast } from "../../icons/PikaIcons";
 import { PlusButton } from "../Buttons/PlusButton";
+import { Container } from "../Container/Container";
 
 interface IllustrationProps {
   text?: string;
@@ -25,7 +26,7 @@ export default function EmptyIllustration({
   type = "emptyMan",
 }: IllustrationProps) {
   return (
-    <div className="flex flex-col items-center justify-center  w-full px-12 ">
+    <Container className="flex flex-col items-center justify-center  w-full px-12 p-8">
       <Image
         width={400}
         height={400}
@@ -36,7 +37,7 @@ export default function EmptyIllustration({
 
       <h1
         className={
-          "text-xl text-primary font-bold text-center pt-6 font-display"
+          "text-xl text-gray-500 font-bold text-center pt-6 font-display"
         }
       >
         {text}
@@ -60,6 +61,6 @@ export default function EmptyIllustration({
       )}
 
       {children}
-    </div>
+    </Container>
   );
 }
