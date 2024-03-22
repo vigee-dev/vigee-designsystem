@@ -30,7 +30,7 @@ export default function EmptyIllustration({
         width={400}
         height={400}
         className="mx-auto w-64 h-auto"
-        src={type === "emptyMan" ? emptyIdeas : emptyMan}
+        src={type === "emptyIdeas" ? emptyIdeas : emptyMan}
         alt="Empty list"
       />
 
