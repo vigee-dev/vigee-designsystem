@@ -22,7 +22,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   if (totalPages === 1) return null;
 
   return (
-    <>
+    <div className="mt-5 flex w-full justify-end">
       <div className="inline-flex">
         <PaginationArrow
           direction="left"
@@ -57,7 +57,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
           isDisabled={currentPage >= totalPages}
         />
       </div>
-    </>
+    </div>
   );
 }
 
