@@ -7,6 +7,7 @@ import { ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
 import VariableLogo from "../Logos/VariableLogo";
 import VigeeGrayLogo from "../../img/logos/VigeeGrayLogo.png";
 import { Badge } from "../ui/badge";
+import { Select } from "../Select/Select";
 
 function classNames(...classes: (string | boolean)[]): string {
   return classes.filter(Boolean).join(" ");
@@ -33,6 +34,11 @@ interface SidebarProps {
   title?: string;
   width?: number;
   height?: number;
+  withSelect?: boolean;
+  selectOptions?: { value: string; label: string }[];
+  onChangeSelect?: (selected: string) => void;
+  classNameSelect?: string;
+  selectPlaceHolder?: string;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -40,7 +46,6 @@ const Sidebar: React.FC<SidebarProps> = ({
   children,
   noLogo,
   dark,
-  background = `white`,
   text = `black`,
   logo,
   menu = false,
@@ -48,13 +53,21 @@ const Sidebar: React.FC<SidebarProps> = ({
   title,
   width,
   height,
+  withSelect,
+  selectOptions,
+  onChangeSelect,
+  classNameSelect,
+  selectPlaceHolder,
 }: SidebarProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [hoverMenu, setHoverMenu] = useState(false);
-
   const router = usePathname();
-  const slug = router;
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const options = [
+    { value: "en", label: "English" },
+    { value: "fr", label: "Français" },
+  ];
 
   return (
     <>
@@ -115,9 +128,25 @@ const Sidebar: React.FC<SidebarProps> = ({
               )}
             </div>
           </div>
+
           <nav className="flex flex-1 flex-col  ">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
               <li>
+                {withSelect &&
+                  selectOptions &&
+                  onChangeSelect &&
+                  selectOptions.length > 0 && (
+                    <div className="flex w-full py-2 ">
+                      <Select
+                        options={selectOptions}
+                        onChange={() => onChangeSelect}
+                        placeholder={selectPlaceHolder}
+                        className={classNameSelect}
+                        defaultValue={selectOptions[0].value}
+                      />{" "}
+                    </div>
+                  )}
+
                 <ul role="list" className="-mx-2 space-y-0 items-center">
                   {navigation.map((item, index) => {
                     // Fonction pour déterminer la classe de base

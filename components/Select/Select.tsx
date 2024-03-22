@@ -23,6 +23,7 @@ interface SelectScrollableProps {
   onChange: (value: string | undefined) => void;
   className?: string;
   disabled?: boolean;
+  defaultValue?: string;
 }
 
 export function Select({
@@ -31,9 +32,10 @@ export function Select({
   onChange,
   className,
   disabled,
+  defaultValue,
 }: SelectScrollableProps) {
   const [selectedValue, setSelectedValue] = React.useState<string | undefined>(
-    undefined
+    defaultValue || undefined
   );
 
   const groupedOptions = options.reduce<Record<string, Option[]>>(
@@ -61,7 +63,7 @@ export function Select({
   return (
     <SelectShadCn
       onValueChange={handleValueChange}
-      defaultValue={selectedValue || undefined}
+      defaultValue={selectedValue}
       disabled={disabled}
     >
       <SelectTrigger
