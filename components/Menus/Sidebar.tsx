@@ -135,7 +135,8 @@ const Sidebar: React.FC<SidebarProps> = ({
                 {withSelect &&
                   selectOptions &&
                   onChangeSelect &&
-                  selectOptions.length > 0 && (
+                  selectOptions.length > 0 &&
+                  sidebarOpen && (
                     <div className="flex w-full py-2 ">
                       <Select
                         options={selectOptions}
