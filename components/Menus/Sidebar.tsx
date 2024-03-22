@@ -36,7 +36,7 @@ interface SidebarProps {
   height?: number;
   withSelect?: boolean;
   selectOptions?: { value: string; label: string }[];
-  onChangeSelect?: () => void;
+  onChangeSelect?: (selected: string) => void;
   classNameSelect?: string;
   selectPlaceHolder?: string;
 }
@@ -140,11 +140,14 @@ const Sidebar: React.FC<SidebarProps> = ({
                     <div className="flex w-full py-2 ">
                       <Select
                         options={selectOptions}
-                        onChange={onChangeSelect}
+                        onChange={e => {
+                          if (e === undefined) return;
+                          onChangeSelect(e);
+                        }}
                         placeholder={selectPlaceHolder}
                         className={classNameSelect}
                         defaultValue={selectOptions[0].value}
-                      />{" "}
+                      />
                     </div>
                   )}
 
