@@ -30,7 +30,7 @@ export default function InputDropZoneFile<T extends FieldValues>({form, name, ex
 
   const [dragActive, setDragActive] = useState<boolean>(false);
   const inputRef = useRef<any>(null);
-  const [files, setFiles] = useState<File[]>(form?.getValues(name) ? form?.getValues(name) : []);
+  const [files, setFiles] = useState<(File | {id: number, signedUrl: string, filename: string})[]>(form?.getValues(name) ? form?.getValues(name) : []);
 
   const handleFiles = (newFiles: File[]) => {
     if (multiple) {
@@ -142,12 +142,12 @@ export default function InputDropZoneFile<T extends FieldValues>({form, name, ex
           icon={<EyeIcon width={32} height={32} className={"text-gray-400"}/>}
           trigger={<img
             key={index}
-            src={URL.createObjectURL(file)}
+            src={file instanceof File ? URL.createObjectURL(file) : file.signedUrl}
             alt="Aperçu du fichier"
             className="h-32 w-32 rounded-lg"
           />}>
             <img
-              src={URL.createObjectURL(file)}
+              src={file instanceof File ? URL.createObjectURL(file) : file.signedUrl}
               alt="Aperçu du fichier"
               className="h-full w-fit rounded-lg"
             />
@@ -167,7 +167,7 @@ export default function InputDropZoneFile<T extends FieldValues>({form, name, ex
         <div className="flex flex-col items-center p-3">
           {files.map((file, index) => (
             <div key={index} className="flex flex-row space-x-5">
-              <span>{file.name}</span>
+              <span>{file instanceof File ? file.name : file.filename}</span>
               <span className="text-red-500 cursor-pointer" onClick={(e) => handleRemoveFile(e, index)}>supprimer</span>
             </div>
           ))}
