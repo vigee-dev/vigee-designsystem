@@ -121,6 +121,7 @@ export default function DatePicker<T extends FieldValues>({
                                             className,
                                         )}
                                         type="text"
+                                        disabled={disabled}
                                     />
                                 ) : (
                                     <Button
