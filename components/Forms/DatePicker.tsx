@@ -34,24 +34,19 @@ interface Props<T extends FieldValues> {
 }
 
 export default function DatePicker<T extends FieldValues>({
-                                                              label,
-                                                              form,
-                                                              name,
-                                                              className,
-                                                              starting_date,
-                                                              disabled,
-                                                              disabledKeys,
-                                                              returnString,
-                                                              defaultValue,
-                                                          }: Props<T>) {
-    const yearDefault = defaultValue
-        ? moment(defaultValue).year().toString()
-        : moment().year().toString();
+    label,
+    form,
+    name,
+    className,
+    starting_date,
+    disabled,
+    disabledKeys,
+    returnString,
+    defaultValue,
+}: Props<T>) {
+    const yearDefault = defaultValue ? moment(defaultValue).year().toString() : moment().year().toString();
     const dateDefault = defaultValue ? moment(defaultValue).toDate() : new Date();
-    const inputDate = defaultValue
-        ? moment(defaultValue).format("DD/MM/YYYY")
-        : "";
-
+    const inputDate = defaultValue ? moment(defaultValue).format("DD/MM/YYYY") : "";
     const [selectedYear, setSelectedYear] = useState(yearDefault);
     const [selectedDate, setSelectedDate] = useState<Date | null>(dateDefault);
     const [inputValue, setInputValue] = useState(inputDate);
@@ -67,8 +62,7 @@ export default function DatePicker<T extends FieldValues>({
             formattedValue = numbers.substring(0, 2) + "/" + numbers.substring(2);
         }
         if (numbers.length > 4) {
-            formattedValue =
-                formattedValue.substring(0, 5) + "/" + formattedValue.substring(5);
+            formattedValue = formattedValue.substring(0, 5) + "/" + formattedValue.substring(5);
         }
         // Limite la longueur de la chaîne à 10 caractères pour correspondre au format DD/MM/YYYY
         return formattedValue.substring(0, 10);
@@ -107,7 +101,7 @@ export default function DatePicker<T extends FieldValues>({
                             <FormControl>
                                 {!disabledKeys ? (
                                     <Input
-                                        value={inputValue}
+                                        value={field.value?.toLocaleDateString() ? field.value.toLocaleDateString() : inputValue}
                                         onChange={(e) => {
                                             const date = handleInputChange(e);
                                             field.onChange(
