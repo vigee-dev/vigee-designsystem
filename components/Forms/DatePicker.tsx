@@ -45,7 +45,7 @@ export default function DatePicker<T extends FieldValues>({
     defaultValue,
 }: Props<T>) {
     const yearDefault = defaultValue ? moment(defaultValue).year().toString() : moment().year().toString();
-    const dateDefault = defaultValue ? moment(defaultValue).toDate() : new Date();
+    const dateDefault = defaultValue ? moment(defaultValue).toDate() : (form && name) ? form.getValues(name) : new Date();
     const inputDate = defaultValue ? moment(defaultValue).format("DD/MM/YYYY") : "";
     const [selectedYear, setSelectedYear] = useState(yearDefault);
     const [selectedDate, setSelectedDate] = useState<Date | null>(dateDefault);
