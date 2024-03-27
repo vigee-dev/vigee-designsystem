@@ -25,7 +25,7 @@ const Content = ({
   onClick,
 }: PageHeaderProps) => (
   <div
-    className={`rounded-xl h-fit p-5 my-4 items-center bg-${background} border border-slate-200 hover:bg-slate-50`}
+    className={`rounded-xl h-fit p-5 my-4 items-center bg-${background} border border-slate-200 hover:bg-slate-50 transition-ease-in-out duration-100 hover:cursor-pointer`}
     onClick={onClick}
   >
     <div className="flex flex-wrap justify-between gap-x-4 w-full items-center">
@@ -34,7 +34,7 @@ const Content = ({
         <TypographyH4>{title}</TypographyH4>
       </div>
       <div className="flex gap-x-4">
-        <div className="rounded-md p-1 transistion-ease-in-out duration-100 hover:cursor-pointer">
+        <div className="rounded-md p-1 ">
           {children ? (
             children
           ) : (
@@ -52,13 +52,19 @@ export function LineContainer({
   background,
   icon,
   href,
+  onClick,
 }: PageHeaderProps) {
   return href ? (
     <Link href={href}>
       <Content title={title} icon={icon} background={background} />
     </Link>
   ) : children ? (
-    <Content title={title} icon={icon} background={background}>
+    <Content
+      title={title}
+      icon={icon}
+      background={background}
+      onClick={onClick}
+    >
       {children}
     </Content>
   ) : (
