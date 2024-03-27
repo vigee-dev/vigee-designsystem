@@ -7,16 +7,17 @@ import {
 } from "../../components/ui/form";
 import SelectAndSearchAsync from "react-select/async";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
-import { GroupBase, OnChangeValue } from "react-select";
-import { MultiValue, SingleValue } from "react-select";
+import {ActionMeta, GroupBase, OnChangeValue} from "react-select";
+import { MultiValue, SingleValue, PropsValue } from "react-select";
+import React from "react";
 
 interface SearchSelectAsyncInterface<
   T extends FieldValues,
   Option,
   IsMulti extends boolean = false
 > {
-  name: Path<T>;
-  form: UseFormReturn<T>;
+  name?: Path<T>;
+  form?: UseFormReturn<T>;
   disabled?: boolean;
   placeholder?: string;
   loadOptions: (query: string) => Promise<Option[]>;
@@ -26,9 +27,11 @@ interface SearchSelectAsyncInterface<
   defaultValue?: IsMulti extends true
     ? MultiValue<Option>
     : SingleValue<Option>;
+  value?: PropsValue<Option>
   label?: string;
   isMulti?: IsMulti;
   noOptionsMessage?: string;
+  onChange?: (newValue: OnChangeValue<Option, IsMulti>, actionMeta: ActionMeta<Option>) => void
 }
 
 // TODO Better way to handle isMulti, Option type etc ...
@@ -49,9 +52,11 @@ export default function SearchSelectAsync<
   isMulti,
   noOptionsMessage = "Aucun résultat",
   defaultValue,
+  onChange,
+  value
 }: SearchSelectAsyncInterface<T, Option, IsMulti>) {
   return (
-    <FormField
+    form && name ?( <FormField
       control={form?.control}
       name={name}
       render={({ field }) => (
@@ -144,6 +149,82 @@ export default function SearchSelectAsync<
           <FormMessage />
         </FormItem>
       )}
-    />
+    />) : (<FormItem>
+      {label && (<FormLabel className="font-black text-primary">{label}</FormLabel>)}
+      <FormControl>
+        {/* TODO Debounce loadoptions ? */}
+        {/* TODO typeof isMulti ?*/}
+        <SelectAndSearchAsync<Option, IsMulti, GroupBase<Option>>
+          theme={theme => ({
+            ...theme,
+            colors: { ...theme.colors, primary: "#f3f4f6" },
+          })}
+          styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              border: 0,
+              backgroundColor: "#f3f4f6",
+              borderRadius: "0.4rem",
+              fontSize: "14px",
+              borderColor: "#f3f4f6",
+            }),
+
+            option: (baseStyles, state) => ({
+              ...baseStyles,
+              cursor: "pointer",
+              fontSize: "14px",
+              backgroundColor: "#FFFFFF",
+              ":hover": {
+                backgroundColor: "#EEEEEE",
+              },
+              border: 0,
+            }),
+            singleValue: (baseStyles, state) => ({
+              ...baseStyles,
+              cursor: "pointer",
+              backgroundColor: "#FFF",
+              padding: "0.2rem",
+              boxShadow: "0 0 0 1px #EEE",
+              fontSize: "14px",
+              borderRadius: "0.4rem",
+            }),
+
+            multiValue: (baseStyles, state) => ({
+              ...baseStyles,
+              cursor: "pointer",
+              backgroundColor: "#FFF",
+              color: "#000",
+              borderRadius: "0.4rem",
+              fontSize: "16px",
+            }),
+            multiValueLabel: (styles, { data }) => ({
+              ...styles,
+              color: "#111",
+            }),
+            multiValueRemove: (styles, { data }) => ({
+              ...styles,
+              color: "#111",
+              borderRadius: "0.4rem",
+              ":hover": {
+                backgroundColor: "#DDD",
+                color: "#111",
+              },
+            }),
+          }}
+          isClearable={isClearable}
+          placeholder={placeholder}
+          isDisabled={disabled} //TODO pass disabled from field.disabled ?
+          onChange={onChange}
+          defaultOptions={defaultOptions || []}
+          defaultValue={defaultValue}
+          noOptionsMessage={() => noOptionsMessage}
+          loadOptions={loadOptions}
+          isMulti={isMulti}
+          value={value}
+        />
+
+      </FormControl>
+      <FormMessage />
+    </FormItem>)
   );
 }
