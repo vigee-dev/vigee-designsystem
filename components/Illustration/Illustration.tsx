@@ -21,7 +21,7 @@ export default function Illustration({
         <Image
           width={2000}
           height={2000}
-          className="mx-auto h-96 w-auto"
+          className="mx-auto h-64 w-auto"
           src={img}
           alt="Login image"
         />
