@@ -14,12 +14,13 @@ import React from "react";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 
 type Props<T extends FieldValues> = {
-  form?: UseFormReturn<T>;
-  name: Path<T>;
-  label?: string;
-  placeholder?: string;
-  description?: string;
-  required?: boolean;
+  form?: UseFormReturn<T>
+  name: Path<T>
+  label?: string
+  placeholder?: string
+  description?: string
+  required?: boolean
+  disabled?: boolean
 };
 export default function PhoneNumber<T extends FieldValues>({
   form,
@@ -28,6 +29,7 @@ export default function PhoneNumber<T extends FieldValues>({
   placeholder = "ex : 0695069999",
   description,
   required = false,
+  disabled = false
 }: Props<T>) {
   return (
     <FormField
@@ -43,6 +45,7 @@ export default function PhoneNumber<T extends FieldValues>({
           )}
           <FormControl className="w-full">
             <PhoneInput
+              disabled={disabled}
               placeholder={placeholder}
               {...field}
               defaultCountry="FR"
