@@ -26,7 +26,7 @@ export default function PhoneNumber<T extends FieldValues>({
   name,
   label = "Téléphone mobile",
   placeholder = "Entrer un numéro",
-  description = "Votre numéro de téléphone mobile",
+  description,
   required = false,
 }: Props<T>) {
   return (
@@ -48,7 +48,11 @@ export default function PhoneNumber<T extends FieldValues>({
               defaultCountry="FR"
             />
           </FormControl>
-          <FormDescription className="text-left">{description}</FormDescription>
+          {description && (
+            <FormDescription className="text-left">
+              {description}
+            </FormDescription>
+          )}
           <FormMessage />
         </FormItem>
       )}
