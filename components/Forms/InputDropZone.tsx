@@ -112,11 +112,11 @@ export default function InputDropZoneFile<T extends FieldValues>({
   }
 
   return (
-    <div className="flex items-center justify-center col-span-full">
+    <div className="flex  items-center justify-center col-span-full">
       <div
         className={`${
           dragActive ? "bg-gray-200" : "bg-gray-100"
-        } w-full flex gap-4 p-8 items-center justify-center h-fit border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 overflow-hidden`}
+        } w-full flex flex-col  gap-4 p-8 items-center justify-center h-fit border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 overflow-hidden`}
         onDragEnter={handleDragEnter}
         onSubmit={e => e.preventDefault()}
         onDrop={handleDrop}
@@ -135,25 +135,25 @@ export default function InputDropZoneFile<T extends FieldValues>({
           accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
         />
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4  items-center ">
-          {!(files.length > 0) ? (
-            <svg
-              className="w-8 h-8 mb-4 text-gray-400 dark:text-gray-400"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 16"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-              />
-            </svg>
-          ) : (
-            files.map((file, index) => (
+        {!(files.length > 0) ? (
+          <svg
+            className="w-12 h-12 text-gray-400 dark:text-gray-400"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 20 16"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+            />
+          </svg>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4  items-center ">
+            {files.map((file, index) => (
               <div key={index}>
                 <Card className="rounded-xl w-36 h-36 p-2 ">
                   <span
@@ -176,9 +176,9 @@ export default function InputDropZoneFile<T extends FieldValues>({
                   </CardContent>
                 </Card>
               </div>
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+        )}
 
         {files?.length === 0 && (
           <p>
