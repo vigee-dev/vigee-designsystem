@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { CalendarIcon } from "@radix-ui/react-icons";
-import {DateRange, Matcher} from "react-day-picker";
+import { DateRange, Matcher } from "react-day-picker";
 import { fr } from "date-fns/esm/locale";
 import { cn } from "../../lib/utils";
 import { Button } from "../ui/button";
@@ -29,13 +29,13 @@ import { Label } from "../ui/label";
 import { PiCalendarCheckDuoSolid } from "../../icons/PikaIcons";
 
 interface DatePickerRangeProps {
-  date: DateRange | undefined
-  setDate: React.Dispatch<React.SetStateAction<DateRange | undefined>> // Fonction pour mettre à jour l'état externe
-  className?: string
-  select?: boolean
-  label?: string
-  onChange?: (date: DateRange) => void
-  disabledDays?: Matcher | Matcher[] | undefined
+  date: DateRange | undefined;
+  setDate: React.Dispatch<React.SetStateAction<DateRange | undefined>>; // Fonction pour mettre à jour l'état externe
+  className?: string;
+  select?: boolean;
+  label?: string;
+  onChange?: (date: DateRange) => void;
+  disabledDays?: Matcher | Matcher[] | undefined;
 }
 
 const DatePickerRange = ({
@@ -45,7 +45,7 @@ const DatePickerRange = ({
   select,
   label,
   onChange,
-  disabledDays
+  disabledDays,
 }: DatePickerRangeProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
   let newDate: DateRange | undefined;
@@ -95,16 +95,15 @@ const DatePickerRange = ({
     <div className={cn("grid gap-2", className)}>
       <Popover open={isOpen} onOpenChange={setIsOpen}>
         <div className="flex flex-col gap-y-1 w-full">
-          {label && (
-            <Label className="font-bold text-primary-light">{label}</Label>
-          )}
+          {label && <Label className="font-bold text-primary">{label}</Label>}
           <PopoverTrigger asChild>
             <Button
               id="date"
               variant={"outline"}
               className={cn(
-                "md:w-[260px] justify-start text-left font-normal w-full bg-input border-0",
-                !date && "text-muted-foreground"
+                "justify-start text-left font-normal w-full bg-input border-0",
+                !date && "text-muted-foreground",
+                className
               )}
             >
               <PiCalendarCheckDuoSolid className="mr-2 h-4 w-4 text-primary-light" />
@@ -153,14 +152,12 @@ const DatePickerRange = ({
                 numberOfMonths={2}
                 locale={fr}
               />
-
-
             </div>
           </PopoverContent>
         </div>
       </Popover>
     </div>
   );
-}
+};
 
-export default DatePickerRange
+export default DatePickerRange;
