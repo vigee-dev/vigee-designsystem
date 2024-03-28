@@ -46,7 +46,6 @@ export default function PhoneNumber<T extends FieldValues>({
               placeholder={placeholder}
               {...field}
               defaultCountry="FR"
-              className="sm:text-[16px] md:text-sm font-medium bg-input border-none"
             />
           </FormControl>
           {description && (
