@@ -20,7 +20,7 @@ export const SplashScreen = ({
 
     loaderAnimation.add({
       targets: "#loader",
-      duration: 10,
+      duration: 1000,
       delay: 0,
       scale: 1,
       easing: "linear",
