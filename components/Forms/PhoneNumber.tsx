@@ -13,12 +13,6 @@ import { z } from "zod";
 import React from "react";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 
-const FormSchema = z.object({
-  phone: z
-    .string()
-    .refine(isValidPhoneNumber, { message: "Invalid phone number" }),
-});
-
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
   name: Path<T>;
@@ -48,7 +42,11 @@ export default function PhoneNumber<T extends FieldValues>({
             </FormLabel>
           )}
           <FormControl className="w-full">
-            <PhoneInput placeholder={placeholder} {...field} />
+            <PhoneInput
+              placeholder={placeholder}
+              {...field}
+              defaultCountry="FR"
+            />
           </FormControl>
           <FormDescription className="text-left">{description}</FormDescription>
           <FormMessage />
