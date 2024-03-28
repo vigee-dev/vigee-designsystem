@@ -19,11 +19,11 @@ export default function Illustration({
     <div className="flex flex-col items-center justify-center bg-primary h-screen w-full px-12 ">
       {img && (
         <Image
-          width={200}
-          height={200}
+          width={2000}
+          height={2000}
           className="mx-auto h-96 w-auto"
           src={img}
-          alt="Vigee Web"
+          alt="Login image"
         />
       )}
       <h1
@@ -40,7 +40,6 @@ export default function Illustration({
         </p>
       )}
 
-      
       {children}
     </div>
   );
