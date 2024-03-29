@@ -55,7 +55,7 @@ export default function DatePicker<T extends FieldValues>({
     function convertDateToString(date: Date | string) {
         console.log(date, "date", typeof date)
         if (typeof date === "string") {
-            return moment(date).format("YYYY-MM-DD");
+            return moment(date).format("DD/MM/YYYY");
         }
         return date.toLocaleDateString();
     }
