@@ -42,7 +42,7 @@ export default function DatePicker<T extends FieldValues>({
     disabled,
     disabledKeys,
     returnString,
-    defaultValue,
+    defaultValue
 }: Props<T>) {
     const yearDefault = defaultValue ? moment(defaultValue).year().toString() : moment().year().toString();
     const dateDefault = defaultValue ? moment(defaultValue).toDate() : (form && name) ? form.getValues(name) : new Date();
@@ -51,6 +51,13 @@ export default function DatePicker<T extends FieldValues>({
     const [selectedDate, setSelectedDate] = useState<Date | null>(dateDefault);
     const [inputValue, setInputValue] = useState(inputDate);
     const [popoverOpen, setPopoverOpen] = useState(false);
+
+    function convertDateToString(date: Date | string) {
+        if (typeof date === "string") {
+            return date;
+        }
+        return date.toLocaleDateString();
+    }
 
     const formatInputDate = (value: string) => {
         // Supprime tout caractère non numérique
@@ -101,7 +108,7 @@ export default function DatePicker<T extends FieldValues>({
                             <FormControl>
                                 {!disabledKeys ? (
                                     <Input
-                                        value={field.value?.toLocaleDateString() ? field.value.toLocaleDateString() : inputValue}
+                                        value={field.value ? convertDateToString(field.value) : inputValue}
                                         onChange={(e) => {
                                             const date = handleInputChange(e);
                                             field.onChange(
