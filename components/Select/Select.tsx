@@ -24,6 +24,7 @@ interface SelectScrollableProps {
   className?: string;
   disabled?: boolean;
   defaultValue?: string;
+  label?: string;
 }
 
 export function Select({
@@ -33,6 +34,7 @@ export function Select({
   className,
   disabled,
   defaultValue,
+  label,
 }: SelectScrollableProps) {
   const [selectedValue, setSelectedValue] = React.useState<string | undefined>(
     defaultValue || undefined
@@ -66,6 +68,12 @@ export function Select({
       defaultValue={selectedValue}
       disabled={disabled}
     >
+      {label && (
+        <SelectLabel className="font-black text-primary mt-2">
+          {label}
+        </SelectLabel>
+      )}
+
       <SelectTrigger
         className={cn("w-[280px] font-medium bg-input border-none", className)}
       >
