@@ -98,10 +98,7 @@ export function DrawerMobile({
               </div>
             </DialogHeader>
 
-            <ScrollArea className="max-h-[80vh] ">
-              {" "}
-              <div className="p-4">{children}</div>
-            </ScrollArea>
+            <div className="p-4">{children}</div>
           </DialogContent>
         </Dialog>
       </DrawerContext.Provider>
@@ -115,13 +112,16 @@ export function DrawerMobile({
           {trigger}
         </DrawerTrigger>
         <DrawerContent onClick={e => e.stopPropagation()}>
-          {title ||
-            (description && (
-              <DrawerHeader className="text-left">
-                <DrawerTitle className="text-primary">{title}</DrawerTitle>
-                <DrawerDescription>{description}</DrawerDescription>
-              </DrawerHeader>
-            ))}
+          <DrawerHeader className="text-left">
+            {title && (
+              <DrawerTitle className="font-bold text-primary">
+                {title}
+              </DrawerTitle>
+            )}
+            {description && (
+              <DrawerDescription>{description}</DrawerDescription>
+            )}
+          </DrawerHeader>
 
           <ScrollArea className="max-h-[80vh] pb-8">
             <div className="p-4">{children}</div>
