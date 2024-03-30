@@ -8,6 +8,7 @@ import {
 import { cn } from "../../lib/utils";
 import Link from "next/link";
 import { Tooltip } from "../Tooltip/Tooltip";
+import { Button } from "./Button";
 
 interface Props {
   onClick?: () => void;
@@ -15,6 +16,7 @@ interface Props {
   href?: string;
   tooltip?: string;
   text?: string;
+  disabled?: boolean;
 }
 
 export const SendButton = ({
@@ -23,6 +25,7 @@ export const SendButton = ({
   href,
   tooltip = "Envoyer",
   text,
+  disabled,
 }: Props) => {
   return href ? (
     <Tooltip message={tooltip}>
@@ -38,16 +41,16 @@ export const SendButton = ({
     </Tooltip>
   ) : (
     <Tooltip message={tooltip}>
-      <div className="flex items-center gap-x-2">
+      <Button className="flex gap-2" disabled={disabled}>
         {text}
         <PiSendPlaneHorizontalContrast
           className={cn(
-            "text-gray-400 hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+            "text-primary-foreground hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
             className
           )}
           onClick={onClick}
         />
-      </div>
+      </Button>
     </Tooltip>
   );
 };
