@@ -23,7 +23,7 @@ interface SearchSelectAsyncInterface<
   loadOptions: (query: string) => Promise<Option[]>;
   isClearable?: boolean;
   preprocessOnChange?: (e: OnChangeValue<Option, IsMulti>) => any;
-  defaultOptions?: Option[];
+  defaultOptions?: Option[] | boolean;
   defaultValue?: IsMulti extends true
     ? MultiValue<Option>
     : SingleValue<Option>;
