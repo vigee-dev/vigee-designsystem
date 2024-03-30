@@ -10,6 +10,7 @@ import {
   SelectValue,
 } from "../../components/ui/select";
 import { cn } from "../../lib/utils";
+import { Label } from "../ui/label";
 
 interface Option {
   value: string;
@@ -68,11 +69,7 @@ export function Select({
       defaultValue={selectedValue}
       disabled={disabled}
     >
-      {label && (
-        <SelectLabel className="font-black text-primary mt-2">
-          {label}
-        </SelectLabel>
-      )}
+      {label && <Label className="font-black text-primary mt-2">{label}</Label>}
 
       <SelectTrigger
         className={cn("w-[280px] font-medium bg-input border-none", className)}
