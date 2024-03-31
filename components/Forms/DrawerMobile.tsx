@@ -98,7 +98,11 @@ export function DrawerMobile({
               </div>
             </DialogHeader>
 
-            <div className="p-4">{children}</div>
+            {size !== "sm" ? (
+              <ScrollArea className="max-h-[80vh] pb-8">{children}</ScrollArea>
+            ) : (
+              <div className="p-4">{children}</div>
+            )}
           </DialogContent>
         </Dialog>
       </DrawerContext.Provider>
