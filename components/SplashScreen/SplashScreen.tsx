@@ -1,12 +1,14 @@
 import React from "react";
 import { useEffect } from "react";
 import anime from "animejs";
+import { cn } from "../../lib/utils";
 
-export const SplashScreen = ({
-  finishLoading,
-}: {
+interface Props {
+  className?: string;
   finishLoading: () => void;
-}) => {
+}
+
+export const SplashScreen = ({ finishLoading, className }: Props) => {
   useEffect(() => {
     const loaderAnimation = anime.timeline({
       complete: () => {
@@ -26,7 +28,7 @@ export const SplashScreen = ({
   }, [finishLoading]);
 
   return (
-    <div className="h-screen w-screen bg-dark">
+    <div className={cn(`h-screen w-screen bg-dark`, className)}>
       <span className="loader"></span>
     </div>
   );
