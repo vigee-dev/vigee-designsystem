@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import { SplashScreen } from "./SplashScreen";
 
 export default function SplashScreenManager({
+  className,
   children,
 }: {
+  className?: string;
   children: React.ReactNode;
 }) {
   const [showSplashScreen, setShowSplashScreen] = useState(true);
@@ -16,7 +18,7 @@ export default function SplashScreenManager({
 
   return showSplashScreen ? (
     <div className="h-screen items-center mx-auto flex justify-center">
-      <SplashScreen finishLoading={finishLoading} />
+      <SplashScreen finishLoading={finishLoading} className={className} />
     </div>
   ) : (
     children
