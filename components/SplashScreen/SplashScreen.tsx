@@ -28,7 +28,7 @@ export const SplashScreen = ({ finishLoading, className }: Props) => {
   }, [finishLoading]);
 
   return (
-    <div className={cn(`h-screen w-screen bg-dark`, className)}>
+    <div className={cn(`h-screen w-screen bg-primary`, className)}>
       <span className="loader"></span>
     </div>
   );
