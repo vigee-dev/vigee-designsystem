@@ -1,8 +1,6 @@
 import React from "react";
-import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import anime from "animejs";
-import loader from "../../img/loaders/loader.gif";
 
 export const SplashScreen = ({
   finishLoading,
@@ -28,8 +26,8 @@ export const SplashScreen = ({
   }, [finishLoading]);
 
   return (
-    <div>
-      <Image id={"loader"} src={loader} alt="loading" width={60} height={60} />
+    <div className="h-screen w-screen bg-dark">
+      <span className="loader"></span>
     </div>
   );
 };
