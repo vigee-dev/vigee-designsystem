@@ -77,7 +77,7 @@ const PieChart = ({ title, subtitle, data, container, colors }: Props) => {
       } items-center mb-2 `}
     >
       <div className="flex flex-col pb-12">
-        <TypographyH3 className="font-bold">{title}</TypographyH3>
+        <TypographyH3 className="font-bold text-primary">{title}</TypographyH3>
         <p className="text-gray-500 text-sm">{subtitle}</p>
       </div>
       <ResponsiveContainer width="100%" height={350}>
