@@ -28,6 +28,7 @@ interface Props {
   data: Data[];
   color?: string;
   container?: boolean;
+  colors?: string[];
 }
 
 interface LabelProps {
@@ -40,7 +41,7 @@ interface LabelProps {
   index: number;
 }
 
-const PieChart = ({ title, subtitle, data, container }: Props) => {
+const PieChart = ({ title, subtitle, data, container, colors }: Props) => {
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
     cx,
@@ -98,7 +99,11 @@ const PieChart = ({ title, subtitle, data, container }: Props) => {
             {data.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
+                fill={
+                  colors
+                    ? colors[index % colors.length]
+                    : COLORS[index % COLORS.length]
+                }
               />
             ))}
           </Pie>
