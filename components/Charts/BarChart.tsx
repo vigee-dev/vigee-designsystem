@@ -39,7 +39,7 @@ export function BarChart({
   return (
     <div
       className={`${
-        container && "bg-white p-8 rounded-md border border-gray-100 shadow-sm"
+        container && "bg-white p-8 rounded-xl border border-gray-100 shadow-sm"
       } items-center mb-2 `}
     >
       <div className="flex flex-col pb-12">
@@ -61,7 +61,7 @@ export function BarChart({
             fontSize={12}
             tickLine={false}
             axisLine={false}
-            tickFormatter={(value) => `${value}€`}
+            tickFormatter={value => `${value}€`}
           />
 
           {keys ? (
