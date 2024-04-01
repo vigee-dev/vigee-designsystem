@@ -25,8 +25,8 @@ export function Ranking({ title, subtitle, data, icon }: Props) {
   return (
     <div className="space-y-8 ">
       <div className="flex flex-col">
-        <TypographyH3 className="font-bold">{title}</TypographyH3>
-        <p className="text-primary text-sm">{subtitle}</p>
+        <TypographyH3 className="text-primary font-bold">{title}</TypographyH3>
+        <p className="text-gray-500 text-sm">{subtitle}</p>
       </div>
 
       <div className="space-y-4">
