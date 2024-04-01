@@ -72,7 +72,7 @@ export function Select({
       {label && <Label className="font-black text-primary mt-2">{label}</Label>}
 
       <SelectTrigger
-        className={cn("w-[280px] font-medium bg-input border-none", className)}
+        className={cn("w-[280px] font-medium bg-input", className)}
       >
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
