@@ -51,23 +51,35 @@ const formatValue = (value: number, euro: boolean): string => {
   return euro ? `${formattedValue}€` : formattedValue;
 };
 
-// Fonction de rendu personnalisé pour les labels
-const renderCustomizedLabel: React.FC<
-  TextProps & { value: number; euro: boolean }
-> = ({ x, y, width, value, euro }) => {
-  const offset = 5; // Décalage pour le positionnement du label au-dessus de la barre
+interface CustomLabelProps {
+  x: number;
+  y: number;
+  width: number;
+  value: number;
+  euro: boolean;
+}
 
-  // Ne pas afficher le label si la valeur est 0
+const renderCustomizedLabel: React.FC<CustomLabelProps> = props => {
+  const { x, y, width, value, euro } = props;
+
   if (value === 0) {
     return null;
   }
+
+  // Vérifiez si x, y, ou width ne sont pas définis, bien que cela ne devrait pas arriver dans la pratique avec Recharts
+  if (x === undefined || y === undefined || width === undefined) {
+    return null;
+  }
+
+  const offset = 5; // Décalage pour le positionnement du label
 
   return (
     <text
       x={x + width / 2}
       y={y - offset}
-      fill="#000"
+      fill="#444"
       textAnchor="middle"
+      dominantBaseline="central"
       fontSize={10}
     >
       {formatValue(value, euro)}
@@ -126,7 +138,15 @@ export const BarChart: React.FC<Props> = ({
               >
                 <LabelList
                   dataKey={key.dataKey}
-                  content={props => renderCustomizedLabel({ ...props, euro })}
+                  content={props =>
+                    renderCustomizedLabel({
+                      x: Number(props.x) ?? 0,
+                      y: Number(props.y) ?? 0,
+                      width: Number(props.width) ?? 0,
+                      value: Number(props.value) ?? 0,
+                      euro,
+                    })
+                  }
                 />
               </Bar>
             ))}
