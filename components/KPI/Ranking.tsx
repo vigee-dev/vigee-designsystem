@@ -43,9 +43,7 @@ export function Ranking({ title, subtitle, data, icon }: Props) {
               <p className="text-sm text-muted-foreground">{item.subtitle}</p>
             </div>
             <div className="ml-auto font-medium text-primary">
-              {item.amount
-                .toLocaleString("fr-FR", { style: "currency", currency: "EUR" })
-                .replace(/\s/g, " ")}
+              {item.amount.toLocaleString("fr-FR").replace(/\s/g, " ")}
               {item.currency}
             </div>
           </div>
