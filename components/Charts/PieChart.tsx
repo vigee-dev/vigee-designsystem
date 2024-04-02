@@ -73,10 +73,10 @@ const PieChart = ({ title, subtitle, data, container, colors }: Props) => {
   return (
     <div
       className={`${
-        container && "bg-white  p-8 rounded-xl border border-gray-100 shadow-sm"
+        container && "bg-white  rounded-xl border border-gray-100 shadow-sm"
       } items-center mb-2 `}
     >
-      <div className="flex flex-col pb-12">
+      <div className="flex flex-col md:pb-12 p-8">
         <TypographyH3 className="font-bold text-primary">{title}</TypographyH3>
         <p className="text-gray-500 text-sm">{subtitle}</p>
       </div>
@@ -95,6 +95,7 @@ const PieChart = ({ title, subtitle, data, container, colors }: Props) => {
             label={renderCustomizedLabel}
             fill="#8884d8"
             dataKey="value"
+            className="text-xs"
           >
             {data.map((entry, index) => (
               <Cell
