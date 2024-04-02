@@ -1,12 +1,15 @@
 "use client";
+import React from "react";
 import {
   Bar,
-  BarChart as BarChartRecharts,
-  CartesianGrid,
-  ReferenceLine,
+  BarChart as RechartsBarChart,
   ResponsiveContainer,
   XAxis,
   YAxis,
+  CartesianGrid,
+  LabelList,
+  Cell,
+  TextProps,
 } from "recharts";
 import { TypographyH3 } from "../Typography/Typography";
 
@@ -27,23 +30,68 @@ interface Props {
   color?: string;
   container?: boolean;
   keys?: Key[];
-  referenceLines?: { value: number; label: string; stroke: string }[]; // Ajout d'une prop pour les lignes de référence
+  euro?: boolean; // Prop pour activer le formatage en euro
 }
 
-export function BarChart({
+// Fonction de formattage unifiée
+const formatValue = (value: number, euro: boolean): string => {
+  let formattedValue = "";
+
+  if (value >= 1000000) {
+    // Pour les valeurs en millions, arrondi au million le plus proche sans décimales
+    formattedValue = `${Math.round(value / 1000000)}M`;
+  } else if (value >= 1000) {
+    // Pour les valeurs en milliers, arrondi au millier le plus proche sans décimales
+    formattedValue = `${Math.round(value / 1000)}k`;
+  } else {
+    // Pour les valeurs inférieures à 1000, arrondi au nombre entier le plus proche
+    formattedValue = Math.round(value).toString();
+  }
+
+  return euro ? `${formattedValue}€` : formattedValue;
+};
+
+// Fonction de rendu personnalisé pour les labels
+const renderCustomizedLabel: React.FC<
+  TextProps & { value: number; euro: boolean }
+> = ({ x, y, width, value, euro }) => {
+  const offset = 5; // Décalage pour le positionnement du label au-dessus de la barre
+
+  // Ne pas afficher le label si la valeur est 0
+  if (value === 0) {
+    return null;
+  }
+
+  return (
+    <text
+      x={x + width / 2}
+      y={y - offset}
+      fill="#000"
+      textAnchor="middle"
+      fontSize={10}
+    >
+      {formatValue(value, euro)}
+    </text>
+  );
+};
+
+// Composant BarChart
+export const BarChart: React.FC<Props> = ({
   data,
   color = "#000",
   title,
   subtitle,
   container,
   keys,
-  referenceLines, // Intégrer les lignes de référence comme une prop
-}: Props) {
+  euro = false,
+}) => {
   return (
     <div
       className={`${
-        container && "bg-white p-8 rounded-xl border border-gray-100 shadow-sm"
-      } items-center mb-2 `}
+        container
+          ? "bg-white p-8 rounded-xl border border-gray-100 shadow-sm"
+          : ""
+      } items-center mb-2`}
     >
       <div className="flex flex-col pb-12">
         <TypographyH3 className="font-bold">{title}</TypographyH3>
@@ -51,7 +99,7 @@ export function BarChart({
       </div>
 
       <ResponsiveContainer width="100%" height={350}>
-        <BarChartRecharts data={data}>
+        <RechartsBarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis
             dataKey="name"
@@ -65,7 +113,7 @@ export function BarChart({
             fontSize={12}
             tickLine={false}
             axisLine={false}
-            tickFormatter={value => `${value}€`}
+            tickFormatter={value => formatValue(value, euro)}
           />
 
           {keys &&
@@ -75,21 +123,15 @@ export function BarChart({
                 dataKey={key.dataKey}
                 fill={key.color}
                 radius={[4, 4, 0, 0]}
-              />
+              >
+                <LabelList
+                  dataKey={key.dataKey}
+                  content={props => renderCustomizedLabel({ ...props, euro })}
+                />
+              </Bar>
             ))}
-
-          {referenceLines &&
-            referenceLines.map((line, index) => (
-              <ReferenceLine
-                key={index}
-                y={line.value}
-                label={line.label}
-                stroke={line.stroke}
-                strokeDasharray="3 3"
-              />
-            ))}
-        </BarChartRecharts>
+        </RechartsBarChart>
       </ResponsiveContainer>
     </div>
   );
-}
+};
