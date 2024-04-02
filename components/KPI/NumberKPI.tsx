@@ -1,4 +1,5 @@
 import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
+import { cn } from "../../lib/utils";
 
 interface StatItem {
   name: string;
@@ -36,9 +37,10 @@ const NumberKPI = ({ stats, columns = 3 }: NumberKPIProps) => {
             <dt className="text-base font-medium text-gray-400">{item.name}</dt>
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
               <div
-                className={`flex items-baseline text-xl font-black  ${
-                  item?.color ? "text-" + item?.color : "text-primary"
-                }`}
+                className={cn(
+                  `flex items-baseline text-xl font-black text-primary`,
+                  item.color
+                )}
               >
                 {item.stat.toLocaleString()}
               </div>
