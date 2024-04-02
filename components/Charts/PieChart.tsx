@@ -84,8 +84,8 @@ const PieChart = ({ title, subtitle, data, container, colors }: Props) => {
         <PieC width={800} height={600}>
           <Pie
             data={data}
-            cx={270}
-            cy={200}
+            cx="50%" // Centrer horizontalement
+            cy="50%" // Centrer verticalement
             startAngle={180}
             endAngle={0}
             innerRadius={70}
