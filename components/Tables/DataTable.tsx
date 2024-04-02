@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, {ReactNode} from "react";
 
 import {
   ColumnDef,
@@ -85,10 +85,7 @@ export function DataTable<TData, TValue>({
                     <TableHead key={header.id} className="bg-gray-50">
                       {header.isPlaceholder
                         ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                        : flexRender(header.column.columnDef.header, header.getContext()) as ReactNode}
                     </TableHead>
                   );
                 })}
@@ -105,10 +102,7 @@ export function DataTable<TData, TValue>({
                 >
                   {row.getVisibleCells().map(cell => (
                     <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
+                      {flexRender(cell.column.columnDef.cell, cell.getContext()) as ReactNode}
                     </TableCell>
                   ))}
                 </TableRow>
