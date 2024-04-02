@@ -25,7 +25,7 @@ export default function TableSearch({ placeholder }: { placeholder: string }) {
         Rechercher
       </label>
       <input
-        className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-[16px] outline-2 placeholder:text-gray-500"
+        className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-[16px] md:text-xs outline-2 placeholder:text-gray-500"
         placeholder={placeholder}
         onChange={e => {
           handleSearch(e.target.value);
