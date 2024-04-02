@@ -179,6 +179,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                       >
                         <li key={item.name}>
                           <Link
+                            prefetch
                             href={item.href}
                             className={`${baseClass} ${textAndBgClass}`}
                           >
@@ -255,7 +256,6 @@ const Sidebar: React.FC<SidebarProps> = ({
               )}
             </div>
           )}
-
           {children}
         </div>
       </main>
