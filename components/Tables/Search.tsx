@@ -8,7 +8,7 @@ export default function TableSearch({ placeholder }: { placeholder: string }) {
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const handleSearch = useDebouncedCallback((term) => {
+  const handleSearch = useDebouncedCallback(term => {
     const params = new URLSearchParams(searchParams);
     params.set("page", "1");
     if (term) {
@@ -20,14 +20,14 @@ export default function TableSearch({ placeholder }: { placeholder: string }) {
   }, 300);
 
   return (
-    <div className="relative flex flex-1 flex-shrink-0 max-w-lg md:max-w-sm min-w-[200px]">
+    <div className="relative flex flex-1 flex-shrink-0 max-w-lg md:max-w-sm min-w-[200px] ">
       <label htmlFor="search" className="sr-only">
         Rechercher
       </label>
       <input
-        className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+        className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-[16px] outline-2 placeholder:text-gray-500"
         placeholder={placeholder}
-        onChange={(e) => {
+        onChange={e => {
           handleSearch(e.target.value);
         }}
         defaultValue={searchParams.get("query")?.toString()}
