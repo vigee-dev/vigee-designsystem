@@ -94,7 +94,7 @@ export const BarChart: React.FC<Props> = ({
       } items-center mb-2`}
     >
       <div className="flex flex-col pb-12">
-        <TypographyH3 className="font-bold">{title}</TypographyH3>
+        <TypographyH3 className="font-bold text-primary">{title}</TypographyH3>
         <p className="text-gray-500 text-sm">{subtitle}</p>
       </div>
 
