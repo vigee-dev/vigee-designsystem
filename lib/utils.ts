@@ -157,3 +157,21 @@ export type PaginationInfo = {
     active: boolean;
   }>;
 };
+
+export const currency = (number: number) => {
+  return {
+    toEuro: () =>
+      (number ?? 0)
+        .toLocaleString("fr-FR", { style: "currency", currency: "EUR" })
+        .replace(/\s/g, " "),
+    toRoundedEuro: () =>
+      Math.round(number)
+        .toLocaleString("fr-FR", {
+          style: "currency",
+          currency: "EUR",
+          minimumFractionDigits: 0, // Force l'affichage sans décimales
+          maximumFractionDigits: 0, // Force l'affichage sans décimales
+        })
+        .replace(/\s/g, " "),
+  };
+};
