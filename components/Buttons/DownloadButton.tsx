@@ -22,12 +22,18 @@ export const DownloadButton = ({
 }: DownloadButtonProps) => {
   return noText ? (
     <Tooltip message={tooltip}>
-      <PiDownloadDownDuoSolid
-        className={cn(
-          " text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out",
-          className
-        )}
-      />
+      <Button
+        onClick={onClick}
+        variant="outline"
+        className="bg-transparent border-none"
+      >
+        <PiDownloadDownDuoSolid
+          className={cn(
+            " text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out",
+            className
+          )}
+        />
+      </Button>
     </Tooltip>
   ) : (
     <Tooltip message={tooltip}>
