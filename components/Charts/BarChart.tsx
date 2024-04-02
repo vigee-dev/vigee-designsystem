@@ -1,8 +1,9 @@
 "use client";
-
 import {
   Bar,
   BarChart as BarChartRecharts,
+  CartesianGrid,
+  ReferenceLine,
   ResponsiveContainer,
   XAxis,
   YAxis,
@@ -26,6 +27,7 @@ interface Props {
   color?: string;
   container?: boolean;
   keys?: Key[];
+  referenceLines?: { value: number; label: string; stroke: string }[]; // Ajout d'une prop pour les lignes de référence
 }
 
 export function BarChart({
@@ -35,6 +37,7 @@ export function BarChart({
   subtitle,
   container,
   keys,
+  referenceLines, // Intégrer les lignes de référence comme une prop
 }: Props) {
   return (
     <div
@@ -49,6 +52,7 @@ export function BarChart({
 
       <ResponsiveContainer width="100%" height={350}>
         <BarChartRecharts data={data}>
+          <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis
             dataKey="name"
             stroke="#000"
@@ -64,7 +68,7 @@ export function BarChart({
             tickFormatter={value => `${value}€`}
           />
 
-          {keys ? (
+          {keys &&
             keys.map((key, index) => (
               <Bar
                 key={index}
@@ -72,10 +76,18 @@ export function BarChart({
                 fill={key.color}
                 radius={[4, 4, 0, 0]}
               />
-            ))
-          ) : (
-            <Bar dataKey="total" fill={color} radius={[4, 4, 0, 0]} />
-          )}
+            ))}
+
+          {referenceLines &&
+            referenceLines.map((line, index) => (
+              <ReferenceLine
+                key={index}
+                y={line.value}
+                label={line.label}
+                stroke={line.stroke}
+                strokeDasharray="3 3"
+              />
+            ))}
         </BarChartRecharts>
       </ResponsiveContainer>
     </div>
