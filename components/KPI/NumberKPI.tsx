@@ -4,7 +4,7 @@ import { cn } from "../../lib/utils";
 interface StatItem {
   name: string;
   stat: string;
-  previousStat: string;
+  previousStat?: string;
   color?: string;
   upNegative?: boolean;
 }
@@ -19,6 +19,7 @@ function classNames(...classes: string[]): string {
 }
 
 const NumberKPI = ({ stats, columns = 3 }: NumberKPIProps) => {
+
   const variation = (previousStat: string, stat: string) => {
     const previousStatNumber = parseInt(previousStat.replace("€", ""));
     const statNumber = parseInt(stat.replace("€", ""));
@@ -45,9 +46,9 @@ const NumberKPI = ({ stats, columns = 3 }: NumberKPIProps) => {
                 {item.stat.toLocaleString()}
               </div>
 
-              <div
+              {item?.previousStat  && <div
                 className={classNames(
-                  item.previousStat < item.stat
+                  item?.previousStat < item.stat
                     ? ` ${
                         !item.upNegative
                           ? "text-green-600 bg-green-100"
@@ -60,8 +61,9 @@ const NumberKPI = ({ stats, columns = 3 }: NumberKPIProps) => {
                       }`,
                   "inline-flex items-baseline rounded-full px-2.5 py-0.5 text-xs font-black md:mt-2 lg:mt-0"
                 )}
-              >
-                {item.previousStat < item.stat ? (
+              >}
+
+                {item.previousStat < item.stat && item.previousStat ? (
                   <ArrowUpIcon
                     className={`-ml-1 mr-0.5 h-4 w-4 flex-shrink-0 self-center ${
                       !item.upNegative ? "text-green-600" : "text-red-800"
@@ -76,13 +78,14 @@ const NumberKPI = ({ stats, columns = 3 }: NumberKPIProps) => {
                     aria-hidden="true"
                   />
                 )}
+                
                 <span className="sr-only">
-                  {" "}
+                 
                   {item.previousStat < item.stat
                     ? "Increased"
                     : "Decreased"} by{" "}
                 </span>
-                {variation(item.previousStat, item.stat).toLocaleString()}%
+                {item.previousStat && variation(item.previousStat, item.stat).toLocaleString()}%
               </div>
             </dd>
           </div>
