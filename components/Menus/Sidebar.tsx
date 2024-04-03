@@ -39,6 +39,7 @@ interface SidebarProps {
   onChangeSelect?: (selected: string) => void;
   classNameSelect?: string;
   selectPlaceHolder?: string;
+  defaultValueSelect?: string;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -58,6 +59,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   onChangeSelect,
   classNameSelect,
   selectPlaceHolder,
+    defaultValueSelect,
 }: SidebarProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [hoverMenu, setHoverMenu] = useState(false);
@@ -146,7 +148,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                         }}
                         placeholder={selectPlaceHolder}
                         className={classNameSelect}
-                        defaultValue={selectOptions[0].value}
+                        defaultValue={defaultValueSelect ?? selectOptions[0].value}
                       />
                     </div>
                   )}
