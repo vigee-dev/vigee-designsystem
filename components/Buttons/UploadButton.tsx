@@ -22,7 +22,7 @@ export const UploadButton = ({
     <Button
       onClick={onClick}
       variant="outline"
-      className="bg-transparent border-none"
+      className="bg-transparent border-none p-1"
     >
       <PiUploadUpDuoSolid
         className={cn(
@@ -32,7 +32,7 @@ export const UploadButton = ({
       />
     </Button>
   ) : (
-    <Button onClick={onClick} variant="outline">
+    <Button onClick={onClick} variant="outline" className="text-gray-600">
       Envoyer
       <PiUploadUpDuoSolid
         className={cn(
