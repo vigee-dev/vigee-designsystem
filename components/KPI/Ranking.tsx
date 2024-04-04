@@ -11,8 +11,9 @@ interface Data {
   name: string;
   avatar?: string;
   amount: number;
+  amount2?: number;
   currency?: string;
-  subtitle: string;
+  subtitle?: string;
 }
 interface Props {
   title?: string;
@@ -42,9 +43,18 @@ export function Ranking({ title, subtitle, data, icon }: Props) {
               <p className="text-sm font-medium leading-none">{item.name}</p>
               <p className="text-sm text-muted-foreground">{item.subtitle}</p>
             </div>
-            <div className="ml-auto font-medium text-primary text-sm">
-              {item.amount.toLocaleString("fr-FR").replace(/\s/g, " ")}
-              {item.currency}
+
+            <div className="flex flex-col gap-1 ml-auto font-medium text-sm">
+              <div className=" text-primary ">
+                {item.amount.toLocaleString("fr-FR").replace(/\s/g, " ")}{" "}
+                {item.currency}
+              </div>
+              {item.amount2 && (
+                <div className="text-secondary ">
+                  {item.amount2.toLocaleString("fr-FR").replace(/\s/g, " ")}{" "}
+                  {item.currency}
+                </div>
+              )}
             </div>
           </div>
         ))}
