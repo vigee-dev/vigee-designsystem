@@ -88,7 +88,7 @@ export default function Input<T extends FieldValues>({
                 min={min}
                 max={max}
                 step={step}
-                className="sm:text-[16px] md:text-sm font-medium bg-input border-none"
+                className="text-[16px] md:text-sm font-medium bg-input border-none"
               />
             </FormControl>
           </HoverCard>
