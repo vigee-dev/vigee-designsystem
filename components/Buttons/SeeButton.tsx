@@ -3,6 +3,7 @@ import { PiEye02OnContrast, PiEye02OnDuoStroke } from "../../icons/PikaIcons";
 import { cn } from "../../lib/utils";
 import Link from "next/link";
 import { Tooltip } from "../Tooltip/Tooltip";
+import { Button } from "./Button";
 
 interface Props {
   onClick?: () => void;
@@ -30,13 +31,19 @@ export const SeeButton = ({
     </Tooltip>
   ) : (
     <Tooltip message={tooltip}>
-      <PiEye02OnContrast
-        className={cn(
-          "text-gray-400 hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-6 h-6",
-          className
-        )}
+      <Button
         onClick={onClick}
-      />
+        variant="outline"
+        className="bg-transparent border-none p-0"
+      >
+        <PiEye02OnContrast
+          className={cn(
+            "text-gray-400 hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-6 h-6",
+            className
+          )}
+          onClick={onClick}
+        />
+      </Button>
     </Tooltip>
   );
 };

@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { Button as ShadButton } from "../ui/button";
 import { LoadingButton } from "./LoadingButton";
+import { cn } from "../../lib/utils";
 
 interface ButtonProps {
   children: React.ReactNode;
@@ -39,14 +40,14 @@ export function Button({
   return pending ? (
     <LoadingButton
       variant={variant}
-      className={"font-bold text-sm border " + className}
+      className={cn("font-bold text-sm border ", className)}
     >
       {children}
     </LoadingButton>
   ) : href && !pending ? (
     <ShadButton
       asChild
-      className={"font-bold text-sm border " + className}
+      className={cn("font-bold text-sm border ", className)}
       variant={variant}
     >
       <Link href={href}>{children}</Link>
@@ -57,7 +58,7 @@ export function Button({
       onClick={onClick}
       type={type}
       disabled={disabled}
-      className={"font-bold text-sm border " + className}
+      className={cn("font-bold text-sm border ", className)}
     >
       {children}
     </ShadButton>

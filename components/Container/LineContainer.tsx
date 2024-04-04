@@ -6,6 +6,7 @@ import {
   PiChevronRightSolid,
   PiChevronRightStroke,
 } from "../../icons/PikaIcons";
+import { Button } from "../Buttons/Button";
 
 interface PageHeaderProps {
   title: string;
@@ -16,17 +17,14 @@ interface PageHeaderProps {
   onClick?: () => void;
 }
 
-// Petite fonction pour construire le contenu
 const Content = ({
   title,
   icon,
   background,
   children,
-  onClick,
-}: PageHeaderProps) => (
+}: Omit<PageHeaderProps, "href" | "onClick">) => (
   <div
     className={`rounded-xl h-fit p-5 my-4 items-center bg-${background} border border-slate-200 hover:bg-slate-50 transition-ease-in-out duration-100 hover:cursor-pointer`}
-    onClick={onClick}
   >
     <div className="flex flex-wrap justify-between gap-x-4 w-full items-center">
       <div className="flex gap-x-4">
@@ -54,20 +52,21 @@ export function LineContainer({
   href,
   onClick,
 }: PageHeaderProps) {
-  return href ? (
-    <Link href={href}>
-      <Content title={title} icon={icon} background={background} />
-    </Link>
-  ) : children ? (
-    <Content
-      title={title}
-      icon={icon}
-      background={background}
-      onClick={onClick}
-    >
-      {children}
-    </Content>
-  ) : (
-    <Content title={title} icon={icon} background={background}  onClick={onClick}/>
+  // Si href est présent, utilisez Link pour la navigation
+  if (href) {
+    return (
+      <Link href={href} passHref>
+        <Content title={title} icon={icon} background={background} />
+      </Link>
+    );
+  }
+
+  // Sinon, appliquez l'événement onClick directement
+  return (
+    <div onClick={onClick}>
+      <Content title={title} icon={icon} background={background}>
+        {children}
+      </Content>
+    </div>
   );
 }

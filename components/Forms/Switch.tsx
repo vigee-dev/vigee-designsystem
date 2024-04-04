@@ -40,7 +40,7 @@ export default function Switch<T extends FieldValues>({
       render={({ field }) => (
         <FormItem
           className={cn(
-            "flex flex-row items-center justify-between py-4 border rounded-xl p-4  text-primary",
+            "flex flex-row items-center justify-between py-4 border rounded-xl p-4  text-primary bg-white",
             className
           )}
         >
@@ -60,7 +60,7 @@ export default function Switch<T extends FieldValues>({
   ) : (
     <FormItem
       className={cn(
-        "flex flex-row items-center justify-between py-4 border rounded-xl p-4  text-primary",
+        "flex flex-row items-center justify-between py-4 border rounded-xl p-4  text-primary bg-white",
         className
       )}
     >

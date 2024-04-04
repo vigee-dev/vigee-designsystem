@@ -116,30 +116,32 @@ export function DrawerMobile({
           {trigger}
         </DrawerTrigger>
         <DrawerContent onClick={e => e.stopPropagation()}>
-          <DrawerHeader className="text-left">
-            {title && (
-              <DrawerTitle className="font-bold text-primary">
-                {title}
-              </DrawerTitle>
-            )}
-            {description && (
-              <DrawerDescription>{description}</DrawerDescription>
-            )}
-          </DrawerHeader>
+          <div className="text-[16px]">
+            <ScrollArea className="max-h-[80vh] pb-8">
+              <DrawerHeader className="text-left">
+                {title && (
+                  <DrawerTitle className="font-bold text-primary">
+                    {title}
+                  </DrawerTitle>
+                )}
+                {description && (
+                  <DrawerDescription>{description}</DrawerDescription>
+                )}
+              </DrawerHeader>
 
-          <ScrollArea className="max-h-[80vh] pb-8">
-            <div className="p-4">{children}</div>
-          </ScrollArea>
+              <div className="p-4">{children}</div>
+            </ScrollArea>
 
-          {cancelButton && (
-            <DrawerFooter>
-              <DrawerClose asChild>
-                <Button type="button" variant="outline">
-                  Annuler
-                </Button>
-              </DrawerClose>
-            </DrawerFooter>
-          )}
+            {cancelButton && (
+              <DrawerFooter>
+                <DrawerClose asChild>
+                  <Button type="button" variant="outline">
+                    Annuler
+                  </Button>
+                </DrawerClose>
+              </DrawerFooter>
+            )}
+          </div>
         </DrawerContent>
       </Drawer>
     </DrawerContext.Provider>
