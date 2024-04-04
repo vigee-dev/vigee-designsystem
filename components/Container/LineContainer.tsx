@@ -68,6 +68,6 @@ export function LineContainer({
       {children}
     </Content>
   ) : (
-    <Content title={title} icon={icon} background={background} />
+    <Content title={title} icon={icon} background={background}  onClick={onClick}/>
   );
 }
