@@ -97,7 +97,7 @@ export default function TextArea<T extends FieldValues>({
               field.onChange(e);
             }}
             className={cn(
-              `resize-none font-medium bg-input border-none`,
+              `resize-none font-medium bg-input border-none text-[16px] md:text-sm`,
               className
             )}
             disabled={disabled}
