@@ -99,7 +99,7 @@ export function DrawerMobile({
             </DialogHeader>
 
             {size !== "sm" ? (
-              <ScrollArea className="max-h-[80vh] pb-8">{children}</ScrollArea>
+              <ScrollArea className="max-h-[80vh] pb-8 p-4">{children}</ScrollArea>
             ) : (
               <div className="p-4">{children}</div>
             )}
@@ -111,7 +111,7 @@ export function DrawerMobile({
 
   return (
     <DrawerContext.Provider value={contextValue}>
-      <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerContext.Provider open={open} onOpenChange={setOpen}>
         <DrawerTrigger onClick={e => e.stopPropagation()} asChild>
           {trigger}
         </DrawerTrigger>
