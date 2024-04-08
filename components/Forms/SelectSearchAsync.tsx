@@ -85,14 +85,14 @@ export default function SearchSelectAsync<
                   border: 0,
                   backgroundColor: "#f3f4f6",
                   borderRadius: "0.4rem",
-                  fontSize: "14px",
+                  fontSize: "16px",
                   borderColor: "#f3f4f6",
                 }),
 
                 option: (baseStyles, state) => ({
                   ...baseStyles,
                   cursor: "pointer",
-                  fontSize: "14px",
+                  fontSize: "16px",
                   backgroundColor: "#FFFFFF",
                   ":hover": {
                     backgroundColor: "#EEEEEE",
@@ -105,7 +105,7 @@ export default function SearchSelectAsync<
                   backgroundColor: "#FFF",
                   padding: "0.2rem",
                   boxShadow: "0 0 0 1px #EEE",
-                  fontSize: "14px",
+                  fontSize: "16px",
                   borderRadius: "0.4rem",
                 }),
 
@@ -120,6 +120,7 @@ export default function SearchSelectAsync<
                 multiValueLabel: (styles, { data }) => ({
                   ...styles,
                   color: "#111",
+                  fontSize: "16px",
                 }),
                 multiValueRemove: (styles, { data }) => ({
                   ...styles,
