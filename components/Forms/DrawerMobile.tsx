@@ -111,7 +111,7 @@ export function DrawerMobile({
 
   return (
     <DrawerContext.Provider value={contextValue}>
-      <DrawerContext.Provider open={open} onOpenChange={setOpen}>
+      <Drawer open={open} onOpenChange={setOpen}>
         <DrawerTrigger onClick={e => e.stopPropagation()} asChild>
           {trigger}
         </DrawerTrigger>
