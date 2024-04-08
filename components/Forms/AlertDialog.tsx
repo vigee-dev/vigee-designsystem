@@ -16,23 +16,25 @@ import { Button } from "../Buttons/Button";
 type Props = {
   btnSubAlert?: string;
   onClick: () => void;
+  onCancel?: () => void
   colorBtn?: "outline" | "destructive";
-  trigger: React.ReactNode;
+  trigger?: React.ReactNode;
   btnQuestion: string;
   isPending?: boolean;
+  isOpen?: boolean
 };
 
-type DrawerContextType = {
+type AlertContextType = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const DrawerContext = React.createContext<DrawerContextType | undefined>(
+const AlertContext = React.createContext<AlertContextType | undefined>(
   undefined
 );
 
 export function useAlertContext() {
-  const context = React.useContext(DrawerContext);
+  const context = React.useContext(AlertContext);
   if (context === undefined) {
     throw new Error(
       "useAlertContext doit être utilisé à l'intérieur d'un useAlertContext.Provider"
@@ -46,17 +48,19 @@ export function AlertDialog({
   btnSubAlert,
   colorBtn = "outline",
   onClick,
+  onCancel,
   trigger,
   isPending,
+  isOpen = false
 }: Props) {
   const [open, setOpen] = React.useState(false);
-  const contextValue: DrawerContextType = {
+  const contextValue: AlertContextType = {
     open,
     setOpen,
   };
 
   return (
-    <Alert>
+    <Alert open={isOpen}>
       <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
       <AlertDialogContent className="z-[1000]">
         <AlertDialogHeader>
@@ -66,7 +70,7 @@ export function AlertDialog({
           )}
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Annuler</AlertDialogCancel>
+          <AlertDialogCancel onClick={onCancel}>Annuler</AlertDialogCancel>
           {!isPending ? (
             <AlertDialogAction
               onClick={onClick}
