@@ -6,12 +6,14 @@ import {
 import { cn } from "../../lib/utils";
 import Link from "next/link";
 import { Tooltip } from "../Tooltip/Tooltip";
+import { Button } from "./Button";
 
 interface Props {
   onClick?: () => void;
   className?: string;
   href?: string;
   tooltip?: string;
+  text?: string;
 }
 
 export const EditButton = ({
@@ -19,13 +21,15 @@ export const EditButton = ({
   className,
   href,
   tooltip = "Modifier",
+  text,
 }: Props) => {
   return href ? (
     <Tooltip message={tooltip}>
       <Link href={href}>
+        {text}
         <PiPencilEditBoxContrast
           className={cn(
-            "text-gray-400 hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+            " text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out",
             className
           )}
         />
@@ -33,13 +37,16 @@ export const EditButton = ({
     </Tooltip>
   ) : (
     <Tooltip message={tooltip}>
-      <PiPencilEditBoxDuoSolid
-        className={cn(
-          "text-gray-400 hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
-          className
-        )}
-        onClick={onClick}
-      />
+      <Button className="bg-transparent border-none p-0">
+        {text}
+        <PiPencilEditBoxDuoSolid
+          className={cn(
+            " text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out",
+            className
+          )}
+          onClick={onClick}
+        />
+      </Button>
     </Tooltip>
   );
 };

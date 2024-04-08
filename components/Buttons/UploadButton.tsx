@@ -20,7 +20,6 @@ export const UploadButton = ({
       variant="outline"
       className="bg-transparent border-none p-0"
     >
-      {" "}
       {text}
       <PiUploadUpDuoSolid
         className={cn(
