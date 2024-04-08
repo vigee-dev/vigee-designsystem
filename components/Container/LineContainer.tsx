@@ -1,12 +1,7 @@
 import Link from "next/link";
 import { TypographyH4 } from "../Typography/Typography";
-import { ChevronRightIcon } from "../../icons/Chevrons";
-import {
-  PiChevronBigRightStroke,
-  PiChevronRightSolid,
-  PiChevronRightStroke,
-} from "../../icons/PikaIcons";
-import { Button } from "../Buttons/Button";
+import { PiChevronBigRightStroke } from "../../icons/PikaIcons";
+import { cn } from "../../lib/utils";
 
 interface PageHeaderProps {
   title: string;
@@ -15,16 +10,20 @@ interface PageHeaderProps {
   icon?: React.ReactNode;
   href?: string;
   onClick?: () => void;
+  className?: string;
 }
 
 const Content = ({
   title,
   icon,
-  background,
   children,
+  className,
 }: Omit<PageHeaderProps, "href" | "onClick">) => (
   <div
-    className={`rounded-xl h-fit p-5 my-4 items-center bg-${background} border border-slate-200 hover:bg-slate-50 transition-ease-in-out duration-100 hover:cursor-pointer`}
+    className={cn(
+      "rounded-xl h-fit p-5 my-4 items-center border border-slate-200 hover:bg-slate-50 transition-ease-in-out duration-100 hover:cursor-pointer bg-white text-primary",
+      className
+    )}
   >
     <div className="flex flex-wrap justify-between gap-x-4 w-full items-center">
       <div className="flex gap-x-4">
