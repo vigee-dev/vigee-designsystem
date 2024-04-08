@@ -14,13 +14,20 @@ export const UploadButton = ({
   className,
   text,
 }: DownloadButtonProps) => {
-  <Button onClick={onClick} variant="outline" className="text-gray-600">
-    {text}
-    <PiUploadUpDuoSolid
-      className={cn(
-        " text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out",
-        className
-      )}
-    />
-  </Button>;
+  return (
+    <Button
+      onClick={onClick}
+      variant="outline"
+      className="bg-transparent border-none p-0"
+    >
+      {" "}
+      {text}
+      <PiUploadUpDuoSolid
+        className={cn(
+          " text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out",
+          className
+        )}
+      />
+    </Button>
+  );
 };
