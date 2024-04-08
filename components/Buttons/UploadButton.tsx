@@ -23,7 +23,7 @@ export const UploadButton = ({
       {text}
       <PiUploadUpDuoSolid
         className={cn(
-          " text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out",
+          "text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out",
           className
         )}
       />
