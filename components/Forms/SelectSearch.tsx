@@ -60,7 +60,7 @@ export default function SelectSearch<
       control={form?.control}
       name={name}
       render={({ field }) => (
-        <FormItem className={cn(classNameContainer)}>
+        <FormItem className={cn(classNameContainer, "md:text-sm text-[16px]")}>
           {label && (
             <FormLabel className="font-black text-primary">{label}</FormLabel>
           )}

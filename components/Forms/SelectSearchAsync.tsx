@@ -7,7 +7,7 @@ import {
 } from "../../components/ui/form";
 import SelectAndSearchAsync from "react-select/async";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
-import {ActionMeta, GroupBase, OnChangeValue} from "react-select";
+import { ActionMeta, GroupBase, OnChangeValue } from "react-select";
 import { MultiValue, SingleValue, PropsValue } from "react-select";
 import React from "react";
 
@@ -27,11 +27,14 @@ interface SearchSelectAsyncInterface<
   defaultValue?: IsMulti extends true
     ? MultiValue<Option>
     : SingleValue<Option>;
-  value?: PropsValue<Option>
+  value?: PropsValue<Option>;
   label?: string;
   isMulti?: IsMulti;
   noOptionsMessage?: string;
-  onChange?: (newValue: OnChangeValue<Option, IsMulti>, actionMeta: ActionMeta<Option>) => void
+  onChange?: (
+    newValue: OnChangeValue<Option, IsMulti>,
+    actionMeta: ActionMeta<Option>
+  ) => void;
 }
 
 // TODO Better way to handle isMulti, Option type etc ...
@@ -53,14 +56,14 @@ export default function SearchSelectAsync<
   noOptionsMessage = "Aucun résultat",
   defaultValue,
   onChange,
-  value
+  value,
 }: SearchSelectAsyncInterface<T, Option, IsMulti>) {
-  return (
-    form && name ?( <FormField
+  return form && name ? (
+    <FormField
       control={form?.control}
       name={name}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className="md:text-sm text-[16px]">
           {label && (
             <FormLabel className="font-black text-primary">{label}</FormLabel>
           )}
@@ -149,8 +152,12 @@ export default function SearchSelectAsync<
           <FormMessage />
         </FormItem>
       )}
-    />) : (<FormItem>
-      {label && (<FormLabel className="font-black text-primary">{label}</FormLabel>)}
+    />
+  ) : (
+    <FormItem>
+      {label && (
+        <FormLabel className="font-black text-primary">{label}</FormLabel>
+      )}
       <FormControl>
         {/* TODO Debounce loadoptions ? */}
         {/* TODO typeof isMulti ?*/}
@@ -222,9 +229,8 @@ export default function SearchSelectAsync<
           isMulti={isMulti}
           value={value}
         />
-
       </FormControl>
       <FormMessage />
-    </FormItem>)
+    </FormItem>
   );
 }
