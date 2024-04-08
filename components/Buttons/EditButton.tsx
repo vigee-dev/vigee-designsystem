@@ -30,7 +30,7 @@ export const EditButton = ({
           {text}
           <PiPencilEditBoxContrast
             className={cn(
-              " text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out",
+              " text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out w-5 h-5",
               className
             )}
           />
@@ -43,7 +43,7 @@ export const EditButton = ({
         {text}
         <PiPencilEditBoxDuoSolid
           className={cn(
-            " text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out",
+            " text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out w-5 h-5",
             className
           )}
           onClick={onClick}
