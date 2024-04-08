@@ -26,11 +26,11 @@ export const EditButton = ({
   return href ? (
     <Tooltip message={tooltip}>
       <Link href={href}>
-        <Button className="bg-transparent border-none p-0">
+        <Button className="bg-transparent border-none p-0" variant="outline">
           {text}
           <PiPencilEditBoxContrast
             className={cn(
-              " text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out w-5 h-5",
+              "text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out w-5 h-5",
               className
             )}
           />
@@ -39,7 +39,7 @@ export const EditButton = ({
     </Tooltip>
   ) : (
     <Tooltip message={tooltip}>
-      <Button className="bg-transparent border-none p-0">
+      <Button className="bg-transparent border-none p-0" variant="outline">
         {text}
         <PiPencilEditBoxDuoSolid
           className={cn(
