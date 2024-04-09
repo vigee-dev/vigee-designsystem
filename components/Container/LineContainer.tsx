@@ -50,12 +50,18 @@ export function LineContainer({
   icon,
   href,
   onClick,
+  className,
 }: PageHeaderProps) {
   // Si href est présent, utilisez Link pour la navigation
   if (href) {
     return (
       <Link href={href} passHref>
-        <Content title={title} icon={icon} background={background} />
+        <Content
+          title={title}
+          icon={icon}
+          background={background}
+          className={className}
+        />
       </Link>
     );
   }
