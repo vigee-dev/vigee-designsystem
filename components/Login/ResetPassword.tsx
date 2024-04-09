@@ -50,6 +50,14 @@ export default function ResetPassword({ token }: ResetPasswordProps) {
     }
   };
 
+  const isPending = () => {
+    if(mutation?.isPending) {
+      return mutation.isPending;
+    } else if (mutation?.isLoading) {
+      return mutation.isLoading;
+    }
+  }
+
   return (
     <div className="w-full max-w-sm space-y-6 align-center my-auto justify-center mx-auto">
       <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
