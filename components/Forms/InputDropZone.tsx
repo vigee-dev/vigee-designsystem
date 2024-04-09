@@ -107,11 +107,9 @@ export default function InputDropZoneFile<T extends FieldValues>({
     inputRef.current.click();
   }
 
-  const isImageFile = (filename: string) =>
-    /\.jpg$|\.jpeg$|\.png$/i.test(filename);
+  const isImageFile = (filename: string) => /\.jpg$|\.jpeg$|\.png$/i.test(filename);
   const isPDFFile = (filename: string) => /\.pdf$/i.test(filename);
-  const shortName = (filename: string) =>
-    filename.length > 15 ? filename.substring(0, 15) + "..." : filename;
+  const shortName = (filename: string) => filename.length > 15 ? filename.substring(0, 15) + "..." : filename;
 
   return (
     <div className="flex  items-center justify-center col-span-full">
