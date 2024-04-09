@@ -3,17 +3,13 @@
 import React from "react";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { useRef, useState } from "react";
-import { DrawerMobile } from "@/app/components/vigee-designsystem/components/Forms/DrawerMobile";
-import { EyeIcon } from "@heroicons/react/24/outline";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "../ui/carousel";
 import { Card, CardContent } from "../ui/card";
-import { PiDeleteDustbin01DuoSolid } from "../../icons/PikaIcons";
+import {
+  PiDeleteDustbin01DuoSolid,
+  PiFile02CheckDuoSolid,
+  PiFilePdfFormatContrast,
+  PiFilePdfFormatDuoSolid,
+} from "../../icons/PikaIcons";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -111,6 +107,12 @@ export default function InputDropZoneFile<T extends FieldValues>({
     inputRef.current.click();
   }
 
+  const isImageFile = (filename: string) =>
+    /\.jpg$|\.jpeg$|\.png$/i.test(filename);
+  const isPDFFile = (filename: string) => /\.pdf$/i.test(filename);
+  const shortName = (filename: string) =>
+    filename.length > 15 ? filename.substring(0, 15) + "..." : filename;
+
   return (
     <div className="flex  items-center justify-center col-span-full">
       <div
@@ -163,16 +165,36 @@ export default function InputDropZoneFile<T extends FieldValues>({
                     <PiDeleteDustbin01DuoSolid />
                   </span>
                   <CardContent className="flex aspect-square items-center justify-center ">
-                    <img
-                      key={index}
-                      src={
-                        file instanceof File
-                          ? URL.createObjectURL(file)
-                          : file.signedUrl
-                      }
-                      alt="Aperçu du fichier"
-                      className=" rounded-lg"
-                    />
+                    {file instanceof File && isImageFile(file.name) ? (
+                      <img
+                        key={index}
+                        src={URL.createObjectURL(file)}
+                        alt="Aperçu du fichier"
+                        className="rounded-lg"
+                        onLoad={event =>
+                          URL.revokeObjectURL(
+                            (event.target as HTMLImageElement).src
+                          )
+                        }
+                      />
+                    ) : "signedUrl" in file ? (
+                      <img
+                        key={index}
+                        src={file.signedUrl}
+                        alt="Aperçu du fichier"
+                        className="rounded-lg"
+                      />
+                    ) : file instanceof File && isPDFFile(file.name) ? (
+                      <div className="flex items-center flex-col text-xs  text-gray-400 gap-2">
+                        <PiFilePdfFormatDuoSolid className="w-12 h-12 text-gray-400" />
+                        {shortName(file.name)}
+                      </div>
+                    ) : (
+                      <div className="flex items-center flex-col text-xs  text-gray-400 gap-2">
+                        <PiFile02CheckDuoSolid className="w-12 h-12 text-gray-400" />
+                        {shortName(file.name)}
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               </div>
