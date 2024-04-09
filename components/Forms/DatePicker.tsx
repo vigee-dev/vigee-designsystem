@@ -13,7 +13,7 @@ import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { cn } from "../../lib/utils";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
-import { fr } from "date-fns/esm/locale";
+import {fr} from "date-fns/locale";
 import { Input } from "../ui/input";
 import {
   PiCalendarCheckContrast,
