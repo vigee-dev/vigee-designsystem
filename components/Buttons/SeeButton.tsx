@@ -23,7 +23,7 @@ export const SeeButton = ({
       <Link href={href}>
         <PiEye02OnContrast
           className={cn(
-            "text-gray-400 hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-6 h-6",
+            "text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out",
             className
           )}
         />
@@ -38,7 +38,7 @@ export const SeeButton = ({
       >
         <PiEye02OnContrast
           className={cn(
-            "text-gray-400 hover:text-primary hover:cursor-pointer transform transition-ease-in-out duration-300 ease-in-out w-6 h-6",
+            "text-gray-500 mx-2 hover:text-primary hover:cursor-pointer transform transition-ease-in-out",
             className
           )}
           onClick={onClick}
