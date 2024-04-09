@@ -49,7 +49,9 @@ const DrawerContext = React.createContext<DrawerContextType | undefined>(
 export function useDrawerContext() {
   const context = React.useContext(DrawerContext);
   if (context === undefined) {
-
+    throw new Error(
+      "useDrawerContext doit être utilisé à l'intérieur d'un DrawerContext.Provider"
+    );
   }
   return context;
 }
