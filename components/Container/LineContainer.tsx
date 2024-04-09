@@ -21,7 +21,7 @@ const Content = ({
 }: Omit<PageHeaderProps, "href" | "onClick">) => (
   <div
     className={cn(
-      "rounded-xl h-fit p-5 my-4 items-center border border-slate-200 hover:bg-slate-50 transition-ease-in-out duration-100 hover:cursor-pointer bg-white text-primary",
+      "rounded-xl h-fit p-5 my-4 items-center border border-slate-200 hover:bg-slate-50 transition-ease-in-out duration-100 hover:cursor-pointer bg-white ",
       className
     )}
   >
