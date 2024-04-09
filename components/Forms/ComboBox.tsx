@@ -96,7 +96,7 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
                   className="max-h-[200px]"
                   key={item.value}
                   value={item.value}
-                  onSelect={currentValue => {
+                  onSelect={(currentValue: string) => {
                     const valueToUpdate =
                       currentValue === value ? undefined : currentValue;
 
