@@ -13,7 +13,7 @@ import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { cn } from "../../lib/utils";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
-import { fr } from "date-fns/locale";
+import {fr} from "date-fns/locale";
 import { Input } from "../ui/input";
 import {
   PiCalendarCheckContrast,
@@ -34,27 +34,27 @@ interface Props<T extends FieldValues> {
 }
 
 export default function DatePicker<T extends FieldValues>({
-                                                            label,
-                                                            form,
-                                                            name,
-                                                            className,
-                                                            starting_date,
-                                                            disabled,
-                                                            disabledKeys,
-                                                            returnString,
-                                                            defaultValue,
-                                                          }: Props<T>) {
+  label,
+  form,
+  name,
+  className,
+  starting_date,
+  disabled,
+  disabledKeys,
+  returnString,
+  defaultValue,
+}: Props<T>) {
   const yearDefault = defaultValue
-      ? moment(defaultValue).year().toString()
-      : moment().year().toString();
+    ? moment(defaultValue).year().toString()
+    : moment().year().toString();
   const dateDefault = defaultValue
-      ? moment(defaultValue).toDate()
-      : form && name
-          ? form.getValues(name)
-          : new Date();
+    ? moment(defaultValue).toDate()
+    : form && name
+    ? form.getValues(name)
+    : new Date();
   const inputDate = defaultValue
-      ? moment(defaultValue).format("DD/MM/YYYY")
-      : "";
+    ? moment(defaultValue).format("DD/MM/YYYY")
+    : "";
   const [selectedYear, setSelectedYear] = useState(yearDefault);
   const [selectedDate, setSelectedDate] = useState<Date | null>(dateDefault);
   const [inputValue, setInputValue] = useState(inputDate);
@@ -79,7 +79,7 @@ export default function DatePicker<T extends FieldValues>({
     }
     if (numbers.length > 4) {
       formattedValue =
-          formattedValue.substring(0, 5) + "/" + formattedValue.substring(5);
+        formattedValue.substring(0, 5) + "/" + formattedValue.substring(5);
     }
     // Limite la longueur de la chaîne à 10 caractères pour correspondre au format DD/MM/YYYY
     return formattedValue.substring(0, 10);
@@ -107,90 +107,90 @@ export default function DatePicker<T extends FieldValues>({
   }, [selectedDate]);
 
   return (
-      <FormField
-          control={form.control}
-          name={name}
-          render={({ field }) => (
-              <FormItem className="flex flex-col py-2">
-                <FormLabel className="font-black text-primary">{label}</FormLabel>
-                <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      {!disabledKeys ? (
-                          <Input
-                              value={
-                                field.value
-                                    ? convertDateToString(field.value)
-                                    : inputValue
-                              }
-                              onChange={(e) => {
-                                const date = handleInputChange(e);
-                                if (date) {
-                                  field.onChange(
-                                      returnString
-                                          ? moment(date).format("YYYY-MM-DD")
-                                          : date,
-                                  );
-                                } else {
-                                  // Gérer le cas où la date n'est pas valide / ou réinitialiser le champ
-                                  field.onChange(null);
-                                }
-                              }}
-                              placeholder="Choisir une date"
-                              className={cn(
-                                  "pl-3 text-left font-display font-medium bg-input border-none",
-                                  !field.value && "text-muted-foreground",
-                                  className,
-                              )}
-                              type="text"
-                              disabled={disabled}
-                          />
-                      ) : (
-                          <Button
-                              disabled={disabled}
-                              variant={"outline"}
-                              className={cn(
-                                  `pl-3 text-left font-display font-medium bg-input border-none`,
-                                  !field.value && "text-muted-foreground",
-                                  className,
-                              )}
-                          >
-                            {field.value ? (
-                                moment(field.value).format("DD/MM/YYYY")
-                            ) : (
-                                <span>Choisir une date</span>
-                            )}
+    <FormField
+      control={form.control}
+      name={name}
+      render={({ field }) => (
+        <FormItem className="flex flex-col py-2">
+          <FormLabel className="font-black text-primary">{label}</FormLabel>
+          <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
+            <PopoverTrigger asChild>
+              <FormControl>
+                {!disabledKeys ? (
+                  <Input
+                    value={
+                      field.value
+                        ? convertDateToString(field.value)
+                        : inputValue
+                    }
+                    onChange={e => {
+                      const date = handleInputChange(e);
+                      if (date) {
+                        field.onChange(
+                          returnString
+                            ? moment(date).format("YYYY-MM-DD")
+                            : date
+                        );
+                      } else {
+                        // Gérer le cas où la date n'est pas valide / ou réinitialiser le champ
+                        field.onChange(null);
+                      }
+                    }}
+                    placeholder="Choisir une date"
+                    className={cn(
+                      "pl-3 text-left font-display font-medium bg-input border-none",
+                      !field.value && "text-muted-foreground",
+                      className
+                    )}
+                    type="text"
+                    disabled={disabled}
+                  />
+                ) : (
+                  <Button
+                    disabled={disabled}
+                    variant={"outline"}
+                    className={cn(
+                      `pl-3 text-left font-display font-medium bg-input border-none`,
+                      !field.value && "text-muted-foreground",
+                      className
+                    )}
+                  >
+                    {field.value ? (
+                      moment(field.value).format("DD/MM/YYYY")
+                    ) : (
+                      <span>Choisir une date</span>
+                    )}
 
-                            <PiCalendarFilledContrast className="ml-auto h-4 w-4 opacity-50" />
-                          </Button>
-                      )}
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                        key={selectedYear}
-                        mode="single"
-                        selected={selectedDate ?? undefined}
-                        onSelect={(date: Date) => {
-                          setSelectedDate(date ?? null);
-                          setPopoverOpen(false); // Ferme le Popover après la sélection d'une date
-                          field.onChange(
-                              returnString ? moment(date).format("YYYY-MM-DD") : date,
-                          );
-                        }}
-                        disabled={(date: number | Date) =>
-                            starting_date ? date < starting_date : false
-                        }
-                        locale={fr}
-                        initialFocus
-                        defaultMonth={selectedDate || new Date()}
-                    />
-                  </PopoverContent>
-                </Popover>
-                <FormDescription></FormDescription>
-                <FormMessage />
-              </FormItem>
-          )}
-      />
+                    <PiCalendarFilledContrast className="ml-auto h-4 w-4 opacity-50" />
+                  </Button>
+                )}
+              </FormControl>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                key={selectedYear}
+                mode="single"
+                selected={selectedDate ?? undefined}
+                onSelect={date => {
+                  setSelectedDate(date ?? null);
+                  setPopoverOpen(false); // Ferme le Popover après la sélection d'une date
+                  field.onChange(
+                    returnString ? moment(date).format("YYYY-MM-DD") : date
+                  );
+                }}
+                disabled={date =>
+                  starting_date ? date < starting_date : false
+                }
+                locale={fr}
+                initialFocus
+                defaultMonth={selectedDate || new Date()}
+              />
+            </PopoverContent>
+          </Popover>
+          <FormDescription></FormDescription>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
   );
 }
