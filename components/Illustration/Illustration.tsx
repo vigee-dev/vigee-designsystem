@@ -23,7 +23,7 @@ export default function Illustration({
           height={2000}
           className="mx-auto h-64 w-auto"
           src={img}
-          alt="Login image"
+          alt="LoginForm image"
         />
       )}
       <h1
