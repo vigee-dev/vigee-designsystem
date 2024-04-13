@@ -4,10 +4,7 @@ import * as React from "react";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react";
-import {
-  PiArrowLeftCircleDuoSolid,
-  PiArrowRightCircleDuoSolid,
-} from "../../icons/PikaIcons";
+import { PiArrowLeftStroke, PiArrowRightStroke } from "../../icons/PikaIcons";
 
 import { cn } from "../../lib/utils";
 import { Button } from "../../components/ui/button";
@@ -219,7 +216,7 @@ const CarouselPrevious = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <PiArrowLeftCircleDuoSolid className="h-4 w-4" />
+      <PiArrowLeftStroke className="h-5 w-5" />
       <span className="sr-only">Previous slide</span>
     </Button>
   );
@@ -248,7 +245,7 @@ const CarouselNext = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <PiArrowRightCircleDuoSolid className="h-4 w-4" />
+      <PiArrowRightStroke className="h-5 w-5" />
       <span className="sr-only">Next slide</span>
     </Button>
   );
