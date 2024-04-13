@@ -51,7 +51,7 @@ export function AlertDialog({
   onCancel,
   trigger,
   isPending,
-  isOpen = false
+  isOpen
 }: Props) {
   const [open, setOpen] = React.useState(false);
   const contextValue: AlertContextType = {
