@@ -1,13 +1,4 @@
 import React from "react";
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form";
-
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { z } from "zod";
 import {
@@ -17,12 +8,19 @@ import {
   SelectValue,
 } from "../ui/select";
 import { PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
-
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "../ui/hover-card";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -83,7 +81,7 @@ export default function Select<T extends FieldValues>({
             )}
           </HoverCard>
           <ShadSelect
-            onValueChange={e => {
+            onValueChange={(e: string) => {
               if (!isBoolean) {
                 field.onChange(e);
               } else {
@@ -95,7 +93,7 @@ export default function Select<T extends FieldValues>({
             disabled={disabled}
           >
             <FormControl>
-              <SelectTrigger className="font-medium bg-input border-none  ">
+              <SelectTrigger className="font-medium bg-input border-none">
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
             </FormControl>
@@ -117,7 +115,7 @@ export default function Select<T extends FieldValues>({
         disabled={disabled}
       >
         <FormControl>
-          <SelectTrigger className="font-medium bg-input border-none  ">
+          <SelectTrigger className="font-medium bg-input border-none">
             <SelectValue placeholder={placeholder} />
           </SelectTrigger>
         </FormControl>
