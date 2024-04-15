@@ -16,7 +16,7 @@ import { cn } from "../../lib/utils";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { Calendar } from "../ui/calendar";
 import { z } from "zod";
-import { enUS, fr } from "date-fns/esm/locale";
+import { fr } from "date-fns/locale";
 
 interface Props<T extends z.ZodType<any, any>> {
   label?: string;
