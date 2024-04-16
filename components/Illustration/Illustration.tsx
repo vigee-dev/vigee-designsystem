@@ -7,6 +7,7 @@ interface IllustrationProps {
   subtitle?: string;
   img?: StaticImageData;
   children?: React.ReactNode;
+  height?: string;
 }
 export default function Illustration({
   title,
@@ -14,6 +15,7 @@ export default function Illustration({
   subtitle,
   img,
   children,
+  height = "64",
 }: IllustrationProps) {
   return (
     <div className="flex flex-col items-center justify-center bg-primary h-screen w-full px-12 ">
@@ -21,9 +23,9 @@ export default function Illustration({
         <Image
           width={2000}
           height={2000}
-          className="mx-auto h-64 w-auto"
+          className={`mx-auto h-${height} w-auto`}
           src={img}
-          alt="Login image"
+          alt="LoginForm image"
         />
       )}
       <h1
