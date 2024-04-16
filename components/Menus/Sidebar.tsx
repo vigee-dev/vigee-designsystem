@@ -8,6 +8,7 @@ import VariableLogo from "../Logos/VariableLogo";
 import VigeeGrayLogo from "../../img/logos/VigeeGrayLogo.png";
 import { Badge } from "../ui/badge";
 import { Select } from "../Select/Select";
+import { cn } from "../../lib/utils";
 
 function classNames(...classes: (string | boolean)[]): string {
   return classes.filter(Boolean).join(" ");
@@ -40,6 +41,7 @@ interface SidebarProps {
   classNameSelect?: string;
   selectPlaceHolder?: string;
   defaultValueSelect?: string;
+  bgColor?: string;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -59,7 +61,8 @@ const Sidebar: React.FC<SidebarProps> = ({
   onChangeSelect,
   classNameSelect,
   selectPlaceHolder,
-    defaultValueSelect,
+  defaultValueSelect,
+  bgColor = "#0E0E0E",
 }: SidebarProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [hoverMenu, setHoverMenu] = useState(false);
@@ -82,8 +85,8 @@ const Sidebar: React.FC<SidebarProps> = ({
       >
         <div
           className={`${"flex px-3"} grow flex-col gap-y-5 overflow-y-auto  shadow-md transform transition-all duration-300 ease-in-out ${
-            dark ? "bg-[#0E0E0E]" : "bg-white"
-          } text-${text}`}
+            dark ? `bg-${bgColor}` : "bg-white"
+          } `}
         >
           <div className="flex h-16 shrink-0 items-center justify-between pt-4 w-full ">
             <div className={`justify-between mx-auto flex w-full px-1`}>
@@ -148,7 +151,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                         }}
                         placeholder={selectPlaceHolder}
                         className={classNameSelect}
-                        defaultValue={defaultValueSelect ?? selectOptions[0].value}
+                        defaultValue={
+                          defaultValueSelect ?? selectOptions[0].value
+                        }
                       />
                     </div>
                   )}
