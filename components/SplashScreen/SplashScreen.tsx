@@ -5,18 +5,16 @@ import { cn } from "../../lib/utils";
 
 interface Props {
   className?: string;
-  finishLoading: () => void;
+  finishLoading?: () => void;
 }
 
 export const SplashScreen = ({ finishLoading, className }: Props) => {
   useEffect(() => {
     const loaderAnimation = anime.timeline({
       complete: () => {
-        finishLoading(); // Cela est appelé une fois l'animation terminée.
+        finishLoading && finishLoading();
       },
     });
-
-    console.log("loaderAnimation", finishLoading);
 
     loaderAnimation.add({
       targets: "#loader",
