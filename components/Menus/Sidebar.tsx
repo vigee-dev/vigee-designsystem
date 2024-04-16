@@ -42,6 +42,7 @@ interface SidebarProps {
   selectPlaceHolder?: string;
   defaultValueSelect?: string;
   bgColor?: string;
+  className?: string;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -61,7 +62,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   classNameSelect,
   selectPlaceHolder,
   defaultValueSelect,
-  bgColor = "#0E0E0E",
+  className,
 }: SidebarProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [hoverMenu, setHoverMenu] = useState(false);
@@ -83,9 +84,10 @@ const Sidebar: React.FC<SidebarProps> = ({
         onMouseLeave={() => setHoverMenu(false)}
       >
         <div
-          className={`${"flex px-3"} grow flex-col gap-y-5 overflow-y-auto  shadow-md transform transition-all duration-300 ease-in-out ${
-            bgColor ? `bg-[${bgColor}]` : "bg-white"
-          } `}
+          className={cn(
+            `${"flex px-3"} grow flex-col gap-y-5 overflow-y-auto  shadow-md transform transition-all duration-300 ease-in-out bg-white`,
+            className
+          )}
         >
           <div className="flex h-16 shrink-0 items-center justify-between pt-4 w-full ">
             <div className={`justify-between mx-auto flex w-full px-1`}>
