@@ -29,6 +29,8 @@ interface Props {
   variant?: "default" | "destructive" | "outline" | "secondary" | "ghost";
   callbackUrl?: string;
   noCopyright?: boolean;
+  imageWidth?: number;
+  imageHeight?: number;
 }
 
 export default function Login({
@@ -37,6 +39,8 @@ export default function Login({
   variant,
   callbackUrl = "/",
   noCopyright = false,
+  imageWidth = 90,
+  imageHeight = 90,
 }: Props) {
   const router = useRouter();
 
@@ -84,8 +88,8 @@ export default function Login({
     <>
       <div className="w-full max-w-xl space-y-6 align-center my-auto justify-start mx-auto py-40 md:px-8 md:p-24 md:py-4 min-h-screen md:min-h-fit md:max-w-[480px]">
         <Image
-          width={90}
-          height={90}
+          width={imageWidth}
+          height={imageHeight}
           className=" ml-4 md:ml-4 absolute md:relative top-12 md:top-0"
           src={logo}
           alt="Vigee - Make IT Simple"
