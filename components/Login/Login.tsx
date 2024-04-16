@@ -28,6 +28,7 @@ interface Props {
   clientName?: string;
   variant?: "default" | "destructive" | "outline" | "secondary" | "ghost";
   callbackUrl?: string;
+  noCopyright?: boolean;
 }
 
 export default function Login({
@@ -35,6 +36,7 @@ export default function Login({
   clientName,
   variant,
   callbackUrl = "/",
+  noCopyright = false,
 }: Props) {
   const router = useRouter();
 
@@ -164,9 +166,11 @@ export default function Login({
             </form>
           </Form>
         </div>
-        <div className="hidden absolute md:flex items-center py-2">
-          <Copyright clientName={clientName} />
-        </div>
+        {noCopyright && (
+          <div className="hidden absolute md:flex items-center py-2">
+            <Copyright clientName={clientName} />
+          </div>
+        )}
       </div>
     </>
   );
