@@ -48,7 +48,6 @@ const Sidebar: React.FC<SidebarProps> = ({
   navigation,
   children,
   noLogo,
-  dark,
   text = `black`,
   logo,
   menu = false,
@@ -85,7 +84,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       >
         <div
           className={`${"flex px-3"} grow flex-col gap-y-5 overflow-y-auto  shadow-md transform transition-all duration-300 ease-in-out ${
-            dark ? `bg-[${bgColor}]` : "bg-white"
+            bgColor ? `bg-[${bgColor}]` : "bg-white"
           } `}
         >
           <div className="flex h-16 shrink-0 items-center justify-between pt-4 w-full ">
