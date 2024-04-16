@@ -27,7 +27,7 @@ export function PlusLessButton<T extends FieldValues>({
   title,
   unit,
   interval = 0.5,
-  min = 1,
+  min = 0.5,
   max = 100,
   start = 1,
   form,
