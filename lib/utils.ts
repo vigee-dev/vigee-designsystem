@@ -173,5 +173,5 @@ export const currency = (number: number) => {
           maximumFractionDigits: 0, // Force l'affichage sans décimales
         })
         .replace(/\s/g, " "),
-  };
-};
+  }
+}

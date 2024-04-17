@@ -1,10 +1,10 @@
 import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
-import { cn } from "../../lib/utils";
+import {cn, currency} from "../../lib/utils";
 
-interface StatItem {
+export interface StatItem {
   name: string;
-  stat: string;
-  previousStat?: string;
+  stat: number;
+  previousStat?: number;
   color?: string;
   upNegative?: boolean;
 }
@@ -19,13 +19,11 @@ function classNames(...classes: string[]): string {
 }
 
 const NumberKPI = ({ stats, columns = 3 }: NumberKPIProps) => {
-  const variation = (previousStat: string, stat: string) => {
-    const previousStatNumber = parseInt(previousStat.replace("€", ""));
-    const statNumber = parseInt(stat.replace("€", ""));
-    const diff = statNumber - previousStatNumber;
-    const percent = (diff / previousStatNumber) * 100;
-    return percent.toFixed(0);
-  };
+  const variation = (previousStat: number, stat: number) => {
+    const diff = stat - previousStat
+    const percent = (diff / previousStat) * 100;
+    return percent.toFixed(0)
+  }
 
   return (
     <div className="my-2">
@@ -42,7 +40,7 @@ const NumberKPI = ({ stats, columns = 3 }: NumberKPIProps) => {
                   item.color
                 )}
               >
-                {item.stat.toLocaleString()}
+                {currency(item.stat).toRoundedEuro()}
               </div>
 
               {item?.previousStat && (
@@ -81,9 +79,7 @@ const NumberKPI = ({ stats, columns = 3 }: NumberKPIProps) => {
                     {item.previousStat < item.stat ? "Increased" : "Decreased"}{" "}
                     by{" "}
                   </span>
-                  {item.previousStat &&
-                    variation(item.previousStat, item.stat).toLocaleString()}
-                  %
+                  {item.previousStat && variation(item.previousStat, item.stat)} %
                 </div>
               )}
             </dd>
