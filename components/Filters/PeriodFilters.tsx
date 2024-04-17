@@ -130,7 +130,7 @@ export const PeriodFilters = ({
         defaultValue="year"
         className="flex flex-col md:flex-row gap-1 md:gap-4 justify-between md:bg-white bg-transparent md:border border-none  items-center"
       >
-        <TabsList className="w-full md:w-fit">
+        <TabsList className="w-full md:w-fit mt-2">
           {day && (
             <TabsTrigger
               className="w-full md:w-fit"
