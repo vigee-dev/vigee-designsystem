@@ -170,7 +170,7 @@ export default function Login({
             </form>
           </Form>
         </div>
-        {noCopyright && (
+        {!noCopyright && (
           <div className="hidden absolute md:flex items-center py-2">
             <Copyright clientName={clientName} />
           </div>
