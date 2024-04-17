@@ -31,7 +31,7 @@
   @apply w-8 h-8 flex items-center justify-center z-10 relative bg-gray-300 rounded-full font-semibold text-white;
 }
 .active .step {
-  @apply bg-primary-light;
+  @apply bg-primary;
 }
 .complete .step {
   @apply bg-primary;
