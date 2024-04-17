@@ -145,7 +145,7 @@ const ButtonComponent = ({
             "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
             className,
             !children &&
-              "group-hover:text-primary text-gray-500 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform ease-in-out duration-300 w-7 h-7"
+              "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-7 h-7"
           )}
         />
       )}
