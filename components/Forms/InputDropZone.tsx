@@ -12,11 +12,12 @@ import {
 } from "../../icons/PikaIcons";
 
 type Props<T extends FieldValues> = {
-  form?: UseFormReturn<T>;
-  name: Path<T>;
-  extensions?: string[];
-  multiple?: boolean;
-};
+  form?: UseFormReturn<T>
+  name: Path<T>
+  extensions?: string[]
+  multiple?: boolean
+  accept?: string
+}
 
 // TODO styles @vigee
 export default function InputDropZoneFile<T extends FieldValues>({
@@ -24,6 +25,7 @@ export default function InputDropZoneFile<T extends FieldValues>({
   name,
   extensions,
   multiple = false,
+  accept
 }: Props<T>) {
   function getPossibleExtensions(strings: string[] | undefined): string {
     // Déterminer les extensions possibles
@@ -132,7 +134,7 @@ export default function InputDropZoneFile<T extends FieldValues>({
           type="file"
           multiple={multiple}
           onChange={handleChange}
-          accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+          accept={accept || ".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"}
         />
 
         {!(files.length > 0) ? (
