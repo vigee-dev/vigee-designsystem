@@ -43,12 +43,3 @@
 .active:not(:first-child):before {
   @apply bg-primary;
 }
-
-.loader {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  animation: animloader 1s linear infinite;
-}
