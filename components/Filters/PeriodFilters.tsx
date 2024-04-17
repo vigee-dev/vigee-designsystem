@@ -202,7 +202,7 @@ export const PeriodFilters = ({
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-full md:w-fit font-medium bg-white md:bg-input'",
+                    "w-full md:w-fit font-medium bg-white md:bg-input",
                     !date && "text-muted-foreground"
                   )}
                 >
@@ -248,12 +248,12 @@ export const PeriodFilters = ({
               defaultValue={months[new Date().getMonth()].value}
               options={months}
               onChange={handleMonthChange}
-              className="w-full md:w-fit bg-white md:bg-transparent"
+              className="w-full md:w-fit bg-white md:bg-input"
             />
           </TabsContent>
 
           <Select
-            className="w-full md:w-auto md:mt-1 bg-white md:bg-transparent"
+            className="w-full md:w-auto md:mt-2 bg-white md:bg-input"
             defaultValue={selectedYear}
             onChange={selectedValue => {
               setSelectedYear(selectedValue ?? "");
