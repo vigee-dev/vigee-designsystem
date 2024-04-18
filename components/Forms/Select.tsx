@@ -110,7 +110,7 @@ export default function Select<T extends FieldValues>({
     />
   ) : (
     <div className={className}>
-      <Label className="font-black text-primary">{label}</Label>
+      {label && <Label className="font-black text-primary">{label}</Label>}
       <ShadSelect
         onValueChange={onChange}
         value={String(value)}

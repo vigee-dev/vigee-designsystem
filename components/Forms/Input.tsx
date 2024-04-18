@@ -17,23 +17,25 @@ import {
   HoverCardTrigger,
   HoverCardContent,
 } from "../ui/hover-card";
+import {Label} from "@/app/components/vigee-designsystem/components/ui/label";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
-  label?: string;
-  placeholder?: string;
-  type?: string;
-  required?: boolean;
-  name: Path<T>;
-  descr?: string;
-  className?: string;
-  disabled?: boolean;
-  id?: string;
-  min?: number | string;
-  max?: number | string;
-  step?: number;
-  helpComponent?: React.ReactNode;
-};
+  label?: string
+  placeholder?: string
+  type?: string
+  required?: boolean
+  name?: Path<T>
+  descr?: string
+  className?: string
+  disabled?: boolean
+  id?: string
+  min?: number | string
+  max?: number | string
+  step?: number
+  helpComponent?: React.ReactNode
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
 
 export default function Input<T extends FieldValues>({
   form,
@@ -50,8 +52,9 @@ export default function Input<T extends FieldValues>({
   max,
   step,
   helpComponent,
+  onChange
 }: Props<T>) {
-  return (
+  return form && name ? (
     <FormField
       control={form?.control}
       name={name}
@@ -97,5 +100,38 @@ export default function Input<T extends FieldValues>({
         </FormItem>
       )}
     />
-  );
+  ) : (
+    <div className={className}>
+      <HoverCard>
+        <div className="flex items-center justify-between ">
+          {label && <Label className="font-black text-primary">{label}</Label>}
+          {helpComponent && (
+            <HoverCardTrigger>
+              <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+            </HoverCardTrigger>
+          )}
+        </div>
+
+        {helpComponent && (
+          <HoverCardContent>
+            <div className="p-2">{helpComponent}</div>
+          </HoverCardContent>
+        )}
+
+        <ShadInput
+          placeholder={placeholder}
+          type={type}
+          disabled={disabled}
+          id={id}
+          min={min}
+          max={max}
+          step={step}
+          onChange={onChange}
+          className="text-[16px] md:text-sm font-medium bg-input border-none"
+        />
+
+      </HoverCard>
+      {descr && <p className={"text-sm text-muted-foreground"}>{descr}</p>}
+    </div>
+  )
 }
