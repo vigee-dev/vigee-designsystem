@@ -5,7 +5,6 @@ import emptyIdeas from "../../img/empty/empty-ideas.svg";
 import Link from "next/link";
 import { Button } from "../Buttons/Button";
 import { PiPlusCircleContrast } from "../../icons/PikaIcons";
-import { PlusButton } from "../Buttons/PlusButton";
 import { Container } from "../Container/Container";
 
 interface IllustrationProps {
@@ -53,7 +52,7 @@ export default function EmptyIllustration({
           {buttonText ? (
             <Button className="flex gap-x-2">{buttonText}</Button>
           ) : (
-            <PlusButton />
+            <Button icon="add" />
           )}
         </Link>
       )}
