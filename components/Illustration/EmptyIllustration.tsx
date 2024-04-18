@@ -52,7 +52,7 @@ export default function EmptyIllustration({
           {buttonText ? (
             <Button className="flex gap-x-2">{buttonText}</Button>
           ) : (
-            <Button icon="add" />
+            <Button icon="add" big />
           )}
         </Link>
       )}
