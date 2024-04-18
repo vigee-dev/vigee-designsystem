@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import Link from "next/link";
 import { Button as ShadButton } from "../ui/button";
-import { LoadingButton } from "./LoadingButton";
 import { cn } from "../../lib/utils";
 import {
   PiSendPlaneHorizontalContrast,
@@ -14,6 +13,7 @@ import {
   PiPencilEditBoxDuoSolid,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
+import { Loader2 } from "lucide-react";
 interface ButtonProps {
   children?: React.ReactNode;
   onClick?: () => void;
@@ -60,12 +60,10 @@ export const Button = React.memo<ButtonProps>(
     tooltip,
   }) => {
     return pending ? (
-      <LoadingButton
-        variant={variant}
-        className={cn("font-bold text-sm border", className)}
-      >
+      <ButtonComponent disabled variant={variant} className={className}>
+        <Loader2 className={`mr-2 h-4 w-4 animate-spin `} />
         {children}
-      </LoadingButton>
+      </ButtonComponent>
     ) : href ? (
       <Link href={href}>
         <ButtonComponent
