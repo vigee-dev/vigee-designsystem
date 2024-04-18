@@ -21,6 +21,8 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
+import {Label} from "@/app/components/vigee-designsystem/components/ui/label";
+import {cn} from "@/app/components/vigee-designsystem/lib/utils";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -107,24 +109,21 @@ export default function Select<T extends FieldValues>({
       )}
     />
   ) : (
-    <FormItem className={className}>
-      <FormLabel className="font-black text-primary">{label}</FormLabel>
+    <div className={className}>
+      <Label className="font-black text-primary">{label}</Label>
       <ShadSelect
         onValueChange={onChange}
         value={String(value)}
         disabled={disabled}
       >
-        <FormControl>
-          <SelectTrigger className="font-medium bg-input border-none">
-            <SelectValue placeholder={placeholder} />
-          </SelectTrigger>
-        </FormControl>
+        <SelectTrigger className="font-medium bg-input border-none">
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
         <SelectContent className="max-h-[200px] font-medium">
           {children}
         </SelectContent>
       </ShadSelect>
-      {descr && <FormDescription>{descr}</FormDescription>}
-      <FormMessage />
-    </FormItem>
+      {descr && <p className={"text-sm text-muted-foreground"}>{descr}</p>}
+    </div>
   );
 }
