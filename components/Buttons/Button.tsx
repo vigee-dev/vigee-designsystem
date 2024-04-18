@@ -32,6 +32,7 @@ interface ButtonProps {
   icon?: keyof typeof iconMap;
   iconComponent?: React.ComponentType<{ className?: string }>;
   tooltip?: string;
+  big?: boolean;
 }
 
 const iconMap = {
@@ -58,6 +59,7 @@ export const Button = React.memo<ButtonProps>(
     icon,
     iconComponent,
     tooltip,
+    big,
   }) => {
     return pending ? (
       <ButtonComponent disabled variant={variant} className={className}>
@@ -75,6 +77,7 @@ export const Button = React.memo<ButtonProps>(
           type={type}
           disabled={disabled}
           tooltip={tooltip}
+          big={big}
         >
           {children}
         </ButtonComponent>
@@ -89,6 +92,7 @@ export const Button = React.memo<ButtonProps>(
         type={type}
         disabled={disabled}
         tooltip={tooltip}
+        big={big}
       >
         {children}
       </ButtonComponent>
@@ -112,6 +116,7 @@ interface ButtonComponentProps {
   icon?: keyof typeof iconMap;
   iconComponent?: React.ComponentType<{ className?: string }>;
   tooltip?: string;
+  big?: boolean;
 }
 
 const ButtonComponent = ({
@@ -124,6 +129,7 @@ const ButtonComponent = ({
   icon,
   iconComponent,
   tooltip,
+  big,
 }: ButtonComponentProps) => {
   const Icon = iconComponent || (icon ? iconMap[icon] : null);
 
@@ -148,7 +154,8 @@ const ButtonComponent = ({
               "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
               className,
               !children &&
-                "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-7 h-7"
+                "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-7 h-7",
+              big && "w-10 h-10"
             )}
           />
         )}
@@ -161,7 +168,7 @@ const ButtonComponent = ({
       type={type}
       disabled={disabled}
       className={cn(
-        "group group-hover:text-primary  group-hover:cursor-pointer font-bold text-sm border flex gap-2",
+        "group group-hover:text-primary  group-hover:cursor-pointer font-bold text-sm border flex gap-2 ",
         className,
         !children &&
           "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent "
@@ -174,7 +181,8 @@ const ButtonComponent = ({
             "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
             className,
             !children &&
-              "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-7 h-7"
+              "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-7 h-7",
+            big && "w-10 h-10"
           )}
         />
       )}
