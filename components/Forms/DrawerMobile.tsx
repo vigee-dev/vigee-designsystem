@@ -78,7 +78,7 @@ export function DrawerMobile({
           <DialogTrigger onClick={e => e.stopPropagation()} asChild>
             {trigger}
           </DialogTrigger>
-          <ScrollArea className="max-h-[80vh] pb-8 p-4 ">
+          <ScrollArea className="max-h-[80vh] ">
             <DialogContent
               onClick={e => e.stopPropagation()}
               className={`max-w-[425px] ${
