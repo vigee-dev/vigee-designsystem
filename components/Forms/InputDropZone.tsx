@@ -1,31 +1,35 @@
 "use client";
 
 import React from "react";
-import { UseFormReturn, FieldValues, Path } from "react-hook-form";
+import { UseFormReturn, FieldValues, Path, PathValue } from "react-hook-form";
 import { useRef, useState } from "react";
 import { Card, CardContent } from "../ui/card";
 import {
   PiDeleteDustbin01DuoSolid,
   PiFile02CheckDuoSolid,
-  PiFilePdfFormatContrast,
   PiFilePdfFormatDuoSolid,
 } from "../../icons/PikaIcons";
+import { Button } from "../Buttons/Button";
 
 type Props<T extends FieldValues> = {
-  form?: UseFormReturn<T>
-  name: Path<T>
-  extensions?: string[]
-  multiple?: boolean
-  accept?: string
+  form?: UseFormReturn<T>;
+  name: Path<T>;
+  extensions?: string[];
+  multiple?: boolean;
+  accept?: string;
+};
+
+interface ButtonProps {
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  icon: string;
 }
 
-// TODO styles @vigee
 export default function InputDropZoneFile<T extends FieldValues>({
   form,
   name,
   extensions,
   multiple = false,
-  accept
+  accept,
 }: Props<T>) {
   function getPossibleExtensions(strings: string[] | undefined): string {
     // Déterminer les extensions possibles
@@ -92,16 +96,12 @@ export default function InputDropZoneFile<T extends FieldValues>({
     setDragActive(true);
   }
 
-  function handleRemoveFile(e: React.MouseEvent, id: any) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const updatedFiles = files;
-    updatedFiles.splice(id, 1);
+  function handleRemoveFile(id: number) {
+    const updatedFiles = files.filter((_, index) => index !== id);
     setFiles(updatedFiles);
-
-    // @ts-ignore TOIMPROVE remove ts-ignore and find a way to fix the type error
-    if (form) form.setValue(name, updatedFiles);
+    if (form) {
+      form.setValue(name as Path<T>, updatedFiles as PathValue<T, Path<T>>);
+    }
   }
 
   function openFileExplorer() {
@@ -109,9 +109,11 @@ export default function InputDropZoneFile<T extends FieldValues>({
     inputRef.current.click();
   }
 
-  const isImageFile = (filename: string) => /\.jpg$|\.jpeg$|\.png$/i.test(filename);
+  const isImageFile = (filename: string) =>
+    /\.jpg$|\.jpeg$|\.png$/i.test(filename);
   const isPDFFile = (filename: string) => /\.pdf$/i.test(filename);
-  const shortName = (filename: string) => filename.length > 15 ? filename.substring(0, 15) + "..." : filename;
+  const shortName = (filename: string) =>
+    filename.length > 15 ? filename.substring(0, 15) + "..." : filename;
 
   return (
     <div className="flex  items-center justify-center col-span-full">
@@ -134,7 +136,9 @@ export default function InputDropZoneFile<T extends FieldValues>({
           type="file"
           multiple={multiple}
           onChange={handleChange}
-          accept={accept || ".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"}
+          accept={
+            accept || ".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+          }
         />
 
         {!(files.length > 0) ? (
@@ -154,16 +158,19 @@ export default function InputDropZoneFile<T extends FieldValues>({
             />
           </svg>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4  items-center ">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4  items-center ">
             {files.map((file, index) => (
-              <div key={index}>
-                <Card className="rounded-xl w-36 h-36 p-2 ">
-                  <span
-                    className="text-red-500 cursor-pointer "
-                    onClick={e => handleRemoveFile(e, index)}
+              <div key={index} className="flex gap-4 ">
+                <Card className="rounded-xl w-36 h-36 p-1 ">
+                  <div
+                    onClick={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleRemoveFile(index);
+                    }}
                   >
-                    <PiDeleteDustbin01DuoSolid />
-                  </span>
+                    <Button icon="trash" />
+                  </div>
                   <CardContent className="flex aspect-square items-center justify-center ">
                     {file instanceof File && isImageFile(file.name) ? (
                       <img
