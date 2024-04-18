@@ -3,7 +3,7 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useDebouncedCallback } from "use-debounce";
 
-export default function TableSearch({ placeholder }: { placeholder: string }) {
+export default function TableSearch({ placeholder }: { placeholder?: string }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -25,8 +25,8 @@ export default function TableSearch({ placeholder }: { placeholder: string }) {
         Rechercher
       </label>
       <input
-        className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-[16px] md:text-xs outline-2 placeholder:text-gray-500"
-        placeholder={placeholder}
+        className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-[16px] md:text-sm outline-2 placeholder:text-gray-500"
+        placeholder={placeholder ?? "Rechercher"}
         onChange={e => {
           handleSearch(e.target.value);
         }}
