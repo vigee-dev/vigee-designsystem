@@ -7,20 +7,20 @@ import {
   FormLabel,
   FormMessage,
 } from "../../components/ui/form";
+import { cn } from "../../lib/utils";
 import { PhoneInput } from "../ui/phone-input";
-import { isValidPhoneNumber } from "react-phone-number-input";
-import { z } from "zod";
 import React from "react";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 
 type Props<T extends FieldValues> = {
-  form?: UseFormReturn<T>
-  name: Path<T>
-  label?: string
-  placeholder?: string
-  description?: string
-  required?: boolean
-  disabled?: boolean
+  form?: UseFormReturn<T>;
+  name: Path<T>;
+  label?: string;
+  placeholder?: string;
+  description?: string;
+  required?: boolean;
+  disabled?: boolean;
+  className?: string;
 };
 export default function PhoneNumber<T extends FieldValues>({
   form,
@@ -29,7 +29,8 @@ export default function PhoneNumber<T extends FieldValues>({
   placeholder = "ex : 0695069999",
   description,
   required = false,
-  disabled = false
+  disabled = false,
+  className,
 }: Props<T>) {
   return (
     <FormField
@@ -37,7 +38,7 @@ export default function PhoneNumber<T extends FieldValues>({
       name={name}
       rules={{ required }}
       render={({ field }) => (
-        <FormItem className="flex flex-col items-start">
+        <FormItem className={cn("flex flex-col items-start", className)}>
           {label && (
             <FormLabel className="font-black text-primary mt-2">
               {label}
