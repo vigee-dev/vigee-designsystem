@@ -10,7 +10,7 @@ import {
   PiDeleteDustbin01DuoStroke,
   PiUploadUpDuoSolid,
   PiArrowLeftStroke,
-  PiPencilEditBoxDuoSolid,
+  PiPencilEditBoxDuoSolid, PiArrowLeftCircleContrast, PiUserPlusContrast,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2 } from "lucide-react";
@@ -44,6 +44,9 @@ const iconMap = {
   upload: PiUploadUpDuoSolid,
   back: PiArrowLeftStroke,
   edit: PiPencilEditBoxDuoSolid,
+  arrowLeft: PiArrowLeftCircleContrast,
+  user: PiUserPlusContrast
+
 };
 
 export const Button = React.memo<ButtonProps>(
