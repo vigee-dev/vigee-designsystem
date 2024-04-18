@@ -32,7 +32,7 @@ function MobileMenu({ nav }: TabProps) {
         <ul role="list" className="flex flex-1 flex-col gap-y-7 ">
           <li>
             <ul role="list" className=" flex justify-center mx-auto  ">
-              {nav?.map((item) => {
+              {nav?.map(item => {
                 const includesSlug = pathName
                   .toLocaleLowerCase()
                   .match(item.slug ? item.slug : "//");
@@ -44,8 +44,8 @@ function MobileMenu({ nav }: TabProps) {
                         href={item.href}
                         className={classNames(
                           includesSlug
-                            ? " text-secondary"
-                            : "text-gray-500 hover:text-secondary   ",
+                            ? " text-primary"
+                            : "text-gray-500 hover:text-primary   ",
                           "group grid  py-1 px-3 text-[11px]  hover: transform transition-all duration-100 ease-in-out text-center font-medium"
                         )}
                       >
@@ -53,8 +53,8 @@ function MobileMenu({ nav }: TabProps) {
                           <div
                             className={classNames(
                               includesSlug
-                                ? " text-secondary   "
-                                : " hover:text-secondary  transform transition-all duration-300 ease-in-out ",
+                                ? " text-primary   "
+                                : " hover:text-primary  transform transition-all duration-300 ease-in-out ",
                               "h-8 w-8 shrink-0 mx-auto justify-center   p-[5px] "
                             )}
                             aria-hidden="true"
@@ -66,13 +66,12 @@ function MobileMenu({ nav }: TabProps) {
                           <div
                             className={classNames(
                               includesSlug
-                                ? " text-secondary   "
-                                : " hover:text-secondary  transform transition-all duration-300 ease-in-out ",
+                                ? " text-primary   "
+                                : " hover:text-primary  transform transition-all duration-300 ease-in-out ",
                               "h-8 w-8 shrink-0 mx-auto justify-center   p-[5px] "
                             )}
                             aria-hidden="true"
                           >
-                            {" "}
                             {item.iconFill}
                           </div>
                         )}
