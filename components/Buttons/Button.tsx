@@ -11,6 +11,7 @@ import {
   PiDeleteDustbin01DuoStroke,
   PiUploadUpDuoSolid,
   PiArrowLeftStroke,
+  PiPencilEditBoxDuoSolid,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 interface ButtonProps {
@@ -41,6 +42,7 @@ const iconMap = {
   trash: PiDeleteDustbin01DuoStroke,
   upload: PiUploadUpDuoSolid,
   back: PiArrowLeftStroke,
+  edit: PiPencilEditBoxDuoSolid,
 };
 
 export const Button = React.memo<ButtonProps>(
@@ -69,6 +71,7 @@ export const Button = React.memo<ButtonProps>(
         <ButtonComponent
           variant={variant}
           icon={icon}
+          iconComponent={iconComponent}
           className={className}
           onClick={onClick}
           type={type}
@@ -82,6 +85,7 @@ export const Button = React.memo<ButtonProps>(
         <ButtonComponent
           variant={variant}
           icon={icon}
+          iconComponent={iconComponent}
           className={className}
           onClick={onClick}
           type={type}
