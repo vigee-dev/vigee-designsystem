@@ -189,3 +189,5 @@ const ButtonComponent = ({
     </ShadButton>
   );
 };
+
+Button.displayName = "Button";
