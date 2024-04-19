@@ -35,6 +35,7 @@ type Props<T extends FieldValues> = {
   step?: number
   helpComponent?: React.ReactNode
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  value?: string
 }
 
 export default function Input<T extends FieldValues>({
@@ -52,7 +53,8 @@ export default function Input<T extends FieldValues>({
   max,
   step,
   helpComponent,
-  onChange
+  onChange,
+  value
 }: Props<T>) {
   return form && name ? (
     <FormField
@@ -101,16 +103,14 @@ export default function Input<T extends FieldValues>({
       )}
     />
   ) : (
-    <div className={className}>
+    <div className={'space-y-2' + className}>
       <HoverCard>
-        <div className="flex items-center justify-between ">
-          {label && <Label className="font-black text-primary">{label}</Label>}
-          {helpComponent && (
-            <HoverCardTrigger>
-              <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
-            </HoverCardTrigger>
-          )}
-        </div>
+        {label && <Label className="font-black text-primary">{label}</Label>}
+        {helpComponent && (
+          <HoverCardTrigger>
+            <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+          </HoverCardTrigger>
+        )}
 
         {helpComponent && (
           <HoverCardContent>
@@ -127,6 +127,7 @@ export default function Input<T extends FieldValues>({
           max={max}
           step={step}
           onChange={onChange}
+          value={value}
           className="text-[16px] md:text-sm font-medium bg-input border-none"
         />
 
