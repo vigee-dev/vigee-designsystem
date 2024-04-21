@@ -17,25 +17,25 @@ import {
   HoverCardTrigger,
   HoverCardContent,
 } from "../ui/hover-card";
-import {Label} from "@/app/components/vigee-designsystem/components/ui/label";
+import { Label } from "../../components/ui/label";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
-  label?: string
-  placeholder?: string
-  type?: string
-  required?: boolean
-  name?: Path<T>
-  descr?: string
-  className?: string
-  disabled?: boolean
-  id?: string
-  min?: number | string
-  max?: number | string
-  step?: number
-  helpComponent?: React.ReactNode
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-}
+  label?: string;
+  placeholder?: string;
+  type?: string;
+  required?: boolean;
+  name?: Path<T>;
+  descr?: string;
+  className?: string;
+  disabled?: boolean;
+  id?: string;
+  min?: number | string;
+  max?: number | string;
+  step?: number;
+  helpComponent?: React.ReactNode;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
 export default function Input<T extends FieldValues>({
   form,
@@ -52,7 +52,7 @@ export default function Input<T extends FieldValues>({
   max,
   step,
   helpComponent,
-  onChange
+  onChange,
 }: Props<T>) {
   return form && name ? (
     <FormField
@@ -129,9 +129,8 @@ export default function Input<T extends FieldValues>({
           onChange={onChange}
           className="text-[16px] md:text-sm font-medium bg-input border-none"
         />
-
       </HoverCard>
       {descr && <p className={"text-sm text-muted-foreground"}>{descr}</p>}
     </div>
-  )
+  );
 }

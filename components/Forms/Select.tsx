@@ -21,8 +21,8 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import {Label} from "@/app/components/vigee-designsystem/components/ui/label";
-import {cn} from "@/app/components/vigee-designsystem/lib/utils";
+import { Label } from "../../components/ui/label";
+import { cn } from "../../lib/utils";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
