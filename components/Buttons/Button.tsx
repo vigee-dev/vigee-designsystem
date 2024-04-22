@@ -49,7 +49,7 @@ const iconMap = {
 
 };
 
-export const Button = React.memo<ButtonProps>(
+const Button = React.memo<ButtonProps>(
   ({
     children,
     onClick,
@@ -196,4 +196,6 @@ const ButtonComponent = ({
   );
 };
 
-Button.displayName = "Button";
+Button.displayName = "Button"
+
+export {Button}
