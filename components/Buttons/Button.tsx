@@ -49,7 +49,7 @@ const iconMap = {
 
 };
 
-export const Button = React.memo<ButtonProps>(
+const Button = React.memo<ButtonProps>(
   ({
     children,
     onClick,
@@ -193,7 +193,9 @@ const ButtonComponent = ({
         />
       )}
     </ShadButton>
-  );
-};
+  )
+}
 
-Button.displayName = "Button";
+Button.displayName = "Button"
+
+export default Button
