@@ -2,8 +2,8 @@ import Image, { StaticImageData } from "next/image";
 import React from "react";
 import Link from "next/link";
 import { Button } from "../Buttons/Button";
-import { PiPlusCircleContrast } from "../../icons/PikaIcons";
 import { Container } from "../Container/Container";
+import emptyMan from "../../img/empty/empty-man.svg";
 
 interface IllustrationProps {
   text?: string;
@@ -12,7 +12,6 @@ interface IllustrationProps {
   subtitle?: string;
   children?: React.ReactNode;
   supportEmail?: string;
-  type?: "emptyMan" | "emptyIdeas";
 }
 export default function EmptyIllustration({
   text,
@@ -20,7 +19,6 @@ export default function EmptyIllustration({
   buttonLink,
   buttonText,
   children,
-  type = "emptyMan",
 }: IllustrationProps) {
   return (
     <Container className="flex flex-col items-center justify-center  w-full px-12 p-8">
@@ -28,7 +26,7 @@ export default function EmptyIllustration({
         width={400}
         height={400}
         className="mx-auto w-64 h-auto"
-        src={type}
+        src={emptyMan}
         alt="Empty list"
       />
 

@@ -6,7 +6,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "../../components/ui/select";
@@ -16,19 +15,32 @@ interface Props {
   name: string;
   placeholder?: string;
   options: { label: string; value: string }[];
+  type?: string;
 }
 
-export const UrlFilter = ({ name, options, placeholder }: Props) => {
-  const [filter, setFilter] = useQueryState(name, { defaultValue: "" });
+export const UrlFilter = ({
+  name,
+  options,
+  placeholder = name.toLocaleUpperCase(),
+  type = "string",
+}: Props) => {
+  const [filter, setFilter] = useQueryState(name, {
+    defaultValue: "",
+    clearOnDefault: true,
+  });
 
   const handleValueChange = (newValue: string) => {
+    if (newValue == filter) {
+      setFilter("");
+      return;
+    }
     setFilter(newValue);
   };
 
   return (
     <Select onValueChange={handleValueChange} defaultValue={filter}>
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select a fruit" />
+        <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent className="w-full md:w-auto">
         <SelectGroup>
