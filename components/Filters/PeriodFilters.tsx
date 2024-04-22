@@ -31,9 +31,7 @@ interface Props {
 }
 
 export const PeriodFilters = ({
-  years = [
-    { label: "Cette année", value: new Date().getFullYear().toString() },
-  ],
+  years = [{ label: "Cette année", value: new Date().getFullYear().toString() }],
   day,
   month,
   week,
@@ -41,18 +39,14 @@ export const PeriodFilters = ({
 }: Props) => {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const searchParams = useSearchParams();
-  const [selectedYear, setSelectedYear] = React.useState<string>(
-    years[0]?.value
-  );
+  const [selectedYear, setSelectedYear] = React.useState<string>(years[0]?.value);
 
   const pathname = usePathname();
   const { replace } = useRouter();
 
   function generateWeeks(year: number) {
     const currentMonth = new Date().getMonth();
-    let startDate = startOfWeek(new Date(year, currentMonth, 1), {
-      weekStartsOn: 1,
-    });
+    let startDate = startOfWeek(new Date(year, currentMonth, 1), { weekStartsOn: 1 });
     let weeks: { label: string; value: string }[] = []; // Déclaration explicite du type du tableau
 
     while (startDate.getMonth() === currentMonth) {

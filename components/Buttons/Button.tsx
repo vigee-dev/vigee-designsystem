@@ -49,8 +49,8 @@ const iconMap = {
 
 };
 
-export const Button = React.memo<ButtonProps>(
-  ({
+const Button = (
+  function Button({
     children,
     onClick,
     variant,
@@ -63,7 +63,7 @@ export const Button = React.memo<ButtonProps>(
     iconComponent,
     tooltip,
     big,
-  }) => {
+  }: ButtonProps)  {
     return pending ? (
       <ButtonComponent disabled variant={variant} className={className}>
         <Loader2 className={`mr-2 h-4 w-4 animate-spin `} />
@@ -195,5 +195,7 @@ const ButtonComponent = ({
     </ShadButton>
   );
 };
+//
+// export const Button = React.memo(function (({props})))
 
-Button.displayName = "Button";
+export {Button}
