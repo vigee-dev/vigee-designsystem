@@ -1,7 +1,5 @@
 import Image, { StaticImageData } from "next/image";
 import React from "react";
-import emptyMan from "../../img/empty/empty-man.svg";
-import emptyIdeas from "../../img/empty/empty-ideas.svg";
 import Link from "next/link";
 import { Button } from "../Buttons/Button";
 import { PiPlusCircleContrast } from "../../icons/PikaIcons";
@@ -30,7 +28,7 @@ export default function EmptyIllustration({
         width={400}
         height={400}
         className="mx-auto w-64 h-auto"
-        src={type === "emptyIdeas" ? emptyIdeas : emptyMan}
+        src={type}
         alt="Empty list"
       />
 
