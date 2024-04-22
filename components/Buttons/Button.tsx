@@ -10,7 +10,9 @@ import {
   PiDeleteDustbin01DuoStroke,
   PiUploadUpDuoSolid,
   PiArrowLeftStroke,
-  PiPencilEditBoxDuoSolid, PiArrowLeftCircleContrast, PiUserPlusContrast,
+  PiPencilEditBoxDuoSolid,
+  PiArrowLeftCircleContrast,
+  PiUserPlusContrast,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2 } from "lucide-react";
@@ -45,47 +47,30 @@ const iconMap = {
   back: PiArrowLeftStroke,
   edit: PiPencilEditBoxDuoSolid,
   arrowLeft: PiArrowLeftCircleContrast,
-  user: PiUserPlusContrast
-
+  user: PiUserPlusContrast,
 };
 
-const Button = (
-  function Button({
-    children,
-    onClick,
-    variant,
-    type = "button",
-    disabled,
-    href,
-    className,
-    pending,
-    icon,
-    iconComponent,
-    tooltip,
-    big,
-  }: ButtonProps)  {
-    return pending ? (
-      <ButtonComponent disabled variant={variant} className={className}>
-        <Loader2 className={`mr-2 h-4 w-4 animate-spin `} />
-        {children}
-      </ButtonComponent>
-    ) : href ? (
-      <Link href={href}>
-        <ButtonComponent
-          variant={variant}
-          icon={icon}
-          iconComponent={iconComponent}
-          className={className}
-          onClick={onClick}
-          type={type}
-          disabled={disabled}
-          tooltip={tooltip}
-          big={big}
-        >
-          {children}
-        </ButtonComponent>
-      </Link>
-    ) : (
+const Button = function Button({
+  children,
+  onClick,
+  variant,
+  type = "button",
+  disabled,
+  href,
+  className,
+  pending,
+  icon,
+  iconComponent,
+  tooltip,
+  big,
+}: ButtonProps) {
+  return pending ? (
+    <ButtonComponent disabled variant={variant} className={className}>
+      <Loader2 className={`mr-2 h-4 w-4 animate-spin `} />
+      {children}
+    </ButtonComponent>
+  ) : href ? (
+    <Link href={href}>
       <ButtonComponent
         variant={variant}
         icon={icon}
@@ -99,9 +84,23 @@ const Button = (
       >
         {children}
       </ButtonComponent>
-    );
-  }
-);
+    </Link>
+  ) : (
+    <ButtonComponent
+      variant={variant}
+      icon={icon}
+      iconComponent={iconComponent}
+      className={className}
+      onClick={onClick}
+      type={type}
+      disabled={disabled}
+      tooltip={tooltip}
+      big={big}
+    >
+      {children}
+    </ButtonComponent>
+  );
+};
 
 interface ButtonComponentProps {
   children?: React.ReactNode;
@@ -198,4 +197,4 @@ const ButtonComponent = ({
 //
 // export const Button = React.memo(function (({props})))
 
-export {Button}
+export { Button };
