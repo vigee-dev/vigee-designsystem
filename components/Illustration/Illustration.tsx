@@ -16,8 +16,8 @@ export default function Illustration({
   subtitle,
   img,
   children,
-  width = 2000,
-  height = 2000,
+  width = 500,
+  height = 500,
 }: IllustrationProps) {
   return (
     <div className="flex flex-col items-center justify-center bg-primary h-screen w-full px-12 ">
