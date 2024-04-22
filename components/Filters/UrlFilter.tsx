@@ -21,7 +21,7 @@ interface Props {
 export const UrlFilter = ({
   name,
   options,
-  placeholder = name.toLocaleUpperCase(),
+  placeholder,
   type = "string",
 }: Props) => {
   const [filter, setFilter] = useQueryState(name, {
@@ -39,7 +39,7 @@ export const UrlFilter = ({
 
   return (
     <Select onValueChange={handleValueChange} defaultValue={filter}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-fit">
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent className="w-full md:w-auto">
