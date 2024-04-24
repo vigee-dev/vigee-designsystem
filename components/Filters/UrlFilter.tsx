@@ -16,6 +16,7 @@ interface Props {
   placeholder?: string;
   options: { label: string; value: string }[];
   type?: string;
+  defaultValue?: string
 }
 
 export const UrlFilter = ({
@@ -23,10 +24,12 @@ export const UrlFilter = ({
   options,
   placeholder,
   type = "string",
+  defaultValue
 }: Props) => {
   const [filter, setFilter] = useQueryState(name, {
-    defaultValue: "",
+    defaultValue: defaultValue || '',
     clearOnDefault: true,
+    shallow: false,
   });
 
   const handleValueChange = (newValue: string) => {
