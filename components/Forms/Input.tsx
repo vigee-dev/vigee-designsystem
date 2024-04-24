@@ -18,6 +18,7 @@ import {
   HoverCardContent,
 } from "../ui/hover-card";
 import { Label } from "../../components/ui/label";
+import { cn } from "../../lib/utils";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -103,14 +104,16 @@ export default function Input<T extends FieldValues>({
       )}
     />
   ) : (
-    <div className={"space-y-2" + className}>
+    <div className={cn("space-y-2", className)}>
       <HoverCard>
-        {label && <Label className="font-black text-primary">{label}</Label>}
-        {helpComponent && (
-          <HoverCardTrigger>
-            <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
-          </HoverCardTrigger>
-        )}
+        <div className="flex items-center justify-between py-1">
+          {label && <Label className="font-black text-primary">{label}</Label>}
+          {helpComponent && (
+            <HoverCardTrigger>
+              <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+            </HoverCardTrigger>
+          )}
+        </div>
 
         {helpComponent && (
           <HoverCardContent>
