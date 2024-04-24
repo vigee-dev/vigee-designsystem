@@ -4,7 +4,7 @@ import {
   TypographyH3,
   TypographyH4,
 } from "../Typography/Typography";
-import { UserIcon } from "../../icons/User";
+
 import { PiUserCircleDuoStroke } from "../../icons/PikaIcons";
 
 interface Data {
