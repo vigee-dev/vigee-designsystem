@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
 import VariableLogo from "../Logos/VariableLogo";
-import VigeeGrayLogo from "../../img/logos/VigeeGrayLogo.png";
+
 import { Badge } from "../ui/badge";
 import { Select } from "../Select/Select";
 import { cn } from "../../lib/utils";
@@ -104,12 +104,9 @@ const Sidebar: React.FC<SidebarProps> = ({
                     <VariableLogo title="Vigee" />
                   )
                 ) : !hoverMenu && !noLogo ? (
-                  <Image
-                    src={logoSmall ? logoSmall : VigeeGrayLogo}
-                    alt="Vigee"
-                    width={30}
-                    height={30}
-                  />
+                  logoSmall && (
+                    <Image src={logoSmall} alt="Vigee" width={30} height={30} />
+                  )
                 ) : (
                   title &&
                   sidebarOpen && (

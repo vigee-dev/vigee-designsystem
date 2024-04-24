@@ -53,9 +53,11 @@ export function Error({
 
       {children}
 
-      {onClick && <Button onClick={onClick} className="py-2">
-        Rééssayer
-      </Button>}
+      {onClick && (
+        <Button onClick={onClick} className="py-2">
+          Rééssayer
+        </Button>
+      )}
     </div>
   );
 }
