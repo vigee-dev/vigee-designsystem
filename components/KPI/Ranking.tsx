@@ -1,10 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import {
-  TypographyH2,
-  TypographyH3,
-  TypographyH4,
-} from "../Typography/Typography";
-
+import { TypographyH3 } from "../Typography/Typography";
 import { PiUserCircleDuoStroke } from "../../icons/PikaIcons";
 
 interface Data {
