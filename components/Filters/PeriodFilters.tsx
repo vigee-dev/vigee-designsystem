@@ -7,9 +7,8 @@ import {
   TabsList,
   TabsTrigger,
 } from "../../components/ui/tabs";
-
+import { useQueryState } from "nuqs";
 import { Select } from "../Select/Select";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { startOfWeek, format, addDays, set } from "date-fns";
 import { fr } from "date-fns/locale";
@@ -31,22 +30,30 @@ interface Props {
 }
 
 export const PeriodFilters = ({
-  years = [{ label: "Cette année", value: new Date().getFullYear().toString() }],
+  years = [
+    { label: "Cette année", value: new Date().getFullYear().toString() },
+  ],
   day,
   month,
   week,
   year = true,
 }: Props) => {
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const searchParams = useSearchParams();
-  const [selectedYear, setSelectedYear] = React.useState<string>(years[0]?.value);
-
-  const pathname = usePathname();
-  const { replace } = useRouter();
+  const [startDate, setStartDate] = useQueryState("starting_date", {
+    defaultValue: "",
+  });
+  const [endDate, setEndDate] = useQueryState("ending_date", {
+    defaultValue: "",
+  });
+  const [selectedYear, setSelectedYear] = useQueryState("year", {
+    defaultValue: years[0].value,
+  });
 
   function generateWeeks(year: number) {
     const currentMonth = new Date().getMonth();
-    let startDate = startOfWeek(new Date(year, currentMonth, 1), { weekStartsOn: 1 });
+    let startDate = startOfWeek(new Date(year, currentMonth, 1), {
+      weekStartsOn: 1,
+    });
     let weeks: { label: string; value: string }[] = []; // Déclaration explicite du type du tableau
 
     while (startDate.getMonth() === currentMonth) {
@@ -81,10 +88,8 @@ export const PeriodFilters = ({
   };
 
   const handleDateChange = (start: Date, end: Date) => {
-    const params = new URLSearchParams(searchParams);
-    params.set("starting_date", formatForURL(start));
-    params.set("ending_date", formatForURL(end));
-    replace(`${pathname}?${params.toString()}`);
+    setStartDate(formatForURL(start)); // Mettre à jour la date de début dans l'URL
+    setEndDate(formatForURL(end)); // Mettre à jour la date de fin dans l'URL
   };
 
   const [weeks, setWeeks] = useState(() => generateWeeks(Number(selectedYear)));
