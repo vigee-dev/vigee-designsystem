@@ -10,13 +10,15 @@ import {
   SelectValue,
 } from "../../components/ui/select";
 import React from "react";
+import { cn } from "../../lib/utils";
 
 interface Props {
   name: string;
   placeholder?: string;
   options: { label: string; value: string }[];
   type?: string;
-  defaultValue?: string
+  defaultValue?: string;
+  className?: string;
 }
 
 export const UrlFilter = ({
@@ -24,10 +26,11 @@ export const UrlFilter = ({
   options,
   placeholder,
   type = "string",
-  defaultValue
+  defaultValue,
+  className,
 }: Props) => {
   const [filter, setFilter] = useQueryState(name, {
-    defaultValue: defaultValue || '',
+    defaultValue: defaultValue || "",
     clearOnDefault: true,
     shallow: false,
   });
@@ -42,7 +45,7 @@ export const UrlFilter = ({
 
   return (
     <Select onValueChange={handleValueChange} defaultValue={filter}>
-      <SelectTrigger className="w-fit">
+      <SelectTrigger className={cn("w-fit", className)}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent className="w-full md:w-auto">
