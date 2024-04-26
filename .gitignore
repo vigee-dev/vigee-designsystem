@@ -3,4 +3,3 @@
 /node_modules
 .DS_Store
 global.css
-tailwind.config.js
