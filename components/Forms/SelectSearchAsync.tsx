@@ -11,33 +11,33 @@ import { ActionMeta, GroupBase, OnChangeValue } from "react-select";
 import { MultiValue, SingleValue, PropsValue } from "react-select";
 import React from "react";
 
-import {Label} from "../ui/label";
+import { Label } from "../ui/label";
 
 interface SearchSelectAsyncInterface<
   T extends FieldValues,
   Option,
   IsMulti extends boolean = false
 > {
-  classname?: string
-  name?: Path<T>
-  form?: UseFormReturn<T>
-  disabled?: boolean
-  placeholder?: string
-  loadOptions: (query: string) => Promise<Option[]>
-  isClearable?: boolean
-  preprocessOnChange?: (e: OnChangeValue<Option, IsMulti>) => any
-  defaultOptions?: Option[] | boolean
+  classname?: string;
+  name?: Path<T>;
+  form?: UseFormReturn<T>;
+  disabled?: boolean;
+  placeholder?: string;
+  loadOptions: (query: string) => Promise<Option[]>;
+  isClearable?: boolean;
+  preprocessOnChange?: (e: OnChangeValue<Option, IsMulti>) => any;
+  defaultOptions?: Option[] | boolean;
   defaultValue?: IsMulti extends true
     ? MultiValue<Option>
-    : SingleValue<Option>
-  value?: PropsValue<Option>
-  label?: string
-  isMulti?: IsMulti
-  noOptionsMessage?: string
+    : SingleValue<Option>;
+  value?: PropsValue<Option>;
+  label?: string;
+  isMulti?: IsMulti;
+  noOptionsMessage?: string;
   onChange?: (
     newValue: OnChangeValue<Option, IsMulti>,
     actionMeta: ActionMeta<Option>
-  ) => void
+  ) => void;
 }
 
 // TODO Better way to handle isMulti, Option type etc ...
@@ -68,7 +68,9 @@ export default function SearchSelectAsync<
       name={name}
       render={({ field }) => (
         <FormItem className={`${classname} md:text-sm text-[16px]`}>
-          {label && <FormLabel className="font-black text-primary">{label}</FormLabel>}
+          {label && (
+            <FormLabel className="font-black text-primary">{label}</FormLabel>
+          )}
           <FormControl>
             {/* TODO Debounce loadoptions ? */}
             {/* TODO typeof isMulti ?*/}
@@ -150,6 +152,9 @@ export default function SearchSelectAsync<
               loadOptions={loadOptions}
               ref={field.ref}
               isMulti={isMulti}
+              components={{
+                IndicatorSeparator: () => null,
+              }}
             />
           </FormControl>
           <FormMessage />
@@ -158,13 +163,13 @@ export default function SearchSelectAsync<
     />
   ) : (
     <div className={`${classname} space-y-2`}>
-      {label && (<Label className="font-black text-primary">{label}</Label>)}
+      {label && <Label className="font-black text-primary">{label}</Label>}
       {/* TODO Debounce loadoptions ? */}
       {/* TODO typeof isMulti ?*/}
       <SelectAndSearchAsync<Option, IsMulti, GroupBase<Option>>
         theme={theme => ({
           ...theme,
-          colors: {...theme.colors, primary: "#f3f4f6"},
+          colors: { ...theme.colors, primary: "#f3f4f6" },
         })}
         styles={{
           control: (baseStyles, state) => ({
@@ -202,11 +207,11 @@ export default function SearchSelectAsync<
             borderRadius: "0.4rem",
             fontSize: "16px",
           }),
-          multiValueLabel: (styles, {data}) => ({
+          multiValueLabel: (styles, { data }) => ({
             ...styles,
             color: "#111",
           }),
-          multiValueRemove: (styles, {data}) => ({
+          multiValueRemove: (styles, { data }) => ({
             ...styles,
             color: "#111",
             borderRadius: "0.4rem",
@@ -226,7 +231,10 @@ export default function SearchSelectAsync<
         loadOptions={loadOptions}
         isMulti={isMulti}
         value={value}
+        components={{
+          IndicatorSeparator: () => null,
+        }}
       />
     </div>
-  )
+  );
 }

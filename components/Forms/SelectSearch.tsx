@@ -141,6 +141,9 @@ export default function SelectSearch<
               isMulti={isMulti}
               defaultValue={defaultValue || field.value}
               value={field.value}
+              components={{
+                IndicatorSeparator: () => null,
+              }}
             />
           </FormControl>
           <FormMessage />
