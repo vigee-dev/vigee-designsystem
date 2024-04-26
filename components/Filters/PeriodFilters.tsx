@@ -41,12 +41,15 @@ export const PeriodFilters = ({
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [startDate, setStartDate] = useQueryState("starting_date", {
     defaultValue: "",
+    shallow: false,
   });
   const [endDate, setEndDate] = useQueryState("ending_date", {
     defaultValue: "",
+    shallow: false,
   });
   const [selectedYear, setSelectedYear] = useQueryState("year", {
     defaultValue: years[0].value,
+    shallow: false,
   });
 
   function generateWeeks(year: number) {
