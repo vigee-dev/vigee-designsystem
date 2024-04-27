@@ -13,7 +13,7 @@ import { cn } from "../../lib/utils";
 import { useRouter } from "next/navigation";
 
 interface TabsResponsiveProps {
-  defaultValue: string;
+  defaultValue?: string;
   query?: string;
   options: {
     name: string;
@@ -31,7 +31,7 @@ export const TabsResponsive = ({
   const router = useRouter();
 
   const [filter, setFilter] = useQueryState(query ?? "", {
-    defaultValue: defaultValue,
+    defaultValue: defaultValue ?? "",
     clearOnDefault: false,
     shallow: false,
   });
@@ -48,7 +48,6 @@ export const TabsResponsive = ({
   };
 
   React.useEffect(() => {
-    console.log("defaultValue", defaultValue, query, filter);
     if (defaultValue && query) {
       setFilter(defaultValue);
     }
@@ -71,7 +70,7 @@ export const TabsResponsive = ({
           />
         )}
       </div>
-      <div className="flex md:hidden ">
+      <div className="flex md:hidden">
         {options.length < 4 ? (
           <TabComponent
             options={options}
@@ -111,7 +110,7 @@ const TabComponent = ({
 }: TabProps) => {
   return (
     <Tabs defaultValue={defaultValue}>
-      <TabsList className="w-full md:w-fit">
+      <TabsList className="w-full md:w-fit ">
         {options.map((option, index) => (
           <TabsTrigger
             key={index}
@@ -150,7 +149,9 @@ const SelectComponent = ({
         }}
       >
         <SelectTrigger
-          className={cn("w-full md:fit font-medium h-12 md:h-fit text-md")}
+          className={cn(
+            "w-full md:fit font-medium h-12 md:h-fit text-md flex gap-2 items-center"
+          )}
         >
           <SelectValue />
         </SelectTrigger>
@@ -158,7 +159,7 @@ const SelectComponent = ({
           {options.map((option, index) => (
             <SelectItem
               value={option.href ?? option.value ?? ""}
-              className="w-full md:fit"
+              className="w-full md:fit flex gap-2"
               key={index}
             >
               {option.icon} {option.name}
