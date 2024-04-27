@@ -13,7 +13,7 @@ function classNames(...classes: string[]): string {
   return classes.filter(Boolean).join(" ");
 }
 
-const KPIs = ({ stats }: NumberKPIProps) => {
+export const KPI = ({ stats }: NumberKPIProps) => {
   return (
     <div>
       <dl className="grid grid-cols-1 divide-y divide-gray-100 overflow-hidden rounded-md shadow-sm md:grid-cols-3 md:divide-x md:divide-gray-100 md:divide-y-0  bg-white border border-gray-100">
@@ -43,5 +43,3 @@ const KPIs = ({ stats }: NumberKPIProps) => {
     </div>
   );
 };
-
-export default KPIs;
