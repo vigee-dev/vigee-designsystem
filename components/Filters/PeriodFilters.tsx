@@ -227,7 +227,7 @@ export const PeriodFilters = ({
               </PopoverContent>
             </Popover>
           </TabsContent>
-          <TabsContent value="week" className="w-full md:w-fit">
+          <TabsContent value="week" className="w-full md:w-fit  mt-0">
             <Select
               className="w-full md:w-fit"
               options={weeks}
@@ -245,7 +245,7 @@ export const PeriodFilters = ({
               }
             />
           </TabsContent>
-          <TabsContent value="month" className="w-full md:w-fit">
+          <TabsContent value="month" className="w-full md:w-fit mt-0">
             <Select
               defaultValue={months[new Date().getMonth()].value}
               options={months}
