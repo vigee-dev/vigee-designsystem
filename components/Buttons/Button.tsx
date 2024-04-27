@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import Link from "next/link";
 import { Button as ShadButton } from "../ui/button";
 import { cn } from "../../lib/utils";
@@ -13,6 +13,7 @@ import {
   PiPencilEditBoxDuoSolid,
   PiArrowLeftCircleContrast,
   PiUserPlusContrast,
+  PiCopyCopiedDuoSolid,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2 } from "lucide-react";
@@ -48,6 +49,7 @@ const iconMap = {
   edit: PiPencilEditBoxDuoSolid,
   arrowLeft: PiArrowLeftCircleContrast,
   user: PiUserPlusContrast,
+  copy: PiCopyCopiedDuoSolid,
 };
 
 const Button = function Button({
@@ -194,7 +196,5 @@ const ButtonComponent = ({
     </ShadButton>
   );
 };
-//
-// export const Button = React.memo(function (({props})))
 
 export { Button };
