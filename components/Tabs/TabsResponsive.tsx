@@ -1,6 +1,5 @@
 "use client";
-
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { useQueryState } from "nuqs";
 import {
   Select,
@@ -12,7 +11,6 @@ import {
 import { Tabs, TabsTrigger, TabsList } from "../../components/ui/tabs";
 import { cn } from "../../lib/utils";
 import { useRouter } from "next/navigation";
-import React from "react";
 
 interface TabsResponsiveProps {
   defaultValue: string;
@@ -51,7 +49,7 @@ export const TabsResponsive = ({
 
   React.useEffect(() => {
     console.log("defaultValue", defaultValue, query, filter);
-    if (defaultValue) {
+    if (defaultValue && query) {
       setFilter(defaultValue);
     }
   }, [defaultValue, setFilter, query]);
