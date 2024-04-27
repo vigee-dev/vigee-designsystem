@@ -132,7 +132,7 @@ export const PeriodFilters = ({
         defaultValue="year"
         className="flex flex-col md:flex-row gap-1 md:gap-4 justify-between bg-transparent md:border border-none  items-center"
       >
-        <TabsList className="w-full md:w-fit mt-2">
+        <TabsList className="w-full md:w-fit">
           {day && (
             <TabsTrigger
               className="w-full md:w-fit"
@@ -255,7 +255,7 @@ export const PeriodFilters = ({
           </TabsContent>
 
           <Select
-            className="w-full md:w-auto md:mt-2 bg-white md:bg-input"
+            className="w-full md:w-auto  bg-white md:bg-input"
             defaultValue={selectedYear}
             onChange={selectedValue => {
               setSelectedYear(selectedValue ?? "");
