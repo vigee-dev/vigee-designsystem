@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, UseMutationResult } from "@tanstack/react-query";
 import { z } from "zod";
 
 const ResetPasswordSchema = z.object({
@@ -8,7 +8,12 @@ const ResetPasswordSchema = z.object({
 });
 type ResetPasswordData = z.infer<typeof ResetPasswordSchema>;
 
-export const useSendResetEmail = () => {
+export const useSendResetEmail = (): UseMutationResult<
+  string,
+  Error,
+  string,
+  unknown
+> => {
   return useMutation<string, Error, string>({
     mutationFn: async (email: string) => {
       // Assurez-vous d'utiliser la clé mutationFn ici

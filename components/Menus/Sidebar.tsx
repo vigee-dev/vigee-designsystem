@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { useState, useEffect, ReactNode } from "react";
 import Image, { StaticImageData } from "next/image";
 import { usePathname } from "next/navigation";
@@ -150,7 +151,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                         placeholder={selectPlaceHolder}
                         className={classNameSelect}
                         defaultValue={
-                          defaultValueSelect ?? selectOptions[0].value
+                          defaultValueSelect ?? selectOptions[0]?.value ?? ""
                         }
                       />
                     </div>

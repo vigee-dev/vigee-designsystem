@@ -117,7 +117,7 @@ export default function Login({
                       <Input
                         placeholder=""
                         {...field}
-                        className="text-[16px] md:text-sm"
+                        className="text-[16px] md:text-sm bg-input"
                       />
                     </FormControl>
 
@@ -137,7 +137,7 @@ export default function Login({
                         placeholder=""
                         {...field}
                         type="password"
-                        className="text-[16px] md:text-sm"
+                        className="text-[16px] md:text-sm bg-input"
                       />
                     </FormControl>
 

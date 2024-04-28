@@ -47,7 +47,7 @@ export function Select({
       if (!acc[group]) {
         acc[group] = [];
       }
-      acc[group].push(option);
+      acc[group]?.push(option);
       return acc;
     },
     {}
