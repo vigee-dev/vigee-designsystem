@@ -1,4 +1,5 @@
-import { Button } from "../ui/button";
+import { PiNotebookDuoSolid } from "../../icons/PikaIcons";
+import { Button } from "../Buttons/Button";
 import {
   SheetTrigger,
   SheetTitle,
@@ -10,25 +11,27 @@ import {
   Sheet,
 } from "../ui/sheet";
 
-import { PlusIcon } from "lucide-react";
-
 interface Props {
   title?: string;
   description?: string;
+  triggerText?: string;
   children?: React.ReactNode;
+  icon?: React.ReactNode;
 }
 
 export default function SheetTriggered({
+  triggerText,
   title,
   description,
   children,
+  icon,
 }: Props) {
   return (
     <div className="fixed bottom-4 right-4">
       <Sheet>
-        <SheetTrigger asChild className="bg-black text-white">
-          <Button className="rounded-full" variant="outline">
-            <PlusIcon className="h-6 w-6" />
+        <SheetTrigger asChild>
+          <Button className="rounded-full" iconComponent={icon}>
+            {triggerText}
           </Button>
         </SheetTrigger>
         <SheetContent side="right">

@@ -33,7 +33,7 @@ interface ButtonProps {
     | "ghost"
     | "link";
   icon?: keyof typeof iconMap;
-  iconComponent?: React.ComponentType<{ className?: string }>;
+  iconComponent?: React.ReactNode;
   tooltip?: string;
   big?: boolean;
 }
@@ -118,7 +118,7 @@ interface ButtonComponentProps {
   disabled?: boolean;
   className?: string;
   icon?: keyof typeof iconMap;
-  iconComponent?: React.ComponentType<{ className?: string }>;
+  iconComponent?: React.ReactNode;
   tooltip?: string;
   big?: boolean;
 }
@@ -135,7 +135,7 @@ const ButtonComponent = ({
   tooltip,
   big,
 }: ButtonComponentProps) => {
-  const Icon = iconComponent || (icon ? iconMap[icon] : null);
+  const Icon = icon ? iconMap[icon] : null;
 
   return tooltip ? (
     <Tooltip message={tooltip ?? ""}>
@@ -152,19 +152,21 @@ const ButtonComponent = ({
         )}
       >
         {children}
-        {Icon && (
-          <Icon
-            className={cn(
-              "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
-              className,
-              !children &&
-                "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-7 h-7",
-              big && "w-10 h-10",
-              variant === "outline" && "text-gray-900",
-              variant === "secondary" && "text-secondary-foreground"
+        {iconComponent
+          ? iconComponent
+          : Icon && (
+              <Icon
+                className={cn(
+                  "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+                  className,
+                  !children &&
+                    "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-7 h-7",
+                  big && "w-10 h-10",
+                  variant === "outline" && "text-gray-900",
+                  variant === "secondary" && "text-secondary-foreground"
+                )}
+              />
             )}
-          />
-        )}
       </ShadButton>
     </Tooltip>
   ) : (
@@ -181,18 +183,20 @@ const ButtonComponent = ({
       )}
     >
       {children}
-      {Icon && (
-        <Icon
-          className={cn(
-            "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
-            !children &&
-              "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-7 h-7",
-            big && "w-10 h-10",
-            variant === "outline" && "text-gray-900",
-            variant === "secondary" && "text-secondary-foreground"
+      {iconComponent
+        ? iconComponent
+        : Icon && (
+            <Icon
+              className={cn(
+                "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+                !children &&
+                  "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-7 h-7",
+                big && "w-10 h-10",
+                variant === "outline" && "text-gray-900",
+                variant === "secondary" && "text-secondary-foreground"
+              )}
+            />
           )}
-        />
-      )}
     </ShadButton>
   );
 };
