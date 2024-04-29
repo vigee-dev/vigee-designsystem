@@ -30,7 +30,13 @@ export default function EmptyIllustration({
         alt="Empty list"
       />
 
-      <h1 className={"text-xl text-gray-500 font-bold text-center pt-6 font-display"}>{text}</h1>
+      <h1
+        className={
+          "text-xl text-gray-500 font-bold text-center pt-6 font-display"
+        }
+      >
+        {text}
+      </h1>
 
       <p className="text-gray-400">{subtitle}</p>
 
