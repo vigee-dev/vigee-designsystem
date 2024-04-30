@@ -1,4 +1,3 @@
-import React from "react";
 import VigeeGrayLogo from "../../img/logos/VigeeGrayLogo.png";
 import Image from "next/image";
 

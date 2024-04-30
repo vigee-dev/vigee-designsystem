@@ -9,7 +9,6 @@ import SelectAndSearchAsync from "react-select/async";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { ActionMeta, GroupBase, OnChangeValue } from "react-select";
 import { MultiValue, SingleValue, PropsValue } from "react-select";
-import React from "react";
 
 import { Label } from "../ui/label";
 

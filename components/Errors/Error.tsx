@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+
 import error from "../../img/error/error.svg";
 import Link from "next/link";
 import { PiEnvelopeArrowRightDuoSolid } from "../../icons/PikaIcons";

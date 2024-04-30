@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import vigee from "../../img/logos/vigee.png";
-import React from "react";
 
 interface ByVigeeProps {
   dark: boolean;

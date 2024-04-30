@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+
 import { useState, useEffect, ReactNode } from "react";
 import Image, { StaticImageData } from "next/image";
 import { usePathname } from "next/navigation";

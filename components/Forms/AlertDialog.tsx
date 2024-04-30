@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+
 import {
   AlertDialog as Alert,
   AlertDialogAction,
@@ -16,12 +16,12 @@ import { Button } from "../Buttons/Button";
 type Props = {
   btnSubAlert?: string;
   onClick: () => void;
-  onCancel?: () => void
+  onCancel?: () => void;
   colorBtn?: "outline" | "destructive";
   trigger?: React.ReactNode;
   btnQuestion: string;
   isPending?: boolean;
-  isOpen?: boolean
+  isOpen?: boolean;
 };
 
 type AlertContextType = {
@@ -51,7 +51,7 @@ export function AlertDialog({
   onCancel,
   trigger,
   isPending,
-  isOpen
+  isOpen,
 }: Props) {
   const [open, setOpen] = React.useState(false);
   const contextValue: AlertContextType = {

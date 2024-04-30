@@ -9,7 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../components/ui/select";
-import React from "react";
+
 import { cn } from "../../lib/utils";
 
 interface Props {

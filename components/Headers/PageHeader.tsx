@@ -1,4 +1,3 @@
-import React from "react";
 import { TypographyH1, TypographyH2 } from "../Typography/Typography";
 import { cn } from "../../lib/utils";
 

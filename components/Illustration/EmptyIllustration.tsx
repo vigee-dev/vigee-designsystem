@@ -1,5 +1,5 @@
 import Image, { StaticImageData } from "next/image";
-import React from "react";
+
 import Link from "next/link";
 import { Button } from "../Buttons/Button";
 import { Container } from "../Container/Container";

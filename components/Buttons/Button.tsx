@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { Button as ShadButton } from "../ui/button";
 import { cn } from "../../lib/utils";

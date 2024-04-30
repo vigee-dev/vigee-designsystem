@@ -1,4 +1,3 @@
-import React from "react";
 import VigeeLoaderTransparent from "../../img/logos/VigeeGrayLogo.png";
 import Image, { StaticImageData } from "next/image";
 

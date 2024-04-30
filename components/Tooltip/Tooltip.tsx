@@ -1,4 +1,3 @@
-import React from "react";
 import {
   TooltipProvider,
   Tooltip as TootltipShad,

@@ -1,4 +1,3 @@
-import React from "react";
 import { useEffect } from "react";
 import anime from "animejs";
 import { cn } from "../../lib/utils";
