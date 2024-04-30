@@ -4,13 +4,16 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "strict": true,
     "esModuleInterop": true,
-    "module": "CommonJS",
+      "module": "esnext",
     "declaration": true,
     "outDir": "./lib",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "jsx": "preserve",
     "skipLibCheck": true
   },
+   "paths": {
+      "@/*": ["./*"]
+    },
   "include": ["./**/*"],
   "exclude": ["node_modules", "lib"]
 }
