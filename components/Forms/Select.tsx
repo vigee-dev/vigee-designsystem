@@ -21,7 +21,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Label } from "../../components/ui/label";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;

@@ -1,5 +1,5 @@
 import { TypographyH1, TypographyH2 } from "../Typography/Typography";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 
 interface PageHeaderProps {
   title: string;

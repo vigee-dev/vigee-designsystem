@@ -9,7 +9,7 @@ import VariableLogo from "../Logos/VariableLogo";
 
 import { Badge } from "../ui/badge";
 import { Select } from "../Select/Select";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 
 function classNames(...classes: (string | boolean)[]): string {
   return classes.filter(Boolean).join(" ");

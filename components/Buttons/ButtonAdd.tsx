@@ -1,5 +1,5 @@
 import { TypographyH2 } from "../Typography/Typography";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 import Link from "next/link";
 
 interface AddButtonProps extends React.HTMLProps<HTMLButtonElement> {

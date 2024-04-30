@@ -1,5 +1,6 @@
+/// <reference types="react" />
 interface ByVigeeProps {
-  dark: boolean;
+    dark: boolean;
 }
 declare const ByVigee: React.FC<ByVigeeProps>;
 export default ByVigee;

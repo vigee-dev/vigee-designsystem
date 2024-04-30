@@ -1,5 +1,5 @@
 import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
-import { cn, currency } from "../../lib/utils";
+import { cn, currency } from "../lib/utils";
 
 export interface StatItem {
   name: string;

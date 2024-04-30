@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../../components/ui/button";
@@ -16,7 +17,7 @@ import {
   PopoverTrigger,
 } from "../../components/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 import { Label } from "../ui/label";
 import { FormLabel } from "../ui/form";
 import { ScrollArea } from "../ui/scroll-area";

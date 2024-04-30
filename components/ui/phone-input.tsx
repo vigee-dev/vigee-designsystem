@@ -22,7 +22,7 @@ import {
   PopoverTrigger,
 } from "../../components/ui/popover";
 
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 
 type PhoneInputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,

@@ -4,7 +4,7 @@ import * as React from "react";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { DateRange, Matcher } from "react-day-picker";
 import { fr } from "date-fns/locale";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";

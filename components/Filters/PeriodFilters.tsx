@@ -15,7 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { PiCalendarDefaultDuoStroke } from "../../icons/PikaIcons";
 import { Calendar } from "../ui/calendar";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 
 interface Props {
   years?: {

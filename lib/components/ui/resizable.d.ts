@@ -1,7 +1,7 @@
-/// <reference types="react" />
 import * as ResizablePrimitive from "react-resizable-panels";
+import * as React from "react";
 declare const ResizablePanelGroup: ({ className, ...props }: React.ComponentProps<typeof ResizablePrimitive.PanelGroup>) => import("react/jsx-runtime").JSX.Element;
-declare const ResizablePanel: import("react").ForwardRefExoticComponent<Omit<import("react").HTMLAttributes<keyof HTMLElementTagNameMap>, "id" | "onResize"> & {
+declare const ResizablePanel: React.ForwardRefExoticComponent<Omit<React.HTMLAttributes<keyof HTMLElementTagNameMap>, "id" | "onResize"> & {
     className?: string | undefined;
     collapsedSize?: number | undefined;
     collapsible?: boolean | undefined;
@@ -16,18 +16,18 @@ declare const ResizablePanel: import("react").ForwardRefExoticComponent<Omit<imp
     style?: object | undefined;
     tagName?: keyof HTMLElementTagNameMap | undefined;
 } & {
-    children?: import("react").ReactNode;
-} & import("react").RefAttributes<ResizablePrimitive.ImperativePanelHandle>>;
-declare const ResizableHandle: ({ withHandle, className, ...props }: Omit<import("react").HTMLAttributes<keyof HTMLElementTagNameMap>, "id"> & {
+    children?: React.ReactNode;
+} & React.RefAttributes<ResizablePrimitive.ImperativePanelHandle>>;
+declare const ResizableHandle: ({ withHandle, className, ...props }: Omit<React.HTMLAttributes<keyof HTMLElementTagNameMap>, "id"> & {
     className?: string | undefined;
     disabled?: boolean | undefined;
     id?: string | null | undefined;
     onDragging?: ResizablePrimitive.PanelResizeHandleOnDragging | undefined;
-    style?: import("react").CSSProperties | undefined;
+    style?: React.CSSProperties | undefined;
     tabIndex?: number | undefined;
     tagName?: keyof HTMLElementTagNameMap | undefined;
 } & {
-    children?: import("react").ReactNode;
+    children?: React.ReactNode;
 } & {
     withHandle?: boolean | undefined;
 }) => import("react/jsx-runtime").JSX.Element;

@@ -9,7 +9,7 @@ import {
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 
 import { Switch as SwitchShadcn } from "../ui/switch";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;

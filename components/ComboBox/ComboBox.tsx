@@ -14,7 +14,7 @@ import {
   PopoverTrigger,
 } from "../../components/ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 import { Label } from "../ui/label";
 import { ScrollArea } from "../ui/scroll-area";
 
