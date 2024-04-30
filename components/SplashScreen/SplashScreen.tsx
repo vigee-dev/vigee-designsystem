@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import anime from "animejs";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 
 interface Props {
   className?: string;

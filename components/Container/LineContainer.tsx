@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { TypographyH4 } from "../Typography/Typography";
 import { PiChevronBigRightStroke } from "../../icons/PikaIcons";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 
 interface PageHeaderProps {
   title: string;

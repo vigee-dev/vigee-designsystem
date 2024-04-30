@@ -13,7 +13,7 @@ import {
   MultiValue,
   SingleValue,
 } from "react-select";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 
 interface SearchSelectInterface<
   T extends FieldValues,

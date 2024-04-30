@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "../../components/ui/select";
 import { Tabs, TabsTrigger, TabsList } from "../../components/ui/tabs";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 import { useRouter } from "next/navigation";
 
 interface TabsResponsiveProps {

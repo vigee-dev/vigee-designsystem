@@ -3,7 +3,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "../../components/ui/collapsible";
-import React, { useState } from "react";
+import { useState } from "react";
 
 interface CollapsibleProps {
   defaultOpen?: boolean;

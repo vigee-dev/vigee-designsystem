@@ -8,8 +8,6 @@ import {
   YAxis,
   CartesianGrid,
   LabelList,
-  Cell,
-  TextProps,
 } from "recharts";
 import { TypographyH3 } from "../Typography/Typography";
 

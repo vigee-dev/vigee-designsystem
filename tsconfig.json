@@ -6,7 +6,7 @@
     "esModuleInterop": true,
       "module": "esnext",
     "declaration": true,
-    "outDir": "./lib",
+    "outDir": "components/lib",
     "moduleResolution": "bundler",
  "jsx": "react-jsx",
     "skipLibCheck": true
@@ -14,6 +14,6 @@
    "paths": {
       "@/*": ["./*"]
     },
-  "include": ["./**/*"],
-  "exclude": ["node_modules", "lib"]
+  "include": ["./**/*", ".", "components"],
+  "exclude": ["node_modules", "components/lib"]
 }

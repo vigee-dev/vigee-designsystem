@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button as ShadButton } from "../ui/button";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 import {
   PiSendPlaneHorizontalContrast,
   PiEye02OnContrast,

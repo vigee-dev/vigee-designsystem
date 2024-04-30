@@ -11,7 +11,7 @@ import moment from "moment";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { Button } from "../ui/button";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { Calendar } from "../ui/calendar";
 import { z } from "zod";

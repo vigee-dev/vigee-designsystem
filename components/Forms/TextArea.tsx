@@ -18,7 +18,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "../ui/hover-card";
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
