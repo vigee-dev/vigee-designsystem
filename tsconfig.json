@@ -14,6 +14,6 @@
    "paths": {
       "@/*": ["./*"]
     },
-  "include": ["./**/*", ".", "component"],
+  "include": ["./**/*", ".", "components"],
   "exclude": ["node_modules", "components/lib"]
 }
