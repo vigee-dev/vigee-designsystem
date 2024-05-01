@@ -226,7 +226,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                               </div>
                               {item?.notifications && (
                                 <div className="flex items-center">
-                                  <Badge className="bg-primary text-white opacity-90 p-1 w-[20px] h-[20px] items-center flex justify-center hover:text-white">
+                                  <Badge className="bg-red-400 text-white opacity-90 p-1 w-[20px] h-[20px] items-center flex justify-center hover:text-white">
                                     {item?.notifications}
                                   </Badge>
                                 </div>
