@@ -6,7 +6,7 @@
     "esModuleInterop": true,
       "module": "esnext",
     "declaration": true,
-    "outDir": "components",
+    "outDir": "components/lib",
     "moduleResolution": "bundler",
  "jsx": "react-jsx",
     "skipLibCheck": true

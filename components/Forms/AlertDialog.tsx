@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+
 import {
   AlertDialog as Alert,
   AlertDialogAction,
@@ -12,6 +12,7 @@ import {
   AlertDialogTrigger,
 } from "../../components/ui/alert-dialog";
 import { Button } from "../Buttons/Button";
+import React from "react";
 
 type Props = {
   btnSubAlert?: string;
