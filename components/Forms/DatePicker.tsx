@@ -178,7 +178,7 @@ export default function DatePicker<T extends FieldValues>({
                   );
                 }}
                 disabled={date =>
-                  starting_date ? date <= starting_date : false
+                  starting_date ? date < starting_date : false
                 }
                 locale={fr}
                 initialFocus
