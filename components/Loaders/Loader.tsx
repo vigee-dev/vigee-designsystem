@@ -13,7 +13,7 @@ export const Loader = ({ text, logo, borderColor }: Props) => {
       <div className="relative flex items-center justify-center">
         <div
           className={`absolute h-12 w-12 border-2 ${
-            borderColor ? borderColor : "border-gray-500 "
+            borderColor ? borderColor : "border-gray-300 "
           } rounded-full animate-spin border-t-transparent `}
         />
 
