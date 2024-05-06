@@ -13,6 +13,9 @@ import {
   PiArrowLeftCircleContrast,
   PiUserPlusContrast,
   PiCopyCopiedDuoSolid,
+  PiChevronRightStroke,
+  PiPlusDefaultStroke,
+  PiSearchDefaultStroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2 } from "lucide-react";
@@ -49,9 +52,12 @@ const iconMap = {
   arrowLeft: PiArrowLeftCircleContrast,
   user: PiUserPlusContrast,
   copy: PiCopyCopiedDuoSolid,
+  chevron: PiChevronRightStroke,
+  search: PiSearchDefaultStroke,
+  plus: PiPlusDefaultStroke,
 };
 
-const Button = function Button({
+export function Button({
   children,
   onClick,
   variant,
@@ -101,7 +107,7 @@ const Button = function Button({
       {children}
     </ButtonComponent>
   );
-};
+}
 
 interface ButtonComponentProps {
   children?: React.ReactNode;
@@ -144,7 +150,7 @@ const ButtonComponent = ({
         type={type}
         disabled={disabled}
         className={cn(
-          "group group-hover:text-primary  group-hover:cursor-pointer font-bold text-sm border flex gap-2",
+          "group group-hover:text-primary rounded-xl group-hover:cursor-pointer font-bold text-sm flex  px-3 gap-4",
           className,
           !children &&
             "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent "
@@ -157,7 +163,7 @@ const ButtonComponent = ({
         {Icon && (
           <Icon
             className={cn(
-              "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+              "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-4 h-4",
               className,
               !children &&
                 "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-7 h-7",
@@ -176,7 +182,7 @@ const ButtonComponent = ({
       type={type}
       disabled={disabled}
       className={cn(
-        "group group-hover:text-primary  group-hover:cursor-pointer font-bold text-sm border flex gap-2 ",
+        "group group-hover:text-primary rounded-xl group-hover:cursor-pointer font-bold text-sm flex  px-3 gap-4",
         className,
         !children &&
           "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent "
@@ -188,7 +194,7 @@ const ButtonComponent = ({
       {Icon && (
         <Icon
           className={cn(
-            "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+            "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-4 h-4",
             className,
             !children &&
               "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-7 h-7",
@@ -201,5 +207,3 @@ const ButtonComponent = ({
     </ShadButton>
   );
 };
-
-export { Button };
