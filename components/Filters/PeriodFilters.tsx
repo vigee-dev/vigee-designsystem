@@ -52,13 +52,13 @@ export const PeriodFilters = ({
   });
 
   function generateWeeks(year: number) {
-    const currentMonth = new Date().getMonth();
-    let startDate = startOfWeek(new Date(year, currentMonth, 1), {
-      weekStartsOn: 1,
+    let startDate = startOfWeek(new Date(year, 0, 1), {
+      weekStartsOn: 1, // Commence la semaine le lundi
     });
-    let weeks: { label: string; value: string }[] = []; // Déclaration explicite du type du tableau
 
-    while (startDate.getMonth() === currentMonth) {
+    let weeks: { label: string; value: string }[] = [];
+
+    while (startDate.getFullYear() === year) {
       const endDate = addDays(startDate, 6);
       weeks.push({
         label: `${formatDate(startDate)} au ${formatDate(endDate)}`,
@@ -94,7 +94,7 @@ export const PeriodFilters = ({
     setEndDate(formatForURL(end)); // Mettre à jour la date de fin dans l'URL
   };
 
-  const [weeks, setWeeks] = useState(() => generateWeeks(Number(selectedYear)));
+  const [weeks, setWeeks] = useState(generateWeeks(Number(selectedYear)));
 
   const [months, setMonths] = useState(() =>
     [...Array(12)].map((_, i) => {
