@@ -249,7 +249,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           sidebarOpen ? "lg:pl-56" : "lg:pl-16"
         } pt-2 md:py-2 bg-gray-50  h-full min-h-screen `}
       >
-        <div className="  pb-24 ">
+        <div className=" md:py-2 pb-24 ">
           {!sidebarOpen && (
             <div
               className="flex shrink-0 items-center justify-start md:justify-start "
