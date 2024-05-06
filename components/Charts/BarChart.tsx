@@ -64,21 +64,20 @@ const renderCustomizedLabel: React.FC<CustomLabelProps> = props => {
     return null;
   }
 
-  // Vérifiez si x, y, ou width ne sont pas définis, bien que cela ne devrait pas arriver dans la pratique avec Recharts
   if (x === undefined || y === undefined || width === undefined) {
     return null;
   }
 
-  const offset = 5; // Décalage pour le positionnement du label
+  const offset = 10; // Décalage pour centrer le texte dans la barre
 
   return (
     <text
-      x={x + width / 2}
-      y={y - offset}
-      fill="#444"
-      textAnchor="middle"
-      dominantBaseline="central"
-      fontSize={10}
+      x={x + width / 2} // Centrer horizontalement
+      y={y + offset} // Ajuster verticalement pour centrer dans la barre
+      fill="white" // Couleur blanche pour les labels
+      textAnchor="middle" // Centrer horizontalement le texte
+      dominantBaseline="central" // Centrer verticalement le texte
+      fontSize={9}
     >
       {formatValue(value, euro)}
     </text>
