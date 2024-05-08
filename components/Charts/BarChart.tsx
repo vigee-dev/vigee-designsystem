@@ -8,6 +8,7 @@ import {
   YAxis,
   CartesianGrid,
   LabelList,
+  Tooltip,
 } from "recharts";
 import { TypographyH3 } from "../Typography/Typography";
 
@@ -36,16 +37,17 @@ const formatValue = (value: number, euro: boolean): string => {
   let formattedValue = "";
 
   if (value >= 1000000) {
-    // Pour les valeurs en millions, arrondi au million le plus proche sans décimales
-    formattedValue = `${Math.round(value / 1000000)}M`;
+    // Arrondi au million le plus proche, avec un chiffre après la virgule
+    formattedValue = `${(value / 1000000).toFixed(1)}M`;
   } else if (value >= 1000) {
-    // Pour les valeurs en milliers, arrondi au millier le plus proche sans décimales
-    formattedValue = `${Math.round(value / 1000)}k`;
+    // Arrondi au millier le plus proche, avec un chiffre après la virgule
+    formattedValue = `${(value / 1000).toFixed(1)}k`;
   } else {
     // Pour les valeurs inférieures à 1000, arrondi au nombre entier le plus proche
     formattedValue = Math.round(value).toString();
   }
 
+  // Ajoute le symbole € si nécessaire
   return euro ? `${formattedValue}€` : formattedValue;
 };
 
@@ -55,6 +57,7 @@ interface CustomLabelProps {
   width: number;
   value: number;
   euro: boolean;
+  color: string;
 }
 
 const renderCustomizedLabel: React.FC<CustomLabelProps> = props => {
@@ -68,13 +71,15 @@ const renderCustomizedLabel: React.FC<CustomLabelProps> = props => {
     return null;
   }
 
-  const offset = 10; // Décalage pour centrer le texte dans la barre
+  const offsetBelow = 10; // Décalage en dessous de la barre
+  const offsetAbove = -5; // Décalage au-dessus de la barre
+  const yOffset = value < 1 ? y + offsetBelow : y + offsetAbove; // Condition pour ajuster la position
 
   return (
     <text
       x={x + width / 2} // Centrer horizontalement
-      y={y + offset} // Ajuster verticalement pour centrer dans la barre
-      fill="white" // Couleur blanche pour les labels
+      y={yOffset} // Position verticale ajustée selon la condition
+      fill={props.color} // Couleur différente selon la position du label
       textAnchor="middle" // Centrer horizontalement le texte
       dominantBaseline="central" // Centrer verticalement le texte
       fontSize={9}
@@ -125,6 +130,32 @@ export const BarChart: React.FC<Props> = ({
             tickFormatter={value => formatValue(value, euro)}
           />
 
+          <Tooltip
+            cursor={{ fill: "#000000", opacity: 0.05 }}
+            content={({ payload }) => {
+              if (payload && payload.length > 0) {
+                return (
+                  <div className="rounded-lg bg-white p-2 shadow-md">
+                    <p className="text-sm font-bold text-primary">
+                      {payload[0].payload.name}
+                    </p>
+
+                    {payload.map((entry, index) => (
+                      <p
+                        key={index}
+                        className="text-sm text-gray-500"
+                      >{`${entry.dataKey}: ${formatValue(
+                        Number(entry.value),
+                        euro
+                      )}`}</p>
+                    ))}
+                  </div>
+                );
+              }
+              return null;
+            }}
+          />
+
           {keys &&
             keys.map((key, index) => (
               <Bar
@@ -137,6 +168,7 @@ export const BarChart: React.FC<Props> = ({
                   dataKey={key.dataKey}
                   content={props =>
                     renderCustomizedLabel({
+                      color: key.color,
                       x: Number(props.x) ?? 0,
                       y: Number(props.y) ?? 0,
                       width: Number(props.width) ?? 0,
