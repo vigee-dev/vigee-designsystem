@@ -73,8 +73,7 @@ export function Button({
 }: ButtonProps) {
   return pending ? (
     <ButtonComponent disabled variant={variant} className={className}>
-      <Loader2 className={`mr-2 h-4 w-4 animate-spin `} />
-      {children}
+      {children} <Loader2 className={`mr-2 h-4 w-4 animate-spin `} />
     </ButtonComponent>
   ) : href ? (
     <Link href={href}>
@@ -150,7 +149,7 @@ const ButtonComponent = ({
         type={type}
         disabled={disabled}
         className={cn(
-          "group group-hover:text-primary rounded-xl group-hover:cursor-pointer font-bold text-sm flex  px-3 gap-4",
+          "group group-hover:text-primary rounded-xl group-hover:cursor-pointer font-bold text-sm flex  px-3 gap-4 ",
           className,
           !children &&
             "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent "
@@ -182,7 +181,7 @@ const ButtonComponent = ({
       type={type}
       disabled={disabled}
       className={cn(
-        "group group-hover:text-primary rounded-xl group-hover:cursor-pointer font-bold text-sm flex  px-3 gap-4",
+        "group group-hover:text-primary rounded-xl group-hover:cursor-pointer font-bold text-sm flex  gap-4 ",
         className,
         !children &&
           "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent "
@@ -194,8 +193,8 @@ const ButtonComponent = ({
       {Icon && (
         <Icon
           className={cn(
-            "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-4 h-4",
-            className,
+            "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+
             !children &&
               "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-7 h-7",
             big && "w-10 h-10",
