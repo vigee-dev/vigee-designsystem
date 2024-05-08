@@ -144,6 +144,7 @@ export default function SelectSearch<
               components={{
                 IndicatorSeparator: () => null,
               }}
+              autoFocus
             />
           </FormControl>
           <FormMessage />
