@@ -4,9 +4,12 @@ import { UseFormReturn, FieldValues, Path, PathValue } from "react-hook-form";
 import { useRef, useState } from "react";
 import { Card, CardContent } from "../ui/card";
 import {
+  PiDeleteBackwardLeftDuoSolid,
   PiDeleteDustbin01DuoSolid,
+  PiDeleteDustbin02Solid,
   PiFile02CheckDuoSolid,
   PiFilePdfFormatDuoSolid,
+  PiMedicalCrossContrast,
 } from "../../icons/PikaIcons";
 import { Button } from "../Buttons/Button";
 
@@ -160,17 +163,8 @@ export default function InputDropZoneFile<T extends FieldValues>({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4  items-center ">
             {files.map((file, index) => (
               <div key={index} className="flex gap-4 ">
-                <Card className="rounded-xl w-36 h-36 p-1 ">
-                  <div
-                    onClick={e => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleRemoveFile(index);
-                    }}
-                  >
-                    <Button icon="trash" />
-                  </div>
-                  <CardContent className="flex aspect-square items-center justify-center ">
+                <Card className="rounded-xl p-1">
+                  <CardContent className="flex flex-col aspect-square items-center justify-center relative">
                     {file instanceof File && isImageFile(file.name) ? (
                       <img
                         key={index}
@@ -201,6 +195,17 @@ export default function InputDropZoneFile<T extends FieldValues>({
                         {shortName(file.name)}
                       </div>
                     )}
+
+                    <div
+                      onClick={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleRemoveFile(index);
+                      }}
+                      className="absolute top-0 right-0 bg-white p-1 rounded-full  cursor-pointer "
+                    >
+                      <PiDeleteDustbin01DuoSolid className="h-5 w-5 text-red-400 hover:text-red-600" />
+                    </div>
                   </CardContent>
                 </Card>
               </div>
