@@ -17,6 +17,7 @@ import {
   PiPlusDefaultStroke,
   PiSearchDefaultStroke,
   PiCameraStroke,
+  PiDeleteDustbin01DuoSolid,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2 } from "lucide-react";
@@ -46,7 +47,7 @@ const iconMap = {
   view: PiEye02OnContrast,
   add: PiPlusSquareDuoSolid,
   download: PiDownloadDownDuoSolid,
-  trash: PiDeleteDustbin01DuoStroke,
+  trash: PiDeleteDustbin01DuoSolid,
   upload: PiUploadUpDuoSolid,
   back: PiArrowLeftStroke,
   edit: PiPencilEditBoxDuoSolid,
