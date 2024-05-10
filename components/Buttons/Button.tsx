@@ -16,6 +16,7 @@ import {
   PiChevronRightStroke,
   PiPlusDefaultStroke,
   PiSearchDefaultStroke,
+  PiCameraStroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2 } from "lucide-react";
@@ -55,6 +56,7 @@ const iconMap = {
   chevron: PiChevronRightStroke,
   search: PiSearchDefaultStroke,
   plus: PiPlusDefaultStroke,
+  camera: PiCameraStroke,
 };
 
 export function Button({
