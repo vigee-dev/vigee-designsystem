@@ -21,29 +21,22 @@ function classNames(...classes: string[]): string {
 const NumberKPI = ({ stats, columns = 3 }: NumberKPIProps) => {
   const variation = (previousStat: number, stat: number) => {
     const diff = stat - previousStat;
-    const percent = (diff / previousStat) * 100;
+    const percent = (diff / (previousStat === 0 ? 1 : previousStat)) * 100;
     return percent.toFixed(0);
   };
 
   return (
     <div className="my-2">
-      <dl
-        className={`grid grid-cols-1 divide-y divide-gray-100 overflow-hidden rounded-xl shadow-sm md:grid-cols-${columns} md:divide-x md:divide-gray-100 md:divide-y-0  bg-white border border-gray-100`}
-      >
+      <dl className={`grid grid-cols-1 divide-y divide-gray-100 overflow-hidden rounded-xl shadow-sm md:grid-cols-${columns} md:divide-x md:divide-gray-100 md:divide-y-0  bg-white border border-gray-100`}>
         {stats.map(item => (
           <div key={item.name} className="px-4 py-5 sm:p-6">
             <dt className="text-base font-medium text-gray-400">{item.name}</dt>
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-              <div
-                className={cn(
-                  `flex items-baseline text-xl font-black text-primary`,
-                  item.color
-                )}
-              >
+              <div className={cn(`flex items-baseline text-xl font-black text-primary`, item.color)}>
                 {currency(item.stat).toRoundedEuro()}
               </div>
 
-              {item?.previousStat && (
+              {item?.previousStat != null && (
                 <div
                   className={classNames(
                     item?.previousStat < item.stat
@@ -76,11 +69,9 @@ const NumberKPI = ({ stats, columns = 3 }: NumberKPIProps) => {
                     />
                   )}
                   <span className="sr-only">
-                    {item.previousStat < item.stat ? "Increased" : "Decreased"}{" "}
-                    by{" "}
+                    {item.previousStat < item.stat ? "Increased" : "Decreased"} by{" "}
                   </span>
-                  {item.previousStat && variation(item.previousStat, item.stat)}{" "}
-                  %
+                  {item.previousStat != null && variation(item.previousStat, item.stat)} %
                 </div>
               )}
             </dd>
