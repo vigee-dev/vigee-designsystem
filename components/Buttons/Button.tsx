@@ -168,7 +168,7 @@ const ButtonComponent = ({
               "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
               className,
               !children &&
-                "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-7 h-7",
+                "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-6 h-6",
               big && "w-10 h-10",
               variant === "outline" && "text-gray-900",
               variant === "secondary" && "text-secondary-foreground"
@@ -199,7 +199,7 @@ const ButtonComponent = ({
             "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
 
             !children &&
-              "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-7 h-7",
+              "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300  w-6 h-6",
             big && "w-10 h-10",
             variant === "outline" && "text-gray-900",
             variant === "secondary" && "text-secondary-foreground"
