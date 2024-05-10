@@ -9,8 +9,8 @@ import SelectAndSearchAsync from "react-select/async";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { ActionMeta, GroupBase, OnChangeValue } from "react-select";
 import { MultiValue, SingleValue, PropsValue } from "react-select";
-
 import { Label } from "../ui/label";
+import { cn } from "../lib/utils";
 
 interface SearchSelectAsyncInterface<
   T extends FieldValues,
@@ -39,7 +39,6 @@ interface SearchSelectAsyncInterface<
   ) => void;
 }
 
-// TODO Better way to handle isMulti, Option type etc ...
 export default function SearchSelectAsync<
   T extends FieldValues,
   Option,
@@ -66,21 +65,15 @@ export default function SearchSelectAsync<
       control={form?.control}
       name={name}
       render={({ field }) => (
-        <FormItem className={`${classname} md:text-sm text-[16px]`}>
+        <FormItem className={cn("text-[16px] ", classname)}>
           {label && (
             <FormLabel className="font-black text-primary">{label}</FormLabel>
           )}
           <FormControl>
-            {/* TODO Debounce loadoptions ? */}
-            {/* TODO typeof isMulti ?*/}
             <SelectAndSearchAsync<Option, IsMulti, GroupBase<Option>>
               theme={theme => ({
                 ...theme,
-
-                colors: {
-                  ...theme.colors,
-                  primary: "#f3f4f6",
-                },
+                colors: { ...theme.colors, primary: "#f3f4f6" },
               })}
               styles={{
                 control: (baseStyles, state) => ({
@@ -88,10 +81,9 @@ export default function SearchSelectAsync<
                   border: 0,
                   backgroundColor: "#f3f4f6",
                   borderRadius: "0.4rem",
-                  fontSize: "16px",
+                  fontSize: "16px", // Assurez-vous que la taille de police est >= 16px
                   borderColor: "#f3f4f6",
                 }),
-
                 option: (baseStyles, state) => ({
                   ...baseStyles,
                   cursor: "pointer",
@@ -111,7 +103,6 @@ export default function SearchSelectAsync<
                   fontSize: "16px",
                   borderRadius: "0.4rem",
                 }),
-
                 multiValue: (baseStyles, state) => ({
                   ...baseStyles,
                   cursor: "pointer",
@@ -120,24 +111,10 @@ export default function SearchSelectAsync<
                   borderRadius: "0.4rem",
                   fontSize: "16px",
                 }),
-                multiValueLabel: (styles, { data }) => ({
-                  ...styles,
-                  color: "#111",
-                  fontSize: "16px",
-                }),
-                multiValueRemove: (styles, { data }) => ({
-                  ...styles,
-                  color: "#111",
-                  borderRadius: "0.4rem",
-                  ":hover": {
-                    backgroundColor: "#DDD",
-                    color: "#111",
-                  },
-                }),
               }}
               isClearable={isClearable}
               placeholder={placeholder}
-              isDisabled={disabled} //TODO pass disabled from field.disabled ?
+              isDisabled={disabled}
               onChange={e => {
                 if (preprocessOnChange) {
                   const value = preprocessOnChange(e);
@@ -149,12 +126,11 @@ export default function SearchSelectAsync<
               defaultValue={defaultValue || field.value}
               noOptionsMessage={() => noOptionsMessage}
               loadOptions={loadOptions}
-              ref={field.ref}
               isMulti={isMulti}
+              value={value}
               components={{
                 IndicatorSeparator: () => null,
               }}
-              autoFocus
             />
           </FormControl>
           <FormMessage />
@@ -164,8 +140,6 @@ export default function SearchSelectAsync<
   ) : (
     <div className={`${classname} space-y-2`}>
       {label && <Label className="font-black text-primary">{label}</Label>}
-      {/* TODO Debounce loadoptions ? */}
-      {/* TODO typeof isMulti ?*/}
       <SelectAndSearchAsync<Option, IsMulti, GroupBase<Option>>
         theme={theme => ({
           ...theme,
@@ -177,13 +151,13 @@ export default function SearchSelectAsync<
             border: 0,
             backgroundColor: "#f3f4f6",
             borderRadius: "0.4rem",
-            fontSize: "14px",
+            fontSize: "16px",
             borderColor: "#f3f4f6",
           }),
           option: (baseStyles, state) => ({
             ...baseStyles,
             cursor: "pointer",
-            fontSize: "14px",
+            fontSize: "16px",
             backgroundColor: "#FFFFFF",
             ":hover": {
               backgroundColor: "#EEEEEE",
@@ -196,7 +170,7 @@ export default function SearchSelectAsync<
             backgroundColor: "#FFF",
             padding: "0.2rem",
             boxShadow: "0 0 0 1px #EEE",
-            fontSize: "14px",
+            fontSize: "16px",
             borderRadius: "0.4rem",
           }),
           multiValue: (baseStyles, state) => ({
@@ -207,23 +181,10 @@ export default function SearchSelectAsync<
             borderRadius: "0.4rem",
             fontSize: "16px",
           }),
-          multiValueLabel: (styles, { data }) => ({
-            ...styles,
-            color: "#111",
-          }),
-          multiValueRemove: (styles, { data }) => ({
-            ...styles,
-            color: "#111",
-            borderRadius: "0.4rem",
-            ":hover": {
-              backgroundColor: "#DDD",
-              color: "#111",
-            },
-          }),
         }}
         isClearable={isClearable}
         placeholder={placeholder}
-        isDisabled={disabled} //TODO pass disabled from field.disabled ?
+        isDisabled={disabled}
         onChange={onChange}
         defaultOptions={defaultOptions || []}
         defaultValue={defaultValue}
@@ -234,7 +195,6 @@ export default function SearchSelectAsync<
         components={{
           IndicatorSeparator: () => null,
         }}
-        autoFocus
       />
     </div>
   );
