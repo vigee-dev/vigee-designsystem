@@ -13,6 +13,11 @@ import {
   PiArrowLeftCircleContrast,
   PiUserPlusContrast,
   PiCopyCopiedDuoSolid,
+  PiChevronRightStroke,
+  PiPlusDefaultStroke,
+  PiSearchDefaultStroke,
+  PiCameraStroke,
+  PiDeleteDustbin01DuoSolid,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2 } from "lucide-react";
@@ -42,16 +47,20 @@ const iconMap = {
   view: PiEye02OnContrast,
   add: PiPlusSquareDuoSolid,
   download: PiDownloadDownDuoSolid,
-  trash: PiDeleteDustbin01DuoStroke,
+  trash: PiDeleteDustbin01DuoSolid,
   upload: PiUploadUpDuoSolid,
   back: PiArrowLeftStroke,
   edit: PiPencilEditBoxDuoSolid,
   arrowLeft: PiArrowLeftCircleContrast,
   user: PiUserPlusContrast,
   copy: PiCopyCopiedDuoSolid,
+  chevron: PiChevronRightStroke,
+  search: PiSearchDefaultStroke,
+  plus: PiPlusDefaultStroke,
+  camera: PiCameraStroke,
 };
 
-const Button = function Button({
+export function Button({
   children,
   onClick,
   variant,
@@ -67,8 +76,7 @@ const Button = function Button({
 }: ButtonProps) {
   return pending ? (
     <ButtonComponent disabled variant={variant} className={className}>
-      <Loader2 className={`mr-2 h-4 w-4 animate-spin `} />
-      {children}
+      {children} <Loader2 className={`mr-2 h-4 w-4 animate-spin `} />
     </ButtonComponent>
   ) : href ? (
     <Link href={href}>
@@ -101,7 +109,7 @@ const Button = function Button({
       {children}
     </ButtonComponent>
   );
-};
+}
 
 interface ButtonComponentProps {
   children?: React.ReactNode;
@@ -144,7 +152,7 @@ const ButtonComponent = ({
         type={type}
         disabled={disabled}
         className={cn(
-          "group group-hover:text-primary  group-hover:cursor-pointer font-bold text-sm border flex gap-2",
+          "group group-hover:text-primary rounded-xl group-hover:cursor-pointer font-bold text-sm flex  px-3 gap-4 ",
           className,
           !children &&
             "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent "
@@ -160,7 +168,7 @@ const ButtonComponent = ({
               "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
               className,
               !children &&
-                "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-7 h-7",
+                "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-6 h-6",
               big && "w-10 h-10",
               variant === "outline" && "text-gray-900",
               variant === "secondary" && "text-secondary-foreground"
@@ -176,7 +184,7 @@ const ButtonComponent = ({
       type={type}
       disabled={disabled}
       className={cn(
-        "group group-hover:text-primary  group-hover:cursor-pointer font-bold text-sm border flex gap-2 ",
+        "group group-hover:text-primary rounded-xl group-hover:cursor-pointer font-bold text-sm flex  gap-4 ",
         className,
         !children &&
           "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent "
@@ -189,9 +197,9 @@ const ButtonComponent = ({
         <Icon
           className={cn(
             "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
-            className,
+
             !children &&
-              "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-7 h-7",
+              "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300  w-6 h-6",
             big && "w-10 h-10",
             variant === "outline" && "text-gray-900",
             variant === "secondary" && "text-secondary-foreground"
@@ -201,5 +209,3 @@ const ButtonComponent = ({
     </ShadButton>
   );
 };
-
-export { Button };

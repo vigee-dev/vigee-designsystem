@@ -154,6 +154,7 @@ export default function SearchSelectAsync<
               components={{
                 IndicatorSeparator: () => null,
               }}
+              autoFocus
             />
           </FormControl>
           <FormMessage />
@@ -233,6 +234,7 @@ export default function SearchSelectAsync<
         components={{
           IndicatorSeparator: () => null,
         }}
+        autoFocus
       />
     </div>
   );

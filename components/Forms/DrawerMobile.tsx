@@ -74,35 +74,40 @@ export function DrawerMobile({
   if (isDesktop) {
     return (
       <DrawerContext.Provider value={contextValue}>
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger onClick={e => e.stopPropagation()} asChild>
-            {trigger}
-          </DialogTrigger>
-          <ScrollArea className="max-h-[80vh] ">
-            <DialogContent
-              onClick={e => e.stopPropagation()}
-              className={`max-w-[425px] ${
-                size === "sm"
-                  ? "md:max-w-[425px]"
-                  : size === "md"
-                  ? "md:max-w-[650px]"
-                  : "md:max-w-[1080px]"
-              } `}
-            >
-              <DialogHeader>
-                <div className="flex items-center gap-x-4 p-4 py-2">
-                  {icon}
-                  <div className="flex flex-col">
-                    <DialogTitle className="text-primary">{title}</DialogTitle>
-                    <DialogDescription>{description}</DialogDescription>
-                  </div>
-                </div>
-              </DialogHeader>
+        <div>
+          <Dialog open={open} onOpenChange={setOpen}>
+            <DialogTrigger onClick={e => e.stopPropagation()} asChild>
+              {trigger}
+            </DialogTrigger>
 
-              <div className="p-4">{children}</div>
-            </DialogContent>
-          </ScrollArea>
-        </Dialog>
+            <ScrollArea className="max-h-[80vh] ">
+              <DialogContent
+                onClick={e => e.stopPropagation()}
+                className={`max-w-[425px] ${
+                  size === "sm"
+                    ? "md:max-w-[425px]"
+                    : size === "md"
+                    ? "md:max-w-[650px]"
+                    : "md:max-w-[1080px]"
+                } `}
+              >
+                <DialogHeader>
+                  <div className="flex items-center gap-x-4 p-4 py-2">
+                    {icon}
+                    <div className="flex flex-col">
+                      <DialogTitle className="text-primary">
+                        {title}
+                      </DialogTitle>
+                      <DialogDescription>{description}</DialogDescription>
+                    </div>
+                  </div>
+                </DialogHeader>
+
+                <div className="p-4">{children}</div>
+              </DialogContent>
+            </ScrollArea>
+          </Dialog>
+        </div>
       </DrawerContext.Provider>
     );
   }
