@@ -9,7 +9,6 @@ import {
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
-  DrawerOverlay,
   DrawerTitle,
   DrawerTrigger,
 } from "../ui/drawer";
@@ -118,7 +117,7 @@ export function DrawerMobile({
         <DrawerTrigger onClick={e => e.stopPropagation()} asChild>
           {trigger}
         </DrawerTrigger>
-        <DrawerOverlay className="fixed inset-0 bg-black/40" />
+
         <DrawerContent
           onClick={e => e.stopPropagation()}
           className="bg-white flex flex-col fixed bottom-0 left-0 right-0 max-h-[96%] rounded-t-[10px]"
@@ -139,15 +138,15 @@ export function DrawerMobile({
               <div className="p-4">{children}</div>
             </ScrollArea>
 
-            {cancelButton && (
-              <DrawerFooter>
+            <DrawerFooter>
+              {cancelButton && (
                 <DrawerClose asChild>
                   <Button type="button" variant="outline">
                     Annuler
                   </Button>
                 </DrawerClose>
-              </DrawerFooter>
-            )}
+              )}
+            </DrawerFooter>
           </div>
         </DrawerContent>
       </Drawer>
