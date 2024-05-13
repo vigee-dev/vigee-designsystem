@@ -68,7 +68,6 @@ export function DrawerMobile({
   const [open, setOpen] = React.useState(false);
 
   const contextValue: DrawerContextType = { open, setOpen };
-
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   if (isDesktop) {
