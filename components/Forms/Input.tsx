@@ -36,6 +36,7 @@ type Props<T extends FieldValues> = {
   helpComponent?: React.ReactNode;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
+  minimalist?: boolean;
 };
 
 export default function Input<T extends FieldValues>({
@@ -55,6 +56,7 @@ export default function Input<T extends FieldValues>({
   helpComponent,
   onChange,
   value,
+  minimalist,
 }: Props<T>) {
   return form && name ? (
     <FormField
@@ -93,7 +95,12 @@ export default function Input<T extends FieldValues>({
                 min={min}
                 max={max}
                 step={step}
-                className="text-[16px] md:text-sm font-medium bg-input border-none"
+                className={cn(
+                  "text-[16px] md:text-sm font-medium bg-input border-none ",
+                  className,
+                  minimalist &&
+                    "focus-visible:ring-offset-0 bg-transparent font-bold text-black placeholder:text-gray-300 selection:border-none focus-visible:ring-0 ring-0 border-none  ring-offset-none p-0 focus:outline-none focus:ring-0 caret-black"
+                )}
               />
             </FormControl>
           </HoverCard>
