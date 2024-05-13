@@ -18,6 +18,7 @@ import {
   PiSearchDefaultStroke,
   PiCameraStroke,
   PiDeleteDustbin01DuoSolid,
+  PiFilterFunnelContrast,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2 } from "lucide-react";
@@ -58,6 +59,7 @@ const iconMap = {
   search: PiSearchDefaultStroke,
   plus: PiPlusDefaultStroke,
   camera: PiCameraStroke,
+  filter: PiFilterFunnelContrast,
 };
 
 export function Button({
