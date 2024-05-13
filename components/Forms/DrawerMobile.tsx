@@ -9,6 +9,7 @@ import {
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
+  DrawerOverlay,
   DrawerTitle,
   DrawerTrigger,
 } from "../ui/drawer";
@@ -117,7 +118,11 @@ export function DrawerMobile({
         <DrawerTrigger onClick={e => e.stopPropagation()} asChild>
           {trigger}
         </DrawerTrigger>
-        <DrawerContent onClick={e => e.stopPropagation()}>
+        <DrawerOverlay className="fixed inset-0 bg-black/40" />
+        <DrawerContent
+          onClick={e => e.stopPropagation()}
+          className="bg-white flex flex-col fixed bottom-0 left-0 right-0 max-h-[96%] rounded-t-[10px]"
+        >
           <div className="text-[16px] ">
             <ScrollArea className="max-h-[80vh] pb-8 ">
               <DrawerHeader className="text-left">
