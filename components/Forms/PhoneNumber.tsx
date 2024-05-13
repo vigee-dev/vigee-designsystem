@@ -50,6 +50,7 @@ export default function PhoneNumber<T extends FieldValues>({
               placeholder={placeholder}
               {...field}
               defaultCountry="FR"
+              className="text-[16px]"
             />
           </FormControl>
           {description && (
