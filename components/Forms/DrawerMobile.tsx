@@ -120,7 +120,7 @@ export function DrawerMobile({
         </DrawerTrigger>
         <DrawerContent onClick={e => e.stopPropagation()}>
           <div className="text-[16px] ">
-            <ScrollArea className="max-h-[80vh] pb-8 z-50">
+            <ScrollArea className="max-h-[80vh] pb-8 ">
               <DrawerHeader className="text-left">
                 {title && (
                   <DrawerTitle className="font-bold text-primary">
