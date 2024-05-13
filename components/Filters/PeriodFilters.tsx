@@ -196,14 +196,14 @@ export const PeriodFilters = ({
           )}
         </TabsList>
 
-        <div className="flex flex-col md:flex-row md:gap-2 gap-1 items-center w-full md:w-fit">
+        <div className="flex flex-col md:flex-row md:gap-2 gap-2 items-center w-full md:w-fit pt-2 md:pt-0">
           <TabsContent value="day" className="w-full md:w-fit">
             <Popover>
               <PopoverTrigger asChild>
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-full md:w-fit font-medium bg-white md:bg-input",
+                    "w-full md:w-fit font-medium md:bg-input",
                     !date && "text-muted-foreground"
                   )}
                 >
@@ -249,12 +249,12 @@ export const PeriodFilters = ({
               defaultValue={months[new Date().getMonth()].value}
               options={months}
               onChange={handleMonthChange}
-              className="w-full md:w-fit bg-white md:bg-input"
+              className="w-full md:w-fit"
             />
           </TabsContent>
 
           <Select
-            className="w-full md:w-auto  bg-white md:bg-input"
+            className="w-full md:w-fit"
             defaultValue={selectedYear}
             onChange={selectedValue => {
               setSelectedYear(selectedValue ?? "");
