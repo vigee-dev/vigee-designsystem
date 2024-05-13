@@ -203,11 +203,11 @@ export const PeriodFilters = ({
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-full md:w-fit font-medium md:bg-input",
-                    !date && "text-muted-foreground"
+                    "w-full md:w-fit  md:bg-input font-bold text-gray-800 -mt-2",
+                    !date && "text-muted-foreground "
                   )}
                 >
-                  <PiCalendarDefaultDuoStroke className="mr-2 h-4 w-4 text-primary" />
+                  <PiCalendarDefaultDuoStroke className="mr-2 h-4 w-4 " />
                   {date ? (
                     format(date, "EEEE dd MMMM", { locale: fr })
                   ) : (
@@ -228,7 +228,7 @@ export const PeriodFilters = ({
           </TabsContent>
           <TabsContent value="week" className="w-full md:w-fit  mt-0">
             <Select
-              className="w-full md:w-fit"
+              className="w-full md:w-fit font-bold md:bg-input text-gray-800"
               options={weeks}
               onChange={(value: string | undefined) => {
                 const selectedWeekStart = new Date(value || "");
@@ -249,12 +249,12 @@ export const PeriodFilters = ({
               defaultValue={months[new Date().getMonth()].value}
               options={months}
               onChange={handleMonthChange}
-              className="w-full md:w-fit"
+              className="w-full md:w-fit font-bold md:bg-input text-gray-800"
             />
           </TabsContent>
 
           <Select
-            className="w-full md:w-fit"
+            className="w-full md:w-fit font-bold md:bg-input text-gray-800"
             defaultValue={selectedYear}
             onChange={selectedValue => {
               setSelectedYear(selectedValue ?? "");
