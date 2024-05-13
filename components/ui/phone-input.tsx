@@ -129,9 +129,9 @@ const CountrySelect = ({
                       country={option.value}
                       countryName={option.label}
                     />
-                    <span className="text-sm flex-1">{option.label}</span>
+                    <span className="text-[16px] flex-1">{option.label}</span>
                     {option.value && (
-                      <span className="text-sm text-foreground/50">
+                      <span className="text-[16px] text-foreground/50">
                         {`+${RPNInput.getCountryCallingCode(option.value)}`}
                       </span>
                     )}
