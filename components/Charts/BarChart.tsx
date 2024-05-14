@@ -30,6 +30,7 @@ interface Props {
   container?: boolean;
   keys?: Key[];
   euro?: boolean; // Prop pour activer le formatage en euro
+  noY?: boolean;
 }
 
 // Fonction de formattage unifiée
@@ -98,6 +99,7 @@ export const BarChart: React.FC<Props> = ({
   container,
   keys,
   euro = false,
+  noY = false,
 }) => {
   const maxValue = Math.max(...data.map(item => item.total ?? 0));
 
@@ -128,13 +130,15 @@ export const BarChart: React.FC<Props> = ({
             axisLine={false}
           />
 
-          <YAxis
-            stroke="#000"
-            fontSize={12}
-            tickLine={false}
-            axisLine={false}
-            tickFormatter={value => formatValue(value, euro)}
-          />
+          {!noY && (
+            <YAxis
+              stroke="#000"
+              fontSize={12}
+              tickLine={false}
+              axisLine={false}
+              tickFormatter={value => formatValue(value, euro)}
+            />
+          )}
 
           <Tooltip
             cursor={{ fill: "#000000", opacity: 0.05 }}
