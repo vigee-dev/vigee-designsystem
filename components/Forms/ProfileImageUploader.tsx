@@ -23,7 +23,7 @@ export const ProfileImageUploader = <TFormValues extends FieldValues>({
   label,
 }: ProfileImageUploaderProps<TFormValues>) => {
   const { watch, setValue } = form;
-  const profileImage = watch(name);
+  const profileImage: File | { id: number; signedUrl: string; filename: string } = watch(name);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const onProfileImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +44,11 @@ export const ProfileImageUploader = <TFormValues extends FieldValues>({
         onClick={handleAvatarClick}
       >
         {profileImage ? (
-          <AvatarImage src={URL.createObjectURL(profileImage)} alt="Profile picture" />
+          profileImage instanceof File ? (
+            <AvatarImage src={URL.createObjectURL(profileImage)} alt="Profile picture" />
+          ) : (
+            ("signedUrl" in profileImage) && <AvatarImage src={profileImage.signedUrl} alt="Profile picture" />
+          )
         ) : (
           <AvatarFallback>
             <PiUserCircleDuoSolid className="text-gray-400 w-full h-full" />
