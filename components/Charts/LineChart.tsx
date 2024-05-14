@@ -90,7 +90,7 @@ export const LineChart: React.FC<Props> = ({
           <XAxis
             dataKey={"name"}
             stroke="#1e293b"
-            fontSize={12}
+            fontSize={10}
             tickLine={false}
             axisLine={false}
             interval={0}
