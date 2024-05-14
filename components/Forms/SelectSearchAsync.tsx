@@ -37,6 +37,7 @@ interface SearchSelectAsyncInterface<
     newValue: OnChangeValue<Option, IsMulti>,
     actionMeta: ActionMeta<Option>
   ) => void;
+  isSearchable?: boolean;
 }
 
 export default function SearchSelectAsync<
@@ -59,11 +60,8 @@ export default function SearchSelectAsync<
   defaultValue,
   onChange,
   value,
+  isSearchable = true,
 }: SearchSelectAsyncInterface<T, Option, IsMulti>) {
-  const handleFocus = () => {
-    window.scrollTo(0, document.body.scrollHeight);
-  };
-
   return form && name ? (
     <FormField
       control={form?.control}
@@ -135,7 +133,10 @@ export default function SearchSelectAsync<
               components={{
                 IndicatorSeparator: () => null,
               }}
-              onFocus={handleFocus}
+              isSearchable={isSearchable}
+              menuPlacement="auto"
+              menuShouldScrollIntoView
+              blurInputOnSelect
             />
           </FormControl>
           <FormMessage />
@@ -200,7 +201,10 @@ export default function SearchSelectAsync<
         components={{
           IndicatorSeparator: () => null,
         }}
-        onFocus={handleFocus}
+        isSearchable={isSearchable}
+        menuPlacement="auto"
+        menuShouldScrollIntoView
+        blurInputOnSelect
       />
     </div>
   );
