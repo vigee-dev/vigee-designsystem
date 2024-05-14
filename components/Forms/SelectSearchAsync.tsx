@@ -60,6 +60,10 @@ export default function SearchSelectAsync<
   onChange,
   value,
 }: SearchSelectAsyncInterface<T, Option, IsMulti>) {
+  const handleFocus = () => {
+    window.scrollTo(0, document.body.scrollHeight);
+  };
+
   return form && name ? (
     <FormField
       control={form?.control}
@@ -131,6 +135,7 @@ export default function SearchSelectAsync<
               components={{
                 IndicatorSeparator: () => null,
               }}
+              onFocus={handleFocus}
             />
           </FormControl>
           <FormMessage />
@@ -195,6 +200,7 @@ export default function SearchSelectAsync<
         components={{
           IndicatorSeparator: () => null,
         }}
+        onFocus={handleFocus}
       />
     </div>
   );
