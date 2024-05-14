@@ -99,21 +99,26 @@ export const BarChart: React.FC<Props> = ({
   keys,
   euro = false,
 }) => {
+  const maxValue = Math.max(...data.map(item => item.total ?? 0));
+
   return (
     <div
       className={`${
         container
           ? "bg-white p-8 rounded-xl border border-gray-100 shadow-sm"
           : ""
-      } items-center mb-2`}
+      } items-center mb-2 `}
     >
       <div className="flex flex-col pb-12">
         <TypographyH3 className="font-bold text-primary">{title}</TypographyH3>
         <p className="text-gray-500 text-sm">{subtitle}</p>
       </div>
 
-      <ResponsiveContainer width="100%" height={350}>
-        <RechartsBarChart data={data}>
+      <ResponsiveContainer width="100%" height={300}>
+        <RechartsBarChart
+          data={data}
+          margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
+        >
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis
             dataKey="name"
@@ -122,6 +127,7 @@ export const BarChart: React.FC<Props> = ({
             tickLine={false}
             axisLine={false}
           />
+
           <YAxis
             stroke="#000"
             fontSize={12}
@@ -141,13 +147,9 @@ export const BarChart: React.FC<Props> = ({
                     </p>
 
                     {payload.map((entry, index) => (
-                      <p
-                        key={index}
-                        className="text-sm text-gray-500"
-                      >{`${entry.dataKey}: ${formatValue(
-                        Number(entry.value),
-                        euro
-                      )}`}</p>
+                      <p key={index} className="text-sm text-gray-500">{`${
+                        entry.dataKey
+                      }: ${formatValue(Number(entry.value), euro)}`}</p>
                     ))}
                   </div>
                 );
