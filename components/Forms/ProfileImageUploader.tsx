@@ -1,27 +1,23 @@
 "use client";
 import React, { useRef } from "react";
-import { UseFormReturn, Path } from "react-hook-form";
+import {UseFormReturn, Path, PathValue, FieldValues, FieldPath} from "react-hook-form";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "../../components/ui/avatar";
+} from "../ui/avatar";
 import {
   PiUploadUpContrast,
   PiUserCircleDuoSolid,
 } from "../../icons/PikaIcons";
 
-interface ProfileImageUploaderProps<
-  TFormValues extends { profileImageUrl?: string | null }
-> {
+interface ProfileImageUploaderProps<TFormValues extends FieldValues> {
   form: UseFormReturn<TFormValues>;
   name: Path<TFormValues>;
   label?: string;
 }
 
-export const ProfileImageUploader = <
-  TFormValues extends { profileImageUrl?: string | null }
->({
+export const ProfileImageUploader = <TFormValues extends FieldValues>({
   form,
   name,
   label,
@@ -33,14 +29,7 @@ export const ProfileImageUploader = <
   const onProfileImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (e: ProgressEvent<FileReader>) => {
-        if (typeof e.target?.result === "string") {
-          // @ts-ignore TOIMPROVE remove ts-ignore and find a way to fix the type error
-          setValue(name, e.target.result as string);
-        }
-      };
-      reader.readAsDataURL(file);
+      setValue(name, file as PathValue<TFormValues, FieldPath<TFormValues>>)
     }
   };
 
@@ -55,7 +44,7 @@ export const ProfileImageUploader = <
         onClick={handleAvatarClick}
       >
         {profileImage ? (
-          <AvatarImage src={profileImage} alt="Profile" />
+          <AvatarImage src={URL.createObjectURL(profileImage)} alt="Profile picture" />
         ) : (
           <AvatarFallback>
             <PiUserCircleDuoSolid className="text-gray-400 w-full h-full" />
@@ -69,7 +58,7 @@ export const ProfileImageUploader = <
         type="file"
         accept="image/*"
         className="hidden"
-        name="profileImageUrl"
+        name={name}
         ref={fileInputRef}
         onChange={onProfileImageChange}
       />
