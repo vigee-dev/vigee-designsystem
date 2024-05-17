@@ -59,7 +59,7 @@ export const TabsResponsive = ({
 
   return (
     <>
-      <div className="hidden md:flex w-full md-fit">
+      <div className="hidden md:flex w-full ">
         {options.length < 7 ? (
           <TabComponent
             options={options}
@@ -122,9 +122,11 @@ const TabComponent = ({
   return (
     <Tabs
       defaultValue={defaultValue}
-      className={cn(`w-full `, fullWidth ? " md:w-full" : " md:w-fit")}
+      className={cn(`w-full`, fullWidth ? " md:w-full" : " md:w-fit")}
     >
-      <TabsList className="w-full md:w-fit ">
+      <TabsList
+        className={cn(`w-full`, fullWidth ? " md:w-full" : " md:w-fit")}
+      >
         {options.map((option, index) => (
           <TabsTrigger
             key={index}
