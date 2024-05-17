@@ -18,12 +18,12 @@ type Option = {
   label: string;
   value: string;
   icon: React.ReactNode;
+  description: string;
 };
 
 type Props<T extends FieldValues> = {
   form: UseFormReturn<T>;
   name: Path<T>;
-
   descr?: string;
   className?: string;
   disabled?: boolean;
@@ -58,10 +58,17 @@ export const Toggles = <T extends FieldValues>({
                     key={option.value}
                     value={option.value}
                     aria-label={option.label}
-                    className={cn("flex items-center gap-2 w-full h-24")}
+                    className={cn(
+                      " items-center h-24 flex justify-between w-full gap-6"
+                    )}
                   >
-                    {option.icon}
-                    <span className="text-md">{option.label}</span>
+                    <div className="w-fit">{option.icon}</div>
+                    <div className="w-full text-left ">
+                      <span className="text-md font-bold ">{option.label}</span>
+                      <p className="text-sm text-gray-500">
+                        {option.description}
+                      </p>
+                    </div>
                   </ToggleGroupItem>
                 ))}
               </ShadToggleGroup>
