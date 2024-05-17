@@ -65,9 +65,11 @@ export const TabsResponsive = ({
             options={options}
             defaultValue={defaultValue}
             handleValueChange={handleValueChange}
-            children={children}
             fullWidth={fullWidth}
-          />
+          >
+            {" "}
+            {children}{" "}
+          </TabComponent>
         ) : (
           <SelectComponent
             options={options}
@@ -79,11 +81,13 @@ export const TabsResponsive = ({
       <div className="flex md:hidden">
         {options.length < 4 ? (
           <TabComponent
-            children={children}
             options={options}
             defaultValue={defaultValue}
             handleValueChange={handleValueChange}
-          />
+          >
+            {" "}
+            {children}{" "}
+          </TabComponent>
         ) : (
           <SelectComponent
             options={options}
