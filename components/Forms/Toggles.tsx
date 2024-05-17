@@ -17,8 +17,8 @@ import { cn } from "../lib/utils";
 type Option = {
   label: string;
   value: string;
-  icon: React.ReactNode;
-  description: string;
+  icon?: React.ReactNode;
+  description?: string;
 };
 
 type Props<T extends FieldValues> = {
@@ -59,7 +59,7 @@ export const Toggles = <T extends FieldValues>({
                     value={option.value}
                     aria-label={option.label}
                     className={cn(
-                      " items-center h-24 flex justify-between w-full gap-6"
+                      " items-center h-20 flex justify-between w-full gap-6 md:px-12 rounded-lg"
                     )}
                   >
                     <div className="w-fit">{option.icon}</div>
