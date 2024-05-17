@@ -21,12 +21,14 @@ interface TabsResponsiveProps {
     value?: string;
     icon?: ReactNode;
   }[];
+  children?: ReactNode;
 }
 
 export const TabsResponsive = ({
   options,
   defaultValue,
   query,
+  children,
 }: TabsResponsiveProps) => {
   const router = useRouter();
 
@@ -73,6 +75,7 @@ export const TabsResponsive = ({
       <div className="flex md:hidden">
         {options.length < 4 ? (
           <TabComponent
+            children={children}
             options={options}
             defaultValue={defaultValue}
             handleValueChange={handleValueChange}
@@ -101,12 +104,14 @@ interface TabProps {
     value?: string;
     icon?: ReactNode;
   }[];
+  children?: ReactNode;
 }
 
 const TabComponent = ({
   options,
   defaultValue,
   handleValueChange,
+  children,
 }: TabProps) => {
   return (
     <Tabs defaultValue={defaultValue}>
@@ -124,6 +129,8 @@ const TabComponent = ({
           </TabsTrigger>
         ))}
       </TabsList>
+
+      {children}
     </Tabs>
   );
 };
