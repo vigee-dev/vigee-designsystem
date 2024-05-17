@@ -31,7 +31,7 @@ type Props<T extends FieldValues> = {
   required?: boolean;
   name?: Path<T>;
   descr?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   disabled?: boolean;
   onChange?: (value: string) => void;
