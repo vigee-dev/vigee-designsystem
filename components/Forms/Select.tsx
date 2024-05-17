@@ -5,6 +5,7 @@ import {
   SelectContent,
   SelectTrigger,
   SelectValue,
+  SelectItem,
 } from "../ui/select";
 import { PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
 import {
@@ -37,6 +38,7 @@ type Props<T extends FieldValues> = {
   value?: string;
   helpComponent?: React.ReactNode;
   isBoolean?: boolean;
+  options?: { label: string; value: string }[];
 };
 
 export default function Select<T extends FieldValues>({
@@ -53,6 +55,7 @@ export default function Select<T extends FieldValues>({
   value,
   helpComponent,
   isBoolean = false,
+  options,
 }: Props<T>) {
   return form?.control && name ? (
     <FormField
@@ -98,8 +101,15 @@ export default function Select<T extends FieldValues>({
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
             </FormControl>
+
             <SelectContent className="max-h-[200px] font-medium">
-              {children}
+              {!options
+                ? children
+                : options.map(option => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
             </SelectContent>
           </ShadSelect>
           {descr && <FormDescription>{descr}</FormDescription>}
@@ -115,12 +125,16 @@ export default function Select<T extends FieldValues>({
         value={String(value)}
         disabled={disabled}
       >
-        <SelectTrigger className="font-medium bg-input border-none">
-          <SelectValue placeholder={placeholder} />
-        </SelectTrigger>
         <SelectContent className="max-h-[200px] font-medium">
-          {children}
+          {!options
+            ? children
+            : options.map(option => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
         </SelectContent>
+        <SelectContent className="max-h-[200px] font-medium"></SelectContent>
       </ShadSelect>
       {descr && <p className={"text-sm text-muted-foreground"}>{descr}</p>}
     </div>
