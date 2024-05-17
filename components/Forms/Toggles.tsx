@@ -59,13 +59,13 @@ export const Toggles = <T extends FieldValues>({
                     value={option.value}
                     aria-label={option.label}
                     className={cn(
-                      " items-center h-20 flex justify-between w-full gap-6 md:px-12 rounded-lg"
+                      " items-center h-20 flex justify-between w-full gap-6 md:px-6 rounded-lg"
                     )}
                   >
                     <div className="w-fit">{option.icon}</div>
                     <div className="w-full text-left ">
                       <span className="text-md font-bold ">{option.label}</span>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-xs text-gray-500">
                         {option.description}
                       </p>
                     </div>
