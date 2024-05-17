@@ -115,7 +115,7 @@ const TabComponent = ({
   children,
 }: TabProps) => {
   return (
-    <Tabs defaultValue={defaultValue}>
+    <Tabs defaultValue={defaultValue} className="w-full md:w-fit ">
       <TabsList className="w-full md:w-fit ">
         {options.map((option, index) => (
           <TabsTrigger
