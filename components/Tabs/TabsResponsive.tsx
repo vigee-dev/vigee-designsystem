@@ -22,6 +22,7 @@ interface TabsResponsiveProps {
     icon?: ReactNode;
   }[];
   children?: ReactNode;
+  fullWidth?: boolean;
 }
 
 export const TabsResponsive = ({
@@ -29,6 +30,7 @@ export const TabsResponsive = ({
   defaultValue,
   query,
   children,
+  fullWidth,
 }: TabsResponsiveProps) => {
   const router = useRouter();
 
@@ -64,6 +66,7 @@ export const TabsResponsive = ({
             defaultValue={defaultValue}
             handleValueChange={handleValueChange}
             children={children}
+            fullWidth={fullWidth}
           />
         ) : (
           <SelectComponent
@@ -106,6 +109,7 @@ interface TabProps {
     icon?: ReactNode;
   }[];
   children?: ReactNode;
+  fullWidth?: boolean;
 }
 
 const TabComponent = ({
@@ -113,9 +117,13 @@ const TabComponent = ({
   defaultValue,
   handleValueChange,
   children,
+  fullWidth,
 }: TabProps) => {
   return (
-    <Tabs defaultValue={defaultValue} className="w-full md:w-fit ">
+    <Tabs
+      defaultValue={defaultValue}
+      className={cn(`w-full `, fullWidth ? " md:w-full" : " md:w-fit")}
+    >
       <TabsList className="w-full md:w-fit ">
         {options.map((option, index) => (
           <TabsTrigger
