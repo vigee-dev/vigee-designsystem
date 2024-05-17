@@ -129,7 +129,10 @@ const TabComponent = ({
           <TabsTrigger
             key={index}
             value={option.href ?? option.value ?? ""}
-            className="w-full md:w-fit flex gap-2"
+            className={cn(
+              `w-full flex gap-2`,
+              fullWidth ? " md:w-full" : " md:w-fit"
+            )}
             onClick={() =>
               handleValueChange(option.href ?? option.value ?? "", option)
             }
