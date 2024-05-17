@@ -51,6 +51,7 @@ export default function Switch<T extends FieldValues>({
             <SwitchShadcn
               checked={field.value}
               onCheckedChange={field.onChange}
+              className="data-[state=unchecked]:bg-slate-200"
             />
           </FormControl>
         </FormItem>
@@ -68,7 +69,11 @@ export default function Switch<T extends FieldValues>({
         <FormDescription>{descr}</FormDescription>
       </div>
       <FormControl>
-        <SwitchShadcn checked={value} onCheckedChange={onChange} />
+        <SwitchShadcn
+          checked={value}
+          onCheckedChange={onChange}
+          className="data-[state=unchecked]:bg-slate-200"
+        />
       </FormControl>
     </FormItem>
   );
