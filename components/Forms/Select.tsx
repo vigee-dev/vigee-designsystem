@@ -125,6 +125,9 @@ export default function Select<T extends FieldValues>({
         value={String(value)}
         disabled={disabled}
       >
+        <SelectTrigger className="font-medium bg-input border-none">
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
         <SelectContent className="max-h-[200px] font-medium">
           {!options
             ? children
@@ -132,9 +135,9 @@ export default function Select<T extends FieldValues>({
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
                 </SelectItem>
-              ))}
+              ))
+          }
         </SelectContent>
-        <SelectContent className="max-h-[200px] font-medium"></SelectContent>
       </ShadSelect>
       {descr && <p className={"text-sm text-muted-foreground"}>{descr}</p>}
     </div>
