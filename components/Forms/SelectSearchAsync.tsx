@@ -4,7 +4,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../components/ui/form";
+} from "../ui/form";
 import SelectAndSearchAsync from "react-select/async";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { ActionMeta, GroupBase, OnChangeValue } from "react-select";
