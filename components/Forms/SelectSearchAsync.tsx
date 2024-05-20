@@ -37,7 +37,8 @@ interface SearchSelectAsyncInterface<
     newValue: OnChangeValue<Option, IsMulti>,
     actionMeta: ActionMeta<Option>
   ) => void;
-  isSearchable?: boolean;
+  isSearchable?: boolean
+  customErrorMessage?: string
 }
 
 export default function SearchSelectAsync<
@@ -61,6 +62,7 @@ export default function SearchSelectAsync<
   onChange,
   value,
   isSearchable = true,
+  customErrorMessage
 }: SearchSelectAsyncInterface<T, Option, IsMulti>) {
   return form && name ? (
     <FormField
@@ -139,7 +141,7 @@ export default function SearchSelectAsync<
               blurInputOnSelect
             />
           </FormControl>
-          <FormMessage />
+          <FormMessage>{customErrorMessage}</FormMessage>
         </FormItem>
       )}
     />
