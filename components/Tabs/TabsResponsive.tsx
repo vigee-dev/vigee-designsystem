@@ -46,7 +46,7 @@ export const TabsResponsive = ({
   ) => {
     if (option.href) {
       router.push(option.href);
-    } else if (option.value) {
+    } else if (option.value && query) {
       setFilter(value);
     }
   };
