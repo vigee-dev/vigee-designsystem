@@ -73,7 +73,7 @@ export default function Switch<T extends FieldValues>({
           checked={value}
           onCheckedChange={onChange}
           className="data-[state=unchecked]:bg-slate-200"
-        />-6
+        />
       </FormControl>
     </FormItem>
   );
