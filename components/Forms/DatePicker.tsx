@@ -44,6 +44,19 @@ export default function DatePicker<T extends FieldValues>({
   returnString,
   defaultValue,
 }: Props<T>) {
+  const setToMidnight = (date: Date): Date => {
+    const midnightDate = new Date(date);
+    midnightDate.setHours(0, 0, 0, 0);
+    return midnightDate;
+  };
+
+  const isDateDisabled = (date: Date): boolean => {
+    const normalizedDate = setToMidnight(date);
+    return starting_date
+      ? normalizedDate < setToMidnight(new Date(starting_date))
+      : false;
+  };
+
   const yearDefault = defaultValue
     ? moment(defaultValue).year().toString()
     : moment().year().toString();
@@ -177,9 +190,7 @@ export default function DatePicker<T extends FieldValues>({
                     returnString ? moment(date).format("YYYY-MM-DD") : date
                   );
                 }}
-                disabled={date =>
-                  starting_date ? date < starting_date : false
-                }
+                disabled={date => isDateDisabled(date)}
                 locale={fr}
                 initialFocus
                 defaultMonth={selectedDate || new Date()}
