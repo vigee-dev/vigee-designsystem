@@ -5,6 +5,7 @@ import { PiUserCircleDuoStroke } from "../../icons/PikaIcons";
 interface Data {
   name: string;
   avatar?: string;
+  img?: string;
   amount: number;
   amount2?: number;
   currency?: string;
@@ -29,9 +30,12 @@ export function Ranking({ title, subtitle, data, icon }: Props) {
         {data?.map((item, index) => (
           <div className="flex items-center" key={index}>
             <Avatar className="h-9 w-9">
-              <AvatarImage src="/avatars/01.png" alt="Avatar" />
+              <AvatarImage
+                src={item.img ? item.img : "/avatars/01.png"}
+                alt="Avatar"
+              />
               <AvatarFallback>
-                {icon ? icon : <PiUserCircleDuoStroke />}
+                {item ? icon : <PiUserCircleDuoStroke />}
               </AvatarFallback>
             </Avatar>
             <div className="ml-4 space-y-1">

@@ -16,7 +16,6 @@ import { Button } from "../ui/button";
 import { PiCalendarDefaultDuoStroke } from "../../icons/PikaIcons";
 import { Calendar } from "../ui/calendar";
 import { cn } from "../lib/utils";
-import {start} from "node:repl";
 
 interface Props {
   years?: {
@@ -49,12 +48,12 @@ export const PeriodFilters = ({
   const [selectedYear, setSelectedYear] = useQueryState("year", {
     defaultValue: years[0].value,
     shallow: false,
-  })
+  });
   const defaultDate = ((): Date => {
-    const date = new Date
-    date.setFullYear(Number(selectedYear))
-    return date
-  })()
+    const date = new Date();
+    date.setFullYear(Number(selectedYear));
+    return date;
+  })();
   const [date, setDate] = useState<Date | undefined>(defaultDate);
 
   function generateWeeks(year: number) {
@@ -103,14 +102,14 @@ export const PeriodFilters = ({
   // TOIMPROVE better way to do this, get rid of year filter maybe ?
   const handleYearChange = (year: string) => {
     if (startDate && endDate) {
-      const startingDate = new Date(startDate)
-      const endingDate = new Date(endDate)
-      startingDate.setFullYear(Number(year))
-      endingDate.setFullYear(Number(year))
-      handleDateChange(startingDate, endingDate)
+      const startingDate = new Date(startDate);
+      const endingDate = new Date(endDate);
+      startingDate.setFullYear(Number(year));
+      endingDate.setFullYear(Number(year));
+      handleDateChange(startingDate, endingDate);
     }
-    setSelectedYear(year)
-  }
+    setSelectedYear(year);
+  };
 
   const [weeks, setWeeks] = useState(generateWeeks(Number(selectedYear)));
 
@@ -126,7 +125,7 @@ export const PeriodFilters = ({
 
   const handleDay = (date: Date | undefined) => {
     if (date) {
-      date.setFullYear(Number(selectedYear))
+      date.setFullYear(Number(selectedYear));
       const start = set(date, { hours: 0, minutes: 0, seconds: 0 });
       const end = set(date, { hours: 23, minutes: 59, seconds: 59 });
       handleDateChange(start, end);
@@ -158,9 +157,9 @@ export const PeriodFilters = ({
               onClick={() => {
                 // TOIMPROVE not clean
                 const startOfDay = new Date();
-                selectedYear && startOfDay.setFullYear(Number(selectedYear))
+                selectedYear && startOfDay.setFullYear(Number(selectedYear));
                 const endOfDay = new Date();
-                selectedYear && endOfDay.setFullYear(Number(selectedYear))
+                selectedYear && endOfDay.setFullYear(Number(selectedYear));
                 handleDateChange(startOfDay, endOfDay);
               }}
             >
@@ -175,8 +174,8 @@ export const PeriodFilters = ({
                 const today = new Date();
                 const start = startOfWeek(today, { weekStartsOn: 1 });
                 const end = addDays(start, 6);
-                selectedYear && start.setFullYear(Number(selectedYear))
-                selectedYear && end.setFullYear(Number(selectedYear))
+                selectedYear && start.setFullYear(Number(selectedYear));
+                selectedYear && end.setFullYear(Number(selectedYear));
                 handleDateChange(start, end);
               }}
             >
@@ -256,8 +255,8 @@ export const PeriodFilters = ({
               onChange={(value: string | undefined) => {
                 const selectedWeekStart = new Date(value || "");
                 const [start, end] = getStartAndEndOfWeek(selectedWeekStart);
-                selectedYear && start.setFullYear(Number(selectedYear))
-                selectedYear && end.setFullYear(Number(selectedYear))
+                selectedYear && start.setFullYear(Number(selectedYear));
+                selectedYear && end.setFullYear(Number(selectedYear));
                 handleDateChange(start, end);
               }}
               defaultValue={
