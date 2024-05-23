@@ -124,10 +124,7 @@ const TabComponent = ({
   fullWidth,
 }: TabProps) => {
   return (
-    <Tabs
-      defaultValue={defaultValue}
-      className={cn(`w-full`, fullWidth ? " md:w-full" : " md:w-fit")}
-    >
+    <Tabs defaultValue={defaultValue} className={cn(`w-full`)}>
       <TabsList
         className={cn(`w-full`, fullWidth ? " md:w-full" : " md:w-fit")}
       >
