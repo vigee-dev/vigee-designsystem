@@ -18,7 +18,9 @@ import {
   PiSearchDefaultStroke,
   PiCameraStroke,
   PiDeleteDustbin01DuoSolid,
-  PiFilterFunnelContrast, PiCalendarFilledStroke,
+  PiFilterFunnelContrast,
+  PiCalendarFilledStroke,
+  PiRefreshDuoSolid,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2 } from "lucide-react";
@@ -61,6 +63,7 @@ const iconMap = {
   camera: PiCameraStroke,
   filter: PiFilterFunnelContrast,
   calendar: PiCalendarFilledStroke,
+  refresh: PiRefreshDuoSolid,
 };
 
 export function Button({
