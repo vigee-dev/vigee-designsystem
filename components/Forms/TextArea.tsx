@@ -71,6 +71,7 @@ export default function TextArea<T extends FieldValues>({
               {label && (
                 <FormLabel className="font-black text-primary mt-2">
                   {label}
+                  {required && <span className="text-red-600 ml-1">*</span>}
                 </FormLabel>
               )}
               {helpComponent && (
