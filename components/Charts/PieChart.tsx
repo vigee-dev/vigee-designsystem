@@ -15,7 +15,7 @@ interface DataItem {
   value: number;
 }
 
-const COLORS = ["#000", "#555555", "#000000", "#555555"];
+const COLORS = ["#472549", "#774C60", "#B75D69", "#EACDC2", "#1A1423"];
 
 interface Data {
   name: string;
@@ -41,7 +41,14 @@ interface LabelProps {
   index: number;
 }
 
-const PieChart = ({ title, subtitle, data, container, colors }: Props) => {
+const PieChart = ({
+  title,
+  subtitle,
+  data,
+  container,
+  colors,
+  color,
+}: Props) => {
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
     cx,
@@ -52,9 +59,9 @@ const PieChart = ({ title, subtitle, data, container, colors }: Props) => {
     percent,
     index,
   }: LabelProps) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos(-midAngle * RADIAN) + 5;
-    const y = cy + radius * Math.sin(-midAngle * RADIAN) - 40;
+    const radius = innerRadius + (outerRadius - innerRadius) * 1;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN) - 10;
 
     return (
       <text
@@ -88,10 +95,10 @@ const PieChart = ({ title, subtitle, data, container, colors }: Props) => {
             cy="50%" // Centrer verticalement
             startAngle={180}
             endAngle={0}
-            innerRadius={70}
-            outerRadius={100}
+            // innerRadius={70}
+            // outerRadius={100}
             labelLine={false}
-            paddingAngle={5}
+            // paddingAngle={5}
             label={renderCustomizedLabel}
             fill="#8884d8"
             dataKey="value"
@@ -100,11 +107,8 @@ const PieChart = ({ title, subtitle, data, container, colors }: Props) => {
             {data.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
-                fill={
-                  colors
-                    ? colors[index % colors.length]
-                    : COLORS[index % COLORS.length]
-                }
+                fill={color}
+                className={`opacity-${index % 2 === 0 ? 100 : 50}`}
               />
             ))}
           </Pie>
