@@ -6,7 +6,6 @@ import {
   PiEye02OnContrast,
   PiPlusSquareDuoSolid,
   PiDownloadDownDuoSolid,
-  PiDeleteDustbin01DuoStroke,
   PiUploadUpDuoSolid,
   PiArrowLeftStroke,
   PiPencilEditBoxDuoSolid,
@@ -20,8 +19,8 @@ import {
   PiDeleteDustbin01DuoSolid,
   PiFilterFunnelContrast,
   PiCalendarFilledStroke,
-  PiRefreshDuoSolid,
   PiRefreshDuoStroke,
+  PiLogOutRightDuoStroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2 } from "lucide-react";
@@ -65,6 +64,7 @@ const iconMap = {
   filter: PiFilterFunnelContrast,
   calendar: PiCalendarFilledStroke,
   refresh: PiRefreshDuoStroke,
+  logout: PiLogOutRightDuoStroke,
 };
 
 export function Button({
@@ -132,6 +132,7 @@ interface ButtonComponentProps {
   disabled?: boolean;
   className?: string;
   icon?: keyof typeof iconMap;
+  iconLeft?: keyof typeof iconMap;
   iconComponent?: React.ReactNode;
   tooltip?: string;
   big?: boolean;
@@ -145,11 +146,13 @@ const ButtonComponent = ({
   disabled,
   className,
   icon,
+  iconLeft,
   iconComponent,
   tooltip,
   big,
 }: ButtonComponentProps) => {
   const Icon = icon ? iconMap[icon] : null;
+  const IconLeft = iconLeft ? iconMap[iconLeft] : null;
 
   return tooltip ? (
     <Tooltip message={tooltip ?? ""}>
@@ -165,6 +168,20 @@ const ButtonComponent = ({
             "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent "
         )}
       >
+        {IconLeft && (
+          <IconLeft
+            className={cn(
+              "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+              className,
+              !children &&
+                "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300  w-6 h-6",
+              big && "w-10 h-10",
+              variant === "outline" && "text-gray-900",
+              variant === "secondary" && "text-secondary-foreground"
+            )}
+          />
+        )}
+
         {children}
 
         {iconComponent}
@@ -197,6 +214,20 @@ const ButtonComponent = ({
           "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent "
       )}
     >
+      {IconLeft && (
+        <IconLeft
+          className={cn(
+            "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+            className,
+            !children &&
+              "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300  w-6 h-6",
+            big && "w-10 h-10",
+            variant === "outline" && "text-gray-900",
+            variant === "secondary" && "text-secondary-foreground"
+          )}
+        />
+      )}
+
       {children}
       {iconComponent}
 
