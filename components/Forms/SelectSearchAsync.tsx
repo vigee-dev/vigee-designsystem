@@ -37,8 +37,9 @@ interface SearchSelectAsyncInterface<
     newValue: OnChangeValue<Option, IsMulti>,
     actionMeta: ActionMeta<Option>
   ) => void;
-  isSearchable?: boolean
-  customErrorMessage?: string
+  isSearchable?: boolean;
+  customErrorMessage?: string;
+  menuPlacement?: "auto" | "bottom" | "top";
 }
 
 export default function SearchSelectAsync<
@@ -62,7 +63,8 @@ export default function SearchSelectAsync<
   onChange,
   value,
   isSearchable = true,
-  customErrorMessage
+  customErrorMessage,
+  menuPlacement = "auto",
 }: SearchSelectAsyncInterface<T, Option, IsMulti>) {
   return form && name ? (
     <FormField
@@ -97,6 +99,7 @@ export default function SearchSelectAsync<
                     backgroundColor: "#EEEEEE",
                   },
                   border: 0,
+                  borderRadius: "0.4rem",
                 }),
                 singleValue: (baseStyles, state) => ({
                   ...baseStyles,
@@ -114,6 +117,11 @@ export default function SearchSelectAsync<
                   color: "#000",
                   borderRadius: "0.4rem",
                   fontSize: "16px",
+                }),
+                menu: (baseStyles, state) => ({
+                  ...baseStyles,
+                  zIndex: 9999,
+                  borderRadius: "0.4rem",
                 }),
               }}
               isClearable={isClearable}
@@ -136,9 +144,10 @@ export default function SearchSelectAsync<
                 IndicatorSeparator: () => null,
               }}
               isSearchable={isSearchable}
-              menuPlacement="auto"
+              maxMenuHeight={180}
               menuShouldScrollIntoView
               blurInputOnSelect
+              menuPlacement={menuPlacement}
             />
           </FormControl>
           <FormMessage>{customErrorMessage}</FormMessage>
@@ -162,6 +171,12 @@ export default function SearchSelectAsync<
             fontSize: "16px",
             borderColor: "#f3f4f6",
           }),
+          input: (provided, state) => ({
+            ...provided,
+            margin: "0px",
+            fontSize: "16px",
+          }),
+
           option: (baseStyles, state) => ({
             ...baseStyles,
             cursor: "pointer",
@@ -189,6 +204,10 @@ export default function SearchSelectAsync<
             borderRadius: "0.4rem",
             fontSize: "16px",
           }),
+          menu: (baseStyles, state) => ({
+            ...baseStyles,
+            zIndex: 9999,
+          }),
         }}
         isClearable={isClearable}
         placeholder={placeholder}
@@ -204,9 +223,11 @@ export default function SearchSelectAsync<
           IndicatorSeparator: () => null,
         }}
         isSearchable={isSearchable}
-        menuPlacement="auto"
-        menuShouldScrollIntoView
+        menuPlacement={menuPlacement}
+        menuShouldScrollIntoView={false}
         blurInputOnSelect
+        menuShouldBlockScroll
+        maxMenuHeight={180}
       />
     </div>
   );

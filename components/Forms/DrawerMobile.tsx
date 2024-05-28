@@ -79,29 +79,32 @@ export function DrawerMobile({
               {trigger}
             </DialogTrigger>
 
-            <DialogContent
-              onClick={e => e.stopPropagation()}
-              className={`max-w-[425px] ${
-                size === "sm"
-                  ? "md:max-w-[425px]"
-                  : size === "md"
-                  ? "md:max-w-[650px]"
-                  : "md:max-w-[1080px]"
-              } `}
-            >
-              <DialogHeader>
-                <div className="flex items-center gap-x-4 p-4 py-2">
-                  {icon}
-                  <div className="flex flex-col">
-                    <DialogTitle className="text-primary">{title}</DialogTitle>
-                    <DialogDescription>{description}</DialogDescription>
+            <ScrollArea className="max-h-[80vh]  ">
+              <DialogContent
+                onClick={e => e.stopPropagation()}
+                className={`max-w-[425px] ${
+                  size === "sm"
+                    ? "md:max-w-[425px]"
+                    : size === "md"
+                    ? "md:max-w-[650px]"
+                    : "md:max-w-[1080px]"
+                } `}
+              >
+                <DialogHeader>
+                  <div className="flex items-center gap-x-4 p-4 py-2">
+                    {icon}
+                    <div className="flex flex-col">
+                      <DialogTitle className="text-primary">
+                        {title}
+                      </DialogTitle>
+                      <DialogDescription>{description}</DialogDescription>
+                    </div>
                   </div>
-                </div>
-              </DialogHeader>
-              <ScrollArea className="max-h-[80vh]">
+                </DialogHeader>
+
                 <div className="p-4 ">{children}</div>
-              </ScrollArea>
-            </DialogContent>
+              </DialogContent>
+            </ScrollArea>
           </Dialog>
         </div>
       </DrawerContext.Provider>
