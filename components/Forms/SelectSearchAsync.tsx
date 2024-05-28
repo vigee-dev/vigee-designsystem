@@ -148,6 +148,7 @@ export default function SearchSelectAsync<
               menuShouldScrollIntoView
               blurInputOnSelect
               menuPlacement={menuPlacement}
+              autoFocus
             />
           </FormControl>
           <FormMessage>{customErrorMessage}</FormMessage>
@@ -228,6 +229,7 @@ export default function SearchSelectAsync<
         blurInputOnSelect
         menuShouldBlockScroll
         maxMenuHeight={180}
+        autoFocus
       />
     </div>
   );
