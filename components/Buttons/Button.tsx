@@ -40,6 +40,7 @@ interface ButtonProps {
     | "ghost"
     | "link";
   icon?: keyof typeof iconMap;
+  iconLeft?: keyof typeof iconMap;
   iconComponent?: React.ReactNode;
   tooltip?: string;
   big?: boolean;
@@ -77,6 +78,7 @@ export function Button({
   className,
   pending,
   icon,
+  iconLeft,
   iconComponent,
   tooltip,
   big,
@@ -90,6 +92,7 @@ export function Button({
       <ButtonComponent
         variant={variant}
         icon={icon}
+        iconLeft={iconLeft}
         iconComponent={iconComponent}
         className={className}
         onClick={onClick}
@@ -105,6 +108,7 @@ export function Button({
     <ButtonComponent
       variant={variant}
       icon={icon}
+      iconLeft={iconLeft}
       iconComponent={iconComponent}
       className={className}
       onClick={onClick}
