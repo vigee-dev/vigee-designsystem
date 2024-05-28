@@ -41,7 +41,7 @@ export default function PhoneNumber<T extends FieldValues>({
         <FormItem className={cn("flex flex-col items-start", className)}>
           {label && (
             <FormLabel className="font-black text-primary mt-2">
-              {label}
+              {label} {required && <span className="text-red-600 ml-1">*</span>}
             </FormLabel>
           )}
           <FormControl className="w-full">
