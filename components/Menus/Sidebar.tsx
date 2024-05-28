@@ -1,15 +1,15 @@
 "use client";
 
-import { useState, useEffect, ReactNode } from "react";
+import { useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ChevronRightIcon, ChevronLeftIcon } from "lucide-react";
 import VariableLogo from "../Logos/VariableLogo";
-
 import { Badge } from "../ui/badge";
 import { Select } from "../Select/Select";
 import { cn } from "../lib/utils";
+import { Button } from "../Buttons/Button";
 
 function classNames(...classes: (string | boolean)[]): string {
   return classes.filter(Boolean).join(" ");
@@ -44,6 +44,7 @@ interface SidebarProps {
   defaultValueSelect?: string;
   bgColor?: string;
   className?: string;
+  logout?: boolean;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -64,6 +65,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   selectPlaceHolder,
   defaultValueSelect,
   className,
+  logout = false,
 }: SidebarProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [hoverMenu, setHoverMenu] = useState(false);
@@ -240,6 +242,14 @@ const Sidebar: React.FC<SidebarProps> = ({
                 </ul>
               </li>
             </ul>
+
+            {logout && (
+              <div className="my-2 flex justify-start">
+                <Button iconLeft="logout" className="font-medium">
+                  Déconnexion
+                </Button>
+              </div>
+            )}
           </nav>
         </div>
       </div>
