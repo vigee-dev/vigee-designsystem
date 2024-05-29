@@ -69,7 +69,8 @@ export default function Input<T extends FieldValues>({
             <div className="flex items-center justify-between ">
               {label && (
                 <FormLabel className="font-black text-primary mt-2">
-                  {label}
+                  {label}{" "}
+                  {required && <span className="text-red-600 ml-1">*</span>}
                 </FormLabel>
               )}
               {helpComponent && (

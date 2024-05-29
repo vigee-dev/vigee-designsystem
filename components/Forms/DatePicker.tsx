@@ -31,6 +31,7 @@ interface Props<T extends FieldValues> {
   returnString?: boolean;
   years?: boolean;
   defaultValue?: string;
+  required?: boolean;
 }
 
 export default function DatePicker<T extends FieldValues>({
@@ -43,6 +44,7 @@ export default function DatePicker<T extends FieldValues>({
   disabledKeys,
   returnString,
   defaultValue,
+  required,
 }: Props<T>) {
   const setToMidnight = (date: Date): Date => {
     const midnightDate = new Date(date);
@@ -124,7 +126,9 @@ export default function DatePicker<T extends FieldValues>({
       name={name}
       render={({ field }) => (
         <FormItem className="flex flex-col py-2">
-          <FormLabel className="font-black text-primary">{label}</FormLabel>
+          <FormLabel className="font-black text-primary">
+            {label} {required && <span className="text-red-600 ml-1">*</span>}
+          </FormLabel>
           <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
             <PopoverTrigger asChild>
               <FormControl>
