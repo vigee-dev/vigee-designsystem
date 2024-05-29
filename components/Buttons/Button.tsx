@@ -21,6 +21,7 @@ import {
   PiCalendarFilledStroke,
   PiRefreshDuoStroke,
   PiLogOutRightDuoStroke,
+  PiNavigationSlantStroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2 } from "lucide-react";
@@ -66,6 +67,7 @@ const iconMap = {
   calendar: PiCalendarFilledStroke,
   refresh: PiRefreshDuoStroke,
   logout: PiLogOutRightDuoStroke,
+  navigation: PiNavigationSlantStroke,
 };
 
 export function Button({
