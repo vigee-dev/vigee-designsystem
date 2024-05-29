@@ -25,6 +25,7 @@ type Props<T extends FieldValues> = {
   placeholder?: string;
   type?: string;
   required?: boolean;
+  requiredFields?: boolean;
   name?: Path<T>;
   descr?: string;
   className?: string;
@@ -45,6 +46,7 @@ export default function Input<T extends FieldValues>({
   placeholder,
   type = "text",
   required = true,
+  requiredFields = true,
   name,
   descr,
   className,
