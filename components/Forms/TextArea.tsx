@@ -46,12 +46,8 @@ export default function TextArea<T extends FieldValues>({
   required,
   label,
   placeholder,
-  count,
   max,
-  minHeight = "32",
-  defaultValue,
   onBlur,
-  onChange,
   className,
   descr,
   disabled,
@@ -67,11 +63,17 @@ export default function TextArea<T extends FieldValues>({
       render={({ field }) => (
         <FormItem>
           <HoverCard>
-            <div className="flex items-center justify-between ">
+            <div className="flex items-center justify-between">
               {label && (
-                <FormLabel className="font-black text-primary mt-2">
+                <FormLabel className="font-black text-primary mt-2 flex items-center gap-2">
                   {label}
                   {required && <span className="text-red-600 ml-1">*</span>}
+                  {max && (
+                    <div className="text-gray-500 text-xs font-medium">
+                      {charCount}
+                      {max && `/ ${max}`}
+                    </div>
+                  )}
                 </FormLabel>
               )}
               {helpComponent && (
@@ -80,19 +82,22 @@ export default function TextArea<T extends FieldValues>({
                 </HoverCardTrigger>
               )}
             </div>
-
-            {helpComponent && (
-              <HoverCardContent>
-                <div className="p-2">{helpComponent}</div>
-              </HoverCardContent>
-            )}
+            <div className="flex items-center justify-between mt-2">
+              <div>
+                {helpComponent && (
+                  <HoverCardContent>
+                    <div className="p-2">{helpComponent}</div>
+                  </HoverCardContent>
+                )}
+              </div>
+            </div>
           </HoverCard>
           <Textarea
             {...field}
             placeholder={placeholder ?? ""}
             onBlur={onBlur}
             onChange={e => {
-              if (count) {
+              if (max) {
                 setCharCount(e.target.value.length); // Mise à jour du compteur de caractères
               }
               field.onChange(e);
