@@ -18,6 +18,7 @@ import {
 } from "../ui/hover-card";
 import { Label } from "../../components/ui/label";
 import { cn } from "../lib/utils";
+import { useState } from "react";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -60,6 +61,8 @@ export default function Input<T extends FieldValues>({
   value,
   minimalist,
 }: Props<T>) {
+  const [charCount, setCharCount] = useState(0);
+
   return form && name ? (
     <FormField
       control={form?.control}
@@ -70,9 +73,15 @@ export default function Input<T extends FieldValues>({
           <HoverCard>
             <div className="flex items-center justify-between ">
               {label && (
-                <FormLabel className="font-black text-primary mt-2">
-                  {label}{" "}
-                  {required && <span className="text-red-600 ml-1">*</span>}
+                <FormLabel className="font-black text-primary mt-2 flex items-center ">
+                  {label}
+                  {required && <span className="text-red-600 mx-1 ">*</span>}
+                  {max && (
+                    <div className="text-gray-500 text-xs font-medium">
+                      {charCount}
+                      {max && `/ ${max}`}
+                    </div>
+                  )}
                 </FormLabel>
               )}
               {helpComponent && (
@@ -104,6 +113,12 @@ export default function Input<T extends FieldValues>({
                   minimalist &&
                     "focus-visible:ring-offset-0 bg-transparent font-bold text-black placeholder:text-gray-300 selection:border-none focus-visible:ring-0 ring-0 border-none  ring-offset-none p-0 focus:outline-none focus:ring-0 caret-black"
                 )}
+                onChange={e => {
+                  if (max) {
+                    setCharCount(e.target.value.length);
+                  }
+                  field.onChange(e);
+                }}
               />
             </FormControl>
           </HoverCard>
