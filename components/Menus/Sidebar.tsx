@@ -248,7 +248,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               <div className="my-2 flex justify-start">
                 <Button
                   iconLeft="logout"
-                  className="font-medium"
+                  className="font-medium bg-transparent text-gray-500 hover:text-gray-800 hover:bg-gray-200"
                   onClick={signOut}
                 >
                   Déconnexion
