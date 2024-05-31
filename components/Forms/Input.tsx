@@ -111,13 +111,20 @@ export default function Input<T extends FieldValues>({
                   "text-[16px] md:text-sm font-medium bg-input border-none ",
                   className,
                   minimalist &&
-                    "focus-visible:ring-offset-0 bg-transparent font-bold text-black placeholder:text-gray-300 selection:border-none focus-visible:ring-0 ring-0 border-none  ring-offset-none p-0 focus:outline-none focus:ring-0 caret-black"
+                    "focus-visible:ring-offset-0 bg-transparent font-bold text-black placeholder:text-gray-300 selection:border-none focus-visible:ring-0 ring-0 border-none ring-offset-none p-0 focus:outline-none focus:ring-0 caret-black"
                 )}
                 onChange={e => {
+                  const value = e.target.value;
+
+                  // Si la valeur est une chaîne vide, la convertir en undefined
+                  const newValue = value === "" ? undefined : value;
+
                   if (max) {
-                    setCharCount(e.target.value.length);
+                    setCharCount(value.length);
                   }
-                  field.onChange(e);
+
+                  // Appeler field.onChange avec la nouvelle valeur
+                  field.onChange(newValue);
                 }}
               />
             </FormControl>
