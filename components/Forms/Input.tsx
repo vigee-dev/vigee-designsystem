@@ -78,7 +78,7 @@ export default function Input<T extends FieldValues>({
                 <FormLabel className="font-black text-primary mt-2 flex items-center ">
                   {label}
                   {required && <span className="text-red-600 mx-1 ">*</span>}
-                  {max && (
+                  {maxLength && (
                     <div className="text-gray-500 text-xs font-medium">
                       {charCount}
                       {maxLength && `/ ${maxLength}`}
