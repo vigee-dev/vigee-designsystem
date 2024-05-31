@@ -25,6 +25,7 @@ import { Label } from "../ui/label";
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
   label?: string;
+  sublabel?: string;
   placeholder?: string;
   required?: boolean;
   name?: Path<T>;
@@ -42,6 +43,7 @@ type Props<T extends FieldValues> = {
 export default function Select<T extends FieldValues>({
   form,
   label,
+  sublabel,
   placeholder,
   required = true,
   name,
@@ -64,12 +66,19 @@ export default function Select<T extends FieldValues>({
         <FormItem className={className}>
           <HoverCard>
             <div className="flex items-center justify-between ">
-              {label && (
-                <FormLabel className="font-black text-primary mt-2">
-                  {label}{" "}
-                  {required && <span className="text-red-600 ml-1">*</span>}
-                </FormLabel>
-              )}
+              <div className="flex flex-col gap-1 ">
+                {label && (
+                  <FormLabel className="font-black text-primary mt-2">
+                    {label}{" "}
+                    {required && <span className="text-red-600 ml-1">*</span>}
+                  </FormLabel>
+                )}
+                {sublabel && (
+                  <Label className="font-medium text-gray-400">
+                    {sublabel}
+                  </Label>
+                )}
+              </div>
               {helpComponent && (
                 <HoverCardTrigger>
                   <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
