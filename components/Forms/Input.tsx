@@ -81,7 +81,7 @@ export default function Input<T extends FieldValues>({
                   {max && (
                     <div className="text-gray-500 text-xs font-medium">
                       {charCount}
-                      {max && `/ ${max}`}
+                      {maxLength && `/ ${maxLength}`}
                     </div>
                   )}
                 </FormLabel>
