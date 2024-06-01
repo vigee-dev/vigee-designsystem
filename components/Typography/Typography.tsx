@@ -9,7 +9,10 @@ export function TypographyH1({
 }) {
   return (
     <h1
-      className={`flex items-center scroll-m-20 text-2xl font-bold tracking-tight lg:text-2xl my-1 ${className}`}
+      className={cn(
+        `flex items-center scroll-m-20 text-2xl font-bold  lg:text-2xl my-1`,
+        className
+      )}
     >
       {children}
     </h1>

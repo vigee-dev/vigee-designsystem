@@ -3,6 +3,7 @@ import { cn } from "../lib/utils";
 
 interface PageHeaderProps {
   title: string;
+  subtitle?: string;
   children?: React.ReactNode;
   small?: boolean;
   icon?: React.ReactNode;
@@ -11,6 +12,7 @@ interface PageHeaderProps {
 
 export function PageHeader({
   title,
+  subtitle,
   children,
   small,
   icon,
@@ -24,13 +26,16 @@ export function PageHeader({
       )}
     >
       <div className="flex flex-wrap justify-between  gap-x-4 w-full items-center ">
-        <div className="flex items-center gap-4 ">
+        <div className="flex  items-center gap-4 ">
           {icon}
-          {small ? (
-            <TypographyH2 className="text-primary">{title}</TypographyH2>
-          ) : (
-            <TypographyH1 className="text-primary">{title}</TypographyH1>
-          )}
+          <div className="flex flex-col">
+            {small ? (
+              <TypographyH2 className="text-primary m-0">{title}</TypographyH2>
+            ) : (
+              <TypographyH1 className="text-primary m-0">{title}</TypographyH1>
+            )}
+            {subtitle && <p className="text-gray-400 text-sm">{subtitle}</p>}
+          </div>
         </div>
         <div className="flex gap-x-4">{children}</div>
       </div>
