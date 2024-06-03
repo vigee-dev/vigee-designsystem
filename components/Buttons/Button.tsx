@@ -87,7 +87,10 @@ export function Button({
 }: ButtonProps) {
   return pending ? (
     <ButtonComponent disabled variant={variant} className={className}>
-      {children} <Loader2 className={`mr-2 h-4 w-4 animate-spin `} />
+      {children}
+      <Loader2
+        className={cn(` h-4 w-4 animate-spin `, children ? "mr-2" : "mr-0")}
+      />
     </ButtonComponent>
   ) : href ? (
     <Link href={href}>
