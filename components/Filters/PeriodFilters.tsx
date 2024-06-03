@@ -8,7 +8,7 @@ import {
 } from "../../components/ui/tabs";
 import { useQueryState } from "nuqs";
 import { Select } from "../Select/Select";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { startOfWeek, format, addDays, set } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -54,11 +54,18 @@ export const PeriodFilters = ({
     date.setFullYear(Number(selectedYear));
     return date;
   })();
+
   const [date, setDate] = useState<Date | undefined>(defaultDate);
+
+  useEffect(() => {
+    const startOfYear = new Date(Number(selectedYear), 0, 1);
+    const endOfYear = new Date(Number(selectedYear), 11, 31);
+    handleDateChange(startOfYear, endOfYear);
+  }, [selectedYear]);
 
   function generateWeeks(year: number) {
     let startDate = startOfWeek(new Date(year, 0, 1), {
-      weekStartsOn: 1, // Commence la semaine le lundi
+      weekStartsOn: 1,
     });
 
     let weeks: { label: string; value: string }[] = [];
@@ -95,11 +102,10 @@ export const PeriodFilters = ({
   };
 
   const handleDateChange = (start: Date, end: Date) => {
-    setStartDate(formatForURL(start)); // Mettre à jour la date de début dans l'URL
-    setEndDate(formatForURL(end)); // Mettre à jour la date de fin dans l'URL
+    setStartDate(formatForURL(start));
+    setEndDate(formatForURL(end));
   };
 
-  // TOIMPROVE better way to do this, get rid of year filter maybe ?
   const handleYearChange = (year: string) => {
     if (startDate && endDate) {
       const startingDate = new Date(startDate);
@@ -143,76 +149,68 @@ export const PeriodFilters = ({
     handleDateChange(start, end);
   };
 
+  const [tab, setTab] = useState("year");
+
+  const onTabChange = (value: string) => {
+    setTab(value);
+
+    if (value === "year") {
+      const startOfYear = new Date(Number(selectedYear), 0, 1);
+      const endOfYear = new Date(Number(selectedYear), 11, 31);
+      handleDateChange(startOfYear, endOfYear);
+    } else if (value === "month") {
+      const startOfMonth = new Date(
+        Number(selectedYear),
+        new Date().getMonth(),
+        1
+      );
+      const endOfMonth = new Date(
+        Number(selectedYear),
+        new Date().getMonth() + 1,
+        0
+      );
+      handleDateChange(startOfMonth, endOfMonth);
+    } else if (value === "week") {
+      const today = new Date();
+      const start = startOfWeek(today, { weekStartsOn: 1 });
+      const end = addDays(start, 6);
+      selectedYear && start.setFullYear(Number(selectedYear));
+      selectedYear && end.setFullYear(Number(selectedYear));
+      handleDateChange(start, end);
+    } else if (value === "day") {
+      const startOfDay = new Date();
+      selectedYear && startOfDay.setFullYear(Number(selectedYear));
+      const endOfDay = new Date();
+      selectedYear && endOfDay.setFullYear(Number(selectedYear));
+      handleDateChange(startOfDay, endOfDay);
+    }
+  };
+
   return (
     <div>
       <Tabs
-        defaultValue="year"
-        className="flex flex-col md:flex-row gap-1 md:gap-4 justify-between bg-transparent md:border border-none  items-center"
+        value={tab}
+        className="flex flex-col md:flex-row gap-1 md:gap-4 justify-between bg-transparent md:border border-none items-center"
+        onValueChange={onTabChange}
       >
         <TabsList className="w-full md:w-fit">
           {day && (
-            <TabsTrigger
-              className="w-full md:w-fit"
-              value="day"
-              onClick={() => {
-                // TOIMPROVE not clean
-                const startOfDay = new Date();
-                selectedYear && startOfDay.setFullYear(Number(selectedYear));
-                const endOfDay = new Date();
-                selectedYear && endOfDay.setFullYear(Number(selectedYear));
-                handleDateChange(startOfDay, endOfDay);
-              }}
-            >
+            <TabsTrigger className="w-full md:w-fit" value="day">
               Jour
             </TabsTrigger>
           )}
           {week && (
-            <TabsTrigger
-              className="w-full md:w-fit"
-              value="week"
-              onClick={() => {
-                const today = new Date();
-                const start = startOfWeek(today, { weekStartsOn: 1 });
-                const end = addDays(start, 6);
-                selectedYear && start.setFullYear(Number(selectedYear));
-                selectedYear && end.setFullYear(Number(selectedYear));
-                handleDateChange(start, end);
-              }}
-            >
+            <TabsTrigger className="w-full md:w-fit" value="week">
               Hebdo
             </TabsTrigger>
           )}
           {month && (
-            <TabsTrigger
-              className="w-full md:w-fit"
-              value="month"
-              onClick={() => {
-                const startOfMonth = new Date(
-                  Number(selectedYear),
-                  new Date().getMonth(),
-                  1
-                );
-                const endOfMonth = new Date(
-                  Number(selectedYear),
-                  new Date().getMonth() + 1,
-                  0
-                );
-                handleDateChange(startOfMonth, endOfMonth);
-              }}
-            >
+            <TabsTrigger className="w-full md:w-fit" value="month">
               Mois
             </TabsTrigger>
           )}
           {year && (day || month || week) && (
-            <TabsTrigger
-              className="w-full md:w-fit"
-              value="year"
-              onClick={() => {
-                const startOfYear = new Date(Number(selectedYear), 0, 1);
-                const endOfYear = new Date(Number(selectedYear), 11, 31);
-                handleDateChange(startOfYear, endOfYear);
-              }}
-            >
+            <TabsTrigger className="w-full md:w-fit" value="year">
               Année
             </TabsTrigger>
           )}
@@ -225,7 +223,7 @@ export const PeriodFilters = ({
                 <Button
                   variant={"outline"}
                   className={cn(
-                    "w-full md:w-fit  md:bg-input font-bold text-gray-800 -mt-2",
+                    "w-full md:w-fit md:bg-input font-bold text-gray-800 -mt-2",
                     !date && "text-muted-foreground "
                   )}
                 >
@@ -248,7 +246,7 @@ export const PeriodFilters = ({
               </PopoverContent>
             </Popover>
           </TabsContent>
-          <TabsContent value="week" className="w-full md:w-fit  mt-0">
+          <TabsContent value="week" className="w-full md:w-fit mt-0">
             <Select
               className="w-full md:w-fit font-bold md:bg-input text-gray-800"
               options={weeks}
