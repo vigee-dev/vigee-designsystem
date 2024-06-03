@@ -98,7 +98,7 @@ export function DrawerMobile({
                   </div>
                 </div>
               </DialogHeader>
-              <ScrollArea className="max-h-[80vh]">
+              <ScrollArea className="max-h-[75vh]">
                 <div className="p-4 ">{children}</div>
               </ScrollArea>
             </DialogContent>
