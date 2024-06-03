@@ -20,12 +20,14 @@ export function CardSkeleton() {
 
 export function CardsSkeleton() {
   return (
-    <>
+    <div className="grid grid-cols-3 gap-4">
       <CardSkeleton />
       <CardSkeleton />
       <CardSkeleton />
       <CardSkeleton />
-    </>
+      <CardSkeleton />
+      <CardSkeleton />
+    </div>
   );
 }
 

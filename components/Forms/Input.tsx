@@ -39,6 +39,7 @@ type Props<T extends FieldValues> = {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   minimalist?: boolean;
+  maxLength?: number;
 };
 
 export default function Input<T extends FieldValues>({
@@ -55,6 +56,7 @@ export default function Input<T extends FieldValues>({
   id,
   min,
   max,
+  maxLength,
   step,
   helpComponent,
   onChange,
@@ -76,10 +78,10 @@ export default function Input<T extends FieldValues>({
                 <FormLabel className="font-black text-primary mt-2 flex items-center ">
                   {label}
                   {required && <span className="text-red-600 mx-1 ">*</span>}
-                  {max && (
+                  {maxLength && (
                     <div className="text-gray-500 text-xs font-medium">
                       {charCount}
-                      {max && `/ ${max}`}
+                      {maxLength && `/ ${maxLength}`}
                     </div>
                   )}
                 </FormLabel>
@@ -114,7 +116,7 @@ export default function Input<T extends FieldValues>({
                     "focus-visible:ring-offset-0 bg-transparent font-bold text-black placeholder:text-gray-300 selection:border-none focus-visible:ring-0 ring-0 border-none  ring-offset-none p-0 focus:outline-none focus:ring-0 caret-black"
                 )}
                 onChange={e => {
-                  if (max) {
+                  if (maxLength) {
                     setCharCount(e.target.value.length);
                   }
                   field.onChange(e);
