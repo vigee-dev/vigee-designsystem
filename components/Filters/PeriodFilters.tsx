@@ -190,7 +190,7 @@ export const PeriodFilters = ({
     <div>
       <Tabs
         value={tab}
-        className="flex flex-col md:flex-row gap-1 md:gap-4 justify-between bg-transparent md:border border-none items-center"
+        className="flex flex-col md:flex-row gap-1 md:gap-4 justify-between bg-transparent md:border border-none items-center bg-white md:bg-transparent p-4 md:p-1 rounded-xl "
         onValueChange={onTabChange}
       >
         <TabsList className="w-full md:w-fit">
