@@ -81,7 +81,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <>
       <div
-        className={`hidden md:flex fixed inset-y-0 lg:flex ${
+        className={`hidden fixed inset-y-0 lg:flex ${
           sidebarOpen ? "w-56 " : "w-16  "
         } flex-col h-screen transition-all ease-in-out duration-300`}
         onMouseEnter={() => setHoverMenu(true)}
