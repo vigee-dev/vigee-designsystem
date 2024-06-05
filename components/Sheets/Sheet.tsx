@@ -107,20 +107,19 @@ export default function SheetTriggered({
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger className="w-full">{trigger}</SheetTrigger>
 
-        <ScrollArea className="max-h-[75vh]">
-          <SheetContent side={side}>
-            <SheetHeader className="text-left flex pb-4">
-              <SheetTitle className="text-primary">{title}</SheetTitle>
-              <SheetDescription>{description}</SheetDescription>
-            </SheetHeader>
-
+        <SheetContent side={side}>
+          <SheetHeader className="text-left flex pb-4">
+            <SheetTitle className="text-primary">{title}</SheetTitle>
+            <SheetDescription>{description}</SheetDescription>
+          </SheetHeader>
+          <ScrollArea className="max-h-[75vh]">
             <div className="p-4">{children}</div>
+          </ScrollArea>
 
-            <SheetClose className="w-full flex justify-center items-center text-center pt-10">
-              <Button icon="chevronDown" />
-            </SheetClose>
-          </SheetContent>
-        </ScrollArea>
+          <SheetClose className="w-full flex justify-center items-center text-center pt-10">
+            <Button icon="chevronDown" />
+          </SheetClose>
+        </SheetContent>
       </Sheet>
     </SheetContext.Provider>
   );
