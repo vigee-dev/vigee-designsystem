@@ -22,6 +22,8 @@ import {
   PiRefreshDuoStroke,
   PiLogOutRightDuoStroke,
   PiNavigationSlantStroke,
+  PiChevronBigDownStroke,
+  PiChevronDownStroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2 } from "lucide-react";
@@ -68,6 +70,7 @@ const iconMap = {
   refresh: PiRefreshDuoStroke,
   logout: PiLogOutRightDuoStroke,
   navigation: PiNavigationSlantStroke,
+  chevronDown: PiChevronDownStroke,
 };
 
 export function Button({
