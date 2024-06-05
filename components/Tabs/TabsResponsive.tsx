@@ -49,7 +49,7 @@ export const TabsResponsive = ({
     } else if (option.value && query) {
       setFilter(value);
     }
-  }
+  };
 
   return (
     <>
@@ -73,7 +73,7 @@ export const TabsResponsive = ({
         )}
       </div>
       <div className="flex md:hidden">
-        {options.length < 4 ? (
+        {options.length < 5 ? (
           <TabComponent
             options={options}
             defaultValue={defaultValue}
