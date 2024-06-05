@@ -19,6 +19,7 @@ import {
 import { Label } from "../../components/ui/label";
 import { cn } from "../lib/utils";
 import { useState } from "react";
+import React from "react";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -48,7 +49,6 @@ export default function Input<T extends FieldValues>({
   placeholder,
   type = "text",
   required = true,
-  requiredFields = true,
   name,
   descr,
   className,
@@ -63,7 +63,9 @@ export default function Input<T extends FieldValues>({
   value,
   minimalist,
 }: Props<T>) {
-  const [charCount, setCharCount] = useState(0);
+  const [charCount, setCharCount] = useState(
+    name ? form?.getValues(name)?.length || 0 : 0
+  );
 
   return form && name ? (
     <FormField

@@ -41,7 +41,6 @@ type Props<T extends FieldValues> = {
 
 export default function TextArea<T extends FieldValues>({
   form,
-  id,
   name,
   required,
   label,
@@ -53,7 +52,9 @@ export default function TextArea<T extends FieldValues>({
   disabled,
   helpComponent,
 }: Props<T>) {
-  const [charCount, setCharCount] = useState(0); // État local pour le compteur de caractères
+  const [charCount, setCharCount] = useState(
+    name ? form?.getValues(name)?.length || 0 : 0
+  );
 
   return (
     <FormField
