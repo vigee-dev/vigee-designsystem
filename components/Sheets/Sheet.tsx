@@ -113,7 +113,7 @@ export default function SheetTriggered({
             <SheetDescription>{description}</SheetDescription>
           </SheetHeader>
           <ScrollArea className="max-h-[75vh]">
-            <div className="p-4">{children}</div>
+            <div className="p-1">{children}</div>
           </ScrollArea>
 
           <SheetClose className="w-full flex justify-center items-center text-center pt-2">
