@@ -49,13 +49,7 @@ export const TabsResponsive = ({
     } else if (option.value && query) {
       setFilter(value);
     }
-  };
-
-  React.useEffect(() => {
-    if (defaultValue && query) {
-      setFilter(defaultValue);
-    }
-  }, [defaultValue, setFilter, query]);
+  }
 
   return (
     <>
