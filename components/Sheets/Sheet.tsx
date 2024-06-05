@@ -14,34 +14,29 @@ import {
 interface Props {
   title?: string;
   description?: string;
-  triggerText?: string;
+  trigger?: React.ReactNode;
   children?: React.ReactNode;
   icon?: React.ReactNode;
+  side?: "left" | "right" | "top" | "bottom";
 }
 
 export default function SheetTriggered({
-  triggerText,
+  trigger,
   title,
   description,
   children,
-  icon,
+  side = "right",
 }: Props) {
   return (
-    <div className="fixed bottom-4 right-4">
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button className="rounded-full" iconComponent={icon}>
-            {triggerText}
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="right">
-          <SheetHeader>
-            <SheetTitle>{title}</SheetTitle>
-            <SheetDescription>{description}</SheetDescription>
-          </SheetHeader>
-          <div className="grid gap-4 py-4">{children}</div>
-        </SheetContent>
-      </Sheet>
-    </div>
+    <Sheet>
+      <SheetTrigger>{trigger}</SheetTrigger>
+      <SheetContent side={side}>
+        <SheetHeader className="text-left flex pb-4">
+          <SheetTitle className="text-primary">{title}</SheetTitle>
+          <SheetDescription>{description}</SheetDescription>
+        </SheetHeader>
+        {children}
+      </SheetContent>
+    </Sheet>
   );
 }
