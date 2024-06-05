@@ -93,7 +93,7 @@ export default function SheetTriggered({
                 </div>
               </DialogHeader>
               <ScrollArea className="max-h-[75vh]">
-                <div className="p-4 ">{children}</div>
+                <div className="p-4">{children}</div>
               </ScrollArea>
             </DialogContent>
           </Dialog>
@@ -107,7 +107,7 @@ export default function SheetTriggered({
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger className="w-full">{trigger}</SheetTrigger>
 
-        <SheetContent side={side}>
+        <SheetContent side={side} className="rounded-t-2xl">
           <SheetHeader className="text-left flex pb-4">
             <SheetTitle className="text-primary">{title}</SheetTitle>
             <SheetDescription>{description}</SheetDescription>
@@ -116,7 +116,7 @@ export default function SheetTriggered({
             <div className="p-4">{children}</div>
           </ScrollArea>
 
-          <SheetClose className="w-full flex justify-center items-center text-center pt-10">
+          <SheetClose className="w-full flex justify-center items-center text-center pt-2">
             <Button icon="chevronDown" />
           </SheetClose>
         </SheetContent>
