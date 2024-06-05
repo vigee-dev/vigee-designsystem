@@ -57,12 +57,6 @@ export const PeriodFilters = ({
 
   const [date, setDate] = useState<Date | undefined>(defaultDate);
 
-  useEffect(() => {
-    const startOfYear = new Date(Number(selectedYear), 0, 1);
-    const endOfYear = new Date(Number(selectedYear), 11, 31);
-    handleDateChange(startOfYear, endOfYear);
-  }, [selectedYear]);
-
   function generateWeeks(year: number) {
     let startDate = startOfWeek(new Date(year, 0, 1), {
       weekStartsOn: 1,
