@@ -59,7 +59,7 @@ export default function SheetTriggered({
   title,
   description,
   children,
-  side = "right",
+  side = "bottom",
   icon,
   size = "md",
 }: Props) {
