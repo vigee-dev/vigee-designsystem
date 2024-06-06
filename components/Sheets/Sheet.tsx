@@ -105,9 +105,15 @@ export default function SheetTriggered({
   return (
     <SheetContext.Provider value={contextValue}>
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger className="w-full">{trigger}</SheetTrigger>
+        <SheetTrigger className="w-full" onClick={e => e.stopPropagation()}>
+          {trigger}{" "}
+        </SheetTrigger>
 
-        <SheetContent side={side} className="rounded-t-2xl">
+        <SheetContent
+          side={side}
+          className="rounded-t-2xl"
+          onClick={e => e.stopPropagation()}
+        >
           <SheetHeader className="text-left flex pb-4">
             <SheetTitle className="text-primary">{title}</SheetTitle>
             <SheetDescription>{description}</SheetDescription>
