@@ -111,16 +111,15 @@ export default function SheetTriggered({
 
         <SheetContent
           side={side}
-          className="rounded-t-2xl"
+          className="rounded-t-2xl lg:max-w-screen-lg overflow-y-scroll max-h-screen"
           onClick={e => e.stopPropagation()}
         >
           <SheetHeader className="text-left flex pb-4">
             <SheetTitle className="text-primary">{title}</SheetTitle>
             <SheetDescription>{description}</SheetDescription>
           </SheetHeader>
-          <ScrollArea className="max-h-[75vh]">
-            <div className="p-1">{children}</div>
-          </ScrollArea>
+
+          <div className="p-1 z-50"> {children}</div>
 
           <SheetClose className="w-full flex justify-center items-center text-center pt-2">
             <Button icon="chevronDown" />
