@@ -11,136 +11,38 @@ import {
   SheetContent,
   Sheet as SheetComponent,
 } from "../ui/sheet";
-import { useMediaQuery } from "@react-hook/media-query";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
-
-import { cn } from "../lib/utils";
 
 interface Props {
   title?: string;
   description?: string;
-  trigger?: React.ReactNode;
+  triggerText?: string;
   children?: React.ReactNode;
   icon?: React.ReactNode;
-  side?: "left" | "right" | "top" | "bottom";
-  size?: "sm" | "md" | "lg";
-  scroll?: boolean;
-  sheet?: boolean;
-}
-
-type SheetContextType = {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const SheetContext = React.createContext<SheetContextType | undefined>(
-  undefined
-);
-
-export function useSheetContext() {
-  const context = React.useContext(SheetContext);
-  if (context === undefined) {
-    throw new Error(
-      "useDrawerContext doit être utilisé à l'intérieur d'un SheetContext.Provider"
-    );
-  }
-  return context;
 }
 
 export default function Sheet({
-  trigger,
+  triggerText,
   title,
   description,
   children,
-  side = "bottom",
   icon,
-  size = "md",
-  scroll = true,
-  sheet = false,
 }: Props) {
-  const [open, setOpen] = React.useState(false);
-  const contextValue: SheetContextType = { open, setOpen };
-  const isDesktop = useMediaQuery("(min-width: 768px)");
-
-  if (isDesktop && !sheet) {
-    return (
-      <SheetContext.Provider value={contextValue}>
-        <div>
-          <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger onClick={e => e.stopPropagation()} asChild>
-              {trigger}
-            </DialogTrigger>
-
-            <DialogContent
-              onClick={e => e.stopPropagation()}
-              className={`max-w-[425px]  ${
-                size === "sm"
-                  ? "md:max-w-[425px]"
-                  : size === "md"
-                  ? "md:max-w-[650px]"
-                  : "md:max-w-[1080px]"
-              } `}
-            >
-              <DialogHeader>
-                <div className="flex items-center gap-x-4 p-4 py-2">
-                  {icon}
-                  <div className="flex flex-col">
-                    <DialogTitle className="text-primary">{title}</DialogTitle>
-                    <DialogDescription>{description}</DialogDescription>
-                  </div>
-                </div>
-              </DialogHeader>
-
-              <div
-                className={cn(
-                  "p-1 max-h-[80vh]",
-                  scroll && "overflow-y-scroll"
-                )}
-              >
-                {children}
-              </div>
-            </DialogContent>
-          </Dialog>
-        </div>
-      </SheetContext.Provider>
-    );
-  }
-
   return (
-    <SheetContext.Provider value={contextValue}>
-      <SheetComponent open={open} onOpenChange={setOpen}>
-        <SheetTrigger className="w-full" onClick={e => e.stopPropagation()}>
-          {trigger}
+    <div className="fixed bottom-4 right-4">
+      <SheetComponent>
+        <SheetTrigger asChild>
+          <Button className="rounded-full" iconComponent={icon}>
+            {triggerText}
+          </Button>
         </SheetTrigger>
-
-        <SheetContent
-          side={side}
-          className={`rounded-t-2xl lg:max-w-screen-lg  `}
-          onClick={e => e.stopPropagation()}
-        >
-          <SheetHeader className="text-left flex pb-4">
-            <SheetTitle className="text-primary">{title}</SheetTitle>
+        <SheetContent side="right">
+          <SheetHeader>
+            <SheetTitle>{title}</SheetTitle>
             <SheetDescription>{description}</SheetDescription>
           </SheetHeader>
-
-          <div
-            className={cn("p-1 max-h-[80vh] ", scroll && "overflow-y-scroll")}
-          >
-            {children}
-          </div>
-
-          <SheetClose className="w-full flex justify-center items-center text-center pt-2">
-            <Button icon="chevronDown" />
-          </SheetClose>
+          <div className="grid gap-4 py-4">{children}</div>
         </SheetContent>
       </SheetComponent>
-    </SheetContext.Provider>
+    </div>
   );
 }
