@@ -80,7 +80,7 @@ export default function SheetTriggered({
 
             <DialogContent
               onClick={e => e.stopPropagation()}
-              className={`max-w-[425px] max-h-[90vh] ${
+              className={`max-w-[425px]  ${
                 size === "sm"
                   ? "md:max-w-[425px]"
                   : size === "md"
@@ -122,7 +122,7 @@ export default function SheetTriggered({
 
         <SheetContent
           side={side}
-          className={`rounded-t-2xl lg:max-w-screen-lg overflow-y-scroll max-h-[90vh]`}
+          className={`rounded-t-2xl lg:max-w-screen-lg  `}
           onClick={e => e.stopPropagation()}
         >
           <SheetHeader className="text-left flex pb-4">
@@ -133,7 +133,6 @@ export default function SheetTriggered({
           <div
             className={cn("p-1 max-h-[80vh] ", scroll && "overflow-y-scroll")}
           >
-            {" "}
             {children}
           </div>
 
