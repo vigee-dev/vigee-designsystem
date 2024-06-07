@@ -26,6 +26,7 @@ interface Props {
   week?: boolean;
   month?: boolean;
   year?: boolean;
+  defaultTab?: string;
 }
 
 export const PeriodFilters = ({
@@ -36,6 +37,7 @@ export const PeriodFilters = ({
   month,
   week,
   year = true,
+  defaultTab = "year",
 }: Props) => {
   const [startDate, setStartDate] = useQueryState("starting_date", {
     defaultValue: "",
@@ -56,6 +58,7 @@ export const PeriodFilters = ({
   })();
 
   const [date, setDate] = useState<Date | undefined>(defaultDate);
+  const [tab, setTab] = useState(defaultTab);
 
   function generateWeeks(year: number) {
     let startDate = startOfWeek(new Date(year, 0, 1), {
@@ -143,8 +146,6 @@ export const PeriodFilters = ({
     handleDateChange(start, end);
   };
 
-  const [tab, setTab] = useState("year");
-
   const onTabChange = (value: string) => {
     setTab(value);
 
@@ -179,6 +180,10 @@ export const PeriodFilters = ({
       handleDateChange(startOfDay, endOfDay);
     }
   };
+
+  useEffect(() => {
+    onTabChange(defaultTab);
+  }, [defaultTab]);
 
   return (
     <div>
