@@ -9,7 +9,7 @@ import {
   SheetHeader,
   SheetClose,
   SheetContent,
-  Sheet,
+  Sheet as SheetComponent,
 } from "../ui/sheet";
 import { useMediaQuery } from "@react-hook/media-query";
 import {
@@ -20,7 +20,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import { ScrollArea } from "../ui/scroll-area";
+
 import { cn } from "../lib/utils";
 
 interface Props {
@@ -54,7 +54,7 @@ export function useSheetContext() {
   return context;
 }
 
-export default function SheetTriggered({
+export default function Sheet({
   trigger,
   title,
   description,
@@ -115,9 +115,9 @@ export default function SheetTriggered({
 
   return (
     <SheetContext.Provider value={contextValue}>
-      <Sheet open={open} onOpenChange={setOpen}>
+      <SheetComponent open={open} onOpenChange={setOpen}>
         <SheetTrigger className="w-full" onClick={e => e.stopPropagation()}>
-          {trigger}{" "}
+          {trigger}
         </SheetTrigger>
 
         <SheetContent
@@ -140,7 +140,7 @@ export default function SheetTriggered({
             <Button icon="chevronDown" />
           </SheetClose>
         </SheetContent>
-      </Sheet>
+      </SheetComponent>
     </SheetContext.Provider>
   );
 }
