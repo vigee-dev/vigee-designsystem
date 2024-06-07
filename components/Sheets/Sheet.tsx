@@ -21,6 +21,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { ScrollArea } from "../ui/scroll-area";
+import { cn } from "../lib/utils";
 
 interface Props {
   title?: string;
@@ -30,6 +31,7 @@ interface Props {
   icon?: React.ReactNode;
   side?: "left" | "right" | "top" | "bottom";
   size?: "sm" | "md" | "lg";
+  scroll?: boolean;
 }
 
 type SheetContextType = {
@@ -59,6 +61,7 @@ export default function SheetTriggered({
   side = "bottom",
   icon,
   size = "md",
+  scroll = true,
 }: Props) {
   const [open, setOpen] = React.useState(false);
   const contextValue: SheetContextType = { open, setOpen };
@@ -92,9 +95,8 @@ export default function SheetTriggered({
                   </div>
                 </div>
               </DialogHeader>
-              <ScrollArea className="max-h-[75vh]">
-                <div className="p-4">{children}</div>
-              </ScrollArea>
+
+              <div className={cn("p-1 max-h-[80vh]", scroll && 'overflow-y-scroll')}> {children}</div>
             </DialogContent>
           </Dialog>
         </div>
@@ -111,7 +113,9 @@ export default function SheetTriggered({
 
         <SheetContent
           side={side}
-          className="rounded-t-2xl lg:max-w-screen-lg overflow-y-scroll max-h-screen"
+          className={
+            `rounded-t-2xl lg:max-w-screen-lg overflow-y-scroll max-h-[90vh]`
+          }
           onClick={e => e.stopPropagation()}
         >
           <SheetHeader className="text-left flex pb-4">
@@ -119,7 +123,7 @@ export default function SheetTriggered({
             <SheetDescription>{description}</SheetDescription>
           </SheetHeader>
 
-          <div className="p-1 z-50"> {children}</div>
+          <div className={cn("p-1 max-h-[80vh] ", scroll && 'overflow-y-scroll')}> {children}</div>
 
           <SheetClose className="w-full flex justify-center items-center text-center pt-2">
             <Button icon="chevronDown" />
