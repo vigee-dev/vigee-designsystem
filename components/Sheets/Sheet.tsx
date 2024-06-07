@@ -69,7 +69,7 @@ export default function SheetTriggered({
   const contextValue: SheetContextType = { open, setOpen };
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
-  if (isDesktop || !sheet) {
+  if (isDesktop && !sheet) {
     return (
       <SheetContext.Provider value={contextValue}>
         <div>
