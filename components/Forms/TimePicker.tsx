@@ -59,7 +59,7 @@ const generateTimeOptions = (
   for (let i = 0; i < 24; i++) {
     for (let j = 0; j < 60; j += step) {
       if (
-        (i >= minHour || (i === minHour && j > minMinute)) &&
+        (i > minHour || (i === minHour && j >= minMinute)) &&
         (i < maxHour || (i === maxHour && j <= maxMinute))
       ) {
         const hour = i.toString().padStart(2, "0");
