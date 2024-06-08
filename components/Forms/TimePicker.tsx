@@ -7,7 +7,10 @@ import {
   SelectValue,
   SelectItem,
 } from "../ui/select";
-import { PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
+import {
+  PiQuestionMarkCircleDuoStroke,
+  PiTimerDefaultDuoSolid,
+} from "../../icons/PikaIcons";
 import {
   HoverCard,
   HoverCardContent,
@@ -146,7 +149,10 @@ export default function TimePicker<T extends FieldValues>({
           >
             <FormControl>
               <SelectTrigger className="font-medium bg-input border-none">
-                <SelectValue placeholder={placeholder} />
+                <div className="flex gap-2 items-center">
+                  <PiTimerDefaultDuoSolid className="w-5 h-5 text-gray-600" />
+                  <SelectValue placeholder={placeholder} />
+                </div>
               </SelectTrigger>
             </FormControl>
 
