@@ -26,7 +26,7 @@ interface Props {
   week?: boolean;
   month?: boolean;
   year?: boolean;
-  defaultTab?: string;
+  defaultPeriod?: string;
 }
 
 export const PeriodFilters = ({
@@ -37,8 +37,13 @@ export const PeriodFilters = ({
   month,
   week,
   year = true,
-  defaultTab = "year",
+  defaultPeriod = "year",
 }: Props) => {
+  const [period, setPeriod] = useQueryState("period", {
+    defaultValue: defaultPeriod,
+    shallow: false,
+  });
+
   const [startDate, setStartDate] = useQueryState("starting_date", {
     defaultValue: "",
     shallow: false,
@@ -47,6 +52,7 @@ export const PeriodFilters = ({
     defaultValue: "",
     shallow: false,
   });
+
   const [selectedYear, setSelectedYear] = useQueryState("year", {
     defaultValue: years[0].value,
     shallow: false,
@@ -58,7 +64,6 @@ export const PeriodFilters = ({
   })();
 
   const [date, setDate] = useState<Date | undefined>(defaultDate);
-  const [tab, setTab] = useState(defaultTab);
 
   function generateWeeks(year: number) {
     let startDate = startOfWeek(new Date(year, 0, 1), {
@@ -147,7 +152,7 @@ export const PeriodFilters = ({
   };
 
   const onTabChange = (value: string) => {
-    setTab(value);
+    setPeriod(value);
 
     if (value === "year") {
       const startOfYear = new Date(Number(selectedYear), 0, 1);
@@ -184,7 +189,7 @@ export const PeriodFilters = ({
   return (
     <div>
       <Tabs
-        value={tab}
+        value={period}
         className="flex flex-col md:flex-row gap-1 md:gap-4 justify-between bg-transparent md:border border-none items-center bg-white md:bg-transparent  md:p-1 rounded-xl "
         onValueChange={onTabChange}
       >
