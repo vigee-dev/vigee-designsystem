@@ -214,13 +214,19 @@ export default function InputDropZoneFile<T extends FieldValues>({
         )}
 
         {files?.length === 0 && (
-          <p>
-            Glissez vos fichiers{" "}
-            <span className="font-bold text-primary cursor-pointer">
-              <u>ou cliquez ici</u>
-            </span>{" "}
-            pour envoyer
-          </p>
+            <>
+              <p>
+                Glissez vos fichiers{" "}
+                <span className="font-bold text-primary cursor-pointer">
+                <u>ou cliquez ici</u>
+              </span>{" "}
+                pour envoyer
+              </p>
+              <p className="text-xs text-gray-400">
+                {extensions &&
+                    `Fichier de type : ${getPossibleExtensions(extensions)}`}
+              </p>
+            </>
         )}
       </div>
     </div>
