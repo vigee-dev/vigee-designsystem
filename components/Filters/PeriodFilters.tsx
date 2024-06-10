@@ -181,10 +181,6 @@ export const PeriodFilters = ({
     }
   };
 
-  useEffect(() => {
-    onTabChange(defaultTab);
-  }, [defaultTab]);
-
   return (
     <div>
       <Tabs

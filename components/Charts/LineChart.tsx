@@ -55,6 +55,7 @@ export const LineChart: React.FC<Props> = ({
   subtitle,
   container,
   euro = false,
+  keys = [{ dataKey: "total", color: color }],
 }) => {
   return (
     <div
@@ -78,30 +79,40 @@ export const LineChart: React.FC<Props> = ({
           data={data}
           margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
         >
-          <defs>
-            <linearGradient id={`colorUv${color}`} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={color} stopOpacity={0.1} />
-              <stop offset="75%" stopColor={color} stopOpacity={0.03} />
-            </linearGradient>
-          </defs>
-          <Area
-            dataKey={"total"}
-            type={"monotone"}
-            stroke={color}
-            fillOpacity={1}
-            fill={`url(#colorUv${color})`}
-          />
+          {keys.map((key, index) => (
+            <defs key={index}>
+              <linearGradient
+                id={`colorUv${key.color}`}
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+                <stop offset="0%" stopColor={key.color} stopOpacity={0.1} />
+                <stop offset="75%" stopColor={key.color} stopOpacity={0.03} />
+              </linearGradient>
+            </defs>
+          ))}
+
+          {keys.map((key, index) => (
+            <Area
+              key={index}
+              dataKey={key.dataKey}
+              type={"monotone"}
+              stroke={key.color}
+              fillOpacity={1}
+              fill={`url(#colorUv${key.color})`}
+            />
+          ))}
 
           <XAxis
             dataKey={"name"}
-            stroke="#1e293b"
             fontSize={10}
             tickLine={false}
             axisLine={false}
             interval={0}
           />
           <YAxis
-            stroke="#000"
             fontSize={12}
             tickLine={false}
             axisLine={false}
