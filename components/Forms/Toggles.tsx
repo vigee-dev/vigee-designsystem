@@ -15,7 +15,7 @@ import {
 import { cn } from "../lib/utils";
 
 type Option = {
-  label: string;
+  label?: string;
   value: string;
   icon?: React.ReactNode;
   description?: string;
@@ -26,6 +26,7 @@ type Props<T extends FieldValues> = {
   name: Path<T>;
   descr?: string;
   className?: string;
+  optionsClassName?: string
   disabled?: boolean;
   options: Option[];
 };
@@ -35,6 +36,7 @@ export const Toggles = <T extends FieldValues>({
   name,
   descr,
   className,
+  optionsClassName,
   disabled,
   options,
 }: Props<T>) => {
@@ -45,7 +47,7 @@ export const Toggles = <T extends FieldValues>({
       render={({ field }) => (
         <FormItem className={className}>
           <FormControl>
-            <Container className="p-1">
+            <Container className="my-0 p-1">
               <ShadToggleGroup
                 type="single"
                 className="w-full"
@@ -57,18 +59,14 @@ export const Toggles = <T extends FieldValues>({
                   <ToggleGroupItem
                     key={option.value}
                     value={option.value}
-                    aria-label={option.label}
-                    className={cn(
-                      " items-center h-20 flex justify-between w-full gap-6 md:px-6 rounded-lg"
-                    )}
+                    aria-label={option.label || ''}
+                    className={cn(" items-center h-20 flex justify-between w-full gap-6 md:px-6 rounded-lg", optionsClassName)}
                   >
                     <div className="w-fit">{option.icon}</div>
-                    <div className="w-full text-left ">
-                      <span className="text-md font-bold ">{option.label}</span>
-                      <p className="text-xs text-gray-500">
-                        {option.description}
-                      </p>
-                    </div>
+                    {(option.label || option.description) && <div className="w-full text-left ">
+                      {option.label && <span className="text-md font-bold ">{option.label}</span>}
+                      {option.description && <p className="text-xs text-gray-500">{option.description}</p>}
+                    </div>}
                   </ToggleGroupItem>
                 ))}
               </ShadToggleGroup>
