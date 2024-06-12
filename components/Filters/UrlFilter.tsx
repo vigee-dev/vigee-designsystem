@@ -40,6 +40,7 @@ export const UrlFilter = ({
       setFilter("");
       return;
     }
+
     setFilter(newValue);
   };
 
