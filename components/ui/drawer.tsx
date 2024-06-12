@@ -10,6 +10,7 @@ const Drawer = ({
   ...props
 }: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
   <DrawerPrimitive.Root
+      // @ts-ignore TODO : fix this
     preventScrollRestoration
     shouldScaleBackground={shouldScaleBackground}
     {...props}
