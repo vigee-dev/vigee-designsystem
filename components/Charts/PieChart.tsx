@@ -49,7 +49,7 @@ const PieChart = ({
   container,
   colors,
   color,
-                    startAngle,
+                    startAngle = 360,
 }: Props) => {
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
