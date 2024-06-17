@@ -144,7 +144,7 @@ export default function SearchSelectAsync<
                 IndicatorSeparator: () => null,
               }}
               isSearchable={isSearchable}
-              maxMenuHeight={180}
+              maxMenuHeight={400}
               menuShouldScrollIntoView
               blurInputOnSelect
               menuPlacement={menuPlacement}
@@ -228,7 +228,7 @@ export default function SearchSelectAsync<
         menuShouldScrollIntoView={false}
         blurInputOnSelect
         menuShouldBlockScroll
-        maxMenuHeight={180}
+        maxMenuHeight={400}
         autoFocus
       />
     </div>
