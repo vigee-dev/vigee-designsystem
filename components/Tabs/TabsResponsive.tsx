@@ -23,6 +23,7 @@ interface TabsResponsiveProps {
   }[];
   children?: ReactNode;
   fullWidth?: boolean;
+  className?: string;
 }
 
 export const TabsResponsive = ({
@@ -31,6 +32,7 @@ export const TabsResponsive = ({
   query,
   children,
   fullWidth,
+  className,
 }: TabsResponsiveProps) => {
   const router = useRouter();
 
@@ -60,6 +62,7 @@ export const TabsResponsive = ({
             defaultValue={defaultValue}
             handleValueChange={handleValueChange}
             fullWidth={fullWidth}
+            className={className}
           >
             {children}
           </TabComponent>
@@ -68,6 +71,7 @@ export const TabsResponsive = ({
             options={options}
             defaultValue={defaultValue}
             handleValueChange={handleValueChange}
+            className={className}
           />
         )}
       </div>
@@ -77,6 +81,7 @@ export const TabsResponsive = ({
             options={options}
             defaultValue={defaultValue}
             handleValueChange={handleValueChange}
+            className={className}
           >
             {children}
           </TabComponent>
@@ -85,6 +90,7 @@ export const TabsResponsive = ({
             options={options}
             defaultValue={defaultValue}
             handleValueChange={handleValueChange}
+            className={className}
           />
         )}
       </div>
@@ -152,6 +158,7 @@ const SelectComponent = ({
   options,
   defaultValue,
   handleValueChange,
+  className,
 }: TabProps) => {
   const router = useRouter();
   return (
@@ -170,7 +177,8 @@ const SelectComponent = ({
       >
         <SelectTrigger
           className={cn(
-            "w-full md:fit font-medium h-12 md:h-fit text-md flex gap-2 items-center"
+            "w-full md:fit font-medium h-12 md:h-fit text-md flex gap-2 items-center",
+            className
           )}
         >
           <SelectValue />
