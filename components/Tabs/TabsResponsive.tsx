@@ -61,8 +61,7 @@ export const TabsResponsive = ({
             handleValueChange={handleValueChange}
             fullWidth={fullWidth}
           >
-            {" "}
-            {children}{" "}
+            {children}
           </TabComponent>
         ) : (
           <SelectComponent
@@ -73,14 +72,13 @@ export const TabsResponsive = ({
         )}
       </div>
       <div className="flex md:hidden">
-        {options.length < 5 ? (
+        {options.length < 4 ? (
           <TabComponent
             options={options}
             defaultValue={defaultValue}
             handleValueChange={handleValueChange}
           >
-            {" "}
-            {children}{" "}
+            {children}
           </TabComponent>
         ) : (
           <SelectComponent
@@ -108,6 +106,7 @@ interface TabProps {
   }[];
   children?: ReactNode;
   fullWidth?: boolean;
+  className?: string;
 }
 
 const TabComponent = ({
@@ -116,11 +115,16 @@ const TabComponent = ({
   handleValueChange,
   children,
   fullWidth,
+  className,
 }: TabProps) => {
   return (
     <Tabs defaultValue={defaultValue} className={cn(`w-full`)}>
       <TabsList
-        className={cn(`w-full`, fullWidth ? " md:w-full" : " md:w-fit")}
+        className={cn(
+          `w-full`,
+          fullWidth ? " md:w-full" : " md:w-fit",
+          className
+        )}
       >
         {options.map((option, index) => (
           <TabsTrigger
@@ -178,7 +182,9 @@ const SelectComponent = ({
               className="w-full md:fit flex gap-2"
               key={index}
             >
-              {option.icon} {option.name}
+              <div className="flex items-center gap-2">
+                {option.icon} {option.name}
+              </div>
             </SelectItem>
           ))}
         </SelectContent>
