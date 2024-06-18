@@ -29,7 +29,7 @@ interface Props {
   color?: string;
   container?: boolean;
   colors?: string[];
-    startAngle?: number;
+  startAngle?: number;
 }
 
 interface LabelProps {
@@ -49,7 +49,7 @@ const PieChart = ({
   container,
   colors,
   color,
-                    startAngle = 360,
+  startAngle = 360,
 }: Props) => {
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
@@ -97,10 +97,9 @@ const PieChart = ({
             cy="50%" // Centrer verticalement
             startAngle={startAngle}
             endAngle={0}
-            // innerRadius={70}
-            // outerRadius={100}
+            innerRadius={50} // Définir le rayon intérieur pour le trou
+            outerRadius={80} // Définir le rayon extérieur de l'anneau
             labelLine={false}
-            // paddingAngle={5}
             label={renderCustomizedLabel}
             fill="#8884d8"
             dataKey="value"
