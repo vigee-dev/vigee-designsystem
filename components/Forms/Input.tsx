@@ -48,7 +48,7 @@ export default function Input<T extends FieldValues>({
   label,
   placeholder,
   type = "text",
-  required = true,
+  required = false,
   name,
   descr,
   className,
