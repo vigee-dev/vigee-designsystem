@@ -18,6 +18,21 @@ export function CardSkeleton() {
   );
 }
 
+export function HeaderSkeleton() {
+  return (
+    <div className={"rounded-xl h-fit bg-white p-6  border items-center mb-4"}>
+      <div className="flex flex-col gap-2  ">
+        <div
+          className={`${shimmer} relative  h-6 w-36 overflow-hidden rounded-md bg-gray-100`}
+        />
+        <div
+          className={`${shimmer} relative h-4 w-24 overflow-hidden rounded-md bg-gray-100`}
+        />
+      </div>
+    </div>
+  );
+}
+
 export function CardsSkeleton() {
   return (
     <div className="grid grid-cols-3 gap-4">
