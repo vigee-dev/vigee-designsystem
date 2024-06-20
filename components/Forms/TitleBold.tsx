@@ -10,7 +10,7 @@ export const TitleBold = ({
   title: string;
 }) => {
   return (
-    <TypographyH2 className={cn("text-gray-4000 font-bold text-lg", className)}>
+    <TypographyH2 className={cn("text-gray-400 font-bold text-lg", className)}>
       {title}
     </TypographyH2>
   );
