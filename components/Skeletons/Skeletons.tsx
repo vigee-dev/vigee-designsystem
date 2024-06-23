@@ -2,6 +2,25 @@
 const shimmer =
   "before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent";
 
+export const InputSkeleton = ({
+  big = true,
+  bigHeight = false,
+}: {
+  big?: boolean;
+  bigHeight?: boolean;
+}) => {
+  return (
+    <div className="flex flex-col p-1 gap-1">
+      <div className="h-6 w-16 rounded-md bg-gray-100" />
+      <div
+        className={`${shimmer} relative h-6 overflow-hidden ${
+          big ? "w-full" : "w-36"
+        } ${bigHeight ? "h-96" : "h-8"} rounded-md bg-gray-100`}
+      />
+    </div>
+  );
+};
+
 export function CardSkeleton() {
   return (
     <div
