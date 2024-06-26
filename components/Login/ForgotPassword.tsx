@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ArrowLongLeftIcon } from "@heroicons/react/24/solid";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import Copyright from "./Copyright";
 import * as z from "zod";
 import { Button } from "../Buttons/Button";
 import { toast } from "sonner";
@@ -89,7 +88,7 @@ export default function ForgotPassword({ logo }: Props) {
                       <Input
                         placeholder="ex : test@email.com"
                         {...field}
-                        className="text-[16px] md:text-sm"
+                        className="text-[16px] md:text-sm bg-input"
                       />
                     </FormControl>
 
