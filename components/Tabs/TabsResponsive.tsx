@@ -150,7 +150,7 @@ const TabComponent = ({
             }
           >
             {option.icon} {option.name}{" "}
-            {option.count && option.count > 0 && (
+            {option?.count && option?.count > 0 ? (
               <Badge
                 className={cn(
                   "bg-red-400 h-5 w-5 flex items-center justify-center mx-auto",
@@ -159,7 +159,7 @@ const TabComponent = ({
               >
                 {option.count}
               </Badge>
-            )}
+            ) : null}
           </TabsTrigger>
         ))}
       </TabsList>
@@ -207,11 +207,11 @@ const SelectComponent = ({
             >
               <div className="flex items-center gap-2">
                 {option.icon} {option.name}
-                {option.count && option.count > 0 && (
+                {option?.count && option?.count > 0 ? (
                   <Badge className={cn("bg-red-400", option.badgeColor)}>
                     {option.count}
                   </Badge>
-                )}
+                ) : null}
               </div>
             </SelectItem>
           ))}
