@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image, { StaticImageData } from "next/image";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -73,6 +73,21 @@ const Sidebar: React.FC<SidebarProps> = ({
   const router = usePathname();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 1024) {
+        setSidebarOpen(false);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const options = [
     { value: "en", label: "English" },
     { value: "fr", label: "Français" },
@@ -81,7 +96,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <>
       <div
-        className={`hidden fixed inset-y-0 lg:flex ${
+        className={` fixed inset-y-0 z-50 flex ${
           sidebarOpen ? "w-56 " : "w-16  "
         } flex-col h-screen transition-all ease-in-out duration-300`}
         onMouseEnter={() => setHoverMenu(true)}
@@ -261,7 +276,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
       <main
         className={`${
-          sidebarOpen ? "lg:pl-56" : "lg:pl-16"
+          sidebarOpen ? "pl-56 " : " pl-16"
         } pt-2 md:py-2 bg-gray-50  h-full min-h-screen `}
       >
         <div className=" md:py-2 pb-24 ">

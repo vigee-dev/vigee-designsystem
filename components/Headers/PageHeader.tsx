@@ -25,10 +25,10 @@ export function PageHeader({
         className
       )}
     >
-      <div className="flex flex-wrap justify-between  gap-x-4 w-full items-center ">
+      <div className="flex flex-wrap md:justify-between  gap-x-4 w-full items-center gap-2">
         <div className="flex  items-center gap-4 ">
           {icon}
-          <div className="flex flex-col">
+          <div className="flex flex-col ">
             {small ? (
               <TypographyH2 className="text-primary m-0">{title}</TypographyH2>
             ) : (

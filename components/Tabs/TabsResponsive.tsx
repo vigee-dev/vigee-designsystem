@@ -11,7 +11,6 @@ import {
 import { Tabs, TabsTrigger, TabsList } from "../../components/ui/tabs";
 import { cn } from "../lib/utils";
 import { useRouter } from "next/navigation";
-import { Badge } from "../ui/badge";
 
 interface TabsResponsiveProps {
   defaultValue?: string;
@@ -21,12 +20,11 @@ interface TabsResponsiveProps {
     href?: string;
     value?: string;
     icon?: ReactNode;
-    count?: number;
-    badgeColor?: string;
   }[];
   children?: ReactNode;
   fullWidth?: boolean;
   className?: string;
+  selectLimit?: number;
 }
 
 export const TabsResponsive = ({
@@ -36,6 +34,7 @@ export const TabsResponsive = ({
   children,
   fullWidth,
   className,
+  selectLimit = 4,
 }: TabsResponsiveProps) => {
   const router = useRouter();
 
@@ -79,7 +78,7 @@ export const TabsResponsive = ({
         )}
       </div>
       <div className="flex md:hidden">
-        {options.length < 4 ? (
+        {options.length < selectLimit ? (
           <TabComponent
             options={options}
             defaultValue={defaultValue}
@@ -112,8 +111,6 @@ interface TabProps {
     href?: string;
     value?: string;
     icon?: ReactNode;
-    count?: number;
-    badgeColor?: string;
   }[];
   children?: ReactNode;
   fullWidth?: boolean;
@@ -149,17 +146,7 @@ const TabComponent = ({
               handleValueChange(option.href ?? option.value ?? "", option)
             }
           >
-            {option.icon} {option.name}{" "}
-            {option?.count && option?.count > 0 ? (
-              <Badge
-                className={cn(
-                  "bg-red-400 h-5 w-5 flex items-center justify-center mx-auto",
-                  option.badgeColor
-                )}
-              >
-                {option.count}
-              </Badge>
-            ) : null}
+            {option.icon} {option.name}
           </TabsTrigger>
         ))}
       </TabsList>
@@ -207,11 +194,6 @@ const SelectComponent = ({
             >
               <div className="flex items-center gap-2">
                 {option.icon} {option.name}
-                {option?.count && option?.count > 0 ? (
-                  <Badge className={cn("bg-red-400", option.badgeColor)}>
-                    {option.count}
-                  </Badge>
-                ) : null}
               </div>
             </SelectItem>
           ))}
