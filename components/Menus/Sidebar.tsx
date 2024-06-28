@@ -268,7 +268,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                   className="font-medium bg-transparent text-gray-500 hover:text-gray-800 hover:bg-gray-200"
                   onClick={signOut}
                 >
-                  Déconnexion
+                  <span className="hidden lg:inline">Déconnexion</span>
                 </Button>
               </div>
             )}
