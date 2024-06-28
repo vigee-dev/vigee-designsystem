@@ -278,7 +278,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
       <main
         className={`${
-          sidebarOpen ? "pl-56 " : " pl-16"
+          sidebarOpen ? "pl-56 " : hiddenMobile ? "" : " pl-16"
         } pt-2 md:py-2 bg-gray-50  h-full min-h-screen `}
       >
         <div className=" md:py-2 pb-24 ">
