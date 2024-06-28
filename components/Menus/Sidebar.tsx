@@ -46,6 +46,7 @@ interface SidebarProps {
   bgColor?: string;
   className?: string;
   logout?: boolean;
+  hiddenMobile?: boolean;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -67,6 +68,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   defaultValueSelect,
   className,
   logout = false,
+  hiddenMobile = false,
 }: SidebarProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [hoverMenu, setHoverMenu] = useState(false);
@@ -96,7 +98,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <>
       <div
-        className={` fixed inset-y-0 z-50 flex ${
+        className={`${hiddenMobile ? "hidden" : "flex"} fixed inset-y-0 z-50  ${
           sidebarOpen ? "w-56 " : "w-16  "
         } flex-col h-screen transition-all ease-in-out duration-300`}
         onMouseEnter={() => setHoverMenu(true)}
