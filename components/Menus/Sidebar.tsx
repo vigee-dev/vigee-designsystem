@@ -98,7 +98,9 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <>
       <div
-        className={`${hiddenMobile ? "hidden" : "flex"} fixed inset-y-0 z-50  ${
+        className={`${
+          hiddenMobile ? "hidden lg:flex" : "flex"
+        } fixed inset-y-0 z-50  ${
           sidebarOpen ? "w-56 " : "w-16  "
         } flex-col h-screen transition-all ease-in-out duration-300`}
         onMouseEnter={() => setHoverMenu(true)}
@@ -278,7 +280,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
       <main
         className={`${
-          sidebarOpen ? "pl-56 " : hiddenMobile ? "" : " pl-16"
+          sidebarOpen ? "pl-56" : hiddenMobile ? "lg:pl-16" : " pl-16"
         } pt-2 md:py-2 bg-gray-50  h-full min-h-screen `}
       >
         <div className=" md:py-2 pb-24 ">
