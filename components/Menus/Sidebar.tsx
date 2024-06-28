@@ -264,13 +264,13 @@ const Sidebar: React.FC<SidebarProps> = ({
             </ul>
 
             {logout && (
-              <div className="my-2 flex justify-start">
+              <div className="my-2 hidden lg:flex justify-start">
                 <Button
                   iconLeft="logout"
                   className="font-medium bg-transparent text-gray-500 hover:text-gray-800 hover:bg-gray-200"
                   onClick={signOut}
                 >
-                  <span className="hidden lg:inline">Déconnexion</span>
+                  Déconnexion
                 </Button>
               </div>
             )}
