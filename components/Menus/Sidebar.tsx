@@ -9,8 +9,11 @@ import VariableLogo from "../Logos/VariableLogo";
 import { Badge } from "../ui/badge";
 import { Select } from "../Select/Select";
 import { cn } from "../lib/utils";
+import {
+  PiLogOutLeftDuoSolid,
+  PiLogOutLeftStroke,
+} from "../../icons/PikaIcons";
 import { Button } from "../Buttons/Button";
-import { signOut } from "next-auth/react";
 
 function classNames(...classes: (string | boolean)[]): string {
   return classes.filter(Boolean).join(" ");
@@ -47,6 +50,7 @@ interface SidebarProps {
   className?: string;
   logout?: boolean;
   hiddenMobile?: boolean;
+  signout?: () => void;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -69,6 +73,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   className,
   logout = false,
   hiddenMobile = false,
+  signout,
 }: SidebarProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [hoverMenu, setHoverMenu] = useState(false);
@@ -183,7 +188,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                   {navigation.map((item, index) => {
                     // Fonction pour déterminer la classe de base
                     const baseClass = item.highlight
-                      ? `group flex gap-x-2 rounded-md p-[3px] text-primary  leading-6 transform transition-all bg-white border border-gray-200  duration-100 ease-in-out items-center mx-1 my-1  shadow-sm hover:scale-105 ${"text-md"} `
+                      ? `group flex gap-x-2 hover:rounded-md p-[3px] text-primary  leading-6 transform transition-all bg-white border border-gray-200  duration-300 ease-in-out items-center mx-1 my-1  shadow-sm hover:scale-105 ${"text-md"} `
                       : `group flex gap-x-2 rounded-md p-[3px] leading-6 transform transition-all duration-100 ease-in-out items-center mx-1 my-1  ${"text-md"}`;
 
                     // Fonction pour déterminer la classe de texte et de fond
@@ -262,21 +267,14 @@ const Sidebar: React.FC<SidebarProps> = ({
                 </ul>
               </li>
             </ul>
-
             {logout && (
-              <div className="my-2 hidden lg:flex justify-start">
-                <Button
-                  iconLeft="logout"
-                  className="font-medium bg-transparent text-gray-500 hover:text-gray-800 hover:bg-gray-200"
-                  onClick={signOut}
-                >
-                  {!sidebarOpen ? (
-                    <span className="hidden">Déconnexion</span>
-                  ) : (
-                    <span className="inline">Déconnexion</span>
-                  )}
-                </Button>
-              </div>
+              <button
+                onClick={signout}
+                className=" hover:text-gray-100 text-gray-100  my-2 text-md w-full  flex gap-2 items-center hover:bg-white/10 rounded-lg p-2 transform transition-all duration-300 ease-in-out"
+              >
+                <PiLogOutLeftStroke className="w-5 h-5 text-gray-500" />
+                {sidebarOpen && <span>Déconnexion</span>}
+              </button>
             )}
           </nav>
         </div>
