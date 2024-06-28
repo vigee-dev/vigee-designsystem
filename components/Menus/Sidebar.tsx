@@ -48,7 +48,7 @@ interface SidebarProps {
   defaultValueSelect?: string;
   bgColor?: string;
   className?: string;
-  logout?: boolean;
+
   hiddenMobile?: boolean;
   signout?: () => void;
 }
@@ -71,7 +71,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   selectPlaceHolder,
   defaultValueSelect,
   className,
-  logout = false,
+
   hiddenMobile = false,
   signout,
 }: SidebarProps) => {
@@ -267,7 +267,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 </ul>
               </li>
             </ul>
-            {logout && (
+            {signout && (
               <button
                 onClick={signout}
                 className=" hover:text-gray-100 text-gray-100  my-2 text-md w-full  flex gap-3 items-center hover:bg-white/10 rounded-lg p-2 transform transition-all duration-300 ease-in-out"
