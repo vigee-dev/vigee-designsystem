@@ -14,6 +14,7 @@ import {
   SingleValue,
 } from "react-select";
 import { cn } from "../lib/utils";
+import { styles } from "./SelectSearchAsync";
 
 interface SearchSelectInterface<
   T extends FieldValues,
@@ -76,56 +77,7 @@ export default function SelectSearch<
                   primary: "#f3f4f6",
                 },
               })}
-              styles={{
-                control: (baseStyles, state) => ({
-                  ...baseStyles,
-                  border: 0,
-                  backgroundColor: "#f3f4f6",
-                  borderRadius: "0.4rem",
-                  fontSize: "14px",
-                  borderColor: "#f3f4f6",
-                }),
-
-                option: (baseStyles, state) => ({
-                  ...baseStyles,
-                  cursor: "pointer",
-                  fontSize: "14px",
-                  backgroundColor: "#FFFFFF",
-                  ":hover": {
-                    backgroundColor: "#EEEEEE",
-                  },
-                  border: 0,
-                }),
-                singleValue: (baseStyles, state) => ({
-                  ...baseStyles,
-                  cursor: "pointer",
-                  backgroundColor: "#FFF",
-                  fontSize: "14px",
-                  borderRadius: "0.4rem",
-                  padding: "0.2rem",
-                }),
-                multiValue: (baseStyles, state) => ({
-                  ...baseStyles,
-                  cursor: "pointer",
-                  backgroundColor: "#FFF",
-                  color: "#000",
-                  borderRadius: "0.4rem",
-                  fontSize: "16px",
-                }),
-                multiValueLabel: (styles, { data }) => ({
-                  ...styles,
-                  color: "#111",
-                }),
-                multiValueRemove: (styles, { data }) => ({
-                  ...styles,
-                  color: "#111",
-                  borderRadius: "0.4rem",
-                  ":hover": {
-                    backgroundColor: "#DDD",
-                    color: "#111",
-                  },
-                }),
-              }}
+              styles={styles}
               isClearable={isClearable}
               placeholder={placeholder}
               isDisabled={disabled} //TODO pass disabled from field.disabled ?

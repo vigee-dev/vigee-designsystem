@@ -79,51 +79,9 @@ export default function SearchSelectAsync<
             <SelectAndSearchAsync<Option, IsMulti, GroupBase<Option>>
               theme={theme => ({
                 ...theme,
-                colors: { ...theme.colors, primary: "#f3f4f6" },
+                colors: { ...theme.colors, primary: "#FFF" },
               })}
-              styles={{
-                control: (baseStyles, state) => ({
-                  ...baseStyles,
-                  border: 0,
-                  backgroundColor: "#f3f4f6",
-                  borderRadius: "0.4rem",
-                  fontSize: "16px", // Assurez-vous que la taille de police est >= 16px
-                  borderColor: "#f3f4f6",
-                }),
-                option: (baseStyles, state) => ({
-                  ...baseStyles,
-                  cursor: "pointer",
-                  fontSize: "16px",
-                  backgroundColor: "#FFFFFF",
-                  ":hover": {
-                    backgroundColor: "#EEEEEE",
-                  },
-                  border: 0,
-                  borderRadius: "0.4rem",
-                }),
-                singleValue: (baseStyles, state) => ({
-                  ...baseStyles,
-                  cursor: "pointer",
-                  backgroundColor: "#FFF",
-                  padding: "0.2rem",
-                  boxShadow: "0 0 0 1px #EEE",
-                  fontSize: "16px",
-                  borderRadius: "0.4rem",
-                }),
-                multiValue: (baseStyles, state) => ({
-                  ...baseStyles,
-                  cursor: "pointer",
-                  backgroundColor: "#FFF",
-                  color: "#000",
-                  borderRadius: "0.4rem",
-                  fontSize: "16px",
-                }),
-                menu: (baseStyles, state) => ({
-                  ...baseStyles,
-                  zIndex: 9999,
-                  borderRadius: "0.4rem",
-                }),
-              }}
+              styles={styles}
               isClearable={isClearable}
               placeholder={placeholder}
               isDisabled={disabled}
@@ -142,6 +100,7 @@ export default function SearchSelectAsync<
               value={value}
               components={{
                 IndicatorSeparator: () => null,
+                DropdownIndicator: () => null,
               }}
               isSearchable={isSearchable}
               maxMenuHeight={400}
@@ -161,55 +120,9 @@ export default function SearchSelectAsync<
       <SelectAndSearchAsync<Option, IsMulti, GroupBase<Option>>
         theme={theme => ({
           ...theme,
-          colors: { ...theme.colors, primary: "#f3f4f6" },
+          colors: { ...theme.colors, primary: "#FFF" },
         })}
-        styles={{
-          control: (baseStyles, state) => ({
-            ...baseStyles,
-            border: 0,
-            backgroundColor: "#f3f4f6",
-            borderRadius: "0.4rem",
-            fontSize: "16px",
-            borderColor: "#f3f4f6",
-          }),
-          input: (provided, state) => ({
-            ...provided,
-            margin: "0px",
-            fontSize: "16px",
-          }),
-
-          option: (baseStyles, state) => ({
-            ...baseStyles,
-            cursor: "pointer",
-            fontSize: "16px",
-            backgroundColor: "#FFFFFF",
-            ":hover": {
-              backgroundColor: "#EEEEEE",
-            },
-            border: 0,
-          }),
-          singleValue: (baseStyles, state) => ({
-            ...baseStyles,
-            cursor: "pointer",
-            backgroundColor: "#FFF",
-            padding: "0.2rem",
-            boxShadow: "0 0 0 1px #EEE",
-            fontSize: "16px",
-            borderRadius: "0.4rem",
-          }),
-          multiValue: (baseStyles, state) => ({
-            ...baseStyles,
-            cursor: "pointer",
-            backgroundColor: "#FFF",
-            color: "#000",
-            borderRadius: "0.4rem",
-            fontSize: "16px",
-          }),
-          menu: (baseStyles, state) => ({
-            ...baseStyles,
-            zIndex: 9999,
-          }),
-        }}
+        styles={styles}
         isClearable={isClearable}
         placeholder={placeholder}
         isDisabled={disabled}
@@ -222,6 +135,7 @@ export default function SearchSelectAsync<
         value={value}
         components={{
           IndicatorSeparator: () => null,
+          DropdownIndicator: () => null,
         }}
         isSearchable={isSearchable}
         menuPlacement={menuPlacement}
@@ -234,3 +148,59 @@ export default function SearchSelectAsync<
     </div>
   );
 }
+
+export const styles = {
+  control: (baseStyles: any, state: any) => ({
+    ...baseStyles,
+    border: "0px solid #f1f1f1",
+    backgroundColor: "#f1f1f1",
+    borderRadius: "0.5rem",
+    fontSize: "12px",
+    borderColor: "#999",
+    fontWeight: "500",
+  }),
+  input: (provided: any, state: any) => ({
+    ...provided,
+    margin: "0px",
+    fontSize: "16px",
+    color: "#000",
+  }),
+  option: (baseStyles: any, state: any) => ({
+    ...baseStyles,
+    cursor: "pointer",
+    fontSize: "12px",
+    backgroundColor: state.isSelected ? "#f1f1f1" : "#FFFFFF",
+    color: state.isSelected ? "#111" : "#000",
+    ":hover": {
+      backgroundColor: "#f1f1f1",
+    },
+    border: 0,
+    fontWeight: "600",
+  }),
+  singleValue: (baseStyles: any, state: any) => ({
+    ...baseStyles,
+    cursor: "pointer",
+    backgroundColor: "#FFF",
+    color: "#000",
+    borderRadius: "1rem",
+    fontSize: "14px",
+    fontWeight: "600",
+    padding: "0.1rem 1rem",
+  }),
+  multiValue: (baseStyles: any, state: any) => ({
+    ...baseStyles,
+    cursor: "pointer",
+    backgroundColor: "#FFF",
+    color: "#000",
+    borderRadius: "1rem",
+    fontSize: "14px",
+    fontWeight: "600",
+  }),
+  menu: (baseStyles: any, state: any) => ({
+    ...baseStyles,
+    zIndex: 9999,
+    color: "#000",
+    fontSize: "14px",
+    fontWeight: "600",
+  }),
+};
