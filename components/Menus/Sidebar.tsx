@@ -270,7 +270,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             {logout && (
               <button
                 onClick={signout}
-                className=" hover:text-gray-100 text-gray-100  my-2 text-md w-full  flex gap-2 items-center hover:bg-white/10 rounded-lg p-2 transform transition-all duration-300 ease-in-out"
+                className=" hover:text-gray-100 text-gray-100  my-2 text-md w-full  flex gap-3 items-center hover:bg-white/10 rounded-lg p-2 transform transition-all duration-300 ease-in-out"
               >
                 <PiLogOutLeftStroke className="w-5 h-5 text-gray-500" />
                 {sidebarOpen && <span>Déconnexion</span>}
