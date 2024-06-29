@@ -38,6 +38,8 @@ export const TabsResponsive = ({
   fullWidth,
   className,
   selectLimit = 4,
+  count,
+  badgeColor,
 }: TabsResponsiveProps) => {
   const router = useRouter();
 
