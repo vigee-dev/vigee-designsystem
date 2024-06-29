@@ -21,13 +21,13 @@ interface TabsResponsiveProps {
     href?: string;
     value?: string;
     icon?: ReactNode;
+    count?: number;
+    badgeColor?: string;
   }[];
   children?: ReactNode;
   fullWidth?: boolean;
   className?: string;
   selectLimit?: number;
-  count?: number;
-  badgeColor?: string;
 }
 
 export const TabsResponsive = ({
@@ -38,8 +38,6 @@ export const TabsResponsive = ({
   fullWidth,
   className,
   selectLimit = 4,
-  count,
-  badgeColor,
 }: TabsResponsiveProps) => {
   const router = useRouter();
 
