@@ -11,7 +11,7 @@ interface GradualSpacingProps {
   className?: string;
 }
 
-export default function GradualSpacing({
+export default function TitleGradual({
   text,
   duration = 0.5,
   delayMultiple = 0.04,
