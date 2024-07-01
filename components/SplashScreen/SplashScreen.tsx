@@ -50,8 +50,8 @@ export const SplashScreen = ({ finishLoading, className }: Props) => {
         x={100}
         y={100}
         className={cn(
-          "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
-          "absolute inset-0 h-full w-full skew-y-12"
+          "[mask-image:radial-gradient(600px_circle_at_center,white,transparent)]",
+          "absolute inset-0 h-full w-full skew-y-12 animate-pulse"
         )}
       />
     </div>
