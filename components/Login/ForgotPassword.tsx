@@ -83,12 +83,12 @@ export default function ForgotPassword({ logo }: Props) {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel className="text-black">Email</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="ex : test@email.com"
                         {...field}
-                        className="text-[16px] md:text-sm bg-input"
+                        className="text-[16px] md:text-sm bg-input text-black"
                       />
                     </FormControl>
 

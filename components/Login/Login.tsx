@@ -112,12 +112,12 @@ export default function Login({
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel className="text-black">Email</FormLabel>
                     <FormControl>
                       <Input
                         placeholder=""
                         {...field}
-                        className="text-[16px] md:text-sm bg-input"
+                        className="text-[16px] md:text-sm bg-input text-black"
                       />
                     </FormControl>
 
@@ -131,13 +131,13 @@ export default function Login({
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Mot de passe</FormLabel>
+                    <FormLabel className="text-black">Mot de passe</FormLabel>
                     <FormControl>
                       <Input
                         placeholder=""
                         {...field}
                         type="password"
-                        className="text-[16px] md:text-sm bg-input"
+                        className="text-[16px] md:text-sm bg-input text-black"
                       />
                     </FormControl>
 
