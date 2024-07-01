@@ -3,29 +3,6 @@
   letter-spacing: -0.03em;
 }
 
-.loader {
-  background-color: #fff;
-  padding: 20px;
-  border: 10px solid #f3f3f3;
-  border-top: 10px solid #111;
-  border-radius: 50%;
-
-  animation: spin 2s linear infinite;
-  transition: transform 0.8s ease-in-out;
-  z-index: 9999;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-  50% {
-    transform: rotate(180deg) scale(1.2);
-  }
-  100% {
-    transform: rotate(360deg) scale(1);
-  }
-}
 .step-item {
   @apply relative flex flex-col justify-center items-center w-full;
 }

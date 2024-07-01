@@ -38,8 +38,7 @@ export const SplashScreen = ({ finishLoading, className }: Props) => {
         className
       )}
     >
-      <span className="loader"></span>
-
+      <span className="border-[10px] bg-white p-[30px] animate-[spin_2s_linear_infinite] border-t-[10px] border-t-solid border-t-black border-t-10 border-t-111 rounded-full transition-transform  ease-in-outout z-50"></span>
       <GridPattern
         width={50}
         height={50}
