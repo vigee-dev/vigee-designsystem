@@ -112,8 +112,6 @@ const Sidebar: React.FC<SidebarProps> = ({
 
     const isItemLast = urlSegments[lastSlugIndex] === item;
 
-    console.log(urlSegments, item, isItemLast, "urlSegments");
-
     return isItemLast;
   }
 
