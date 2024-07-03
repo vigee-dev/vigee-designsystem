@@ -155,7 +155,7 @@ export const styles = {
     border: "0px solid #f1f1f1",
     backgroundColor: "#f1f1f1",
     borderRadius: "0.5rem",
-    fontSize: "12px",
+    fontSize: "14px",
     borderColor: "#999",
     fontWeight: "500",
   }),
@@ -168,7 +168,7 @@ export const styles = {
   option: (baseStyles: any, state: any) => ({
     ...baseStyles,
     cursor: "pointer",
-    fontSize: "12px",
+    fontSize: "14px",
     backgroundColor: state.isSelected ? "#f1f1f1" : "#FFFFFF",
     color: state.isSelected ? "#111" : "#000",
     ":hover": {
