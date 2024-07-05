@@ -24,6 +24,10 @@ import {
   PiNavigationSlantStroke,
   PiChevronBigDownStroke,
   PiChevronDownStroke,
+  PiGithubStroke,
+  PiGoogleStroke,
+  PiAppleLogoStroke,
+  PiCopyCopiedStroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2 } from "lucide-react";
@@ -60,7 +64,7 @@ const iconMap = {
   edit: PiPencilEditBoxDuoSolid,
   arrowLeft: PiArrowLeftCircleContrast,
   user: PiUserPlusContrast,
-  copy: PiCopyCopiedDuoSolid,
+  copy: PiCopyCopiedStroke,
   chevron: PiChevronRightStroke,
   search: PiSearchDefaultStroke,
   plus: PiPlusDefaultStroke,
@@ -71,6 +75,9 @@ const iconMap = {
   logout: PiLogOutRightDuoStroke,
   navigation: PiNavigationSlantStroke,
   chevronDown: PiChevronDownStroke,
+  github: PiGithubStroke,
+  google: PiGoogleStroke,
+  apple: PiAppleLogoStroke,
 };
 
 export function Button({
