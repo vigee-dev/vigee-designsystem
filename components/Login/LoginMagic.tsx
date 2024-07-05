@@ -1,8 +1,5 @@
-import React from "react";
-
-("use client");
+"use client";
 import Image, { StaticImageData } from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -32,6 +29,9 @@ interface Props {
   noCopyright?: boolean;
   imageWidth?: number;
   imageHeight?: number;
+  github?: boolean;
+  google?: boolean;
+  apple?: boolean;
 }
 
 export default function Login({
@@ -42,6 +42,9 @@ export default function Login({
   noCopyright = false,
   imageWidth = 90,
   imageHeight = 90,
+  github = false,
+  google = false,
+  apple = false,
 }: Props) {
   const router = useRouter();
 
@@ -127,40 +130,34 @@ export default function Login({
                 )}
               />
 
-              <div className="flex  gap-4">
-                <Button
-                  variant="outline"
-                  icon="github"
-                  onClick={() =>
-                    signIn("github", { callbackUrl: "/app/dashboard" })
-                  }
-                  tooltip="Connexion avec GitHub"
-                />
-                <Button
-                  variant="outline"
-                  icon="google"
-                  onClick={() =>
-                    signIn("github", { callbackUrl: "/app/dashboard" })
-                  }
-                  tooltip="Connexion avec Google"
-                />
-                <Button
-                  variant="outline"
-                  icon="apple"
-                  onClick={() =>
-                    signIn("github", { callbackUrl: "/app/dashboard" })
-                  }
-                  tooltip="Connexion avec Apple"
-                />
-              </div>
-
-              <div className="flex flex-col md:items-center ">
-                <Link
-                  href="/forgot-password"
-                  className="font-base  hover:font-bold text-sm hover:text-primary flex gap-x-2 text-gray-500 transform hover:scale-105 transition duration-300 ease-in-out pb-2"
-                >
-                  Mot de passe oublié ?
-                </Link>
+              <div className="flex  gap-4 w-full mx-auto">
+                {github && (
+                  <Button
+                    icon="github"
+                    onClick={() =>
+                      signIn("github", { callbackUrl: "/app/dashboard" })
+                    }
+                    tooltip="Connexion avec GitHub"
+                  />
+                )}
+                {google && (
+                  <Button
+                    icon="google"
+                    onClick={() =>
+                      signIn("github", { callbackUrl: "/app/dashboard" })
+                    }
+                    tooltip="Connexion avec Google"
+                  />
+                )}
+                {apple && (
+                  <Button
+                    icon="apple"
+                    onClick={() =>
+                      signIn("github", { callbackUrl: "/app/dashboard" })
+                    }
+                    tooltip="Connexion avec Apple"
+                  />
+                )}
               </div>
 
               <div className="flex flex-col items-center ">
