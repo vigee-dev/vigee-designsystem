@@ -8,11 +8,10 @@ import * as z from "zod";
 import { Button } from "../Buttons/Button";
 import { toast } from "sonner";
 import { TypographyH1 } from "../Typography/Typography";
-import { signIn } from "next-auth/react";
+
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -20,6 +19,7 @@ import {
 } from "../ui/form";
 
 import { Input } from "../ui/input";
+import { signIn } from "next-auth/react";
 
 interface Props {
   logo: StaticImageData;
@@ -56,9 +56,6 @@ export default function Login({
   // Schéma de validation zod
   const schema = z.object({
     email: z.string().email("L'adresse email est invalide."),
-    password: z.string().min(8, {
-      message: "Le mot de passe doit contenir au moins 8 caractères.",
-    }),
   });
 
   const form = useForm<FormValues>({
@@ -66,14 +63,12 @@ export default function Login({
   });
 
   const email = form.watch("email");
-  const password = form.watch("password");
 
   const onSubmit = async (data: FormValues) => {
     const result = await signIn("credentials", {
       redirect: false,
       callbackUrl: callbackUrl,
       email: data.email,
-      password: data.password,
     });
 
     if (result) {
@@ -144,7 +139,7 @@ export default function Login({
                   <Button
                     icon="google"
                     onClick={() =>
-                      signIn("github", { callbackUrl: "/app/dashboard" })
+                      signIn("google", { callbackUrl: "/app/dashboard" })
                     }
                     tooltip="Connexion avec Google"
                   />
@@ -153,7 +148,7 @@ export default function Login({
                   <Button
                     icon="apple"
                     onClick={() =>
-                      signIn("github", { callbackUrl: "/app/dashboard" })
+                      signIn("apple", { callbackUrl: "/app/dashboard" })
                     }
                     tooltip="Connexion avec Apple"
                   />
@@ -164,7 +159,7 @@ export default function Login({
                 <div className="absolute md:relative bottom-12 md:bottom-0 w-full px-4 md:px-0 items-center gap-2 ">
                   <Button
                     pending={form.formState.isSubmitting}
-                    disabled={!email || !password}
+                    disabled={!email}
                     type="submit"
                     variant={variant ? variant : "default"}
                     className="w-full h-12 text-md font-bold"
