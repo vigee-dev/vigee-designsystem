@@ -9,15 +9,9 @@ import {
   RadialBarChart,
 } from "recharts";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../../components/ui/card";
+import { Card, CardContent, CardFooter } from "../../components/ui/card";
 import { ChartConfig, ChartContainer } from "../../components/ui/chart";
+import { cn } from "../lib/utils";
 const chartData = [
   { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
 ];
@@ -32,13 +26,13 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function RadialChart() {
+interface RadialChartProps {
+  className?: string;
+}
+
+export function RadialChart({ className }: RadialChartProps) {
   return (
-    <Card className="flex flex-col">
-      <CardHeader className="items-center pb-0">
-        <CardTitle>Radial Chart - Text</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
-      </CardHeader>
+    <Card className={cn("flex flex-col", className)}>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
