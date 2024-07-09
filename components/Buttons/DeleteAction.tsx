@@ -5,8 +5,7 @@ interface Props {
   alertTitle: string;
   alertSubTitle?: string;
   buttonText: string;
-  title: string;
-  message: string;
+
   deleteAction: () => void;
   className?: string;
   isPending: boolean;
