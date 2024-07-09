@@ -5,14 +5,15 @@ interface Props {
   title: string;
   message: string;
   deleteAction: () => void;
+  className?: string;
 }
 
-export const DeleteAction = ({ deleteAction }: Props) => {
+export const DeleteAction = ({ deleteAction, className }: Props) => {
   return (
     <AlertDialog
       onClick={deleteAction}
       trigger={
-        <Button icon="trash" variant="outline">
+        <Button icon="trash" variant="outline" className={className}>
           {"Supprimer l'inventaire"}
         </Button>
       }
