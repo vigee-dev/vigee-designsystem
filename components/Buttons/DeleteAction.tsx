@@ -5,10 +5,9 @@ interface Props {
   alertTitle: string;
   alertSubTitle?: string;
   buttonText: string;
-
   deleteAction: () => void;
   className?: string;
-  isPending: boolean;
+  isPending?: boolean;
 }
 
 export const DeleteAction = ({
