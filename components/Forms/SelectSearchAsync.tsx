@@ -152,8 +152,8 @@ export default function SearchSelectAsync<
 export const styles = {
   control: (baseStyles: any, state: any) => ({
     ...baseStyles,
-    border: "0px solid #f1f1f1",
-    backgroundColor: "#f1f1f1",
+    border: "0px solid #f3f4f6",
+    backgroundColor: "#f3f4f6",
     borderRadius: "0.5rem",
     fontSize: "14px",
     borderColor: "#999",
@@ -169,7 +169,7 @@ export const styles = {
     ...baseStyles,
     cursor: "pointer",
     fontSize: "14px",
-    backgroundColor: state.isSelected ? "#f1f1f1" : "#FFFFFF",
+    backgroundColor: state.isSelected ? "#f3f4f6" : "#FFFFFF",
     color: state.isSelected ? "#111" : "#000",
     ":hover": {
       backgroundColor: "#f1f1f1",
