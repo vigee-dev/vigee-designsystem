@@ -59,7 +59,7 @@ export const TabsResponsive = ({
   };
 
   return (
-    <>
+    <div>
       <div className="hidden md:flex w-full ">
         {options.length < 7 ? (
           <TabComponent
@@ -99,7 +99,7 @@ export const TabsResponsive = ({
           />
         )}
       </div>
-    </>
+    </div>
   );
 };
 
