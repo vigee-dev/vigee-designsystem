@@ -48,6 +48,7 @@ interface SidebarProps {
 
   hiddenMobile?: boolean;
   signout?: () => void;
+  persistQuery?: string;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -71,6 +72,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   hiddenMobile = false,
   signout,
+  persistQuery,
 }: SidebarProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [hoverMenu, setHoverMenu] = useState(false);
@@ -189,7 +191,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     return (
                       <div key={index} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)}>
                         <li key={item.name}>
-                          <Link prefetch href={`${item.href} ${item.persist ? "?" + searchParams.toString() : ""}`} replace className={`${baseClass} ${textAndBgClass}`}>
+                          <Link prefetch href={`${item.href}${persistQuery ? "?" + persistQuery + "=" + defaultValueSelect : ""}`} replace className={`${baseClass} ${textAndBgClass}`}>
                             <div className="flex justify-between w-full pr-2">
                               <div className="flex items-center gap-x-2">
                                 {checkUrlActive(item.slug) || hoveredIndex === index || item.highlight ? (
