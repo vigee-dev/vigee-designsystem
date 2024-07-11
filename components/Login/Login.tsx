@@ -31,9 +31,11 @@ interface Props {
   noCopyright?: boolean;
   imageWidth?: number;
   imageHeight?: number;
+  
 }
 
 export default function Login({
+
   logo,
   clientName,
   variant,

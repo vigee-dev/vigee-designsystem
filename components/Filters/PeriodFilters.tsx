@@ -1,12 +1,7 @@
 "use client";
 
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "../../components/ui/tabs";
-import { useQueryState } from "nuqs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
+import { parseAsString, useQueryState } from "nuqs";
 import { Select } from "../Select/Select";
 import { useState, useEffect } from "react";
 import { startOfWeek, format, addDays, set } from "date-fns";
@@ -16,6 +11,10 @@ import { Button } from "../ui/button";
 import { PiCalendarDefaultDuoStroke } from "../../icons/PikaIcons";
 import { Calendar } from "../ui/calendar";
 import { cn } from "../lib/utils";
+import React from "react";
+import { Loader } from "../Loaders/Loader";
+import { InputSkeleton } from "../Skeletons/Skeletons";
+import { Spinner } from "../Loaders/Spinner";
 
 interface Props {
   years?: {
@@ -29,19 +28,12 @@ interface Props {
   defaultPeriod?: string;
 }
 
-export const PeriodFilters = ({
-  years = [
-    { label: "Cette année", value: new Date().getFullYear().toString() },
-  ],
-  day,
-  month,
-  week,
-  year = true,
-  defaultPeriod = "year",
-}: Props) => {
+export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Date().getFullYear().toString() }], day, month, week, year = true, defaultPeriod = "year" }: Props) => {
+  const [isLoading, startTransition] = React.useTransition();
   const [period, setPeriod] = useQueryState("period", {
     defaultValue: defaultPeriod,
     shallow: false,
+    startTransition,
   });
 
   const [startDate, setStartDate] = useQueryState("starting_date", {
@@ -159,16 +151,8 @@ export const PeriodFilters = ({
       const endOfYear = new Date(Number(selectedYear), 11, 31);
       handleDateChange(startOfYear, endOfYear);
     } else if (value === "month") {
-      const startOfMonth = new Date(
-        Number(selectedYear),
-        new Date().getMonth(),
-        1
-      );
-      const endOfMonth = new Date(
-        Number(selectedYear),
-        new Date().getMonth() + 1,
-        0
-      );
+      const startOfMonth = new Date(Number(selectedYear), new Date().getMonth(), 1);
+      const endOfMonth = new Date(Number(selectedYear), new Date().getMonth() + 1, 0);
       handleDateChange(startOfMonth, endOfMonth);
     } else if (value === "week") {
       const today = new Date();
@@ -191,58 +175,45 @@ export const PeriodFilters = ({
       <Tabs
         value={period}
         className="flex flex-col md:flex-row gap-1 md:gap-4 justify-between bg-transparent md:border border-none items-center bg-white md:bg-transparent  md:p-1 rounded-xl "
-        onValueChange={onTabChange}
-      >
-        <TabsList className="w-full md:w-fit">
-          {day && (
-            <TabsTrigger className="w-full md:w-fit" value="day">
-              Jour
-            </TabsTrigger>
-          )}
-          {week && (
-            <TabsTrigger className="w-full md:w-fit" value="week">
-              Hebdo
-            </TabsTrigger>
-          )}
-          {month && (
-            <TabsTrigger className="w-full md:w-fit" value="month">
-              Mois
-            </TabsTrigger>
-          )}
-          {year && (day || month || week) && (
-            <TabsTrigger className="w-full md:w-fit" value="year">
-              Année
-            </TabsTrigger>
-          )}
-        </TabsList>
+        onValueChange={onTabChange}>
+        <div className="gap-4 flex items-center">
+          <TabsList className="w-full md:w-fit">
+            {day && (
+              <TabsTrigger className="w-full md:w-fit" value="day">
+                Jour
+              </TabsTrigger>
+            )}
+            {week && (
+              <TabsTrigger className="w-full md:w-fit" value="week">
+                Hebdo
+              </TabsTrigger>
+            )}
+            {month && (
+              <TabsTrigger className="w-full md:w-fit" value="month">
+                Mois
+              </TabsTrigger>
+            )}
+            {year && (day || month || week) && (
+              <TabsTrigger className="w-full md:w-fit" value="year">
+                Année
+              </TabsTrigger>
+            )}
+          </TabsList>
+
+          {isLoading && <Spinner />}
+        </div>
 
         <div className="flex flex-col md:flex-row md:gap-2 gap-2 items-center w-full md:w-fit pt-2 md:pt-0">
           <TabsContent value="day" className="w-full md:w-fit">
             <Popover>
               <PopoverTrigger asChild>
-                <Button
-                  variant={"outline"}
-                  className={cn(
-                    "w-full md:w-fit md:bg-input font-bold text-gray-800 -mt-2",
-                    !date && "text-muted-foreground "
-                  )}
-                >
+                <Button variant={"outline"} className={cn("w-full md:w-fit md:bg-input font-bold text-gray-800 -mt-2", !date && "text-muted-foreground ")}>
                   <PiCalendarDefaultDuoStroke className="mr-2 h-4 w-4 " />
-                  {date ? (
-                    format(date, "EEEE dd MMMM", { locale: fr })
-                  ) : (
-                    <span>Choisir une date</span>
-                  )}
+                  {date ? format(date, "EEEE dd MMMM", { locale: fr }) : <span>Choisir une date</span>}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0">
-                <Calendar
-                  mode="single"
-                  selected={date}
-                  onSelect={handleDay}
-                  initialFocus
-                  locale={fr}
-                />
+                <Calendar mode="single" selected={date} onSelect={handleDay} initialFocus locale={fr} />
               </PopoverContent>
             </Popover>
           </TabsContent>
@@ -266,12 +237,7 @@ export const PeriodFilters = ({
             />
           </TabsContent>
           <TabsContent value="month" className="w-full md:w-fit mt-0">
-            <Select
-              defaultValue={months[new Date().getMonth()].value}
-              options={months}
-              onChange={handleMonthChange}
-              className="w-full md:w-fit font-bold md:bg-input text-gray-800"
-            />
+            <Select defaultValue={months[new Date().getMonth()].value} options={months} onChange={handleMonthChange} className="w-full md:w-fit font-bold md:bg-input text-gray-800" />
           </TabsContent>
 
           <Select
