@@ -30,6 +30,7 @@ interface SidebarProps {
     slug: string;
     highlight?: boolean;
     notifications?: number;
+    persist?: boolean;
   }[];
   menu?: boolean;
   logoSmall?: StaticImageData;
@@ -188,7 +189,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     return (
                       <div key={index} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)}>
                         <li key={item.name}>
-                          <Link prefetch href={`${item.href}?${searchParams.toString()}`} replace className={`${baseClass} ${textAndBgClass}`}>
+                          <Link prefetch href={`${item.href} ${item.persist ? "?" + searchParams.toString() : ""}`} replace className={`${baseClass} ${textAndBgClass}`}>
                             <div className="flex justify-between w-full pr-2">
                               <div className="flex items-center gap-x-2">
                                 {checkUrlActive(item.slug) || hoveredIndex === index || item.highlight ? (
