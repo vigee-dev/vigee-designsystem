@@ -39,15 +39,18 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
   const [startDate, setStartDate] = useQueryState("starting_date", {
     defaultValue: "",
     shallow: false,
+    startTransition,
   });
   const [endDate, setEndDate] = useQueryState("ending_date", {
     defaultValue: "",
     shallow: false,
+    startTransition,
   });
 
   const [selectedYear, setSelectedYear] = useQueryState("year", {
     defaultValue: years[0].value,
     shallow: false,
+    startTransition,
   });
   const defaultDate = ((): Date => {
     const date = new Date();
@@ -101,14 +104,16 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
   };
 
   const handleYearChange = (year: string) => {
-    if (startDate && endDate) {
-      const startingDate = new Date(startDate);
-      const endingDate = new Date(endDate);
-      startingDate.setFullYear(Number(year));
-      endingDate.setFullYear(Number(year));
-      handleDateChange(startingDate, endingDate);
-    }
-    setSelectedYear(year);
+    startTransition(() => {
+      if (startDate && endDate) {
+        const startingDate = new Date(startDate);
+        const endingDate = new Date(endDate);
+        startingDate.setFullYear(Number(year));
+        endingDate.setFullYear(Number(year));
+        handleDateChange(startingDate, endingDate);
+      }
+      setSelectedYear(year);
+    });
   };
 
   const [weeks, setWeeks] = useState(generateWeeks(Number(selectedYear)));
@@ -124,23 +129,27 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
   );
 
   const handleDay = (date: Date | undefined) => {
-    if (date) {
-      date.setFullYear(Number(selectedYear));
-      const start = set(date, { hours: 0, minutes: 0, seconds: 0 });
-      const end = set(date, { hours: 23, minutes: 59, seconds: 59 });
-      handleDateChange(start, end);
-      setDate(date);
-    }
+    startTransition(() => {
+      if (date) {
+        date.setFullYear(Number(selectedYear));
+        const start = set(date, { hours: 0, minutes: 0, seconds: 0 });
+        const end = set(date, { hours: 23, minutes: 59, seconds: 59 });
+        handleDateChange(start, end);
+        setDate(date);
+      }
+    });
   };
 
   const handleMonthChange = (value: string | undefined) => {
-    const selectedMonthStart = new Date(
-      Number(selectedYear),
-      months.findIndex(m => m.value === value),
-      1
-    );
-    const [start, end] = getStartAndEndOfMonth(selectedMonthStart);
-    handleDateChange(start, end);
+    startTransition(() => {
+      const selectedMonthStart = new Date(
+        Number(selectedYear),
+        months.findIndex(m => m.value === value),
+        1
+      );
+      const [start, end] = getStartAndEndOfMonth(selectedMonthStart);
+      handleDateChange(start, end);
+    });
   };
 
   const onTabChange = (value: string) => {

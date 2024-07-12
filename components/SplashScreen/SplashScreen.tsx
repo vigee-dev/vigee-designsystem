@@ -28,7 +28,7 @@ export const SplashScreen = ({ finishLoading, className }: Props) => {
       scale: 1,
       easing: "easeInOutSine",
     });
-  }, [finishLoading]);
+  }, [finishLoading,]);
 
   return (
     <div
