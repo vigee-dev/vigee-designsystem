@@ -44,16 +44,42 @@ export default function Login({ logo, clientName, variant, callbackUrl = "/", no
 
   const email = form.watch("email");
 
-  const onSubmit = async (data: FormValues) => {
-    try {
-      const response = await signIn("resend", {
-        email: data.email,
-      });
-      toast.success("Un email de vérification vous a été envoyé. Cliquez sur le lien pour vos connecter.");
-    } catch (error) {
+  const onSubmitResend = async (data: FormValues) => {
+    const response = await signIn("resend", {
+      email: data.email,
+      redirect: false,
+    });
+    if (response?.error) {
       toast.error("Une erreur s'est produite lors de l'envoi du mail de vérification.");
-      console.log("error", error);
+      return false;
     }
+    toast.success("Un email de vérification vous a été envoyé. Cliquez sur le lien pour vos connecter.");
+    return true;
+  };
+
+  const onSubmitGoogle = async () => {
+    const response = await signIn("google", {
+      redirect: false,
+    });
+    if (response?.error) {
+      console.log("response", response);
+      toast.error("Une erreur s'est produite lors de la connexion.");
+      return false;
+    }
+    toast.success("Vous avez été connecté avec succès.");
+    return true;
+  };
+
+  const onSubmitGithub = async () => {
+    const response = await signIn("github", {
+      redirect: false,
+    });
+    if (response?.error) {
+      toast.error("Une erreur s'est produite lors de la connexion.");
+      return false;
+    }
+    toast.success("Vous avez été connecté avec succès.");
+    return true;
   };
 
   return (
@@ -66,7 +92,7 @@ export default function Login({ logo, clientName, variant, callbackUrl = "/", no
           </div>
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 py-4" id="form">
+            <form onSubmit={form.handleSubmit(onSubmitResend)} className="space-y-4 py-4" id="form">
               <FormField
                 control={form.control}
                 name="email"
@@ -83,8 +109,8 @@ export default function Login({ logo, clientName, variant, callbackUrl = "/", no
               />
 
               <div className="flex  gap-4 w-full mx-auto">
-                {github && <Button icon="github" onClick={() => signIn("github", { callbackUrl: "/app/dashboard" })} tooltip="Connexion avec GitHub" />}
-                {google && <Button icon="google" onClick={() => signIn("google", { callbackUrl: "/app/dashboard" })} tooltip="Connexion avec Google" />}
+                {github && <Button icon="github" onClick={onSubmitGithub} tooltip="Connexion avec GitHub" />}
+                {google && <Button icon="google" onClick={onSubmitGoogle} tooltip="Connexion avec Google" />}
                 {apple && <Button icon="apple" onClick={() => signIn("apple", { callbackUrl: "/app/dashboard" })} tooltip="Connexion avec Apple" />}
               </div>
 
