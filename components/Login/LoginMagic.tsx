@@ -9,6 +9,7 @@ import { Button } from "../Buttons/Button";
 import { TypographyH1 } from "../Typography/Typography";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
+import { signIn } from "next-auth/react";
 import { toast } from "sonner";
 
 interface Props {
@@ -22,7 +23,6 @@ interface Props {
   github?: boolean;
   google?: boolean;
   apple?: boolean;
-  signIn?: (provider: string, options?: { callbackUrl?: string }) => void;
 }
 
 export default function Login({ logo, clientName, variant, callbackUrl = "/", noCopyright = false, imageWidth = 90, imageHeight = 90, github = false, google = false, apple = false }: Props) {
