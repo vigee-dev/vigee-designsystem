@@ -1,6 +1,5 @@
 "use client";
 import Image, { StaticImageData } from "next/image";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import Copyright from "./Copyright";
@@ -23,11 +22,22 @@ interface Props {
   github?: boolean;
   google?: boolean;
   apple?: boolean;
+  credentials?: boolean;
 }
 
-export default function Login({ logo, clientName, variant, callbackUrl = "/", noCopyright = false, imageWidth = 90, imageHeight = 90, github = false, google = false, apple = false }: Props) {
-  const router = useRouter();
-
+export default function Login({
+  logo,
+  clientName,
+  variant,
+  callbackUrl = "/",
+  noCopyright = false,
+  imageWidth = 90,
+  imageHeight = 90,
+  github = false,
+  google = false,
+  apple = false,
+  credentials = false,
+}: Props) {
   type FormValues = {
     email: string;
     password: string;
@@ -35,19 +45,21 @@ export default function Login({ logo, clientName, variant, callbackUrl = "/", no
 
   // Schéma de validation zod
   const schema = z.object({
-    email: z.string().email("L'adresse email est invalide."),
+    email: z.string().email("L'adresse email est invalide.").min(1, "L'adresse email est invalide."),
+  });
+  const schemaWithPassword = schema.extend({
+    password: z.string().min(8, "Le mot de passe doit contenir au moins 8 caractères.").max(32, "Le mot de passe doit contenir au plus 32 caractères."),
   });
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(credentials ? schemaWithPassword : schema),
   });
-
-  const email = form.watch("email");
 
   const onSubmitResend = async (data: FormValues) => {
     const response = await signIn("resend", {
       email: data.email,
       redirect: false,
+      callbackUrl: callbackUrl || "/",
     });
     if (response?.error) {
       toast.error("Une erreur s'est produite lors de l'envoi du mail de vérification.");
@@ -55,6 +67,22 @@ export default function Login({ logo, clientName, variant, callbackUrl = "/", no
     }
     toast.success("Un email de vérification vous a été envoyé. Cliquez sur le lien pour vos connecter.");
     return true;
+  };
+
+  const onSubmitCredentials = async (data: FormValues) => {
+    const response = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+    });
+    if (response) {
+      if (response.ok) {
+        toast.success("Vous êtes connecté.");
+      } else {
+        toast.error("Mot de passe ou identifiant incorrect");
+      }
+    } else {
+      toast("Une erreur est survenue, veuillez réesayer ultérieurement.");
+    }
   };
 
   const onSubmitGoogle = async () => {
@@ -92,7 +120,7 @@ export default function Login({ logo, clientName, variant, callbackUrl = "/", no
           </div>
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmitResend)} className="space-y-4 py-4" id="form">
+            <form onSubmit={form.handleSubmit(credentials ? onSubmitCredentials : onSubmitResend)} className="space-y-4 py-4" id="form">
               <FormField
                 control={form.control}
                 name="email"
@@ -107,6 +135,20 @@ export default function Login({ logo, clientName, variant, callbackUrl = "/", no
                   </FormItem>
                 )}
               />
+              {credentials && (
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Mot de passe</FormLabel>
+                      <FormControl>
+                        <Input type="password" placeholder="" {...field} className="text-[16px] md:text-sm bg-input text-black" />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              )}
 
               <div className="flex  gap-4 w-full mx-auto">
                 {github && <Button icon="github" onClick={onSubmitGithub} tooltip="Connexion avec GitHub" />}
@@ -116,7 +158,7 @@ export default function Login({ logo, clientName, variant, callbackUrl = "/", no
 
               <div className="flex flex-col items-center ">
                 <div className="absolute md:relative bottom-12 md:bottom-0 w-full px-4 md:px-0 items-center gap-2 ">
-                  <Button pending={form.formState.isSubmitting} disabled={!email} type="submit" variant={variant ? variant : "default"} className="w-full h-12 text-md font-bold">
+                  <Button pending={form.formState.isSubmitting} disabled={!form.formState.isValid} type="submit" variant={variant ? variant : "default"} className="w-full h-12 text-md font-bold">
                     Connexion
                   </Button>
                 </div>
@@ -124,6 +166,7 @@ export default function Login({ logo, clientName, variant, callbackUrl = "/", no
             </form>
           </Form>
         </div>
+
         {!noCopyright && (
           <div className="hidden absolute md:flex items-center py-2">
             <Copyright clientName={clientName} />
