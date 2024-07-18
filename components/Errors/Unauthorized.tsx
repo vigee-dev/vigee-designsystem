@@ -15,7 +15,7 @@ interface IllustrationProps {
 }
 export function Unauthorized({ title = "Accès refusé", subtitle = "Vous n'avez pas les droits pour accéder à cette page.", children, supportEmail, onClick, img = unauthorized }: IllustrationProps) {
   return (
-    <div className="flex flex-col items-center justify-center  w-full px-12 ">
+    <div className="flex flex-col items-center justify-center  w-full px-12 max-w-2xl">
       {img && <Image width={400} height={400} className="mx-auto w-44 h-auto" src={img} alt="Erreur" />}
       <h1 className={"text-xl text-primary font-bold text-center pt-6 font-display"}>{title ? title : "Une erreur s'est produite."}</h1>
 
