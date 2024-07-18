@@ -45,7 +45,6 @@ interface SidebarProps {
   defaultValueSelect?: string;
   bgColor?: string;
   className?: string;
-
   hiddenMobile?: boolean;
   signout?: () => void;
   persistQuery?: string;
@@ -180,7 +179,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                   {navigation.map((item, index) => {
                     // Fonction pour déterminer la classe de base
                     const baseClass = item.highlight
-                      ? `group flex gap-x-2 hover:rounded-md p-[3px] text-primary  leading-6 transform transition-all bg-white border border-gray-200  duration-300 ease-in-out items-center mx-1 my-1  shadow-sm hover:scale-105 ${"text-md"} `
+                      ? `group flex gap-x-2 rounded-md p-[3px] text-primary  leading-6 transform transition-all bg-white border border-gray-200  duration-300 ease-in-out items-center mx-1 my-1  shadow-sm hover:scale-105 ${"text-md"} `
                       : `group flex gap-x-2 rounded-md p-[3px] leading-6 transform transition-all duration-100 ease-in-out items-center mx-1 my-1  ${"text-md"}`;
 
                     // Fonction pour déterminer la classe de texte et de fond
