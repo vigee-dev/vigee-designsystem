@@ -126,7 +126,7 @@ export default function DatePicker<T extends FieldValues>({ label, form, name, c
                 )}
               </FormControl>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0 " align="start" onClick={e => e.stopPropagation()}>
+            <PopoverContent className="w-auto p-0 z-[100]" align="start">
               <Calendar
                 key={selectedYear}
                 mode="single"
