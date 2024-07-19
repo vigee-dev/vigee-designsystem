@@ -31,8 +31,7 @@ function DatePickerRange<T extends FieldValues>({ form, name, label, required, d
       render={({ field }) => {
         const textValue = (() => {
           const { value } = field
-          console.log('value', value)
-          if (value?.from instanceof Date && value?.to instanceof Date) return format(value.from, 'yyyy/MM/dd') + ' - ' + format(value.to, 'yyyy/MM/dd');
+          if (value?.from instanceof Date && value?.to instanceof Date) return format(value.from, 'dd/MM/yyyy') + ' - ' + format(value.to, 'dd/MM/yyyy');
           return placeholder || 'Plage de date'
         })()
 
