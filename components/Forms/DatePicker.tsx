@@ -97,7 +97,7 @@ export default function DatePicker<T extends FieldValues>({ label, form, name, c
           <FormLabel className="font-black text-primary">
             {label} {required && <span className="text-red-600 ml-1">*</span>}
           </FormLabel>
-          <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
+          <Popover open={popoverOpen} onOpenChange={setPopoverOpen} modal={true}>
             <PopoverTrigger asChild>
               <FormControl>
                 {!disabledKeys ? (
@@ -126,7 +126,7 @@ export default function DatePicker<T extends FieldValues>({ label, form, name, c
                 )}
               </FormControl>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0 z-[100]" align="start">
+            <PopoverContent className="w-auto p-0 " align="start">
               <Calendar
                 key={selectedYear}
                 mode="single"
