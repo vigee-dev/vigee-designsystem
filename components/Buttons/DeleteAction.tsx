@@ -4,20 +4,13 @@ import { Button } from "../Buttons/Button";
 interface Props {
   alertTitle: string;
   alertSubTitle?: string;
-  buttonText: string;
+  buttonText?: string;
   deleteAction: () => void;
   className?: string;
   isPending?: boolean;
 }
 
-export const DeleteAction = ({
-  deleteAction,
-  className,
-  buttonText,
-  isPending,
-  alertTitle,
-  alertSubTitle,
-}: Props) => {
+export const DeleteAction = ({ deleteAction, className, buttonText, isPending, alertTitle, alertSubTitle }: Props) => {
   return (
     <AlertDialog
       btnQuestion={alertTitle}
