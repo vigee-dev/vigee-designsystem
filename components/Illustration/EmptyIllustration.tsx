@@ -1,5 +1,4 @@
 import Image from "next/image";
-
 import Link from "next/link";
 import { Button } from "../Buttons/Button";
 import { Container } from "../Container/Container";
