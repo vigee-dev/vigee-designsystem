@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { fr } from "date-fns/locale";
 import { Input } from "../ui/input";
-import { PiCalendarCheckContrast, PiCalendarFilledContrast } from "../../icons/PikaIcons";
+import { PiCalendarFilledContrast } from "../../icons/PikaIcons";
 
 interface Props<T extends FieldValues> {
   label?: string;
