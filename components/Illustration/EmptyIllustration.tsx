@@ -14,7 +14,7 @@ interface IllustrationProps {
   supportEmail?: string;
   button?: boolean;
 }
-export default function EmptyIllustration({ text, subtitle, buttonLink, buttonText, children, button = true }: IllustrationProps) {
+export default function EmptyIllustration({ text, subtitle, buttonLink, buttonText, children, button = false }: IllustrationProps) {
   return (
     <Container className="flex flex-col items-center justify-center  w-full px-12 p-8">
       <Image width={400} height={400} className="mx-auto w-64 h-auto" src={emptyMan} alt="Empty list" />
