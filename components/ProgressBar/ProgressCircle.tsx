@@ -83,7 +83,7 @@ export default function ProgressCircle({ max = 100, min = 0, value = 0, gaugePri
           {currentPercent}
         </span>
       </div>
-      <p className="text-primary mt-2">{text}</p>
+      <p className="text-gray-500 mt-2 animate-pulse">{text}</p>
     </div>
   );
 }
