@@ -80,7 +80,7 @@ export default function ProgressCircle({ max = 100, min = 0, value = 0, gaugePri
           />
         </svg>
         <span data-current-value={currentPercent} className="duration-[var(--transition-length)] delay-[var(--delay)] absolute inset-0 m-auto h-fit w-fit ease-linear animate-in fade-in text-primary">
-          {currentPercent}
+          {currentPercent} %
         </span>
       </div>
       <p className="text-gray-500 mt-2 animate-pulse">{text}</p>
