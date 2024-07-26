@@ -32,6 +32,7 @@ import {
   PiThreeDotsMenuHorizontalCircleDuoStroke,
   PiThreeDotsMenuHorizontalDuoStroke,
   PiThreeDotsMenuHorizontalStroke,
+  PiCheckTickSingleStroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2 } from "lucide-react";
@@ -77,6 +78,7 @@ const iconMap = {
   google: PiGoogleStroke,
   apple: PiAppleLogoStroke,
   dots: PiThreeDotsMenuHorizontalStroke,
+  check: PiCheckTickSingleStroke,
 };
 
 export function Button({ children, onClick, variant, type = "button", disabled, href, className, pending, icon, iconLeft, iconComponent, tooltip, big }: ButtonProps) {
