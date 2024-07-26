@@ -28,6 +28,10 @@ import {
   PiGoogleStroke,
   PiAppleLogoStroke,
   PiCopyCopiedStroke,
+  PiThreeDotsMenuHorizontalCircleDuoSolid,
+  PiThreeDotsMenuHorizontalCircleDuoStroke,
+  PiThreeDotsMenuHorizontalDuoStroke,
+  PiThreeDotsMenuHorizontalStroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2 } from "lucide-react";
@@ -39,13 +43,7 @@ interface ButtonProps {
   href?: string;
   className?: string;
   pending?: boolean;
-  variant?:
-    | "default"
-    | "destructive"
-    | "outline"
-    | "secondary"
-    | "ghost"
-    | "link";
+  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
   icon?: keyof typeof iconMap;
   iconLeft?: keyof typeof iconMap;
   iconComponent?: React.ReactNode;
@@ -78,29 +76,14 @@ const iconMap = {
   github: PiGithubStroke,
   google: PiGoogleStroke,
   apple: PiAppleLogoStroke,
+  dots: PiThreeDotsMenuHorizontalStroke,
 };
 
-export function Button({
-  children,
-  onClick,
-  variant,
-  type = "button",
-  disabled,
-  href,
-  className,
-  pending,
-  icon,
-  iconLeft,
-  iconComponent,
-  tooltip,
-  big,
-}: ButtonProps) {
+export function Button({ children, onClick, variant, type = "button", disabled, href, className, pending, icon, iconLeft, iconComponent, tooltip, big }: ButtonProps) {
   return pending ? (
     <ButtonComponent disabled variant={variant} className={className}>
       {children}
-      <Loader2
-        className={cn(` h-4 w-4 animate-spin `, children ? "mr-2" : "mr-0")}
-      />
+      <Loader2 className={cn(` h-4 w-4 animate-spin `, children ? "mr-2" : "mr-0")} />
     </ButtonComponent>
   ) : href ? (
     <Link href={href}>
@@ -114,8 +97,7 @@ export function Button({
         type={type}
         disabled={disabled}
         tooltip={tooltip}
-        big={big}
-      >
+        big={big}>
         {children}
       </ButtonComponent>
     </Link>
@@ -130,8 +112,7 @@ export function Button({
       type={type}
       disabled={disabled}
       tooltip={tooltip}
-      big={big}
-    >
+      big={big}>
       {children}
     </ButtonComponent>
   );
@@ -140,13 +121,7 @@ export function Button({
 interface ButtonComponentProps {
   children?: React.ReactNode;
   onClick?: () => void;
-  variant?:
-    | "default"
-    | "destructive"
-    | "outline"
-    | "secondary"
-    | "ghost"
-    | "link";
+  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   className?: string;
@@ -157,19 +132,7 @@ interface ButtonComponentProps {
   big?: boolean;
 }
 
-const ButtonComponent = ({
-  children,
-  onClick,
-  variant,
-  type,
-  disabled,
-  className,
-  icon,
-  iconLeft,
-  iconComponent,
-  tooltip,
-  big,
-}: ButtonComponentProps) => {
+const ButtonComponent = ({ children, onClick, variant, type, disabled, className, icon, iconLeft, iconComponent, tooltip, big }: ButtonComponentProps) => {
   const Icon = icon ? iconMap[icon] : null;
   const IconLeft = iconLeft ? iconMap[iconLeft] : null;
 
@@ -183,10 +146,8 @@ const ButtonComponent = ({
         className={cn(
           "group group-hover:text-primary rounded-xl group-hover:cursor-pointer font-bold text-sm flex  px-3 gap-4 ",
           className,
-          !children &&
-            "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent "
-        )}
-      >
+          !children && "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent "
+        )}>
         {IconLeft && (
           <IconLeft
             className={cn(
@@ -229,10 +190,8 @@ const ButtonComponent = ({
       className={cn(
         "group group-hover:text-primary rounded-xl group-hover:cursor-pointer font-bold text-sm flex  gap-4 ",
         className,
-        !children &&
-          "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent "
-      )}
-    >
+        !children && "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent "
+      )}>
       {IconLeft && (
         <IconLeft
           className={cn(
