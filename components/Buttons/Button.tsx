@@ -11,7 +11,6 @@ import {
   PiPencilEditBoxDuoSolid,
   PiArrowLeftCircleContrast,
   PiUserPlusContrast,
-  PiCopyCopiedDuoSolid,
   PiChevronRightStroke,
   PiPlusDefaultStroke,
   PiSearchDefaultStroke,
@@ -22,15 +21,11 @@ import {
   PiRefreshDuoStroke,
   PiLogOutRightDuoStroke,
   PiNavigationSlantStroke,
-  PiChevronBigDownStroke,
   PiChevronDownStroke,
   PiGithubStroke,
   PiGoogleStroke,
   PiAppleLogoStroke,
   PiCopyCopiedStroke,
-  PiThreeDotsMenuHorizontalCircleDuoSolid,
-  PiThreeDotsMenuHorizontalCircleDuoStroke,
-  PiThreeDotsMenuHorizontalDuoStroke,
   PiThreeDotsMenuHorizontalStroke,
   PiCheckTickSingleStroke,
 } from "../../icons/PikaIcons";
@@ -159,7 +154,8 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
                 "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300  w-6 h-6",
               big && "w-10 h-10",
               variant === "outline" && "text-gray-900",
-              variant === "secondary" && "text-secondary-foreground"
+              variant === "secondary" && "text-secondary-foreground",
+              "group-hover:animate-pulse"
             )}
           />
         )}
@@ -177,7 +173,8 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
                 "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-6 h-6",
               big && "w-10 h-10",
               variant === "outline" && "text-gray-900",
-              variant === "secondary" && "text-secondary-foreground"
+              variant === "secondary" && "text-secondary-foreground",
+              "group-hover:animate-pulse"
             )}
           />
         )}
@@ -203,7 +200,8 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
               "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300  w-6 h-6",
             big && "w-10 h-10",
             variant === "outline" && "text-gray-900",
-            variant === "secondary" && "text-secondary-foreground"
+            variant === "secondary" && "text-secondary-foreground",
+            "group-hover:animate-pulse"
           )}
         />
       )}
@@ -220,7 +218,8 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
               "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300  w-6 h-6",
             big && "w-10 h-10",
             variant === "outline" && "text-gray-900",
-            variant === "secondary" && "text-secondary-foreground"
+            variant === "secondary" && "text-secondary-foreground",
+            "group-hover:animate-pulse"
           )}
         />
       )}
