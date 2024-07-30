@@ -1,5 +1,4 @@
 import Image, { StaticImageData } from "next/image";
-
 import error from "../../img/error/error.svg";
 import Link from "next/link";
 import { PiEnvelopeArrowRightDuoSolid } from "../../icons/PikaIcons";
