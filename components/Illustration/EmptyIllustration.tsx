@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "../Buttons/Button";
 import { Container } from "../Container/Container";
 import emptyMan from "../../img/empty/empty-man.svg";
+import { cn } from "../lib/utils";
 
 interface IllustrationProps {
   text?: string;
@@ -12,10 +13,11 @@ interface IllustrationProps {
   children?: React.ReactNode;
   supportEmail?: string;
   button?: boolean;
+  className?: string;
 }
-export default function EmptyIllustration({ text, subtitle, buttonLink, buttonText, children, button = false }: IllustrationProps) {
+export default function EmptyIllustration({ text, subtitle, buttonLink, buttonText, children, button = false, className }: IllustrationProps) {
   return (
-    <Container className="flex flex-col items-center justify-center  w-full px-12 p-8">
+    <Container className={cn("flex flex-col items-center justify-center  w-full px-12 p-8", className)}>
       <Image width={400} height={400} className="mx-auto w-64 h-auto" src={emptyMan} alt="Empty list" />
 
       <h1 className={"text-xl text-gray-500 font-bold text-center pt-6 font-display"}>{text}</h1>
