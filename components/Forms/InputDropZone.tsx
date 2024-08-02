@@ -216,7 +216,7 @@ export default function InputDropZoneFile<T extends FieldValues>({
         {files?.length === 0 && (
             <>
               <p>
-                Glissez vos fichiers{" "}
+                {multiple ? "Glissez vos fichiers" : "Glissez votre fichier"}{" "}
                 <span className="font-bold text-primary cursor-pointer">
                 <u>ou cliquez ici</u>
               </span>{" "}
