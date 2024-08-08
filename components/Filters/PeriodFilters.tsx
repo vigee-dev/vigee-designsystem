@@ -1,9 +1,9 @@
 "use client";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
-import { parseAsString, useQueryState } from "nuqs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { useQueryState } from "nuqs";
 import { Select } from "../Select/Select";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { startOfWeek, format, addDays, set } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -12,8 +12,6 @@ import { PiCalendarDefaultDuoStroke } from "../../icons/PikaIcons";
 import { Calendar } from "../ui/calendar";
 import { cn } from "../lib/utils";
 import React from "react";
-import { Loader } from "../Loaders/Loader";
-import { InputSkeleton } from "../Skeletons/Skeletons";
 import { Spinner } from "../Loaders/Spinner";
 
 interface Props {
@@ -51,7 +49,8 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
     defaultValue: years[0].value,
     shallow: false,
     startTransition,
-  });
+  })
+
   const defaultDate = ((): Date => {
     const date = new Date();
     date.setFullYear(Number(selectedYear));
@@ -252,6 +251,7 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
           <Select
             className="w-full md:w-fit font-bold md:bg-input text-gray-800"
             defaultValue={selectedYear}
+            value={selectedYear}
             onChange={selectedValue => {
               handleYearChange(selectedValue ?? "");
             }}
