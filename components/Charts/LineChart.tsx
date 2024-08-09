@@ -10,7 +10,7 @@ import {
   Area,
 } from "recharts";
 
-interface Data {
+export interface LineChartData {
   name: string;
   total?: number;
 }
@@ -23,7 +23,7 @@ interface Key {
 interface Props {
   title?: string;
   subtitle?: string;
-  data: Data[];
+  data: LineChartData[];
   color?: string;
   container?: boolean;
   keys?: Key[];
