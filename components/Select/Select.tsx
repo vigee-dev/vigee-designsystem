@@ -46,7 +46,6 @@ export function Select({
   );
 
   useEffect(() => {
-    console.log('change', value)
     setSelectedValue(value)
   }, [value])
 
