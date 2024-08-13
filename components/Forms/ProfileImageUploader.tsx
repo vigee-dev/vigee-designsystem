@@ -14,13 +14,15 @@ import {
 interface ProfileImageUploaderProps<TFormValues extends FieldValues> {
   form: UseFormReturn<TFormValues>;
   name: Path<TFormValues>;
-  label?: string;
+  label?: string
+  disabled?: boolean
 }
 
 export const ProfileImageUploader = <TFormValues extends FieldValues>({
   form,
   name,
   label,
+  disabled = false
 }: ProfileImageUploaderProps<TFormValues>) => {
   const { watch, setValue } = form;
   const profileImage: File | { id: number; signedUrl: string; filename: string } = watch(name);
@@ -40,7 +42,7 @@ export const ProfileImageUploader = <TFormValues extends FieldValues>({
   return (
     <div className="flex items-center gap-2">
       <Avatar
-        className="border shadow w-16 h-16 flex justify-center items-center cursor-pointer"
+        className={`border shadow w-16 h-16 flex justify-center items-center ${!disabled ? 'cursor-pointer' : ''}`}
         onClick={handleAvatarClick}
       >
         {profileImage ? (
@@ -54,18 +56,18 @@ export const ProfileImageUploader = <TFormValues extends FieldValues>({
             <PiUserCircleDuoSolid className="text-gray-400 w-full h-full" />
           </AvatarFallback>
         )}
-        <div className="absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300">
-          <PiUploadUpContrast className="text-white w-8 h-8" />
-        </div>
+        {!disabled && <div className={`absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300`}>
+          <PiUploadUpContrast className="text-white w-8 h-8"/>
+        </div>}
       </Avatar>
-      <input
+      {!disabled && <input
         type="file"
         accept="image/*"
         className="hidden"
         name={name}
         ref={fileInputRef}
         onChange={onProfileImageChange}
-      />
+      />}
       {<p className="text-sm text-gray-500">{label}</p>}
     </div>
   );
