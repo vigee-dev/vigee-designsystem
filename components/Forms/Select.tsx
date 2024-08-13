@@ -100,6 +100,7 @@ export default function Select<T extends FieldValues>({
                 let eBoolean = e === "true";
                 field.onChange(eBoolean);
               }
+              if (onChange) onChange(e)
             }}
             value={String(field.value)}
             disabled={disabled}
