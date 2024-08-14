@@ -118,10 +118,9 @@ export default function Input<T extends FieldValues>({
                     "focus-visible:ring-offset-0 bg-transparent font-bold text-black placeholder:text-gray-300 selection:border-none focus-visible:ring-0 ring-0 border-none  ring-offset-none p-0 focus:outline-none focus:ring-0 caret-black"
                 )}
                 onChange={e => {
-                  if (maxLength) {
-                    setCharCount(e.target.value.length);
-                  }
-                  field.onChange(e);
+                  if (maxLength) setCharCount(e.target.value.length);
+                  field.onChange(e)
+                  if (onChange) onChange(e)
                 }}
               />
             </FormControl>
