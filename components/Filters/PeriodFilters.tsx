@@ -3,8 +3,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import { useQueryState } from "nuqs";
 import { Select } from "../Select/Select";
-import { useState } from "react";
-import { startOfWeek, format, addDays, set } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
@@ -13,6 +11,9 @@ import { Calendar } from "../ui/calendar";
 import { cn } from "../lib/utils";
 import React from "react";
 import { Spinner } from "../Loaders/Spinner";
+import { DateTime } from "luxon";
+import { DEFAULT_LOCALE, DEFAULT_TZ, generateMonthOptions, generateWeekOptions } from "../../../../../utils/date.utils";
+import { useSearchParams } from "next/navigation";
 
 interface Props {
   years?: {
@@ -23,159 +24,79 @@ interface Props {
   week?: boolean;
   month?: boolean;
   year?: boolean;
-  defaultPeriod?: string;
+  defaultPeriod?: PeriodFilterViewType;
 }
 
-export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Date().getFullYear().toString() }], day, month, week, year = true, defaultPeriod = "year" }: Props) => {
-  const [isLoading, startTransition] = React.useTransition();
+type PeriodFilterViewType = 'day' | 'week' | 'month' | 'year'
+
+export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Date().getFullYear().toString() }], defaultPeriod = "year" }: Props) => {
+  const now = DateTime.now().setZone(DEFAULT_LOCALE).setLocale(DEFAULT_LOCALE)
+  const searchParams = useSearchParams()
+  const [isLoading, startTransition] = React.useTransition()
+
   const [period, setPeriod] = useQueryState("period", {
     defaultValue: defaultPeriod,
     shallow: false,
     startTransition,
-  });
-
-  const [startDate, setStartDate] = useQueryState("starting_date", {
-    defaultValue: "",
-    shallow: false,
-    startTransition,
-  });
-  const [endDate, setEndDate] = useQueryState("ending_date", {
-    defaultValue: "",
-    shallow: false,
-    startTransition,
-  });
-
-  const [selectedYear, setSelectedYear] = useQueryState("year", {
-    defaultValue: years[0].value,
-    shallow: false,
-    startTransition,
   })
 
-  const defaultDate = ((): Date => {
-    const date = new Date();
-    date.setFullYear(Number(selectedYear));
-    return date;
-  })();
+  const [week, setWeek] = useQueryState("week", {
+    defaultValue: searchParams.get("week") || DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE).weekNumber.toString(),
+    shallow: false,
+    startTransition
+  });
+  const [month, setMonth] = useQueryState("month", {
+    defaultValue: searchParams.get("month") || DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE).month.toString(),
+    shallow: false,
+    startTransition
+  });
+  const [day, setDay] = useQueryState("day", {
+    defaultValue: searchParams.get("day") || DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE).day.toString(),
+    shallow: false,
+    startTransition
+  });
+  const [year, setYear] = useQueryState("year", {
+    defaultValue: searchParams.get("year") || DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE).year.toString(),
+    shallow: false,
+    startTransition
+  })
 
-  const [date, setDate] = useState<Date | undefined>(defaultDate);
+  const weekOptions = generateWeekOptions(Number(year), 'EEE dd MMMM')
+  const monthsOptions = generateMonthOptions(Number(year))
 
-  function generateWeeks(year: number) {
-    let startDate = startOfWeek(new Date(year, 0, 1), {
-      weekStartsOn: 1,
-    });
-
-    let weeks: { label: string; value: string }[] = [];
-
-    while (startDate.getFullYear() === year) {
-      const endDate = addDays(startDate, 6);
-      weeks.push({
-        label: `${formatDate(startDate)} au ${formatDate(endDate)}`,
-        value: formatForURL(startDate),
-      });
-      startDate = addDays(startDate, 7);
-    }
-    return weeks;
-  }
-
-  function formatDate(date: Date): string {
-    return format(date, "EE dd MMMM", { locale: fr });
-  }
-
-  function formatForURL(date: Date): string {
-    return format(date, "yyy-MM-dd");
-  }
-
-  const getStartAndEndOfWeek = (date: Date): [Date, Date] => {
-    const start = startOfWeek(date, { weekStartsOn: 1 });
-    const end = addDays(start, 6);
-    return [start, end];
-  };
-
-  const getStartAndEndOfMonth = (date: Date): [Date, Date] => {
-    const start = new Date(date.getFullYear(), date.getMonth(), 1);
-    const end = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-    return [start, end];
-  };
-
-  const handleDateChange = (start: Date, end: Date) => {
-    setStartDate(formatForURL(start));
-    setEndDate(formatForURL(end));
-  };
-
-  const handleYearChange = (year: string) => {
+  const handleSetUrlParameters = (year: number, month: number, week: number, day: number) => {
     startTransition(() => {
-      if (startDate && endDate) {
-        const startingDate = new Date(startDate);
-        const endingDate = new Date(endDate);
-        startingDate.setFullYear(Number(year));
-        endingDate.setFullYear(Number(year));
-        handleDateChange(startingDate, endingDate);
-      }
-      setSelectedYear(year);
-    });
-  };
-
-  const [weeks, setWeeks] = useState(generateWeeks(Number(selectedYear)));
-
-  const [months, setMonths] = useState(() =>
-    [...Array(12)].map((_, i) => {
-      const monthStart = new Date(Number(selectedYear), i, 1);
-      return {
-        label: monthStart.toLocaleString("fr-FR", { month: "long" }),
-        value: formatDate(monthStart),
-      };
+      setYear(year.toString())
+      setMonth(month.toString())
+      setWeek(week.toString())
+      setDay(day.toString())
     })
-  );
+  }
 
-  const handleDay = (date: Date | undefined) => {
-    startTransition(() => {
-      if (date) {
-        date.setFullYear(Number(selectedYear));
-        const start = set(date, { hours: 0, minutes: 0, seconds: 0 });
-        const end = set(date, { hours: 23, minutes: 59, seconds: 59 });
-        handleDateChange(start, end);
-        setDate(date);
-      }
-    });
-  };
+  const handleDayChange = (date: Date | undefined) => {
+    if (date) {
+      const luxonDate = DateTime.fromJSDate(date, { zone: DEFAULT_TZ }).setLocale(DEFAULT_LOCALE)
+      handleSetUrlParameters(luxonDate.year, luxonDate.month, luxonDate.weekNumber, luxonDate.day)
+    }
+  }
+
+  const handleWeekChange = (value: string | undefined) => {
+    const selectedWeek = !isNaN(Number(value)) ? Number(value) : now.weekNumber
+    handleSetUrlParameters(Number(year), Number(month), selectedWeek, Number(day))
+  }
 
   const handleMonthChange = (value: string | undefined) => {
-    startTransition(() => {
-      const selectedMonthStart = new Date(
-        Number(selectedYear),
-        months.findIndex(m => m.value === value),
-        1
-      );
-      const [start, end] = getStartAndEndOfMonth(selectedMonthStart);
-      handleDateChange(start, end);
-    });
-  };
+    const selectedMonth = !isNaN(Number(value)) ? Number(value) : now.month
+    handleSetUrlParameters(Number(year), selectedMonth, Number(week), Number(day))
+  }
+
+  const handleYearChange = (value: string | undefined) => {
+    const selecterYear = !isNaN(Number(value)) ? Number(value) : now.year
+    handleSetUrlParameters(selecterYear, Number(month), Number(week), Number(day))
+  }
 
   const onTabChange = (value: string) => {
-    setPeriod(value);
-
-    if (value === "year") {
-      const startOfYear = new Date(Number(selectedYear), 0, 1);
-      const endOfYear = new Date(Number(selectedYear), 11, 31);
-      handleDateChange(startOfYear, endOfYear);
-    } else if (value === "month") {
-      const startOfMonth = new Date(Number(selectedYear), new Date().getMonth(), 1);
-      const endOfMonth = new Date(Number(selectedYear), new Date().getMonth() + 1, 0);
-      handleDateChange(startOfMonth, endOfMonth);
-    } else if (value === "week") {
-      const today = new Date();
-      const start = startOfWeek(today, { weekStartsOn: 1 });
-      const end = addDays(start, 6);
-      selectedYear && start.setFullYear(Number(selectedYear));
-      selectedYear && end.setFullYear(Number(selectedYear));
-      handleDateChange(start, end);
-    } else if (value === "day") {
-      const startOfDay = new Date();
-      selectedYear && startOfDay.setFullYear(Number(selectedYear));
-      const endOfDay = new Date();
-      selectedYear && endOfDay.setFullYear(Number(selectedYear));
-      handleDateChange(startOfDay, endOfDay);
-    }
+    setPeriod(value)
   };
 
   return (
@@ -183,29 +104,14 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
       <Tabs
         value={period}
         className="flex flex-col md:flex-row gap-1 md:gap-4 justify-between bg-transparent md:border border-none items-center bg-white md:bg-transparent  md:p-1 rounded-xl "
-        onValueChange={onTabChange}>
+        onValueChange={onTabChange}
+      >
         <div className="gap-4 flex items-center">
           <TabsList className="w-full md:w-fit">
-            {day && (
-              <TabsTrigger className="w-full md:w-fit" value="day">
-                Jour
-              </TabsTrigger>
-            )}
-            {week && (
-              <TabsTrigger className="w-full md:w-fit" value="week">
-                Hebdo
-              </TabsTrigger>
-            )}
-            {month && (
-              <TabsTrigger className="w-full md:w-fit" value="month">
-                Mois
-              </TabsTrigger>
-            )}
-            {year && (day || month || week) && (
-              <TabsTrigger className="w-full md:w-fit" value="year">
-                Année
-              </TabsTrigger>
-            )}
+            {day && <TabsTrigger className="w-full md:w-fit" value="day">Jour</TabsTrigger>}
+            {week && <TabsTrigger className="w-full md:w-fit" value="week">Hebdo</TabsTrigger>}
+            {month && <TabsTrigger className="w-full md:w-fit" value="month">Mois</TabsTrigger>}
+            {year && (day || month || week) && <TabsTrigger className="w-full md:w-fit" value="year">Année</TabsTrigger>}
           </TabsList>
 
           {isLoading && <Spinner />}
@@ -215,48 +121,62 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
           <TabsContent value="day" className="w-full md:w-fit">
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant={"outline"} className={cn("w-full md:w-fit md:bg-input font-bold text-gray-800 -mt-2", !date && "text-muted-foreground ")}>
+                <Button variant={"outline"} className={cn("w-full md:w-fit md:bg-input font-bold text-gray-800 -mt-2")}>
                   <PiCalendarDefaultDuoStroke className="mr-2 h-4 w-4 " />
-                  {date ? format(date, "EEEE dd MMMM", { locale: fr }) : <span>Choisir une date</span>}
+                  {/*TOIMPROVE selected date must be declare somewhere else*/}
+                  {DateTime.fromObject({
+                    year: Number(year),
+                    month: Number(month),
+                    day: Number(day)
+                  }, { zone: DEFAULT_TZ, locale: DEFAULT_LOCALE }).toLocaleString({
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                  })}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0">
-                <Calendar mode="single" selected={date} onSelect={handleDay} initialFocus locale={fr} />
+                {/*TOIMPROVE selected date must be declare somewhere else*/}
+                <Calendar
+                  mode="single"
+                  initialFocus
+                  locale={fr}
+                  selected={DateTime.fromObject({
+                    year: Number(year),
+                    month: Number(month),
+                    day: Number(day)
+                  }, { zone: DEFAULT_TZ, locale: DEFAULT_LOCALE }).toJSDate()}
+                  onSelect={handleDayChange}
+                />
               </PopoverContent>
             </Popover>
           </TabsContent>
           <TabsContent value="week" className="w-full md:w-fit mt-0">
             <Select
               className="w-full md:w-fit font-bold md:bg-input text-gray-800"
-              options={weeks}
-              onChange={(value: string | undefined) => {
-                const selectedWeekStart = new Date(value || "");
-                const [start, end] = getStartAndEndOfWeek(selectedWeekStart);
-                selectedYear && start.setFullYear(Number(selectedYear));
-                selectedYear && end.setFullYear(Number(selectedYear));
-                handleDateChange(start, end);
-              }}
-              defaultValue={
-                weeks.find(week => {
-                  const [start] = getStartAndEndOfWeek(new Date(week.value));
-                  return date && start <= date && date <= addDays(start, 6);
-                })?.value
-              }
+              options={weekOptions}
+              onChange={handleWeekChange}
+              defaultValue={week}
+              value={week}
             />
           </TabsContent>
           <TabsContent value="month" className="w-full md:w-fit mt-0">
-            <Select defaultValue={months[new Date().getMonth()].value} options={months} onChange={handleMonthChange} className="w-full md:w-fit font-bold md:bg-input text-gray-800" />
+            <Select
+              className="w-full md:w-fit font-bold md:bg-input text-gray-800"
+              options={monthsOptions}
+              onChange={handleMonthChange}
+              defaultValue={month}
+              value={month}
+            />
           </TabsContent>
 
           <Select
             className="w-full md:w-fit font-bold md:bg-input text-gray-800"
-            defaultValue={selectedYear}
-            value={selectedYear}
-            onChange={selectedValue => {
-              handleYearChange(selectedValue ?? "");
-            }}
-            placeholder="Année"
             options={years}
+            onChange={handleYearChange}
+            defaultValue={year}
+            value={year}
+            placeholder={"Année"}
           />
         </div>
       </Tabs>
