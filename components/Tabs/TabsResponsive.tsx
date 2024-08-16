@@ -1,10 +1,10 @@
 "use client";
 import { ReactNode } from "react";
 import { useQueryState } from "nuqs";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
-import { Tabs, TabsTrigger, TabsList } from "../../components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Tabs, TabsTrigger, TabsList } from "../ui/tabs";
 import { cn } from "../lib/utils";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Badge } from "../ui/badge";
 
 interface TabsResponsiveProps {
