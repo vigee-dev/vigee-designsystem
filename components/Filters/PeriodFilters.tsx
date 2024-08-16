@@ -27,8 +27,10 @@ interface Props {
   defaultPeriod?: PeriodFilterViewType;
 }
 
+// TODO duplicate with another type from WeekViewFilter, the two components should be the same
 type PeriodFilterViewType = 'day' | 'week' | 'month' | 'year'
 
+// TODO refactor WeekViewFilters and PeriodFilters together as they go the same thing, redefine it to a big 'Filters' component
 export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Date().getFullYear().toString() }], defaultPeriod = "year" }: Props) => {
   const now = DateTime.now().setZone(DEFAULT_LOCALE).setLocale(DEFAULT_LOCALE)
   const searchParams = useSearchParams()
@@ -63,6 +65,7 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
 
   const weekOptions = generateWeekOptions(Number(year), 'EEE dd MMMM')
   const monthsOptions = generateMonthOptions(Number(year))
+  const selectedDate = DateTime.fromObject({ year: Number(year), month: Number(month), day: Number(day) }, { zone: DEFAULT_TZ, locale: DEFAULT_LOCALE })
 
   const handleSetUrlParameters = (year: number, month: number, week: number, day: number) => {
     startTransition(() => {
@@ -123,34 +126,22 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
               <PopoverTrigger asChild>
                 <Button variant={"outline"} className={cn("w-full md:w-fit md:bg-input font-bold text-gray-800 -mt-2")}>
                   <PiCalendarDefaultDuoStroke className="mr-2 h-4 w-4 " />
-                  {/*TOIMPROVE selected date must be declare somewhere else*/}
-                  {DateTime.fromObject({
-                    year: Number(year),
-                    month: Number(month),
-                    day: Number(day)
-                  }, { zone: DEFAULT_TZ, locale: DEFAULT_LOCALE }).toLocaleString({
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric'
-                  })}
+                  {selectedDate.toLocaleString({ day: 'numeric', month: 'long', year: 'numeric' })}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0">
-                {/*TOIMPROVE selected date must be declare somewhere else*/}
                 <Calendar
                   mode="single"
                   initialFocus
                   locale={fr}
-                  selected={DateTime.fromObject({
-                    year: Number(year),
-                    month: Number(month),
-                    day: Number(day)
-                  }, { zone: DEFAULT_TZ, locale: DEFAULT_LOCALE }).toJSDate()}
+                  defaultMonth={selectedDate.toJSDate()}
+                  selected={selectedDate.toJSDate()}
                   onSelect={handleDayChange}
                 />
               </PopoverContent>
             </Popover>
           </TabsContent>
+
           <TabsContent value="week" className="w-full md:w-fit mt-0">
             <Select
               className="w-full md:w-fit font-bold md:bg-input text-gray-800"
@@ -160,6 +151,7 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
               value={week}
             />
           </TabsContent>
+
           <TabsContent value="month" className="w-full md:w-fit mt-0">
             <Select
               className="w-full md:w-fit font-bold md:bg-input text-gray-800"
