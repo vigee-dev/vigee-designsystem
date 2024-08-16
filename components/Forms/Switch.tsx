@@ -22,62 +22,56 @@ type Props<T extends FieldValues> = {
   onChange?: (value: boolean) => void;
   value?: boolean;
   className?: string;
-  children?: React.ReactNode;
-};
+  children?: React.ReactNode
+  disabled?: boolean
+}
 
 export default function Switch<T extends FieldValues>({
-                                                        form,
-                                                        label,
-                                                        name,
-                                                        descr,
-                                                        className,
-                                                        onChange,
-                                                        value,
-                                                        children,
-                                                      }: Props<T>) {
+  form,
+  label,
+  name,
+  descr,
+  className,
+  onChange,
+  value,
+  children,
+  disabled = false
+}: Props<T>) {
   return form?.control && name ? (
-      <FormField
-          control={form.control}
-          name={name}
-          render={({ field }) => (
-              <FormItem
-                  className={cn(
-                      "flex flex-row items-center justify-between py-4 border rounded-xl p-4  text-primary bg-white",
-                      className,
-                  )}
-              >
-                <div className="space-y-0.5">
-                  <FormLabel className="text-base ">{children ? children : label}</FormLabel>
-                  <FormDescription>{descr}</FormDescription>
-                </div>
-                <FormControl>
-                  <SwitchShadcn
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                      className="data-[state=unchecked]:bg-slate-200"
-                  />
-                </FormControl>
-              </FormItem>
-          )}
-      />
-  ) : (
-      <FormItem
-          className={cn(
-              "flex flex-row items-center justify-between py-4 border rounded-xl p-4  text-primary bg-white",
-              className,
-          )}
-      >
-        <div className="space-y-0.5">
-          <FormLabel className="text-base ">{label}</FormLabel>
-          <FormDescription>{descr}</FormDescription>
-        </div>
-        <FormControl>
-          <SwitchShadcn
-              checked={value}
-              onCheckedChange={onChange}
+    <FormField
+      control={form.control}
+      name={name}
+      render={({ field }) => (
+        <FormItem className={cn("flex flex-row items-center justify-between py-4 border rounded-xl p-4  text-primary bg-white", className)}>
+          <div className="space-y-0.5">
+            <FormLabel className="text-base ">{children ? children : label}</FormLabel>
+            <FormDescription>{descr}</FormDescription>
+          </div>
+          <FormControl>
+            <SwitchShadcn
+              disabled={disabled}
+              checked={field.value}
+              onCheckedChange={field.onChange}
               className="data-[state=unchecked]:bg-slate-200"
-          />
-        </FormControl>
-      </FormItem>
+            />
+          </FormControl>
+        </FormItem>
+      )}
+    />
+  ) : (
+    <FormItem className={cn("flex flex-row items-center justify-between py-4 border rounded-xl p-4  text-primary bg-white", className)}>
+      <div className="space-y-0.5">
+        <FormLabel className="text-base ">{label}</FormLabel>
+        <FormDescription>{descr}</FormDescription>
+      </div>
+      <FormControl>
+        <SwitchShadcn
+          disabled={disabled}
+          checked={value}
+          onCheckedChange={onChange}
+          className="data-[state=unchecked]:bg-slate-200"
+        />
+      </FormControl>
+    </FormItem>
   );
 }
