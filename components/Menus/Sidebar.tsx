@@ -79,7 +79,6 @@ const Sidebar: React.FC<SidebarProps> = ({
   const searchParams = useSearchParams();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   // const session = useSession()
-  // console.log('session', session)
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 1024) {
