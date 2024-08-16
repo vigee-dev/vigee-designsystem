@@ -25,7 +25,6 @@ interface PreviousStatProps {
 }
 
 const PreviousStat = ({ previousStat, upNegative = false, notApplicable = false }: PreviousStatProps) => {
-  console.log('previous stat ', previousStat, upNegative);
   return (
     <div
       className={classNames(
