@@ -17,11 +17,11 @@ interface IllustrationProps {
 }
 export default function EmptyIllustration({ text, subtitle, buttonLink, buttonText, children, button = false, className }: IllustrationProps) {
   return (
-    <Container className={cn("flex flex-col items-center justify-center  w-full px-12 p-8", className)}>
+    <Container className={cn("flex flex-col items-center justify-center w-full px-12 p-8", className)}>
       <Image width={400} height={400} className="mx-auto w-64 h-auto" src={emptyMan} alt="Empty list" />
 
       <h1 className={"text-xl text-gray-500 font-bold text-center pt-6 font-display"}>{text}</h1>
-      <p className="text-gray-400">{subtitle}</p>
+      <p className="text-gray-400 text-center">{subtitle}</p>
 
       {!buttonLink && button && (
         <div className="text-sm text-gray-500  items-center text-center font-display pt-2">{buttonText ? <Button className="flex gap-x-2">{buttonText}</Button> : <Button icon="add" big />}</div>

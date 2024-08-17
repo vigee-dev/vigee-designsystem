@@ -42,7 +42,7 @@ export default function Switch<T extends FieldValues>({
       control={form.control}
       name={name}
       render={({ field }) => (
-        <FormItem className={cn("flex flex-row items-center justify-between py-4 border rounded-xl p-4  text-primary bg-white", className)}>
+        <FormItem className={cn("flex flex-row items-center justify-between py-4 border rounded-xl p-4 gap-2 text-primary bg-white", className)}>
           <div className="space-y-0.5">
             <FormLabel className="text-base ">{children ? children : label}</FormLabel>
             <FormDescription>{descr}</FormDescription>

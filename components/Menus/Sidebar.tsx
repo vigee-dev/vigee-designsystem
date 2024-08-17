@@ -74,6 +74,9 @@ const Sidebar: React.FC<SidebarProps> = ({
   signout,
   persistQuery,
 }: SidebarProps) => {
+  const pathname = usePathname()
+  // TOIMPROVE find a way to hide the menu other than using pathname
+  const notDisplayMobileMenu = pathname.includes("create")
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [hoverMenu, setHoverMenu] = useState(false);
   const searchParams = useSearchParams();
@@ -98,7 +101,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     { value: "en", label: "English" },
     { value: "fr", label: "Français" },
   ];
-  const pathname = usePathname();
+
   function checkUrlActive(item: string) {
     const slugs = navigation.map(nav => nav.slug);
     // Diviser l'URL en segments
@@ -246,7 +249,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       </div>
 
       <main className={`${sidebarOpen ? "pl-56" : hiddenMobile ? "lg:pl-16" : " pl-16"} pt-2 md:py-2 bg-gray-50  h-full min-h-screen `}>
-        <div className=" md:py-2 pb-24 ">
+        <div className={`md:py-2 ${!notDisplayMobileMenu ? "pb-24" : ""}`}>
           {!sidebarOpen && (
             <div className="flex shrink-0 items-center justify-start md:justify-start " onClick={() => setSidebarOpen(true)}>
               {menu && (
