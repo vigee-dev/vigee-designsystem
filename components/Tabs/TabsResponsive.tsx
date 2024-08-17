@@ -119,7 +119,7 @@ const SelectComponent = ({ options, defaultValue, handleValueChange, className }
           // Assurez-vous que `value` est défini avant de pousser le routeur
           if (value) {
             handleValueChange(value, {
-              href: options.find(option => option.value === value)?.href,
+              href: options.find(option => option.href === value)?.href,
               value: options.find(option => option.value === value)?.value,
             });
           }
