@@ -160,22 +160,18 @@ export default function InputDropZoneFile<T extends FieldValues>({
             />
           </svg>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4  items-center ">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center ">
             {files.map((file, index) => (
-              <div key={index} className="flex gap-4 ">
-                <Card className="rounded-xl p-1">
-                  <CardContent className="flex flex-col aspect-square items-center justify-center relative">
+              // <div key={index} className="flex">
+                <Card key={index} className={"flex items-center aspect-square justify-center rounded-xl p-8"}>
+                  <CardContent className={"p-0 flex flex-col items-center justify-center relative"}>
                     {file instanceof File && isImageFile(file.name) ? (
                       <img
                         key={index}
                         src={URL.createObjectURL(file)}
                         alt="Aperçu du fichier"
                         className="rounded-lg"
-                        onLoad={event =>
-                          URL.revokeObjectURL(
-                            (event.target as HTMLImageElement).src
-                          )
-                        }
+                        onLoad={event => URL.revokeObjectURL((event.target as HTMLImageElement).src)}
                       />
                     ) : "signedUrl" in file ? (
                       <img
@@ -185,12 +181,12 @@ export default function InputDropZoneFile<T extends FieldValues>({
                         className="rounded-lg"
                       />
                     ) : file instanceof File && isPDFFile(file.name) ? (
-                      <div className="flex items-center flex-col text-xs  text-gray-400 gap-2">
+                      <div className="flex items-center flex-col text-xs text-gray-400 gap-2">
                         <PiFilePdfFormatDuoSolid className="w-12 h-12 text-gray-400" />
                         {shortName(file.name)}
                       </div>
                     ) : (
-                      <div className="flex items-center flex-col text-xs  text-gray-400 gap-2">
+                      <div className="flex items-center flex-col text-xs text-gray-400 gap-2">
                         <PiFile02CheckDuoSolid className="w-12 h-12 text-gray-400" />
                         {shortName(file.name)}
                       </div>
@@ -208,7 +204,7 @@ export default function InputDropZoneFile<T extends FieldValues>({
                     </div>
                   </CardContent>
                 </Card>
-              </div>
+              // </div>
             ))}
           </div>
         )}
@@ -223,8 +219,7 @@ export default function InputDropZoneFile<T extends FieldValues>({
                 pour envoyer
               </p>
               <p className="text-xs text-gray-400">
-                {extensions &&
-                    `Fichier de type : ${getPossibleExtensions(extensions)}`}
+                {extensions && `Fichier de type : ${getPossibleExtensions(extensions)}`}
               </p>
             </>
         )}

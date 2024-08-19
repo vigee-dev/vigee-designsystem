@@ -9,6 +9,7 @@ import { Button } from "../ui/button";
 import { cn } from "../lib/utils";
 import { Calendar } from "../ui/calendar";
 import React from "react";
+import { Matcher } from "react-day-picker";
 
 interface Props<T extends FieldValues> {
   form: UseFormReturn<T>;
@@ -21,9 +22,10 @@ interface Props<T extends FieldValues> {
   disabled?: boolean;
   id?: string;
   helpComponent?: React.ReactNode;
+  disabledDates?: Matcher | Matcher[] | undefined;
 }
 
-function DatePickerRange<T extends FieldValues>({ form, name, label, required, descr, className, disabled, helpComponent, placeholder, id }: Props<T>) {
+function DatePickerRange<T extends FieldValues>({ form, name, label, required, descr, className, disabled, helpComponent, placeholder, id, disabledDates }: Props<T>) {
   return (
     <FormField
       control={form.control}
@@ -64,9 +66,7 @@ function DatePickerRange<T extends FieldValues>({ form, name, label, required, d
                 mode="range"
                 selected={field.value}
                 onSelect={field.onChange}
-                disabled={(date) =>
-                  date > new Date() || date < new Date("1900-01-01")
-                }
+                disabled={disabledDates}
                 initialFocus
               />
             </PopoverContent>

@@ -11,6 +11,8 @@ import {
 } from "../../components/ui/select";
 import { cn } from "../lib/utils";
 import { Label } from "../ui/label";
+import { useEffect } from "react";
+import { set } from "date-fns";
 
 interface Option {
   value: string;
@@ -26,6 +28,7 @@ interface SelectScrollableProps {
   disabled?: boolean;
   defaultValue?: string;
   label?: string;
+  value?: string
 }
 
 export function Select({
@@ -36,10 +39,15 @@ export function Select({
   disabled,
   defaultValue,
   label,
+  value
 }: SelectScrollableProps) {
   const [selectedValue, setSelectedValue] = React.useState<string | undefined>(
     defaultValue || undefined
   );
+
+  useEffect(() => {
+    setSelectedValue(value)
+  }, [value])
 
   const groupedOptions = options.reduce<Record<string, Option[]>>(
     (acc, option) => {
@@ -67,13 +75,12 @@ export function Select({
     <SelectShadCn
       onValueChange={handleValueChange}
       defaultValue={selectedValue}
+      value={selectedValue}
       disabled={disabled}
     >
       {label && <Label className="font-black text-primary mt-2">{label}</Label>}
 
-      <SelectTrigger
-        className={cn("w-[280px] font-medium bg-input", className)}
-      >
+      <SelectTrigger className={cn("w-[280px] font-medium bg-input", className)}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent className={cn("max-h-[200px] font-medium", className)}>

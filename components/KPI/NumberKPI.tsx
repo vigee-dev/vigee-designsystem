@@ -18,11 +18,43 @@ function classNames(...classes: string[]): string {
   return classes.filter(Boolean).join(" ");
 }
 
+interface PreviousStatProps {
+  previousStat: number
+  upNegative?: boolean
+  notApplicable?: boolean
+}
+
+const PreviousStat = ({ previousStat, upNegative = false, notApplicable = false }: PreviousStatProps) => {
+  return (
+    <div
+      className={classNames(
+        (!notApplicable && previousStat > 0) ? `${!upNegative ? "text-green-600 bg-green-100" : "text-red-600 bg-red-100"}` : '',
+        (!notApplicable && previousStat < 0) ? `${!upNegative ? "bg-red-100 text-red-600" : "bg-green-100 text-green-600"}` : '',
+        (notApplicable && previousStat) === 0 ? `bg-gray-100 text-gray-600` : '',
+        "inline-flex items-baseline rounded-full px-2.5 py-0.5 text-xs font-black md:mt-2 lg:mt-0"
+      )}
+    >
+      {!notApplicable && previousStat > 0 && <ArrowUpIcon
+        className={`-ml-1 mr-0.5 h-4 w-4 flex-shrink-0 self-center ${!upNegative ? "text-green-600" : "text-red-600"}`}
+        aria-hidden="true"
+      />}
+
+      {!notApplicable && previousStat < 0 && <ArrowDownIcon
+        className={`-ml-1 mr-0.5 h-4 w-4 flex-shrink-0 self-center ${!upNegative ? "text-red-600" : "text-green-600"}`}
+        aria-hidden="true"
+      />}
+
+      <span className="sr-only">{previousStat < 0 ? "Increased" : "Decreased"} by </span>
+      {(previousStat !== 0 && !notApplicable) ? previousStat.toFixed(0) + ' %' : 'N/A'}
+    </div>
+  )
+}
+
+
 const NumberKPI = ({ stats, columns = 3 }: NumberKPIProps) => {
   const variation = (previousStat: number, stat: number) => {
     const diff = stat - previousStat;
-    const percent = (diff / (previousStat === 0 ? 1 : previousStat)) * 100;
-    return percent.toFixed(0);
+    return (diff / (previousStat === 0 ? 1 : previousStat)) * 100;
   };
 
   return (
@@ -35,45 +67,7 @@ const NumberKPI = ({ stats, columns = 3 }: NumberKPIProps) => {
               <div className={cn(`flex items-baseline text-xl font-black text-primary`, item.color)}>
                 {currency(item.stat).toRoundedEuro()}
               </div>
-
-              {item?.previousStat != null && (
-                <div
-                  className={classNames(
-                    item?.previousStat < item.stat
-                      ? ` ${
-                          !item.upNegative
-                            ? "text-green-600 bg-green-100"
-                            : "text-red-800 bg-red-100"
-                        }`
-                      : ` ${
-                          !item.upNegative
-                            ? "bg-red-100 text-red-600"
-                            : "bg-green-100 text-green-800"
-                        }`,
-                    "inline-flex items-baseline rounded-full px-2.5 py-0.5 text-xs font-black md:mt-2 lg:mt-0"
-                  )}
-                >
-                  {item.previousStat < item.stat ? (
-                    <ArrowUpIcon
-                      className={`-ml-1 mr-0.5 h-4 w-4 flex-shrink-0 self-center ${
-                        !item.upNegative ? "text-green-600" : "text-red-800"
-                      }`}
-                      aria-hidden="true"
-                    />
-                  ) : (
-                    <ArrowDownIcon
-                      className={`-ml-1 mr-0.5 h-4 w-4 flex-shrink-0 self-center ${
-                        !item.upNegative ? "text-red-600" : "text-green-800"
-                      }`}
-                      aria-hidden="true"
-                    />
-                  )}
-                  <span className="sr-only">
-                    {item.previousStat < item.stat ? "Increased" : "Decreased"} by{" "}
-                  </span>
-                  {item.previousStat != null && variation(item.previousStat, item.stat)} %
-                </div>
-              )}
+              {item.previousStat != null && <PreviousStat previousStat={variation(item.previousStat, item.stat)} upNegative={item.upNegative} notApplicable={item.previousStat === 0} />}
             </dd>
           </div>
         ))}

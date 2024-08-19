@@ -40,6 +40,7 @@ interface SearchSelectAsyncInterface<
   isSearchable?: boolean;
   customErrorMessage?: string;
   menuPlacement?: "auto" | "bottom" | "top";
+  autofocus?: boolean
 }
 
 export default function SearchSelectAsync<
@@ -65,6 +66,7 @@ export default function SearchSelectAsync<
   isSearchable = true,
   customErrorMessage,
   menuPlacement = "auto",
+  autofocus = false
 }: SearchSelectAsyncInterface<T, Option, IsMulti>) {
   return form && name ? (
     <FormField
@@ -107,7 +109,7 @@ export default function SearchSelectAsync<
               menuShouldScrollIntoView
               blurInputOnSelect
               menuPlacement={menuPlacement}
-              autoFocus
+              autoFocus={autofocus}
             />
           </FormControl>
           <FormMessage>{customErrorMessage}</FormMessage>
@@ -143,7 +145,7 @@ export default function SearchSelectAsync<
         blurInputOnSelect
         menuShouldBlockScroll
         maxMenuHeight={400}
-        autoFocus
+        autoFocus={autofocus}
       />
     </div>
   );

@@ -1,31 +1,38 @@
 "use client";
-import { ReactNode } from "react";
+import { ReactNode, useTransition } from "react";
 import { useQueryState } from "nuqs";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
-import { Tabs, TabsTrigger, TabsList } from "../../components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Tabs, TabsTrigger, TabsList } from "../ui/tabs";
 import { cn } from "../lib/utils";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Badge } from "../ui/badge";
+import { Spinner } from "../Loaders/Spinner";
+
+
+export type TabOption = {
+  name: string;
+  href?: string;
+  value?: string;
+  icon?: ReactNode;
+  count?: number;
+  badgeColor?: string;
+}
 
 interface TabsResponsiveProps {
   defaultValue?: string;
+  value?: string
   query?: string;
-  options: {
-    name: string;
-    href?: string;
-    value?: string;
-    icon?: ReactNode;
-    count?: number;
-    badgeColor?: string;
-  }[];
+  options: TabOption[];
   children?: ReactNode;
   fullWidth?: boolean;
   className?: string;
   selectLimit?: number;
 }
 
-export const TabsResponsive = ({ options, defaultValue, query, children, fullWidth, className, selectLimit = 4 }: TabsResponsiveProps) => {
+export const TabsResponsive = ({ options, defaultValue, value, query, children, fullWidth, className, selectLimit = 4 }: TabsResponsiveProps) => {
   const router = useRouter();
+  const [isLoading, startTransition] = useTransition()
+  const pathname = usePathname()
 
   const [filter, setFilter] = useQueryState(query ?? "", {
     defaultValue: defaultValue ?? "",
@@ -40,33 +47,41 @@ export const TabsResponsive = ({ options, defaultValue, query, children, fullWid
   });
 
   const handleValueChange = (value: string, option: { href?: string; value?: string }) => {
-    if (option.href) {
-      router.push(option.href);
-    } else if (option.value && query) {
-      setFilter(value);
-      setPage("1");
-    }
+    startTransition(() => {
+      if (option.href) {
+        router.push(option.href);
+      } else if (option.value && query) {
+        setFilter(value);
+        setPage("1");
+      }
+    })
   };
 
   return (
     <div>
-      <div className="hidden md:flex w-full ">
-        {options.length < 7 ? (
-          <TabComponent options={options} defaultValue={defaultValue} handleValueChange={handleValueChange} fullWidth={fullWidth} className={className}>
-            {children}
-          </TabComponent>
-        ) : (
-          <SelectComponent options={options} defaultValue={defaultValue} handleValueChange={handleValueChange} className={className} />
-        )}
+      <div className={"hidden md:flex w-full items-center"}>
+        <div className={"flex items-center gap-4"}>
+          {options.length < 7 ? (
+            <TabsComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} fullWidth={fullWidth} className={className}>
+              {children}
+            </TabsComponent>
+          ) : (
+            <SelectComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} className={className} />
+          )}
+          {isLoading && <Spinner />}
+        </div>
       </div>
-      <div className="flex md:hidden">
-        {options.length < selectLimit ? (
-          <TabComponent options={options} defaultValue={defaultValue} handleValueChange={handleValueChange} className={className}>
-            {children}
-          </TabComponent>
-        ) : (
-          <SelectComponent options={options} defaultValue={defaultValue} handleValueChange={handleValueChange} className={className} />
-        )}
+      <div className={"flex md:hidden items-center gap-5"}>
+        <div className={"flex items-center gap-4"}>
+          {options.length < selectLimit ? (
+            <TabsComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} className={className}>
+              {children}
+            </TabsComponent>
+          ) : (
+            <SelectComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} className={className} />
+          )}
+          {isLoading && <Spinner />}
+        </div>
       </div>
     </div>
   );
@@ -74,23 +89,17 @@ export const TabsResponsive = ({ options, defaultValue, query, children, fullWid
 
 interface TabProps {
   defaultValue?: string;
+  value?: string;
   handleValueChange: (value: string, option: { href?: string; value?: string }) => void;
-  options: {
-    name: string;
-    href?: string;
-    value?: string;
-    icon?: ReactNode;
-    count?: number;
-    badgeColor?: string;
-  }[];
+  options: TabOption[];
   children?: ReactNode;
   fullWidth?: boolean;
   className?: string;
 }
 
-const TabComponent = ({ options, defaultValue, handleValueChange, children, fullWidth, className }: TabProps) => {
+const TabsComponent = ({ options, defaultValue, value, handleValueChange, children, fullWidth, className }: TabProps) => {
   return (
-    <Tabs defaultValue={defaultValue} className={cn(`w-full`)}>
+    <Tabs defaultValue={defaultValue} className={cn(`w-full`)} value={value}>
       <TabsList className={cn(`w-full`, fullWidth ? " md:w-full" : " md:w-fit", className)}>
         {options.map((option, index) => (
           <TabsTrigger
@@ -109,17 +118,18 @@ const TabComponent = ({ options, defaultValue, handleValueChange, children, full
   );
 };
 
-const SelectComponent = ({ options, defaultValue, handleValueChange, className }: TabProps) => {
+const SelectComponent = ({ options, defaultValue, value, handleValueChange, className }: TabProps) => {
   const router = useRouter();
   return (
     <div className="w-full md:w-fit">
       <Select
         defaultValue={defaultValue}
+        value={value}
         onValueChange={value => {
           // Assurez-vous que `value` est défini avant de pousser le routeur
           if (value) {
             handleValueChange(value, {
-              href: options.find(option => option.value === value)?.href,
+              href: options.find(option => option.href === value)?.href,
               value: options.find(option => option.value === value)?.value,
             });
           }
