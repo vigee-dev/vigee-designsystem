@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { TypographyH3 } from "../Typography/Typography";
-import { PiUserCircleDuoStroke } from "../../icons/PikaIcons";
+import { PiUserCircleDuoSolid, PiUserCircleDuoStroke } from "../../icons/PikaIcons";
 import { cn } from "../lib/utils";
 
 interface Data {
@@ -38,10 +38,14 @@ export function Ranking({ title, subtitle, data, icon }: Props) {
       <div className="space-y-4">
         {data?.map((item, index) => (
           <div className="flex items-center" key={index}>
-            <Avatar className="h-9 w-9">
-              <AvatarImage src={item.img ? item.img : "/avatars/01.png"} alt="Avatar" className="object-cover w-full h-full" />
-              <AvatarFallback>{item ? icon : <PiUserCircleDuoStroke />}</AvatarFallback>
-            </Avatar>
+            {item.img ? (
+              <Avatar className="h-9 w-9">
+                <AvatarImage src={item.img} alt="Avatar" className="object-cover w-full h-full" /> <AvatarFallback>{item ? icon : <PiUserCircleDuoStroke />}</AvatarFallback>
+              </Avatar>
+            ) : (
+              <PiUserCircleDuoSolid className="text-gray-400  h-9 w-9" />
+            )}
+
             <div className="ml-4 space-y-1">
               <p className="text-sm font-medium leading-none">{truncateName(item.name)}</p>
               <p className="text-sm text-muted-foreground">{truncateName(item.subtitle || "")}</p>
