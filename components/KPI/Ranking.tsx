@@ -25,7 +25,7 @@ interface Props {
 
 export function Ranking({ title, subtitle, data, icon }: Props) {
   const truncateName = (name: string) => {
-    return name.length > 10 ? name.substring(0, 10) + "..." : name;
+    return name.length > 20 ? name.substring(0, 20) + "..." : name;
   };
 
   return (
