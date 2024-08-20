@@ -65,7 +65,7 @@ export function HorizontalBarChart({ data, title, description, footerText }: Com
               {sortedData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.color} /> // Utilisez la couleur ici
               ))}
-              <LabelList dataKey="percentage" position="right" className="text-primary" /> // Affichez le pourcentage en bout de ligne
+              <LabelList dataKey="percentage" position="right" className="text-primary" />
             </Bar>
           </BarChart>
         </ChartContainer>
