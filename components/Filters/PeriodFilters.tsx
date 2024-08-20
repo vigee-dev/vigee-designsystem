@@ -28,78 +28,78 @@ interface Props {
 }
 
 // TODO duplicate with another type from WeekViewFilter, the two components should be the same
-type PeriodFilterViewType = 'day' | 'week' | 'month' | 'year'
+type PeriodFilterViewType = "day" | "week" | "month" | "year";
 
 // TODO refactor WeekViewFilters and PeriodFilters together as they go the same thing, redefine it to a big 'Filters' component
 export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Date().getFullYear().toString() }], defaultPeriod = "year" }: Props) => {
-  const now = DateTime.now().setZone(DEFAULT_LOCALE).setLocale(DEFAULT_LOCALE)
-  const searchParams = useSearchParams()
-  const [isLoading, startTransition] = React.useTransition()
+  const now = DateTime.now().setZone(DEFAULT_LOCALE).setLocale(DEFAULT_LOCALE);
+  const searchParams = useSearchParams();
+  const [isLoading, startTransition] = React.useTransition();
 
   const [period, setPeriod] = useQueryState("period", {
     defaultValue: defaultPeriod,
     shallow: false,
     startTransition,
-  })
+  });
 
   const [week, setWeek] = useQueryState("week", {
     defaultValue: searchParams.get("week") || DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE).weekNumber.toString(),
     shallow: false,
-    startTransition
+    startTransition,
   });
   const [month, setMonth] = useQueryState("month", {
     defaultValue: searchParams.get("month") || DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE).month.toString(),
     shallow: false,
-    startTransition
+    startTransition,
   });
   const [day, setDay] = useQueryState("day", {
     defaultValue: searchParams.get("day") || DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE).day.toString(),
     shallow: false,
-    startTransition
+    startTransition,
   });
   const [year, setYear] = useQueryState("year", {
     defaultValue: searchParams.get("year") || DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE).year.toString(),
     shallow: false,
-    startTransition
-  })
+    startTransition,
+  });
 
-  const weekOptions = generateWeekOptions(Number(year), 'EEE dd MMMM')
-  const monthsOptions = generateMonthOptions(Number(year))
-  const selectedDate = DateTime.fromObject({ year: Number(year), month: Number(month), day: Number(day) }, { zone: DEFAULT_TZ, locale: DEFAULT_LOCALE })
+  const weekOptions = generateWeekOptions(Number(year), "EEE dd MMMM");
+  const monthsOptions = generateMonthOptions(Number(year));
+  const selectedDate = DateTime.fromObject({ year: Number(year), month: Number(month), day: Number(day) }, { zone: DEFAULT_TZ, locale: DEFAULT_LOCALE });
 
   const handleSetUrlParameters = (year: number, month: number, week: number, day: number) => {
     startTransition(() => {
-      setYear(year.toString())
-      setMonth(month.toString())
-      setWeek(week.toString())
-      setDay(day.toString())
-    })
-  }
+      setYear(year.toString());
+      setMonth(month.toString());
+      setWeek(week.toString());
+      setDay(day.toString());
+    });
+  };
 
   const handleDayChange = (date: Date | undefined) => {
     if (date) {
-      const luxonDate = DateTime.fromJSDate(date, { zone: DEFAULT_TZ }).setLocale(DEFAULT_LOCALE)
-      handleSetUrlParameters(luxonDate.year, luxonDate.month, luxonDate.weekNumber, luxonDate.day)
+      const luxonDate = DateTime.fromJSDate(date, { zone: DEFAULT_TZ }).setLocale(DEFAULT_LOCALE);
+      handleSetUrlParameters(luxonDate.year, luxonDate.month, luxonDate.weekNumber, luxonDate.day);
     }
-  }
+  };
 
   const handleWeekChange = (value: string | undefined) => {
-    const selectedWeek = !isNaN(Number(value)) ? Number(value) : now.weekNumber
-    handleSetUrlParameters(Number(year), Number(month), selectedWeek, Number(day))
-  }
+    const selectedWeek = !isNaN(Number(value)) ? Number(value) : now.weekNumber;
+    handleSetUrlParameters(Number(year), Number(month), selectedWeek, Number(day));
+  };
 
   const handleMonthChange = (value: string | undefined) => {
-    const selectedMonth = !isNaN(Number(value)) ? Number(value) : now.month
-    handleSetUrlParameters(Number(year), selectedMonth, Number(week), Number(day))
-  }
+    const selectedMonth = !isNaN(Number(value)) ? Number(value) : now.month;
+    handleSetUrlParameters(Number(year), selectedMonth, Number(week), Number(day));
+  };
 
   const handleYearChange = (value: string | undefined) => {
-    const selecterYear = !isNaN(Number(value)) ? Number(value) : now.year
-    handleSetUrlParameters(selecterYear, Number(month), Number(week), Number(day))
-  }
+    const selecterYear = !isNaN(Number(value)) ? Number(value) : now.year;
+    handleSetUrlParameters(selecterYear, Number(month), Number(week), Number(day));
+  };
 
   const onTabChange = (value: string) => {
-    setPeriod(value)
+    setPeriod(value);
   };
 
   return (
@@ -107,14 +107,29 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
       <Tabs
         value={period}
         className="flex flex-col md:flex-row gap-1 md:gap-4 justify-between bg-transparent md:border border-none items-center bg-white md:bg-transparent  md:p-1 rounded-xl "
-        onValueChange={onTabChange}
-      >
-        <div className="gap-4 flex items-center">
+        onValueChange={onTabChange}>
+        <div className="gap-4 flex items-center w-full">
           <TabsList className="w-full md:w-fit">
-            {day && <TabsTrigger className="w-full md:w-fit" value="day">Jour</TabsTrigger>}
-            {week && <TabsTrigger className="w-full md:w-fit" value="week">Hebdo</TabsTrigger>}
-            {month && <TabsTrigger className="w-full md:w-fit" value="month">Mois</TabsTrigger>}
-            {year && (day || month || week) && <TabsTrigger className="w-full md:w-fit" value="year">Année</TabsTrigger>}
+            {day && (
+              <TabsTrigger className="w-full md:w-fit" value="day">
+                Jour
+              </TabsTrigger>
+            )}
+            {week && (
+              <TabsTrigger className="w-full md:w-fit" value="week">
+                Hebdo
+              </TabsTrigger>
+            )}
+            {month && (
+              <TabsTrigger className="w-full md:w-fit" value="month">
+                Mois
+              </TabsTrigger>
+            )}
+            {year && (day || month || week) && (
+              <TabsTrigger className="w-full md:w-fit" value="year">
+                Année
+              </TabsTrigger>
+            )}
           </TabsList>
 
           {isLoading && <Spinner />}
@@ -126,50 +141,24 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
               <PopoverTrigger asChild>
                 <Button variant={"outline"} className={cn("w-full md:w-fit md:bg-input font-bold text-gray-800 -mt-2")}>
                   <PiCalendarDefaultDuoStroke className="mr-2 h-4 w-4 " />
-                  {selectedDate.toLocaleString({ day: 'numeric', month: 'long', year: 'numeric' })}
+                  {selectedDate.toLocaleString({ day: "numeric", month: "long", year: "numeric" })}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0">
-                <Calendar
-                  mode="single"
-                  initialFocus
-                  locale={fr}
-                  defaultMonth={selectedDate.toJSDate()}
-                  selected={selectedDate.toJSDate()}
-                  onSelect={handleDayChange}
-                />
+                <Calendar mode="single" initialFocus locale={fr} defaultMonth={selectedDate.toJSDate()} selected={selectedDate.toJSDate()} onSelect={handleDayChange} />
               </PopoverContent>
             </Popover>
           </TabsContent>
 
           <TabsContent value="week" className="w-full md:w-fit mt-0">
-            <Select
-              className="w-full md:w-fit font-bold md:bg-input text-gray-800"
-              options={weekOptions}
-              onChange={handleWeekChange}
-              defaultValue={week}
-              value={week}
-            />
+            <Select className="w-full md:w-fit font-bold md:bg-input text-gray-800" options={weekOptions} onChange={handleWeekChange} defaultValue={week} value={week} />
           </TabsContent>
 
           <TabsContent value="month" className="w-full md:w-fit mt-0">
-            <Select
-              className="w-full md:w-fit font-bold md:bg-input text-gray-800"
-              options={monthsOptions}
-              onChange={handleMonthChange}
-              defaultValue={month}
-              value={month}
-            />
+            <Select className="w-full md:w-fit font-bold md:bg-input text-gray-800" options={monthsOptions} onChange={handleMonthChange} defaultValue={month} value={month} />
           </TabsContent>
 
-          <Select
-            className="w-full md:w-fit font-bold md:bg-input text-gray-800"
-            options={years}
-            onChange={handleYearChange}
-            defaultValue={year}
-            value={year}
-            placeholder={"Année"}
-          />
+          <Select className="w-full md:w-fit font-bold md:bg-input text-gray-800" options={years} onChange={handleYearChange} defaultValue={year} value={year} placeholder={"Année"} />
         </div>
       </Tabs>
     </div>
