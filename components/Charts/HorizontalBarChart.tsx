@@ -44,7 +44,7 @@ export function HorizontalBarChart({ data, title, description, footerText }: Com
   const sortedData = dataWithPercentage.sort((a, b) => b.value - a.value);
 
   return (
-    <Card className="border-gray-100">
+    <Card className="border-gray-100 p-8">
       <div className="flex flex-col">
         <TypographyH3 className="text-primary font-bold">{title}</TypographyH3>
         <p className="text-gray-500 text-sm">{description}</p>
