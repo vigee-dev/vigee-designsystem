@@ -1,9 +1,10 @@
 "use client";
 
-import { Bar, BarChart, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, XAxis, YAxis, Cell, LabelList } from "recharts"; // Ajoutez LabelList ici
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "../../components/ui/chart";
+import { TypographyH3 } from "../Typography/Typography";
 
 interface ChartDataItem {
   label: string;
@@ -32,25 +33,40 @@ export function HorizontalBarChart({ data, title, description, footerText }: Com
     label: "Valeur",
   };
 
+  // Calculer le pourcentage pour chaque barre
+  const totalValue = data.reduce((sum, item) => sum + item.value, 0);
+  const dataWithPercentage = data.map(item => ({
+    ...item,
+    percentage: ((item.value / totalValue) * 100).toFixed(0) + "%",
+  }));
+
+  // Trier les données par valeur décroissante
+  const sortedData = dataWithPercentage.sort((a, b) => b.value - a.value);
+
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
-      </CardHeader>
+    <Card className="border-gray-100">
+      <div className="flex flex-col">
+        <TypographyH3 className="text-primary font-bold">{title}</TypographyH3>
+        <p className="text-gray-500 text-sm">{description}</p>
+      </div>
       <CardContent>
         <ChartContainer config={chartConfig}>
           <BarChart
             accessibilityLayer
-            data={data}
+            data={sortedData}
             layout="vertical"
             margin={{
-              left: 0,
+              left: 40, // Ajoutez plus de marge à gauche
             }}>
-            <YAxis dataKey="browser" type="category" tickLine={false} tickMargin={10} axisLine={false} tickFormatter={value => chartConfig[value as keyof typeof chartConfig]?.label} />
-            <XAxis dataKey="visitors" type="number" hide />
+            <YAxis dataKey="label" type="category" tickLine={false} tickMargin={10} axisLine={false} tickFormatter={value => value} />
+            <XAxis dataKey="value" type="number" hide />
             <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-            <Bar dataKey="visitors" layout="vertical" radius={5} />
+            <Bar dataKey="value" layout="vertical" radius={5}>
+              {sortedData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.color} /> // Utilisez la couleur ici
+              ))}
+              <LabelList dataKey="percentage" position="right" className="text-primary" /> // Affichez le pourcentage en bout de ligne
+            </Bar>
           </BarChart>
         </ChartContainer>
       </CardContent>
