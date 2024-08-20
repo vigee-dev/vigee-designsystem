@@ -15,7 +15,7 @@ interface ComponentProps {
   data: ChartDataItem[];
   title: string;
   description: string;
-  footerText: string;
+  footerText?: string;
   euro?: boolean;
 }
 
