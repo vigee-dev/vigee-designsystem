@@ -4,7 +4,6 @@ import { Bar, BarChart, XAxis, YAxis, Cell, LabelList } from "recharts"; // Ajou
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "../../components/ui/chart";
-import { TypographyH3 } from "../Typography/Typography";
 
 interface ChartDataItem {
   label: string;
@@ -44,11 +43,11 @@ export function HorizontalBarChart({ data, title, description, footerText }: Com
   const sortedData = dataWithPercentage.sort((a, b) => b.value - a.value);
 
   return (
-    <Card className="border-gray-100 p-8">
-      <div className="flex flex-col">
-        <TypographyH3 className="text-primary font-bold">{title}</TypographyH3>
-        <p className="text-gray-500 text-sm">{description}</p>
-      </div>
+    <Card className="border-gray-100">
+      <CardHeader>
+        <CardTitle className="text-lg font-bold text-primary">{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
           <BarChart
