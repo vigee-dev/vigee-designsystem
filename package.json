@@ -3,6 +3,7 @@
   "version": "1.4.28",
   "description": "Vigee - Design System",
   "scripts": {
+    
     "lint": "tsc"
   },
   "repository": {
