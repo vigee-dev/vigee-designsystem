@@ -43,7 +43,7 @@ export function HorizontalBarChart({ data, title, description, footerText }: Com
   const sortedData = dataWithPercentage.sort((a, b) => b.value - a.value);
 
   return (
-    <Card className="border-gray-100">
+    <Card className="border-gray-100 ">
       <CardHeader>
         <CardTitle className="text-lg font-bold text-primary">{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
@@ -56,6 +56,7 @@ export function HorizontalBarChart({ data, title, description, footerText }: Com
             layout="vertical"
             margin={{
               left: 40, // Ajoutez plus de marge à gauche
+              right: 30,
             }}>
             <YAxis dataKey="label" type="category" tickLine={false} tickMargin={10} axisLine={false} tickFormatter={value => value} />
             <XAxis dataKey="value" type="number" hide />
