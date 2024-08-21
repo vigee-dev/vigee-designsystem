@@ -12,8 +12,58 @@ import { cn } from "../lib/utils";
 import React from "react";
 import { Spinner } from "../Loaders/Spinner";
 import { DateTime } from "luxon";
-import { DEFAULT_LOCALE, DEFAULT_TZ, generateMonthOptions, generateWeekOptions } from "../../../../../utils/date.utils";
 import { useSearchParams } from "next/navigation";
+
+const DEFAULT_TZ = process.env.NEXT_PUBLIC_DEFAULT_TIMEZONE || 'Europe/Paris'
+const DEFAULT_LOCALE = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'fr-FR'
+
+interface WeekOption {
+  label: string;
+  value: string;
+}
+
+export const generateWeekOptions = (year: number, formatString?: string): WeekOption[] => {
+  const weeks: WeekOption[] = [];
+
+  let week = 1;
+  let dt = DateTime.fromObject({ weekYear: year, weekNumber: week }).setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE);
+
+  while (dt.weekYear === year) {
+    const startOfWeek = dt.startOf('week');
+    const endOfWeek = dt.endOf('week');
+
+    const label = (() => {
+      if (formatString) return `${startOfWeek.toFormat(formatString)} au ${endOfWeek.toFormat(formatString)}`;
+      else return `Semaine ${week} du ${startOfWeek.toLocaleString(DateTime.DATE_FULL)} au ${endOfWeek.toLocaleString(DateTime.DATE_FULL)}`;
+    })()
+
+    weeks.push({ label, value: week.toString() });
+
+    week++;
+    dt = dt.plus({ weeks: 1 });
+  }
+
+  return weeks;
+}
+
+interface MonthOption {
+  label: string
+  value: string
+}
+
+export const generateMonthOptions = (year: number): MonthOption[] => {
+  const months: MonthOption[] = [];
+
+  for (let month = 1; month <= 12; month++) {
+    const dt = DateTime.fromObject({ year, month }).setLocale(DEFAULT_LOCALE).setZone(DEFAULT_TZ);
+
+
+    const label = dt.toFormat('MMM');
+    months.push({ label: label.charAt(0).toUpperCase() + label.slice(1), value: month.toString() });
+  }
+
+  return months;
+};
 
 interface Props {
   years?: {
