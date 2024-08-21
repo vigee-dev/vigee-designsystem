@@ -59,9 +59,9 @@ const NumberKPI = ({ stats, columns = 3 }: NumberKPIProps) => {
           <div key={item.name} className="px-4 py-5 sm:p-6">
             <dt className="text-base font-medium text-gray-400">{item.name}</dt>
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-              <div className={cn(`flex items-baseline text-xl font-black text-primary`, item.color)}>
+              <div className={cn(`flex items-center text-xl font-black text-primary gap-2`, item.color)}>
                 {item.icon}
-                {item.currency && item.stat ? currency(item.stat).toRoundedEuro() : item.stat}
+                {item.currency ? currency(item.stat).toRoundedEuro() : item.stat}
               </div>
               {item.previousStat != null && <PreviousStat previousStat={variation(item.previousStat, item.stat)} upNegative={item.upNegative} notApplicable={item.previousStat === 0} />}
             </dd>
