@@ -7,7 +7,7 @@ export interface StatItem {
   previousStat?: number;
   color?: string;
   upNegative?: boolean;
-  currency?: string;
+  unit?: string;
   icon?: React.ReactNode;
 }
 
@@ -25,6 +25,23 @@ interface PreviousStatProps {
   upNegative?: boolean;
   notApplicable?: boolean;
 }
+
+const getColumnClass = (columns: number) => {
+  switch (columns) {
+    case 1:
+      return "md:grid-cols-1";
+    case 2:
+      return "md:grid-cols-2";
+    case 3:
+      return "md:grid-cols-3";
+    case 4:
+      return "md:grid-cols-4";
+    case 5:
+      return "md:grid-cols-5";
+    default:
+      return "md:grid-cols-3";
+  }
+};
 
 const PreviousStat = ({ previousStat, upNegative = false, notApplicable = false }: PreviousStatProps) => {
   return (
@@ -54,14 +71,16 @@ const NumberKPI = ({ stats, columns = 3 }: NumberKPIProps) => {
   return (
     <div className="my-2">
       <dl
-        className={`grid grid-cols-1 divide-y divide-gray-100 overflow-hidden rounded-xl shadow-sm md:grid-cols-${columns} md:divide-x md:divide-gray-100 md:divide-y-0  bg-white border border-gray-100`}>
+        className={`grid grid-cols-1 divide-y divide-gray-100 overflow-hidden rounded-xl shadow-sm ${getColumnClass(
+          columns
+        )} md:divide-x md:divide-gray-100 md:divide-y-0 bg-white border border-gray-100`}>
         {stats.map(item => (
           <div key={item.name} className="px-4 py-5 sm:p-6">
             <dt className="text-base font-medium text-gray-400">{item.name}</dt>
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
               <div className={cn(`flex items-center text-xl font-black text-primary gap-2`, item.color)}>
                 {item.icon}
-                {item.currency ? currency(item.stat).toRoundedEuro() : item.stat}
+                {item.unit === "€" ? currency(item.stat).toRoundedEuro() : item.unit ? `${item.stat} ${item.unit}` : item.stat}
               </div>
               {item.previousStat != null && <PreviousStat previousStat={variation(item.previousStat, item.stat)} upNegative={item.upNegative} notApplicable={item.previousStat === 0} />}
             </dd>
