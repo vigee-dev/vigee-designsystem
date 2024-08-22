@@ -4,7 +4,7 @@ import { useQueryState } from "nuqs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Tabs, TabsTrigger, TabsList } from "../ui/tabs";
 import { cn } from "../lib/utils";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Badge } from "../ui/badge";
 
 export type TabOption = {
@@ -14,11 +14,11 @@ export type TabOption = {
   icon?: ReactNode;
   count?: number;
   badgeColor?: string;
-}
+};
 
 interface TabsResponsiveProps {
   defaultValue?: string;
-  value?: string
+  value?: string;
   query?: string;
   options: TabOption[];
   children?: ReactNode;
@@ -30,7 +30,6 @@ interface TabsResponsiveProps {
 
 export const TabsResponsive = ({ options, defaultValue, value, query, children, fullWidth, className, selectLimit = 4, startTransition }: TabsResponsiveProps) => {
   const router = useRouter();
-  const pathname = usePathname()
 
   const [filter, setFilter] = useQueryState(query ?? "", {
     defaultValue: defaultValue ?? "",
@@ -65,10 +64,10 @@ export const TabsResponsive = ({ options, defaultValue, value, query, children, 
   };
 
   return (
-    <div>
+    <div className="w-full">
       <div className={"hidden md:flex w-full items-center"}>
-        <div className={"flex items-center gap-4"}>
-          {options.length < 7 ? (
+        <div className={"flex items-center gap-4 w-full"}>
+          {options.length < selectLimit ? (
             <TabsComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} fullWidth={fullWidth} className={className}>
               {children}
             </TabsComponent>
