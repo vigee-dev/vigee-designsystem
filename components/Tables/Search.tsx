@@ -3,8 +3,9 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useDebouncedCallback } from "use-debounce";
 import { PiSearchDefaultStroke } from "../../icons/PikaIcons";
+import { cn } from "../lib/utils";
 
-export default function TableSearch({ placeholder }: { placeholder?: string }) {
+export default function TableSearch({ className, placeholder }: { className?: string, placeholder?: string }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -21,7 +22,7 @@ export default function TableSearch({ placeholder }: { placeholder?: string }) {
   }, 300);
 
   return (
-    <div className="relative flex flex-1 flex-shrink-0 max-w-lg md:max-w-sm min-w-[200px] ">
+    <div className={cn("relative flex flex-1 max-w-lg flex-shrink-0 md:max-w-sm min-w-[200px]", className)}>
       <label htmlFor="search" className="sr-only">
         Rechercher
       </label>
