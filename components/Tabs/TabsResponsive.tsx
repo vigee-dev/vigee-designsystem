@@ -64,10 +64,10 @@ export const TabsResponsive = ({ options, defaultValue, value, query, children, 
   };
 
   return (
-    <div className="w-full">
+    <div className="">
       <div className={"hidden md:flex w-full items-center"}>
         <div className={"flex items-center gap-4 w-full"}>
-          {options.length < selectLimit ? (
+          {options.length < 7 ? (
             <TabsComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} fullWidth={fullWidth} className={className}>
               {children}
             </TabsComponent>
