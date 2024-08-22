@@ -10,9 +10,9 @@ import { PiCalendarDefaultDuoStroke } from "../../icons/PikaIcons";
 import { Calendar } from "../ui/calendar";
 import { cn } from "../lib/utils";
 import React from "react";
-import { Spinner } from "../Loaders/Spinner";
 import { DateTime } from "luxon";
 import { useSearchParams } from "next/navigation";
+import { useGlobalTransition } from "../../../../Contexts/GlobalTransitionContext";
 
 const DEFAULT_TZ = process.env.NEXT_PUBLIC_DEFAULT_TIMEZONE || 'Europe/Paris'
 const DEFAULT_LOCALE = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'fr-FR'
@@ -84,33 +84,28 @@ type PeriodFilterViewType = "day" | "week" | "month" | "year";
 export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Date().getFullYear().toString() }], defaultPeriod = "year" }: Props) => {
   const now = DateTime.now().setZone(DEFAULT_LOCALE).setLocale(DEFAULT_LOCALE);
   const searchParams = useSearchParams();
-  const [isLoading, startTransition] = React.useTransition();
+  const { startGlobalTransition } = useGlobalTransition()
 
   const [period, setPeriod] = useQueryState("period", {
     defaultValue: defaultPeriod,
-    shallow: false,
-    startTransition,
+    shallow: false
   });
 
   const [week, setWeek] = useQueryState("week", {
     defaultValue: searchParams.get("week") || DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE).weekNumber.toString(),
-    shallow: false,
-    startTransition,
+    shallow: false
   });
   const [month, setMonth] = useQueryState("month", {
     defaultValue: searchParams.get("month") || DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE).month.toString(),
-    shallow: false,
-    startTransition,
+    shallow: false
   });
   const [day, setDay] = useQueryState("day", {
     defaultValue: searchParams.get("day") || DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE).day.toString(),
-    shallow: false,
-    startTransition,
+    shallow: false
   });
   const [year, setYear] = useQueryState("year", {
     defaultValue: searchParams.get("year") || DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE).year.toString(),
-    shallow: false,
-    startTransition,
+    shallow: false
   });
 
   const weekOptions = generateWeekOptions(Number(year), "EEE dd MMMM");
@@ -118,7 +113,7 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
   const selectedDate = DateTime.fromObject({ year: Number(year), month: Number(month), day: Number(day) }, { zone: DEFAULT_TZ, locale: DEFAULT_LOCALE });
 
   const handleSetUrlParameters = (year: number, month: number, week: number, day: number) => {
-    startTransition(() => {
+    startGlobalTransition(() => {
       setYear(year.toString());
       setMonth(month.toString());
       setWeek(week.toString());
@@ -149,7 +144,7 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
   };
 
   const onTabChange = (value: string) => {
-    setPeriod(value);
+    startGlobalTransition(() => setPeriod(value))
   };
 
   return (
@@ -160,29 +155,12 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
         onValueChange={onTabChange}>
         <div className="gap-4 flex items-center w-full">
           <TabsList className="w-full md:w-fit">
-            {day && (
-              <TabsTrigger className="w-full md:w-fit" value="day">
-                Jour
-              </TabsTrigger>
-            )}
-            {week && (
-              <TabsTrigger className="w-full md:w-fit" value="week">
-                Hebdo
-              </TabsTrigger>
-            )}
-            {month && (
-              <TabsTrigger className="w-full md:w-fit" value="month">
-                Mois
-              </TabsTrigger>
-            )}
-            {year && (day || month || week) && (
-              <TabsTrigger className="w-full md:w-fit" value="year">
-                Année
-              </TabsTrigger>
-            )}
+            {day && <TabsTrigger className="w-full md:w-fit" value="day">Jour</TabsTrigger>}
+            {week && <TabsTrigger className="w-full md:w-fit" value="week">Hebdo</TabsTrigger>}
+            {month && <TabsTrigger className="w-full md:w-fit" value="month">Mois</TabsTrigger>}
+            {year && (day || month || week) && <TabsTrigger className="w-full md:w-fit" value="year">Année</TabsTrigger>}
           </TabsList>
 
-          {isLoading && <Spinner />}
         </div>
 
         <div className="flex flex-col md:flex-row md:gap-2 gap-2 items-center w-full md:w-fit pt-2 md:pt-0">
