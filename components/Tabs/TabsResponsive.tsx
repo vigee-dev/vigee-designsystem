@@ -6,8 +6,6 @@ import { Tabs, TabsTrigger, TabsList } from "../ui/tabs";
 import { cn } from "../lib/utils";
 import { usePathname, useRouter } from "next/navigation";
 import { Badge } from "../ui/badge";
-import { Spinner } from "../Loaders/Spinner";
-
 
 export type TabOption = {
   name: string;
@@ -27,11 +25,11 @@ interface TabsResponsiveProps {
   fullWidth?: boolean;
   className?: string;
   selectLimit?: number;
+  startTransition?: (callback: () => void) => void
 }
 
-export const TabsResponsive = ({ options, defaultValue, value, query, children, fullWidth, className, selectLimit = 4 }: TabsResponsiveProps) => {
+export const TabsResponsive = ({ options, defaultValue, value, query, children, fullWidth, className, selectLimit = 4, startTransition }: TabsResponsiveProps) => {
   const router = useRouter();
-  const [isLoading, startTransition] = useTransition()
   const pathname = usePathname()
 
   const [filter, setFilter] = useQueryState(query ?? "", {
@@ -47,14 +45,23 @@ export const TabsResponsive = ({ options, defaultValue, value, query, children, 
   });
 
   const handleValueChange = (value: string, option: { href?: string; value?: string }) => {
-    startTransition(() => {
+    if (startTransition) {
+      startTransition(() => {
+        if (option.href) {
+          router.push(option.href);
+        } else if (option.value && query) {
+          setFilter(value);
+          setPage("1");
+        }
+      })
+    } else {
       if (option.href) {
         router.push(option.href);
       } else if (option.value && query) {
         setFilter(value);
         setPage("1");
       }
-    })
+    }
   };
 
   return (
@@ -68,11 +75,10 @@ export const TabsResponsive = ({ options, defaultValue, value, query, children, 
           ) : (
             <SelectComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} className={className} />
           )}
-          {isLoading && <Spinner />}
         </div>
       </div>
       <div className={"flex md:hidden items-center gap-5"}>
-        <div className={"flex items-center gap-4"}>
+        <div className={"flex items-center gap-4 w-full"}>
           {options.length < selectLimit ? (
             <TabsComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} className={className}>
               {children}
@@ -80,7 +86,6 @@ export const TabsResponsive = ({ options, defaultValue, value, query, children, 
           ) : (
             <SelectComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} className={className} />
           )}
-          {isLoading && <Spinner />}
         </div>
       </div>
     </div>
