@@ -49,7 +49,7 @@ const PreviousStat = ({ previousStat, upNegative = false, notApplicable = false 
       className={classNames(
         !notApplicable && previousStat > 0 ? `${!upNegative ? "text-green-600 bg-green-100" : "text-red-600 bg-red-100"}` : "",
         !notApplicable && previousStat < 0 ? `${!upNegative ? "bg-red-100 text-red-600" : "bg-green-100 text-green-600"}` : "",
-        (notApplicable && previousStat) === 0 ? `bg-gray-100 text-gray-600` : "",
+        (notApplicable || (previousStat === 0)) ? `bg-gray-100 text-gray-600` : "",
         "inline-flex items-baseline rounded-full px-2.5 py-0.5 text-xs font-black md:mt-2 lg:mt-0"
       )}>
       {!notApplicable && previousStat > 0 && <ArrowUpIcon className={`-ml-1 mr-0.5 h-4 w-4 flex-shrink-0 self-center ${!upNegative ? "text-green-600" : "text-red-600"}`} aria-hidden="true" />}
