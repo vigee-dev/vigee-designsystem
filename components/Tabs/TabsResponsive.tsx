@@ -4,10 +4,9 @@ import { useQueryState } from "nuqs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Tabs, TabsTrigger, TabsList } from "../ui/tabs";
 import { cn } from "../lib/utils";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Badge } from "../ui/badge";
 import { Spinner } from "../Loaders/Spinner";
-
 
 export type TabOption = {
   name: string;
@@ -16,11 +15,11 @@ export type TabOption = {
   icon?: ReactNode;
   count?: number;
   badgeColor?: string;
-}
+};
 
 interface TabsResponsiveProps {
   defaultValue?: string;
-  value?: string
+  value?: string;
   query?: string;
   options: TabOption[];
   children?: ReactNode;
@@ -29,10 +28,9 @@ interface TabsResponsiveProps {
   selectLimit?: number;
 }
 
-export const TabsResponsive = ({ options, defaultValue, value, query, children, fullWidth, className, selectLimit = 4 }: TabsResponsiveProps) => {
+export const TabsResponsive = ({ options, defaultValue, value, query, children, fullWidth, className, selectLimit = 5 }: TabsResponsiveProps) => {
   const router = useRouter();
-  const [isLoading, startTransition] = useTransition()
-  const pathname = usePathname()
+  const [isLoading, startTransition] = useTransition();
 
   const [filter, setFilter] = useQueryState(query ?? "", {
     defaultValue: defaultValue ?? "",
@@ -54,14 +52,14 @@ export const TabsResponsive = ({ options, defaultValue, value, query, children, 
         setFilter(value);
         setPage("1");
       }
-    })
+    });
   };
 
   return (
     <div>
       <div className={"hidden md:flex w-full items-center"}>
         <div className={"flex items-center gap-4"}>
-          {options.length < 7 ? (
+          {options.length < selectLimit ? (
             <TabsComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} fullWidth={fullWidth} className={className}>
               {children}
             </TabsComponent>
