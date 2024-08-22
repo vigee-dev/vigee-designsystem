@@ -21,9 +21,10 @@ interface Props {
   subtitle?: string;
   data: Data[];
   icon?: React.ReactNode;
+  emptyMessage?: string;
 }
 
-export function Ranking({ title, subtitle, data, icon }: Props) {
+export function Ranking({ title, subtitle, data, icon, emptyMessage }: Props) {
   const truncateName = (name: string) => {
     return name.length > 15 ? name.substring(0, 15) + "..." : name;
   };
@@ -63,6 +64,7 @@ export function Ranking({ title, subtitle, data, icon }: Props) {
             </div>
           </div>
         ))}
+        {!(data.length > 0) && emptyMessage && <p className="text-gray-500 text-sm">{emptyMessage}</p>}
       </div>
     </div>
   );

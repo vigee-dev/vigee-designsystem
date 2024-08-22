@@ -17,9 +17,10 @@ interface ComponentProps {
   description: string;
   footerText?: string;
   euro?: boolean;
+  emptyMessage?: string
 }
 
-export function HorizontalBarChart({ data, title, description, footerText }: ComponentProps) {
+export function HorizontalBarChart({ data, title, description, footerText, emptyMessage }: ComponentProps) {
   const chartConfig = data.reduce((config, item) => {
     config[item.label] = {
       label: item.label,
@@ -49,6 +50,7 @@ export function HorizontalBarChart({ data, title, description, footerText }: Com
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent>
+        {!(data.length > 0) && emptyMessage && <p className="text-gray-500 text-sm">{emptyMessage}</p>}
         <ChartContainer config={chartConfig}>
           <BarChart
             accessibilityLayer
