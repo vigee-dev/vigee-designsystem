@@ -56,9 +56,9 @@ export const TabsResponsive = ({ options, defaultValue, value, query, children, 
   };
 
   return (
-    <div>
+    <div className="w-full">
       <div className={"hidden md:flex w-full items-center"}>
-        <div className={"flex items-center gap-4"}>
+        <div className={"flex items-center gap-4 w-full"}>
           {options.length < selectLimit ? (
             <TabsComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} fullWidth={fullWidth} className={className}>
               {children}
@@ -69,8 +69,8 @@ export const TabsResponsive = ({ options, defaultValue, value, query, children, 
           {isLoading && <Spinner />}
         </div>
       </div>
-      <div className={"flex md:hidden items-center gap-5"}>
-        <div className={"flex items-center gap-4"}>
+      <div className={"flex md:hidden items-center gap-5 w-full"}>
+        <div className={"flex items-center gap-4 w-full"}>
           {options.length < selectLimit ? (
             <TabsComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} className={className}>
               {children}
