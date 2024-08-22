@@ -75,16 +75,16 @@ interface Props {
   month?: boolean;
   year?: boolean;
   defaultPeriod?: PeriodFilterViewType;
+  startTransition?: (callback: () => void) => void;
 }
 
 // TODO duplicate with another type from WeekViewFilter, the two components should be the same
 type PeriodFilterViewType = "day" | "week" | "month" | "year";
 
 // TODO refactor WeekViewFilters and PeriodFilters together as they go the same thing, redefine it to a big 'Filters' component
-export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Date().getFullYear().toString() }], defaultPeriod = "year" }: Props) => {
+export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Date().getFullYear().toString() }], defaultPeriod = "year", startTransition }: Props) => {
   const now = DateTime.now().setZone(DEFAULT_LOCALE).setLocale(DEFAULT_LOCALE);
   const searchParams = useSearchParams();
-  const { startGlobalTransition } = useGlobalTransition()
 
   const [period, setPeriod] = useQueryState("period", {
     defaultValue: defaultPeriod,
@@ -113,12 +113,19 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
   const selectedDate = DateTime.fromObject({ year: Number(year), month: Number(month), day: Number(day) }, { zone: DEFAULT_TZ, locale: DEFAULT_LOCALE });
 
   const handleSetUrlParameters = (year: number, month: number, week: number, day: number) => {
-    startGlobalTransition(() => {
+    if (startTransition) {
+      startTransition(() => {
+        setYear(year.toString());
+        setMonth(month.toString());
+        setWeek(week.toString());
+        setDay(day.toString());
+      })
+    } else {
       setYear(year.toString());
       setMonth(month.toString());
       setWeek(week.toString());
       setDay(day.toString());
-    });
+    }
   };
 
   const handleDayChange = (date: Date | undefined) => {
@@ -144,8 +151,9 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
   };
 
   const onTabChange = (value: string) => {
-    startGlobalTransition(() => setPeriod(value))
-  };
+    if (startTransition) startTransition(() => setPeriod(value))
+    else setPeriod(value)
+  }
 
   return (
     <div>
