@@ -12,7 +12,9 @@ import { cn } from "../lib/utils";
 import React from "react";
 import { DateTime } from "luxon";
 import { useSearchParams } from "next/navigation";
+/*
 import { useGlobalTransition } from "../../../../Contexts/GlobalTransitionContext";
+*/
 
 const DEFAULT_TZ = process.env.NEXT_PUBLIC_DEFAULT_TIMEZONE || 'Europe/Paris'
 const DEFAULT_LOCALE = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'fr-FR'
