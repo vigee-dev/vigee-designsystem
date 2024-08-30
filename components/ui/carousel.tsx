@@ -2,7 +2,16 @@
 
 import * as React from "react";
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
-import { PiArrowLeftStroke, PiArrowRightStroke, PiChevronLeftStroke, PiChevronRightStroke } from "../../icons/PikaIcons";
+import {
+  PiArrowLeftStroke,
+  PiArrowRightStroke,
+  PiChevronBigRightSolid,
+  PiChevronLeftStroke,
+  PiChevronRightContrast,
+  PiChevronRightStroke,
+  PiDoubleChevronLeftDuoStroke,
+  PiDoubleChevronRightDuoStroke,
+} from "../../icons/PikaIcons";
 
 import { cn } from "../lib/utils";
 import { Button } from "../../components/ui/button";
@@ -161,7 +170,7 @@ const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProp
         onClick={scrollPrev}
         {...props}>
         <div className="flex items-center gap-2">
-          <PiChevronLeftStroke className="h-6 w-6" />
+          <PiDoubleChevronLeftDuoStroke className="h-10 w-10" />
           {(prevText || contextPrevText) && <span className="text-sm font-medium">{prevText || contextPrevText}</span>}
         </div>
         <span className="sr-only">Previous slide</span>
@@ -185,7 +194,7 @@ const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<ty
       {...props}>
       <div className="flex items-center gap-2">
         {(nextText || contextNextText) && <span className="text-sm font-medium">{nextText || contextNextText}</span>}
-        <PiChevronRightStroke className="h-6 w-6" />
+        <PiDoubleChevronRightDuoStroke className="h-10 w-10" />
       </div>
       <span className="sr-only">Next slide</span>
     </Button>
