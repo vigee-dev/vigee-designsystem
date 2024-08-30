@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, Variants } from "framer-motion";
 
-import { cn } from "lib/utils";
+import { cn } from "../lib/utils";
 
 interface HyperTextProps {
   text: string;
@@ -39,47 +39,29 @@ export default function HyperText({
   };
 
   useEffect(() => {
-    const interval = setInterval(
-      () => {
-        if (!animateOnLoad && isFirstRender.current) {
-          clearInterval(interval);
-          isFirstRender.current = false;
-          return;
-        }
-        if (interations.current < text.length) {
-          setDisplayText((t) =>
-            t.map((l, i) =>
-              l === " "
-                ? l
-                : i <= interations.current
-                  ? text[i]
-                  : alphabets[getRandomInt(26)],
-            ),
-          );
-          interations.current = interations.current + 0.1;
-        } else {
-          setTrigger(false);
-          clearInterval(interval);
-        }
-      },
-      duration / (text.length * 10),
-    );
+    const interval = setInterval(() => {
+      if (!animateOnLoad && isFirstRender.current) {
+        clearInterval(interval);
+        isFirstRender.current = false;
+        return;
+      }
+      if (interations.current < text.length) {
+        setDisplayText(t => t.map((l, i) => (l === " " ? l : i <= interations.current ? text[i] : alphabets[getRandomInt(26)])));
+        interations.current = interations.current + 0.1;
+      } else {
+        setTrigger(false);
+        clearInterval(interval);
+      }
+    }, duration / (text.length * 10));
     // Clean up interval on unmount
     return () => clearInterval(interval);
   }, [text, duration, trigger, animateOnLoad]);
 
   return (
-    <div
-      className="overflow-hidden py-2 flex cursor-default scale-100"
-      onMouseEnter={triggerAnimation}
-    >
+    <div className="overflow-hidden py-2 flex cursor-default scale-100" onMouseEnter={triggerAnimation}>
       <AnimatePresence mode="wait">
         {displayText.map((letter, i) => (
-          <motion.h1
-            key={i}
-            className={cn("font-mono", letter === " " ? "w-3" : "", className)}
-            {...framerProps}
-          >
+          <motion.h1 key={i} className={cn("font-mono", letter === " " ? "w-3" : "", className)} {...framerProps}>
             {letter.toUpperCase()}
           </motion.h1>
         ))}
