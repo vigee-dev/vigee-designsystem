@@ -75,7 +75,7 @@ export default function SheetDialog({ trigger, title, description, children, sid
           {trigger}
         </SheetTrigger>
 
-        <SheetContent side={side} className={`rounded-t-2xl lg:max-w-screen-lg max-h-[90vh] overflow-y-auto`} onClick={e => e.stopPropagation()}>
+        <SheetContent side={side} className={`rounded-t-2xl lg:max-w-screen-lg max-h-dvh overflow-y-auto`} onClick={e => e.stopPropagation()}>
           <SheetHeader className="text-left flex pb-4">
             <SheetTitle className="text-primary">{title}</SheetTitle>
             <SheetDescription>{description}</SheetDescription>
