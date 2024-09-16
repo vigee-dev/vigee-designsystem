@@ -12,12 +12,13 @@ import { cn } from "../lib/utils";
 import React from "react";
 import { DateTime } from "luxon";
 import { useSearchParams } from "next/navigation";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 /*
 import { useGlobalTransition } from "../../../../Contexts/GlobalTransitionContext";
 */
 
-const DEFAULT_TZ = process.env.NEXT_PUBLIC_DEFAULT_TIMEZONE || 'Europe/Paris'
-const DEFAULT_LOCALE = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || 'fr-FR'
+const DEFAULT_TZ = process.env.NEXT_PUBLIC_DEFAULT_TIMEZONE || "Europe/Paris";
+const DEFAULT_LOCALE = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || "fr-FR";
 
 interface WeekOption {
   label: string;
@@ -31,13 +32,13 @@ export const generateWeekOptions = (year: number, formatString?: string): WeekOp
   let dt = DateTime.fromObject({ weekYear: year, weekNumber: week }).setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE);
 
   while (dt.weekYear === year) {
-    const startOfWeek = dt.startOf('week');
-    const endOfWeek = dt.endOf('week');
+    const startOfWeek = dt.startOf("week");
+    const endOfWeek = dt.endOf("week");
 
     const label = (() => {
       if (formatString) return `${startOfWeek.toFormat(formatString)} au ${endOfWeek.toFormat(formatString)}`;
       else return `Semaine ${week} du ${startOfWeek.toLocaleString(DateTime.DATE_FULL)} au ${endOfWeek.toLocaleString(DateTime.DATE_FULL)}`;
-    })()
+    })();
 
     weeks.push({ label, value: week.toString() });
 
@@ -46,11 +47,11 @@ export const generateWeekOptions = (year: number, formatString?: string): WeekOp
   }
 
   return weeks;
-}
+};
 
 interface MonthOption {
-  label: string
-  value: string
+  label: string;
+  value: string;
 }
 
 export const generateMonthOptions = (year: number): MonthOption[] => {
@@ -59,8 +60,7 @@ export const generateMonthOptions = (year: number): MonthOption[] => {
   for (let month = 1; month <= 12; month++) {
     const dt = DateTime.fromObject({ year, month }).setLocale(DEFAULT_LOCALE).setZone(DEFAULT_TZ);
 
-
-    const label = dt.toFormat('MMM');
+    const label = dt.toFormat("MMM");
     months.push({ label: label.charAt(0).toUpperCase() + label.slice(1), value: month.toString() });
   }
 
@@ -90,24 +90,24 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
 
   const [period, setPeriod] = useQueryState("period", {
     defaultValue: defaultPeriod,
-    shallow: false
+    shallow: false,
   });
 
   const [week, setWeek] = useQueryState("week", {
     defaultValue: searchParams.get("week") || DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE).weekNumber.toString(),
-    shallow: false
+    shallow: false,
   });
   const [month, setMonth] = useQueryState("month", {
     defaultValue: searchParams.get("month") || DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE).month.toString(),
-    shallow: false
+    shallow: false,
   });
   const [day, setDay] = useQueryState("day", {
     defaultValue: searchParams.get("day") || DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE).day.toString(),
-    shallow: false
+    shallow: false,
   });
   const [year, setYear] = useQueryState("year", {
     defaultValue: searchParams.get("year") || DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE).year.toString(),
-    shallow: false
+    shallow: false,
   });
 
   const weekOptions = generateWeekOptions(Number(year), "EEE dd MMMM");
@@ -121,7 +121,7 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
         setMonth(month.toString());
         setWeek(week.toString());
         setDay(day.toString());
-      })
+      });
     } else {
       setYear(year.toString());
       setMonth(month.toString());
@@ -153,9 +153,19 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
   };
 
   const onTabChange = (value: string) => {
-    if (startTransition) startTransition(() => setPeriod(value))
-    else setPeriod(value)
-  }
+    if (startTransition) startTransition(() => setPeriod(value));
+    else setPeriod(value);
+  };
+
+  const goToPreviousDay = () => {
+    const previousDay = selectedDate.minus({ days: 1 });
+    handleSetUrlParameters(previousDay.year, previousDay.month, previousDay.weekNumber, previousDay.day);
+  };
+
+  const goToNextDay = () => {
+    const nextDay = selectedDate.plus({ days: 1 });
+    handleSetUrlParameters(nextDay.year, nextDay.month, nextDay.weekNumber, nextDay.day);
+  };
 
   return (
     <div>
@@ -165,29 +175,61 @@ export const PeriodFilters = ({ years = [{ label: "Cette année", value: new Dat
         onValueChange={onTabChange}>
         <div className="gap-4 flex items-center w-full">
           <TabsList className="w-full md:w-fit">
-            {day && <TabsTrigger className="w-full md:w-fit" value="day">Jour</TabsTrigger>}
-            {week && <TabsTrigger className="w-full md:w-fit" value="week">Hebdo</TabsTrigger>}
-            {month && <TabsTrigger className="w-full md:w-fit" value="month">Mois</TabsTrigger>}
-            {year && (day || month || week) && <TabsTrigger className="w-full md:w-fit" value="year">Année</TabsTrigger>}
+            {day && (
+              <TabsTrigger className="w-full md:w-fit" value="day">
+                Jour
+              </TabsTrigger>
+            )}
+            {week && (
+              <TabsTrigger className="w-full md:w-fit" value="week">
+                Hebdo
+              </TabsTrigger>
+            )}
+            {month && (
+              <TabsTrigger className="w-full md:w-fit" value="month">
+                Mois
+              </TabsTrigger>
+            )}
+            {year && (day || month || week) && (
+              <TabsTrigger className="w-full md:w-fit" value="year">
+                Année
+              </TabsTrigger>
+            )}
           </TabsList>
-
         </div>
 
-        <div className="flex flex-col md:flex-row md:gap-2 gap-2 items-center w-full md:w-fit pt-2 md:pt-0">
-          <TabsContent value="day" className="w-full md:w-fit">
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant={"outline"} className={cn("w-full md:w-fit md:bg-input font-bold text-gray-800 -mt-2")}>
-                  <PiCalendarDefaultDuoStroke className="mr-2 h-4 w-4 " />
-                  {selectedDate.toLocaleString({ day: "numeric", month: "long", year: "numeric" })}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0">
-                <Calendar mode="single" initialFocus locale={fr} defaultMonth={selectedDate.toJSDate()} selected={selectedDate.toJSDate()} onSelect={handleDayChange} />
-              </PopoverContent>
-            </Popover>
-          </TabsContent>
+        <div className="flex flex-col md:flex-row md:gap-2 gap-2 items-center w-full md:w-fit  md:pt-0 ">
+          <TabsContent value="day" className="w-full md:w-fit ">
+            <div className="relative flex items-center rounded-md bg-white md:items-stretch w-full ">
+              <button
+                type="button"
+                className="flex border-none shadow-none h-9 w-12 items-center justify-center border-gray-300 pr-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pr-0 md:hover:bg-gray-50"
+                onClick={goToPreviousDay}>
+                <span className="sr-only">Précédent</span>
+                <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+              </button>
 
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant={"outline"} className={cn("w-full md:w-fit md:bg-input font-bold text-gray-800 ")}>
+                    <PiCalendarDefaultDuoStroke className="mr-2 h-4 w-4 " />
+                    {selectedDate.toLocaleString({ day: "numeric", month: "long", year: "numeric" })}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0">
+                  <Calendar mode="single" initialFocus locale={fr} defaultMonth={selectedDate.toJSDate()} selected={selectedDate.toJSDate()} onSelect={handleDayChange} />
+                </PopoverContent>
+              </Popover>
+
+              <button
+                type="button"
+                className="flex h-9 w-12 items-center justify-center rounded-r-md pl-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pl-0 md:hover:bg-gray-50"
+                onClick={goToNextDay}>
+                <span className="sr-only">Suivant</span>
+                <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </div>
+          </TabsContent>
           <TabsContent value="week" className="w-full md:w-fit mt-0">
             <Select className="w-full md:w-fit font-bold md:bg-input text-gray-800" options={weekOptions} onChange={handleWeekChange} defaultValue={week} value={week} />
           </TabsContent>
