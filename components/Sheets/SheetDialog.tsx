@@ -75,13 +75,13 @@ export default function SheetDialog({ trigger, title, description, children, sid
           {trigger}
         </SheetTrigger>
 
-        <SheetContent side={side} className={`rounded-t-2xl lg:max-w-screen-lg h-lvh overflow-y-scroll`} onClick={e => e.stopPropagation()}>
+        <SheetContent side={side} className={`rounded-t-2xl lg:max-w-screen-lg max-h-dvh overflow-y-auto`} onClick={e => e.stopPropagation()}>
           <SheetHeader className="text-left flex pb-4">
             <SheetTitle className="text-primary">{title}</SheetTitle>
             <SheetDescription>{description}</SheetDescription>
           </SheetHeader>
 
-          <div className={cn("p-1 ")}>{children}</div>
+          <div className={cn("p-1")}>{children}</div>
 
           <SheetClose className="w-full flex justify-center items-center text-center pt-2">
             <Button icon="chevronDown" />
