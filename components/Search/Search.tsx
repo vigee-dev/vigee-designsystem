@@ -26,7 +26,7 @@ export default function Search({
         Rechercher
       </label>
       <input
-        className="peer block w-full font-variations rounded-md border border-gray-200 py-[9px] pl-10 text-[16px] md:text-sm outline-2 placeholder:text-gray-400"
+        className="peer block w-full font-variations rounded-md border border-gray-200 py-[9px] pl-10 pr-2 text-[16px] md:text-sm outline-2 placeholder:text-gray-400"
         placeholder={placeholder ?? "Rechercher"}
         onChange={(e) => debouncedHandleSearch(e.target.value)}
         defaultValue={defaultValue}
