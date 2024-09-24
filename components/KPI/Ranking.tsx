@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { TypographyH3 } from "../Typography/Typography";
 import { PiUserCircleDuoSolid, PiUserCircleDuoStroke } from "../../icons/PikaIcons";
 import { cn } from "../lib/utils";
+import { truncate } from "lodash";
 
 interface Data {
   name: string;
@@ -38,7 +39,7 @@ export function Ranking({ title, subtitle, data, icon, emptyMessage }: Props) {
 
       <div className="space-y-4">
         {data?.map((item, index) => (
-          <div className="flex items-center" key={index}>
+          <div className={"flex items-center"} key={index}>
             {item.img ? (
               <Avatar className="h-9 w-9">
                 <AvatarImage src={item.img} alt="Avatar" className="object-cover w-full h-full" /> <AvatarFallback>{item ? icon : <PiUserCircleDuoStroke />}</AvatarFallback>
@@ -48,7 +49,7 @@ export function Ranking({ title, subtitle, data, icon, emptyMessage }: Props) {
             )}
 
             <div className="ml-4 space-y-1">
-              <p className="text-sm font-medium leading-none">{truncateName(item.name)}</p>
+              <p className="text-sm font-medium leading-none whitespace-nowrap">{truncate(item.name, { length: 15 })}</p>
               <p className="text-sm text-muted-foreground">{truncateName(item.subtitle || "")}</p>
             </div>
 
