@@ -70,7 +70,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="w-full">
-      <div className="flex justify-between items-center font-medium text-sm text-gray-400 pb-4 ">
+      <div className="flex justify-between items-center font-medium text-sm text-gray-400">
         {title && <p>{title}</p>}
         {info && <p>{info}</p>}
       </div>
@@ -101,7 +101,8 @@ export function DataTable<TData, TValue>({
                   onClick={() => onNewClientClick && onNewClientClick(row.id)}
                 >
                   {row.getVisibleCells().map(cell => (
-                    <TableCell key={cell.id}>
+                    // @ts-ignore TOFIX tanstack doesn't provide meta types for whatever reason ? 'https://github.com/TanStack/table/discussions/4157'
+                    <TableCell key={cell.id} className={cell.column.columnDef.meta?.cellClassName}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext()) as ReactNode}
                     </TableCell>
                   ))}
