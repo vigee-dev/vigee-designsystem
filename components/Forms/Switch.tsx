@@ -11,6 +11,8 @@ import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { Switch as SwitchShadcn } from "../ui/switch";
 import { cn } from "../lib/utils";
 import Link from "next/link";
+import { Label } from "../ui/label";
+import * as React from "react";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -62,19 +64,17 @@ export default function Switch<T extends FieldValues>({
       )}
     />
   ) : (
-    <FormItem className={cn("flex flex-row items-center justify-between py-4 border rounded-xl p-4  text-primary bg-white", className)}>
+    <div className={cn("flex flex-row items-center justify-between py-4 border rounded-xl p-4 gap-2 text-primary bg-white", className)}>
       <div className="space-y-0.5">
-        <FormLabel className="text-base ">{label}</FormLabel>
-        <FormDescription>{descr}</FormDescription>
+        {label && <Label className="text-base">{label}</Label>}
+        {descr && <p className={cn("text-sm text-muted-foreground")}>{descr}</p>}
       </div>
-      <FormControl>
-        <SwitchShadcn
-          disabled={disabled}
-          checked={value}
-          onCheckedChange={onChange}
-          className="data-[state=unchecked]:bg-slate-200"
-        />
-      </FormControl>
-    </FormItem>
+      <SwitchShadcn
+        disabled={disabled}
+        checked={value}
+        onCheckedChange={onChange}
+        className="data-[state=unchecked]:bg-slate-200"
+      />
+    </div>
   );
 }
