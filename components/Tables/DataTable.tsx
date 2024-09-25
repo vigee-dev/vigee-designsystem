@@ -8,7 +8,7 @@ import {
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
-  getSortedRowModel,
+  getSortedRowModel, Row,
   useReactTable,
 } from "@tanstack/react-table";
 
@@ -27,7 +27,7 @@ interface DataTableProps<TData, TValue> {
   search?: boolean;
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  onNewClientClick?: (id: string) => void;
+  onRowClick?: (row: Row<TData>) => void;
   lines?: number;
 }
 
@@ -38,7 +38,7 @@ export function DataTable<TData, TValue>({
   data,
   search,
   lines,
-  onNewClientClick,
+  onRowClick,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -94,11 +94,11 @@ export function DataTable<TData, TValue>({
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map(row => (
+              table.getRowModel().rows.map( row => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  onClick={() => onNewClientClick && onNewClientClick(row.id)}
+                  onClick={() => onRowClick && onRowClick(row)}
                 >
                   {row.getVisibleCells().map(cell => (
                     // @ts-ignore TOFIX tanstack doesn't provide meta types for whatever reason ? 'https://github.com/TanStack/table/discussions/4157'
