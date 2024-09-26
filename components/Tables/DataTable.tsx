@@ -20,6 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
+import { cn } from "../lib/utils";
 
 interface DataTableProps<TData, TValue> {
   title?: string;
@@ -29,6 +30,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   onRowClick?: (row: Row<TData>) => void;
   lines?: number;
+  className?: string;
 }
 
 export function DataTable<TData, TValue>({
@@ -39,6 +41,7 @@ export function DataTable<TData, TValue>({
   search,
   lines,
   onRowClick,
+  className,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -69,7 +72,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="w-full">
+    <div className={cn("w-full", className)}>
       <div className="flex justify-between items-center font-medium text-sm text-gray-400">
         {title && <p>{title}</p>}
         {info && <p>{info}</p>}
