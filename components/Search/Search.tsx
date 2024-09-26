@@ -29,10 +29,10 @@ export default function Search({
 
   return (
     <div className={cn("relative flex flex-1 items-center max-w-lg flex-shrink-0 md:max-w-sm min-w-[200px] text-primary gap-2", className)}>
-      <div className="space-y-0.5">
+      {(label || description) && <div className="space-y-0.5">
         {label && <Label htmlFor={'search'} className={"text-base"}>{label}</Label>}
         {description && <p className={cn("text-sm text-muted-foreground")}>{description}</p>}
-      </div>
+      </div>}
       <div className="relative flex flex-1">
         <input
           className="peer block w-full font-variations rounded-md border border-gray-200 py-[9px] pl-10 pr-2 text-[16px] md:text-sm outline-2 placeholder:text-gray-400"
