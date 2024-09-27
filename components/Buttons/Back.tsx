@@ -1,22 +1,25 @@
 import Link from "next/link";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { Button } from "./Button";
+import { cn } from "../lib/utils";
 
 interface BackProps {
   href?: string;
   where?: string;
   onClick?: () => void;
   linkBtn?: boolean;
+  className?: string;
 }
 
 const Back: React.FC<BackProps> = ({
-                                     href,
-                                     where,
-                                     onClick,
-                                     linkBtn = false,
-                                   }) => {
+  href,
+  where,
+  onClick,
+  linkBtn = false,
+  className,
+}) => {
   return (
-      <div className="flex flex-grid text-gray-400 ">
+      <div className={cn("flex flex-grid text-gray-400 ", className)}>
         {href ? (
             <Link
                 href={href}
