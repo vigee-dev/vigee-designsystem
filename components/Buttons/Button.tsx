@@ -28,13 +28,13 @@ import {
   PiCopyCopiedStroke,
   PiThreeDotsMenuHorizontalStroke,
   PiCheckTickSingleStroke,
-  PiPhoneDefaultStroke,
   PiPhoneDefaultContrast,
   PiOpenaiStroke,
-  PiSettings01Stroke
+  PiSettings01Stroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2 } from "lucide-react";
+import React from "react";
 interface ButtonProps {
   children?: React.ReactNode;
   onClick?: () => void;
@@ -80,7 +80,7 @@ const iconMap = {
   check: PiCheckTickSingleStroke,
   phone: PiPhoneDefaultContrast,
   ai: PiOpenaiStroke,
-  settings: PiSettings01Stroke
+  settings: PiSettings01Stroke,
 };
 
 export function Button({ children, onClick, variant, type = "button", disabled, href, className, pending, icon, iconLeft, iconComponent, tooltip, big }: ButtonProps) {
@@ -140,6 +140,17 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
   const Icon = icon ? iconMap[icon] : null;
   const IconLeft = iconLeft ? iconMap[iconLeft] : null;
 
+  const iconClasses = cn(
+    "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+    !children &&
+      "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300  w-6 h-6",
+    big && "w-10 h-10",
+    variant === "outline" && "text-gray-900",
+    variant === "secondary" && "text-secondary-foreground",
+    "group-hover:animate-pulse",
+    className
+  );
+
   return tooltip ? (
     <Tooltip message={tooltip ?? ""}>
       <ShadButton
@@ -152,39 +163,13 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
           className,
           !children && "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent "
         )}>
-        {IconLeft && (
-          <IconLeft
-            className={cn(
-              "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
-              className,
-              !children &&
-                "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300  w-6 h-6",
-              big && "w-10 h-10",
-              variant === "outline" && "text-gray-900",
-              variant === "secondary" && "text-secondary-foreground",
-              "group-hover:animate-pulse"
-            )}
-          />
-        )}
+        {IconLeft && <IconLeft className={iconClasses} />}
 
         {children}
 
-        {iconComponent}
+        {iconComponent && React.isValidElement(iconComponent) && React.cloneElement(iconComponent, { className: iconClasses } as any)}
 
-        {Icon && (
-          <Icon
-            className={cn(
-              "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
-              className,
-              !children &&
-                "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-6 h-6",
-              big && "w-10 h-10",
-              variant === "outline" && "text-gray-900",
-              variant === "secondary" && "text-secondary-foreground",
-              "group-hover:animate-pulse"
-            )}
-          />
-        )}
+        {Icon && <Icon className={iconClasses} />}
       </ShadButton>
     </Tooltip>
   ) : (
@@ -198,38 +183,12 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
         className,
         !children && "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent "
       )}>
-      {IconLeft && (
-        <IconLeft
-          className={cn(
-            "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
-            className,
-            !children &&
-              "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300  w-6 h-6",
-            big && "w-10 h-10",
-            variant === "outline" && "text-gray-900",
-            variant === "secondary" && "text-secondary-foreground",
-            "group-hover:animate-pulse"
-          )}
-        />
-      )}
+      {IconLeft && <IconLeft className={iconClasses} />}
 
       {children}
-      {iconComponent}
+      {iconComponent && React.isValidElement(iconComponent) && React.cloneElement(iconComponent, { className: iconClasses } as any)}
 
-      {Icon && (
-        <Icon
-          className={cn(
-            "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
-
-            !children &&
-              "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300  w-6 h-6",
-            big && "w-10 h-10",
-            variant === "outline" && "text-gray-900",
-            variant === "secondary" && "text-secondary-foreground",
-            "group-hover:animate-pulse"
-          )}
-        />
-      )}
+      {Icon && <Icon className={iconClasses} />}
     </ShadButton>
   );
 };
