@@ -35,6 +35,7 @@ import {
   PiUserSettingsDuoSolid,
   PiBarchartDefaultDuoSolid,
   PiLayoutGridTwoHorizontalDuoSolid,
+  PiCalendarDefaultDuoSolid,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2 } from "lucide-react";
@@ -71,7 +72,7 @@ const iconMap = {
   plus: PiPlusDefaultStroke,
   camera: PiCameraStroke,
   filter: PiFilterFunnelContrast,
-  calendar: PiCalendarFilledStroke,
+  calendar: PiCalendarDefaultDuoSolid,
   refresh: PiRefreshDuoStroke,
   logout: PiLogOutRightDuoStroke,
   navigation: PiNavigationSlantStroke,
