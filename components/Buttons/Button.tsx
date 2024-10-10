@@ -36,9 +36,10 @@ import {
   PiBarchartDefaultDuoSolid,
   PiLayoutGridTwoHorizontalDuoSolid,
   PiCalendarDefaultDuoSolid,
+  PiListSearchDuoSolid,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
-import { Loader2 } from "lucide-react";
+import { Loader2, XIcon } from "lucide-react";
 interface ButtonProps {
   children?: React.ReactNode;
   onClick?: () => void;
@@ -87,6 +88,8 @@ const iconMap = {
   settings: PiUserSettingsDuoSolid,
   stats: PiBarchartDefaultDuoSolid,
   list: PiLayoutGridTwoHorizontalDuoSolid,
+  seeMore: PiListSearchDuoSolid,
+  cross: XIcon,
 };
 
 export function Button({ children, onClick, variant, type = "button", disabled, href, className, pending, icon, iconLeft, iconComponent, tooltip, big }: ButtonProps) {
