@@ -7,7 +7,7 @@ export const ButtonSubmit = () => {
   const { pending } = useFormStatus();
 
   return (
-    <Button type="submit" pending={pending}>
+    <Button type="submit" pending={pending} icon="chevron">
       Enregistrer
     </Button>
   );
