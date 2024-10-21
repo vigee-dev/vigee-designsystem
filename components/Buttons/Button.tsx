@@ -31,10 +31,15 @@ import {
   PiPhoneDefaultStroke,
   PiPhoneDefaultContrast,
   PiOpenaiStroke,
-  PiSettings01Stroke
+  PiSettings01Stroke,
+  PiUserSettingsDuoSolid,
+  PiBarchartDefaultDuoSolid,
+  PiLayoutGridTwoHorizontalDuoSolid,
+  PiCalendarDefaultDuoSolid,
+  PiListSearchDuoSolid,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
-import { Loader2 } from "lucide-react";
+import { Loader2, XIcon } from "lucide-react";
 interface ButtonProps {
   children?: React.ReactNode;
   onClick?: () => void;
@@ -68,7 +73,7 @@ const iconMap = {
   plus: PiPlusDefaultStroke,
   camera: PiCameraStroke,
   filter: PiFilterFunnelContrast,
-  calendar: PiCalendarFilledStroke,
+  calendar: PiCalendarDefaultDuoSolid,
   refresh: PiRefreshDuoStroke,
   logout: PiLogOutRightDuoStroke,
   navigation: PiNavigationSlantStroke,
@@ -80,7 +85,11 @@ const iconMap = {
   check: PiCheckTickSingleStroke,
   phone: PiPhoneDefaultContrast,
   ai: PiOpenaiStroke,
-  settings: PiSettings01Stroke
+  settings: PiUserSettingsDuoSolid,
+  stats: PiBarchartDefaultDuoSolid,
+  list: PiLayoutGridTwoHorizontalDuoSolid,
+  seeMore: PiListSearchDuoSolid,
+  cross: XIcon,
 };
 
 export function Button({ children, onClick, variant, type = "button", disabled, href, className, pending, icon, iconLeft, iconComponent, tooltip, big }: ButtonProps) {
