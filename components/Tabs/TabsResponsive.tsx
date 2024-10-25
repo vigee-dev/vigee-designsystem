@@ -25,7 +25,7 @@ interface TabsResponsiveProps {
   fullWidth?: boolean;
   className?: string;
   selectLimit?: number;
-  startTransition?: (callback: () => void) => void
+  startTransition?: (callback: () => void) => void;
 }
 
 export const TabsResponsive = ({ options, defaultValue, value, query, children, fullWidth, className, selectLimit = 4, startTransition }: TabsResponsiveProps) => {
@@ -52,7 +52,7 @@ export const TabsResponsive = ({ options, defaultValue, value, query, children, 
           setFilter(value);
           setPage("1");
         }
-      })
+      });
     } else {
       if (option.href) {
         router.push(option.href);
@@ -67,7 +67,7 @@ export const TabsResponsive = ({ options, defaultValue, value, query, children, 
     <div className="">
       <div className={"hidden md:flex w-full items-center"}>
         <div className={"flex items-center gap-4 w-full"}>
-          {options.length < 7 ? (
+          {options.length < selectLimit ? (
             <TabsComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} fullWidth={fullWidth} className={className}>
               {children}
             </TabsComponent>
@@ -78,7 +78,7 @@ export const TabsResponsive = ({ options, defaultValue, value, query, children, 
       </div>
       <div className={"flex md:hidden items-center gap-5"}>
         <div className={"flex items-center gap-4 w-full"}>
-          {options.length < selectLimit ? (
+          {options.length < 4 ? (
             <TabsComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} className={className}>
               {children}
             </TabsComponent>
