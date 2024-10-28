@@ -36,6 +36,7 @@ interface DatePickerRangeProps {
   label?: string;
   onChange?: (date: DateRange) => void;
   disabledDays?: Matcher | Matcher[] | undefined;
+  disabled?: boolean;
 }
 
 const DatePickerRange = ({
@@ -46,6 +47,7 @@ const DatePickerRange = ({
   label,
   onChange,
   disabledDays,
+  disabled = false
 }: DatePickerRangeProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
   let newDate: DateRange | undefined;
@@ -98,6 +100,7 @@ const DatePickerRange = ({
           {label && <Label className="font-bold text-primary">{label}</Label>}
           <PopoverTrigger asChild>
             <Button
+              disabled={disabled}
               id="date"
               variant={"outline"}
               className={cn(
@@ -143,7 +146,7 @@ const DatePickerRange = ({
               </PopoverClose>
 
               <Calendar
-                disabled={disabledDays}
+                disabled={disabledDays || disabled}
                 //initialFocus
                 mode="range"
                 defaultMonth={date?.from}
