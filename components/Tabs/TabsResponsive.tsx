@@ -7,20 +7,21 @@ import { cn } from "../lib/utils";
 import { useRouter } from "next/navigation";
 import { Badge } from "../ui/badge";
 
-export type TabOption = {
+export type TabOption<T extends string = string> = {
   name: string;
   href?: string;
-  value?: string;
+  value?: T;
   icon?: ReactNode;
   count?: number;
   badgeColor?: string;
 };
 
-interface TabsResponsiveProps {
+interface TabsResponsiveProps<T extends string = string> {
+  onChange?: (value: T) => void;
   defaultValue?: string;
   value?: string;
   query?: string;
-  options: TabOption[];
+  options: TabOption<T>[];
   children?: ReactNode;
   fullWidth?: boolean;
   className?: string;
@@ -28,7 +29,7 @@ interface TabsResponsiveProps {
   startTransition?: (callback: () => void) => void
 }
 
-export const TabsResponsive = ({ options, defaultValue, value, query, children, fullWidth, className, selectLimit = 4, startTransition }: TabsResponsiveProps) => {
+export function TabsResponsive <T extends string = string> ({ onChange, options, defaultValue, value, query, children, fullWidth, className, selectLimit = 4, startTransition }: TabsResponsiveProps<T>) {
   const router = useRouter();
 
   const [filter, setFilter] = useQueryState(query ?? "", {
@@ -43,23 +44,23 @@ export const TabsResponsive = ({ options, defaultValue, value, query, children, 
     shallow: false,
   });
 
-  const handleValueChange = (value: string, option: { href?: string; value?: string }) => {
+  const updateValueAndNotify = (value: string | T, option: { href?: string; value?: T }) => {
+    if (option.href) {
+      router.push(option.href);
+    } else if (option.value && query) {
+      setFilter(value);
+      setPage("1");
+    }
+    if (onChange && option.value) onChange(option.value);
+  };
+
+  const handleValueChange = (value: T | string, option: { href?: string; value?: T }) => {
     if (startTransition) {
       startTransition(() => {
-        if (option.href) {
-          router.push(option.href);
-        } else if (option.value && query) {
-          setFilter(value);
-          setPage("1");
-        }
+        updateValueAndNotify(value, option)
       })
     } else {
-      if (option.href) {
-        router.push(option.href);
-      } else if (option.value && query) {
-        setFilter(value);
-        setPage("1");
-      }
+      updateValueAndNotify(value, option)
     }
   };
 
@@ -91,17 +92,17 @@ export const TabsResponsive = ({ options, defaultValue, value, query, children, 
   );
 };
 
-interface TabProps {
+interface TabProps<T extends string = string> {
   defaultValue?: string;
   value?: string;
-  handleValueChange: (value: string, option: { href?: string; value?: string }) => void;
-  options: TabOption[];
+  handleValueChange: (value: T | string, option: { href?: string; value?: T }) => void;
+  options: TabOption<T>[];
   children?: ReactNode;
   fullWidth?: boolean;
   className?: string;
 }
 
-const TabsComponent = ({ options, defaultValue, value, handleValueChange, children, fullWidth, className }: TabProps) => {
+const TabsComponent = <T extends string = string>({ options, defaultValue, value, handleValueChange, children, fullWidth, className }: TabProps<T>) => {
   return (
     <Tabs defaultValue={defaultValue} className={cn(`w-full`)} value={value}>
       <TabsList className={cn(`w-full`, fullWidth ? " md:w-full" : " md:w-fit", className)}>
@@ -122,7 +123,7 @@ const TabsComponent = ({ options, defaultValue, value, handleValueChange, childr
   );
 };
 
-const SelectComponent = ({ options, defaultValue, value, handleValueChange, className }: TabProps) => {
+const SelectComponent = <T extends string = string>({ options, defaultValue, value, handleValueChange, className }: TabProps<T>) => {
   const router = useRouter();
   return (
     <div className="w-full md:w-fit">
