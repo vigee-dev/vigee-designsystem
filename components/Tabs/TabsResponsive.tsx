@@ -68,7 +68,7 @@ export function TabsResponsive <T extends string = string> ({ onChange, options,
     <div className="">
       <div className={"hidden md:flex w-full items-center"}>
         <div className={"flex items-center gap-4 w-full"}>
-          {options.length < selectLimit ? (
+          {options.length < 7 ? (
             <TabsComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} fullWidth={fullWidth} className={className}>
               {children}
             </TabsComponent>
@@ -79,7 +79,7 @@ export function TabsResponsive <T extends string = string> ({ onChange, options,
       </div>
       <div className={"flex md:hidden items-center gap-5"}>
         <div className={"flex items-center gap-4 w-full"}>
-          {options.length < 4 ? (
+          {options.length < selectLimit ? (
             <TabsComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} className={className}>
               {children}
             </TabsComponent>
