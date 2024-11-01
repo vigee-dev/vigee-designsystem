@@ -14,6 +14,7 @@ export interface StatItem {
 interface NumberKPIProps {
   stats: StatItem[];
   columns?: number;
+  small?: boolean;
 }
 
 function classNames(...classes: string[]): string {
@@ -49,7 +50,7 @@ const PreviousStat = ({ previousStat, upNegative = false, notApplicable = false 
       className={classNames(
         !notApplicable && previousStat > 0 ? `${!upNegative ? "text-green-600 bg-green-100" : "text-red-600 bg-red-100"}` : "",
         !notApplicable && previousStat < 0 ? `${!upNegative ? "bg-red-100 text-red-600" : "bg-green-100 text-green-600"}` : "",
-        (notApplicable || (previousStat === 0)) ? `bg-gray-100 text-gray-600` : "",
+        notApplicable || previousStat === 0 ? `bg-gray-100 text-gray-600` : "",
         "inline-flex items-baseline rounded-full px-2.5 py-0.5 text-xs font-black md:mt-2 lg:mt-0"
       )}>
       {!notApplicable && previousStat > 0 && <ArrowUpIcon className={`-ml-1 mr-0.5 h-4 w-4 flex-shrink-0 self-center ${!upNegative ? "text-green-600" : "text-red-600"}`} aria-hidden="true" />}
@@ -62,7 +63,7 @@ const PreviousStat = ({ previousStat, upNegative = false, notApplicable = false 
   );
 };
 
-const NumberKPI = ({ stats, columns = 3 }: NumberKPIProps) => {
+const NumberKPI = ({ stats, columns = 3, small = false }: NumberKPIProps) => {
   const variation = (previousStat: number, stat: number) => {
     const diff = stat - previousStat;
     return (diff / (previousStat === 0 ? 1 : previousStat)) * 100;
@@ -75,10 +76,10 @@ const NumberKPI = ({ stats, columns = 3 }: NumberKPIProps) => {
           columns
         )} md:divide-x md:divide-gray-100 md:divide-y-0 bg-white border border-gray-100`}>
         {stats.map(item => (
-          <div key={item.name} className="px-4 py-5 sm:p-6">
-            <dt className="text-base font-medium text-gray-400">{item.name}</dt>
+          <div key={item.name} className={cn("px-4 ", small ? "flex gap-2 items-center justify-between py-2 px-6" : "py-5 sm:p-6")}>
+            <dt className={cn(" font-medium text-gray-400", small ? "text-sm" : "text-base")}>{item.name}</dt>
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-              <div className={cn(`flex items-center text-xl font-black text-primary gap-2`, item.color)}>
+              <div className={cn(`flex items-center text-xl font-black text-primary gap-2`, item.color, small ? "text-base" : "text-xl")}>
                 {item.icon}
                 {item.unit === "€" ? currency(item.stat).toRoundedEuro() : item.unit ? `${item.stat} ${item.unit}` : item.stat}
               </div>
