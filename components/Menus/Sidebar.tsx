@@ -74,9 +74,9 @@ const Sidebar: React.FC<SidebarProps> = ({
   signout,
   persistQuery,
 }: SidebarProps) => {
-  const pathname = usePathname()
+  const pathname = usePathname();
   // TOIMPROVE find a way to hide the menu other than using pathname
-  const notDisplayMobileMenu = pathname.includes("create")
+  const notDisplayMobileMenu = pathname.includes("create");
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [hoverMenu, setHoverMenu] = useState(false);
   const searchParams = useSearchParams();
@@ -224,7 +224,12 @@ const Sidebar: React.FC<SidebarProps> = ({
                               </div>
                               {item?.notifications && (
                                 <div className="flex items-center">
-                                  <Badge className="bg-red-400 text-white opacity-90 p-1 w-[20px] h-[20px] items-center flex justify-center hover:text-white">{item?.notifications}</Badge>
+                                  <Badge
+                                    className={`bg-red-400 text-white opacity-90 ${
+                                      sidebarOpen ? "w-[20px] h-[20px] p-1 justify-center items-center" : "w-[8px] h-[8px] p-0 items-start"
+                                    }  flex  hover:text-white`}>
+                                    {sidebarOpen && item?.notifications}
+                                  </Badge>
                                 </div>
                               )}
                             </div>
