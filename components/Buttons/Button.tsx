@@ -171,7 +171,8 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
               big && "w-10 h-10",
               variant === "outline" && "text-gray-900",
               variant === "secondary" && "text-secondary-foreground",
-              "group-hover:animate-pulse"
+              "group-hover:animate-pulse",
+              "bg-transparent"
             )}
           />
         )}
@@ -191,7 +192,8 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
               variant === "outline" && "text-gray-900",
               variant === "secondary" && "text-secondary-foreground",
               "group-hover:animate-pulse",
-              className
+              className,
+              "bg-transparent"
             )}
           />
         )}
@@ -219,7 +221,8 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
             variant === "outline" && "text-gray-900",
             variant === "secondary" && "text-secondary-foreground",
             "group-hover:animate-pulse",
-            className
+            className,
+            "bg-transparent"
           )}
         />
       )}
@@ -237,7 +240,8 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
             variant === "outline" && "text-gray-900",
             variant === "secondary" && "text-secondary-foreground",
             "group-hover:animate-pulse",
-            className
+            className,
+            "bg-transparent"
           )}
         />
       )}
