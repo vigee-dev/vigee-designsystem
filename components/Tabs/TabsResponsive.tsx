@@ -14,6 +14,7 @@ export type TabOption<T extends string = string> = {
   icon?: ReactNode;
   count?: number;
   badgeColor?: string;
+  disabled?: boolean;
 };
 
 interface TabsResponsiveProps<T extends string = string> {
@@ -29,7 +30,7 @@ interface TabsResponsiveProps<T extends string = string> {
   startTransition?: (callback: () => void) => void;
 }
 
-export function TabsResponsive <T extends string = string> ({ onChange, options, defaultValue, value, query, children, fullWidth, className, selectLimit = 4, startTransition }: TabsResponsiveProps<T>) {
+export function TabsResponsive<T extends string = string>({ onChange, options, defaultValue, value, query, children, fullWidth, className, selectLimit = 4, startTransition }: TabsResponsiveProps<T>) {
   const router = useRouter();
 
   const [filter, setFilter] = useQueryState(query ?? "", {
@@ -57,10 +58,10 @@ export function TabsResponsive <T extends string = string> ({ onChange, options,
   const handleValueChange = (value: T | string, option: { href?: string; value?: T }) => {
     if (startTransition) {
       startTransition(() => {
-        updateValueAndNotify(value, option)
-      })
+        updateValueAndNotify(value, option);
+      });
     } else {
-      updateValueAndNotify(value, option)
+      updateValueAndNotify(value, option);
     }
   };
 
@@ -90,7 +91,7 @@ export function TabsResponsive <T extends string = string> ({ onChange, options,
       </div>
     </div>
   );
-};
+}
 
 interface TabProps<T extends string = string> {
   defaultValue?: string;
@@ -109,6 +110,7 @@ const TabsComponent = <T extends string = string>({ options, defaultValue, value
         {options.map((option, index) => (
           <TabsTrigger
             key={index}
+            disabled={option.disabled}
             value={option.href ?? option.value ?? ""}
             className={cn(`w-full flex gap-2`, fullWidth ? " md:w-full" : " md:w-fit")}
             onClick={() => handleValueChange(option.href ?? option.value ?? "", option)}>
@@ -124,7 +126,6 @@ const TabsComponent = <T extends string = string>({ options, defaultValue, value
 };
 
 const SelectComponent = <T extends string = string>({ options, defaultValue, value, handleValueChange, className }: TabProps<T>) => {
-  const router = useRouter();
   return (
     <div className="w-full md:w-fit">
       <Select
@@ -144,7 +145,7 @@ const SelectComponent = <T extends string = string>({ options, defaultValue, val
         </SelectTrigger>
         <SelectContent className={cn("font-medium")}>
           {options.map((option, index) => (
-            <SelectItem value={option.href ?? option.value ?? ""} className="w-full md:fit flex gap-2" key={index}>
+            <SelectItem value={option.href ?? option.value ?? ""} className="w-full md:fit flex gap-2" key={index} disabled={option.disabled}>
               <div className="flex items-center gap-2">
                 {option.icon} {option.name}
                 {option?.count && option?.count > 0 ? <Badge className={cn("bg-red-400", option.badgeColor)}>{option.count}</Badge> : null}
