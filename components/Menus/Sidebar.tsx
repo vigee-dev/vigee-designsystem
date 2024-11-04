@@ -10,7 +10,6 @@ import { Badge } from "../ui/badge";
 import { Select } from "../Select/Select";
 import { cn } from "../lib/utils";
 import { PiLogOutLeftStroke } from "../../icons/PikaIcons";
-import { useSession } from "next-auth/react";
 
 function classNames(...classes: (string | boolean)[]): string {
   return classes.filter(Boolean).join(" ");
