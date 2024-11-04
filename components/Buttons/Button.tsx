@@ -37,6 +37,7 @@ import {
   PiLayoutGridTwoHorizontalDuoSolid,
   PiCalendarDefaultDuoSolid,
   PiListSearchDuoSolid,
+  PiRotateLeftStroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2, XIcon } from "lucide-react";
@@ -89,6 +90,7 @@ const iconMap = {
   stats: PiBarchartDefaultDuoSolid,
   list: PiLayoutGridTwoHorizontalDuoSolid,
   seeMore: PiListSearchDuoSolid,
+  cancel: PiRotateLeftStroke,
   cross: XIcon,
 };
 
