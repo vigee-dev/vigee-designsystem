@@ -49,6 +49,7 @@ interface SidebarProps {
   hiddenMobile?: boolean;
   signout?: () => void;
   persistQuery?: string;
+  open?: boolean;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -69,15 +70,15 @@ const Sidebar: React.FC<SidebarProps> = ({
   selectPlaceHolder,
   defaultValueSelect,
   className,
-
   hiddenMobile = false,
   signout,
   persistQuery,
+  open = true,
 }: SidebarProps) => {
   const pathname = usePathname();
   // TOIMPROVE find a way to hide the menu other than using pathname
   const notDisplayMobileMenu = pathname.includes("create");
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(open);
   const [hoverMenu, setHoverMenu] = useState(false);
   const searchParams = useSearchParams();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
