@@ -104,7 +104,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   function checkUrlActive(item: string) {
     const slugs = navigation.map(nav => nav.slug);
-    // Diviser l'URL en segments
+
     const urlSegments = pathname.split("/").filter(Boolean);
 
     let lastSlugIndex = -1;
