@@ -12,7 +12,10 @@ const Card = React.forwardRef<
       className
     )}
     {...props}
-  />
+  >
+    {props.title && <CardTitle className="mb-4 tracking-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-bold text-primary">{props.title}</CardTitle>}
+    {props.children}
+  </div>
 ));
 Card.displayName = "Card";
 
