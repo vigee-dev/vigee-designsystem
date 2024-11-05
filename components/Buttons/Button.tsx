@@ -42,7 +42,7 @@ import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2, XIcon } from "lucide-react";
 interface ButtonProps {
   children?: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   href?: string;
@@ -133,7 +133,7 @@ export function Button({ children, onClick, variant, type = "button", disabled, 
 
 interface ButtonComponentProps {
   children?: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
