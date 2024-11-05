@@ -60,7 +60,7 @@ export default function SheetDialog({ trigger, title, description, children, sid
                 </div>
               </DialogHeader>
 
-              <div className={cn("p-1 max-h-[80vh]", scroll && "overflow-y-scroll")}>{children}</div>
+              <div className={cn("p-1 max-h-[80vh]", scroll && "overflow-y-auto")}>{children}</div>
             </DialogContent>
           </Dialog>
         </div>

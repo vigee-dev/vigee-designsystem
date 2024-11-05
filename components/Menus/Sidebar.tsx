@@ -10,7 +10,6 @@ import { Badge } from "../ui/badge";
 import { Select } from "../Select/Select";
 import { cn } from "../lib/utils";
 import { PiLogOutLeftStroke } from "../../icons/PikaIcons";
-import { useSession } from "next-auth/react";
 
 function classNames(...classes: (string | boolean)[]): string {
   return classes.filter(Boolean).join(" ");
@@ -49,6 +48,7 @@ interface SidebarProps {
   hiddenMobile?: boolean;
   signout?: () => void;
   persistQuery?: string;
+  open?: boolean;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -69,15 +69,15 @@ const Sidebar: React.FC<SidebarProps> = ({
   selectPlaceHolder,
   defaultValueSelect,
   className,
-
   hiddenMobile = false,
   signout,
   persistQuery,
+  open = true,
 }: SidebarProps) => {
-  const pathname = usePathname()
+  const pathname = usePathname();
   // TOIMPROVE find a way to hide the menu other than using pathname
-  const notDisplayMobileMenu = pathname.includes("create")
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const notDisplayMobileMenu = pathname.includes("create");
+  const [sidebarOpen, setSidebarOpen] = useState(open);
   const [hoverMenu, setHoverMenu] = useState(false);
   const searchParams = useSearchParams();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -104,7 +104,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   function checkUrlActive(item: string) {
     const slugs = navigation.map(nav => nav.slug);
-    // Diviser l'URL en segments
+
     const urlSegments = pathname.split("/").filter(Boolean);
 
     let lastSlugIndex = -1;
@@ -224,7 +224,12 @@ const Sidebar: React.FC<SidebarProps> = ({
                               </div>
                               {item?.notifications && (
                                 <div className="flex items-center">
-                                  <Badge className="bg-red-400 text-white opacity-90 p-1 w-[20px] h-[20px] items-center flex justify-center hover:text-white">{item?.notifications}</Badge>
+                                  <Badge
+                                    className={`bg-red-400 text-white opacity-90 ${
+                                      sidebarOpen ? "w-[20px] h-[20px] p-1 justify-center items-center" : "w-[8px] h-[8px] p-0 items-start"
+                                    }  flex  hover:text-white`}>
+                                    {sidebarOpen && item?.notifications}
+                                  </Badge>
                                 </div>
                               )}
                             </div>
