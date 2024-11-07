@@ -40,6 +40,7 @@ interface SidebarProps {
   withSelect?: boolean;
   selectOptions?: { value: string; label: string }[];
   onChangeSelect?: (selected: string) => void;
+  valueSelect?: string;
   classNameSelect?: string;
   selectPlaceHolder?: string;
   defaultValueSelect?: string;
@@ -68,6 +69,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   classNameSelect,
   selectPlaceHolder,
   defaultValueSelect,
+  valueSelect,
   className,
   hiddenMobile = false,
   signout,
@@ -175,6 +177,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                       placeholder={selectPlaceHolder}
                       className={classNameSelect}
                       defaultValue={defaultValueSelect ?? selectOptions[0]?.value ?? ""}
+                      value={valueSelect}
                     />
                   </div>
                 )}
