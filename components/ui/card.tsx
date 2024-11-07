@@ -13,7 +13,7 @@ const Card = React.forwardRef<
     )}
     {...props}
   >
-    {props.title && <CardTitle className="mb-4 tracking-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-bold text-primary">{props.title}</CardTitle>}
+    {props.title && <CardTitle className="mb-4 tracking-normal peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-medium text-lg text-primary">{props.title}</CardTitle>}
     {props.children}
   </div>
 ));
