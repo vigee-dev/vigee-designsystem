@@ -15,6 +15,7 @@ interface NumberKPIProps {
   stats: StatItem[];
   columns?: number;
   small?: boolean;
+  className?: string;
 }
 
 function classNames(...classes: string[]): string {
@@ -63,7 +64,7 @@ const PreviousStat = ({ previousStat, upNegative = false, notApplicable = false 
   );
 };
 
-const NumberKPI = ({ stats, columns = 3, small = false }: NumberKPIProps) => {
+const NumberKPI = ({ stats, columns = 3, small = false, className }: NumberKPIProps) => {
   const variation = (previousStat: number, stat: number) => {
     const diff = stat - previousStat;
     return (diff / (previousStat === 0 ? 1 : previousStat)) * 100;
@@ -72,9 +73,10 @@ const NumberKPI = ({ stats, columns = 3, small = false }: NumberKPIProps) => {
   return (
     <div className="my-2">
       <dl
-        className={`grid grid-cols-1 divide-y divide-gray-100 overflow-hidden rounded-xl shadow-sm ${getColumnClass(
-          columns
-        )} md:divide-x md:divide-gray-100 md:divide-y-0 bg-white border border-gray-100`}>
+        className={cn(
+          `grid grid-cols-1 divide-y divide-gray-100 overflow-hidden rounded-xl shadow-sm ${getColumnClass(columns)} md:divide-x md:divide-gray-100 md:divide-y-0 bg-white border border-gray-100`,
+          className
+        )}>
         {stats.map(item => (
           <div key={item.name} className={cn("px-4 ", small ? "flex gap-2 items-center justify-between py-2 px-6" : "py-5 sm:p-6")}>
             <dt className={cn(" font-medium text-gray-400", small ? "text-sm" : "text-base")}>{item.name}</dt>
