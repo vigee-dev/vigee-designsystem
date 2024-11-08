@@ -2,30 +2,18 @@
 const shimmer =
   "before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent";
 
-export const InputSkeleton = ({
-  big = true,
-  bigHeight = false,
-}: {
-  big?: boolean;
-  bigHeight?: boolean;
-}) => {
+export const InputSkeleton = ({ big = true, bigHeight = false }: { big?: boolean; bigHeight?: boolean }) => {
   return (
     <div className="flex flex-col p-1 gap-1">
       <div className="h-6 w-16 rounded-md bg-gray-100" />
-      <div
-        className={`${shimmer} relative h-6 overflow-hidden ${
-          big ? "w-full" : "w-36"
-        } ${bigHeight ? "h-96" : "h-8"} rounded-md bg-gray-100`}
-      />
+      <div className={`${shimmer} relative h-6 overflow-hidden ${big ? "w-full" : "w-36"} ${bigHeight ? "h-96" : "h-8"} rounded-md bg-gray-100`} />
     </div>
   );
 };
 
 export function CardSkeleton() {
   return (
-    <div
-      className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm`}
-    >
+    <div className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm`}>
       <div className="flex p-4">
         <div className="h-5 w-5 rounded-md bg-gray-200" />
         <div className="ml-2 h-6 w-16 rounded-md bg-gray-200 text-sm font-medium" />
@@ -39,14 +27,10 @@ export function CardSkeleton() {
 
 export function HeaderSkeleton() {
   return (
-    <div className={"rounded-xl h-fit bg-white p-6  border items-center mb-4"}>
+    <div className={"rounded-xl h-fit bg-white p-6   items-center mb-4"}>
       <div className="flex flex-col gap-2  ">
-        <div
-          className={`${shimmer} relative  h-6 w-36 overflow-hidden rounded-md bg-gray-100`}
-        />
-        <div
-          className={`${shimmer} relative h-4 w-24 overflow-hidden rounded-md bg-gray-100`}
-        />
+        <div className={`${shimmer} relative  h-6 w-36 overflow-hidden rounded-md bg-gray-100`} />
+        <div className={`${shimmer} relative h-4 w-24 overflow-hidden rounded-md bg-gray-100`} />
       </div>
     </div>
   );
@@ -97,9 +81,7 @@ export function InvoiceSkeleton() {
 
 export function LatestInvoicesSkeleton() {
   return (
-    <div
-      className={`${shimmer} relative flex w-full flex-col overflow-hidden md:col-span-4 lg:col-span-4`}
-    >
+    <div className={`${shimmer} relative flex w-full flex-col overflow-hidden md:col-span-4 lg:col-span-4`}>
       <div className="mb-4 h-8 w-36 rounded-md bg-gray-100" />
       <div className="flex grow flex-col justify-between rounded-xl bg-gray-100 p-4">
         <div className="bg-white px-6">
@@ -124,11 +106,7 @@ interface DashboardSkeletonProps {
 export default function DashboardSkeleton({ noTop }: DashboardSkeletonProps) {
   return (
     <>
-      {!noTop && (
-        <div
-          className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`}
-        />
-      )}
+      {!noTop && <div className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`} />}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <CardSkeleton />
         <CardSkeleton />
@@ -148,11 +126,7 @@ export default function DashboardSkeleton({ noTop }: DashboardSkeletonProps) {
 }
 
 export function TitleSkeleton() {
-  return (
-    <div
-      className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`}
-    />
-  );
+  return <div className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`} />;
 }
 
 export function TableRowSkeleton() {
@@ -247,10 +221,7 @@ export function InvoicesTableSkeleton() {
                 <th scope="col" className="px-3 py-5 font-medium">
                   Status
                 </th>
-                <th
-                  scope="col"
-                  className="relative pb-4 pl-3 pr-6 pt-2 sm:pr-6"
-                >
+                <th scope="col" className="relative pb-4 pl-3 pr-6 pt-2 sm:pr-6">
                   <span className="sr-only">Edit</span>
                 </th>
               </tr>
