@@ -38,6 +38,7 @@ import {
   PiCalendarDefaultDuoSolid,
   PiListSearchDuoSolid,
   PiRotateLeftStroke,
+  PiChevronLeftStroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2, XIcon } from "lucide-react";
@@ -70,6 +71,7 @@ const iconMap = {
   user: PiUserPlusContrast,
   copy: PiCopyCopiedStroke,
   chevron: PiChevronRightStroke,
+  chevronLeft: PiChevronLeftStroke,
   search: PiSearchDefaultStroke,
   plus: PiPlusDefaultStroke,
   camera: PiCameraStroke,
