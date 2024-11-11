@@ -4,16 +4,16 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "strict": true,
     "esModuleInterop": true,
-      "module": "esnext",
+    "module": "esnext",
     "declaration": true,
     "outDir": "components/lib",
     "moduleResolution": "bundler",
- "jsx": "react-jsx",
-    "skipLibCheck": true
-  },
-   "paths": {
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "paths": {
       "@/*": ["./*"]
     },
+  },
   "include": ["./**/*", ".", "components"],
   "exclude": ["node_modules", "components/lib"]
 }

@@ -2,7 +2,7 @@ import Image, { StaticImageData } from "next/image";
 
 import unauthorized from "../../img/error/unauthorized.svg";
 import Link from "next/link";
-import { PiEnvelopeArrowRightDuoSolid } from "../../icons/PikaIcons";
+import { PiEnvelopeArrowRightDuoSolid } from "@/icons/PikaIcons";
 import { Button } from "../Buttons/Button";
 
 interface IllustrationProps {
