@@ -129,7 +129,7 @@ const TabsComponent = <T extends string = string>({ options, defaultValue, value
             className={cn(
               `w-full flex gap-2 group`,
               fullWidth ? " md:w-full" : " md:w-fit",
-              variation === "rounded" ? "rounded-xl bg-gray-200 text-gray-800 data-[state=active]:bg-primary data-[state=active]:text-gray-100 font-bold " : ""
+              variation === "rounded" ? "rounded-xl bg-gray-200 text-gray-600 data-[state=active]:bg-primary data-[state=active]:text-gray-100 font-bold " : ""
             )}
             onClick={() => handleValueChange(option.href ?? option.value ?? "", option)}>
             <span className="group-data-[state=active]:text-gray-100 text-gray-400">{option.icon}</span>
