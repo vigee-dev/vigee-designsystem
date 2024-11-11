@@ -1,5 +1,5 @@
 import {
-  DropdownMenu as DropdownMenuPrimitive,
+  DropdownMenu as DropdownMenuPrimitive, DropdownMenuCheckboxItem,
   DropdownMenuContent, DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -13,6 +13,14 @@ export type DropDownMenuItemType =
     type: 'item';
     content: string | ReactNode;
     onClick?: () => void;
+  }
+  | {
+    type: 'item-checkbox'
+    checked: boolean
+    onCheckedChange?: (checked: boolean) => void
+    content: string | ReactNode;
+    onClick?: () => void;
+    className?: string
   }
   | {
     type: 'separator';
@@ -40,17 +48,34 @@ const DropdownMenu = ({ trigger, items, menuClassName }: Props) => {
                 <DropdownMenuItem key={index} onClick={item.onClick} asChild>
                   {item.content}
                 </DropdownMenuItem>
-              );
+              )
+
+            case 'item-checkbox':
+              return (
+                <DropdownMenuCheckboxItem
+                  className={cn(item.className)}
+                  checked={item.checked}
+                  onCheckedChange={item.onCheckedChange}
+                  key={index}
+                  onClick={item.onClick}
+                >
+                  {item.content}
+                </DropdownMenuCheckboxItem>
+              )
+
             case 'sub-menu-label':
               return (
                 <DropdownMenuLabel key={index}>
                   {item.content}
                 </DropdownMenuLabel>
-              );
+              )
+
             case 'separator':
-              return <DropdownMenuSeparator key={index} />;
+              return <DropdownMenuSeparator key={index} />
+
             default:
-              return null;
+              return null
+
           }
         })}
       </DropdownMenuContent>
