@@ -12,17 +12,15 @@ interface PageHeaderProps {
 
 export function PageHeader({ title, subtitle, children, small, icon, className }: PageHeaderProps) {
   return (
-    <div className={cn("rounded-xl h-fit bg-white p-5  border items-center mb-4", className)}>
-      <div className="flex  md:justify-between  gap-x-4 w-full items-center gap-2">
-        <div className="flex  items-center gap-4 ">
-          {icon}
-          <div className="flex flex-col ">
-            {small ? <TypographyH2 className="text-primary m-0">{title}</TypographyH2> : <TypographyH1 className="text-primary m-0">{title}</TypographyH1>}
-            {subtitle && <p className="text-gray-400 text-sm">{subtitle}</p>}
-          </div>
+    <div className={cn("rounded-xl h-fit bg-white p-5  border items-center mb-4 flex flex-col md:flex-row md:justify-between  gap-x-4 w-full  gap-2", className)}>
+      <div className="flex  items-center gap-4 ">
+        {icon}
+        <div className="flex flex-col ">
+          {small ? <TypographyH2 className="text-primary m-0">{title}</TypographyH2> : <TypographyH1 className="text-primary m-0">{title}</TypographyH1>}
+          {subtitle && <p className="text-gray-400 text-sm">{subtitle}</p>}
         </div>
-        <div className="flex gap-x-4">{children}</div>
       </div>
+      <div className="flex gap-x-4">{children}</div>
     </div>
   );
 }
