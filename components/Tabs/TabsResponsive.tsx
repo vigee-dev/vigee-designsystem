@@ -28,9 +28,22 @@ interface TabsResponsiveProps<T extends string = string> {
   className?: string;
   selectLimit?: number;
   startTransition?: (callback: () => void) => void;
+  variation?: "default" | "rounded";
 }
 
-export function TabsResponsive<T extends string = string>({ onChange, options, defaultValue, value, query, children, fullWidth, className, selectLimit = 4, startTransition }: TabsResponsiveProps<T>) {
+export function TabsResponsive<T extends string = string>({
+  onChange,
+  options,
+  defaultValue,
+  value,
+  query,
+  children,
+  fullWidth,
+  className,
+  selectLimit = 4,
+  startTransition,
+  variation = "default",
+}: TabsResponsiveProps<T>) {
   const router = useRouter();
 
   const [filter, setFilter] = useQueryState(query ?? "", {
@@ -70,7 +83,7 @@ export function TabsResponsive<T extends string = string>({ onChange, options, d
       <div className={"hidden md:flex w-full items-center"}>
         <div className={"flex items-center gap-4 w-full"}>
           {options.length < 7 ? (
-            <TabsComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} fullWidth={fullWidth} className={className}>
+            <TabsComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} fullWidth={fullWidth} className={className} variation={variation}>
               {children}
             </TabsComponent>
           ) : (
@@ -81,7 +94,7 @@ export function TabsResponsive<T extends string = string>({ onChange, options, d
       <div className={"flex md:hidden items-center gap-5"}>
         <div className={"flex items-center gap-4 w-full"}>
           {options.length < selectLimit ? (
-            <TabsComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} className={className}>
+            <TabsComponent options={options} defaultValue={defaultValue} value={value} handleValueChange={handleValueChange} className={className} variation={variation}>
               {children}
             </TabsComponent>
           ) : (
@@ -101,20 +114,26 @@ interface TabProps<T extends string = string> {
   children?: ReactNode;
   fullWidth?: boolean;
   className?: string;
+  variation?: "default" | "rounded";
 }
 
-const TabsComponent = <T extends string = string>({ options, defaultValue, value, handleValueChange, children, fullWidth, className }: TabProps<T>) => {
+const TabsComponent = <T extends string = string>({ options, defaultValue, value, handleValueChange, children, fullWidth, className, variation = "default" }: TabProps<T>) => {
   return (
     <Tabs defaultValue={defaultValue} className={cn(`w-full`)} value={value}>
-      <TabsList className={cn(`w-full`, fullWidth ? " md:w-full" : " md:w-fit", className)}>
+      <TabsList className={cn(`w-full `, fullWidth ? " md:w-full" : " md:w-fit", className, variation === "rounded" ? "bg-transparent gap-2" : "")}>
         {options.map((option, index) => (
           <TabsTrigger
             key={index}
             disabled={option.disabled}
             value={option.href ?? option.value ?? ""}
-            className={cn(`w-full flex gap-2`, fullWidth ? " md:w-full" : " md:w-fit")}
+            className={cn(
+              `w-full flex gap-2 group`,
+              fullWidth ? " md:w-full" : " md:w-fit",
+              variation === "rounded" ? "rounded-xl bg-gray-200 text-gray-800 data-[state=active]:bg-primary data-[state=active]:text-gray-100 font-bold " : ""
+            )}
             onClick={() => handleValueChange(option.href ?? option.value ?? "", option)}>
-            {option.icon} {option.name}
+            <span className="group-data-[state=active]:text-gray-100 text-gray-400">{option.icon}</span>
+            {option.name}
             {option?.count && option?.count > 0 ? <Badge className={cn("bg-red-400 h-5 w-5 flex items-center justify-center mx-auto", option.badgeColor)}>{option.count}</Badge> : null}
           </TabsTrigger>
         ))}
