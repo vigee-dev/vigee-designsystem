@@ -20,6 +20,8 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
+
+import { Table as TanstackTable } from '@tanstack/react-table'
 import { cn } from "../lib/utils";
 
 interface DataTableProps<TData, TValue> {
@@ -31,6 +33,7 @@ interface DataTableProps<TData, TValue> {
   onRowClick?: (row: Row<TData>) => void;
   lines?: number;
   className?: string;
+  tableHook?: TanstackTable<TData>
 }
 
 export function DataTable<TData, TValue>({
@@ -42,16 +45,13 @@ export function DataTable<TData, TValue>({
   lines,
   onRowClick,
   className,
+ tableHook,
 }: DataTableProps<TData, TValue>) {
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
-  const [globalFilter, setGlobalFilter] = React.useState<string | undefined>(
-    undefined
-  );
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+  const [globalFilter, setGlobalFilter] = React.useState<string | undefined>(undefined);
   const [rowSelection, setRowSelection] = React.useState({});
 
-  const table = useReactTable({
+  const table = useReactTable(tableHook?.options || {
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
@@ -69,7 +69,7 @@ export function DataTable<TData, TValue>({
         pageSize: lines || 10,
       },
     },
-  });
+  })
 
   return (
     <div className={cn("w-full", className)}>
