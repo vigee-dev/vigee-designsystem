@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "baseUrl": ".",
     "lib": ["dom", "dom.iterable", "esnext"],
     "strict": true,
     "esModuleInterop": true,
@@ -10,9 +11,6 @@
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "skipLibCheck": true,
-    "paths": {
-      "@/*": ["./*"]
-    },
   },
   "include": ["./**/*", ".", "components"],
   "exclude": ["node_modules", "components/lib"]
