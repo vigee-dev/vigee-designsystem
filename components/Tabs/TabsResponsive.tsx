@@ -134,7 +134,7 @@ const TabsComponent = <T extends string = string>({ options, defaultValue, value
                 : ""
             )}
             onClick={() => handleValueChange(option.href ?? option.value ?? "", option)}>
-            <span className="group-data-[state=active]:text-gray-100 text-gray-400 dark:group-data-[state=active]:text-zinc-800">{option.icon}</span>
+            {option.icon && <span className="group-data-[state=active]:text-gray-100 text-gray-400 dark:group-data-[state=active]:text-zinc-800">{option.icon}</span>}
             {option.name}
             {option?.count && option?.count > 0 ? <Badge className={cn("bg-red-400 h-5 w-5 flex items-center justify-center mx-auto", option.badgeColor)}>{option.count}</Badge> : null}
           </TabsTrigger>
