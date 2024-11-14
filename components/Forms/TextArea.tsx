@@ -37,6 +37,7 @@ type Props<T extends FieldValues> = {
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
   helpComponent?: React.ReactNode;
+  rows?: number;
 };
 
 export default function TextArea<T extends FieldValues>({
@@ -51,6 +52,7 @@ export default function TextArea<T extends FieldValues>({
   descr,
   disabled,
   helpComponent,
+  rows = 3
 }: Props<T>) {
   const [charCount, setCharCount] = useState(
     name ? form?.getValues(name)?.length || 0 : 0
@@ -95,6 +97,7 @@ export default function TextArea<T extends FieldValues>({
           </HoverCard>
           <Textarea
             {...field}
+            rows={rows}
             placeholder={placeholder ?? ""}
             onBlur={onBlur}
             onChange={e => {
