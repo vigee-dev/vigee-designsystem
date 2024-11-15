@@ -161,7 +161,7 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
         type={type}
         disabled={disabled}
         className={cn(
-          "group rounded-xl font-bold text-sm flex px-3 gap-4 ",
+          "group rounded-xl font-bold text-sm flex gap-4 ",
           className,
           !children && "bg-transparent border-none hover:bg-transparent",
           !disabled ? "hover:cursor-pointer group-hover:text-primary" : 'hover:cursor-not-allowed',
