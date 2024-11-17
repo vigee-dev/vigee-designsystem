@@ -161,21 +161,21 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
         type={type}
         disabled={disabled}
         className={cn(
-          "group group-hover:text-primary rounded-xl group-hover:cursor-pointer font-bold text-sm flex  px-3 gap-4 ",
+          "group rounded-xl font-bold text-sm flex px-3 gap-4 ",
           className,
-          !children && "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent "
+          !children && "bg-transparent border-none hover:bg-transparent",
+          !disabled ? "hover:cursor-pointer group-hover:text-primary" : 'hover:cursor-not-allowed',
         )}>
         {IconLeft && (
           <IconLeft
             className={cn(
               "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
-              className,
-              !children &&
-                "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300  w-6 h-6",
+              !children && "text-gray-400 transform transition-ease-in-out duration-300 w-6 h-6",
               big && "w-10 h-10",
               variant === "outline" && "text-gray-900",
               variant === "secondary" && "text-secondary-foreground",
-              "group-hover:animate-pulse",
+              !disabled && "group-hover:animate-pulse",
+              (!children && !disabled) && 'group-hover:text-primary group-hover:scale-105',
               "bg-transparent"
             )}
           />
@@ -189,14 +189,12 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
           <Icon
             className={cn(
               "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
-
-              !children &&
-                "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300 w-6 h-6",
+              !children && "text-gray-400 transform transition-ease-in-out duration-300 w-6 h-6",
               big && "w-10 h-10",
               variant === "outline" && "text-gray-900",
               variant === "secondary" && "text-secondary-foreground",
-              "group-hover:animate-pulse",
-              className,
+              !disabled && "group-hover:animate-pulse",
+              (!children && !disabled) && 'group-hover:text-primary group-hover:scale-105',
               "bg-transparent"
             )}
           />
@@ -210,21 +208,21 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
       type={type}
       disabled={disabled}
       className={cn(
-        "group group-hover:text-primary rounded-xl group-hover:cursor-pointer font-bold text-sm flex  gap-4 ",
+        "group rounded-xl font-bold text-sm flex gap-4",
         className,
-        !children && "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent "
+        !children && "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent",
+        !disabled ? "hover:cursor-pointer group-hover:text-primary" : 'hover:cursor-not-allowed',
       )}>
       {IconLeft && (
         <IconLeft
           className={cn(
             "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
-
-            !children &&
-              "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300  w-6 h-6",
+            !children && "text-gray-400 transform transition-ease-in-out duration-300 w-6 h-6",
             big && "w-10 h-10",
             variant === "outline" && "text-gray-900",
             variant === "secondary" && "text-secondary-foreground",
-            "group-hover:animate-pulse",
+            !disabled && "group-hover:animate-pulse",
+            (!children && !disabled) && 'group-hover:text-primary group-hover:scale-105',
             className,
             "bg-transparent"
           )}
@@ -238,13 +236,12 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
         <Icon
           className={cn(
             "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
-            !children &&
-              "group-hover:text-primary text-gray-400 group-hover:cursor-pointer hover:text-primary hover:cursor-pointer group-hover:scale-105 transform transition-ease-in-out duration-300  w-6 h-6",
+            !children && "text-gray-400 transform transition-ease-in-out duration-300 w-6 h-6",
             big && "w-10 h-10",
             variant === "outline" && "text-gray-900",
             variant === "secondary" && "text-secondary-foreground",
-            "group-hover:animate-pulse",
-            className,
+            !disabled && "group-hover:animate-pulse",
+            (!children && !disabled) && 'group-hover:text-primary group-hover:scale-105',
             "bg-transparent"
           )}
         />
