@@ -43,7 +43,7 @@ export function LineContainer({ title, subtitle, children, background, icon, hre
   // Sinon, appliquez l'événement onClick directement
   return (
     <div onClick={onClick}>
-      <Content title={title} icon={icon} background={background}>
+      <Content title={title} subtitle={subtitle} icon={icon} background={background} className={className}>
         {children}
       </Content>
     </div>
