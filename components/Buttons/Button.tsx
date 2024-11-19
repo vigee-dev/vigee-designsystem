@@ -39,6 +39,10 @@ import {
   PiListSearchDuoSolid,
   PiRotateLeftStroke,
   PiChevronLeftStroke,
+  PiListArrowDownDuoSolid,
+  PiFilterLinesStroke,
+  PiListPlusStroke,
+  PiListPlusDuoStroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2, XIcon } from "lucide-react";
@@ -76,7 +80,7 @@ const iconMap = {
   search: PiSearchDefaultStroke,
   plus: PiPlusDefaultStroke,
   camera: PiCameraStroke,
-  filter: PiFilterFunnelContrast,
+  filter: PiFilterLinesStroke,
   calendar: PiCalendarDefaultDuoSolid,
   refresh: PiRefreshDuoStroke,
   logout: PiLogOutRightDuoStroke,
@@ -91,7 +95,7 @@ const iconMap = {
   ai: PiOpenaiStroke,
   settings: PiUserSettingsDuoSolid,
   stats: PiBarchartDefaultDuoSolid,
-  list: PiLayoutGridTwoHorizontalDuoSolid,
+  list: PiListPlusStroke,
   seeMore: PiListSearchDuoSolid,
   cancel: PiRotateLeftStroke,
   cross: XIcon,
