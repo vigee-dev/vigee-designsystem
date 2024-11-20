@@ -37,7 +37,7 @@ export const generateWeekOptions = (year: number, formatString?: string): WeekOp
 
     const label = (() => {
       if (formatString) return `${startOfWeek.toFormat(formatString)} au ${endOfWeek.toFormat(formatString)}`;
-      else return `Semaine ${week} du ${startOfWeek.toLocaleString(DateTime.DATE_FULL)} au ${endOfWeek.toLocaleString(DateTime.DATE_FULL)}`;
+      else return `Sem. ${week} du ${startOfWeek.toLocaleString(DateTime.DATE_FULL)} au ${endOfWeek.toLocaleString(DateTime.DATE_FULL)}`;
     })();
 
     weeks.push({ label, value: week.toString() });
