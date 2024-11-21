@@ -17,7 +17,7 @@ interface IllustrationProps {
 }
 export default function EmptyIllustration({ text, subtitle, buttonLink, buttonText, children, button = false, className }: IllustrationProps) {
   return (
-    <Container className={cn("flex flex-col items-center justify-center  w-full px-12 p-8", className)}>
+    <Container className={cn("flex flex-col items-center justify-center  border-none bg-transparent w-full px-12 p-8", className)}>
       <Image width={400} height={400} className="mx-auto w-64 h-auto" src={emptyMan} alt="Empty list" />
 
       <h2 className={"text-lg text-gray-600 font-medium text-center pt-6 font-display"}>{text}</h2>
