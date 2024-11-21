@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { Badge } from "../ui/badge";
 
 export type TabOption<T extends string = string> = {
-  name: string;
+  name: string | ReactNode;
   href?: string;
   value?: T;
   icon?: ReactNode;
@@ -127,7 +127,7 @@ const TabsComponent = <T extends string = string>({ options, defaultValue, value
             disabled={option.disabled}
             value={option.href ?? option.value ?? ""}
             className={cn(
-              `w-full flex gap-2 group`,
+              `w-full flex gap-2 group min-w-0`,
               fullWidth ? " md:w-full" : " md:w-fit",
               variation === "rounded"
                 ? "rounded-xl dark:bg-zinc-900 bg-gray-200 dark:data-[state=active]:text-zinc-800 text-gray-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-gray-50 font-bold"
