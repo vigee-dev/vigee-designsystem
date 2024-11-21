@@ -23,9 +23,10 @@ interface Props {
   data: Data[];
   icon?: React.ReactNode;
   emptyMessage?: string;
+  classNameImage?: string;
 }
 
-export function Ranking({ title, subtitle, data, icon, emptyMessage }: Props) {
+export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameImage }: Props) {
   const truncateName = (name: string) => {
     return name.length > 15 ? name.substring(0, 15) + "..." : name;
   };
@@ -41,8 +42,8 @@ export function Ranking({ title, subtitle, data, icon, emptyMessage }: Props) {
         {data?.map((item, index) => (
           <div className={"flex items-center"} key={index}>
             {item.img ? (
-              <Avatar className="h-9 w-9">
-                <AvatarImage src={item.img} alt="Avatar" className="object-cover w-full h-full" /> <AvatarFallback>{item ? icon : <PiUserCircleDuoStroke />}</AvatarFallback>
+              <Avatar className={cn("h-9 w-9", classNameImage)}>
+                <AvatarImage src={item.img} alt="Avatar" className={"object-cover w-full h-full"} /> <AvatarFallback>{item ? icon : <PiUserCircleDuoStroke />}</AvatarFallback>
               </Avatar>
             ) : (
               <PiUserCircleDuoSolid className="text-gray-400  h-9 w-9" />
@@ -50,7 +51,7 @@ export function Ranking({ title, subtitle, data, icon, emptyMessage }: Props) {
 
             <div className="ml-4 space-y-1">
               <p className="text-sm font-medium leading-none whitespace-nowrap">{truncate(item.name, { length: 15 })}</p>
-              <p className="text-sm text-muted-foreground">{truncateName(item.subtitle || "")}</p>
+              {item.subtitle && <p className="text-sm text-muted-foreground">{truncateName(item.subtitle || "")}</p>}
             </div>
 
             <div className="flex flex-col gap-1 ml-auto font-medium text-sm">
