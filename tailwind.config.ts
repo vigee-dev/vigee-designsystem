@@ -2,14 +2,7 @@
 
 const config = {
   darkMode: ["class"],
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "!./app/components/vigee-designsystem/node_modules/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-    "./../../apps/**/*.{ts,tsx}",
-  ],
+  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "!./**/node_modules/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}", "./../../apps/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
     container: {
