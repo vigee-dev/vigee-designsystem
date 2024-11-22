@@ -7,10 +7,11 @@ import GridPattern from "./GridPattern";
 
 interface Props {
   className?: string;
+  dark?: boolean;
   finishLoading?: () => void;
 }
 
-export const SplashScreen = ({ finishLoading, className }: Props) => {
+export const SplashScreen = ({ finishLoading, className, dark }: Props) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -28,29 +29,26 @@ export const SplashScreen = ({ finishLoading, className }: Props) => {
       scale: 1,
       easing: "easeInOutSine",
     });
-  }, [finishLoading,]);
+  }, [finishLoading]);
 
   return (
-    <div
-      className={cn(
-        "flex h-screen w-screen  bg-white items-center justify-center",
-        className
-      )}
-    >
-      <span className="border-[10px]  bg-white p-[20px] animate-[spin_2s_linear_infinite] border-t-[10px] border-t-solid border-t-primary border-t-10 border-t-111 rounded-full transition-transform  ease-in-outout z-50"></span>
+    <div className={cn("flex h-screen w-screen  bg-white items-center justify-center", className, dark ? "bg-zinc-900 text-white" : "")}>
+      <span
+        className={cn(
+          "border-[10px] bg-white p-[20px] animate-[spin_2s_linear_infinite] border-t-[10px] border-t-solid border-t-primary border-t-10 border-t-111 rounded-full transition-transform  ease-in-outout z-50",
+          className,
+          dark ? "bg-zinc-900 border-zinc-400 border-t-zinc-100 text-white" : ""
+        )}></span>
       <GridPattern
         width={50}
         height={50}
         numSquares={30}
         maxOpacity={0.4}
         duration={1}
-        repeatDelay={10}
+        repeatDelay={1}
         x={150}
         y={120}
-        className={cn(
-          "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)] ",
-          "absolute inset-0 h-full w-full skew-y-12 animate-pulse text-primary"
-        )}
+        className={cn("[mask-image:radial-gradient(300px_circle_at_center,white,transparent)] ", "absolute inset-0 h-full w-full skew-y-12 animate-pulse text-primary", dark ? "text-white" : "")}
       />
     </div>
   );
