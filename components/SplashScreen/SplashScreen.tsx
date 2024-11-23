@@ -35,7 +35,7 @@ export const SplashScreen = ({ finishLoading, className, dark }: Props) => {
     <div className={cn("flex h-screen w-screen  bg-white items-center justify-center", className, dark ? "bg-zinc-900 text-white" : "")}>
       <span
         className={cn(
-          "border-[10px] bg-white p-[20px] animate-[spin_2s_linear_infinite] border-t-[10px] border-t-solid border-t-primary border-t-10 border-t-111 rounded-full transition-transform  ease-in-outout z-50",
+          "border-[7px] bg-white p-[10px] animate-[spin_2s_linear_infinite] border-t-[7px] border-t-solid border-t-primary border-t-6 border-t-111 rounded-full transition-transform  ease-in-outout z-50",
           className,
           dark ? "bg-zinc-900 border-zinc-400 border-t-zinc-100 text-white" : ""
         )}></span>
