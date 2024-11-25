@@ -82,7 +82,7 @@ const iconMap = {
   plus: PiPlusDefaultStroke,
   camera: PiCameraStroke,
   filter: PiFilterLinesStroke,
-  calendar: PiCalendarDefaultStroke,
+  calendar: PiCalendarFilledStroke,
   refresh: PiRefreshDuoStroke,
   logout: PiLogOutRightDuoStroke,
   navigation: PiNavigationSlantStroke,
