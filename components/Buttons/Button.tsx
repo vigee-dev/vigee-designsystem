@@ -43,6 +43,7 @@ import {
   PiFilterLinesStroke,
   PiListPlusStroke,
   PiListPlusDuoStroke,
+  PiCalendarDefaultStroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2, XIcon } from "lucide-react";
@@ -81,7 +82,7 @@ const iconMap = {
   plus: PiPlusDefaultStroke,
   camera: PiCameraStroke,
   filter: PiFilterLinesStroke,
-  calendar: PiCalendarDefaultDuoSolid,
+  calendar: PiCalendarDefaultStroke,
   refresh: PiRefreshDuoStroke,
   logout: PiLogOutRightDuoStroke,
   navigation: PiNavigationSlantStroke,
