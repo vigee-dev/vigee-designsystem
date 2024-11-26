@@ -106,10 +106,10 @@ const iconMap = {
 
 export function Button({ children, onClick, variant, type = "button", disabled, href, className, pending, icon, iconLeft, iconComponent, tooltip, big, classNameIcon }: ButtonProps) {
   return pending ? (
-    <ButtonComponent disabled variant={variant} className={className}>
+    <ShadButton disabled variant={variant} className={cn(className, children ? "rounded-xl font-bold text-sm flex px-3 gap-4" : "bg-transparent text-gray-800")}>
       {children}
-      <Loader2 className={cn(` h-4 w-4 animate-spin `, children ? "mr-2" : "mr-0")} />
-    </ButtonComponent>
+      <Loader2 className={cn(`h-4 w-4 animate-spin `, children ? "mr-2" : "mr-0 ")} />
+    </ShadButton>
   ) : href ? (
     <Link href={href}>
       <ButtonComponent
@@ -158,9 +158,10 @@ interface ButtonComponentProps {
   tooltip?: string;
   big?: boolean;
   classNameIcon?: string;
+  pending?: boolean;
 }
 
-const ButtonComponent = ({ children, onClick, variant, type, disabled, className, icon, iconLeft, iconComponent, tooltip, big, classNameIcon }: ButtonComponentProps) => {
+const ButtonComponent = ({ children, onClick, variant, type, disabled, className, icon, iconLeft, iconComponent, tooltip, big, classNameIcon, pending }: ButtonComponentProps) => {
   const Icon = icon ? iconMap[icon] : null;
   const IconLeft = iconLeft ? iconMap[iconLeft] : null;
 
@@ -175,7 +176,8 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
           "group rounded-xl font-bold text-sm flex px-3 gap-4 ",
           className,
           !children && "bg-transparent border-none hover:bg-transparent",
-          !disabled ? "hover:cursor-pointer group-hover:text-primary" : "hover:cursor-not-allowed"
+          !disabled ? "hover:cursor-pointer group-hover:text-primary" : "hover:cursor-not-allowed ",
+          pending && children && "bg-transparent text-gray-800"
         )}>
         {IconLeft && (
           <IconLeft
@@ -224,7 +226,8 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
         "group rounded-xl font-bold text-sm flex gap-4",
         className,
         !children && "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent",
-        !disabled ? "hover:cursor-pointer group-hover:text-primary" : "hover:cursor-not-allowed"
+        !disabled ? "hover:cursor-pointer group-hover:text-primary" : "hover:cursor-not-allowed",
+        pending && children && "bg-transparent text-gray-800"
       )}>
       {IconLeft && (
         <IconLeft
