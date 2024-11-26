@@ -97,7 +97,7 @@ const iconMap = {
   apple: PiAppleLogoStroke,
   dots: PiThreeDotsMenuHorizontalStroke,
   check: PiCheckTickSingleStroke,
-  phone: PiPhoneDefaultContrast,
+  phone: PiPhoneDefaultStroke,
   ai: PiOpenaiStroke,
   settings: PiUserSettingsStroke,
   stats: PiBarchartDefaultStroke,
