@@ -2,26 +2,8 @@
 import * as React from "react";
 import { Button } from "../ui/button";
 import { useMediaQuery } from "@react-hook/media-query";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "../ui/drawer";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
+import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "../ui/drawer";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { ScrollArea } from "../ui/scroll-area";
 
 interface Props {
@@ -42,29 +24,17 @@ type DrawerContextType = {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const DrawerContext = React.createContext<DrawerContextType | undefined>(
-  undefined
-);
+const DrawerContext = React.createContext<DrawerContextType | undefined>(undefined);
 
 export function useDrawerContext() {
   const context = React.useContext(DrawerContext);
   if (context === undefined) {
-    throw new Error(
-      "useDrawerContext doit être utilisé à l'intérieur d'un DrawerContext.Provider"
-    );
+    throw new Error("useDrawerContext doit être utilisé à l'intérieur d'un DrawerContext.Provider");
   }
   return context;
 }
 
-export function DrawerMobile({
-  children,
-  title,
-  description,
-  trigger,
-  icon,
-  cancelButton,
-  size = "sm",
-}: Props) {
+export function DrawerMobile({ children, title, description, trigger, icon, cancelButton, size = "sm" }: Props) {
   const [open, setOpen] = React.useState(false);
 
   const contextValue: DrawerContextType = { open, setOpen };
@@ -81,14 +51,7 @@ export function DrawerMobile({
 
             <DialogContent
               onClick={e => e.stopPropagation()}
-              className={`max-w-[425px] max-h-[90vh] ${
-                size === "sm"
-                  ? "md:max-w-[425px]"
-                  : size === "md"
-                  ? "md:max-w-[650px]"
-                  : "md:max-w-[1080px]"
-              } `}
-            >
+              className={`max-w-[425px] max-h-[90vh] ${size === "sm" ? "md:max-w-[425px]" : size === "md" ? "md:max-w-[650px]" : "md:max-w-[1080px]"} `}>
               <DialogHeader>
                 <div className="flex items-center gap-x-4 p-4 py-2">
                   {icon}
@@ -115,21 +78,12 @@ export function DrawerMobile({
           {trigger}
         </DrawerTrigger>
 
-        <DrawerContent
-          onClick={e => e.stopPropagation()}
-          className="bg-white flex flex-col fixed bottom-0 left-0 right-0 max-h-[96%] rounded-t-[10px]"
-        >
+        <DrawerContent onClick={e => e.stopPropagation()} className="bg-white flex flex-col fixed bottom-0 left-0 right-0 max-h-[96%] rounded-t-[10px]">
           <div className="text-[16px]">
             <ScrollArea className="max-h-[80vh] ">
               <DrawerHeader className="text-left">
-                {title && (
-                  <DrawerTitle className="font-bold text-primary">
-                    {title}
-                  </DrawerTitle>
-                )}
-                {description && (
-                  <DrawerDescription>{description}</DrawerDescription>
-                )}
+                {title && <DrawerTitle className="font-bold text-primary">{title}</DrawerTitle>}
+                {description && <DrawerDescription>{description}</DrawerDescription>}
               </DrawerHeader>
 
               <div className="p-4">{children}</div>
