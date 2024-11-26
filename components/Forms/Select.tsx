@@ -1,25 +1,8 @@
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
-import {
-  Select as ShadSelect,
-  SelectContent,
-  SelectTrigger,
-  SelectValue,
-  SelectItem,
-} from "../ui/select";
+import { Select as ShadSelect, SelectContent, SelectTrigger, SelectValue, SelectItem } from "../ui/select";
 import { PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "../ui/hover-card";
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card";
+import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Label } from "../ui/label";
 
 type Props<T extends FieldValues> = {
@@ -37,7 +20,7 @@ type Props<T extends FieldValues> = {
   value?: string;
   helpComponent?: React.ReactNode;
   isBoolean?: boolean;
-  options?: { label: string; value: string }[];
+  options?: { label: string; value: string; icon?: React.ReactNode }[];
 };
 
 export default function Select<T extends FieldValues>({
@@ -69,15 +52,10 @@ export default function Select<T extends FieldValues>({
               <div className="flex flex-col gap-1 ">
                 {label && (
                   <FormLabel className="font-black text-primary mt-2">
-                    {label}{" "}
-                    {required && <span className="text-red-600 ml-1">*</span>}
+                    {label} {required && <span className="text-red-600 ml-1">*</span>}
                   </FormLabel>
                 )}
-                {sublabel && (
-                  <Label className="font-medium text-gray-400">
-                    {sublabel}
-                  </Label>
-                )}
+                {sublabel && <Label className="font-medium text-gray-400">{sublabel}</Label>}
               </div>
               {helpComponent && (
                 <HoverCardTrigger>
@@ -100,11 +78,10 @@ export default function Select<T extends FieldValues>({
                 let eBoolean = e === "true";
                 field.onChange(eBoolean);
               }
-              if (onChange) onChange(e)
+              if (onChange) onChange(e);
             }}
             value={String(field.value)}
-            disabled={disabled}
-          >
+            disabled={disabled}>
             <FormControl>
               <SelectTrigger className="font-medium bg-input border-none">
                 <SelectValue placeholder={placeholder} />
@@ -116,7 +93,10 @@ export default function Select<T extends FieldValues>({
                 ? children
                 : options.map(option => (
                     <SelectItem key={option.value} value={option.value}>
-                      {option.label}
+                      <div className="flex items-center gap-2">
+                        {option.icon}
+                        {option.label}
+                      </div>
                     </SelectItem>
                   ))}
             </SelectContent>
@@ -129,11 +109,7 @@ export default function Select<T extends FieldValues>({
   ) : (
     <div className={className}>
       {label && <Label className="font-black text-primary">{label}</Label>}
-      <ShadSelect
-        onValueChange={onChange}
-        value={String(value)}
-        disabled={disabled}
-      >
+      <ShadSelect onValueChange={onChange} value={String(value)} disabled={disabled}>
         <SelectTrigger className="font-medium bg-input border-none">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
@@ -142,7 +118,10 @@ export default function Select<T extends FieldValues>({
             ? children
             : options.map(option => (
                 <SelectItem key={option.value} value={option.value}>
-                  {option.label}
+                  <div className="flex items-center gap-2">
+                    {option.icon}
+                    {option.label}
+                  </div>
                 </SelectItem>
               ))}
         </SelectContent>
