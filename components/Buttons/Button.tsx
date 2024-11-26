@@ -48,6 +48,7 @@ import {
   PiContactsBookStroke,
   PiBarchartDefaultStroke,
   PiUserSettingsStroke,
+  PiChatDefaultStroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2, XIcon } from "lucide-react";
@@ -106,6 +107,7 @@ const iconMap = {
   cross: XIcon,
   home: PiHomeDefaultStroke,
   contacts: PiContactsBookStroke,
+  chat: PiChatDefaultStroke,
 };
 
 export function Button({ children, onClick, variant, type = "button", disabled, href, className, pending, icon, iconLeft, iconComponent, tooltip, big, classNameIcon }: ButtonProps) {
