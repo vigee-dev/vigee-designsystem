@@ -20,7 +20,7 @@ type Props<T extends FieldValues> = {
   value?: string;
   helpComponent?: React.ReactNode;
   isBoolean?: boolean;
-  options?: { label: string; value: string; icon?: React.ReactNode }[];
+  options?: { label: string; value: string; icon?: React.ReactNode; color?: string }[];
 };
 
 export default function Select<T extends FieldValues>({
@@ -93,7 +93,7 @@ export default function Select<T extends FieldValues>({
                 ? children
                 : options.map(option => (
                     <SelectItem key={option.value} value={option.value}>
-                      <div className="flex items-center gap-2">
+                      <div className={`flex items-center gap-2 ${option.color}`}>
                         {option.icon}
                         {option.label}
                       </div>
@@ -118,7 +118,7 @@ export default function Select<T extends FieldValues>({
             ? children
             : options.map(option => (
                 <SelectItem key={option.value} value={option.value}>
-                  <div className="flex items-center gap-2">
+                  <div className={`flex items-center gap-2 ${option.color}`}>
                     {option.icon}
                     {option.label}
                   </div>
