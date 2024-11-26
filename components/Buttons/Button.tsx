@@ -45,6 +45,9 @@ import {
   PiListPlusDuoStroke,
   PiCalendarDefaultStroke,
   PiHomeDefaultStroke,
+  PiContactsBookStroke,
+  PiBarchartDefaultStroke,
+  PiUserSettingsStroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2, XIcon } from "lucide-react";
@@ -95,13 +98,14 @@ const iconMap = {
   check: PiCheckTickSingleStroke,
   phone: PiPhoneDefaultContrast,
   ai: PiOpenaiStroke,
-  settings: PiUserSettingsDuoSolid,
-  stats: PiBarchartDefaultDuoSolid,
+  settings: PiUserSettingsStroke,
+  stats: PiBarchartDefaultStroke,
   list: PiListPlusStroke,
   seeMore: PiListSearchDuoSolid,
   cancel: PiRotateLeftStroke,
   cross: XIcon,
   home: PiHomeDefaultStroke,
+  contacts: PiContactsBookStroke,
 };
 
 export function Button({ children, onClick, variant, type = "button", disabled, href, className, pending, icon, iconLeft, iconComponent, tooltip, big, classNameIcon }: ButtonProps) {
