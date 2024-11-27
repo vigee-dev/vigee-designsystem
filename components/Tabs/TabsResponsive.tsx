@@ -28,7 +28,7 @@ interface TabsResponsiveProps<T extends string = string> {
   className?: string;
   selectLimit?: number;
   startTransition?: (callback: () => void) => void;
-  variation?: "default" | "rounded";
+  variation?: "default" | "rounded" | "rounded-blue" | "rounded-green";
 }
 
 export function TabsResponsive<T extends string = string>({
@@ -114,13 +114,19 @@ interface TabProps<T extends string = string> {
   children?: ReactNode;
   fullWidth?: boolean;
   className?: string;
-  variation?: "default" | "rounded";
+  variation?: "default" | "rounded" | "rounded-blue" | "rounded-green";
 }
 
 const TabsComponent = <T extends string = string>({ options, defaultValue, value, handleValueChange, children, fullWidth, className, variation = "default" }: TabProps<T>) => {
   return (
     <Tabs defaultValue={defaultValue} className={cn(`w-full`)} value={value}>
-      <TabsList className={cn(`w-full `, fullWidth ? " md:w-full" : " md:w-fit", className, variation === "rounded" ? "bg-transparent gap-2" : "")}>
+      <TabsList
+        className={cn(
+          `w-full `,
+          fullWidth ? " md:w-full" : " md:w-fit",
+          className,
+          variation === "rounded" || variation === "rounded-blue" || variation === "rounded-green" ? "bg-transparent gap-2" : ""
+        )}>
         {options.map((option, index) => (
           <TabsTrigger
             key={index}
@@ -130,7 +136,13 @@ const TabsComponent = <T extends string = string>({ options, defaultValue, value
               `w-full flex gap-2 group min-w-0`,
               fullWidth ? " md:w-full" : " md:w-fit",
               variation === "rounded"
-                ? "rounded-xl dark:bg-zinc-900 bg-zinc-100 dark:data-[state=active]:text-zinc-800 text-gray-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-zinc-100 font-bold"
+                ? "rounded-xl dark:bg-zinc-900 bg-zinc-100 dark:data-[state=active]:text-zinc-800 text-zinc-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-zinc-100 font-bold"
+                : "",
+              variation === "rounded-blue"
+                ? "rounded-xl dark:bg-blue-200 dark:text-blue-600 bg-zinc-100 dark:data-[state=active]:text-blue-800 text-blue-600 dark:data-[state=active]:bg-white data-[state=active]:bg-blue-500 data-[state=active]:text-white font-bold"
+                : "",
+              variation === "rounded-green"
+                ? "rounded-xl dark:bg-emerald-900 dark:text-emerald-50 bg-zinc-100 dark:data-[state=active]:text-emerald-800 text-emerald-600 dark:data-[state=active]:bg-white data-[state=active]:bg-emerald-500 data-[state=active]:text-white font-bold"
                 : ""
             )}
             onClick={() => handleValueChange(option.href ?? option.value ?? "", option)}>
