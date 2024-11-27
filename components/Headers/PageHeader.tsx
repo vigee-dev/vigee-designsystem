@@ -8,12 +8,13 @@ interface PageHeaderProps {
   small?: boolean;
   icon?: React.ReactNode;
   className?: string;
+  variant?: "sticky" | "default";
 }
 
-export function PageHeader({ title, subtitle, children, small, icon, className }: PageHeaderProps) {
+export function PageHeader({ title, subtitle, children, small, icon, className, variant = "sticky" }: PageHeaderProps) {
   return (
-    <div className="sticky top-0 z-40 py-1 bg-gray-50 w-full">
-      <div className={cn("rounded-xl h-fit py-5   items-center mb-3 flex  md:flex-row justify-between gap-x-4  gap-2", className)}>
+    <div className={cn(" top-0 z-40 py-1 items-center w-full", variant === "sticky" ? "bg-gray-50 " : "bg-white border border-gray-200 rounded-xl p-4")}>
+      <div className={cn("rounded-xl h-fit items-center flex  md:flex-row justify-between gap-x-4  gap-2", className)}>
         <div className="flex items-center gap-4 ">
           {icon}
           <div className="flex flex-col ">
