@@ -29,9 +29,10 @@ type Props<T extends FieldValues> = {
   helpComponent?: React.ReactNode;
   rows?: number;
   white?: boolean;
+  fullWidth?: boolean;
 };
 
-export default function TextArea<T extends FieldValues>({ form, name, required, label, placeholder, max, onBlur, className, descr, disabled, helpComponent, rows = 3, white }: Props<T>) {
+export default function TextArea<T extends FieldValues>({ form, name, required, label, placeholder, max, onBlur, className, descr, disabled, helpComponent, rows = 3, white, fullWidth }: Props<T>) {
   const [charCount, setCharCount] = useState(name ? form?.getValues(name)?.length || 0 : 0);
 
   return (
@@ -40,7 +41,7 @@ export default function TextArea<T extends FieldValues>({ form, name, required, 
       name={name}
       rules={{ required }}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className={cn(fullWidth && "col-span-full")}>
           <HoverCard>
             <div className="flex items-center justify-between">
               {label && (
