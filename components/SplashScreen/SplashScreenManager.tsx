@@ -11,7 +11,7 @@ export default function SplashScreenManager({ className, dark, children }: { cla
   };
 
   return showSplashScreen ? (
-    <div className="h-screen items-center mx-auto flex justify-center">
+    <div className="h-screen items-center mx-auto flex justify-center max-h-screen">
       <SplashScreen finishLoading={finishLoading} className={className} dark={dark} />
     </div>
   ) : (
