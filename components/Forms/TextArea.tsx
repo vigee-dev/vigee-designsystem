@@ -3,21 +3,11 @@ import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
 import { useState } from "react";
 
-import {
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form";
+import { FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "../ui/hover-card";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card";
 import { cn } from "../lib/utils";
 
 type Props<T extends FieldValues> = {
@@ -38,25 +28,11 @@ type Props<T extends FieldValues> = {
   onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void;
   helpComponent?: React.ReactNode;
   rows?: number;
+  white?: boolean;
 };
 
-export default function TextArea<T extends FieldValues>({
-  form,
-  name,
-  required,
-  label,
-  placeholder,
-  max,
-  onBlur,
-  className,
-  descr,
-  disabled,
-  helpComponent,
-  rows = 3
-}: Props<T>) {
-  const [charCount, setCharCount] = useState(
-    name ? form?.getValues(name)?.length || 0 : 0
-  );
+export default function TextArea<T extends FieldValues>({ form, name, required, label, placeholder, max, onBlur, className, descr, disabled, helpComponent, rows = 3, white }: Props<T>) {
+  const [charCount, setCharCount] = useState(name ? form?.getValues(name)?.length || 0 : 0);
 
   return (
     <FormField
@@ -106,10 +82,7 @@ export default function TextArea<T extends FieldValues>({
               }
               field.onChange(e);
             }}
-            className={cn(
-              `resize-none font-medium bg-input border-none text-[16px] md:text-sm col-span-full`,
-              className
-            )}
+            className={cn(`resize-none font-medium bg-input border-none text-[16px] md:text-sm col-span-full`, className, white && "bg-white border border-zinc-200 border-solid")}
             disabled={disabled}
           />
           {descr && <FormDescription>{descr}</FormDescription>}

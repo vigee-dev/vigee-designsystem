@@ -31,6 +31,7 @@ type Props<T extends FieldValues> = {
   minimalist?: boolean;
   maxLength?: number;
   link?: string | null;
+  white?: boolean;
 };
 
 export default function Input<T extends FieldValues>({
@@ -53,6 +54,7 @@ export default function Input<T extends FieldValues>({
   value,
   minimalist,
   link,
+  white,
 }: Props<T>) {
   const [charCount, setCharCount] = useState(name ? form?.getValues(name)?.length || 0 : 0);
   return form && name ? (
@@ -104,7 +106,8 @@ export default function Input<T extends FieldValues>({
                   "text-[16px] md:text-sm font-medium bg-input border-none ",
                   className,
                   minimalist &&
-                    "focus-visible:ring-offset-0 bg-transparent font-bold text-black placeholder:text-gray-300 selection:border-none focus-visible:ring-0 ring-0 border-none  ring-offset-none p-0 focus:outline-none focus:ring-0 caret-black"
+                    "focus-visible:ring-offset-0 bg-transparent font-bold text-black placeholder:text-gray-300 selection:border-none focus-visible:ring-0 ring-0 border-none  ring-offset-none p-0 focus:outline-none focus:ring-0 caret-black",
+                  white && "bg-white border border-zinc-200 border-solid"
                 )}
                 onChange={e => {
                   if (maxLength) setCharCount(e.target.value.length);
@@ -154,7 +157,7 @@ export default function Input<T extends FieldValues>({
           step={step}
           onChange={onChange}
           value={value}
-          className="text-[16px] md:text-sm font-medium bg-input border-none"
+          className={cn("text-[16px] md:text-sm font-medium bg-input border-none", white && "bg-white border border-zinc-200 border-solid")}
         />
       </HoverCard>
       {descr && <p className={"text-sm text-muted-foreground"}>{descr}</p>}
