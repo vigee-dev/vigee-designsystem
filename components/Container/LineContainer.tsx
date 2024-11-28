@@ -16,12 +16,16 @@ interface PageHeaderProps {
 }
 
 const Content = ({ title, subtitle, icon, children, className }: Omit<PageHeaderProps, "href" | "onClick">) => (
-  <div className={cn("rounded-xl h-fit py-4 md:my-2 items-center border-none  group transition-ease-in-out duration-100 hover:cursor-pointer bg-transparent ", className)}>
+  <div
+    className={cn(
+      "rounded-xl h-fit py-4 md:my-2 text-gray-600 hover:text-gray-900 items-center border-none  group transition-ease-in-out duration-100 hover:cursor-pointer bg-transparent transition-ease-in-out duration-100",
+      className
+    )}>
     <div className="flex justify-between  w-full items-center ">
       <div className="flex gap-x-8 items-center">
-        {icon && <div className="icon-container text-gray-600 group-hover:text-gray-900 transition-ease-in-out duration-100">{icon}</div>}
+        {icon && <div className="icon-container   ">{icon}</div>}
         <div className="flex flex-col px-2">
-          <TypographyH4 className="md:text-base text-sm font-bold text-gray-600 group-hover:text-gray-900 transition-ease-in-out duration-100">{title}</TypographyH4>
+          <TypographyH4 className="md:text-base text-sm font-bold   ">{title}</TypographyH4>
           {subtitle && <p className="text-gray-400 group-hover:text-gray-600 md:text-sm text-xs transition-ease-in-out duration-100">{subtitle}</p>}
         </div>
       </div>
