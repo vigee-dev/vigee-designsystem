@@ -23,12 +23,11 @@ interface TabsResponsiveProps<T extends string = string> {
   query?: string;
   options: TabOption<T>[];
   children?: ReactNode;
-  fullWidth?: boolean;
   className?: string;
   startTransition?: (callback: () => void) => void;
 }
 
-export function TabMobile<T extends string = string>({ onChange, options, defaultValue, value, query, children, fullWidth, className, startTransition }: TabsResponsiveProps<T>) {
+export function TabMobile<T extends string = string>({ onChange, options, defaultValue, value, query, children, className, startTransition }: TabsResponsiveProps<T>) {
   const router = useRouter();
 
   const [filter, setFilter] = useQueryState(query ?? "", {
@@ -74,7 +73,7 @@ export function TabMobile<T extends string = string>({ onChange, options, defaul
               value={option.href ?? option.value ?? ""}
               className={cn(
                 `flex gap-2 group min-w-0 px-2`,
-                fullWidth ? "w-full" : "w-fit",
+
                 "rounded-xl dark:bg-zinc-900 bg-zinc-100 dark:data-[state=active]:text-zinc-800 text-zinc-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-zinc-100 font-bold"
               )}
               onClick={() => handleValueChange(option.href ?? option.value ?? "", option)}>
