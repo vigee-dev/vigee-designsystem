@@ -49,6 +49,7 @@ import {
   PiBarchartDefaultStroke,
   PiUserSettingsStroke,
   PiChatDefaultStroke,
+  PiUserCircleStroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2, XIcon } from "lucide-react";
@@ -79,7 +80,8 @@ const iconMap = {
   back: PiArrowLeftStroke,
   edit: PiPencilEditBoxDuoSolid,
   arrowLeft: PiArrowLeftCircleContrast,
-  user: PiUserPlusContrast,
+  userAdd: PiUserPlusContrast,
+  user: PiUserCircleStroke,
   copy: PiCopyCopiedStroke,
   chevron: PiChevronRightStroke,
   chevronLeft: PiChevronLeftStroke,
