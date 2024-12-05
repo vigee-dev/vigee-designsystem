@@ -1,4 +1,4 @@
-import { TypographyH1, TypographyH2 } from "../Typography/Typography";
+import { TypographyH2 } from "../Typography/Typography";
 import { cn } from "../lib/utils";
 
 interface PageHeaderProps {
@@ -20,7 +20,7 @@ export function PageHeader({ title, subtitle, children, small, icon, className, 
       <div className="flex items-center gap-4">
         {icon && <div className={iconClassName}>{icon}</div>}
         <div className="flex flex-col">
-          {small ? <TypographyH2 className={cn("text-primary m-0", classNameTitle)}>{title}</TypographyH2> : <TypographyH1 className="text-primary m-0">{title}</TypographyH1>}
+          <TypographyH2 className={cn("text-primary m-0", classNameTitle)}>{title}</TypographyH2>
           {subtitle && <p className={cn("text-gray-400 text-sm", classNameSubtitle)}>{subtitle}</p>}
         </div>
       </div>
