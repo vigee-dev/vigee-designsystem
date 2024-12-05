@@ -66,7 +66,7 @@ export function TabMobile<T extends string = string>({ onChange, options, defaul
   return (
     <div className="flex items-center gap-4 w-full">
       <Tabs defaultValue={defaultValue} className={cn(`w-full overflow-x-auto`)} value={value}>
-        <TabsList className={cn(`overflow-x-auto py-2`, className, "bg-transparent gap-2")}>
+        <TabsList className={cn(`overflow-x-auto `, className, "bg-transparent gap-2")}>
           {options.map((option, index) => (
             <TabsTrigger
               key={index}
