@@ -64,7 +64,7 @@ export function TabMobile<T extends string = string>({ onChange, options, defaul
   };
 
   return (
-    <div className="flex items-center gap-4 w-full py-1">
+    <div className="flex items-center gap-4 w-full">
       <Tabs defaultValue={defaultValue} className={cn(`w-full overflow-x-auto sm:no-scrollbar `, className)} value={value}>
         <TabsList className={cn(`overflow-x-auto `, "bg-transparent gap-2", fullWidth ? "w-full" : "w-fit")}>
           {options.map((option, index) => (
