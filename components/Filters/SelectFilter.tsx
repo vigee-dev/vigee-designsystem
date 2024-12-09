@@ -2,7 +2,7 @@
 import { useCallback } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Select } from "../../components/Select/Select";
-import { cn } from "components/lib/utils";
+import { cn } from "../lib/utils";
 
 interface Props {
   statusName: string;
