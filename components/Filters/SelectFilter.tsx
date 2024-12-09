@@ -2,14 +2,16 @@
 import { useCallback } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Select } from "../../components/Select/Select";
+import { cn } from "components/lib/utils";
 
 interface Props {
   statusName: string;
   placeholder?: string;
   status: { label: string; value: string; icon?: React.ReactNode }[];
+  className?: string;
 }
 
-export const SelectFilter = ({ statusName, status, placeholder }: Props) => {
+export const SelectFilter = ({ statusName, status, placeholder, className }: Props) => {
   const { replace } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -30,5 +32,5 @@ export const SelectFilter = ({ statusName, status, placeholder }: Props) => {
     [searchParams, statusName]
   );
 
-  return <Select className="w-full md:w-auto" onChange={handleSearch} defaultValue={searchParams.get(statusName) ?? ""} placeholder={placeholder} options={status} />;
+  return <Select className={cn("w-full md:w-auto", className)} onChange={handleSearch} defaultValue={searchParams.get(statusName) ?? ""} placeholder={placeholder} options={status} />;
 };
