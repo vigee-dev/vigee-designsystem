@@ -6,7 +6,7 @@ import { Select } from "../../components/Select/Select";
 interface Props {
   statusName: string;
   placeholder?: string;
-  status: { label: string; value: string }[];
+  status: { label: string; value: string; icon?: React.ReactNode }[];
 }
 
 export const SelectFilter = ({ statusName, status, placeholder }: Props) => {
@@ -19,11 +19,7 @@ export const SelectFilter = ({ statusName, status, placeholder }: Props) => {
       const params = new URLSearchParams(searchParams.toString());
       params.set("page", "1");
 
-      if (
-        status === undefined ||
-        status === searchParams.get(statusName) ||
-        status === ""
-      ) {
+      if (status === undefined || status === searchParams.get(statusName) || status === "") {
         params.delete(statusName);
       } else {
         params.set(statusName, status);
@@ -34,13 +30,5 @@ export const SelectFilter = ({ statusName, status, placeholder }: Props) => {
     [searchParams, statusName]
   );
 
-  return (
-    <Select
-      className="w-full md:w-auto"
-      onChange={handleSearch}
-      defaultValue={searchParams.get(statusName) ?? ""}
-      placeholder={placeholder}
-      options={status}
-    />
-  );
+  return <Select className="w-full md:w-auto" onChange={handleSearch} defaultValue={searchParams.get(statusName) ?? ""} placeholder={placeholder} options={status} />;
 };

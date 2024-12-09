@@ -1,14 +1,6 @@
 "use client";
 import * as React from "react";
-import {
-  Select as SelectShadCn,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "../../components/ui/select";
+import { Select as SelectShadCn, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../../components/ui/select";
 import { cn } from "../lib/utils";
 import { Label } from "../ui/label";
 import { useEffect } from "react";
@@ -18,6 +10,7 @@ interface Option {
   value: string;
   label: string;
   group?: string;
+  icon?: React.ReactNode;
 }
 
 interface SelectScrollableProps {
@@ -28,38 +21,24 @@ interface SelectScrollableProps {
   disabled?: boolean;
   defaultValue?: string;
   label?: string;
-  value?: string
+  value?: string;
 }
 
-export function Select({
-  options,
-  placeholder = "Sélectionnez une valeur",
-  onChange,
-  className,
-  disabled,
-  defaultValue,
-  label,
-  value
-}: SelectScrollableProps) {
-  const [selectedValue, setSelectedValue] = React.useState<string | undefined>(
-    defaultValue || undefined
-  );
+export function Select({ options, placeholder = "Sélectionnez une valeur", onChange, className, disabled, defaultValue, label, value }: SelectScrollableProps) {
+  const [selectedValue, setSelectedValue] = React.useState<string | undefined>(defaultValue || undefined);
 
   useEffect(() => {
-    setSelectedValue(value)
-  }, [value])
+    setSelectedValue(value);
+  }, [value]);
 
-  const groupedOptions = options.reduce<Record<string, Option[]>>(
-    (acc, option) => {
-      const group = option.group || "Ungrouped"; // Default group name for ungrouped items
-      if (!acc[group]) {
-        acc[group] = [];
-      }
-      acc[group]?.push(option);
-      return acc;
-    },
-    {}
-  );
+  const groupedOptions = options.reduce<Record<string, Option[]>>((acc, option) => {
+    const group = option.group || "Ungrouped"; // Default group name for ungrouped items
+    if (!acc[group]) {
+      acc[group] = [];
+    }
+    acc[group]?.push(option);
+    return acc;
+  }, {});
 
   const handleValueChange = (newValue: string) => {
     if (newValue === String(selectedValue)) {
@@ -72,12 +51,7 @@ export function Select({
   };
 
   return (
-    <SelectShadCn
-      onValueChange={handleValueChange}
-      defaultValue={selectedValue}
-      value={selectedValue}
-      disabled={disabled}
-    >
+    <SelectShadCn onValueChange={handleValueChange} defaultValue={selectedValue} value={selectedValue} disabled={disabled}>
       {label && <Label className="font-black text-primary mt-2">{label}</Label>}
 
       <SelectTrigger className={cn("w-[280px] font-medium bg-input", className)}>
@@ -87,12 +61,12 @@ export function Select({
         {Object.entries(groupedOptions).map(([groupName, groupOptions]) => (
           <SelectGroup key={groupName}>
             {/* Only render the SelectLabel if the group name is not 'Ungrouped' */}
-            {groupName !== "Ungrouped" && (
-              <SelectLabel>{groupName}</SelectLabel>
-            )}
+            {groupName !== "Ungrouped" && <SelectLabel>{groupName}</SelectLabel>}
             {groupOptions.map(option => (
               <SelectItem key={option.value} value={option.value}>
-                {option.label}
+                <div className="flex items-center gap-2">
+                  {option.icon} {option.label}
+                </div>
               </SelectItem>
             ))}
           </SelectGroup>
