@@ -195,7 +195,7 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
               big && "w-10 h-10",
               variant === "outline" && "text-gray-900",
               variant === "secondary" && "text-secondary-foreground",
-              !disabled && "group-hover:animate-pulse",
+              !disabled && "md:group-hover:animate-pulse",
               !children && !disabled && "group-hover:text-primary group-hover:scale-105",
               "bg-transparent",
               classNameIcon
@@ -215,7 +215,7 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
               big && "w-10 h-10",
               variant === "outline" && "text-gray-900",
               variant === "secondary" && "text-secondary-foreground",
-              !disabled && "group-hover:animate-pulse",
+              !disabled && "md:group-hover:animate-pulse",
               !children && !disabled && "group-hover:text-primary group-hover:scale-105",
               "bg-transparent",
               classNameIcon
@@ -245,7 +245,7 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
             big && "w-10 h-10",
             variant === "outline" && "text-gray-900",
             variant === "secondary" && "text-secondary-foreground",
-            !disabled && "group-hover:animate-pulse",
+            !disabled && "md:group-hover:animate-pulse",
             !children && !disabled && "group-hover:text-primary group-hover:scale-105",
             className,
             "bg-transparent",
@@ -265,7 +265,7 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
             big && "w-10 h-10",
             variant === "outline" && "text-gray-900",
             variant === "secondary" && "text-secondary-foreground",
-            !disabled && "group-hover:animate-pulse",
+            !disabled && "md:group-hover:animate-pulse",
             !children && !disabled && "group-hover:text-primary group-hover:scale-105",
             "bg-transparent",
             classNameIcon
