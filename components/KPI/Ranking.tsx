@@ -43,10 +43,11 @@ export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameIm
           <div className={"flex items-center"} key={index}>
             {item.img ? (
               <Avatar className={cn("h-9 w-9", classNameImage)}>
-                <AvatarImage src={item.img} alt="Avatar" className={"object-cover w-full h-full"} /> <AvatarFallback>{item ? icon : <PiUserCircleDuoStroke />}</AvatarFallback>
+                <AvatarImage src={item.img} alt="Avatar" className={"object-cover w-full h-full"} />{" "}
+                <AvatarFallback>{item ? icon : <PiUserCircleDuoStroke className={cn("h-9 w-9", classNameImage)} />}</AvatarFallback>
               </Avatar>
             ) : (
-              <PiUserCircleDuoSolid className="text-gray-400  h-9 w-9" />
+              <PiUserCircleDuoSolid className={cn("text-gray-400  h-9 w-9", classNameImage)} />
             )}
 
             <div className="ml-4 space-y-1">

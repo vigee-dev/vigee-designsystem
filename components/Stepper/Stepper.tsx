@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Container } from "./../../components/Container/Container";
 import { PiCheckTickCircleContrast } from "./../../icons/PikaIcons";
 import { cn } from "../../components/lib/utils";
@@ -39,7 +39,7 @@ function Stepper<StepContent extends string>({ stepper, className }: { stepper: 
         {stepper.steps?.map((step, i) => (
           <div key={i} className={`step-item ${stepper.currentStep === i ? "active" : ""} ${i < stepper.currentStep ? "complete" : ""}`}>
             <div className="step">{i < stepper.currentStep ? <PiCheckTickCircleContrast /> : i + 1}</div>
-            <p className="text-gray-500 text-xs md:text-sm font-medium pt-1">{step}</p>
+            <p className={`${stepper.currentStep === i ? "text-black" : "text-gray-500"} text-xs md:text-sm font-medium pt-1`}>{step}</p>
           </div>
         ))}
       </div>
