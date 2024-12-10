@@ -25,7 +25,7 @@ const Content = ({ title, subtitle, icon, children, className }: Omit<PageHeader
       <div className="flex gap-x-8 items-center">
         {icon && <div className="icon-container   ">{icon}</div>}
         <div className="flex flex-col px-2">
-          <TypographyH4 className="md:text-base text-sm font-bold   ">{title}</TypographyH4>
+          <TypographyH4 className="text-xs md:text-base  font-bold   ">{title}</TypographyH4>
           {subtitle && <p className="text-gray-400 group-hover:text-gray-600 md:text-sm text-xs transition-ease-in-out duration-100">{subtitle}</p>}
         </div>
       </div>
