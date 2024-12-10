@@ -190,6 +190,21 @@ export function InvoicesMobileSkeleton() {
   );
 }
 
+export function MobileCardSkeleton() {
+  return (
+    <div className="mb-2 w-full rounded-md bg-white p-4 flex justify-between">
+      <div>
+        <div className="h-6 w-16 rounded bg-gray-100"></div>
+        <div className="mt-2 h-6 w-24 rounded bg-gray-100"></div>
+      </div>
+      <div className="flex justify-end gap-2 items-center">
+        <div className="mr-2 h-8 w-8 rounded-full bg-gray-100"></div>
+        <div className="h-10 w-10 rounded bg-gray-100"></div>
+      </div>
+    </div>
+  );
+}
+
 export function InvoicesTableSkeleton() {
   return (
     <div className="mt-6 flow-root">
@@ -247,12 +262,12 @@ export function TableSkeleton() {
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50  md:pt-0">
           <div className="md:hidden">
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
-            <InvoicesMobileSkeleton />
+            <MobileCardSkeleton />
+            <MobileCardSkeleton />
+            <MobileCardSkeleton />
+            <MobileCardSkeleton />
+            <MobileCardSkeleton />
+            <MobileCardSkeleton />
           </div>
           <table className="hidden min-w-full text-gray-900 md:table">
             <tbody className="bg-white">
