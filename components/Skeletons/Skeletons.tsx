@@ -1,3 +1,5 @@
+import { cn } from "../lib/utils";
+
 // Loading animation
 const shimmer =
   "before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent";
@@ -258,9 +260,9 @@ export function InvoicesTableSkeleton() {
   );
 }
 
-export function TableSkeleton() {
+export function TableSkeleton({ className }: { className?: string }) {
   return (
-    <div className="mt-6 flow-root">
+    <div className={cn("mt-6 flow-root", className)}>
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50  md:pt-0">
           <div className="md:hidden">
