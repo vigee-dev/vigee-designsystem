@@ -4,6 +4,7 @@ import { PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card";
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Label } from "../ui/label";
+import { cn } from "../lib/utils";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -21,6 +22,7 @@ type Props<T extends FieldValues> = {
   helpComponent?: React.ReactNode;
   isBoolean?: boolean;
   options?: { label: string; value: string; icon?: React.ReactNode; color?: string }[];
+  variant?: 'default' | 'haro';
 };
 
 export default function Select<T extends FieldValues>({
@@ -39,6 +41,7 @@ export default function Select<T extends FieldValues>({
   helpComponent,
   isBoolean = false,
   options,
+  variant = 'default',
 }: Props<T>) {
   return form?.control && name ? (
     <FormField
@@ -46,7 +49,13 @@ export default function Select<T extends FieldValues>({
       name={name}
       rules={{ required }}
       render={({ field }) => (
-        <FormItem className={className}>
+        <FormItem
+          className={cn(
+            className,
+            variant === "default" && 'border-none',
+            variant === "haro" && 'border-gray-400 border-2 rounded'
+          )}
+        >
           <HoverCard>
             <div className="flex items-center justify-between ">
               <div className="flex flex-col gap-1 ">
@@ -83,7 +92,7 @@ export default function Select<T extends FieldValues>({
             value={String(field.value)}
             disabled={disabled}>
             <FormControl>
-              <SelectTrigger className="font-medium bg-input border-none">
+              <SelectTrigger className={`font-medium bg-input`}>
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
             </FormControl>
@@ -110,7 +119,7 @@ export default function Select<T extends FieldValues>({
     <div className={className}>
       {label && <Label className="font-black text-primary">{label}</Label>}
       <ShadSelect onValueChange={onChange} value={String(value)} disabled={disabled}>
-        <SelectTrigger className="font-medium bg-input border-none">
+        <SelectTrigger className={`font-medium bg-input ${variant === "default" && 'border-none'} ${variant === "outlined" && 'border-gray-400 border-2'}`}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent className="max-h-[200px] font-medium">
