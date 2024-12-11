@@ -47,7 +47,7 @@ export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameIm
                 <AvatarImage src={item.img} alt="Avatar" className={"object-cover w-full h-full"} /> <AvatarFallback>{item ? icon : <PiUserCircleDuoStroke />}</AvatarFallback>
               </Avatar>
             ) : (
-              <PiUserCircleDuoSolid className="text-gray-400  h-9 w-9" />
+              <PiUserCircleDuoSolid className={cn("text-gray-400 h-9 w-9", classNameImage)} />
             )}
 
             <div className="ml-4 space-y-1">
