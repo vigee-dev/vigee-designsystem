@@ -24,9 +24,10 @@ interface Props {
   icon?: React.ReactNode;
   emptyMessage?: string;
   classNameImage?: string;
+  kiloEuros?: boolean;
 }
 
-export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameImage }: Props) {
+export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameImage, kiloEuros }: Props) {
   const truncateName = (name: string) => {
     return name.length > 15 ? name.substring(0, 15) + "..." : name;
   };
@@ -43,11 +44,10 @@ export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameIm
           <div className={"flex items-center"} key={index}>
             {item.img ? (
               <Avatar className={cn("h-9 w-9", classNameImage)}>
-                <AvatarImage src={item.img} alt="Avatar" className={"object-cover w-full h-full"} />{" "}
-                <AvatarFallback>{item ? icon : <PiUserCircleDuoStroke className={cn("h-9 w-9", classNameImage)} />}</AvatarFallback>
+                <AvatarImage src={item.img} alt="Avatar" className={"object-cover w-full h-full"} /> <AvatarFallback>{item ? icon : <PiUserCircleDuoStroke />}</AvatarFallback>
               </Avatar>
             ) : (
-              <PiUserCircleDuoSolid className={cn("text-gray-400  h-9 w-9", classNameImage)} />
+              <PiUserCircleDuoSolid className="text-gray-400  h-9 w-9" />
             )}
 
             <div className="ml-4 space-y-1">
@@ -57,11 +57,23 @@ export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameIm
 
             <div className="flex flex-col gap-1 ml-auto font-medium text-sm">
               <div className={cn(" text-primary ", item.amount1Color && item.amount1Color)}>
-                {item.amount1Name} {item.amount.toLocaleString("fr-FR").replace(/\s/g, " ")} {item.currency}
+                {item.amount1Name}{" "}
+                {kiloEuros && item.amount > 10000
+                  ? Math.round(item.amount / 1000)
+                      .toLocaleString("fr-FR")
+                      .replace(/\s/g, " ") + "k"
+                  : item.amount.toLocaleString("fr-FR").replace(/\s/g, " ")}{" "}
+                {item.currency}
               </div>
               {item.amount2 && (
                 <div className={cn(" text-secondary ", item.amount2Color && item.amount2Color)}>
-                  {item.amount2Name} {item.amount2.toLocaleString("fr-FR").replace(/\s/g, " ")} {item.currency}
+                  {item.amount2Name}{" "}
+                  {kiloEuros && item.amount2 > 10000
+                    ? Math.round(item.amount2 / 1000)
+                        .toLocaleString("fr-FR")
+                        .replace(/\s/g, " ") + "k"
+                    : item.amount2.toLocaleString("fr-FR").replace(/\s/g, " ")}{" "}
+                  {item.currency}
                 </div>
               )}
             </div>
