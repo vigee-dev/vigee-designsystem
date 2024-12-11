@@ -22,7 +22,7 @@ type Props<T extends FieldValues> = {
   helpComponent?: React.ReactNode;
   isBoolean?: boolean;
   options?: { label: string; value: string; icon?: React.ReactNode; color?: string }[];
-  variant?: 'default' | 'haro';
+  variant?: 'default' | 'outlined';
 };
 
 export default function Select<T extends FieldValues>({
@@ -53,7 +53,6 @@ export default function Select<T extends FieldValues>({
           className={cn(
             className,
             variant === "default" && 'border-none',
-            variant === "haro" && 'border-gray-400 border-2 rounded'
           )}
         >
           <HoverCard>
@@ -92,7 +91,10 @@ export default function Select<T extends FieldValues>({
             value={String(field.value)}
             disabled={disabled}>
             <FormControl>
-              <SelectTrigger className={`font-medium bg-input`}>
+              <SelectTrigger className={cn(
+                'font-medium bg-input',
+                variant === 'outlined' && 'border-gray-400 border rounded-lg',
+              )}>
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
             </FormControl>
