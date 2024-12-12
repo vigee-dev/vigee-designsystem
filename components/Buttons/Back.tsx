@@ -39,7 +39,7 @@ const Back: React.FC<BackProps> = ({ href, where, onClick, className, back = fal
         href={back ? "" : href}
         onClick={back ? () => router.back() : onClick}
         classNameIcon="bg-zinc-900 text-zinc-50 h-12 w-12 rounded-full bg-zinc-900 p-2 shrink-0 hover:text-zinc-900 hover:bg-zinc-50 z-50"
-        className="md:hidden fixed bottom-12 left-0"
+        className="md:hidden fixed bottom-12 left-0 z-50"
       />
     </>
   );
