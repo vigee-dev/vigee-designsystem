@@ -91,7 +91,7 @@ export default function Select<T extends FieldValues>({
             value={String(field.value)}
             disabled={disabled}>
             <FormControl>
-              <SelectTrigger className={cn('font-medium bg-input', variant === 'outlined' && 'border-gray-400 border rounded-lg')}>
+              <SelectTrigger className={cn('font-medium bg-input', variant === 'outlined' && 'border-gray-400 border rounded-lg bg-transparent')}>
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
             </FormControl>
@@ -118,7 +118,7 @@ export default function Select<T extends FieldValues>({
     <div className={className}>
       {label && <Label className="font-black text-primary">{label}</Label>}
       <ShadSelect onValueChange={onChange} value={String(value)} disabled={disabled}>
-        <SelectTrigger className={`font-medium bg-input ${variant === "outlined" && 'border-gray-400 border rounded-lg'}`}>
+        <SelectTrigger className={`font-medium bg-input ${variant === "outlined" && 'border-gray-400 border rounded-lg bg-transparent'}`}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent className="max-h-[200px] font-medium">
