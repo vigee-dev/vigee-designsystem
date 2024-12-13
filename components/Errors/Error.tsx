@@ -18,7 +18,7 @@ export function Error({ title, subtitle, children, supportEmail, onClick, varian
   const image = variant === "bro" ? errorBro : error;
   return (
     <div className="flex flex-col items-center justify-center  w-full px-12 max-w-2xl">
-      <Image width={400} height={400} className="mx-auto w-44 h-auto" src={image} alt="Erreur" />
+      <Image width={400} height={400} className="mx-auto w-64 h-64" src={image} alt="Erreur" />
       <h1 className={"text-xl text-primary font-bold text-center pt-6 font-display"}>{title ? title : "Une erreur s'est produite."}</h1>
 
       {subtitle && <p className="text-gray-400">{subtitle}</p>}

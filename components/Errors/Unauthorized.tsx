@@ -1,6 +1,7 @@
 import Image, { StaticImageData } from "next/image";
 
 import unauthorized from "../../img/error/unauthorized.svg";
+import unauthorizedBro from "../../img/error/unauthorized-bro.svg";
 import Link from "next/link";
 import { Button } from "../Buttons/Button";
 import { PiEnvelopeArrowRightDuoSolid } from "../../icons/PikaIcons";
@@ -12,11 +13,21 @@ interface IllustrationProps {
   supportEmail?: string;
   img?: StaticImageData;
   onClick?: () => void;
+  variant?: "bro" | "classic";
 }
-export function Unauthorized({ title = "Accès refusé", subtitle = "Vous n'avez pas les droits pour accéder à cette page.", children, supportEmail, onClick, img = unauthorized }: IllustrationProps) {
+export function Unauthorized({
+  title = "Accès refusé",
+  subtitle = "Vous n'avez pas les droits pour accéder à cette page.",
+  children,
+  supportEmail,
+  onClick,
+  img = unauthorized,
+  variant = "bro",
+}: IllustrationProps) {
+  const image = variant === "bro" ? unauthorizedBro : unauthorized;
   return (
     <div className="flex flex-col items-center justify-center  w-full px-12 max-w-2xl">
-      {img && <Image width={400} height={400} className="mx-auto w-44 h-auto" src={img} alt="Erreur" />}
+      {img && <Image width={400} height={400} className="mx-auto w-64 h-64" src={image} alt="Erreur" />}
       <h1 className={"text-xl text-primary font-bold text-center pt-6 font-display"}>{title ? title : "Une erreur s'est produite."}</h1>
 
       {subtitle && <p className="text-gray-400">{subtitle}</p>}
