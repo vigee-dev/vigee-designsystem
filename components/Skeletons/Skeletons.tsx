@@ -13,6 +13,21 @@ export const InputSkeleton = ({ big = true, bigHeight = false }: { big?: boolean
   );
 };
 
+export const MultiInputsSkeleton = ({ number = 3 }: { number?: number }) => {
+  const inputs = Array.from({ length: number }, (_, index) => index);
+
+  return (
+    <div className="flex flex-col p-1 gap-1 w-full">
+      {inputs.map(input => (
+        <div className="flex flex-col p-1 gap-1">
+          <div className="h-6 w-16 rounded-md bg-gray-100" />
+          <div className={`${shimmer} relative h-6 overflow-hidden w-full rounded-md bg-gray-100`} />
+        </div>
+      ))}
+    </div>
+  );
+};
+
 export function CardSkeleton() {
   return (
     <div className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm`}>
