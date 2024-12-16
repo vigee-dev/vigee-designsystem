@@ -4,6 +4,8 @@ import { UseFormReturn, FieldValues, Path, PathValue } from "react-hook-form";
 import { useRef, useState } from "react";
 import { Card, CardContent } from "../ui/card";
 import {
+  PiCloudArrowUploadDuoSolid,
+  PiCloudArrowUploadDuoStroke,
   PiDeleteBackwardLeftDuoSolid,
   PiDeleteDustbin01DuoSolid,
   PiDeleteDustbin02Solid,
@@ -26,13 +28,7 @@ interface ButtonProps {
   icon: string;
 }
 
-export default function InputDropZoneFile<T extends FieldValues>({
-  form,
-  name,
-  extensions,
-  multiple = false,
-  accept,
-}: Props<T>) {
+export default function InputDropZoneFile<T extends FieldValues>({ form, name, extensions, multiple = false, accept }: Props<T>) {
   function getPossibleExtensions(strings: string[] | undefined): string {
     // Déterminer les extensions possibles
     const extensions = strings || [];
@@ -48,9 +44,7 @@ export default function InputDropZoneFile<T extends FieldValues>({
 
   const [dragActive, setDragActive] = useState<boolean>(false);
   const inputRef = useRef<any>(null);
-  const [files, setFiles] = useState<
-    (File | { id: number; signedUrl: string; filename: string })[]
-  >(form?.getValues(name) ? form?.getValues(name) : []);
+  const [files, setFiles] = useState<(File | { id: number; signedUrl: string; filename: string })[]>(form?.getValues(name) ? form?.getValues(name) : []);
 
   const handleFiles = (newFiles: File[]) => {
     if (multiple) {
@@ -111,11 +105,9 @@ export default function InputDropZoneFile<T extends FieldValues>({
     inputRef.current.click();
   }
 
-  const isImageFile = (filename: string) =>
-    /\.jpg$|\.jpeg$|\.png$/i.test(filename);
+  const isImageFile = (filename: string) => /\.jpg$|\.jpeg$|\.png$/i.test(filename);
   const isPDFFile = (filename: string) => /\.pdf$/i.test(filename);
-  const shortName = (filename: string) =>
-    filename.length > 15 ? filename.substring(0, 15) + "..." : filename;
+  const shortName = (filename: string) => (filename.length > 15 ? filename.substring(0, 15) + "..." : filename);
 
   return (
     <div className="flex  items-center justify-center col-span-full">
@@ -128,8 +120,7 @@ export default function InputDropZoneFile<T extends FieldValues>({
         onDrop={handleDrop}
         onDragLeave={handleDragLeave}
         onDragOver={handleDragOver}
-        onClick={openFileExplorer}
-      >
+        onClick={openFileExplorer}>
         {/* this input element allows us to select files for upload. We make it hidden so we can activate it when the user clicks select files */}
         <input
           placeholder="fileInput"
@@ -138,90 +129,60 @@ export default function InputDropZoneFile<T extends FieldValues>({
           type="file"
           multiple={multiple}
           onChange={handleChange}
-          accept={
-            accept || ".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
-          }
+          accept={accept || ".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"}
         />
 
         {!(files.length > 0) ? (
-          <svg
-            className="w-12 h-12 text-gray-400 dark:text-gray-400"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 20 16"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-            />
-          </svg>
+          <PiCloudArrowUploadDuoStroke className="w-12 h-12 text-gray-500" />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center ">
             {files.map((file, index) => (
               // <div key={index} className="flex">
-                <Card key={index} className={"flex items-center aspect-square justify-center rounded-xl p-8"}>
-                  <CardContent className={"p-0 flex flex-col items-center justify-center relative"}>
-                    {file instanceof File && isImageFile(file.name) ? (
-                      <img
-                        key={index}
-                        src={URL.createObjectURL(file)}
-                        alt="Aperçu du fichier"
-                        className="rounded-lg"
-                        onLoad={event => URL.revokeObjectURL((event.target as HTMLImageElement).src)}
-                      />
-                    ) : "signedUrl" in file ? (
-                      <img
-                        key={index}
-                        src={file.signedUrl}
-                        alt="Aperçu du fichier"
-                        className="rounded-lg"
-                      />
-                    ) : file instanceof File && isPDFFile(file.name) ? (
-                      <div className="flex items-center flex-col text-xs text-gray-400 gap-2">
-                        <PiFilePdfFormatDuoSolid className="w-12 h-12 text-gray-400" />
-                        {shortName(file.name)}
-                      </div>
-                    ) : (
-                      <div className="flex items-center flex-col text-xs text-gray-400 gap-2">
-                        <PiFile02CheckDuoSolid className="w-12 h-12 text-gray-400" />
-                        {shortName(file.name)}
-                      </div>
-                    )}
-
-                    <div
-                      onClick={e => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleRemoveFile(index);
-                      }}
-                      className="absolute top-0 right-0 bg-white p-1 rounded-full  cursor-pointer "
-                    >
-                      <PiDeleteDustbin01DuoSolid className="h-5 w-5 text-red-400 hover:text-red-600" />
+              <Card key={index} className={"flex items-center aspect-square justify-center rounded-xl p-8"}>
+                <CardContent className={"p-0 flex flex-col items-center justify-center relative"}>
+                  {file instanceof File && isImageFile(file.name) ? (
+                    <img key={index} src={URL.createObjectURL(file)} alt="Aperçu du fichier" className="rounded-lg" onLoad={event => URL.revokeObjectURL((event.target as HTMLImageElement).src)} />
+                  ) : "signedUrl" in file ? (
+                    <img key={index} src={file.signedUrl} alt="Aperçu du fichier" className="rounded-lg" />
+                  ) : file instanceof File && isPDFFile(file.name) ? (
+                    <div className="flex items-center flex-col text-xs text-gray-400 gap-2">
+                      <PiFilePdfFormatDuoSolid className="w-12 h-12 text-gray-400" />
+                      {shortName(file.name)}
                     </div>
-                  </CardContent>
-                </Card>
+                  ) : (
+                    <div className="flex items-center flex-col text-xs text-gray-400 gap-2">
+                      <PiFile02CheckDuoSolid className="w-12 h-12 text-gray-400" />
+                      {shortName(file.name)}
+                    </div>
+                  )}
+
+                  <div
+                    onClick={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleRemoveFile(index);
+                    }}
+                    className="absolute top-0 right-0 bg-white p-1 rounded-full  cursor-pointer ">
+                    <PiDeleteDustbin01DuoSolid className="h-5 w-5 text-red-400 hover:text-red-600" />
+                  </div>
+                </CardContent>
+              </Card>
               // </div>
             ))}
           </div>
         )}
 
         {files?.length === 0 && (
-            <>
-              <p>
-                {multiple ? "Glissez vos fichiers" : "Glissez votre fichier"}{" "}
-                <span className="font-bold text-primary cursor-pointer">
+          <>
+            <p>
+              {multiple ? "Glissez vos fichiers" : "Glissez votre fichier"}{" "}
+              <span className="font-bold text-primary cursor-pointer">
                 <u>ou cliquez ici</u>
               </span>{" "}
-                pour envoyer
-              </p>
-              <p className="text-xs text-gray-400">
-                {extensions && `Fichier de type : ${getPossibleExtensions(extensions)}`}
-              </p>
-            </>
+              pour envoyer
+            </p>
+            <p className="text-xs text-gray-400">{extensions && `Fichier de type : ${getPossibleExtensions(extensions)}`}</p>
+          </>
         )}
       </div>
     </div>
