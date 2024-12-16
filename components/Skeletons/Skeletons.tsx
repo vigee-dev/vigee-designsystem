@@ -18,8 +18,8 @@ export const MultiInputsSkeleton = ({ number = 3 }: { number?: number }) => {
 
   return (
     <div className="flex flex-col p-1 gap-1 w-full">
-      {inputs.map(input => (
-        <div className="flex flex-col p-1 gap-1">
+      {inputs.map((input, index) => (
+        <div key={index} className="flex flex-col p-1 gap-1">
           <div className="h-6 w-16 rounded-md bg-gray-100" />
           <div className={`${shimmer} relative h-6 overflow-hidden w-full rounded-md bg-gray-100`} />
         </div>
