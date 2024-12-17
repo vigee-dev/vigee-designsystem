@@ -3,6 +3,7 @@ import { TypographyH3 } from "../Typography/Typography";
 import { PiUserCircleDuoSolid, PiUserCircleDuoStroke } from "../../icons/PikaIcons";
 import { cn } from "../lib/utils";
 import { truncate } from "lodash";
+import EmptyIllustration from "../Illustration/EmptyIllustration";
 
 interface Data {
   name: string;
@@ -30,7 +31,7 @@ interface Props {
 
 export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameImage, kiloEuros, iconTitle }: Props) {
   const truncateName = (name: string) => {
-    return name.length > 15 ? name.substring(0, 15) + "..." : name;
+    return name?.length > 15 ? name.substring(0, 15) + "..." : name;
   };
 
   return (
@@ -83,7 +84,7 @@ export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameIm
             </div>
           </div>
         ))}
-        {!(data.length > 0) && emptyMessage && <p className="text-gray-500 text-sm">{emptyMessage}</p>}
+        {!(data && data?.length > 0) && emptyMessage && <EmptyIllustration className="text-gray-500 text-sm" text={emptyMessage} />}
       </div>
     </div>
   );
