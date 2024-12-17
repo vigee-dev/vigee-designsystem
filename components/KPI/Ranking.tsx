@@ -25,18 +25,22 @@ interface Props {
   emptyMessage?: string;
   classNameImage?: string;
   kiloEuros?: boolean;
+  iconTitle?: React.ReactNode;
 }
 
-export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameImage, kiloEuros }: Props) {
+export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameImage, kiloEuros, iconTitle }: Props) {
   const truncateName = (name: string) => {
     return name.length > 15 ? name.substring(0, 15) + "..." : name;
   };
 
   return (
     <div className="space-y-8 ">
-      <div className="flex flex-col">
-        <TypographyH3 className="text-primary font-bold">{title}</TypographyH3>
-        <p className="text-gray-500 text-sm">{subtitle}</p>
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex flex-col">
+          <TypographyH3 className="text-primary font-bold">{title}</TypographyH3>
+          <p className="text-gray-500 text-sm">{subtitle}</p>
+        </div>
+        {iconTitle}
       </div>
 
       <div className="space-y-4">
