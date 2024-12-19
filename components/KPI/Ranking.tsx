@@ -84,7 +84,7 @@ export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameIm
             </div>
           </div>
         ))}
-        {!(data && data?.length > 0) && emptyMessage && <EmptyIllustration className="text-gray-500 text-sm" text={emptyMessage} />}
+        {!(data && data?.length > 0) && emptyMessage && <EmptyIllustration className="text-gray-500 text-sm p-0" subtitle={emptyMessage} classNameImage="w-36 h-36" />}
       </div>
     </div>
   );
