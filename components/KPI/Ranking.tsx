@@ -3,6 +3,7 @@ import { TypographyH3 } from "../Typography/Typography";
 import { PiUserCircleDuoSolid, PiUserCircleDuoStroke } from "../../icons/PikaIcons";
 import { cn } from "../lib/utils";
 import { truncate } from "lodash";
+import EmptyIllustration from "../Illustration/EmptyIllustration";
 
 interface Data {
   name: string;
@@ -25,18 +26,22 @@ interface Props {
   emptyMessage?: string;
   classNameImage?: string;
   kiloEuros?: boolean;
+  iconTitle?: React.ReactNode;
 }
 
-export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameImage, kiloEuros }: Props) {
+export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameImage, kiloEuros, iconTitle }: Props) {
   const truncateName = (name: string) => {
-    return name.length > 15 ? name.substring(0, 15) + "..." : name;
+    return name?.length > 15 ? name.substring(0, 15) + "..." : name;
   };
 
   return (
     <div className="space-y-8 ">
-      <div className="flex flex-col">
-        <TypographyH3 className="text-primary font-bold">{title}</TypographyH3>
-        <p className="text-gray-500 text-sm">{subtitle}</p>
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex flex-col">
+          <TypographyH3 className="text-primary font-bold">{title}</TypographyH3>
+          <p className="text-gray-500 text-sm">{subtitle}</p>
+        </div>
+        {iconTitle}
       </div>
 
       <div className="space-y-4">
@@ -79,7 +84,7 @@ export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameIm
             </div>
           </div>
         ))}
-        {!(data.length > 0) && emptyMessage && <p className="text-gray-500 text-sm">{emptyMessage}</p>}
+        {!(data && data?.length > 0) && emptyMessage && <EmptyIllustration className="text-gray-500 text-sm p-0" subtitle={emptyMessage} classNameImage="w-36 h-36" />}
       </div>
     </div>
   );

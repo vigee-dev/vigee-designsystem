@@ -14,12 +14,13 @@ interface IllustrationProps {
   supportEmail?: string;
   button?: boolean;
   className?: string;
+  classNameImage?: string;
   color?: string;
 }
-export default function EmptyIllustration({ text, subtitle, buttonLink, buttonText, children, button = false, className, color = "text-secondary" }: IllustrationProps) {
+export default function EmptyIllustration({ text, subtitle, buttonLink, buttonText, children, button = false, className, color = "text-secondary", classNameImage }: IllustrationProps) {
   return (
     <Container className={cn("flex flex-col items-center justify-center  border-none bg-transparent w-full px-12 p-8", className)}>
-      <SvgImage color={color} />
+      <SvgImage color={color} className={classNameImage} />
 
       <h2 className={"text-lg text-gray-600 font-medium text-center font-display"}>{text}</h2>
       <p className="text-gray-400 text-sm">{subtitle}</p>
@@ -38,9 +39,9 @@ export default function EmptyIllustration({ text, subtitle, buttonLink, buttonTe
   );
 }
 
-const SvgImage = ({ color }: { color?: string }) => {
+const SvgImage = ({ color, className }: { color?: string; className?: string }) => {
   return (
-    <div className={`w-60 h-60 ${color}`}>
+    <div className={cn(`w-60 h-60 ${color}`, className)}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
         <defs>
           <clipPath id="freepik--clip-path--inject-402">
