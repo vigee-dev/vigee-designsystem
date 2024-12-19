@@ -40,6 +40,8 @@ import {
   PiUserSettingsStroke,
   PiChatDefaultStroke,
   PiUserCircleStroke,
+  PiPlayBigSolid,
+  PiPlayCircleDuoSolid,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2, XIcon } from "lucide-react";
@@ -100,6 +102,7 @@ const iconMap = {
   home: PiHomeDefaultStroke,
   contacts: PiContactsBookStroke,
   chat: PiChatDefaultStroke,
+  play: PiPlayCircleDuoSolid,
 };
 
 export function Button({ children, onClick, variant, type = "button", disabled, href, className, pending, icon, iconLeft, iconComponent, tooltip, big, classNameIcon }: ButtonProps) {
