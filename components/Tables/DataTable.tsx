@@ -34,6 +34,7 @@ interface DataTableProps<TData, TValue> {
   lines?: number;
   className?: string;
   tableHook?: TanstackTable<TData>
+  displayBottomRowsSkeleton?: boolean;
 }
 
 export function DataTable<TData, TValue>({
@@ -45,7 +46,8 @@ export function DataTable<TData, TValue>({
   lines,
   onRowClick,
   className,
- tableHook,
+  tableHook,
+  displayBottomRowsSkeleton = false
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = React.useState<string | undefined>(undefined);
@@ -70,6 +72,18 @@ export function DataTable<TData, TValue>({
       },
     },
   })
+
+  const RowSkeleton = () => {
+    return (
+      <TableRow>
+        {table.getVisibleLeafColumns().map((column, index) => (
+          <TableCell key={index} className={'py-6'}>
+            <div className="h-6 animate-pulse w-full rounded bg-gray-100"></div>
+          </TableCell>
+        ))}
+      </TableRow>
+    )
+  }
 
   return (
     <div className={cn("w-full", className)}>
@@ -122,8 +136,20 @@ export function DataTable<TData, TValue>({
                 </TableCell>
               </TableRow>
             )}
+
+            {displayBottomRowsSkeleton && (
+              <>
+                <RowSkeleton />
+                <RowSkeleton />
+                <RowSkeleton />
+                <RowSkeleton />
+                <RowSkeleton />
+              </>
+            )}
+
           </TableBody>
         </Table>
+
 
         {table.getFilteredSelectedRowModel().rows.length > 0 && (
           <div className="flex-1 text-sm text-muted-foreground mt-2">
