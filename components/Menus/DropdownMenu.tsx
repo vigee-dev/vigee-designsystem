@@ -13,6 +13,7 @@ export type DropDownMenuItemType =
     type: 'item';
     content: string | ReactNode;
     onClick?: () => void;
+    className?: string
   }
   | {
     type: 'item-checkbox'
@@ -45,15 +46,15 @@ const DropdownMenu = ({ trigger, items, menuClassName }: Props) => {
           switch (item.type) {
             case 'item':
               return (
-                <DropdownMenuItem key={index} onClick={item.onClick} asChild>
-                  {item.content}
+                <DropdownMenuItem className={cn(item.className, 'cursor-pointer')} key={index} onClick={item.onClick} asChild>
+                  {typeof item.content === 'string' ? <p>{item.content}</p> : item.content}
                 </DropdownMenuItem>
               )
 
             case 'item-checkbox':
               return (
                 <DropdownMenuCheckboxItem
-                  className={cn(item.className)}
+                  className={cn(item.className, 'cursor-pointer')}
                   checked={item.checked}
                   onCheckedChange={item.onCheckedChange}
                   key={index}

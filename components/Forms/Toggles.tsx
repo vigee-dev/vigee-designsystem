@@ -34,7 +34,7 @@ export const Toggles = <T extends FieldValues>({ form, name, label, descr, class
           {label && <Label className="font-bold">{label}</Label>}
           <FormControl>
             <Container className={cn("p-1", className)}>
-              <ShadToggleGroup type="single" className="w-full flex flex-col md:flex-row  " value={field.value} onValueChange={field.onChange} disabled={disabled}>
+              <ShadToggleGroup type="single" className="w-full flex flex-col md:flex-row flex-wrap " value={field.value} onValueChange={field.onChange} disabled={disabled}>
                 {options.map(option => (
                   <ToggleGroupItem
                     key={option.value}

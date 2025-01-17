@@ -74,7 +74,7 @@ export function TabMobile<T extends string = string>({ onChange, options, defaul
               value={option.href ?? option.value ?? ""}
               className={cn(
                 `flex gap-2 group min-w-0 px-2`,
-                "rounded-xl dark:bg-zinc-900 bg-zinc-100 dark:data-[state=active]:text-zinc-800 text-zinc-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-zinc-100 font-bold",
+                "rounded-xl dark:bg-zinc-900 bg-zinc-100 dark:data-[state=active]:text-zinc-800 text-zinc-500 dark:data-[state=active]:bg-white data-[state=active]:bg-zinc-800 data-[state=active]:text-zinc-100 font-bold",
                 fullWidth ? "w-full" : "w-fit"
               )}
               onClick={() => handleValueChange(option.href ?? option.value ?? "", option)}>
