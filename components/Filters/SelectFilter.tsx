@@ -21,7 +21,7 @@ export const SelectFilter = ({ statusName, status, placeholder, className }: Pro
       const params = new URLSearchParams(searchParams.toString());
       params.set("page", "1");
 
-      if (status === undefined || status === searchParams.get(statusName) || status === "") {
+      if (status === undefined || status === searchParams.get(statusName) || status === "" || status === "all") {
         params.delete(statusName);
       } else {
         params.set(statusName, status);
@@ -32,5 +32,5 @@ export const SelectFilter = ({ statusName, status, placeholder, className }: Pro
     [searchParams, statusName]
   );
 
-  return <Select className={cn("w-full md:w-auto", className)} onChange={handleSearch} defaultValue={searchParams.get(statusName) ?? ""} placeholder={placeholder} options={status} />;
+  return <Select className={cn("w-full md:w-auto", className)} onChange={handleSearch} defaultValue={searchParams.get(statusName) ?? ""} placeholder={placeholder ?? ""} options={status} />;
 };
