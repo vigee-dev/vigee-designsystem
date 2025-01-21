@@ -26,6 +26,7 @@ type Props<T extends FieldValues> = {
   className?: string;
   children?: React.ReactNode
   disabled?: boolean
+  inverted?: boolean
 }
 
 export default function Switch<T extends FieldValues>({
@@ -37,7 +38,8 @@ export default function Switch<T extends FieldValues>({
   onChange,
   value,
   children,
-  disabled = false
+  disabled = false,
+  inverted = false
 }: Props<T>) {
   return form?.control && name ? (
     <FormField
@@ -52,10 +54,10 @@ export default function Switch<T extends FieldValues>({
           <FormControl>
             <SwitchShadcn
               disabled={disabled}
-              checked={field.value}
+              checked={inverted ? !field.value : field.value}
               onCheckedChange={(checked) => {
-                if (onChange) onChange(checked)
-                field.onChange(checked)
+                if (onChange) onChange(inverted ? !checked : checked)
+                field.onChange(inverted ? !checked : checked)
               }}
               className="data-[state=unchecked]:bg-slate-200"
             />
@@ -71,7 +73,7 @@ export default function Switch<T extends FieldValues>({
       </div>
       <SwitchShadcn
         disabled={disabled}
-        checked={value}
+        checked={inverted ? !value : value}
         onCheckedChange={onChange}
         className="data-[state=unchecked]:bg-slate-200"
       />
