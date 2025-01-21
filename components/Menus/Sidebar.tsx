@@ -165,7 +165,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             </div>
           </div>
 
-          {sidebarOpen && commandComponent ? commandComponent : null}
+          {commandComponent ? commandComponent : null}
 
           <nav className="flex flex-1 flex-col  ">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
