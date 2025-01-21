@@ -50,6 +50,7 @@ interface SidebarProps {
   signout?: () => void;
   persistQuery?: string;
   open?: boolean;
+  commandComponent?: React.ReactNode;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({
@@ -75,6 +76,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   signout,
   persistQuery,
   open = true,
+    commandComponent,
 }: SidebarProps) => {
   const pathname = usePathname();
   // TOIMPROVE find a way to hide the menu other than using pathname
@@ -162,6 +164,8 @@ const Sidebar: React.FC<SidebarProps> = ({
               )}
             </div>
           </div>
+
+          {sidebarOpen && commandComponent ? commandComponent : null}
 
           <nav className="flex flex-1 flex-col  ">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
