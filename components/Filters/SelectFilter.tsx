@@ -9,9 +9,10 @@ interface Props {
   placeholder?: string;
   status: { label: string; value: string; icon?: React.ReactNode }[];
   className?: string;
+  defaultValue?: string;
 }
 
-export const SelectFilter = ({ statusName, status, placeholder, className }: Props) => {
+export const SelectFilter = ({ statusName, status, placeholder, className, defaultValue }: Props) => {
   const { replace } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -32,5 +33,7 @@ export const SelectFilter = ({ statusName, status, placeholder, className }: Pro
     [searchParams, statusName]
   );
 
-  return <Select className={cn("w-full md:w-auto", className)} onChange={handleSearch} defaultValue={searchParams.get(statusName) ?? ""} placeholder={placeholder ?? ""} options={status} />;
+  return (
+    <Select className={cn("w-full md:w-auto", className)} onChange={handleSearch} defaultValue={defaultValue ?? searchParams.get(statusName) ?? ""} placeholder={placeholder ?? ""} options={status} />
+  );
 };
