@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button as ShadButton } from "../ui/button";
+import { Button as ShadButton, ButtonProps as ShadButtonProps } from "../ui/button";
 import { cn } from "../lib/utils";
 import {
   PiSendPlaneHorizontalContrast,
@@ -46,9 +46,11 @@ import {
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2, XIcon } from "lucide-react";
-export interface ButtonProps {
+
+export interface ButtonProps extends ShadButtonProps {
   children?: React.ReactNode;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onPointerDown?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   href?: string;
@@ -107,7 +109,7 @@ const iconMap = {
   pause: PiPauseCircleDuoSolid,
 };
 
-export function Button({ children, onClick, variant, type = "button", disabled, href, className, pending, icon, iconLeft, iconComponent, tooltip, big, classNameIcon }: ButtonProps) {
+export function Button({ children, onClick, variant, type = "button", disabled, href, className, pending, icon, iconLeft, iconComponent, tooltip, big, classNameIcon, ...props }: ButtonProps) {
   return pending ? (
     <ShadButton disabled variant={variant} className={cn(className, children ? "rounded-xl font-bold text-sm flex px-3 gap-4" : "bg-transparent text-gray-800")}>
       {children}
@@ -126,7 +128,9 @@ export function Button({ children, onClick, variant, type = "button", disabled, 
         type={type}
         disabled={disabled}
         tooltip={tooltip}
-        big={big}>
+        big={big}
+        {...props}
+      >
         {children}
       </ButtonComponent>
     </Link>
@@ -142,13 +146,15 @@ export function Button({ children, onClick, variant, type = "button", disabled, 
       type={type}
       disabled={disabled}
       tooltip={tooltip}
-      big={big}>
+      big={big}
+      {...props}
+    >
       {children}
     </ButtonComponent>
   );
 }
 
-interface ButtonComponentProps {
+interface ButtonComponentProps extends ShadButtonProps {
   children?: React.ReactNode;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
@@ -164,13 +170,14 @@ interface ButtonComponentProps {
   pending?: boolean;
 }
 
-const ButtonComponent = ({ children, onClick, variant, type, disabled, className, icon, iconLeft, iconComponent, tooltip, big, classNameIcon, pending }: ButtonComponentProps) => {
+const ButtonComponent = ({ children, onClick, variant, type, disabled, className, icon, iconLeft, iconComponent, tooltip, big, classNameIcon, pending, ...props }: ButtonComponentProps) => {
   const Icon = icon ? iconMap[icon] : null;
   const IconLeft = iconLeft ? iconMap[iconLeft] : null;
 
   return tooltip ? (
     <Tooltip message={tooltip ?? ""}>
       <ShadButton
+        {...props}
         variant={variant}
         onClick={onClick}
         type={type}
@@ -221,6 +228,7 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
     </Tooltip>
   ) : (
     <ShadButton
+      {...props}
       variant={variant}
       onClick={onClick}
       type={type}
