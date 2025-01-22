@@ -5,6 +5,7 @@ import { cn } from "../lib/utils";
 import { Label } from "../ui/label";
 import { useEffect } from "react";
 import { set } from "date-fns";
+import { Button } from "../Buttons/Button";
 
 interface Option {
   value: string;
@@ -22,9 +23,10 @@ interface SelectScrollableProps {
   defaultValue?: string;
   label?: string;
   value?: string;
+  clearable?: boolean;
 }
 
-export function Select({ options, placeholder = "Sélectionnez une valeur", onChange, className, disabled, defaultValue, label, value }: SelectScrollableProps) {
+export function Select({ options, placeholder = "Sélectionnez une valeur", onChange, className, disabled, defaultValue, label, value, clearable = false }: SelectScrollableProps) {
   const [selectedValue, setSelectedValue] = React.useState<string | undefined>(defaultValue || undefined);
 
   useEffect(() => {
@@ -50,13 +52,26 @@ export function Select({ options, placeholder = "Sélectionnez une valeur", onCh
     }
   };
 
+  const handleClear = () => {
+    setSelectedValue(undefined);
+    onChange(undefined);
+  }
+
   return (
     <SelectShadCn onValueChange={handleValueChange} defaultValue={selectedValue} value={selectedValue} disabled={disabled}>
       {label && <Label className="font-black text-primary mt-2">{label}</Label>}
 
       <SelectTrigger className={cn("w-[280px] font-medium bg-input", className)}>
         <SelectValue placeholder={placeholder} />
+        {clearable && (
+          <Button
+            onPointerDown={handleClear}
+            className={`${selectedValue ? 'opacity-1' : 'opacity-0'} ml-2 p-0 h-4 w-4`}
+            icon={'cross'}
+          />
+        )}
       </SelectTrigger>
+
       <SelectContent className={cn("max-h-[200px] font-medium", className)}>
         {Object.entries(groupedOptions).map(([groupName, groupOptions]) => (
           <SelectGroup key={groupName}>
