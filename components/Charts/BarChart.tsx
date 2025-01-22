@@ -103,6 +103,7 @@ export const BarChart: React.FC<Props> = ({
 }) => {
   const maxValue = Math.max(...data.map(item => item.total ?? 0));
 
+  // @ts-ignore
   return (
     <div
       className={`${
@@ -180,7 +181,7 @@ export const BarChart: React.FC<Props> = ({
                       width: Number(props.width) ?? 0,
                       value: Number(props.value) ?? 0,
                       euro,
-                    })
+                    }) as any
                   }
                 />
               </Bar>
