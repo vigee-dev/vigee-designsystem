@@ -6,15 +6,15 @@ import { Label } from "../ui/label";
 import { useEffect, useState } from "react";
 import { Button } from "../Buttons/Button";
 
-interface Option {
+export interface SelectOption {
   value: string;
   label: string;
   group?: string;
   icon?: React.ReactNode;
 }
 
-interface SelectScrollableProps {
-  options: Option[];
+export interface SelectProps {
+  options: SelectOption[];
   placeholder?: string;
   onChange: (value: string | undefined) => void;
   className?: string;
@@ -25,7 +25,7 @@ interface SelectScrollableProps {
   clearable?: boolean;
 }
 
-export function Select({ options, placeholder = "Sélectionnez une valeur", onChange, className, disabled, defaultValue, label, value, clearable = false }: SelectScrollableProps) {
+export function Select({ options, placeholder = "Sélectionnez une valeur", onChange, className, disabled, defaultValue, label, value, clearable = false }: SelectProps) {
   const [selectedValue, setSelectedValue] = React.useState<string | undefined>(defaultValue || undefined);
   const [key, setKey] = useState<string>(new Date().toISOString()) /* key to control the rerender of the component */
 
@@ -33,7 +33,7 @@ export function Select({ options, placeholder = "Sélectionnez une valeur", onCh
     setSelectedValue(value);
   }, [value]);
 
-  const groupedOptions = options.reduce<Record<string, Option[]>>((acc, option) => {
+  const groupedOptions = options.reduce<Record<string, SelectOption[]>>((acc, option) => {
     const group = option.group || "Ungrouped"; // Default group name for ungrouped items
     if (!acc[group]) {
       acc[group] = [];
@@ -65,12 +65,8 @@ export function Select({ options, placeholder = "Sélectionnez une valeur", onCh
 
       <SelectTrigger className={cn("w-[280px] font-medium bg-input", className)}>
         <SelectValue placeholder={placeholder} />
-        {clearable && (
-          <Button
-            onPointerDown={handleClear}
-            className={`${selectedValue ? 'opacity-1' : 'opacity-0'} ml-2 p-0 h-4 w-4`}
-            icon={'cross'}
-          />
+        {clearable && selectedValue && (
+          <Button onPointerDown={handleClear} className={`ml-2 p-0 h-4 w-4`} icon={'cross'}/>
         )}
       </SelectTrigger>
 
