@@ -3,8 +3,7 @@ import * as React from "react";
 import { Select as SelectShadCn, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../../components/ui/select";
 import { cn } from "../lib/utils";
 import { Label } from "../ui/label";
-import { useEffect } from "react";
-import { set } from "date-fns";
+import { useEffect, useState } from "react";
 import { Button } from "../Buttons/Button";
 
 interface Option {
@@ -28,6 +27,7 @@ interface SelectScrollableProps {
 
 export function Select({ options, placeholder = "Sélectionnez une valeur", onChange, className, disabled, defaultValue, label, value, clearable = false }: SelectScrollableProps) {
   const [selectedValue, setSelectedValue] = React.useState<string | undefined>(defaultValue || undefined);
+  const [key, setKey] = useState<string>(new Date().toISOString()) /* key to control the rerender of the component */
 
   useEffect(() => {
     setSelectedValue(value);
@@ -43,6 +43,7 @@ export function Select({ options, placeholder = "Sélectionnez une valeur", onCh
   }, {});
 
   const handleValueChange = (newValue: string) => {
+    // TODO: What's the reason of this check ? When selecting the same value, the handleValueChange isn't called
     if (newValue === String(selectedValue)) {
       setSelectedValue(undefined);
       onChange(undefined);
@@ -53,12 +54,13 @@ export function Select({ options, placeholder = "Sélectionnez une valeur", onCh
   };
 
   const handleClear = () => {
+    setKey(new Date().toISOString()) // /!\ Force the component to re-render by setting a new key
     setSelectedValue(undefined);
     onChange(undefined);
   }
 
   return (
-    <SelectShadCn onValueChange={handleValueChange} defaultValue={selectedValue} value={selectedValue} disabled={disabled}>
+    <SelectShadCn key={key} onValueChange={handleValueChange} defaultValue={selectedValue} value={selectedValue} disabled={disabled}>
       {label && <Label className="font-black text-primary mt-2">{label}</Label>}
 
       <SelectTrigger className={cn("w-[280px] font-medium bg-input", className)}>
