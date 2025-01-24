@@ -1,7 +1,8 @@
-"use client";
-import { Select } from "../../components/Select/Select";
+"use client"
+
+import { useQueryState } from "nuqs"
+import { Select } from "../Select/Select";
 import { cn } from "../lib/utils";
-import { useQueryState } from "nuqs";
 
 interface Props {
   searchParam: string;
@@ -13,10 +14,18 @@ interface Props {
   clearOnDefault?: boolean;
 }
 
-export const SelectSearchParam = ({ searchParam, status, placeholder, className, shallow = true, defaultValue, clearOnDefault = true }: Props) => {
-  const [queryState, setQueryState] = useQueryState(searchParam, { ...(defaultValue ? { defaultValue } : {}), clearOnDefault, shallow, })
+const SelectSearchParam = ({ searchParam, status, placeholder, className, shallow = true, defaultValue, clearOnDefault = true }: Props) => {
+  const [queryState, setQueryState] = useQueryState(searchParam,
+    {
+      ...(defaultValue ? { defaultValue } : {}),
+      clearOnDefault,
+      shallow,
+    }
+  )
 
-  const handleChange = (value: string | undefined) => setQueryState(value || null)
+  const handleChange = (value: string | undefined) => {
+    setQueryState(value || null)
+  }
 
   return (
     <Select
@@ -26,6 +35,9 @@ export const SelectSearchParam = ({ searchParam, status, placeholder, className,
       value={queryState || undefined}
       placeholder={placeholder}
       options={status}
+      clearable
     />
   );
 };
+
+export default SelectSearchParam;
