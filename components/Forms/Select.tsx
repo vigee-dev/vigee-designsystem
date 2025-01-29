@@ -1,140 +1,90 @@
-import { UseFormReturn, FieldValues, Path } from "react-hook-form";
-import { Select as ShadSelect, SelectContent, SelectTrigger, SelectValue, SelectItem } from "../ui/select";
-import { PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card";
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
-import { Label } from "../ui/label";
+"use client";
+import * as React from "react";
+import { Select as SelectShadCn, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../../components/ui/select";
 import { cn } from "../lib/utils";
+import { Label } from "../ui/label";
+import { useEffect, useState } from "react";
+import { Button } from "../Buttons/Button";
 
-type Props<T extends FieldValues> = {
-  form?: UseFormReturn<T>;
-  label?: string;
-  sublabel?: string;
+export interface SelectOption {
+  value: string;
+  label: string;
+  group?: string;
+  icon?: React.ReactNode;
+}
+
+export interface SelectProps {
+  options: SelectOption[];
   placeholder?: string;
-  required?: boolean;
-  name?: Path<T>;
-  descr?: string;
-  children?: React.ReactNode;
+  onChange: (value: string | undefined) => void;
   className?: string;
   disabled?: boolean;
-  onChange?: (value: string) => void;
+  defaultValue?: string;
+  label?: string;
   value?: string;
-  helpComponent?: React.ReactNode;
-  isBoolean?: boolean;
-  options?: { label: string; value: string; icon?: React.ReactNode; color?: string }[];
-  variant?: 'default' | 'outlined';
-};
+  clearable?: boolean;
+}
 
-export default function Select<T extends FieldValues>({
-  form,
-  label,
-  sublabel,
-  placeholder,
-  required = true,
-  name,
-  descr,
-  children,
-  className,
-  disabled,
-  onChange,
-  value,
-  helpComponent,
-  isBoolean = false,
-  options,
-  variant = 'default',
-}: Props<T>) {
-  return form?.control && name ? (
-    <FormField
-      control={form.control}
-      name={name}
-      rules={{ required }}
-      render={({ field }) => (
-        <FormItem
-          className={cn(
-            className,
-            variant === "default" && 'border-none',
-          )}
-        >
-          <HoverCard>
-            <div className="flex items-center justify-between ">
-              <div className="flex flex-col gap-1 ">
-                {label && (
-                  <FormLabel className="font-black text-primary mt-2">
-                    {label} {required && <span className="text-red-600 ml-1">*</span>}
-                  </FormLabel>
-                )}
-                {sublabel && <Label className="font-medium text-gray-400">{sublabel}</Label>}
-              </div>
-              {helpComponent && (
-                <HoverCardTrigger>
-                  <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
-                </HoverCardTrigger>
-              )}
-            </div>
+export function Select({ options, placeholder = "Sélectionnez une valeur", onChange, className, disabled, defaultValue, label, value, clearable = false }: SelectProps) {
+  const [selectedValue, setSelectedValue] = React.useState<string | undefined>(defaultValue || undefined);
+  const [key, setKey] = useState<string>(new Date().toISOString()); /* key to control the rerender of the component */
 
-            {helpComponent && (
-              <HoverCardContent>
-                <div className="p-2">{helpComponent}</div>
-              </HoverCardContent>
-            )}
-          </HoverCard>
-          <ShadSelect
-            onValueChange={(e: string) => {
-              if (!isBoolean) {
-                field.onChange(e);
-              } else {
-                let eBoolean = e === "true";
-                field.onChange(eBoolean);
-              }
-              if (onChange) onChange(e);
-            }}
-            value={String(field.value)}
-            disabled={disabled}>
-            <FormControl>
-              <SelectTrigger className={cn('font-medium bg-input', variant === 'outlined' && 'border-gray-400 border rounded-lg bg-transparent')}>
-                <SelectValue placeholder={placeholder} />
-              </SelectTrigger>
-            </FormControl>
+  useEffect(() => {
+    setSelectedValue(value);
+  }, [value]);
 
-            <SelectContent className="max-h-[200px] font-medium">
-              {!options
-                ? children
-                : options.map(option => (
-                    <SelectItem key={option.value} value={option.value}>
-                      <div className={`flex items-center gap-2 ${option.color}`}>
-                        {option.icon}
-                        {option.label}
-                      </div>
-                    </SelectItem>
-                  ))}
-            </SelectContent>
-          </ShadSelect>
-          {descr && <FormDescription>{descr}</FormDescription>}
-          <FormMessage />
-        </FormItem>
-      )}
-    />
-  ) : (
-    <div className={className}>
-      {label && <Label className="font-black text-primary">{label}</Label>}
-      <ShadSelect onValueChange={onChange} value={String(value)} disabled={disabled}>
-        <SelectTrigger className={`font-medium bg-input ${variant === "outlined" && 'border-gray-400 border rounded-lg bg-transparent'}`}>
+  const groupedOptions = options.reduce<Record<string, SelectOption[]>>((acc, option) => {
+    const group = option.group || "Ungrouped"; // Default group name for ungrouped items
+    if (!acc[group]) {
+      acc[group] = [];
+    }
+    acc[group]?.push(option);
+    return acc;
+  }, {});
+
+  const handleValueChange = (newValue: string) => {
+    // TODO: What's the reason of this check ? When selecting the same value, the handleValueChange isn't called
+    if (newValue === String(selectedValue)) {
+      setSelectedValue(undefined);
+      onChange(undefined);
+    } else {
+      setSelectedValue(newValue);
+      onChange(newValue);
+    }
+  };
+
+  const handleClear = () => {
+    setKey(new Date().toISOString()); // /!\ Force the component to re-render by setting a new key
+    setSelectedValue(undefined);
+    onChange(undefined);
+  };
+
+  return (
+    <SelectShadCn key={key} onValueChange={handleValueChange} defaultValue={selectedValue} value={selectedValue} disabled={disabled}>
+      {label && <Label className="font-black text-primary mt-2">{label}</Label>}
+
+      <SelectTrigger className={cn("w-[280px] font-medium bg-input ", className)}>
+        <div className="flex items-center">
           <SelectValue placeholder={placeholder} />
-        </SelectTrigger>
-        <SelectContent className="max-h-[200px] font-medium">
-          {!options
-            ? children
-            : options.map(option => (
-                <SelectItem key={option.value} value={option.value}>
-                  <div className={`flex items-center gap-2 ${option.color}`}>
-                    {option.icon}
-                    {option.label}
-                  </div>
-                </SelectItem>
-              ))}
-        </SelectContent>
-      </ShadSelect>
-      {descr && <p className={"text-sm text-muted-foreground"}>{descr}</p>}
-    </div>
+          {clearable && selectedValue && <Button onPointerDown={handleClear} className={`ml-2 p-0 h-4 w-4`} icon={"cross"} />}
+        </div>
+      </SelectTrigger>
+
+      <SelectContent className={cn("max-h-[200px] font-medium", className)}>
+        {Object.entries(groupedOptions).map(([groupName, groupOptions]) => (
+          <SelectGroup key={groupName}>
+            {/* Only render the SelectLabel if the group name is not 'Ungrouped' */}
+            {groupName !== "Ungrouped" && <SelectLabel>{groupName}</SelectLabel>}
+            {groupOptions.map(option => (
+              <SelectItem key={option.value} value={option.value}>
+                <div className="flex items-center gap-2">
+                  {option.icon} {option.label}
+                </div>
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        ))}
+      </SelectContent>
+    </SelectShadCn>
   );
 }
