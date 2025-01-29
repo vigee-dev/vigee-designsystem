@@ -27,7 +27,7 @@ export interface SelectProps {
 
 export function Select({ options, placeholder = "Sélectionnez une valeur", onChange, className, disabled, defaultValue, label, value, clearable = false }: SelectProps) {
   const [selectedValue, setSelectedValue] = React.useState<string | undefined>(defaultValue || undefined);
-  const [key, setKey] = useState<string>(new Date().toISOString()) /* key to control the rerender of the component */
+  const [key, setKey] = useState<string>(new Date().toISOString()); /* key to control the rerender of the component */
 
   useEffect(() => {
     setSelectedValue(value);
@@ -54,20 +54,20 @@ export function Select({ options, placeholder = "Sélectionnez une valeur", onCh
   };
 
   const handleClear = () => {
-    setKey(new Date().toISOString()) // /!\ Force the component to re-render by setting a new key
+    setKey(new Date().toISOString()); // /!\ Force the component to re-render by setting a new key
     setSelectedValue(undefined);
     onChange(undefined);
-  }
+  };
 
   return (
     <SelectShadCn key={key} onValueChange={handleValueChange} defaultValue={selectedValue} value={selectedValue} disabled={disabled}>
       {label && <Label className="font-black text-primary mt-2">{label}</Label>}
 
-      <SelectTrigger className={cn("w-[280px] font-medium bg-input", className)}>
-        <SelectValue placeholder={placeholder} />
-        {clearable && selectedValue && (
-          <Button onPointerDown={handleClear} className={`ml-2 p-0 h-4 w-4`} icon={'cross'}/>
-        )}
+      <SelectTrigger className={cn("w-[280px] font-medium bg-input ", className)}>
+        <div className="flex items-center">
+          <SelectValue placeholder={placeholder} />
+          {clearable && selectedValue && <Button onPointerDown={handleClear} className={`ml-2 p-0 h-4 w-4`} icon={"cross"} />}
+        </div>
       </SelectTrigger>
 
       <SelectContent className={cn("max-h-[200px] font-medium", className)}>
