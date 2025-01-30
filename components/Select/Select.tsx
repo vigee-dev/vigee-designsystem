@@ -23,9 +23,10 @@ export interface SelectProps {
   label?: string;
   value?: string;
   clearable?: boolean;
+  classNameContent?: string;
 }
 
-export function Select({ options, placeholder = "Sélectionnez une valeur", onChange, className, disabled, defaultValue, label, value, clearable = false }: SelectProps) {
+export function Select({ options, placeholder = "Sélectionnez une valeur", onChange, className, disabled, defaultValue, label, value, clearable = false, classNameContent }: SelectProps) {
   const [selectedValue, setSelectedValue] = React.useState<string | undefined>(defaultValue || undefined);
   const [key, setKey] = useState<string>(new Date().toISOString()); /* key to control the rerender of the component */
 
@@ -70,7 +71,7 @@ export function Select({ options, placeholder = "Sélectionnez une valeur", onCh
         </div>
       </SelectTrigger>
 
-      <SelectContent className={cn("max-h-[200px] font-medium", className)}>
+      <SelectContent className={cn("max-h-[200px] font-medium", classNameContent)}>
         {Object.entries(groupedOptions).map(([groupName, groupOptions]) => (
           <SelectGroup key={groupName}>
             {/* Only render the SelectLabel if the group name is not 'Ungrouped' */}
