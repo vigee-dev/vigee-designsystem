@@ -19,6 +19,7 @@ function useStepper<StepContent extends string>(initialStep: number, steps: Step
   const nextStep = () => setCurrentStep(prevStep => Math.min(prevStep + 1, steps.length - 1));
   const prevStep = () => setCurrentStep(prevStep => Math.max(prevStep - 1, 0));
   const getCurrentStepContent = () => steps[currentStep];
+  const goToStep = (step: number) => setCurrentStep(Math.max(0, Math.min(step, steps.length - 1))); // Ajout de la méthode goToStep
 
   return {
     currentStep,
@@ -27,6 +28,7 @@ function useStepper<StepContent extends string>(initialStep: number, steps: Step
     getCurrentStepContent,
     steps,
     className,
+    goToStep,
   };
 }
 
