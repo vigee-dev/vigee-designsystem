@@ -29,7 +29,7 @@ interface SidebarProps {
     iconFill?: React.ReactNode;
     slug: string;
     highlight?: boolean;
-    notifications?: number;
+    notifications?: number | undefined | null;
     persist?: boolean;
   }[];
   menu?: boolean;
@@ -76,7 +76,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   signout,
   persistQuery,
   open = true,
-    commandComponent,
+  commandComponent,
 }: SidebarProps) => {
   const pathname = usePathname();
   // TOIMPROVE find a way to hide the menu other than using pathname
