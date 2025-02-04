@@ -26,9 +26,16 @@ interface TabsResponsiveProps<T extends string = string> {
   className?: string;
   startTransition?: (callback: () => void) => void;
   fullWidth?: boolean;
+  variant?: "default" | "light";
 }
 
-export function TabMobile<T extends string = string>({ onChange, options, defaultValue, value, query, children, className, startTransition, fullWidth }: TabsResponsiveProps<T>) {
+const variants = {
+  default:
+    "rounded-xl dark:bg-zinc-900 bg-zinc-100 dark:data-[state=active]:text-zinc-800 text-zinc-500 dark:data-[state=active]:bg-white data-[state=active]:bg-zinc-800 data-[state=active]:text-zinc-100 font-bold",
+  light: "rounded-xl bg-transparent data-[state=active]:text-zinc-800 text-zinc-400 font-bold data-[state=active]:bg-transparent data-[state=active]:shadow-none border-none pl-0",
+} as const;
+
+export function TabMobile<T extends string = string>({ onChange, options, defaultValue, value, query, children, className, startTransition, fullWidth, variant = "default" }: TabsResponsiveProps<T>) {
   const router = useRouter();
 
   const [filter, setFilter] = useQueryState(query ?? "", {
@@ -72,11 +79,7 @@ export function TabMobile<T extends string = string>({ onChange, options, defaul
               key={index}
               disabled={option.disabled}
               value={option.href ?? option.value ?? ""}
-              className={cn(
-                `flex gap-2 group min-w-0 px-2`,
-                "rounded-xl dark:bg-zinc-900 bg-zinc-100 dark:data-[state=active]:text-zinc-800 text-zinc-500 dark:data-[state=active]:bg-white data-[state=active]:bg-zinc-800 data-[state=active]:text-zinc-100 font-bold",
-                fullWidth ? "w-full" : "w-fit"
-              )}
+              className={cn(`flex gap-2 group min-w-0 px-2`, fullWidth ? "w-full" : "w-fit", variants[variant])}
               onClick={() => handleValueChange(option.href ?? option.value ?? "", option)}>
               <div className="flex items-center gap-2 justify-between ">
                 <div className="flex items-center gap-2">
