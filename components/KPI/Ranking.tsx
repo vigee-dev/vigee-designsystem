@@ -27,9 +27,10 @@ interface Props {
   classNameImage?: string;
   kiloEuros?: boolean;
   iconTitle?: React.ReactNode;
+  classNameContent?: string;
 }
 
-export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameImage, kiloEuros, iconTitle }: Props) {
+export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameImage, kiloEuros, iconTitle, classNameContent }: Props) {
   const truncateName = (name: string) => {
     return name?.length > 15 ? name.substring(0, 15) + "..." : name;
   };
@@ -44,7 +45,7 @@ export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameIm
         {iconTitle}
       </div>
 
-      <div className="space-y-4">
+      <div className={cn("space-y-4 ", classNameContent)}>
         {data?.map((item, index) => (
           <div className={"flex items-center"} key={index}>
             {item.img ? (
