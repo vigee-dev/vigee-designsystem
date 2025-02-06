@@ -9,6 +9,8 @@ export interface StatItem {
   upNegative?: boolean;
   unit?: string;
   icon?: React.ReactNode;
+  objectif?: number; // Ajout de l'objectif
+  ecartType?: number; // Ajout de l'écart type
 }
 
 interface NumberKPIProps {
@@ -70,6 +72,11 @@ const NumberKPI = ({ stats, columns = 3, small = false, className }: NumberKPIPr
     return (diff / (previousStat === 0 ? 1 : previousStat)) * 100;
   };
 
+  const ecartType = (objectif: number, stat: number) => {
+    const diff = stat - objectif;
+    return diff;
+  };
+
   return (
     <div className="my-2">
       <dl
@@ -86,6 +93,16 @@ const NumberKPI = ({ stats, columns = 3, small = false, className }: NumberKPIPr
                 {item.unit === "€" ? currency(item.stat).toRoundedEuro() : item.unit ? `${item.stat} ${item.unit}` : item.stat}
               </div>
               {item.previousStat != null && <PreviousStat previousStat={variation(item.previousStat, item.stat)} upNegative={item.upNegative} notApplicable={item.previousStat === 0} />}
+              {item.objectif != null && item.ecartType != null && (
+                <div
+                  className={classNames(
+                    Math.abs(ecartType(item.stat, item.objectif)) > item.ecartType ? "text-red-600 bg-red-100" : "text-green-600 bg-green-100",
+                    "inline-flex items-baseline rounded-full px-2.5 py-0.5 text-xs font-black md:mt-2 lg:mt-0"
+                  )}>
+                  {ecartType(item.stat, item.objectif) > 0 ? "+" : ""}
+                  {ecartType(item.stat, item.objectif)}%
+                </div>
+              )}
             </dd>
           </div>
         ))}
