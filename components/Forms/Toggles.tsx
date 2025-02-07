@@ -22,9 +22,10 @@ type Props<T extends FieldValues> = {
   optionsClassName?: string;
   disabled?: boolean;
   options: Option[];
+  wrap?: boolean;
 };
 
-export const Toggles = <T extends FieldValues>({ form, name, label, descr, className, optionsClassName, disabled, options }: Props<T>) => {
+export const Toggles = <T extends FieldValues>({ form, name, label, descr, className, optionsClassName, disabled, options, wrap = false }: Props<T>) => {
   return (
     <FormField
       control={form.control}
@@ -36,7 +37,7 @@ export const Toggles = <T extends FieldValues>({ form, name, label, descr, class
             <Container className={cn("p-1", className)}>
               <ShadToggleGroup
                 type="single"
-                className={`w-full flex flex-col md:flex-row  ${options.length > 2 && "flex-wrap"}`}
+                className={`w-full flex flex-col md:flex-row  ${wrap || (options.length > 3 && "flex-wrap")}`}
                 value={field.value}
                 onValueChange={field.onChange}
                 disabled={disabled}>
