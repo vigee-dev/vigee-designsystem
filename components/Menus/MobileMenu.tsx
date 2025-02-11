@@ -21,9 +21,10 @@ interface MenuItem {
 interface TabProps {
   nav?: MenuItem[];
   urlButton?: string;
+  icon?: React.ReactNode;
 }
 
-function MobileMenu({ nav, urlButton }: TabProps) {
+function MobileMenu({ nav, urlButton, icon }: TabProps) {
   const pathName = usePathname();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -32,10 +33,9 @@ function MobileMenu({ nav, urlButton }: TabProps) {
       <nav className="flex flex-1 flex-col">
         <ul role="list" className="flex flex-1 flex-col gap-y-7">
           <li>
-            <ul role="list" className="flex justify-center mx-auto">
+            <ul role="list" className={`grid  gap-x-4 ${urlButton ? "grid-cols-5" : "grid-cols-4"}`}>
               {nav?.slice(0, 2).map(item => {
                 const includesSlug = pathName.toLocaleLowerCase().match(item.slug ? item.slug : "//");
-
                 return (
                   <li key={item.name}>
                     {item.href && (
@@ -70,9 +70,9 @@ function MobileMenu({ nav, urlButton }: TabProps) {
                   </li>
                 );
               })}
-              {urlButton && (
-                <li className="mt-3">
-                  <Button icon="add" href={urlButton} classNameIcon="text-secondary w-12 h-12 z-50" />
+              {urlButton && icon && (
+                <li className="col-span-1 mx-auto">
+                  <Link href={urlButton}>{icon}</Link>
                 </li>
               )}
               {nav?.slice(2, 4).map(item => {
