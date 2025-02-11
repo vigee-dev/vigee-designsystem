@@ -20,11 +20,10 @@ interface MenuItem {
 
 interface TabProps {
   nav?: MenuItem[];
-  urlButton?: string;
-  icon?: React.ReactNode;
+  buttonComponent?: React.ReactNode;
 }
 
-function MobileMenu({ nav, urlButton, icon }: TabProps) {
+function MobileMenu({ nav, buttonComponent }: TabProps) {
   const pathName = usePathname();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -33,7 +32,7 @@ function MobileMenu({ nav, urlButton, icon }: TabProps) {
       <nav className="flex flex-1 flex-col">
         <ul role="list" className="flex flex-1 flex-col gap-y-7">
           <li>
-            <ul role="list" className={`grid  gap-x-4 ${urlButton ? "grid-cols-5" : "grid-cols-4"}`}>
+            <ul role="list" className={`grid  gap-x-4 ${buttonComponent ? "grid-cols-5" : "grid-cols-4"}`}>
               {nav?.slice(0, 2).map(item => {
                 const includesSlug = pathName.toLocaleLowerCase().match(item.slug ? item.slug : "//");
                 return (
@@ -70,11 +69,7 @@ function MobileMenu({ nav, urlButton, icon }: TabProps) {
                   </li>
                 );
               })}
-              {urlButton && icon && (
-                <li className="col-span-1 mx-auto">
-                  <Link href={urlButton}>{icon}</Link>
-                </li>
-              )}
+              {buttonComponent && <li className="col-span-1 mx-auto">{buttonComponent}</li>}
               {nav?.slice(2, 4).map(item => {
                 const includesSlug = pathName.toLocaleLowerCase().match(item.slug ? item.slug : "//");
                 return (
