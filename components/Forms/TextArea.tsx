@@ -83,7 +83,7 @@ export default function TextArea<T extends FieldValues>({ form, name, required, 
               }
               field.onChange(e);
             }}
-            className={cn(`resize-none font-medium bg-input border-none text-[16px] md:text-sm col-span-full`, className, white && "bg-white border border-zinc-200 border-solid")}
+            className={cn(`resize-none font-medium bg-input border-none text-[16px] md:text-sm col-span-full`, white && "bg-white border border-zinc-200 border-solid", className)}
             disabled={disabled}
           />
           {descr && <FormDescription>{descr}</FormDescription>}
