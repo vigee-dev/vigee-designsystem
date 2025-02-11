@@ -128,7 +128,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   return (
     <>
       <div
-        className={`${hiddenMobile ? "hidden lg:flex" : "flex"} fixed inset-y-0 z-50  ${sidebarOpen ? "w-56 " : "w-16  "} flex-col h-screen transition-all ease-in-out duration-300`}
+        className={`${hiddenMobile ? "hidden lg:flex" : "flex"} fixed inset-y-0   ${sidebarOpen ? "w-56 " : "w-16  "} flex-col h-screen transition-all ease-in-out duration-300`}
         onMouseEnter={() => setHoverMenu(true)}
         onMouseLeave={() => setHoverMenu(false)}>
         <div className={cn(`${"flex px-3"} grow flex-col gap-y-5 overflow-y-auto  shadow-md transform transition-all duration-300 ease-in-out bg-white`, className)}>
