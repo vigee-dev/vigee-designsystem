@@ -21,9 +21,10 @@ interface ComboBoxProps {
   items: Item[];
   icon?: React.ReactNode;
   className?: string;
+  triggerOnHover?: boolean;
 }
 
-export function ComboBox({ items, value, onChange, label, placeholder = "Sélectionnez...", icon, className }: ComboBoxProps) {
+export function ComboBox({ items, value, onChange, label, placeholder = "Sélectionnez...", icon, className, triggerOnHover = false }: ComboBoxProps) {
   const [open, setOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
 
@@ -49,7 +50,7 @@ export function ComboBox({ items, value, onChange, label, placeholder = "Sélect
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-full p-0">
+        <PopoverContent className="w-full p-0" onMouseEnter={() => triggerOnHover && setOpen(true)}>
           <Command filter={filterItems}>
             <CommandInput placeholder="Rechercher..." autoFocus />
             <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
