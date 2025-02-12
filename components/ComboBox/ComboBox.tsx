@@ -20,9 +20,10 @@ interface ComboBoxProps {
   placeholder?: string;
   items: Item[];
   icon?: React.ReactNode;
+  className?: string;
 }
 
-export function ComboBox({ items, value, onChange, label, placeholder = "Sélectionnez...", icon }: ComboBoxProps) {
+export function ComboBox({ items, value, onChange, label, placeholder = "Sélectionnez...", icon, className }: ComboBoxProps) {
   const [open, setOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
 
@@ -40,7 +41,7 @@ export function ComboBox({ items, value, onChange, label, placeholder = "Sélect
         <Label className="font-bold text-primary-light">{label}</Label>
 
         <PopoverTrigger asChild>
-          <Button variant="outline" role="combobox" aria-expanded={open} className="w-full flex gap-x-2 bg-input border-0 justify-between">
+          <Button variant="outline" role="combobox" aria-expanded={open} className={cn("w-full flex gap-x-2 bg-input border-0 justify-between", className)}>
             <div className="flex gap-x-2 items-center text-gray-800">
               {icon && icon}
               {value ? items.find(item => item.value === value)?.label : placeholder}
