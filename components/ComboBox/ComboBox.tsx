@@ -30,19 +30,35 @@ export function ComboBox({ items, value, onChange, label, placeholder = "Sélect
 
   // Fonction de filtrage personnalisée
   const filterItems = (value = "", search = "") => {
-    // Votre logique de filtrage ici, retournez 1 pour un match, 0 sinon.
-    // Par exemple, filtrer sur le label des items
     if (value.toLowerCase().includes(search.toLowerCase())) return 1;
     return 0;
   };
 
+  const handleMouseEnter = () => {
+    if (triggerOnHover) {
+      setOpen(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (triggerOnHover) {
+      setOpen(false);
+    }
+  };
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <Label className="font-bold text-primary-light">{label}</Label>
 
         <PopoverTrigger asChild>
-          <Button variant="outline" role="combobox" aria-expanded={open} className={cn("w-full flex gap-x-2 bg-input border-0 justify-between", className)}>
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            className={cn("w-full flex gap-x-2 bg-input border-0 justify-between", className)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}>
             <div className="flex gap-x-2 items-center text-gray-800">
               {icon && icon}
               {value ? items.find(item => item.value === value)?.label : placeholder}
@@ -50,7 +66,7 @@ export function ComboBox({ items, value, onChange, label, placeholder = "Sélect
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-full p-0" onMouseEnter={() => triggerOnHover && setOpen(true)}>
+        <PopoverContent className="w-full p-0">
           <Command filter={filterItems}>
             <CommandInput placeholder="Rechercher..." autoFocus />
             <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
