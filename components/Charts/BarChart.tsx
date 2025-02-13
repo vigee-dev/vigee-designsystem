@@ -172,6 +172,7 @@ export const BarChart: React.FC<Props> = ({
               >
                 <LabelList
                   dataKey={key.dataKey}
+                  // @ts-ignore à vérifier
                   content={props =>
                     renderCustomizedLabel({
                       color: key.color,
