@@ -11,6 +11,7 @@ type Option = {
   value: string;
   icon?: React.ReactNode;
   description?: string;
+  disabled?: boolean;
 };
 
 type Props<T extends FieldValues> = {
@@ -41,6 +42,7 @@ export const Toggles = <T extends FieldValues>({ form, name, label, descr, class
                     key={option.value}
                     value={option.value}
                     aria-label={option.label || ""}
+                    disabled={option.disabled}
                     className={cn(" items-center h-fit p-4 flex justify-between w-full gap-6 md:px-6 rounded-lg  border-none", optionsClassName)}>
                     <div className="w-fit">{option.icon}</div>
                     {(option.label || option.description) && (
