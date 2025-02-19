@@ -10,11 +10,11 @@ import {
   SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "../components/ui/sidebar";
+} from "../../components/ui/sidebar";
 import { Plus, MoreHorizontal } from "lucide-react";
 import FooterSidebar from "./footer-sidebar";
 import { userSidebar } from "./datas-sidebar/footer-data";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../../components/ui/dropdown-menu";
 import { SwitcherSidebar } from "./switcher-sidebar";
 
 const AppSidebar = ({
