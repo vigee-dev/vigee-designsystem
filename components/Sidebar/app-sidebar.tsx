@@ -21,10 +21,12 @@ const AppSidebar = ({
   items,
   itemsSwitcher,
   logo,
+  pathname,
 }: {
-  items: { name: string; slug: string; type?: string; icon: React.ReactNode; href: string; notifications?: number; actions?: { title: string; url: string }[] }[];
+  items: { name: string; slug: string; type?: string; icon: React.ReactNode; iconFill: React.ReactNode; href: string; notifications?: number; actions?: { title: string; url: string }[] }[];
   itemsSwitcher: { name: string; slug: string; type: string; icon: React.ReactNode }[];
   logo?: string;
+  pathname: string;
 }) => {
   return (
     <Sidebar collapsible="icon">
@@ -35,22 +37,27 @@ const AppSidebar = ({
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map(item => (
-                <SidebarMenuItem key={item.name}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.slug}>
-                      {item.icon}
-                      <span>{item.name}</span>
+              {items.map((item, index) => (
+                <SidebarMenuItem key={index}>
+                  <SidebarMenuButton asChild isActive={pathname === item.href} className={`py-4`}>
+                    <a href={item.slug} className={`group-${index} flex items-center gap-2  `}>
+                      <span className={`${pathname === item.href ? "inline" : "hidden "}`}>{item.iconFill}</span>
+                      <span className={`${pathname === item.href ? "hidden" : "inline"}`}>{item.icon}</span>
+                      <span className="font-medium text-base">{item.name}</span>
                     </a>
                   </SidebarMenuButton>
+
                   {item?.type === "action" && (
                     <SidebarMenuAction asChild>
                       <a href={item?.href}>
-                        <Plus /> <span className="sr-only">Créer</span>
+                        <Plus />
+                        <span className="sr-only">Créer</span>
                       </a>
                     </SidebarMenuAction>
                   )}
-                  {item?.type === "notification" && <SidebarMenuBadge>{item?.notifications}</SidebarMenuBadge>}
+                  {item?.type === "notification" && item?.notifications && item?.notifications > 0 && (
+                    <SidebarMenuBadge className="bg-red-400 text-white rounded-full">{item?.notifications}</SidebarMenuBadge>
+                  )}
                   {item?.type === "dropdownmenu" && (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -58,7 +65,7 @@ const AppSidebar = ({
                           <MoreHorizontal />
                         </SidebarMenuAction>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent side="right" align="start">
+                      <DropdownMenuContent side="right" align="start" className="h-60 overflow-y-auto">
                         {item?.actions?.map((action, index) => (
                           <DropdownMenuItem key={index} className={"flex items-center gap-x-2"}>
                             <a href={action.url}>
