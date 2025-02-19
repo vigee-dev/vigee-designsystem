@@ -1,0 +1,60 @@
+import { Body, Button, Container, Head, Html, Preview, Text } from "@react-email/components";
+import * as React from "react";
+import { main, container, button, code } from "./style";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import { primary } from "./data";
+
+type ContentItem = {
+  label?: string;
+  content: string;
+};
+
+type Props = {
+  content: string | ContentItem[];
+};
+
+const normalizeContent = (content: Props["content"]): ContentItem[] => {
+  if (!content) return [];
+  if (typeof content === "string") return [{ content }];
+  return content;
+};
+
+export const Global = ({ title, subtitle, btnText, btnUrlAction, content }: { title: string; subtitle: string; btnText: string; btnUrlAction: string; content: Props["content"] }) => {
+  const normalizedContent = normalizeContent(content);
+
+  return (
+    <Html>
+      <Head />
+      <Preview>{title}</Preview>
+      <Body style={main}>
+        <Container style={container}>
+          <Header title={title} subtitle={subtitle} />
+
+          {normalizedContent.map((item, itemIndex) => (
+            <>
+              {item.label && <Text style={{ fontWeight: "bold" }}>{item.label}</Text>}
+              <code style={code}>
+                {item.content.split("\n").map((line, lineIndex) => (
+                  <React.Fragment key={lineIndex}>
+                    {line}
+                    <br />
+                  </React.Fragment>
+                ))}
+              </code>
+            </>
+          ))}
+
+          {btnText && btnUrlAction && (
+            <Button style={{ ...button, backgroundColor: primary, textAlign: "center" }} href={btnUrlAction}>
+              {btnText}
+            </Button>
+          )}
+          <Footer />
+        </Container>
+      </Body>
+    </Html>
+  );
+};
+
+export default Global;

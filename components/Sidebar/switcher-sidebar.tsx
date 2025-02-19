@@ -12,6 +12,7 @@ export function SwitcherSidebar({
   items,
   menuTitle,
   logo,
+  logoSmall,
 }: {
   items: {
     name: string;
@@ -20,6 +21,7 @@ export function SwitcherSidebar({
   }[];
   menuTitle?: string;
   logo?: string;
+  logoSmall?: string;
 }) {
   const { isMobile } = useSidebar();
 
@@ -41,7 +43,7 @@ export function SwitcherSidebar({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton size="lg" asChild={headerData.type === "link"} className={"data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"}>
-              <HeaderButtonSidebar headerData={headerData} logo={logo} />
+              <HeaderButtonSidebar headerData={headerData} logo={logo} logoSmall={logoSmall} />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg" align="start" side={isMobile ? "bottom" : "right"} sideOffset={4}>

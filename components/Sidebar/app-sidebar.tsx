@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sidebar,
   SidebarContent,
@@ -21,6 +23,7 @@ const AppSidebar = ({
   items,
   itemsSwitcher,
   logo,
+  logoSmall,
   pathname,
   user,
   links,
@@ -38,6 +41,7 @@ const AppSidebar = ({
   }[];
   itemsSwitcher: { name: string; slug: string; type: string; icon: React.ReactNode }[];
   logo?: string;
+  logoSmall?: string;
   pathname: string;
   user?: { name: string; email: string; avatar: string };
   links: { name: string; icon: React.ReactNode; href: string }[];
@@ -45,7 +49,7 @@ const AppSidebar = ({
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        <SwitcherSidebar items={itemsSwitcher} logo={logo} />
+        <SwitcherSidebar items={itemsSwitcher} logo={logo} logoSmall={logoSmall} />
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
@@ -53,8 +57,8 @@ const AppSidebar = ({
             <SidebarMenu>
               {items.map((item, index) => (
                 <SidebarMenuItem key={index}>
-                  <SidebarMenuButton asChild isActive={pathname === item.href} className={`py-4`}>
-                    <Link href={item.slug} className={`group-${index} flex items-center gap-2  `}>
+                  <SidebarMenuButton asChild isActive={pathname === item.href} className={`py-4 w-full items-center`}>
+                    <Link href={item.slug} className={`group-${index} flex items-center gap-2 w-full`}>
                       <span className={`${pathname === item.href ? "inline" : "hidden "}`}>{item.iconFill}</span>
                       <span className={`${pathname === item.href ? "hidden" : "inline"}`}>{item.icon}</span>
                       <span className="font-medium text-base">{item.name}</span>
