@@ -3,7 +3,8 @@
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "../../components/ui/sidebar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../../components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar";
-import { BadgeCheck, ChevronRight, LogOut } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 type Props = {
   user: {
@@ -11,9 +12,14 @@ type Props = {
     email: string;
     avatar: string;
   };
+  links: {
+    name: string;
+    icon: React.ReactNode;
+    href: string;
+  }[];
 };
 
-const FooterSidebar = ({ user }: Props) => {
+const FooterSidebar = ({ user, links }: Props) => {
   const { isMobile } = useSidebar();
 
   return (
@@ -48,16 +54,16 @@ const FooterSidebar = ({ user }: Props) => {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck className={"size-4 mr-2"} />
-                Mon compte
-              </DropdownMenuItem>
+              {links.map(link => (
+                <DropdownMenuItem key={link.name}>
+                  <Link href={link.href} className="cursor-pointer flex gap-2 items-center">
+                    {link.icon}
+                    {link.name}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogOut className={"size-4 mr-2"} />
-              Se déconnecter
-            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
