@@ -1,8 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import { HeaderDataProps } from "./type-sidebar";
 import { ChevronsUpDown } from "lucide-react";
-import { useSidebar } from "components/ui/sidebar";
-
+import { useSidebar } from "../../components/ui/sidebar";
+import Link from "next/link";
 type Props = {
   headerData: HeaderDataProps;
   logo?: string;
@@ -25,7 +27,7 @@ const HeaderButtonSidebar = ({ headerData, logo, logoSmall }: Props) => {
     </>
   );
 
-  return <> {headerData.type === "link" ? <a href={headerData.url}>{content}</a> : content}</>;
+  return <> {headerData.type === "link" ? <Link href={headerData.url}>{content}</Link> : content}</>;
 };
 
 export default HeaderButtonSidebar;

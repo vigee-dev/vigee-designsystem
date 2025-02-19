@@ -30,13 +30,6 @@ export function SwitcherSidebar({
 
   const activeTeamFind = items.find(item => item.slug === pathname);
 
-  const [activeTeam, setActiveTeam] = React.useState(activeTeamFind);
-
-  function handleClick(item: (typeof items)[number]) {
-    setActiveTeam(item);
-    router.push(item.slug);
-  }
-
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -49,7 +42,13 @@ export function SwitcherSidebar({
           <DropdownMenuContent className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg" align="start" side={isMobile ? "bottom" : "right"} sideOffset={4}>
             {menuTitle && <DropdownMenuLabel className="text-xs text-muted-foreground">{menuTitle}</DropdownMenuLabel>}
             {items.map((item, index) => (
-              <DropdownMenuItem key={item.name} onClick={() => handleClick(item)} className="gap-2 p-2">
+              <DropdownMenuItem
+                key={item.name}
+                onClick={() => {
+                  router.push(item.slug);
+                  router.refresh();
+                }}
+                className="gap-2 p-2">
                 {item.icon}
                 {item.name}
                 <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>

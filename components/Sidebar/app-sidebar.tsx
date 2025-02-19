@@ -18,6 +18,8 @@ import FooterSidebar from "./footer-sidebar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "../../components/ui/dropdown-menu";
 import { SwitcherSidebar } from "./switcher-sidebar";
 import Link from "next/link";
+import React from "react";
+import Image from "next/image";
 
 const AppSidebar = ({
   items,
@@ -27,6 +29,8 @@ const AppSidebar = ({
   pathname,
   user,
   links,
+  headerComponent,
+  switcher,
 }: {
   items: {
     name: string;
@@ -45,11 +49,14 @@ const AppSidebar = ({
   pathname: string;
   user?: { name: string; email: string; avatar: string };
   links: { name: string; icon: React.ReactNode; href: string }[];
+  headerComponent?: React.ReactNode;
+  switcher?: boolean;
 }) => {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        <SwitcherSidebar items={itemsSwitcher} logo={logo} logoSmall={logoSmall} />
+        {switcher ? <SwitcherSidebar items={itemsSwitcher} logo={logo} logoSmall={logoSmall} /> : logo ? <Image src={logo} alt="logo" width={150} height={150} className="py-4" /> : null}
+        {headerComponent}
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
