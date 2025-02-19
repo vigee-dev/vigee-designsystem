@@ -60,9 +60,6 @@ const code = {
   border: "1px solid #eee",
   color: "#333",
   maxWidth: "100%",
-  wordWrap: "break-word",
-  overflowWrap: "break-word",
-  wordBreak: "break-all",
 };
 
 const codeWithMarginBottom = {
