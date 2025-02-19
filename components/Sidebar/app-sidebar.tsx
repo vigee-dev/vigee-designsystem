@@ -105,9 +105,14 @@ const AppSidebar = ({
                     </SidebarMenuAction>
                   )}
 
-                  {item?.type === "notification" && item?.notifications && item?.notifications > 0 && (
-                    <SidebarMenuBadge className="bg-red-400 text-white rounded-full items-center">{item?.notifications}</SidebarMenuBadge>
-                  )}
+                  {item?.type === "notification" &&
+                    item?.notifications &&
+                    item?.notifications > 0 &&
+                    (open ? (
+                      <SidebarMenuBadge className="bg-red-400 text-white rounded-full items-center">{item?.notifications}</SidebarMenuBadge>
+                    ) : (
+                      <div className="bg-red-400 text-white rounded-full items-center w-2 h-2 absolute top-0 right-0" />
+                    ))}
 
                   {item?.type === "dropdownmenu" && (
                     <DropdownMenu>
