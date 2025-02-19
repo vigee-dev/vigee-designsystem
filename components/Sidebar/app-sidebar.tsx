@@ -12,14 +12,16 @@ import {
   SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "../../components/ui/sidebar";
 import { Plus, MoreHorizontal } from "lucide-react";
 import FooterSidebar from "./footer-sidebar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "../../components/ui/dropdown-menu";
 import { SwitcherSidebar } from "./switcher-sidebar";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const AppSidebar = ({
   items,
@@ -52,10 +54,25 @@ const AppSidebar = ({
   headerComponent?: React.ReactNode;
   switcher?: boolean;
 }) => {
+  const router = useRouter();
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+
+  const handleClick = (item: { slug: string }) => {
+    router.push(item.slug);
+    router.refresh();
+  };
+  const { open } = useSidebar();
+
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        {switcher ? <SwitcherSidebar items={itemsSwitcher} logo={logo} logoSmall={logoSmall} /> : logo ? <Image src={logo} alt="logo" width={150} height={150} className="py-4" /> : null}
+        {switcher ? (
+          <SwitcherSidebar items={itemsSwitcher} logo={logo} logoSmall={logoSmall} />
+        ) : logo && open ? (
+          <Image src={logo} alt="logo" width={150} height={150} className="py-4" />
+        ) : logoSmall && !open ? (
+          <Image src={logoSmall} alt="logoSmall" width={80} height={80} className="py-4 p-1" />
+        ) : null}
         {headerComponent}
       </SidebarHeader>
       <SidebarContent>
@@ -63,25 +80,33 @@ const AppSidebar = ({
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item, index) => (
-                <SidebarMenuItem key={index}>
-                  <SidebarMenuButton asChild isActive={pathname === item.href} className={`py-4 w-full items-center`}>
-                    <Link href={item.slug} className={`group-${index} flex items-center gap-2 w-full`}>
-                      <span className={`${pathname === item.href ? "inline" : "hidden "}`}>{item.iconFill}</span>
-                      <span className={`${pathname === item.href ? "hidden" : "inline"}`}>{item.icon}</span>
-                      <span className="font-medium text-base">{item.name}</span>
-                    </Link>
+                <SidebarMenuItem key={index} className={`w-full items-center  rounded-md hover:cursor-pointer ${(pathname === item.href || hoveredItem === item.slug) && "bg-zinc-800"}`}>
+                  <SidebarMenuButton asChild onMouseEnter={() => setHoveredItem(item.slug)} onMouseLeave={() => setHoveredItem(null)} className="w-full">
+                    <div className={`flex items-center gap-2 w-full`} onClick={() => handleClick(item)}>
+                      <span className={`${pathname === item.href || hoveredItem === item.slug ? "inline  transition-opacity duration-300" : "hidden  transition-opacity duration-300"}`}>
+                        {item.iconFill}
+                      </span>
+                      <span className={`${pathname !== item.href && hoveredItem !== item.slug ? "inline  transition-opacity duration-300" : "hidden  transition-opacity duration-300"}`}>
+                        {item.icon}
+                      </span>
+                      <span
+                        className={`font-medium text-base group ${pathname === item.href || hoveredItem === item.slug ? "text-white  transition-opacity duration-300" : "text-zinc-400  transition-opacity duration-300"}`}>
+                        {item.name}
+                      </span>
+                    </div>
                   </SidebarMenuButton>
 
                   {item?.type === "action" && (
-                    <SidebarMenuAction asChild>
+                    <SidebarMenuAction asChild className="items-center">
                       <Link href={item?.href}>
                         <Plus />
                         <span className="sr-only">Créer</span>
                       </Link>
                     </SidebarMenuAction>
                   )}
+
                   {item?.type === "notification" && item?.notifications && item?.notifications > 0 && (
-                    <SidebarMenuBadge className="bg-red-400 text-white rounded-full">{item?.notifications}</SidebarMenuBadge>
+                    <SidebarMenuBadge className="bg-red-400 text-white rounded-full items-center">{item?.notifications}</SidebarMenuBadge>
                   )}
 
                   {item?.type === "dropdownmenu" && (
