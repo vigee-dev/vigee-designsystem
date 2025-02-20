@@ -57,8 +57,8 @@ const AppSidebar = ({
   const router = useRouter();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
-  const handleClick = (item: { slug: string }) => {
-    router.push(item.slug);
+  const handleClick = (item: { href: string }) => {
+    router.push(item.href);
     router.refresh();
   };
   const { open } = useSidebar();
