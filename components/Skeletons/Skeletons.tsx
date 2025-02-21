@@ -275,10 +275,10 @@ export function InvoicesTableSkeleton() {
   );
 }
 
-export function TableSkeleton({ className }: { className?: string }) {
+export function TableSkeleton({ className, noBackground }: { className?: string; noBackground?: boolean }) {
   return (
     <div className={cn("mt-6 flow-root", className)}>
-      <div className="inline-block min-w-full align-middle">
+      <div className={cn("inline-block min-w-full align-middle", !noBackground && "bg-white")}>
         <div className="rounded-lg bg-gray-50  md:pt-0">
           <div className="md:hidden">
             <MobileCardSkeleton />
@@ -289,7 +289,7 @@ export function TableSkeleton({ className }: { className?: string }) {
             <MobileCardSkeleton />
           </div>
           <table className="hidden min-w-full text-gray-900 md:table">
-            <tbody className="bg-white">
+            <tbody className={cn("bg-transparent", !noBackground && "bg-gray-50")}>
               <TableRowSkeleton />
               <TableRowSkeleton />
               <TableRowSkeleton />
