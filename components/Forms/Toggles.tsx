@@ -24,9 +24,10 @@ type Props<T extends FieldValues> = {
   disabled?: boolean;
   options: Option[];
   nowrap?: boolean;
+  multi?: boolean;
 };
 
-export const Toggles = <T extends FieldValues>({ form, name, label, descr, className, optionsClassName, disabled, options, nowrap = false }: Props<T>) => {
+export const Toggles = <T extends FieldValues>({ form, name, label, descr, className, optionsClassName, disabled, options, nowrap = false, multi = false }: Props<T>) => {
   return (
     <FormField
       control={form.control}
@@ -36,7 +37,12 @@ export const Toggles = <T extends FieldValues>({ form, name, label, descr, class
           {label && <Label className="font-bold">{label}</Label>}
           <FormControl>
             <Container className={cn("p-1", className)}>
-              <ShadToggleGroup type="single" className={`w-full flex flex-col md:flex-row  ${!nowrap && "flex-wrap"}`} value={field.value} onValueChange={field.onChange} disabled={disabled}>
+              <ShadToggleGroup
+                type={multi ? "multiple" : "single"}
+                className={`w-full flex flex-col md:flex-row  ${!nowrap && "flex-wrap"}`}
+                value={field.value}
+                onValueChange={field.onChange}
+                disabled={disabled}>
                 {options.map(option => (
                   <ToggleGroupItem
                     key={option.value}
