@@ -76,7 +76,7 @@ export default function TextArea<T extends FieldValues>({ form, name, required, 
             {...field}
             rows={rows}
             placeholder={placeholder ?? ""}
-            onBlur={onBlur}
+            onBlur={onBlur ? onBlur : field.onBlur}
             onChange={e => {
               if (max) {
                 setCharCount(e.target.value.length); // Mise à jour du compteur de caractères

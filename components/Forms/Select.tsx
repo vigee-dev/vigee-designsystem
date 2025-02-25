@@ -79,6 +79,7 @@ export default function Select<T extends FieldValues>({
             )}
           </HoverCard>
           <ShadSelect
+            {...field}
             onValueChange={(e: string) => {
               if (!isBoolean) {
                 field.onChange(e);
