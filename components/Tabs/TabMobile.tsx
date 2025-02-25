@@ -83,7 +83,15 @@ export function TabMobile<T extends string = string>({ onChange, options, defaul
               onClick={() => handleValueChange(option.href ?? option.value ?? "", option)}>
               <div className="flex items-center gap-2 justify-between ">
                 <div className="flex items-center gap-2">
-                  {option.icon && <span className="group-data-[state=active]:text-zinc-50 text-gray-400 dark:group-data-[state=active]:text-zinc-800">{option.icon}</span>}
+                  {option.icon && (
+                    <span
+                      className={cn(
+                        "group-data-[state=active]:text-zinc-50 text-gray-400 dark:group-data-[state=active]:text-zinc-800",
+                        variant === "light" && "text-zinc-400 group-data-[state=active]:text-zinc-800"
+                      )}>
+                      {option.icon}
+                    </span>
+                  )}
                   {option.name}
                 </div>
                 {option?.count && option?.count > 0 ? <Badge className={cn("bg-red-400 h-5 w-5 flex items-center justify-center mx-auto", option.badgeColor)}>{option.count}</Badge> : null}{" "}
