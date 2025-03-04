@@ -15,7 +15,8 @@ type Props = {
   links: {
     name: string;
     icon: React.ReactNode;
-    href: string;
+    href?: string;
+    onClick?: () => Promise<void> | void;
   }[];
 };
 
@@ -56,10 +57,17 @@ const FooterSidebar = ({ user, links }: Props) => {
             <DropdownMenuGroup>
               {links.map(link => (
                 <DropdownMenuItem key={link.name}>
-                  <Link href={link.href} className="cursor-pointer flex gap-2 items-center">
-                    {link.icon}
-                    {link.name}
-                  </Link>
+                  {link.href ? (
+                    <Link href={link.href} className="cursor-pointer flex gap-2 items-center">
+                      {link.icon}
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <button onClick={link.onClick} className="cursor-pointer flex gap-2 items-center w-full text-left">
+                      {link.icon}
+                      {link.name}
+                    </button>
+                  )}
                 </DropdownMenuItem>
               ))}
             </DropdownMenuGroup>

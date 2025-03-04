@@ -23,6 +23,10 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+type LinkItem = { name: string; icon: React.ReactNode; href: string; onClick?: never } | { name: string; icon: React.ReactNode; href?: never; onClick: () => Promise<void> | void };
+
+type Links = LinkItem;
+
 const AppSidebar = ({
   items,
   itemsSwitcher,
@@ -50,7 +54,7 @@ const AppSidebar = ({
   logoSmall?: string;
   pathname: string;
   user?: { name: string; email: string; avatar: string };
-  links: { name: string; icon: React.ReactNode; href: string }[];
+  links: Links[];
   headerComponent?: React.ReactNode;
   switcher?: boolean;
 }) => {
