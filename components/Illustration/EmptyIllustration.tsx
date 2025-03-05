@@ -1,8 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../Buttons/Button";
 import { Container } from "../Container/Container";
-import emptyMan from "../../img/empty/empty-man.svg";
 import { cn } from "../lib/utils";
 
 interface IllustrationProps {
@@ -26,12 +24,12 @@ export default function EmptyIllustration({ text, subtitle, buttonLink, buttonTe
       <p className="text-gray-400 text-sm">{subtitle}</p>
 
       {!buttonLink && button && (
-        <div className="text-sm text-gray-500  items-center text-center font-display pt-2">{buttonText ? <Button className="flex gap-x-2">{buttonText}</Button> : <Button icon="add" big />}</div>
+        <div className="text-sm text-gray-500  items-center text-center font-display pt-2">{buttonText ? <Button className="flex gap-x-2">{buttonText}</Button> : <Button icon="plus" />}</div>
       )}
 
       {buttonLink && (
         <Link className="text-sm text-gray-500  items-center text-center font-display pt-2" href={`${buttonLink}`}>
-          {buttonText ? <Button className="flex gap-x-2">{buttonText}</Button> : <Button icon="add" big />}
+          {buttonText ? <Button className="flex gap-x-2">{buttonText}</Button> : <Button icon="plus" />}
         </Link>
       )}
       {children}
