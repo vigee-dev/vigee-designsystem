@@ -45,9 +45,9 @@ export function Ranking({ title, subtitle, data, icon, emptyMessage, classNameIm
         {iconTitle}
       </div>
 
-      <div className={cn("space-y-4 ", classNameContent)}>
+      <div className={cn("space-y-4 overflow-y-auto custom-scrollbar", classNameContent)}>
         {data?.map((item, index) => (
-          <div className={"flex items-center"} key={index}>
+          <div className={"flex items-center  pr-2"} key={index}>
             {item.img ? (
               <Avatar className={cn("h-9 w-9", classNameImage)}>
                 <AvatarImage src={item.img} alt="Avatar" className={"object-cover w-full h-full"} /> <AvatarFallback>{item ? icon : <PiUserCircleDuoStroke />}</AvatarFallback>

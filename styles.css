@@ -25,6 +25,16 @@
 .active:not(:first-child):before {
   @apply bg-primary;
 }
+
+.custom-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0px; /* Chrome, Safari, Opera */
+  background: transparent; /* Assure que l'arrière-plan est transparent */
+}
 /* @layer base {
   :root {
     --sidebar-background: 0 0% 98%;
