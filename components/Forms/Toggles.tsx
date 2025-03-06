@@ -25,9 +25,10 @@ type Props<T extends FieldValues> = {
   options: Option[];
   nowrap?: boolean;
   multi?: boolean;
+  variant?: "default" | "small";
 };
 
-export const Toggles = <T extends FieldValues>({ form, name, label, descr, className, optionsClassName, disabled, options, nowrap = false, multi = false }: Props<T>) => {
+export const Toggles = <T extends FieldValues>({ form, name, label, descr, className, optionsClassName, disabled, options, nowrap = false, multi = false, variant = "default" }: Props<T>) => {
   return (
     <FormField
       control={form.control}
@@ -36,10 +37,10 @@ export const Toggles = <T extends FieldValues>({ form, name, label, descr, class
         <FormItem className="w-full col-span-full">
           {label && <Label className="font-bold">{label}</Label>}
           <FormControl>
-            <Container className={cn("p-1", className)}>
+            <Container className={cn("p-1", className, variant === "small" && "border-none")}>
               <ShadToggleGroup
                 type={multi ? "multiple" : "single"}
-                className={`w-full flex flex-col md:flex-row  ${!nowrap && "flex-wrap"}`}
+                className={cn(`w-full flex flex-col md:flex-row  flex-wrap`, nowrap && "flex-nowrap", variant === "small" && "flex-nowrap border-none w-fit")}
                 value={field.value}
                 onValueChange={field.onChange}
                 disabled={disabled}>
@@ -49,7 +50,11 @@ export const Toggles = <T extends FieldValues>({ form, name, label, descr, class
                     value={option.value}
                     aria-label={option.label || ""}
                     disabled={option.disabled}
-                    className={cn(" items-center h-fit p-4 flex justify-between w-full gap-6 md:px-6 rounded-lg  border-none", optionsClassName)}>
+                    className={cn(
+                      " items-center h-fit p-4 flex justify-between w-full gap-6 md:px-6 rounded-lg  border-none",
+                      optionsClassName,
+                      variant === "small" && "rounded-full border-none p-2 gap-0 justify-center bg-zinc-900 text-white md:px-3"
+                    )}>
                     <div className="w-fit">{option.icon}</div>
                     {(option.label || option.description) && (
                       <div className="w-full text-left ">
