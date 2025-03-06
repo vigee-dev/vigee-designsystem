@@ -53,7 +53,7 @@ export const Toggles = <T extends FieldValues>({ form, name, label, descr, class
                     className={cn(
                       " items-center h-fit p-4 flex justify-between w-full gap-6 md:px-6 rounded-lg  border-none",
                       optionsClassName,
-                      variant === "small" && "rounded-full border-none p-2 gap-0 justify-center bg-zinc-900 text-white md:px-3"
+                      variant === "small" && "rounded-full border-none p-2 gap-0 justify-center data-[state=on]:bg-zinc-900 data-[state=on]:text-white md:px-3"
                     )}>
                     <div className="w-fit">{option.icon}</div>
                     {(option.label || option.description) && (
