@@ -21,8 +21,8 @@ type Props<T extends FieldValues> = {
   value?: string;
   helpComponent?: React.ReactNode;
   isBoolean?: boolean;
-  options?: { label: string; value: string; icon?: React.ReactNode; color?: string }[];
-  variant?: 'default' | 'outlined';
+  options?: { label: string; value: string; icon?: React.ReactNode; color?: string; disabled?: boolean }[];
+  variant?: "default" | "outlined";
 };
 
 export default function Select<T extends FieldValues>({
@@ -41,7 +41,7 @@ export default function Select<T extends FieldValues>({
   helpComponent,
   isBoolean = false,
   options,
-  variant = 'default',
+  variant = "default",
 }: Props<T>) {
   return form?.control && name ? (
     <FormField
@@ -49,12 +49,7 @@ export default function Select<T extends FieldValues>({
       name={name}
       rules={{ required }}
       render={({ field }) => (
-        <FormItem
-          className={cn(
-            className,
-            variant === "default" && 'border-none',
-          )}
-        >
+        <FormItem className={cn(className, variant === "default" && "border-none")}>
           <HoverCard>
             <div className="flex items-center justify-between ">
               <div className="flex flex-col gap-1 ">
@@ -92,7 +87,7 @@ export default function Select<T extends FieldValues>({
             value={String(field.value)}
             disabled={disabled}>
             <FormControl>
-              <SelectTrigger className={cn('font-medium bg-input', variant === 'outlined' && 'border-gray-400 border rounded-lg bg-transparent')}>
+              <SelectTrigger className={cn("font-medium bg-input", variant === "outlined" && "border-gray-400 border rounded-lg bg-transparent")}>
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
             </FormControl>
@@ -101,7 +96,7 @@ export default function Select<T extends FieldValues>({
               {!options
                 ? children
                 : options.map(option => (
-                    <SelectItem key={option.value} value={option.value}>
+                    <SelectItem key={option.value} value={option.value} disabled={option.disabled}>
                       <div className={`flex items-center gap-2 ${option.color}`}>
                         {option.icon}
                         {option.label}
@@ -119,7 +114,7 @@ export default function Select<T extends FieldValues>({
     <div className={className}>
       {label && <Label className="font-black text-primary">{label}</Label>}
       <ShadSelect onValueChange={onChange} value={String(value)} disabled={disabled}>
-        <SelectTrigger className={`font-medium bg-input ${variant === "outlined" && 'border-gray-400 border rounded-lg bg-transparent'}`}>
+        <SelectTrigger className={`font-medium bg-input ${variant === "outlined" && "border-gray-400 border rounded-lg bg-transparent"}`}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent className="max-h-[200px] font-medium">
