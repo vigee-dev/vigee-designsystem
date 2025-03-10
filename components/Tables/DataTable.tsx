@@ -35,6 +35,7 @@ interface DataTableProps<TData, TValue> {
   className?: string;
   tableHook?: TanstackTable<TData>
   displayBottomRowsSkeleton?: boolean;
+  rowClassname?: string
 }
 
 export function DataTable<TData, TValue>({
@@ -47,7 +48,8 @@ export function DataTable<TData, TValue>({
   onRowClick,
   className,
   tableHook,
-  displayBottomRowsSkeleton = false
+  displayBottomRowsSkeleton = false,
+  rowClassname
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = React.useState<string | undefined>(undefined);
@@ -113,7 +115,7 @@ export function DataTable<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map( row => (
                 <TableRow
-                  className={`${onRowClick ? 'cursor-pointer' : ''}`}
+                  className={`${onRowClick ? 'cursor-pointer' : ''} ${rowClassname || ''}`}
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                   onClick={() => onRowClick && onRowClick(row)}
