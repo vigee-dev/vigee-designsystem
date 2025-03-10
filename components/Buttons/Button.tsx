@@ -40,9 +40,9 @@ import {
   PiUserSettingsStroke,
   PiChatDefaultStroke,
   PiUserCircleStroke,
-  PiPlayBigSolid,
   PiPlayCircleDuoSolid,
   PiPauseCircleDuoSolid,
+  PiChevronUpStroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2, XIcon } from "lucide-react";
@@ -89,6 +89,7 @@ const iconMap = {
   logout: PiLogOutRightDuoStroke,
   navigation: PiNavigationSlantStroke,
   chevronDown: PiChevronDownStroke,
+  chevronUp: PiChevronUpStroke,
   github: PiGithubStroke,
   google: PiGoogleStroke,
   apple: PiAppleLogoStroke,
@@ -129,8 +130,7 @@ export function Button({ children, onClick, variant, type = "button", disabled, 
         disabled={disabled}
         tooltip={tooltip}
         big={big}
-        {...props}
-      >
+        {...props}>
         {children}
       </ButtonComponent>
     </Link>
@@ -147,8 +147,7 @@ export function Button({ children, onClick, variant, type = "button", disabled, 
       disabled={disabled}
       tooltip={tooltip}
       big={big}
-      {...props}
-    >
+      {...props}>
       {children}
     </ButtonComponent>
   );
