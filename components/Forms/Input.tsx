@@ -4,10 +4,10 @@ import { Input as ShadInput } from "../ui/input";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { PiExternalLinkCircleDuoSolid, PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
 
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "../ui/hover-card";
+import { HoverCard, HoverCardTrigger } from "../ui/hover-card";
 import { Label } from "../../components/ui/label";
 import { cn } from "../lib/utils";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import React from "react";
 
 type Props<T extends FieldValues> = {
