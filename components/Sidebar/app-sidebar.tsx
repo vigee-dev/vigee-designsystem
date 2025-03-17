@@ -22,7 +22,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { cn } from "components/lib/utils";
+import { cn } from "../lib/utils";
 
 type LinkItem = { name: string; icon: React.ReactNode; href: string; onClick?: never } | { name: string; icon: React.ReactNode; href?: never; onClick: () => Promise<void> | void };
 
