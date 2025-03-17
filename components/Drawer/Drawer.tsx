@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "components/lib/utils";
+import { cn } from "../lib/utils";
 import { Drawer as VaulDrawer } from "vaul";
 
 export function Drawer({
