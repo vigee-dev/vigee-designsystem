@@ -39,6 +39,7 @@ const AppSidebar = ({
   headerComponent,
   switcher,
   classNameItems,
+  hoverBackground = "bg-zinc-800",
 }: {
   items: {
     name: string;
@@ -60,6 +61,7 @@ const AppSidebar = ({
   headerComponent?: React.ReactNode;
   switcher?: boolean;
   classNameItems?: string;
+  hoverBackground?: string;
 }) => {
   const router = useRouter();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
@@ -87,13 +89,18 @@ const AppSidebar = ({
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item, index) => (
-                <SidebarMenuItem key={index} className={`w-full items-center  rounded-md hover:cursor-pointer ${(pathname === item.href || hoveredItem === item.slug) && "bg-zinc-800"}`}>
+                <SidebarMenuItem key={index} className={`w-full items-center  rounded-md hover:cursor-pointer ${(pathname === item.href || hoveredItem === item.slug) && hoverBackground}`}>
                   <SidebarMenuButton asChild onMouseEnter={() => setHoveredItem(item.slug)} onMouseLeave={() => setHoveredItem(null)} className="w-full">
                     <div className={`flex items-center gap-2 w-full`} onClick={() => handleClick(item)}>
                       <span className={`${pathname === item.href || hoveredItem === item.slug ? "inline  transition-opacity duration-300" : "hidden  transition-opacity duration-300"}`}>
                         {item.iconFill}
                       </span>
-                      <span className={`${pathname !== item.href && hoveredItem !== item.slug ? "inline  transition-opacity duration-300" : "hidden  transition-opacity duration-300"}`}>
+                      <span
+                        className={cn(
+                          "inline  transition-opacity duration-300",
+                          pathname !== item.href && hoveredItem !== item.slug ? "inline  transition-opacity duration-300" : "hidden  transition-opacity duration-300",
+                          classNameItems
+                        )}>
                         {item.icon}
                       </span>
                       <span
