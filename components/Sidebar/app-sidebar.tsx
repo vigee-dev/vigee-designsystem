@@ -22,6 +22,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { cn } from "components/lib/utils";
 
 type LinkItem = { name: string; icon: React.ReactNode; href: string; onClick?: never } | { name: string; icon: React.ReactNode; href?: never; onClick: () => Promise<void> | void };
 
@@ -37,6 +38,7 @@ const AppSidebar = ({
   links,
   headerComponent,
   switcher,
+  classNameItems,
 }: {
   items: {
     name: string;
@@ -57,6 +59,7 @@ const AppSidebar = ({
   links: Links[];
   headerComponent?: React.ReactNode;
   switcher?: boolean;
+  classNameItems?: string;
 }) => {
   const router = useRouter();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
@@ -94,7 +97,11 @@ const AppSidebar = ({
                         {item.icon}
                       </span>
                       <span
-                        className={`font-medium text-base group ${pathname === item.href || hoveredItem === item.slug ? "text-white  transition-opacity duration-300" : "text-zinc-400  transition-opacity duration-300"}`}>
+                        className={cn(
+                          "font-medium text-base group",
+                          pathname === item.href || hoveredItem === item.slug ? "text-white  transition-opacity duration-300" : "text-zinc-400  transition-opacity duration-300",
+                          classNameItems
+                        )}>
                         {item.name}
                       </span>
                     </div>
