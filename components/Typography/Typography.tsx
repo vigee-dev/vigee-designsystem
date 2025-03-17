@@ -9,11 +9,11 @@ export function TypographyH2({ children, className }: { children: React.ReactNod
 }
 
 export function TypographyH3({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <h3 className={`scroll-m-20 text-lg  tracking-tight ${className}`}>{children}</h3>;
+  return <h3 className={`scroll-m-20 text-lg text-primary tracking-tight ${className}`}>{children}</h3>;
 }
 
 export function TypographyH4({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <h4 className={`scroll-m-20 text-md  tracking-tight ${className}`}>{children}</h4>;
+  return <h4 className={`scroll-m-20 text-md tracking-tight ${className}`}>{children}</h4>;
 }
 
 export function TypographyBlockquote({ children }: { children: React.ReactNode }) {
@@ -22,6 +22,10 @@ export function TypographyBlockquote({ children }: { children: React.ReactNode }
 
 export function Body({ children, className }: { children: React.ReactNode; className?: string }) {
   return <p className={cn("text-base text-foreground", className)}>{children}</p>;
+}
+
+export function BodySmall({ children, className }: { children: React.ReactNode; className?: string }) {
+  return <p className={cn("text-sm text-foreground", className)}>{children}</p>;
 }
 
 export function Caption({ children, className }: { children: React.ReactNode; className?: string }) {
