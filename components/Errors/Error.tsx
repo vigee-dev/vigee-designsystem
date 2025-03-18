@@ -14,8 +14,8 @@ interface IllustrationProps {
   onClick?: () => void;
   variant?: "bro" | "classic";
 }
-export function Error({ title, subtitle, children, supportEmail, onClick, variant = "bro" }: IllustrationProps) {
-  const image = variant === "bro" ? errorBro : error;
+export function Error({ title, subtitle, children, supportEmail, onClick, variant = "bro", img = error }: IllustrationProps) {
+  const image = variant === "bro" ? errorBro : img;
   return (
     <div className="flex flex-col items-center justify-center  w-full px-12 max-w-2xl">
       <Image width={400} height={400} className="mx-auto w-64 h-64" src={image} alt="Erreur" />
