@@ -27,7 +27,9 @@ const Back: React.FC<BackProps> = ({ href, where, onClick, className, back = fal
             <p className="mx-1 text-sm "> {where}</p>
           </Link>
         ) : (
-          <div onClick={() => router.back()} className="flex flex-grid text-gray-400  hover:text-primary transform ease-in-out duration-200 hover:font-bold items-center hover:cursor-pointer">
+          <div
+            onClick={back ? () => router.back() : onClick}
+            className="flex flex-grid text-gray-400  hover:text-primary transform ease-in-out duration-200 hover:font-bold items-center hover:cursor-pointer">
             <PiChevronLeftStroke />
             <p className="mx-1 text-sm "> {where}</p>
           </div>
