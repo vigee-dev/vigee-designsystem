@@ -52,7 +52,7 @@ const AppSidebar = ({
     actions?: { title: string; url: string }[];
     dropdownContent?: React.ReactNode;
   }[];
-  itemsSwitcher: { name: string; slug: string; type: string; icon: React.ReactNode }[];
+  itemsSwitcher?: { name: string; slug: string; type: string; icon: React.ReactNode }[];
   logo?: string;
   logoSmall?: string;
   pathname: string;
@@ -75,7 +75,7 @@ const AppSidebar = ({
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        {switcher ? (
+        {switcher && itemsSwitcher ? (
           <SwitcherSidebar items={itemsSwitcher} logo={logo} logoSmall={logoSmall} />
         ) : logo && open ? (
           <Image src={logo} alt="logo" width={150} height={150} className="py-4" />
@@ -89,8 +89,10 @@ const AppSidebar = ({
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item, index) => (
-                <SidebarMenuItem key={index} className={`w-full items-center  rounded-md hover:cursor-pointer ${(pathname === item.href || hoveredItem === item.slug) && hoverBackground}`}>
-                  <SidebarMenuButton asChild onMouseEnter={() => setHoveredItem(item.slug)} onMouseLeave={() => setHoveredItem(null)} className="w-full">
+                <SidebarMenuItem
+                  key={index}
+                  className={cn("w-full items-center  rounded-md hover:cursor-pointer transition-all duration-300", (pathname === item.href || hoveredItem === item.slug) && hoverBackground)}>
+                  <SidebarMenuButton asChild onMouseEnter={() => setHoveredItem(item.slug)} onMouseLeave={() => setHoveredItem(null)} className={cn("w-full hover:bg-transparent")}>
                     <div className={`flex items-center gap-2 w-full`} onClick={() => handleClick(item)}>
                       <span className={`${pathname === item.href || hoveredItem === item.slug ? "inline  transition-opacity duration-300" : "hidden  transition-opacity duration-300"}`}>
                         {item.iconFill}
@@ -98,7 +100,7 @@ const AppSidebar = ({
                       <span
                         className={cn(
                           "inline  transition-opacity duration-300",
-                          pathname !== item.href && hoveredItem !== item.slug ? "inline  transition-opacity duration-300" : "hidden  transition-opacity duration-300",
+                          pathname !== item.href && hoveredItem !== item.slug ? "inline  transition-all duration-300" : "hidden  transition-all duration-300",
                           classNameItems
                         )}>
                         {item.icon}
@@ -151,7 +153,7 @@ const AppSidebar = ({
         </SidebarGroup>
       </SidebarContent>
       {user && (
-        <SidebarFooter>
+        <SidebarFooter className={classNameItems}>
           <FooterSidebar user={user} links={links} />
         </SidebarFooter>
       )}
