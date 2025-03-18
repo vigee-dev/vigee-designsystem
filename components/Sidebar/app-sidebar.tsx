@@ -92,12 +92,7 @@ const AppSidebar = ({
                 <SidebarMenuItem
                   key={index}
                   className={cn("w-full items-center  rounded-md hover:cursor-pointer transition-all duration-300", (pathname === item.href || hoveredItem === item.slug) && hoverBackground)}>
-                  <SidebarMenuButton
-                    asChild
-                    onMouseEnter={() => setHoveredItem(item.slug)}
-                    onMouseLeave={() => setHoveredItem(null)}
-                    variant="ghost"
-                    className={cn("w-full hover:bg-transparent bg-transparent")}>
+                  <SidebarMenuButton asChild onMouseEnter={() => setHoveredItem(item.slug)} onMouseLeave={() => setHoveredItem(null)} className={cn("w-full hover:bg-transparent bg-transparent")}>
                     <div className={`flex items-center gap-2 w-full`} onClick={() => handleClick(item)}>
                       <span className={`${pathname === item.href || hoveredItem === item.slug ? "inline  transition-opacity duration-300" : "hidden  transition-opacity duration-300"}`}>
                         {item.iconFill}
