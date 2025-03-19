@@ -15,7 +15,8 @@ interface Props<T extends FieldValues> {
   form: UseFormReturn<T>;
   name: Path<T>;
   className?: string;
-  starting_date?: Date;
+  starting_date?: Date | null;
+  ending_date?: Date | null;
   disabled?: boolean;
   disabledKeys?: boolean;
   returnString?: boolean;
@@ -24,7 +25,7 @@ interface Props<T extends FieldValues> {
   required?: boolean;
 }
 
-export default function DatePicker<T extends FieldValues>({ label, form, name, className, starting_date, disabled, disabledKeys, returnString, defaultValue, required }: Props<T>) {
+export default function DatePicker<T extends FieldValues>({ label, form, name, className, starting_date, ending_date, disabled, disabledKeys, returnString, defaultValue, required }: Props<T>) {
   const setToMidnight = (date: Date): Date => {
     const midnightDate = new Date(date);
     midnightDate.setHours(0, 0, 0, 0);
@@ -33,7 +34,7 @@ export default function DatePicker<T extends FieldValues>({ label, form, name, c
 
   const isDateDisabled = (date: Date): boolean => {
     const normalizedDate = setToMidnight(date);
-    return starting_date ? normalizedDate < setToMidnight(new Date(starting_date)) : false;
+    return (starting_date ? normalizedDate < setToMidnight(new Date(starting_date)) : false) || (ending_date ? normalizedDate > setToMidnight(new Date(ending_date)) : false);
   };
 
   const yearDefault = defaultValue ? moment(defaultValue).year().toString() : moment().year().toString();
