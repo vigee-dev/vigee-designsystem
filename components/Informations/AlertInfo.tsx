@@ -1,6 +1,6 @@
-import { cn } from "components/lib/utils";
+import { cn } from "../../components/lib/utils";
 import { Alert, AlertDescription, AlertTitle } from "../../components/ui/alert";
-import { PiAlertCircleDuoSolid, PiAlertTriangleDuoSolid, PiInformationCircleDuoSolid, PiQuestionMarkCircleDuoSolid } from "icons/PikaIcons";
+import { PiAlertCircleDuoSolid, PiAlertTriangleDuoSolid, PiInformationCircleDuoSolid, PiQuestionMarkCircleDuoSolid } from "../../icons/PikaIcons";
 
 export function AlertInfo({ title, description, type }: { title: string; description?: string; type: "info" | "destructive" | "warning" | "question" }) {
   const color =
