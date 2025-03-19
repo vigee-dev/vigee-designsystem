@@ -8,7 +8,6 @@ import {
   PiDownloadDownDuoSolid,
   PiUploadUpDuoSolid,
   PiArrowLeftStroke,
-  PiPencilEditBoxDuoSolid,
   PiArrowLeftCircleContrast,
   PiUserPlusContrast,
   PiChevronRightStroke,
@@ -43,6 +42,7 @@ import {
   PiPlayCircleDuoSolid,
   PiPauseCircleDuoSolid,
   PiChevronUpStroke,
+  PiPencilEditBoxDuoStroke,
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { Loader2, XIcon } from "lucide-react";
@@ -73,7 +73,7 @@ const iconMap = {
   trash: PiDeleteDustbin01DuoSolid,
   upload: PiUploadUpDuoSolid,
   back: PiArrowLeftStroke,
-  edit: PiPencilEditBoxDuoSolid,
+  edit: PiPencilEditBoxDuoStroke,
   arrowLeft: PiArrowLeftCircleContrast,
   userAdd: PiUserPlusContrast,
   user: PiUserCircleStroke,
