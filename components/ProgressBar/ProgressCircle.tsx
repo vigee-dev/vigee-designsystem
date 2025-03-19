@@ -16,6 +16,8 @@ export default function ProgressCircle({ max = 100, min = 0, value = 0, gaugePri
   const percentPx = circumference / 100;
   const currentPercent = ((value - min) / (max - min)) * 100;
 
+  console.log("currentPercent", currentPercent);
+
   return (
     <div className="flex flex-col items-center justify-center">
       <div
