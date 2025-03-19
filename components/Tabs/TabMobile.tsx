@@ -31,7 +31,7 @@ interface TabsResponsiveProps<T extends string = string> {
 
 const variants = {
   default:
-    "rounded-xl dark:bg-zinc-900 bg-zinc-100 dark:data-[state=active]:text-zinc-800 text-zinc-500 dark:data-[state=active]:bg-white data-[state=active]:bg-zinc-800 data-[state=active]:text-zinc-100 font-bold",
+    "rounded-xl dark:bg-zinc-900 bg-zinc-100 dark:data-[state=active]:text-zinc-800 text-zinc-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary-background data-[state=active]:text-primary-foreground font-bold",
   light: "rounded-xl bg-transparent data-[state=active]:text-primary text-primary-light font-bold data-[state=active]:bg-transparent data-[state=active]:shadow-none border-none pl-0",
 } as const;
 
@@ -86,7 +86,7 @@ export function TabMobile<T extends string = string>({ onChange, options, defaul
                   {option.icon && (
                     <span
                       className={cn(
-                        "group-data-[state=active]:text-zinc-50 text-gray-400 dark:group-data-[state=active]:text-zinc-800",
+                        "group-data-[state=active]:text-primary-light text-zinc-400 dark:group-data-[state=active]:text-primary",
                         variant === "light" && "text-zinc-400 group-data-[state=active]:text-zinc-800"
                       )}>
                       {option.icon}

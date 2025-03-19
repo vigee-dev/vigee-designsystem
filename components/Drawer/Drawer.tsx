@@ -14,7 +14,7 @@ export function Drawer({
   className,
 }: {
   children: React.ReactNode;
-  trigger: React.ReactNode;
+  trigger?: React.ReactNode;
   title?: string;
   description?: string;
   open?: boolean;
