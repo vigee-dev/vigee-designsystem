@@ -1,11 +1,10 @@
 "use client";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useDebouncedCallback } from "use-debounce";
 import { PiSearchDefaultStroke } from "../../icons/PikaIcons";
 import { cn } from "../lib/utils";
 
-export default function TableSearch({ className, placeholder }: { className?: string, placeholder?: string }) {
+export default function TableSearch({ className, placeholder, variant = "default" }: { className?: string; placeholder?: string; variant?: "default" | "light" }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -27,7 +26,10 @@ export default function TableSearch({ className, placeholder }: { className?: st
         Rechercher
       </label>
       <input
-        className="peer block w-full font-variations rounded-md border border-gray-200 py-[9px] pl-10 text-[16px] md:text-sm outline-2 placeholder:text-gray-400"
+        className={cn(
+          "peer block w-full font-variations rounded-md border border-gray-200 py-[9px] pl-10 text-[16px] md:text-sm outline-2 placeholder:text-gray-400",
+          variant === "light" && "bg-transparent border-none"
+        )}
         placeholder={placeholder ?? "Rechercher"}
         onChange={e => {
           handleSearch(e.target.value);
