@@ -23,9 +23,25 @@ interface Props<T extends FieldValues> {
   years?: boolean;
   defaultValue?: string;
   required?: boolean;
+  classNameInput?: string;
+  classNameButton?: string;
 }
 
-export default function DatePicker<T extends FieldValues>({ label, form, name, className, starting_date, ending_date, disabled, disabledKeys, returnString, defaultValue, required }: Props<T>) {
+export default function DatePicker<T extends FieldValues>({
+  label,
+  form,
+  name,
+  className,
+  starting_date,
+  ending_date,
+  disabled,
+  disabledKeys,
+  returnString,
+  defaultValue,
+  required,
+  classNameInput,
+  classNameButton,
+}: Props<T>) {
   const setToMidnight = (date: Date): Date => {
     const midnightDate = new Date(date);
     midnightDate.setHours(0, 0, 0, 0);
@@ -94,7 +110,7 @@ export default function DatePicker<T extends FieldValues>({ label, form, name, c
       control={form.control}
       name={name}
       render={({ field }) => (
-        <FormItem className="flex flex-col py-2">
+        <FormItem className={cn("flex flex-col py-2", className)}>
           <FormLabel className="font-black text-primary">
             {label} {required && <span className="text-red-600 ml-1">*</span>}
           </FormLabel>
@@ -114,14 +130,16 @@ export default function DatePicker<T extends FieldValues>({ label, form, name, c
                       }
                     }}
                     placeholder="Choisir une date"
-                    className={cn("pl-3 text-left font-display font-medium bg-input border-none", !field.value && "text-muted-foreground", className)}
+                    className={cn("pl-3 text-left font-display font-medium bg-input border-none", !field.value && "text-muted-foreground", classNameInput)}
                     type="text"
                     disabled={disabled}
                   />
                 ) : (
-                  <Button disabled={disabled} variant={"outline"} className={cn(`pl-3 text-left font-display font-medium bg-input border-none`, !field.value && "text-muted-foreground", className)}>
+                  <Button
+                    disabled={disabled}
+                    variant={"outline"}
+                    className={cn(`pl-3 text-left font-display font-medium bg-input border-none`, !field.value && "text-muted-foreground", classNameButton)}>
                     {field.value ? moment(field.value).format("DD/MM/YYYY") : <span>Choisir une date</span>}
-
                     <PiCalendarFilledContrast className="ml-auto h-4 w-4 opacity-50" />
                   </Button>
                 )}

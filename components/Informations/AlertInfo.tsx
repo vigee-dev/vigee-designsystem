@@ -1,32 +1,54 @@
 import { cn } from "../../components/lib/utils";
 import { Alert, AlertDescription, AlertTitle } from "../../components/ui/alert";
-import { PiAlertCircleDuoSolid, PiAlertTriangleDuoSolid, PiInformationCircleDuoSolid, PiQuestionMarkCircleDuoSolid } from "../../icons/PikaIcons";
+import { PiAlertCircleDuoSolid, PiAlertTriangleDuoSolid, PiCheckTickCircleDuoSolid, PiInformationCircleDuoSolid, PiQuestionMarkCircleDuoSolid } from "../../icons/PikaIcons";
 
-export function AlertInfo({ title, description, type }: { title: string; description?: string; type: "info" | "destructive" | "warning" | "question" }) {
+export function AlertInfo({
+  title,
+  description,
+  type,
+  className,
+}: {
+  title: string;
+  description?: string;
+  type: "neutral" | "informative" | "destructive" | "warning" | "question" | "success";
+  className?: string;
+}) {
   const color =
-    type === "info"
-      ? "text-informative bg-informative-light"
+    type === "informative"
+      ? "text-informative bg-informative-background"
       : type === "destructive"
-        ? "text-destructive bg-destructive-light"
-        : type === "warning"
-          ? "text-warning bg-warning-light"
-          : "text-question bg-question-light";
+      ? "text-destructive bg-destructive-background"
+      : type === "warning"
+      ? "text-warning bg-warning-background"
+      : type === "success"
+      ? "text-success bg-success-background"
+      : "text-neutral bg-neutral-background";
   const lightColor =
-    type === "info" ? "text-informative-foreground " : type === "destructive" ? "text-destructive-foreground " : type === "warning" ? "text-warning-foreground " : "text-question-foreground ";
+    type === "informative"
+      ? "text-informative-foreground-light "
+      : type === "destructive"
+      ? "text-destructive-foreground-light "
+      : type === "warning"
+      ? "text-warning-foreground-light "
+      : type === "success"
+      ? "text-success-foreground-light "
+      : "text-neutral-foreground-light ";
 
   const icon =
-    type === "info" ? (
+    type === "informative" ? (
       <PiInformationCircleDuoSolid className={cn(`h-6 w-6 shrink-0`, color)} />
     ) : type === "destructive" ? (
       <PiAlertCircleDuoSolid className={cn(`h-6 w-6 shrink-0`, color)} />
     ) : type === "warning" ? (
       <PiAlertTriangleDuoSolid className={cn(`h-6 w-6 shrink-0`, color)} />
+    ) : type === "success" ? (
+      <PiCheckTickCircleDuoSolid className={cn(`h-6 w-6 shrink-0`, color)} />
     ) : (
       <PiQuestionMarkCircleDuoSolid className={cn(`h-6 w-6 shrink-0`, color)} />
     );
 
   return (
-    <Alert className={cn("flex items-center p-3 rounded-xl border-none", color)}>
+    <Alert className={cn("flex items-center p-3 rounded-xl border-none", color, className)}>
       <div className="flex items-center gap-4">
         {icon}
         <div className="flex flex-col">

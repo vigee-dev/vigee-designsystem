@@ -5,7 +5,7 @@ export function TypographyH1({ children, className }: { children: React.ReactNod
 }
 
 export function TypographyH2({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <h2 className={cn(`scroll-m-20  pb-2 text-xl  tracking-tight first:mt-0`, className)}>{children}</h2>;
+  return <h2 className={cn(`scroll-m-20  pb-2 text-xl  tracking-tight first:mt-0 font-bold`, className)}>{children}</h2>;
 }
 
 export function TypographyH3({ children, className }: { children: React.ReactNode; className?: string }) {

@@ -303,3 +303,24 @@ export function TableSkeleton({ className, noBackground }: { className?: string;
     </div>
   );
 }
+
+export const DocumentSkeleton = () => {
+  return (
+    <div className="flex flex-col gap-2">
+      <InputSkeleton />
+
+      <InputSkeleton />
+      <div className="p-1">
+        <div className={`${shimmer} relative h-6 overflow-hidden w-full rounded-md bg-gray-100 `} />
+      </div>
+      <InputSkeleton />
+      <div className="p-1">
+        <div className={`${shimmer} relative h-6 overflow-hidden w-full rounded-md bg-gray-100  `} />
+      </div>
+      <InputSkeleton />
+      <div className="p-1">
+        <div className={`${shimmer} relative h-6 overflow-hidden w-full rounded-md bg-gray-100`} />
+      </div>
+    </div>
+  );
+};

@@ -1,32 +1,17 @@
 "use client";
 
 import * as React from "react";
-import { CalendarIcon } from "@radix-ui/react-icons";
 import { DateRange, Matcher } from "react-day-picker";
 import { fr } from "date-fns/locale";
 import { cn } from "../lib/utils";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
-import {
-  format,
-  startOfWeek,
-  endOfWeek,
-  startOfMonth,
-  endOfMonth,
-  startOfYear,
-  endOfYear,
-} from "date-fns";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { format, startOfWeek, endOfWeek, startOfMonth, endOfMonth, startOfYear, endOfYear } from "date-fns";
 import { PopoverClose } from "@radix-ui/react-popover";
 import { Label } from "../ui/label";
-import { PiCalendarCheckDuoSolid } from "../../icons/PikaIcons";
+import { PiCalendarRangeDuoSolid } from "../../icons/PikaIcons";
 
 interface DatePickerRangeProps {
   date: DateRange | undefined;
@@ -39,21 +24,14 @@ interface DatePickerRangeProps {
   disabled?: boolean;
 }
 
-const DatePickerRange = ({
-  className,
-  date,
-  setDate,
-  select,
-  label,
-  onChange,
-  disabledDays,
-  disabled = false
-}: DatePickerRangeProps) => {
+const DatePickerRange = ({ className, date, setDate, select, label, onChange, disabledDays, disabled = false }: DatePickerRangeProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
-  let newDate: DateRange | undefined;
+  const [selectedPeriod, setSelectedPeriod] = React.useState<string>();
 
   const handleSelectChange = (value: string) => {
-    const lastYear = new Date().getFullYear() - 1;
+    setSelectedPeriod(value);
+    let newDate: DateRange | undefined;
+
     switch (value) {
       case "thisWeek":
         newDate = {
@@ -65,6 +43,22 @@ const DatePickerRange = ({
         newDate = {
           from: startOfMonth(new Date()),
           to: endOfMonth(new Date()),
+        };
+        break;
+      case "lastMonth":
+        const lastMonth = new Date();
+        lastMonth.setMonth(lastMonth.getMonth() - 1);
+        newDate = {
+          from: startOfMonth(lastMonth),
+          to: endOfMonth(lastMonth),
+        };
+        break;
+      case "sameMonthLastYear":
+        const sameMonthLastYear = new Date();
+        sameMonthLastYear.setFullYear(sameMonthLastYear.getFullYear() - 1);
+        newDate = {
+          from: startOfMonth(sameMonthLastYear),
+          to: endOfMonth(sameMonthLastYear),
         };
         break;
       case "thisYear":
@@ -99,22 +93,12 @@ const DatePickerRange = ({
         <div className="flex flex-col gap-y-1 w-full">
           {label && <Label className="font-bold text-primary">{label}</Label>}
           <PopoverTrigger asChild>
-            <Button
-              disabled={disabled}
-              id="date"
-              variant={"outline"}
-              className={cn(
-                "justify-start text-left font-normal w-full bg-input border-0",
-                !date && "text-muted-foreground",
-                className
-              )}
-            >
-              <PiCalendarCheckDuoSolid className="mr-2 h-4 w-4 text-primary-light" />
+            <Button disabled={disabled} id="date" variant={"outline"} className={cn("justify-start text-left font-normal w-full bg-gray-100 border-0", !date && "text-muted-foreground", className)}>
+              <PiCalendarRangeDuoSolid className="mr-2 h-4 w-4 text-primary-light" />
               {date?.from ? (
                 date.to ? (
                   <>
-                    {format(date.from, "dd LLL y", { locale: fr })} -{" "}
-                    {format(date.to, "dd LLL y", { locale: fr })}
+                    {format(date.from, "dd LLL y", { locale: fr })} - {format(date.to, "dd LLL y", { locale: fr })}
                   </>
                 ) : (
                   format(date.from, "LLL dd, y", { locale: fr })
@@ -128,7 +112,7 @@ const DatePickerRange = ({
             <div className="flex flex-col p-2">
               <PopoverClose>
                 {select && (
-                  <Select onValueChange={handleSelectChange}>
+                  <Select value={selectedPeriod} onValueChange={handleSelectChange}>
                     <SelectTrigger>
                       <SelectValue placeholder="Choisir une période" />
                     </SelectTrigger>
@@ -136,9 +120,9 @@ const DatePickerRange = ({
                       <SelectItem value="thisWeek">Cette semaine</SelectItem>
                       <SelectItem value="thisMonth">Ce mois-ci</SelectItem>
                       <SelectItem value="thisYear">Cette année</SelectItem>
-                      <SelectItem value="lastYear">
-                        {"L'année dernière"}
-                      </SelectItem>
+                      <SelectItem value="lastMonth">Le mois dernier</SelectItem>
+                      <SelectItem value="lastYear">L'année dernière</SelectItem>
+                      <SelectItem value="sameMonthLastYear">Même mois l'année dernière</SelectItem>
                       <SelectItem value="allTime">Depuis le début</SelectItem>
                     </SelectContent>
                   </Select>
@@ -147,11 +131,13 @@ const DatePickerRange = ({
 
               <Calendar
                 disabled={disabledDays || disabled}
-                //initialFocus
                 mode="range"
                 defaultMonth={date?.from}
                 selected={date}
-                onSelect={setDate}
+                onSelect={newDate => {
+                  setDate(newDate);
+                  setSelectedPeriod(undefined);
+                }}
                 numberOfMonths={1}
                 locale={fr}
               />
