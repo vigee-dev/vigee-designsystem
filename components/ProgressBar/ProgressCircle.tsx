@@ -16,8 +16,6 @@ export default function ProgressCircle({ max = 100, min = 0, value = 0, gaugePri
   const percentPx = circumference / 100;
   const currentPercent = ((value - min) / (max - min)) * 100;
 
-  console.log("currentPercent", currentPercent);
-
   return (
     <div className="flex flex-col items-center justify-center">
       <div
@@ -85,7 +83,7 @@ export default function ProgressCircle({ max = 100, min = 0, value = 0, gaugePri
         <span
           data-current-value={currentPercent}
           className={cn("duration-[var(--transition-length)] delay-[var(--delay)] absolute inset-0 m-auto h-fit w-fit ease-linear animate-in fade-in text-primary", textClassName)}>
-          {currentPercent} %
+          {currentPercent.toFixed(0)} %
         </span>
       </div>
       {text && <p className="text-gray-500 mt-2 animate-pulse">{text}</p>}
