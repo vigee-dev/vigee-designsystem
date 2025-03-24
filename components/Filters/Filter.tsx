@@ -16,12 +16,14 @@ export const Filter = ({
   placeholder,
   defaultValue,
   searchable,
+  clearable,
 }: {
   queryKey: string;
   options: { label: string; value: string }[];
   placeholder?: string;
   defaultValue?: string;
   searchable?: boolean;
+  clearable?: boolean;
 }) => {
   const [value, setValue] = useQueryState(queryKey, { shallow: false });
   const [open, setOpen] = React.useState(false);
@@ -72,6 +74,13 @@ export const Filter = ({
   }
 
   return (
-    <Select onChange={handleChange} options={sortedOptions} placeholder={placeholder} className="w-fit bg-transparent border-none whitespace-nowrap" defaultValue={value ?? defaultValue} clearable />
+    <Select
+      onChange={handleChange}
+      options={sortedOptions}
+      placeholder={placeholder}
+      className="w-fit bg-transparent border-none whitespace-nowrap"
+      defaultValue={value ?? defaultValue}
+      clearable={clearable}
+    />
   );
 };
