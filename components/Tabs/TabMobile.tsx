@@ -31,7 +31,7 @@ interface TabsResponsiveProps<T extends string = string> {
 
 const variants = {
   default:
-    "rounded-xl dark:bg-zinc-900 bg-zinc-100 dark:data-[state=active]:text-zinc-800 text-zinc-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary-background data-[state=active]:text-primary-foreground font-bold",
+    "rounded-xl dark:bg-zinc-900 bg-zinc-100 dark:data-[state=active]:text-zinc-800 text-zinc-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold",
   light: "rounded-xl bg-transparent data-[state=active]:text-primary text-primary-light font-bold data-[state=active]:bg-transparent data-[state=active]:shadow-none border-none pl-0",
 } as const;
 

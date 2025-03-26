@@ -17,7 +17,7 @@ interface IllustrationProps {
 export function Error({ title, subtitle, children, supportEmail, onClick, variant = "bro", img = error }: IllustrationProps) {
   const image = variant === "bro" ? errorBro : img;
   return (
-    <div className="flex flex-col items-center justify-center  w-full px-12 max-w-2xl">
+    <div className="flex flex-col items-center justify-center text-center  w-full px-12 max-w-xl gap-2">
       <Image width={400} height={400} className="mx-auto w-64 h-64" src={image} alt="Erreur" />
       <h1 className={"text-xl text-primary font-bold text-center pt-6 font-display"}>{title ? title : "Une erreur s'est produite."}</h1>
 
