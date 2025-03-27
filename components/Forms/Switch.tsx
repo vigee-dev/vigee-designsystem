@@ -1,16 +1,9 @@
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "../ui/form";
+import { FormControl, FormDescription, FormField, FormItem, FormLabel } from "../ui/form";
 
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 
 import { Switch as SwitchShadcn } from "../ui/switch";
 import { cn } from "../lib/utils";
-import Link from "next/link";
 import { Label } from "../ui/label";
 import * as React from "react";
 
@@ -24,29 +17,20 @@ type Props<T extends FieldValues> = {
   onChange?: (value: boolean) => void;
   value?: boolean;
   className?: string;
-  children?: React.ReactNode
-  disabled?: boolean
-  inverted?: boolean
-}
+  children?: React.ReactNode;
+  disabled?: boolean;
+  inverted?: boolean;
+  icon?: React.ReactNode;
+};
 
-export default function Switch<T extends FieldValues>({
-  form,
-  label,
-  name,
-  descr,
-  className,
-  onChange,
-  value,
-  children,
-  disabled = false,
-  inverted = false
-}: Props<T>) {
+export default function Switch<T extends FieldValues>({ form, label, name, descr, className, onChange, value, children, disabled = false, inverted = false, icon }: Props<T>) {
   return form?.control && name ? (
     <FormField
       control={form.control}
       name={name}
       render={({ field }) => (
         <FormItem className={cn("flex flex-row items-center justify-between py-4 border rounded-xl p-4 gap-2 text-primary bg-white", className)}>
+          {icon && <div className="flex flex-row items-center gap-2">{icon}</div>}
           <div className="space-y-0.5">
             <FormLabel className="text-base ">{children ? children : label}</FormLabel>
             <FormDescription>{descr}</FormDescription>
@@ -55,9 +39,9 @@ export default function Switch<T extends FieldValues>({
             <SwitchShadcn
               disabled={disabled}
               checked={inverted ? !field.value : field.value}
-              onCheckedChange={(checked) => {
-                if (onChange) onChange(inverted ? !checked : checked)
-                field.onChange(inverted ? !checked : checked)
+              onCheckedChange={checked => {
+                if (onChange) onChange(inverted ? !checked : checked);
+                field.onChange(inverted ? !checked : checked);
               }}
               className="data-[state=unchecked]:bg-slate-200"
             />
@@ -71,12 +55,7 @@ export default function Switch<T extends FieldValues>({
         {label && <Label className="text-base">{label}</Label>}
         {descr && <p className={cn("text-sm text-muted-foreground")}>{descr}</p>}
       </div>
-      <SwitchShadcn
-        disabled={disabled}
-        checked={inverted ? !value : value}
-        onCheckedChange={onChange}
-        className="data-[state=unchecked]:bg-slate-200"
-      />
+      <SwitchShadcn disabled={disabled} checked={inverted ? !value : value} onCheckedChange={onChange} className="data-[state=unchecked]:bg-slate-200" />
     </div>
   );
 }

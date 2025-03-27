@@ -1,17 +1,27 @@
+import Link from "next/link";
 import { cn } from "../../components/lib/utils";
 import { Alert, AlertDescription, AlertTitle } from "../../components/ui/alert";
-import { PiAlertCircleDuoSolid, PiAlertTriangleDuoSolid, PiCheckTickCircleDuoSolid, PiInformationCircleDuoSolid, PiQuestionMarkCircleDuoSolid } from "../../icons/PikaIcons";
+import {
+  PiAlertCircleDuoSolid,
+  PiAlertTriangleDuoSolid,
+  PiCheckTickCircleDuoSolid,
+  PiExternalLinkSquareDuoSolid,
+  PiInformationCircleDuoSolid,
+  PiQuestionMarkCircleDuoSolid,
+} from "../../icons/PikaIcons";
 
 export function AlertInfo({
   title,
   description,
   type,
   className,
+  link,
 }: {
   title: string;
   description?: string;
   type: "neutral" | "informative" | "destructive" | "warning" | "question" | "success";
   className?: string;
+  link?: string;
 }) {
   const color =
     type === "informative"
@@ -55,6 +65,11 @@ export function AlertInfo({
           <AlertTitle className={cn(color, "text-sm py-0 my-0")}>{title}</AlertTitle>
           {description && <AlertDescription className={cn(lightColor, "text-xs")}>{description}</AlertDescription>}
         </div>
+        {link && (
+          <Link href={link}>
+            <PiExternalLinkSquareDuoSolid />
+          </Link>
+        )}
       </div>
     </Alert>
   );
