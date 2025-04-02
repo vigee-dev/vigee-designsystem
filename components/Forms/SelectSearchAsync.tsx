@@ -1,10 +1,4 @@
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../ui/form";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import SelectAndSearchAsync from "react-select/async";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { ActionMeta, GroupBase, OnChangeValue } from "react-select";
@@ -12,11 +6,7 @@ import { MultiValue, SingleValue, PropsValue } from "react-select";
 import { Label } from "../ui/label";
 import { cn } from "../lib/utils";
 
-interface SearchSelectAsyncInterface<
-  T extends FieldValues,
-  Option,
-  IsMulti extends boolean = false
-> {
+interface SearchSelectAsyncInterface<T extends FieldValues, Option, IsMulti extends boolean = false> {
   classname?: string;
   name?: Path<T>;
   form?: UseFormReturn<T>;
@@ -26,28 +16,19 @@ interface SearchSelectAsyncInterface<
   isClearable?: boolean;
   preprocessOnChange?: (e: OnChangeValue<Option, IsMulti>) => any;
   defaultOptions?: Option[] | boolean;
-  defaultValue?: IsMulti extends true
-    ? MultiValue<Option>
-    : SingleValue<Option>;
+  defaultValue?: IsMulti extends true ? MultiValue<Option> : SingleValue<Option>;
   value?: PropsValue<Option>;
   label?: string;
   isMulti?: IsMulti;
   noOptionsMessage?: string;
-  onChange?: (
-    newValue: OnChangeValue<Option, IsMulti>,
-    actionMeta: ActionMeta<Option>
-  ) => void;
+  onChange?: (newValue: OnChangeValue<Option, IsMulti>, actionMeta: ActionMeta<Option>) => void;
   isSearchable?: boolean;
   customErrorMessage?: string;
   menuPlacement?: "auto" | "bottom" | "top";
-  autofocus?: boolean
+  autofocus?: boolean;
 }
 
-export default function SearchSelectAsync<
-  T extends FieldValues,
-  Option,
-  IsMulti extends boolean = false
->({
+export default function SearchSelectAsync<T extends FieldValues, Option, IsMulti extends boolean = false>({
   classname,
   name,
   label,
@@ -66,7 +47,7 @@ export default function SearchSelectAsync<
   isSearchable = true,
   customErrorMessage,
   menuPlacement = "auto",
-  autofocus = false
+  autofocus = false,
 }: SearchSelectAsyncInterface<T, Option, IsMulti>) {
   return form && name ? (
     <FormField
@@ -74,9 +55,7 @@ export default function SearchSelectAsync<
       name={name}
       render={({ field }) => (
         <FormItem className={cn("text-[16px] ", classname)}>
-          {label && (
-            <FormLabel className="font-black text-primary">{label}</FormLabel>
-          )}
+          {label && <FormLabel className="font-black text-primary">{label}</FormLabel>}
           <FormControl>
             <SelectAndSearchAsync<Option, IsMulti, GroupBase<Option>>
               theme={theme => ({

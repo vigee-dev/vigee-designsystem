@@ -42,7 +42,7 @@ export default function SelectSearch<T extends FieldValues, Option, IsMulti exte
       control={form?.control}
       name={name}
       render={({ field }) => (
-        <FormItem className={cn(classNameContainer, "md:text-sm text-[16px]")}>
+        <FormItem className={cn(classNameContainer, "md:text-sm text-[16px] ")}>
           {label && <FormLabel className="font-black text-primary">{label}</FormLabel>}
           {sublabel && <FormDescription className="text-sm text-gray-500">{sublabel}</FormDescription>}
           <FormControl>
