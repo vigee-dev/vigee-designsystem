@@ -66,7 +66,7 @@ export const Toggles = <T extends FieldValues>({
                 type={multi ? "multiple" : "single"}
                 className={cn(`w-full flex flex-col md:flex-row  flex-wrap`, nowrap && "flex-nowrap", variant === "small" && "flex-nowrap border-none w-fit")}
                 value={field.value}
-                onValueChange={handleValueChange}
+                onValueChange={field.onChange}
                 disabled={disabled}>
                 {options.map(option => (
                   <ToggleGroupItem
