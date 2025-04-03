@@ -44,10 +44,12 @@ export function Drawer({
             {cancelable && <Back where="retour" onClick={onClose} />}
             <div className="flex items-center gap-4">
               {icon}
-              <div className="flex flex-col">
-                <VaulDrawer.Title className="font-bold text-gray-900 mt-8 text-lg">{title}</VaulDrawer.Title>
-                <VaulDrawer.Description className="leading-6  text-gray-600 pb-4">{description}</VaulDrawer.Description>
-              </div>
+              {title || description ? (
+                <div className="flex flex-col">
+                  <VaulDrawer.Title className="font-bold text-gray-900 mt-8 text-lg">{title}</VaulDrawer.Title>
+                  <VaulDrawer.Description className="leading-6  text-gray-600 pb-4">{description}</VaulDrawer.Description>
+                </div>
+              ) : null}
             </div>
             {children}
           </div>
