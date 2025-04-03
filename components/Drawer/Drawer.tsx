@@ -17,6 +17,7 @@ export function Drawer({
   cancelable = false,
   fullScreen = false,
   classNameContent = "",
+  dismissible = true,
 }: {
   children: React.ReactNode;
   trigger?: React.ReactNode;
@@ -30,9 +31,10 @@ export function Drawer({
   cancelable?: boolean;
   fullScreen?: boolean;
   classNameContent?: string;
+  dismissible?: boolean;
 }) {
   return (
-    <VaulDrawer.Root open={open} onClose={onClose} onOpenChange={onOpenChange}>
+    <VaulDrawer.Root open={open} onClose={onClose} onOpenChange={onOpenChange} dismissible={dismissible}>
       <VaulDrawer.Trigger className="">{trigger}</VaulDrawer.Trigger>
       <VaulDrawer.Portal>
         <VaulDrawer.Overlay className="fixed inset-0 bg-black/40" />
