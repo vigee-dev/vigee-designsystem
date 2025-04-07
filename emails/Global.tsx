@@ -20,7 +20,21 @@ const normalizeContent = (content: Props["content"]): ContentItem[] => {
   return content;
 };
 
-export const Global = ({ title, subtitle, btnText, btnUrlAction, content }: { title: string; subtitle: string; btnText: string; btnUrlAction: string; content: Props["content"] }) => {
+export const Global = ({
+  title,
+  subtitle,
+  btnText,
+  btnUrlAction,
+  content,
+  data,
+}: {
+  title: string;
+  subtitle: string;
+  btnText: string;
+  btnUrlAction: string;
+  content: Props["content"];
+  data?: { primary: string; website: string; baseUrl: string; imageLink: string; contactLink: string; webLink: string; slogan: string };
+}) => {
   const normalizedContent = normalizeContent(content);
 
   return (
@@ -29,7 +43,7 @@ export const Global = ({ title, subtitle, btnText, btnUrlAction, content }: { ti
       <Preview>{title}</Preview>
       <Body style={main}>
         <Container style={container}>
-          <Header title={title} subtitle={subtitle} />
+          <Header title={title} subtitle={subtitle} data={data} />
 
           {normalizedContent.map((item, itemIndex) => (
             <>
@@ -46,11 +60,11 @@ export const Global = ({ title, subtitle, btnText, btnUrlAction, content }: { ti
           ))}
 
           {btnText && btnUrlAction && (
-            <Button style={{ ...button, backgroundColor: primary, textAlign: "center" }} href={btnUrlAction}>
+            <Button style={{ ...button, backgroundColor: data?.primary || primary, textAlign: "center" }} href={btnUrlAction}>
               {btnText}
             </Button>
           )}
-          <Footer />
+          <Footer data={data} />
         </Container>
       </Body>
     </Html>
