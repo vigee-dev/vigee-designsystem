@@ -27,12 +27,12 @@ export function AlertInfo({
     type === "informative"
       ? "text-informative bg-informative-background"
       : type === "destructive"
-      ? "text-destructive bg-destructive-background"
+      ? "text-destructive-foreground bg-destructive-background"
       : type === "warning"
-      ? "text-warning bg-warning-background"
+      ? "text-warning-foreground bg-warning-background"
       : type === "success"
-      ? "text-success bg-success-background"
-      : "text-neutral bg-neutral-background";
+      ? "text-success-foreground bg-success-background"
+      : "text-neutral-foreground bg-neutral-background";
   const lightColor =
     type === "informative"
       ? "text-informative-foreground-light "
