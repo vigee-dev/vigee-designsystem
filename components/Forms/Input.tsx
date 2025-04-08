@@ -125,27 +125,27 @@ export default function Input<T extends FieldValues>({
   ) : (
     <div className={cn("space-y-2", className)}>
       <HoverCard>
-        <div className="flex items-center justify-between py-1">
+        {(label || helpComponent) && <div className="flex items-center justify-between py-1">
           {label && <Label className="font-black text-primary">{label}</Label>}
           {helpComponent && (
             <HoverCardTrigger>
-              <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+              <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400"/>
             </HoverCardTrigger>
           )}
-        </div>
+        </div>}
 
-        <div className="flex items-center gap-2">
+        {(helpComponent || link) &&<div className="flex items-center gap-2">
           {helpComponent && (
             <HoverCardTrigger>
-              <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+              <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400"/>
             </HoverCardTrigger>
           )}
           {link && (
             <a href={link} target="_blank" rel="noopener noreferrer">
-              <PiExternalLinkCircleDuoSolid className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+              <PiExternalLinkCircleDuoSolid className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400"/>
             </a>
           )}
-        </div>
+        </div>}
 
         <ShadInput
           placeholder={placeholder}
