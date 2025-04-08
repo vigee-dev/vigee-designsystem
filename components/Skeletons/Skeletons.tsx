@@ -57,10 +57,6 @@ export const PlanningTaskSkeleton = ({ className }: { className?: string }) => {
 export const TicketSkeleton = () => {
   return (
     <div className="flex flex-col gap-2 animate-pulse">
-      <div className="flex gap-2 bg-white p-2 rounded-xl w-32 h-8">
-        <div className="h-4 w-16 rounded-md bg-gray-100" />
-        <div className="h-4 w-32 rounded-md bg-gray-100" />
-      </div>
       <div className={`${shimmer} flex items-center justify-between p-3 rounded-xl border border-gray-100 bg-white gap-2 `}>
         {/* Left part: icon + client/project + description */}
         <div className="flex items-center gap-2 flex-1 min-w-0">
@@ -89,10 +85,25 @@ export const TicketSkeleton = () => {
   );
 };
 
+export const TicketsTitleSkeleton = ({ className }: { className?: string }) => {
+  return (
+    <div className={cn("flex flex-col gap-2 my-2", className)}>
+      <div className="flex gap-2 bg-white p-2 rounded-xl w-32 h-8">
+        <div className="h-4 w-16 rounded-md bg-gray-100" />
+        <div className="h-4 w-32 rounded-md bg-gray-100" />
+      </div>
+      <TicketSkeleton />
+    </div>
+  );
+};
+
 export const TicketsSkeleton = ({ className }: { className?: string }) => {
   return (
     <div className={cn("flex flex-col gap-2 my-2", className)}>
-      <TicketSkeleton />
+      <TicketsTitleSkeleton />
+      {Array.from({ length: 2 }).map((_, index) => (
+        <TicketSkeleton key={index} />
+      ))}
     </div>
   );
 };
