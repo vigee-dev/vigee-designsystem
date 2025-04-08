@@ -4,11 +4,95 @@ import { cn } from "../lib/utils";
 const shimmer =
   "before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent";
 
+export const MiniInputSkeleton = () => {
+  return (
+    <div className="flex flex-col p-1 gap-1 bg-white rounded-xl animate-pulse">
+      <div className="h-4 w-12 rounded-md bg-gray-100" />
+    </div>
+  );
+};
+
 export const InputSkeleton = ({ big = true, bigHeight = false }: { big?: boolean; bigHeight?: boolean }) => {
   return (
     <div className="flex flex-col p-1 gap-1">
       <div className="h-6 w-16 rounded-md bg-gray-100" />
       <div className={`${shimmer} relative h-6 overflow-hidden ${big ? "w-full" : "w-36"} ${bigHeight ? "h-96" : "h-8"} rounded-md bg-gray-100`} />
+    </div>
+  );
+};
+
+export const TaskSkeleton = () => {
+  return (
+    <div className={`${shimmer} flex items-center justify-between rounded-xl border border-gray-100 bg-white p-2 gap-2`}>
+      <div className="flex items-center gap-2 flex-1 min-w-0">
+        <div className="h-6 w-6 rounded-md bg-gray-100 flex-shrink-0" />
+        <div className="h-6 w-64 rounded-md bg-gray-100" />
+      </div>
+
+      <div className="flex items-center gap-2 flex-shrink-0">
+        <div className="h-6 w-6 rounded-md bg-gray-100" />
+        <div className="h-6 w-12 rounded-md bg-gray-100" />
+        <div className="h-6 w-6 rounded-full bg-gray-100" />
+        <div className="h-6 w-12 rounded-md bg-gray-100" />
+        <div className="h-6 w-6 rounded-full bg-gray-100" />
+      </div>
+    </div>
+  );
+};
+
+export const PlanningTaskSkeleton = ({ className }: { className?: string }) => {
+  return (
+    <div className={cn(`${shimmer} animate-pulse flex flex-col gap-2 rounded-xl `, className)}>
+      <div className="flex gap-2 bg-white p-2 rounded-xl w-32 h-8">
+        <div className="h-4 w-16 rounded-md bg-gray-100" />
+        <div className="h-4 w-32 rounded-md bg-gray-100" />
+      </div>
+      <TaskSkeleton />
+      <TaskSkeleton />
+      <TaskSkeleton />
+    </div>
+  );
+};
+
+export const TicketSkeleton = () => {
+  return (
+    <div className="flex flex-col gap-2 animate-pulse">
+      <div className="flex gap-2 bg-white p-2 rounded-xl w-32 h-8">
+        <div className="h-4 w-16 rounded-md bg-gray-100" />
+        <div className="h-4 w-32 rounded-md bg-gray-100" />
+      </div>
+      <div className={`${shimmer} flex items-center justify-between p-3 rounded-xl border border-gray-100 bg-white gap-2 `}>
+        {/* Left part: icon + client/project + description */}
+        <div className="flex items-center gap-2 flex-1 min-w-0">
+          {/* Avatar placeholder */}
+          <div className="h-8 w-8 rounded-full bg-gray-100 flex-shrink-0" />
+
+          {/* Texts */}
+          <div className="flex flex-col gap-1 overflow-hidden">
+            <div className="flex gap-2">
+              <div className="h-4 w-28 rounded bg-gray-100" />
+              <div className="h-4 w-32 rounded bg-gray-100" />
+            </div>
+            <div className="h-4 w-48 rounded bg-gray-100" />
+          </div>
+        </div>
+
+        {/* Right part: flags, timer, date, etc. */}
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="h-4 w-4 rounded bg-gray-100" /> {/* Flag */}
+          <div className="h-4 w-4 rounded bg-gray-100" /> {/* Timer */}
+          <div className="h-4 w-12 rounded bg-gray-100" /> {/* Date */}
+          <div className="h-4 w-4 rounded-full bg-gray-100" /> {/* Dot */}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const TicketsSkeleton = ({ className }: { className?: string }) => {
+  return (
+    <div className={cn("flex flex-col gap-2 my-2", className)}>
+      <TicketSkeleton />
     </div>
   );
 };
@@ -24,6 +108,33 @@ export const MultiInputsSkeleton = ({ number = 3 }: { number?: number }) => {
           <div className={`${shimmer} relative h-6 overflow-hidden w-full rounded-md bg-gray-100`} />
         </div>
       ))}
+    </div>
+  );
+};
+
+export const CalendarSkeleton = () => {
+  return (
+    <div className={`${shimmer} w-fit p-4 rounded-lg  bg-white`}>
+      {/* Header avec les flèches et le mois */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="h-6 w-6 rounded-md bg-gray-100" /> {/* Flèche gauche */}
+        <div className="h-4 w-24 rounded-md bg-gray-100" /> {/* Mois / année */}
+        <div className="h-6 w-6 rounded-md bg-gray-100" /> {/* Flèche droite */}
+      </div>
+
+      {/* Lignes de jours de la semaine */}
+      <div className="grid grid-cols-7 gap-2 mb-2">
+        {Array.from({ length: 7 }).map((_, i) => (
+          <div key={`day-title-${i}`} className="h-3 w-6 rounded-md bg-gray-100 mx-auto" />
+        ))}
+      </div>
+
+      {/* Grille des jours (6 lignes x 7 colonnes) */}
+      <div className="grid grid-cols-7 gap-2">
+        {Array.from({ length: 42 }).map((_, i) => (
+          <div key={`day-${i}`} className="h-8 w-8 rounded-md bg-gray-100 mx-auto" />
+        ))}
+      </div>
     </div>
   );
 };
@@ -142,8 +253,8 @@ export default function DashboardSkeleton({ noTop }: DashboardSkeletonProps) {
   );
 }
 
-export function TitleSkeleton() {
-  return <div className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`} />;
+export function TitleSkeleton({ className }: { className?: string }) {
+  return <div className={cn(`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`, className)} />;
 }
 
 export function TableRowSkeleton() {
