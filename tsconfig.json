@@ -12,6 +12,6 @@
     "jsx": "react-jsx",
     "skipLibCheck": true,
   },
-  "include": ["./**/*", ".", "components"],
+  "include": ["./**/*", ".", "components", "../next-auth.d.ts"],
   "exclude": ["node_modules", "components/lib"]
 }
