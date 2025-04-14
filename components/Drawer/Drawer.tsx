@@ -64,7 +64,7 @@ export function Drawer({
             <div className="flex items-center gap-4">
               {icon}
               {title || description ? (
-                <div className="flex justify-between">
+                <div className="flex justify-between w-full">
                   <div className="flex flex-col">
                     <VaulDrawer.Title className="font-bold text-gray-900 mt-8 text-lg">
                       {title}
