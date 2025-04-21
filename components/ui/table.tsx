@@ -3,12 +3,12 @@ import * as React from "react";
 
 const Table = React.forwardRef<
   HTMLTableElement,
-  React.HTMLAttributes<HTMLTableElement>
->(({ className, ...props }, ref) => (
-  <div className="w-full overflow-auto border   sm:rounded-lg">
+  React.HTMLAttributes<HTMLTableElement> & { wrapperClassName?: string }
+>(({ className, wrapperClassName, ...props }, ref) => (
+  <div className={cn("w-full overflow-auto border sm:rounded-lg", wrapperClassName)}>
     <table
       ref={ref}
-      className={cn("w-full caption-bottom text-sm  ", className)}
+      className={cn("w-full caption-bottom text-sm", className)}
       {...props}
     />
   </div>

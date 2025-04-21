@@ -1,5 +1,5 @@
 "use client";
-import React, {ReactNode} from "react";
+import React, {ReactNode, useRef, useEffect} from "react";
 
 import {
   ColumnDef,
@@ -24,6 +24,26 @@ import {
 import { Table as TanstackTable } from '@tanstack/react-table'
 import { cn } from "../lib/utils";
 
+interface ClassNames {
+  root?: string;
+  header?: string;
+  headerTitle?: string;
+  headerInfo?: string;
+  table?: string;
+  tableWrapper?: string;
+  tableHeader?: string;
+  tableHeaderRow?: string;
+  tableHeaderCell?: string;
+  tableBody?: string;
+  tableRow?: string;
+  tableCell?: string;
+  noResultsRow?: string;
+  noResultsCell?: string;
+  skeletonRow?: string;
+  skeletonCell?: string;
+  footer?: string;
+}
+
 interface DataTableProps<TData, TValue> {
   title?: string;
   info?: string;
@@ -35,7 +55,9 @@ interface DataTableProps<TData, TValue> {
   className?: string;
   tableHook?: TanstackTable<TData>
   displayBottomRowsSkeleton?: boolean;
-  rowClassname?: string
+  rowClassname?: string;
+  classNames?: ClassNames;
+  onReachBottom?: () => void;
 }
 
 export function DataTable<TData, TValue>({
@@ -49,11 +71,33 @@ export function DataTable<TData, TValue>({
   className,
   tableHook,
   displayBottomRowsSkeleton = false,
-  rowClassname
+  rowClassname,
+  classNames = {},
+  onReachBottom,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = React.useState<string | undefined>(undefined);
   const [rowSelection, setRowSelection] = React.useState({});
+  const bottomRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!onReachBottom) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          onReachBottom();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (bottomRef.current) {
+      observer.observe(bottomRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [onReachBottom]);
 
   const table = useReactTable(tableHook?.options || {
     data,
@@ -66,7 +110,7 @@ export function DataTable<TData, TValue>({
     onRowSelectionChange: setRowSelection,
     state: {
       columnFilters,
-      globalFilter, // Utilisez l'état globalFilter pour la recherche globale
+      globalFilter,
       rowSelection,
       pagination: {
         pageIndex: 0,
@@ -77,9 +121,9 @@ export function DataTable<TData, TValue>({
 
   const RowSkeleton = () => {
     return (
-      <TableRow>
+      <TableRow className={classNames.skeletonRow}>
         {table.getVisibleLeafColumns().map((column, index) => (
-          <TableCell key={index} className={'py-6'}>
+          <TableCell key={index} className={cn('py-6', classNames.skeletonCell)}>
             <div className="h-6 animate-pulse w-full rounded bg-gray-100"></div>
           </TableCell>
         ))}
@@ -88,20 +132,26 @@ export function DataTable<TData, TValue>({
   }
 
   return (
-    <div className={cn("w-full", className)}>
-      <div className="flex justify-between items-center font-medium text-sm text-gray-400">
-        {title && <p>{title}</p>}
-        {info && <p>{info}</p>}
+    <div className={cn("w-full", className, classNames.root)}>
+      <div className={cn(
+        "flex justify-between items-center font-medium text-sm text-gray-400",
+        classNames.header
+      )}>
+        {title && <p className={classNames.headerTitle}>{title}</p>}
+        {info && <p className={classNames.headerInfo}>{info}</p>}
       </div>
 
       <div>
-        <Table>
-          <TableHeader>
+        <Table wrapperClassName={classNames.tableWrapper} className={classNames.table}>
+          <TableHeader className={classNames.tableHeader}>
             {table.getHeaderGroups().map(headerGroup => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} className={classNames.tableHeaderRow}>
                 {headerGroup.headers.map(header => {
                   return (
-                    <TableHead key={header.id} className="bg-gray-50">
+                    <TableHead
+                      key={header.id}
+                      className={cn("bg-gray-50", classNames.tableHeaderCell)}
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(header.column.columnDef.header, header.getContext()) as ReactNode}
@@ -111,28 +161,38 @@ export function DataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody className={classNames.tableBody}>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map( row => (
+              table.getRowModel().rows.map(row => (
                 <TableRow
-                  className={`${onRowClick ? 'cursor-pointer' : ''} ${rowClassname || ''}`}
+                  className={cn(
+                    onRowClick && 'cursor-pointer',
+                    rowClassname,
+                    classNames.tableRow
+                  )}
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                   onClick={() => onRowClick && onRowClick(row)}
                 >
                   {row.getVisibleCells().map(cell => (
-                    // @ts-ignore TOFIX tanstack doesn't provide meta types for whatever reason ? 'https://github.com/TanStack/table/discussions/4157'
-                    <TableCell key={cell.id} className={cell.column.columnDef.meta?.cellClassName}>
+                    <TableCell
+                      key={cell.id}
+                      className={cn(
+                        // @ts-ignore
+                        cell.column.columnDef.meta?.cellClassName,
+                        classNames.tableCell
+                      )}
+                    >
                       {flexRender(cell.column.columnDef.cell, cell.getContext()) as ReactNode}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
-              <TableRow>
+              <TableRow className={classNames.noResultsRow}>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className={cn("h-24 text-center", classNames.noResultsCell)}
                 >
                   Aucun résultat
                 </TableCell>
@@ -148,13 +208,15 @@ export function DataTable<TData, TValue>({
                 <RowSkeleton />
               </>
             )}
-
+            <div ref={bottomRef} style={{ height: '10px' }} />
           </TableBody>
         </Table>
 
-
         {table.getFilteredSelectedRowModel().rows.length > 0 && (
-          <div className="flex-1 text-sm text-muted-foreground mt-2">
+          <div className={cn(
+            "flex-1 text-sm text-muted-foreground mt-2",
+            classNames.footer
+          )}>
             {table.getFilteredSelectedRowModel().rows.length.toLocaleString()}{" "}
             sur {table.getFilteredRowModel().rows.length.toLocaleString()}{" "}
             lignes(s) sélectionnée(s)
