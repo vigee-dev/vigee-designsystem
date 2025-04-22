@@ -42,7 +42,9 @@ export default function EmptyIllustration({
       >
         {text}
       </h2>
-      <p className="text-gray-400 text-sm">{subtitle}</p>
+      <p className="text-gray-400 text-sm max-w-lg mx-auto text-center">
+        {subtitle}
+      </p>
 
       {!buttonLink && button && (
         <div className="text-sm text-gray-500  items-center text-center font-display pt-2">
