@@ -12,6 +12,7 @@ interface ActionWithValidationProps {
   icon: "trash" | "check" | "cross";
   children?: React.ReactNode;
   tooltip?: string;
+  classNameIcon?: string;
 }
 
 export const ActionWithValidation = ({
@@ -24,6 +25,7 @@ export const ActionWithValidation = ({
   icon,
   children,
   tooltip,
+  classNameIcon,
 }: ActionWithValidationProps) => {
   return (
     <AlertDialog
@@ -38,6 +40,7 @@ export const ActionWithValidation = ({
             icon={icon}
             variant="outline"
             className={cn(className)}
+            classNameIcon={classNameIcon}
             tooltip={tooltip}
           >
             {buttonText}
