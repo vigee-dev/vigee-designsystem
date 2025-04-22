@@ -1,5 +1,5 @@
-import { AlertDialog } from "../Forms/AlertDialog";
 import { Button } from "../Buttons/Button";
+import { AlertDialog } from "../Forms/AlertDialog";
 import { cn } from "../lib/utils";
 
 interface ActionWithValidationProps {
@@ -11,9 +11,20 @@ interface ActionWithValidationProps {
   action: () => void;
   icon: "trash" | "check" | "cross";
   children?: React.ReactNode;
+  tooltip?: string;
 }
 
-export const ActionWithValidation = ({ action, className, buttonText, isPending, title, subtitle, icon, children }: ActionWithValidationProps) => {
+export const ActionWithValidation = ({
+  action,
+  className,
+  buttonText,
+  isPending,
+  title,
+  subtitle,
+  icon,
+  children,
+  tooltip,
+}: ActionWithValidationProps) => {
   return (
     <AlertDialog
       btnQuestion={title || "Êtes-vous sur ?"}
@@ -23,7 +34,12 @@ export const ActionWithValidation = ({ action, className, buttonText, isPending,
         children ? (
           children
         ) : (
-          <Button icon={icon} variant="outline" className={cn(className)}>
+          <Button
+            icon={icon}
+            variant="outline"
+            className={cn(className)}
+            tooltip={tooltip}
+          >
             {buttonText}
           </Button>
         )
