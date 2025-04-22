@@ -1,5 +1,15 @@
 "use client";
 
+import { MoreHorizontal, Plus } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "../../components/ui/dropdown-menu";
 import {
   Sidebar,
   SidebarContent,
@@ -14,17 +24,18 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "../../components/ui/sidebar";
-import { Plus, MoreHorizontal } from "lucide-react";
-import FooterSidebar from "./footer-sidebar";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "../../components/ui/dropdown-menu";
-import { SwitcherSidebar } from "./switcher-sidebar";
-import Link from "next/link";
-import React, { useState } from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { cn } from "../lib/utils";
+import FooterSidebar from "./footer-sidebar";
+import { SwitcherSidebar } from "./switcher-sidebar";
 
-type LinkItem = { name: string; icon: React.ReactNode; href: string; onClick?: never } | { name: string; icon: React.ReactNode; href?: never; onClick: () => Promise<void> | void };
+type LinkItem =
+  | { name: string; icon: React.ReactNode; href: string; onClick?: never }
+  | {
+      name: string;
+      icon: React.ReactNode;
+      href?: never;
+      onClick: () => Promise<void> | void;
+    };
 
 type Links = LinkItem;
 
@@ -52,7 +63,12 @@ const AppSidebar = ({
     actions?: { title: string; url: string }[];
     dropdownContent?: React.ReactNode;
   }[];
-  itemsSwitcher?: { name: string; slug: string; type: string; icon: React.ReactNode }[];
+  itemsSwitcher?: {
+    name: string;
+    slug: string;
+    type: string;
+    icon: React.ReactNode;
+  }[];
   logo?: string;
   logoSmall?: string;
   pathname: string;
@@ -76,11 +92,27 @@ const AppSidebar = ({
     <Sidebar collapsible="icon">
       <SidebarHeader>
         {switcher && itemsSwitcher ? (
-          <SwitcherSidebar items={itemsSwitcher} logo={logo} logoSmall={logoSmall} />
+          <SwitcherSidebar
+            items={itemsSwitcher}
+            logo={logo}
+            logoSmall={logoSmall}
+          />
         ) : logo && open ? (
-          <Image src={logo} alt="logo" width={150} height={150} className="py-4" />
+          <Image
+            src={logo}
+            alt="logo"
+            width={150}
+            height={150}
+            className="py-4"
+          />
         ) : logoSmall && !open ? (
-          <Image src={logoSmall} alt="logoSmall" width={80} height={80} className="py-4 p-1" />
+          <Image
+            src={logoSmall}
+            alt="logoSmall"
+            width={80}
+            height={80}
+            className="py-4 p-1"
+          />
         ) : null}
         {headerComponent}
       </SidebarHeader>
@@ -91,26 +123,51 @@ const AppSidebar = ({
               {items.map((item, index) => (
                 <SidebarMenuItem
                   key={index}
-                  className={cn("w-full items-center  rounded-md hover:cursor-pointer transition-all duration-300", (pathname === item.href || hoveredItem === item.slug) && hoverBackground)}>
-                  <SidebarMenuButton asChild onMouseEnter={() => setHoveredItem(item.slug)} onMouseLeave={() => setHoveredItem(null)} className={cn("w-full hover:bg-transparent bg-transparent")}>
-                    <div className={`flex items-center gap-2 w-full`} onClick={() => handleClick(item)}>
-                      <span className={`${pathname === item.href || hoveredItem === item.slug ? "inline  transition-opacity duration-300" : "hidden  transition-opacity duration-300"}`}>
+                  className={cn(
+                    "w-full items-center  rounded-md hover:cursor-pointer transition-all duration-300",
+                    (pathname === item.href || hoveredItem === item.slug) &&
+                      hoverBackground
+                  )}
+                >
+                  <SidebarMenuButton
+                    asChild
+                    onMouseEnter={() => setHoveredItem(item.slug)}
+                    onMouseLeave={() => setHoveredItem(null)}
+                    className={cn("w-full hover:bg-transparent bg-transparent")}
+                  >
+                    <div
+                      className={`flex items-center gap-2 w-full`}
+                      onClick={() => handleClick(item)}
+                    >
+                      <span
+                        className={`${
+                          pathname === item.href || hoveredItem === item.slug
+                            ? "inline  transition-opacity duration-300"
+                            : "hidden  transition-opacity duration-300"
+                        }`}
+                      >
                         {item.iconFill}
                       </span>
                       <span
                         className={cn(
                           "inline  transition-opacity duration-300",
-                          pathname !== item.href && hoveredItem !== item.slug ? "inline  transition-all duration-300" : "hidden  transition-all duration-300",
+                          pathname !== item.href && hoveredItem !== item.slug
+                            ? "inline  transition-all duration-300"
+                            : "hidden  transition-all duration-300",
                           classNameItems
-                        )}>
+                        )}
+                      >
                         {item.icon}
                       </span>
                       <span
                         className={cn(
                           "font-medium text-base group",
-                          pathname === item.href || hoveredItem === item.slug ? "text-white  transition-opacity duration-300" : "text-zinc-400  transition-opacity duration-300",
+                          pathname === item.href || hoveredItem === item.slug
+                            ? "text-white  transition-opacity duration-300"
+                            : "text-zinc-400  transition-opacity duration-300",
                           classNameItems
-                        )}>
+                        )}
+                      >
                         {item.name}
                       </span>
                     </div>
@@ -129,7 +186,9 @@ const AppSidebar = ({
                     item?.notifications &&
                     item?.notifications > 0 &&
                     (open ? (
-                      <SidebarMenuBadge className="bg-red-400 text-white rounded-full items-center">{item?.notifications}</SidebarMenuBadge>
+                      <SidebarMenuBadge className="bg-red-400 text-white rounded-full items-center">
+                        {item?.notifications}
+                      </SidebarMenuBadge>
                     ) : (
                       <div className="bg-red-400 text-white rounded-full items-center w-2 h-2 absolute top-0 right-0" />
                     ))}
@@ -141,7 +200,11 @@ const AppSidebar = ({
                           <MoreHorizontal />
                         </SidebarMenuAction>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent side="right" align="start" className="h-60 overflow-y-auto">
+                      <DropdownMenuContent
+                        side="right"
+                        align="start"
+                        className="h-60 overflow-y-auto"
+                      >
                         {item?.dropdownContent}
                       </DropdownMenuContent>
                     </DropdownMenu>
