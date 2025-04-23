@@ -96,6 +96,7 @@ export default function InputDropZoneFile<T extends FieldValues>({ form, name, e
     const updatedFiles = files.filter((_, index) => index !== id);
     setFiles(updatedFiles);
     if (form) {
+      // @ts-ignore
       form.setValue(name as Path<T>, updatedFiles as PathValue<T, Path<T>>);
     }
   }
