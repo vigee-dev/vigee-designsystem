@@ -74,7 +74,9 @@ export default function Login({
       email: data.email,
       password: data.password,
     });
+    //@ts-ignore
     if (response) {
+      //@ts-ignore
       if (response.ok) {
         toast.success("Vous êtes connecté.");
       } else {
