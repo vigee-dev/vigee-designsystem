@@ -41,6 +41,7 @@ export function PlusLessButton<T extends FieldValues>({
   }
 
   React.useEffect(() => {
+    // @ts-ignore
     form?.setValue(name, goal as PathValue<T, Path<T>>, {
       shouldValidate: true,
     });
