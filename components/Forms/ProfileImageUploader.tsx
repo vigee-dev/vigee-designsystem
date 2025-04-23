@@ -21,6 +21,7 @@ export const ProfileImageUploader = <TFormValues extends FieldValues>({ form, na
   const onProfileImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      //ts-ignore
       setValue(name, file as PathValue<TFormValues, FieldPath<TFormValues>>);
     }
   };
