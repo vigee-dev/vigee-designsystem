@@ -30,6 +30,7 @@ export const DeleteAction = ({
           icon="trash"
           variant="outline"
           className={className}
+          pending={isPending}
           tooltip={tooltip}
         >
           {buttonText}
