@@ -12,18 +12,47 @@ export const MiniInputSkeleton = () => {
   );
 };
 
-export const InputSkeleton = ({ big = true, bigHeight = false }: { big?: boolean; bigHeight?: boolean }) => {
+export const ChatBubbleSkeleton = () => {
+  return (
+    <div
+      className="flex flex-row items-end gap-2 p-2 bg-white rounded-xl shadow-sm w-fit max-w-xs animate-pulse  border-gray-100"
+      aria-busy="true"
+    >
+      {/* Message skeleton */}
+      <div className="flex flex-col gap-2 flex-1 min-w-[80px]">
+        <div className="h-3 w-24 rounded-md bg-gray-100" />
+        <div className="h-3 w-32 rounded-md bg-gray-100" />
+      </div>
+      {/* Pending dot */}
+      <div className="w-2 h-2 rounded-full bg-gray-300 animate-pulse ml-2" />
+      {/* Avatar skeleton */}
+      <div className="w-8 h-8 rounded-full bg-gray-200" />
+    </div>
+  );
+};
+
+export const InputSkeleton = ({
+  big = true,
+  bigHeight = false,
+}: {
+  big?: boolean;
+  bigHeight?: boolean;
+}) => {
   return (
     <div className="flex flex-col p-1 gap-1">
       <div className="h-6 w-16 rounded-md bg-gray-100" />
-      <div className={`${shimmer} relative h-6 overflow-hidden ${big ? "w-full" : "w-36"} ${bigHeight ? "h-96" : "h-8"} rounded-md bg-gray-100`} />
+      <div
+        className={`${shimmer} relative h-6 overflow-hidden ${big ? "w-full" : "w-36"} ${bigHeight ? "h-96" : "h-8"} rounded-md bg-gray-100`}
+      />
     </div>
   );
 };
 
 export const TaskSkeleton = () => {
   return (
-    <div className={`${shimmer} flex items-center justify-between rounded-xl border border-gray-100 bg-white p-2 gap-2`}>
+    <div
+      className={`${shimmer} flex items-center justify-between rounded-xl border border-gray-100 bg-white p-2 gap-2`}
+    >
       <div className="flex items-center gap-2 flex-1 min-w-0">
         <div className="h-6 w-6 rounded-md bg-gray-100 flex-shrink-0" />
         <div className="h-6 w-64 rounded-md bg-gray-100" />
@@ -42,7 +71,12 @@ export const TaskSkeleton = () => {
 
 export const PlanningTaskSkeleton = ({ className }: { className?: string }) => {
   return (
-    <div className={cn(`${shimmer} animate-pulse flex flex-col gap-2 rounded-xl `, className)}>
+    <div
+      className={cn(
+        `${shimmer} animate-pulse flex flex-col gap-2 rounded-xl `,
+        className
+      )}
+    >
       <div className="flex gap-2 bg-white p-2 rounded-xl w-32 h-8">
         <div className="h-4 w-16 rounded-md bg-gray-100" />
         <div className="h-4 w-32 rounded-md bg-gray-100" />
@@ -57,7 +91,9 @@ export const PlanningTaskSkeleton = ({ className }: { className?: string }) => {
 export const TicketSkeleton = () => {
   return (
     <div className="flex flex-col gap-2 animate-pulse">
-      <div className={`${shimmer} flex items-center justify-between p-3 rounded-xl border border-gray-100 bg-white gap-2 `}>
+      <div
+        className={`${shimmer} flex items-center justify-between p-3 rounded-xl border border-gray-100 bg-white gap-2 `}
+      >
         {/* Left part: icon + client/project + description */}
         <div className="flex items-center gap-2 flex-1 min-w-0">
           {/* Avatar placeholder */}
@@ -116,7 +152,9 @@ export const MultiInputsSkeleton = ({ number = 3 }: { number?: number }) => {
       {inputs.map((input, index) => (
         <div key={index} className="flex flex-col p-1 gap-1">
           <div className="h-6 w-16 rounded-md bg-gray-100" />
-          <div className={`${shimmer} relative h-6 overflow-hidden w-full rounded-md bg-gray-100`} />
+          <div
+            className={`${shimmer} relative h-6 overflow-hidden w-full rounded-md bg-gray-100`}
+          />
         </div>
       ))}
     </div>
@@ -136,14 +174,20 @@ export const CalendarSkeleton = () => {
       {/* Lignes de jours de la semaine */}
       <div className="grid grid-cols-7 gap-2 mb-2">
         {Array.from({ length: 7 }).map((_, i) => (
-          <div key={`day-title-${i}`} className="h-3 w-6 rounded-md bg-gray-100 mx-auto" />
+          <div
+            key={`day-title-${i}`}
+            className="h-3 w-6 rounded-md bg-gray-100 mx-auto"
+          />
         ))}
       </div>
 
       {/* Grille des jours (6 lignes x 7 colonnes) */}
       <div className="grid grid-cols-7 gap-2">
         {Array.from({ length: 42 }).map((_, i) => (
-          <div key={`day-${i}`} className="h-8 w-8 rounded-md bg-gray-100 mx-auto" />
+          <div
+            key={`day-${i}`}
+            className="h-8 w-8 rounded-md bg-gray-100 mx-auto"
+          />
         ))}
       </div>
     </div>
@@ -152,7 +196,9 @@ export const CalendarSkeleton = () => {
 
 export function CardSkeleton() {
   return (
-    <div className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm`}>
+    <div
+      className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm`}
+    >
       <div className="flex p-4">
         <div className="h-5 w-5 rounded-md bg-gray-200" />
         <div className="ml-2 h-6 w-16 rounded-md bg-gray-200 text-sm font-medium" />
@@ -168,8 +214,12 @@ export function HeaderSkeleton() {
   return (
     <div className={"rounded-xl h-fit bg-white p-6   items-center mb-4"}>
       <div className="flex flex-col gap-2  ">
-        <div className={`${shimmer} relative  h-6 w-36 overflow-hidden rounded-md bg-gray-100`} />
-        <div className={`${shimmer} relative h-4 w-24 overflow-hidden rounded-md bg-gray-100`} />
+        <div
+          className={`${shimmer} relative  h-6 w-36 overflow-hidden rounded-md bg-gray-100`}
+        />
+        <div
+          className={`${shimmer} relative h-4 w-24 overflow-hidden rounded-md bg-gray-100`}
+        />
       </div>
     </div>
   );
@@ -220,7 +270,9 @@ export function InvoiceSkeleton() {
 
 export function LatestInvoicesSkeleton() {
   return (
-    <div className={`${shimmer} relative flex w-full flex-col overflow-hidden md:col-span-4 lg:col-span-4`}>
+    <div
+      className={`${shimmer} relative flex w-full flex-col overflow-hidden md:col-span-4 lg:col-span-4`}
+    >
       <div className="mb-4 h-8 w-36 rounded-md bg-gray-100" />
       <div className="flex grow flex-col justify-between rounded-xl bg-gray-100 p-4">
         <div className="bg-white px-6">
@@ -245,7 +297,11 @@ interface DashboardSkeletonProps {
 export default function DashboardSkeleton({ noTop }: DashboardSkeletonProps) {
   return (
     <>
-      {!noTop && <div className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`} />}
+      {!noTop && (
+        <div
+          className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`}
+        />
+      )}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <CardSkeleton />
         <CardSkeleton />
@@ -265,7 +321,14 @@ export default function DashboardSkeleton({ noTop }: DashboardSkeletonProps) {
 }
 
 export function TitleSkeleton({ className }: { className?: string }) {
-  return <div className={cn(`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`, className)} />;
+  return (
+    <div
+      className={cn(
+        `${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`,
+        className
+      )}
+    />
+  );
 }
 
 export function TableRowSkeleton() {
@@ -377,7 +440,10 @@ export function InvoicesTableSkeleton() {
                 <th scope="col" className="px-3 py-5 font-medium">
                   Status
                 </th>
-                <th scope="col" className="relative pb-4 pl-3 pr-6 pt-2 sm:pr-6">
+                <th
+                  scope="col"
+                  className="relative pb-4 pl-3 pr-6 pt-2 sm:pr-6"
+                >
                   <span className="sr-only">Edit</span>
                 </th>
               </tr>
@@ -397,10 +463,21 @@ export function InvoicesTableSkeleton() {
   );
 }
 
-export function TableSkeleton({ className, noBackground }: { className?: string; noBackground?: boolean }) {
+export function TableSkeleton({
+  className,
+  noBackground,
+}: {
+  className?: string;
+  noBackground?: boolean;
+}) {
   return (
     <div className={cn("mt-6 flow-root", className)}>
-      <div className={cn("inline-block min-w-full align-middle", !noBackground && "bg-white")}>
+      <div
+        className={cn(
+          "inline-block min-w-full align-middle",
+          !noBackground && "bg-white"
+        )}
+      >
         <div className="rounded-lg bg-gray-50  md:pt-0">
           <div className="md:hidden">
             <MobileCardSkeleton />
@@ -411,7 +488,9 @@ export function TableSkeleton({ className, noBackground }: { className?: string;
             <MobileCardSkeleton />
           </div>
           <table className="hidden min-w-full text-gray-900 md:table">
-            <tbody className={cn("bg-transparent", !noBackground && "bg-gray-50")}>
+            <tbody
+              className={cn("bg-transparent", !noBackground && "bg-gray-50")}
+            >
               <TableRowSkeleton />
               <TableRowSkeleton />
               <TableRowSkeleton />
@@ -433,15 +512,21 @@ export const DocumentSkeleton = () => {
 
       <InputSkeleton />
       <div className="p-1">
-        <div className={`${shimmer} relative h-6 overflow-hidden w-full rounded-md bg-gray-100 `} />
+        <div
+          className={`${shimmer} relative h-6 overflow-hidden w-full rounded-md bg-gray-100 `}
+        />
       </div>
       <InputSkeleton />
       <div className="p-1">
-        <div className={`${shimmer} relative h-6 overflow-hidden w-full rounded-md bg-gray-100  `} />
+        <div
+          className={`${shimmer} relative h-6 overflow-hidden w-full rounded-md bg-gray-100  `}
+        />
       </div>
       <InputSkeleton />
       <div className="p-1">
-        <div className={`${shimmer} relative h-6 overflow-hidden w-full rounded-md bg-gray-100`} />
+        <div
+          className={`${shimmer} relative h-6 overflow-hidden w-full rounded-md bg-gray-100`}
+        />
       </div>
     </div>
   );

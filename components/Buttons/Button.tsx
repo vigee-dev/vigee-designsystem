@@ -39,6 +39,7 @@ import {
   PiSearchDefaultStroke,
   PiSendPlaneHorizontalContrast,
   PiThreeDotsMenuHorizontalStroke,
+  PiThumbReactionLikeStroke,
   PiUploadUpDuoSolid,
   PiUserCircleStroke,
   PiUserPlusContrast,
@@ -119,6 +120,7 @@ const iconMap = {
   play: PiPlayCircleDuoSolid,
   pause: PiPauseCircleDuoSolid,
   link: PiLinkHorizontalStroke,
+  thumbsUp: PiThumbReactionLikeStroke,
 };
 
 export function Button({
