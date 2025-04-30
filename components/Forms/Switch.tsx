@@ -10,7 +10,6 @@ import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 
 import { Switch as SwitchShadcn } from "../ui/switch";
 import { cn } from "../lib/utils";
-import Link from "next/link";
 import { Label } from "../ui/label";
 import * as React from "react";
 
@@ -27,6 +26,7 @@ type Props<T extends FieldValues> = {
   children?: React.ReactNode
   disabled?: boolean
   inverted?: boolean
+  pending?: boolean
 }
 
 export default function Switch<T extends FieldValues>({
@@ -39,8 +39,18 @@ export default function Switch<T extends FieldValues>({
   value,
   children,
   disabled = false,
-  inverted = false
+  inverted = false,
+  pending = false
 }: Props<T>) {
+  const switchComponent = (
+    <SwitchShadcn
+      disabled={disabled || pending}
+      checked={inverted ? !value : value}
+      onCheckedChange={onChange}
+      className="data-[state=unchecked]:bg-slate-200"
+    />
+  );
+
   return form?.control && name ? (
     <FormField
       control={form.control}
@@ -53,7 +63,7 @@ export default function Switch<T extends FieldValues>({
           </div>
           <FormControl>
             <SwitchShadcn
-              disabled={disabled}
+              disabled={disabled || pending}
               checked={inverted ? !field.value : field.value}
               onCheckedChange={(checked) => {
                 if (onChange) onChange(inverted ? !checked : checked)
@@ -71,12 +81,7 @@ export default function Switch<T extends FieldValues>({
         {label && <Label className="text-base">{label}</Label>}
         {descr && <p className={cn("text-sm text-muted-foreground")}>{descr}</p>}
       </div>
-      <SwitchShadcn
-        disabled={disabled}
-        checked={inverted ? !value : value}
-        onCheckedChange={onChange}
-        className="data-[state=unchecked]:bg-slate-200"
-      />
+      {switchComponent}
     </div>
   );
 }
