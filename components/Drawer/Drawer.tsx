@@ -42,7 +42,9 @@ export function Drawer({
       onOpenChange={onOpenChange}
       dismissible={dismissible}
     >
-      <VaulDrawer.Trigger className="w-full">{trigger}</VaulDrawer.Trigger>
+      <VaulDrawer.Trigger className="w-full" asChild>
+        {trigger}
+      </VaulDrawer.Trigger>
       <VaulDrawer.Portal>
         <VaulDrawer.Overlay className="fixed inset-0 bg-black/40" />
         <VaulDrawer.Content
