@@ -150,7 +150,7 @@ const NumberKPI = ({
             >
               {item.name}
             </dt>
-            <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
+            <dd className="mt-1 flex items-center justify-between md:block lg:flex">
               <div className="flex flex-col gap-2">
                 <div
                   className={cn(
@@ -166,6 +166,7 @@ const NumberKPI = ({
                     ? `${item.stat} ${item.unit}`
                     : item.stat}
                 </div>
+
                 {item.stat2 != null && (
                   <div
                     className={cn(
@@ -177,25 +178,28 @@ const NumberKPI = ({
                   </div>
                 )}
               </div>
-              {item.previousStat != null && (
-                <PreviousStat
-                  previousStat={variation(item.previousStat, item.stat)}
-                  upNegative={item.upNegative}
-                  notApplicable={item.previousStat === 0}
-                />
-              )}
 
               {item.ratio != null && (
                 <div
                   className={classNames(
                     item.ratio.type === "positive"
                       ? "text-green-600 bg-green-100"
-                      : "text-red-600 bg-red-100",
-                    "inline-flex items-baseline rounded-full px-2.5 py-0.5 text-xs font-black md:mt-2 lg:mt-0"
+                      : item.ratio.type === "negative"
+                      ? "text-red-600 bg-red-100"
+                      : "text-gray-600 bg-gray-100",
+                    "inline-flex items-baseline rounded-full px-2.5 text-xs font-black  lg:mt-0 mx-2"
                   )}
                 >
                   {item.ratio.amount}
                 </div>
+              )}
+
+              {item.previousStat != null && (
+                <PreviousStat
+                  previousStat={variation(item.previousStat, item.stat)}
+                  upNegative={item.upNegative}
+                  notApplicable={item.previousStat === 0}
+                />
               )}
 
               {item.objectif != null && item.ecartType != null && (
