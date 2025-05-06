@@ -148,10 +148,13 @@ const NumberKPI = ({
                 small ? "text-sm" : "text-base"
               )}
             >
-              {item.name}
+              <div className="flex items-center gap-2">
+                {item.iconTitle}
+                {item.name}
+              </div>
             </dt>
             <dd className="mt-1 flex items-center justify-between md:block lg:flex">
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1">
                 <div
                   className={cn(
                     `flex items-center text-xl font-black text-primary gap-2 whitespace-nowrap`,
@@ -163,8 +166,8 @@ const NumberKPI = ({
                   {item.unit === "€"
                     ? currency(item.stat).toRoundedEuro()
                     : item.unit
-                    ? `${item.stat} ${item.unit}`
-                    : item.stat}
+                      ? `${item.stat} ${item.unit}`
+                      : item.stat}
                 </div>
 
                 {item.stat2 != null && (
@@ -185,8 +188,8 @@ const NumberKPI = ({
                     item.ratio.type === "positive"
                       ? "text-green-600 bg-green-100"
                       : item.ratio.type === "negative"
-                      ? "text-red-600 bg-red-100"
-                      : "text-gray-600 bg-gray-100",
+                        ? "text-red-600 bg-red-100"
+                        : "text-gray-600 bg-gray-100",
                     "inline-flex items-baseline rounded-full px-2.5 text-xs font-black  lg:mt-0 mx-2"
                   )}
                 >

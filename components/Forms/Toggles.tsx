@@ -88,7 +88,7 @@ export const Toggles = <T extends FieldValues>({
                   type={multi ? "multiple" : "single"}
                   className={cn(
                     "w-full gap-2",
-                    isNowrap ? "flex" : `grid ${gridColsClass}`,
+                    isNowrap ? `grid ${gridColsClass} ` : `flex flex-col`,
                     variant === "small" && "border-none w-full"
                   )}
                   value={field.value}
