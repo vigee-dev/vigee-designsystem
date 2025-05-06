@@ -1,12 +1,21 @@
-import React from "react";
-import { UseFormReturn, FieldValues, Path, PathValue } from "react-hook-form";
-import { Container } from "../Container/Container";
-import { ToggleGroup as ShadToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
-import { FormControl, FormDescription, FormField, FormItem, FormMessage } from "../ui/form";
-import { cn } from "../lib/utils";
-import { Label } from "../ui/label";
 import { motion } from "framer-motion";
-import { PiCheckTickCircleDuoSolid } from "../../icons/PikaIcons";
+import React from "react";
+import { FieldValues, Path, PathValue, UseFormReturn } from "react-hook-form";
+import { PiCheckTickSquareDuoSolid } from "../../icons/PikaIcons";
+import { Container } from "../Container/Container";
+import { cn } from "../lib/utils";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "../ui/form";
+import { Label } from "../ui/label";
+import {
+  ToggleGroup as ShadToggleGroup,
+  ToggleGroupItem,
+} from "../ui/toggle-group";
 
 type Option = {
   label?: string;
@@ -65,38 +74,74 @@ export const Toggles = <T extends FieldValues>({
         <FormItem className="w-full col-span-full">
           {label && <Label className="font-bold">{label}</Label>}
           <FormControl>
-            <Container className={cn("p-1", className, variant === "small" && "border-none")}>
+            <Container
+              className={cn(
+                "p-1",
+                className,
+                variant === "small" && "border-none"
+              )}
+            >
               <ShadToggleGroup
                 type={multi ? "multiple" : "single"}
-                className={cn(`w-full flex flex-col md:flex-row flex-wrap`, nowrap && "flex-nowrap", variant === "small" && "flex-nowrap border-none w-full")}
+                className={cn(
+                  "w-full grid md:grid-cols-3 gap-2",
+                  nowrap && "flex-nowrap",
+                  variant === "small" && "border-none w-full"
+                )}
                 value={field.value}
                 onValueChange={field.onChange}
-                disabled={disabled}>
-                {options.map(option => (
-                  <motion.div key={option.value} initial={{ opacity: 0.8, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="w-full">
+                disabled={disabled}
+              >
+                {options.map((option) => (
+                  <motion.div
+                    key={option.value}
+                    initial={{ opacity: 0.8, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="h-full"
+                  >
                     <ToggleGroupItem
                       value={option.value}
                       aria-label={option.label || ""}
                       disabled={option.disabled}
                       className={cn(
-                        "items-center h-fit p-4 flex justify-between w-full gap-6 md:px-6 rounded-lg border-none data-[state=on]:bg-input hover:bg-input",
+                        "items-center h-full p-4 flex justify-between w-full gap-4 md:px-6 rounded-lg border-none data-[state=on]:bg-input hover:bg-input",
                         optionsClassName,
-                        variant === "small" && "rounded-full border-none p-2 gap-0 justify-center  data-[state=on]:bg-primary data-[state=on]:text-white md:px-3"
-                      )}>
+                        variant === "small" &&
+                          "rounded-full border-none p-2 gap-0 justify-center  data-[state=on]:bg-primary data-[state=on]:text-white md:px-3"
+                      )}
+                    >
                       <div className="flex items-center w-full gap-4">
                         <div>{option.icon}</div>
                         {(option.label || option.description) && (
                           <div className="w-full text-left">
-                            {option.label && <span className="text-md font-bold">{option.label}</span>}
-                            {option.description && <p className="text-xs text-gray-500">{option.description}</p>}
+                            {option.label && (
+                              <span className="text-md font-bold">
+                                {option.label}
+                              </span>
+                            )}
+                            {option.description && (
+                              <p className="text-xs text-gray-500">
+                                {option.description}
+                              </p>
+                            )}
                           </div>
                         )}
                       </div>
-                      {withCheckbox && field.value === option.value && (
-                        <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} className="ml-2">
-                          <PiCheckTickCircleDuoSolid className="text-primary" />
-                        </motion.div>
-                      )}
+                      {withCheckbox &&
+                        (multi
+                          ? Array.isArray(field.value) &&
+                            field.value.includes(option.value)
+                          : field.value === option.value) && (
+                          <motion.div
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.3 }}
+                            className="ml-2"
+                          >
+                            <PiCheckTickSquareDuoSolid className="text-success-foreground" />
+                          </motion.div>
+                        )}
                     </ToggleGroupItem>
                   </motion.div>
                 ))}
