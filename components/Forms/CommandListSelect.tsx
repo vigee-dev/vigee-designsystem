@@ -76,10 +76,13 @@ export default function CommandListSelect<T extends FieldValues>({
     if (onChange) onChange(newValue);
   };
 
-  const currentValue = form?.control && name ? form.getValues(name) : value;
-  const currentLabel = options?.find(
-    (option) => option.value === currentValue
-  )?.label;
+  const currentValue =
+    (form?.control && name ? form.watch(name) : value) ?? options?.[0]?.value;
+
+  const currentLabel =
+    options?.find((option) => option.value === currentValue)?.label ||
+    placeholder ||
+    options?.[0]?.label;
 
   const sortedOptions = [...(options || [])].sort((a, b) =>
     a.label.localeCompare(b.label)
@@ -107,7 +110,7 @@ export default function CommandListSelect<T extends FieldValues>({
             )}
             disabled={disabled}
           >
-            {currentLabel || placeholder}
+            {currentLabel}
             <PiSearchBigStroke className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
