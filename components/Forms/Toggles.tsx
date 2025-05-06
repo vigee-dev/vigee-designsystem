@@ -88,7 +88,7 @@ export const Toggles = <T extends FieldValues>({
                   type={multi ? "multiple" : "single"}
                   className={cn(
                     "w-full gap-2",
-                    isNowrap ? `grid ${gridColsClass} ` : `flex flex-col`,
+                    isNowrap ? "flex" : `flex flex-col`,
                     variant === "small" && "border-none w-full"
                   )}
                   value={field.value}
@@ -108,7 +108,7 @@ export const Toggles = <T extends FieldValues>({
                         aria-label={option.label || ""}
                         disabled={option.disabled}
                         className={cn(
-                          "items-center h-full w-full p-4 flex justify-between gap-4 md:px-6 rounded-lg border-none data-[state=on]:bg-input hover:bg-input",
+                          "items-center h-full w-full flex-1 p-4 flex justify-between gap-4 md:px-6 rounded-lg border-none data-[state=on]:bg-input hover:bg-input",
                           optionsClassName,
                           variant === "small" &&
                             "rounded-full border-none p-1 gap-0 justify-center  data-[state=on]:bg-primary data-[state=on]:text-white md:px-0"
