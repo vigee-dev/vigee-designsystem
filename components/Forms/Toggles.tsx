@@ -111,7 +111,7 @@ export const Toggles = <T extends FieldValues>({
                           "items-center h-full w-full p-4 flex justify-between gap-4 md:px-6 rounded-lg border-none data-[state=on]:bg-input hover:bg-input",
                           optionsClassName,
                           variant === "small" &&
-                            "rounded-full border-none p-2 gap-0 justify-center  data-[state=on]:bg-primary data-[state=on]:text-white md:px-3"
+                            "rounded-full border-none p-1 gap-0 justify-center  data-[state=on]:bg-primary data-[state=on]:text-white md:px-0"
                         )}
                       >
                         <div className="flex items-center w-full gap-4">
