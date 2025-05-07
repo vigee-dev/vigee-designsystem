@@ -122,7 +122,7 @@ export function TabMobile<T extends string = string>({
                   {option.icon && (
                     <span
                       className={cn(
-                        "group-data-[state=active]:text-primary-light text-zinc-400 dark:group-data-[state=active]:text-primary",
+                        "group-data-[state=active]:text-primary-light text-zinc-400 dark:group-data-[state=active]:text-primary opacity-50 group-data-[state=active]:opacity-100",
                         variant === "light" &&
                           "text-zinc-400 group-data-[state=active]:text-zinc-800"
                       )}
@@ -135,7 +135,7 @@ export function TabMobile<T extends string = string>({
                 {option?.count && option?.count > 0 ? (
                   <Badge
                     className={cn(
-                      "bg-red-400 h-5 w-5 flex items-center justify-center mx-auto",
+                      "bg-red-400 h-5 w-5 flex items-center justify-center mx-auto opacity-50 group-data-[state=active]:opacity-100",
                       option.badgeColor
                     )}
                   >
