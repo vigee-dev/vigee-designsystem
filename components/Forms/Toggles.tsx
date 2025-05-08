@@ -88,7 +88,7 @@ export const Toggles = <T extends FieldValues>({
                   type={multi ? "multiple" : "single"}
                   className={cn(
                     "w-full gap-2",
-                    isNowrap ? "flex" : `grid ${gridColsClass}`,
+                    isNowrap ? `flex w-full flex-1` : `flex flex-col`,
                     variant === "small" && "border-none w-full"
                   )}
                   value={field.value}
@@ -112,6 +112,7 @@ export const Toggles = <T extends FieldValues>({
                           optionsClassName,
                           variant === "small" &&
                             "rounded-full border-none p-1 gap-0 justify-center  data-[state=on]:bg-primary data-[state=on]:text-white md:px-0"
+                         
                         )}
                       >
                         <div className="flex items-center w-full gap-4">
