@@ -34,15 +34,17 @@ export const ChatBubbleSkeleton = () => {
 export const InputSkeleton = ({
   big = true,
   bigHeight = false,
+  className,
 }: {
   big?: boolean;
   bigHeight?: boolean;
+  className?: string;
 }) => {
   return (
-    <div className="flex flex-col p-1 gap-1">
+    <div className={cn("flex flex-col p-1 gap-1", className)}>
       <div className="h-6 w-16 rounded-md bg-gray-100" />
       <div
-        className={`${shimmer} relative h-6 overflow-hidden ${big ? "w-full" : "w-36"} ${bigHeight ? "h-96" : "h-8"} rounded-md bg-gray-100`}
+        className={cn(`${shimmer} relative h-6 overflow-hidden ${big ? "w-full" : "w-36"} ${bigHeight ? "h-96" : "h-8"} rounded-md bg-gray-100`)}
       />
     </div>
   );
