@@ -463,6 +463,56 @@ export function InvoicesTableSkeleton() {
   );
 }
 
+export function TicketResumeSkeleton({
+  className,
+  noBackground,
+}: {
+  className?: string;
+  noBackground?: boolean;
+}) {
+  return (
+    <div className={cn("mt-6 flow-root", className)}>
+      <div className="inline-block min-w-full align-middle">
+        <div
+          className={cn(
+            "rounded-lg p-4 md:pt-0",
+            noBackground ? "" : "bg-gray-50"
+          )}
+        >
+          {/* Icône de validation */}
+          <div className="flex justify-center mb-4">
+            <div className="h-10 w-10 rounded-full bg-gray-200 animate-pulse" />
+          </div>
+
+          {/* Titre principal */}
+          <div className="h-5 w-3/4 mx-auto mb-6 rounded-md bg-gray-200 animate-pulse" />
+
+          {/* Contenu principal */}
+          <div className="rounded-xl bg-white p-4 shadow-sm border border-gray-100 space-y-3 animate-pulse">
+            <div className="flex items-center space-x-4">
+              <div className="h-4 w-4 bg-gray-200 rounded-full" />
+              <div className="h-4 w-32 bg-gray-200 rounded-md" />
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="h-4 w-4 bg-gray-200 rounded-sm" />
+              <div className="h-4 w-20 bg-gray-200 rounded-md" />
+            </div>
+            <div className="space-y-1 pt-2">
+              <div className="h-4 w-60 bg-gray-200 rounded-md" />
+              <div className="h-4 w-72 bg-gray-200 rounded-md" />
+            </div>
+          </div>
+
+          {/* Bouton */}
+          <div className="flex justify-center mt-6">
+            <div className="h-10 w-48 bg-gray-200 rounded-lg animate-pulse" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function TableSkeleton({
   className,
   noBackground,
