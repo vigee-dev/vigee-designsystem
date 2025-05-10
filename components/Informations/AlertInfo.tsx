@@ -25,7 +25,8 @@ export function AlertInfo({
     | "destructive"
     | "warning"
     | "question"
-    | "success";
+    | "success"
+    | "special";
   className?: string;
   link?: string;
 }) {
@@ -38,6 +39,8 @@ export function AlertInfo({
       ? "text-warning-foreground bg-warning-background"
       : type === "success"
       ? "text-success-foreground bg-success-background"
+      : type === "special"
+      ? "text-purple-600 bg-purple-100"
       : "text-neutral-foreground bg-neutral-background";
   const lightColor =
     type === "informative"
@@ -48,6 +51,8 @@ export function AlertInfo({
       ? "text-warning-foreground-light "
       : type === "success"
       ? "text-success-foreground-light "
+      : type === "special"
+      ? "text-purple-600-light "
       : "text-neutral-foreground-light ";
 
   const icon =
@@ -59,6 +64,8 @@ export function AlertInfo({
       <PiAlertTriangleDuoSolid className={cn(`h-6 w-6 shrink-0`, color)} />
     ) : type === "success" ? (
       <PiCheckTickCircleDuoSolid className={cn(`h-6 w-6 shrink-0`, color)} />
+    ) : type === "special" ? (
+      <PiInformationCircleDuoSolid className={cn(`h-6 w-6 shrink-0`, color)} />
     ) : (
       <PiQuestionMarkCircleDuoSolid className={cn(`h-6 w-6 shrink-0`, color)} />
     );
