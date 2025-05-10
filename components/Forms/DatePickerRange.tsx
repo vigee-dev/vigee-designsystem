@@ -1,17 +1,17 @@
 "use client";
 
+import { PopoverClose } from "@radix-ui/react-popover";
+import { endOfMonth, endOfWeek, endOfYear, format, startOfMonth, startOfWeek, startOfYear } from "date-fns";
+import { fr } from "date-fns/locale";
 import * as React from "react";
 import { DateRange, Matcher } from "react-day-picker";
-import { fr } from "date-fns/locale";
+import { PiCalendarRangeDuoSolid } from "../../icons/PikaIcons";
 import { cn } from "../lib/utils";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
+import { Label } from "../ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { format, startOfWeek, endOfWeek, startOfMonth, endOfMonth, startOfYear, endOfYear } from "date-fns";
-import { PopoverClose } from "@radix-ui/react-popover";
-import { Label } from "../ui/label";
-import { PiCalendarRangeDuoSolid } from "../../icons/PikaIcons";
 
 interface DatePickerRangeProps {
   date: DateRange | undefined;
@@ -29,6 +29,16 @@ const DatePickerRange = ({ className, date, setDate, select, label, onChange, di
   const [selectedPeriod, setSelectedPeriod] = React.useState<string>();
 
   const handleSelectChange = (value: string) => {
+    // Si on clique sur la même valeur, on désélectionne
+    if (value === selectedPeriod) {
+      setSelectedPeriod(undefined);
+      setDate(undefined);
+      if (onChange) {
+        onChange({ from: undefined, to: undefined });
+      }
+      return;
+    }
+
     setSelectedPeriod(value);
     let newDate: DateRange | undefined;
 
@@ -114,7 +124,16 @@ const DatePickerRange = ({ className, date, setDate, select, label, onChange, di
                 {select && (
                   <Select value={selectedPeriod} onValueChange={handleSelectChange}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Choisir une période" />
+                      <SelectValue>
+                        {selectedPeriod === "thisWeek" && "Cette semaine"}
+                        {selectedPeriod === "thisMonth" && "Ce mois-ci"}
+                        {selectedPeriod === "thisYear" && "Cette année"}
+                        {selectedPeriod === "lastMonth" && "Le mois dernier"}
+                        {selectedPeriod === "lastYear" && "L'année dernière"}
+                        {selectedPeriod === "sameMonthLastYear" && "Même mois l'année dernière"}
+                        {selectedPeriod === "allTime" && "Toutes les périodes"}
+                        {!selectedPeriod || selectedPeriod === "allTime" && ""}
+                      </SelectValue>
                     </SelectTrigger>
                     <SelectContent position="popper">
                       <SelectItem value="thisWeek">Cette semaine</SelectItem>
@@ -123,7 +142,7 @@ const DatePickerRange = ({ className, date, setDate, select, label, onChange, di
                       <SelectItem value="lastMonth">Le mois dernier</SelectItem>
                       <SelectItem value="lastYear">L'année dernière</SelectItem>
                       <SelectItem value="sameMonthLastYear">Même mois l'année dernière</SelectItem>
-                      <SelectItem value="allTime">Depuis le début</SelectItem>
+                      <SelectItem value="allTime">Toutes les périodes</SelectItem>
                     </SelectContent>
                   </Select>
                 )}
