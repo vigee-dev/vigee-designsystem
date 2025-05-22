@@ -44,7 +44,9 @@ export const InputSkeleton = ({
     <div className={cn("flex flex-col p-1 gap-1", className)}>
       <div className="h-6 w-16 rounded-md bg-gray-100" />
       <div
-        className={cn(`${shimmer} relative h-6 overflow-hidden ${big ? "w-full" : "w-36"} ${bigHeight ? "h-96" : "h-8"} rounded-md bg-gray-100`)}
+        className={cn(
+          `${shimmer} relative h-6 overflow-hidden ${big ? "w-full" : "w-36"} ${bigHeight ? "h-96" : "h-8"} rounded-md bg-gray-100`
+        )}
       />
     </div>
   );
@@ -57,7 +59,7 @@ export const TaskSkeleton = () => {
     >
       <div className="flex items-center gap-2 flex-1 min-w-0">
         <div className="h-6 w-6 rounded-md bg-gray-100 flex-shrink-0" />
-        <div className="h-6 w-64 rounded-md bg-gray-100" />
+        <div className="h-6 md:w-64 w-full rounded-md bg-gray-100" />
       </div>
 
       <div className="flex items-center gap-2 flex-shrink-0">
