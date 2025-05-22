@@ -58,7 +58,7 @@ export const TaskSkeleton = () => {
       className={`${shimmer} flex items-center justify-between rounded-xl border border-gray-100 bg-white p-2 gap-2`}
     >
       <div className="flex items-center gap-2 flex-1 min-w-0">
-        <div className="h-6 w-6 rounded-md bg-gray-100 flex-shrink-0" />
+        <div className="h-6 w-6 rounded-md bg-gray-100 md:flex-shrink-0" />
         <div className="h-6 md:w-64 w-full rounded-md bg-gray-100" />
       </div>
 
