@@ -1,9 +1,9 @@
 import { Body, Button, Container, Head, Html, Preview, Text } from "@react-email/components";
 import * as React from "react";
-import { main, container, button, code } from "./style";
-import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Header from "./components/Header";
 import { primary } from "./data";
+import { button, code, container, main } from "./style";
 
 type ContentItem = {
   label?: string;
@@ -27,13 +27,14 @@ export const Global = ({
   btnUrlAction,
   content,
   data,
+
 }: {
   title: string;
   subtitle: string;
   btnText: string;
   btnUrlAction: string;
   content: Props["content"];
-  data?: { primary: string; website: string; baseUrl: string; imageLink: string; contactLink: string; webLink: string; slogan: string };
+  data?: { primary: string; website: string; baseUrl: string; imageLink: string; contactLink: string; webLink: string; slogan: string; imageWidth?: string; imageHeight?: string, marginLeft?: string, marginBottom?: string };
 }) => {
   const normalizedContent = normalizeContent(content);
 

@@ -19,6 +19,7 @@ export function Drawer({
   classNameContent = "",
   dismissible = true,
   headerComponent,
+  direction = "bottom",
 }: {
   children: React.ReactNode;
   trigger?: React.ReactNode;
@@ -34,6 +35,7 @@ export function Drawer({
   classNameContent?: string;
   dismissible?: boolean;
   headerComponent?: React.ReactNode;
+  direction?: "bottom" | "left" | "right";
 }) {
   return (
     <VaulDrawer.Root
@@ -41,10 +43,11 @@ export function Drawer({
       onClose={onClose}
       onOpenChange={onOpenChange}
       dismissible={dismissible}
+      direction={direction}
     >
       <VaulDrawer.Trigger asChild>{trigger}</VaulDrawer.Trigger>
       <VaulDrawer.Portal>
-        <VaulDrawer.Overlay className="fixed inset-0 bg-black/40" />
+        <VaulDrawer.Overlay className="fixed inset-0 bg-black/30 z-50" />
         <VaulDrawer.Content
           className={cn(
             "bg-white flex flex-col fixed z-50 bottom-0 left-0 right-0 max-h-[92vh] rounded-t-[10px]",
