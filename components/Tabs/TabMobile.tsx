@@ -13,7 +13,9 @@ export type TabOption<T extends string = string> = {
   icon?: ReactNode;
   count?: number;
   badgeColor?: string;
+  color?: string;
   disabled?: boolean;
+  badgeIcon?: ReactNode;
 };
 
 interface TabsResponsiveProps<T extends string = string> {
@@ -98,7 +100,7 @@ export function TabMobile<T extends string = string>({
       >
         <TabsList
           className={cn(
-            `overflow-x-auto `,
+            `overflow-x-auto`,
             "bg-transparent gap-2",
             fullWidth ? "w-full" : "w-fit"
           )}
@@ -132,6 +134,7 @@ export function TabMobile<T extends string = string>({
                   )}
                   {option.name}
                 </div>
+
                 {option?.count && option?.count > 0 ? (
                   <Badge
                     className={cn(
@@ -141,7 +144,7 @@ export function TabMobile<T extends string = string>({
                   >
                     {option.count}
                   </Badge>
-                ) : null}{" "}
+                ) : null}
               </div>
             </TabsTrigger>
           ))}
