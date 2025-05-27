@@ -66,6 +66,14 @@ export const Toggles = <T extends FieldValues>({
     [form, name, onChange]
   );
 
+  // Force la valeur par défaut si le champ est vide
+  React.useEffect(() => {
+    const current = form.getValues(name);
+    if (!current && options.length > 0) {
+      form.setValue(name, options[0].value as PathValue<T, Path<T>>);
+    }
+  }, [form, name, options]);
+
   return (
     <FormField
       control={form.control}
@@ -112,7 +120,6 @@ export const Toggles = <T extends FieldValues>({
                           optionsClassName,
                           variant === "small" &&
                             "rounded-full border-none p-1 gap-0 justify-center  data-[state=on]:bg-primary data-[state=on]:text-white md:px-0"
-                         
                         )}
                       >
                         <div className="flex items-center w-full gap-4">
