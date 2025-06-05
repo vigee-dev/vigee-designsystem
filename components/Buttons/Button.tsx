@@ -42,7 +42,7 @@ import {
   PiThumbReactionLikeStroke,
   PiUploadUpDuoSolid,
   PiUserCircleStroke,
-  PiUserPlusContrast,
+  PiUserPlusStroke,
   PiUserSettingsStroke,
 } from "../../icons/PikaIcons";
 import { cn } from "../lib/utils";
@@ -86,7 +86,7 @@ const iconMap = {
   back: PiArrowLeftStroke,
   edit: PiPencilEditBoxDuoStroke,
   arrowLeft: PiArrowLeftCircleContrast,
-  userAdd: PiUserPlusContrast,
+  userAdd: PiUserPlusStroke,
   user: PiUserCircleStroke,
   copy: PiCopyCopiedStroke,
   chevron: PiChevronRightStroke,
