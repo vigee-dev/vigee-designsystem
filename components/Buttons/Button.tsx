@@ -6,8 +6,10 @@ import {
   PiArrowLeftStroke,
   PiBarchartDefaultStroke,
   PiCalendarFilledStroke,
+  PiCalendarPlusStroke,
   PiCameraStroke,
   PiChatDefaultStroke,
+  PiChatPlusStroke,
   PiCheckTickSingleStroke,
   PiChevronDownStroke,
   PiChevronLeftStroke,
@@ -32,6 +34,7 @@ import {
   PiPencilEditBoxDuoStroke,
   PiPhoneDefaultStroke,
   PiPlayCircleDuoSolid,
+  PiPlusCircleStroke,
   PiPlusDefaultStroke,
   PiPlusSquareDuoSolid,
   PiRefreshDuoStroke,
@@ -121,6 +124,9 @@ const iconMap = {
   pause: PiPauseCircleDuoSolid,
   link: PiLinkHorizontalStroke,
   thumbsUp: PiThumbReactionLikeStroke,
+  chatAdd: PiChatPlusStroke,
+  rdvAdd: PiCalendarPlusStroke,
+  plusCircle: PiPlusCircleStroke,
 };
 
 export function Button({
