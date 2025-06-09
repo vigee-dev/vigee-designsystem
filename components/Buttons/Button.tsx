@@ -38,6 +38,7 @@ import {
   PiPlusDefaultStroke,
   PiPlusSquareDuoSolid,
   PiRefreshDuoStroke,
+  PiRepeatSquareStroke,
   PiRotateLeftStroke,
   PiSearchDefaultStroke,
   PiSendPlaneHorizontalContrast,
@@ -127,6 +128,7 @@ const iconMap = {
   chatAdd: PiChatPlusStroke,
   rdvAdd: PiCalendarPlusStroke,
   plusCircle: PiPlusCircleStroke,
+  repeat: PiRepeatSquareStroke,
 };
 
 export function Button({
