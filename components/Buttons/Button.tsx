@@ -20,10 +20,12 @@ import {
   PiDeleteDustbin01DuoSolid,
   PiDownloadDownDuoSolid,
   PiEye02OnContrast,
+  PiFacebookStroke,
   PiFilterLinesStroke,
   PiGithubStroke,
   PiGoogleStroke,
   PiHomeDefaultStroke,
+  PiInstagramStroke,
   PiLinkHorizontalStroke,
   PiListPlusStroke,
   PiListSearchDuoSolid,
@@ -129,6 +131,8 @@ const iconMap = {
   rdvAdd: PiCalendarPlusStroke,
   plusCircle: PiPlusCircleStroke,
   repeat: PiRepeatSquareStroke,
+  instagram: PiInstagramStroke,
+  facebook: PiFacebookStroke,
 };
 
 export function Button({

@@ -9,6 +9,7 @@ interface Props {
   className?: string;
   isPending?: boolean;
   tooltip?: string;
+  classNameIcon?: string;
 }
 
 export const DeleteAction = ({
@@ -19,6 +20,7 @@ export const DeleteAction = ({
   alertTitle,
   alertSubTitle,
   tooltip,
+  classNameIcon,
 }: Props) => {
   return (
     <AlertDialog
@@ -32,6 +34,7 @@ export const DeleteAction = ({
           className={className}
           pending={isPending}
           tooltip={tooltip}
+          classNameIcon={classNameIcon}
         >
           {buttonText}
         </Button>
