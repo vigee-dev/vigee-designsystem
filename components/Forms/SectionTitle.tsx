@@ -1,14 +1,22 @@
+import { cn } from "../lib/utils";
 import { TypographyH2 } from "../Typography/Typography";
 
 interface SectionTitleProps {
   title: string;
   subtitle?: string;
+  className?: string;
 }
 
-export const SectionTitle = ({ title, subtitle }: SectionTitleProps) => {
+export const SectionTitle = ({
+  title,
+  subtitle,
+  className,
+}: SectionTitleProps) => {
   return (
-    <div className="flex flex-col">
-      <TypographyH2 className="text-primary font-medium">{title}</TypographyH2>
+    <div className={cn("flex flex-col", className)}>
+      <TypographyH2 className="text-primary font-bold text-2xl">
+        {title}
+      </TypographyH2>
       <p className="text-sm text-gray-400 font-disaply font-variations">
         {subtitle}
       </p>
