@@ -47,6 +47,23 @@ const getColumnClass = (columns: number) => {
   }
 };
 
+const groupItemsByRows = (items: StatItem[], columns: number) => {
+  const rows: StatItem[][] = [];
+  const totalItems = items.length;
+  const fullRows = Math.floor(totalItems / columns);
+  const remainingItems = totalItems % columns;
+
+  for (let i = 0; i < fullRows; i++) {
+    rows.push(items.slice(i * columns, (i + 1) * columns));
+  }
+
+  if (remainingItems > 0) {
+    rows.push(items.slice(fullRows * columns));
+  }
+
+  return rows;
+};
+
 const PreviousStat = ({ previousStat, upNegative = false, notApplicable = false }: PreviousStatProps) => {
   return (
     <div
@@ -76,49 +93,61 @@ const NumberKPI = ({ stats, columns = 3, small = false, className }: NumberKPIPr
     return stat - objectif;
   };
 
+  const rows = groupItemsByRows(stats, columns);
+
   return (
     <div className="my-2">
-      <dl
-        className={cn(
-          `grid grid-cols-1 overflow-hidden rounded-xl shadow-sm ${getColumnClass(columns)} bg-white border border-gray-100`,
-          className
-        )}>
-        {stats.map((item, index) => {
-          const isLastRow = Math.floor(index / columns) === Math.floor((stats.length - 1) / columns);
-          const isLastInRow = (index + 1) % columns === 0 || index === stats.length - 1;
+      <div className={cn("overflow-hidden rounded-xl shadow-sm bg-white border border-gray-100", className)}>
+        {rows.map((rowItems, rowIndex) => {
+          const isLastRow = rowIndex === rows.length - 1;
+          const actualColumns = rowItems.length;
 
           return (
-            <div
-              key={item.name}
+            <dl
+              key={rowIndex}
               className={cn(
-                "px-4 relative",
-                small ? "flex gap-2 items-center justify-between py-2 px-6" : "py-5 sm:p-6",
-                !isLastInRow && columns > 1 ? "md:border-r md:border-gray-100" : "",
+                "grid grid-cols-1",
+                getColumnClass(actualColumns),
                 !isLastRow ? "border-b border-gray-100" : ""
               )}
             >
-              <dt className={cn(" font-medium text-gray-400", small ? "text-sm" : "text-base")}>{item.name}</dt>
-              <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-                <div className={cn(`flex items-center text-xl font-black text-primary gap-2 whitespace-nowrap`, item.color, small ? "text-base" : "text-xl")}>
-                  {item.icon}
-                  {item.unit === "€" ? currency(item.stat).toRoundedEuro() : item.unit ? `${item.stat} ${item.unit}` : item.stat}
-                </div>
-                {item.previousStat != null && <PreviousStat previousStat={variation(item.previousStat, item.stat)} upNegative={item.upNegative} notApplicable={item.previousStat === 0} />}
-                {item.objectif != null && item.ecartType != null && (
+              {rowItems.map((item, itemIndex) => {
+                const isLastInRow = itemIndex === rowItems.length - 1;
+
+                return (
                   <div
-                    className={classNames(
-                      Math.abs(ecartType(item.stat, item.objectif)) > item.ecartType ? "text-red-600 bg-red-100" : "text-green-600 bg-green-100",
-                      "inline-flex items-baseline rounded-full px-2.5 py-0.5 text-xs font-black md:mt-2 lg:mt-0"
-                    )}>
-                    {ecartType(item.stat, item.objectif) > 0 ? "+" : ""}
-                    {ecartType(item.stat, item.objectif)}%
+                    key={item.name}
+                    className={cn(
+                      "px-4 relative",
+                      small ? "flex gap-2 items-center justify-between py-2 px-6" : "py-5 sm:p-6",
+                      !isLastInRow && actualColumns > 1 ? "md:border-r md:border-gray-100" : ""
+                    )}
+                  >
+                    <dt className={cn(" font-medium text-gray-400", small ? "text-sm" : "text-base")}>{item.name}</dt>
+                    <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
+                      <div className={cn(`flex items-center text-xl font-black text-primary gap-2 whitespace-nowrap`, item.color, small ? "text-base" : "text-xl")}>
+                        {item.icon}
+                        {item.unit === "€" ? currency(item.stat).toRoundedEuro() : item.unit ? `${item.stat} ${item.unit}` : item.stat}
+                      </div>
+                      {item.previousStat != null && <PreviousStat previousStat={variation(item.previousStat, item.stat)} upNegative={item.upNegative} notApplicable={item.previousStat === 0} />}
+                      {item.objectif != null && item.ecartType != null && (
+                        <div
+                          className={classNames(
+                            Math.abs(ecartType(item.stat, item.objectif)) > item.ecartType ? "text-red-600 bg-red-100" : "text-green-600 bg-green-100",
+                            "inline-flex items-baseline rounded-full px-2.5 py-0.5 text-xs font-black md:mt-2 lg:mt-0"
+                          )}>
+                          {ecartType(item.stat, item.objectif) > 0 ? "+" : ""}
+                          {ecartType(item.stat, item.objectif)}%
+                        </div>
+                      )}
+                    </dd>
                   </div>
-                )}
-              </dd>
-            </div>
+                );
+              })}
+            </dl>
           );
         })}
-      </dl>
+      </div>
     </div>
   );
 };
