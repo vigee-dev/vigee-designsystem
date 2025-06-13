@@ -139,7 +139,10 @@ export default function CommandListSelect<T extends FieldValues>({
         "flex flex-col gap-2"
       )}
     >
-      <Label className="font-black text-primary ">{label}</Label>
+      <Label className="font-black text-primary ">
+        {label}{" "}
+        {required && <span className="text-red-600 ml-1">*</span>}
+      </Label>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
