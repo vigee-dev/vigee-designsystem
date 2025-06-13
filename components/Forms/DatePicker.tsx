@@ -105,6 +105,13 @@ export default function DatePicker<T extends FieldValues>({
     }
   }, [selectedDate]);
 
+  useEffect(() => {
+    if (form.getValues(name)) {
+      const date = typeof form.getValues(name) === 'string' ? new Date(form.getValues(name)) : form.getValues(name);
+      setSelectedDate(date);
+    }
+  }, [form.getValues(name)]);
+
   return (
     <FormField
       control={form.control}
