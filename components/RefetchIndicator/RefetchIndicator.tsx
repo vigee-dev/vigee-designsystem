@@ -34,7 +34,7 @@ export const RefetchIndicator: React.FC<RefetchIndicatorProps> = ({
 
       return () => clearTimeout(timer);
     }
-  }, [isRefetching, state]);
+  }, [isRefetching]); /* DO NOT UPDATE DEPENDENCIES WITH "state", it will break the component state*/
 
   const iconSizeClass = size === 'sm' ? 'h-6 w-6 p-1' : 'h-8 w-8 p-1.5';
 
