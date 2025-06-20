@@ -96,7 +96,7 @@ export default function Select<T extends FieldValues>({
               </SelectTrigger>
             </FormControl>
 
-            <SelectContent className="max-h-[200px] font-medium">
+            <SelectContent className="max-h-[210px] font-medium">
               {!options
                 ? children
                 : options.map(option => (
