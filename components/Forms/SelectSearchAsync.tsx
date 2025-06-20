@@ -166,6 +166,7 @@ export const styles = {
     margin: "0px",
     fontSize: "16px",
     color: "#000",
+    cursor: "pointer",
   }),
   option: (baseStyles: any, state: any) => ({
     ...baseStyles,
