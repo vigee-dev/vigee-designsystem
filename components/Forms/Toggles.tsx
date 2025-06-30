@@ -140,6 +140,7 @@ type Props<T extends FieldValues> = {
   options: Option[];
   nowrap?: boolean;
   multi?: boolean;
+  columns?: number;
   variant?: 'default' | 'small';
   onChange?: (value: string) => void;
   withCheckbox?: boolean;
@@ -159,6 +160,7 @@ export const Toggles = <T extends FieldValues>({
   variant = 'default',
   onChange,
   withCheckbox = false,
+  columns,
 }: Props<T>) => {
   const handleValueChange = React.useCallback(
     (value: string | string[]) => {
@@ -200,7 +202,11 @@ export const Toggles = <T extends FieldValues>({
                   type={multi ? 'multiple' : 'single'}
                   className={cn(
                     'w-full gap-2',
-                    isNowrap ? 'flex md:flex-row flex-col' : `flex flex-col`,
+                    columns
+                      ? `grid grid-cols-1 md:grid-cols-${columns}`
+                      : isNowrap
+                        ? 'flex md:flex-row flex-col'
+                        : 'flex flex-col',
                     variant === 'small' && 'border-none w-full'
                   )}
                   value={field.value}
