@@ -101,7 +101,6 @@ export default function SheetDialogControlled({
     return () => window.removeEventListener('resize', checkIsDesktop);
   }, []);
 
-  // Clone le trigger avec le gestionnaire de click
   const triggerWithHandler = trigger ? React.cloneElement(
     trigger as React.ReactElement,
     {
@@ -116,7 +115,6 @@ export default function SheetDialogControlled({
     }
   ) : null;
 
-  // Si forceSheet ou mobile, utilise Sheet
   if (forceSheet || !isDesktop) {
     return (
       <SheetComponent open={open} onOpenChange={onOpenChange}>
