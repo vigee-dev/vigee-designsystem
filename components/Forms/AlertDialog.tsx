@@ -71,7 +71,7 @@ export function AlertDialog({
           )}
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={onCancel}>Annuler</AlertDialogCancel>
+          {onCancel && <AlertDialogCancel onClick={onCancel}>Annuler</AlertDialogCancel>}
           {!isPending ? (
             <AlertDialogAction
               onClick={onClick}
