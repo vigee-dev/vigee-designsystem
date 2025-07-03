@@ -20,6 +20,7 @@ export function Drawer({
   dismissible = true,
   headerComponent,
   direction = 'bottom',
+  large = false,
 }: {
   children: React.ReactNode;
   trigger?: React.ReactNode;
@@ -36,6 +37,7 @@ export function Drawer({
   dismissible?: boolean;
   headerComponent?: React.ReactNode;
   direction?: 'bottom' | 'left' | 'right';
+  large?: boolean;
 }) {
   console.log('onClose:', onClose);
   return (
@@ -59,7 +61,7 @@ export function Drawer({
           <div className='w-full h-full overflow-auto'>
             <div
               className={cn(
-                'max-w-lg w-full mx-auto p-4 rounded-t-[10px]',
+                `${large ? 'max-w-4xl' : 'max-w-lg'} w-full mx-auto p-4 rounded-t-[10px]`,
                 classNameContent,
                 fullScreen && 'rounded-none'
               )}
