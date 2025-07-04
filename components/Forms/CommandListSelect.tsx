@@ -43,6 +43,7 @@ type Props<T extends FieldValues> = {
   variant?: "default" | "outlined";
   searchable?: boolean;
   multi?: boolean;
+  modal?: boolean;
 };
 
 export default function CommandListSelect<T extends FieldValues>({
@@ -64,6 +65,7 @@ export default function CommandListSelect<T extends FieldValues>({
   variant = "default",
   searchable = true,
   multi = false,
+    modal = false
 }: Props<T>) {
   const [open, setOpen] = React.useState(false);
 
@@ -143,7 +145,7 @@ export default function CommandListSelect<T extends FieldValues>({
         {label}{" "}
         {required && <span className="text-red-600 ml-1">*</span>}
       </Label>
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover open={open} onOpenChange={setOpen} modal={modal}>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
