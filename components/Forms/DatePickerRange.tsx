@@ -5,11 +5,13 @@ import {
   endOfWeek,
   endOfYear,
   format,
+  parseISO,
   startOfMonth,
   startOfWeek,
   startOfYear,
 } from "date-fns";
 import { fr } from "date-fns/locale";
+import { useQueryState } from "nuqs";
 import * as React from "react";
 import { DateRange, Matcher } from "react-day-picker";
 import { PiCalendarRangeDuoSolid } from "../../icons/PikaIcons";
@@ -26,9 +28,62 @@ import {
   SelectValue,
 } from "../ui/select";
 
+// Fonction utilitaire pour détecter la période à partir des dates
+const getPeriodFromDates = (from?: Date, to?: Date): string | undefined => {
+  const now = new Date();
+
+  if (
+    from?.toDateString() ===
+      startOfWeek(now, { weekStartsOn: 1 }).toDateString() &&
+    to?.toDateString() === endOfWeek(now, { weekStartsOn: 1 }).toDateString()
+  )
+    return "thisWeek";
+  if (
+    from?.toDateString() === startOfMonth(now).toDateString() &&
+    to?.toDateString() === endOfMonth(now).toDateString()
+  )
+    return "thisMonth";
+
+  // Last month
+  const lastMonth = new Date(now);
+  lastMonth.setMonth(now.getMonth() - 1);
+  if (
+    from?.toDateString() === startOfMonth(lastMonth).toDateString() &&
+    to?.toDateString() === endOfMonth(lastMonth).toDateString()
+  )
+    return "lastMonth";
+
+  // Same month last year
+  const sameMonthLastYear = new Date(now);
+  sameMonthLastYear.setFullYear(now.getFullYear() - 1);
+  if (
+    from?.toDateString() === startOfMonth(sameMonthLastYear).toDateString() &&
+    to?.toDateString() === endOfMonth(sameMonthLastYear).toDateString()
+  )
+    return "sameMonthLastYear";
+
+  // This year
+  if (
+    from?.toDateString() === startOfYear(now).toDateString() &&
+    to?.toDateString() === endOfYear(now).toDateString()
+  )
+    return "thisYear";
+
+  // Last year
+  const lastYear = new Date(now.getFullYear() - 1, 0, 1);
+  if (
+    from?.toDateString() === startOfYear(lastYear).toDateString() &&
+    to?.toDateString() === endOfYear(lastYear).toDateString()
+  )
+    return "lastYear";
+
+  // All time (aucune date)
+  if (!from && !to) return "allTime";
+
+  return undefined;
+};
+
 interface DatePickerRangeProps {
-  date: DateRange | undefined;
-  setDate: React.Dispatch<React.SetStateAction<DateRange | undefined>>; // Fonction pour mettre à jour l'état externe
   className?: string;
   select?: boolean;
   label?: string;
@@ -39,29 +94,81 @@ interface DatePickerRangeProps {
 
 const DatePickerRange = ({
   className,
-  date,
-  setDate,
+  select,
   label,
   onChange,
   disabledDays,
   disabled = false,
 }: DatePickerRangeProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [selectedPeriod, setSelectedPeriod] = React.useState<string>();
+  const [isManualSelection, setIsManualSelection] = React.useState(false);
+
+  // Gestion des query params directement dans le composant
+  const [startDate, setStartDate] = useQueryState("start_date");
+  const [endDate, setEndDate] = useQueryState("end_date");
+
+  // Calcul du range à partir de l'URL
+  const dateRange = React.useMemo<DateRange | undefined>(() => {
+    if (startDate && endDate) {
+      const from = parseISO(startDate);
+      const to = parseISO(endDate);
+      return { from, to };
+    }
+    if (startDate && !endDate) {
+      return { from: parseISO(startDate), to: parseISO(startDate) };
+    }
+    if (!startDate && endDate) {
+      return { from: parseISO(endDate), to: parseISO(endDate) };
+    }
+    return undefined;
+  }, [startDate, endDate]);
+
+  // Période sélectionnée (select)
+  const [selectedPeriod, setSelectedPeriod] = React.useState<
+    string | undefined
+  >(() => getPeriodFromDates(dateRange?.from, dateRange?.to));
+  React.useEffect(() => {
+    setSelectedPeriod(getPeriodFromDates(dateRange?.from, dateRange?.to));
+  }, [dateRange]);
+
+  // Fonction centralisée pour gérer les changements de date
+  const handleDateChange = React.useCallback(
+    (newDate: DateRange | undefined, newPeriod?: string) => {
+      if (onChange && newDate) {
+        onChange(newDate);
+      }
+      // Mise à jour de l'URL via nuqs
+      const startDateStr = newDate?.from
+        ? format(newDate.from, "yyyy-MM-dd")
+        : "";
+      const endDateStr = newDate?.to ? format(newDate.to, "yyyy-MM-dd") : "";
+      setStartDate(startDateStr || null);
+      setEndDate(endDateStr || null);
+      setSelectedPeriod(newPeriod);
+    },
+    [onChange, setStartDate, setEndDate]
+  );
+
+  // Handler spécifique pour la sélection manuelle dans le calendrier
+  const handleManualDateChange = React.useCallback(
+    (newDate: DateRange | undefined) => {
+      setIsManualSelection(true);
+      // Détecter automatiquement si la sélection manuelle correspond à une période
+      const detectedPeriod = newDate
+        ? getPeriodFromDates(newDate.from, newDate.to)
+        : undefined;
+      handleDateChange(newDate, detectedPeriod);
+      setTimeout(() => setIsManualSelection(false), 100);
+    },
+    [handleDateChange]
+  );
 
   const handleSelectChange = (value: string) => {
     if (value === selectedPeriod) {
-      setSelectedPeriod(undefined);
-      setDate(undefined);
-      if (onChange) {
-        onChange({ from: undefined, to: undefined });
-      }
+      handleDateChange(undefined, undefined);
       return;
     }
-
-    setSelectedPeriod(value);
     let newDate: DateRange | undefined;
-
     switch (value) {
       case "thisWeek":
         newDate = {
@@ -109,29 +216,12 @@ const DatePickerRange = ({
       default:
         return;
     }
-
-    setDate(newDate);
-    if (onChange && newDate) {
-      onChange(newDate);
-    }
+    handleDateChange(newDate, value);
     setIsOpen(false);
   };
 
   const handleReset = () => {
-    setDate(undefined);
-    setSelectedPeriod(undefined);
-    if (onChange) {
-      onChange({ from: undefined, to: undefined });
-    }
-    // Reset URL parameters
-    const currentParams = new URLSearchParams(window.location.search);
-    currentParams.delete("start_date");
-    currentParams.delete("end_date");
-    window.history.replaceState(
-      {},
-      "",
-      `${window.location.pathname}?${currentParams.toString()}`
-    );
+    handleDateChange(undefined, undefined);
   };
 
   return (
@@ -146,19 +236,19 @@ const DatePickerRange = ({
               variant={"outline"}
               className={cn(
                 "justify-start text-left font-normal w-full bg-gray-100 border-0",
-                !date && "text-muted-foreground",
+                !dateRange && "text-muted-foreground",
                 className
               )}
             >
               <PiCalendarRangeDuoSolid className="mr-2 h-4 w-4 text-primary-light" />
-              {date?.from ? (
-                date.to ? (
+              {dateRange?.from ? (
+                dateRange.to ? (
                   <>
-                    {format(date.from, "dd LLL y", { locale: fr })} -{" "}
-                    {format(date.to, "dd LLL y", { locale: fr })}
+                    {format(dateRange.from, "dd LLL y", { locale: fr })} -{" "}
+                    {format(dateRange.to, "dd LLL y", { locale: fr })}
                   </>
                 ) : (
-                  format(date.from, "LLL dd, y", { locale: fr })
+                  format(dateRange.from, "LLL dd, y", { locale: fr })
                 )
               ) : (
                 <span>Choisir une période</span>
@@ -170,52 +260,52 @@ const DatePickerRange = ({
               <Calendar
                 disabled={disabledDays || disabled}
                 mode="range"
-                defaultMonth={date?.from}
-                selected={date}
-                onSelect={(newDate) => {
-                  setDate(newDate);
-                  if (onChange && newDate) {
-                    onChange(newDate);
-                  }
-                }}
+                defaultMonth={dateRange?.from}
+                selected={dateRange}
+                onSelect={handleManualDateChange}
                 numberOfMonths={1}
                 locale={fr}
               />
-              <Select value={selectedPeriod} onValueChange={handleSelectChange}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Choisir une période">
-                    {selectedPeriod
-                      ? selectedPeriod === "thisWeek"
-                        ? "Cette semaine"
-                        : selectedPeriod === "thisMonth"
+              {select && (
+                <Select
+                  value={selectedPeriod}
+                  onValueChange={handleSelectChange}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Choisir une période">
+                      {selectedPeriod
+                        ? selectedPeriod === "thisWeek"
+                          ? "Cette semaine"
+                          : selectedPeriod === "thisMonth"
                           ? "Ce mois-ci"
                           : selectedPeriod === "thisYear"
-                            ? "Cette année"
-                            : selectedPeriod === "lastMonth"
-                              ? "Le mois dernier"
-                              : selectedPeriod === "lastYear"
-                                ? "L'année dernière"
-                                : selectedPeriod === "sameMonthLastYear"
-                                  ? "Même mois l'année dernière"
-                                  : ""
-                      : "Choisir une période"}
-                  </SelectValue>
-                </SelectTrigger>
-                <SelectContent position="popper">
-                  <SelectItem value="thisWeek">Cette semaine</SelectItem>
-                  <SelectItem value="thisMonth">Ce mois-ci</SelectItem>
-                  <SelectItem value="thisYear">Cette année</SelectItem>
-                  <SelectItem value="lastMonth">Le mois dernier</SelectItem>
-                  <SelectItem value="lastYear">L'année dernière</SelectItem>
-                  <SelectItem value="sameMonthLastYear">
-                    Même mois l'année dernière
-                  </SelectItem>
-                </SelectContent>
-              </Select>
+                          ? "Cette année"
+                          : selectedPeriod === "lastMonth"
+                          ? "Le mois dernier"
+                          : selectedPeriod === "lastYear"
+                          ? "L'année dernière"
+                          : selectedPeriod === "sameMonthLastYear"
+                          ? "Même mois l'année dernière"
+                          : ""
+                        : "Choisir une période"}
+                    </SelectValue>
+                  </SelectTrigger>
+                  <SelectContent position="popper">
+                    <SelectItem value="thisWeek">Cette semaine</SelectItem>
+                    <SelectItem value="thisMonth">Ce mois-ci</SelectItem>
+                    <SelectItem value="thisYear">Cette année</SelectItem>
+                    <SelectItem value="lastMonth">Le mois dernier</SelectItem>
+                    <SelectItem value="lastYear">L'année dernière</SelectItem>
+                    <SelectItem value="sameMonthLastYear">
+                      Même mois l'année dernière
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
               <Button
                 onClick={handleReset}
                 className="mt-2"
-                disabled={!date || !date.from}
+                disabled={!dateRange || !dateRange.from}
               >
                 Réinitialiser
               </Button>
