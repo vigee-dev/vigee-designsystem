@@ -37,10 +37,24 @@ const NewDatePicker = <T extends FieldValues = any>({
 }: NewDatePickerProps<T>) => {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState<Date>(initialDate || new Date());
-  const [hour, setHour] = useState<string>(initialHour || '');
+  // Initialisation de l'heure par défaut à l'heure actuelle si non fournie, mais seulement au premier rendu
+  const [hour, setHour] = useState<string>(() => {
+    if (typeof initialHour === 'string') return initialHour;
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2, '0');
+    const m = String(now.getMinutes()).padStart(2, '0');
+    return `${h}:${m}`;
+  });
 
   const getIsoString = (date: Date, hour: string): string => {
-    if (!date || !hour || hour.length !== 5) return '';
+    if (!date) return '';
+    if (!hour || hour.length !== 5) {
+      // Retourne la date seule au format ISO (minuit UTC)
+      return (
+        DateTime.fromJSDate(date).startOf('day').toUTC().toISODate() +
+        'T00:00:00.000Z'
+      );
+    }
     const [h, m] = hour.split(':');
     const dt = DateTime.fromJSDate(date).set({
       hour: Number(h),
@@ -106,7 +120,7 @@ const NewDatePicker = <T extends FieldValues = any>({
 
   return (
     <div
-      className={`inline-flex items-center border rounded-xl px-2  ${className}`}
+      className={`inline-flex text-sm items-center border rounded-xl px-2  ${className}`}
     >
       {label && (
         <span className='mr-4 font-light flex items-center h-full'>
@@ -162,7 +176,7 @@ const NewDatePicker = <T extends FieldValues = any>({
           value={hour}
           onChange={(e) => handleHourChange(e.target.value)}
           className={cn(
-            'font-light text-lg tracking-widest p-0 pl-2 bg-transparent border-none no-time-indicator',
+            'font-light  tracking-widest p-0 pl-2 bg-transparent border-none no-time-indicator',
             'focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 focus:border-none focus-visible:border-none'
           )}
           placeholder='-- : --'
