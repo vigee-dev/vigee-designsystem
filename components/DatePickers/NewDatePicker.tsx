@@ -113,7 +113,7 @@ const NewDatePicker = <T extends FieldValues = any>({
           {label}
         </span>
       )}
-      {/* Partie date avec popover */}
+
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <div
@@ -154,69 +154,21 @@ const NewDatePicker = <T extends FieldValues = any>({
           <Calendar mode='single' selected={date} onSelect={handleDateChange} />
         </PopoverContent>
       </Popover>
-      {/* Partie horaire indépendante */}
-      <div className='relative flex items-center ml-4'>
-        <PiClockDefaultStroke className='w-5 h-5 ' />
-        {form && name ? (
-          <FormField
-            control={form.control}
-            name={name}
-            render={({ field }) => (
-              <FormItem className='w-full'>
-                <FormControl>
-                  <div className='relative'>
-                    <ShadInput
-                      type='time'
-                      value={hour}
-                      onChange={(e) => handleHourChange(e.target.value)}
-                      className={cn(
-                        'w-[90px] font-light text-lg tracking-widest pr-2 bg-transparent border-none no-time-indicator',
-                        !(hour && hour.length > 0) &&
-                          'text-transparent caret-transparent'
-                      )}
-                      placeholder='-- : --'
-                      tabIndex={0}
-                      aria-label="Choisir l'heure"
-                    />
-                    {!(hour && hour.length > 0) && (
-                      <span
-                        className='absolute left-0 top-0 w-[90px] h-full flex items-center pl-3 font-light text-lg tracking-widest text-black pointer-events-none'
-                        style={{ pointerEvents: 'none' }}
-                      >
-                        -- : --
-                      </span>
-                    )}
-                  </div>
-                </FormControl>
-              </FormItem>
-            )}
-          />
-        ) : (
-          <div className='relative'>
-            <ShadInput
-              type='time'
-              value={hour}
-              onChange={(e) => handleHourChange(e.target.value)}
-              className={cn(
-                'w-[90px] font-light text-lg tracking-widest pr-2 bg-transparent border-none no-time-indicator',
-                'focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 focus:border-none focus-visible:border-none',
-                !(hour && hour.length > 0) &&
-                  'text-transparent caret-transparent'
-              )}
-              placeholder='-- : --'
-              tabIndex={0}
-              aria-label="Choisir l'heure"
-            />
-            {!(hour && hour.length > 0) && (
-              <span
-                className='absolute left-0 top-0 w-[90px] h-full flex items-center pl-3 font-light text-lg tracking-widest text-black pointer-events-none'
-                style={{ pointerEvents: 'none' }}
-              >
-                -- : --
-              </span>
-            )}
-          </div>
-        )}
+
+      <div className='relative flex items-center justify-center ml-4'>
+        <PiClockDefaultStroke className='w-6 h-6 ' />
+        <ShadInput
+          type='time'
+          value={hour}
+          onChange={(e) => handleHourChange(e.target.value)}
+          className={cn(
+            'w-full font-light text-lg tracking-widest pr-2 bg-transparent border-none no-time-indicator',
+            'focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 focus:border-none focus-visible:border-none'
+          )}
+          placeholder='-- : --'
+          tabIndex={0}
+          aria-label="Choisir l'heure"
+        />
       </div>
     </div>
   );
