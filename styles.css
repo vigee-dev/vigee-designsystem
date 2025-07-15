@@ -1,5 +1,5 @@
 .font-variations {
-  font-variation-settings: "wdth" 130;
+  font-variation-settings: 'wdth' 130;
   letter-spacing: -0.03em;
 }
 
@@ -24,4 +24,10 @@
 .complete:not(:first-child):before,
 .active:not(:first-child):before {
   @apply bg-primary;
+}
+
+/* claase personnalisée ajoutée pour le composant NewDatePicker. Il permet d'enlever l'icone horloge a droite de l'input quand on est en type time. Car de base les navigateurs ajoutent cette icone si on met l'input en type time */
+.no-time-indicator::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
 }

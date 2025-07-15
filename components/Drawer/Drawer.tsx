@@ -39,7 +39,6 @@ export function Drawer({
   direction?: 'bottom' | 'left' | 'right';
   large?: boolean;
 }) {
-  console.log('onClose:', onClose);
   return (
     <VaulDrawer.Root
       open={open}

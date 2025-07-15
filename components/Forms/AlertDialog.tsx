@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   AlertDialog as Alert,
@@ -10,15 +10,15 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../../components/ui/alert-dialog";
-import { Button } from "../Buttons/Button";
-import React from "react";
+} from '../../components/ui/alert-dialog';
+import { Button } from '../Buttons/Button';
+import React from 'react';
 
 type Props = {
   btnSubAlert?: string;
   onClick: () => void;
   onCancel?: () => void;
-  colorBtn?: "outline" | "destructive";
+  colorBtn?: 'outline' | 'destructive';
   trigger?: React.ReactNode;
   btnQuestion: string;
   isPending?: boolean;
@@ -47,7 +47,7 @@ export function useAlertContext() {
 export function AlertDialog({
   btnQuestion,
   btnSubAlert,
-  colorBtn = "outline",
+  colorBtn = 'outline',
   onClick,
   onCancel,
   trigger,
@@ -63,7 +63,7 @@ export function AlertDialog({
   return (
     <Alert open={isOpen}>
       <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
-      <AlertDialogContent className="z-[1000]">
+      <AlertDialogContent className='z-[1000]'>
         <AlertDialogHeader>
           <AlertDialogTitle>{btnQuestion}</AlertDialogTitle>
           {btnSubAlert && (
@@ -71,11 +71,11 @@ export function AlertDialog({
           )}
         </AlertDialogHeader>
         <AlertDialogFooter>
-          {onCancel && <AlertDialogCancel onClick={onCancel}>Annuler</AlertDialogCancel>}
+          {<AlertDialogCancel onClick={onCancel}>Annuler</AlertDialogCancel>}
           {!isPending ? (
             <AlertDialogAction
               onClick={onClick}
-              className="text-white bg-red-500"
+              className='text-white bg-red-500'
               disabled={isPending}
             >
               Confirmer
