@@ -162,7 +162,7 @@ const NewDatePicker = <T extends FieldValues = any>({
           value={hour}
           onChange={(e) => handleHourChange(e.target.value)}
           className={cn(
-            'w-full font-light text-lg tracking-widest pr-2 bg-transparent border-none no-time-indicator',
+            'font-light text-lg tracking-widest p-0 pl-2 bg-transparent border-none no-time-indicator',
             'focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 focus:border-none focus-visible:border-none'
           )}
           placeholder='-- : --'
