@@ -85,7 +85,7 @@ export const DatePickerFilter = ({
 
   return (
     <div
-      className={`inline-flex text-sm items-center border rounded-xl px-2 ${displayHour ? 'py-0' : 'py-2'}  ${className}`}
+      className={`inline-flex text-sm items-center border rounded-xl px-2 ${displayHour ? 'py-0' : 'py-1'}  ${className}`}
     >
       {label && (
         <span className='mr-4 font-light flex items-center h-full'>

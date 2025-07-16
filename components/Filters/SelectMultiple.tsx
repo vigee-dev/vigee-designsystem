@@ -68,7 +68,7 @@ export default function SelectMultiple({
       <PopoverTrigger asChild>
         <div
           className={cn(
-            'flex items-center gap-2 rounded-xl border px-3 py-2 cursor-pointer min-w-[120px]',
+            'flex items-center gap-2 rounded-xl border px-3 py-1 cursor-pointer min-w-[120px]',
             selectedOptions.length === 0 && 'text-gray-500'
           )}
         >
