@@ -44,7 +44,7 @@ export const NumberFilter = ({
         step={step}
         placeholder={placeholder}
         className={cn(
-          'px-2 py-1 bg-transparent border-none focus:outline-none focus:ring-2 focus:ring-primary',
+          'px-2 py-1 bg-transparent border-none focus:outline-none',
           icon ? 'pl-2' : ''
         )}
       />
