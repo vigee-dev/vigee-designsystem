@@ -17,7 +17,7 @@ export type SelectMultipleOption = {
 interface SelectMultipleProps {
   options: SelectMultipleOption[];
   placeholder?: string;
-  icon?: React.ReactNode;
+  icon?: React.ReactNode; // <-- l'icône passée en props
   queryKey?: string;
   maxVisibleBadges?: number;
 }
@@ -72,20 +72,21 @@ export default function SelectMultiple({
             selectedOptions.length === 0 && 'text-gray-500'
           )}
         >
-          {icon}
           {selectedOptions.length === 0 ? (
-            <span className='text-sm'>{placeholder}</span>
+            <>
+              {icon && <span className='mr-1 flex items-center'>{icon}</span>}
+              <span className='text-sm'>{placeholder}</span>
+            </>
           ) : (
             <div className='flex gap-2 flex-wrap items-center'>
               {visibleBadges.map((opt) => (
                 <Badge
                   key={opt.value}
-                  className='bg-black text-white flex items-center gap-1 rounded-full px-3 py-1'
+                  className='bg-gray-200 text-black transition hover:bg-gray-300 cursor-pointer  flex items-center gap-1 rounded-full px-3 py-1'
                   onClick={(e) => {
                     e.stopPropagation();
                     toggleValue(String(opt.value));
                   }}
-                  style={{ cursor: 'pointer' }}
                 >
                   {opt.icon}
                   <span>{opt.label}</span>
@@ -101,7 +102,7 @@ export default function SelectMultiple({
         </div>
       </PopoverTrigger>
       <PopoverContent className='w-56 p-0' align='start'>
-        <div className='flex flex-col'>
+        <div className='flex flex-col max-h-60 overflow-y-auto'>
           {options.map((opt) => {
             const isSelected = selectedValues.includes(String(opt.value));
             return (
