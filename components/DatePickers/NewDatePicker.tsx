@@ -1,126 +1,91 @@
-import React, { useState } from 'react';
+'use client';
+
+import React from 'react';
 import { DateTime } from 'luxon';
 import { addDays } from 'date-fns';
-import {
-  PiCalendarFilledStroke,
-  PiClockDefaultStroke,
-} from '../../icons/PikaIcons';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useQueryState } from 'nuqs';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Calendar } from '../ui/calendar';
-import Input from '../Forms/Input';
-import { cn } from '../lib/utils';
 import { Input as ShadInput } from '../ui/input';
-import { FormControl, FormField, FormItem } from '../ui/form';
-import { UseFormReturn, FieldValues, Path } from 'react-hook-form';
+import {
+  PiCalendarFilledStroke,
+  PiChevronLeftStroke,
+  PiChevronRightStroke,
+  PiClockDefaultStroke,
+} from '../../icons/PikaIcons';
 
-interface NewDatePickerProps<T extends FieldValues = any> {
+interface NewDatePickerProps {
   label?: string;
   withArrows?: boolean;
   className?: string;
-  onChange?: (value: { iso: string }) => void;
-  initialDate?: Date;
-  initialHour?: string;
-  form?: UseFormReturn<T>;
-  name?: Path<T>;
+  defaultValue?: string;
+  displayHour?: boolean;
+  queryKey?: string;
+  minDate?: Date;
+  maxDate?: Date;
 }
 
-const NewDatePicker = <T extends FieldValues = any>({
+export const NewDatePicker = ({
   label,
   withArrows,
   className = '',
-  onChange,
-  initialDate,
-  initialHour,
-  form,
-  name,
-}: NewDatePickerProps<T>) => {
-  const [open, setOpen] = useState(false);
-  const [date, setDate] = useState<Date>(initialDate || new Date());
-  // Initialisation de l'heure par défaut à l'heure actuelle si non fournie, mais seulement au premier rendu
-  const [hour, setHour] = useState<string>(() => {
-    if (typeof initialHour === 'string') return initialHour;
-    const now = new Date();
-    const h = String(now.getHours()).padStart(2, '0');
-    const m = String(now.getMinutes()).padStart(2, '0');
-    return `${h}:${m}`;
-  });
+  defaultValue,
+  displayHour = false,
+  queryKey = 'start_date',
+  minDate,
+  maxDate,
+}: NewDatePickerProps) => {
+  const [value, setValue] = useQueryState(queryKey, { shallow: false });
 
-  const getIsoString = (date: Date, hour: string): string => {
-    if (!date) return '';
-    if (!hour || hour.length !== 5) {
-      // Retourne la date seule au format ISO (minuit UTC)
-      return (
-        DateTime.fromJSDate(date).startOf('day').toUTC().toISODate() +
-        'T00:00:00.000Z'
-      );
-    }
-    const [h, m] = hour.split(':');
-    const dt = DateTime.fromJSDate(date).set({
-      hour: Number(h),
-      minute: Number(m),
-      second: 0,
-      millisecond: 0,
-    });
-    return dt.toUTC().toISO() || '';
-  };
+  const iso = value ?? defaultValue ?? DateTime.now().toISO();
+  const dt = DateTime.fromISO(iso!);
+  const date = dt.toJSDate();
+  const hour = dt.toFormat('HH:mm');
 
-  const handlePrev = () => {
-    setDate((prev) => {
-      const newDate = addDays(prev, -1);
-      const iso = getIsoString(newDate, hour);
-      if (form && name)
-        form.setValue(
-          name,
-          iso as unknown as import('react-hook-form').PathValue<T, Path<T>>,
-          { shouldValidate: true }
-        );
-      if (onChange) onChange({ iso });
-      return newDate;
-    });
-  };
-  const handleNext = () => {
-    setDate((prev) => {
-      const newDate = addDays(prev, 1);
-      const iso = getIsoString(newDate, hour);
-      if (form && name)
-        form.setValue(
-          name,
-          iso as unknown as import('react-hook-form').PathValue<T, Path<T>>,
-          { shouldValidate: true }
-        );
-      if (onChange) onChange({ iso });
-      return newDate;
-    });
-  };
   const handleDateChange = (selected?: Date) => {
     if (selected) {
-      setDate(selected);
-      const iso = getIsoString(selected, hour);
-      if (form && name)
-        form.setValue(
-          name,
-          iso as unknown as import('react-hook-form').PathValue<T, Path<T>>,
-          { shouldValidate: true }
-        );
-      if (onChange) onChange({ iso });
+      const newIso = DateTime.fromJSDate(selected)
+        .set({
+          hour: Number(hour.split(':')[0]),
+          minute: Number(hour.split(':')[1]),
+        })
+        .toISO();
+      setValue(newIso!);
     }
   };
-  const handleHourChange = (value: string) => {
-    setHour(value);
-    const iso = getIsoString(date, value);
-    if (form && name)
-      form.setValue(
-        name,
-        iso as unknown as import('react-hook-form').PathValue<T, Path<T>>,
-        { shouldValidate: true }
-      );
-    if (onChange) onChange({ iso });
+  const handleHourChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const [h, m] = e.target.value.split(':');
+    const newIso = DateTime.fromJSDate(date)
+      .set({ hour: Number(h), minute: Number(m) })
+      .toISO();
+    setValue(newIso!);
+  };
+
+  // Fonctions utilisées avec la props withArrow pour changer rapidement de date
+  const handlePrev = () => {
+    const newDate = addDays(date, -1);
+    const newIso = DateTime.fromJSDate(newDate)
+      .set({
+        hour: Number(hour.split(':')[0]),
+        minute: Number(hour.split(':')[1]),
+      })
+      .toISO();
+    setValue(newIso!);
+  };
+  const handleNext = () => {
+    const newDate = addDays(date, 1);
+    const newIso = DateTime.fromJSDate(newDate)
+      .set({
+        hour: Number(hour.split(':')[0]),
+        minute: Number(hour.split(':')[1]),
+      })
+      .toISO();
+    setValue(newIso!);
   };
 
   return (
     <div
-      className={`inline-flex text-sm items-center border rounded-xl px-2  ${className}`}
+      className={`inline-flex text-sm items-center border rounded-xl px-2 ${displayHour ? 'py-0' : 'py-2'}  ${className}`}
     >
       {label && (
         <span className='mr-4 font-light flex items-center h-full'>
@@ -128,12 +93,9 @@ const NewDatePicker = <T extends FieldValues = any>({
         </span>
       )}
 
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover>
         <PopoverTrigger asChild>
-          <div
-            className='inline-flex items-center cursor-pointer'
-            onClick={() => setOpen(true)}
-          >
+          <div className='inline-flex items-center cursor-pointer'>
             <PiCalendarFilledStroke className='w-5 h-5' />
             {withArrows && (
               <button
@@ -144,12 +106,10 @@ const NewDatePicker = <T extends FieldValues = any>({
                 className='mx-1 transition-colors rounded-full hover:bg-gray-100'
                 type='button'
               >
-                <ChevronLeft />
+                <PiChevronLeftStroke />
               </button>
             )}
-            <span className='mx-2 font-light'>
-              {DateTime.fromJSDate(date).toFormat('dd/MM/yyyy')}
-            </span>
+            <span className='mx-2 font-light'>{dt.toFormat('dd/MM/yyyy')}</span>
             {withArrows && (
               <button
                 onClick={(e) => {
@@ -159,33 +119,36 @@ const NewDatePicker = <T extends FieldValues = any>({
                 className='mx-1 transition-colors rounded-full hover:bg-gray-100'
                 type='button'
               >
-                <ChevronRight />
+                <PiChevronRightStroke />
               </button>
             )}
           </div>
         </PopoverTrigger>
         <PopoverContent align='start' className='w-auto p-2'>
-          <Calendar mode='single' selected={date} onSelect={handleDateChange} />
+          <Calendar
+            mode='single'
+            selected={date}
+            onSelect={handleDateChange}
+            fromDate={minDate}
+            toDate={maxDate}
+          />
         </PopoverContent>
       </Popover>
 
-      <div className='relative flex items-center justify-center ml-4'>
-        <PiClockDefaultStroke className='w-6 h-6 ' />
-        <ShadInput
-          type='time'
-          value={hour}
-          onChange={(e) => handleHourChange(e.target.value)}
-          className={cn(
-            'font-light  tracking-widest p-0 pl-2 bg-transparent border-none no-time-indicator',
-            'focus:outline-none focus-visible:outline-none focus:ring-0 focus-visible:ring-0 focus:border-none focus-visible:border-none'
-          )}
-          placeholder='-- : --'
-          tabIndex={0}
-          aria-label="Choisir l'heure"
-        />
-      </div>
+      {displayHour && (
+        <div className='relative flex items-center justify-center ml-4'>
+          <PiClockDefaultStroke className='w-6 h-6 ' />
+          <ShadInput
+            type='time'
+            value={hour}
+            onChange={handleHourChange}
+            className='font-light cursor-pointer tracking-widest p-0 pl-2 bg-transparent border-none'
+            placeholder='-- : --'
+            tabIndex={0}
+            aria-label="Choisir l'heure"
+          />
+        </div>
+      )}
     </div>
   );
 };
-
-export default NewDatePicker;

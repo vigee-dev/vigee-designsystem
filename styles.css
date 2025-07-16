@@ -26,15 +26,24 @@
   @apply bg-primary;
 }
 
-/* classe personnalisée ajoutée pour le composant NewDatePicker. Il permet d'enlever l'icone horloge a droite de l'input quand on est en type time. Car de base les navigateurs ajoutent cette icone si on met l'input en type time */
-.no-time-indicator::-webkit-calendar-picker-indicator {
-  display: none;
-  -webkit-appearance: none;
-}
-
 /* Supprime le focus natif sur les inputs time (notamment celui de shadcn) (Chrome, Safari, Edge) */
 input[type='time']:focus {
   outline: none;
   box-shadow: none;
   border: none;
+}
+
+/* Classes pour supprimer l'icone horloge par defaut sur l'input time*/
+input[type='time']::-webkit-calendar-picker-indicator {
+  display: none;
+}
+/* Pour Firefox */
+input[type='time']::-moz-focus-inner {
+  border: 0;
+}
+input[type='time']::-moz-focus-outer {
+  border: 0;
+}
+input[type='time']::-ms-clear {
+  display: none;
 }
