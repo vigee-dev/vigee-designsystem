@@ -10,7 +10,6 @@ interface CheckboxFilterProps {
   label: string;
   className?: string;
   defaultChecked?: boolean;
-  onChange?: (checked: boolean) => void;
 }
 
 export const CheckboxFilter = ({
@@ -18,7 +17,6 @@ export const CheckboxFilter = ({
   label,
   className,
   defaultChecked = false,
-  onChange,
 }: CheckboxFilterProps) => {
   const [value, setValue] = useQueryState(queryKey, { shallow: false });
 
@@ -26,9 +24,6 @@ export const CheckboxFilter = ({
 
   const handleCheckedChange = (checked: boolean) => {
     setValue(checked ? 'true' : 'false');
-    if (onChange) {
-      onChange(checked);
-    }
   };
 
   return (

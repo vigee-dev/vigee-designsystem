@@ -47,3 +47,9 @@ input[type='time']::-moz-focus-outer {
 input[type='time']::-ms-clear {
   display: none;
 }
+
+/* Classe pour effacer l'outline du composant SelectFilter car tailwind non pris en compte*/
+.hide-focus-outline:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
