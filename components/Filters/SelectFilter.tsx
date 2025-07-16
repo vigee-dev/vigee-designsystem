@@ -9,10 +9,7 @@ interface Props {
   placeholder?: string;
   status: { label: string; value: string; icon?: React.ReactNode }[];
   className?: string;
-  classNameWrapper?: string;
   defaultValue?: string;
-  icon?: React.ReactNode;
-  noPageParams?: boolean;
 }
 
 export const SelectFilter = ({
@@ -20,10 +17,7 @@ export const SelectFilter = ({
   status,
   placeholder,
   className,
-  classNameWrapper,
   defaultValue,
-  icon,
-  noPageParams = false,
 }: Props) => {
   const { replace } = useRouter();
   const pathname = usePathname();
@@ -32,9 +26,7 @@ export const SelectFilter = ({
   const handleSearch = useCallback(
     (status: string | undefined) => {
       const params = new URLSearchParams(searchParams.toString());
-      if (!noPageParams) {
-        params.set('page', '1');
-      }
+      params.set('page', '1');
 
       if (
         status === undefined ||
@@ -53,15 +45,12 @@ export const SelectFilter = ({
   );
 
   return (
-    <div className={cn('flex items-center', classNameWrapper)}>
-      {icon && <span className='mr-1 flex items-center'>{icon}</span>}
-      <Select
-        className={cn('w-full md:w-auto', className)}
-        onChange={handleSearch}
-        defaultValue={defaultValue ?? searchParams.get(statusName) ?? ''}
-        placeholder={placeholder ?? ''}
-        options={status}
-      />
-    </div>
+    <Select
+      className={cn('w-full md:w-auto', className)}
+      onChange={handleSearch}
+      defaultValue={defaultValue ?? searchParams.get(statusName) ?? ''}
+      placeholder={placeholder ?? ''}
+      options={status}
+    />
   );
 };
