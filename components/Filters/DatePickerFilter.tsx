@@ -25,7 +25,7 @@ interface NewDatePickerProps {
   maxDate?: Date;
 }
 
-export const NewDatePicker = ({
+export const DatePickerFilter = ({
   label,
   withArrows,
   className = '',
