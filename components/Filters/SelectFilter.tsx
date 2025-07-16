@@ -12,6 +12,7 @@ interface Props {
   classNameWrapper?: string;
   defaultValue?: string;
   icon?: React.ReactNode;
+  noPageParams?: boolean;
 }
 
 export const SelectFilter = ({
@@ -22,6 +23,7 @@ export const SelectFilter = ({
   classNameWrapper,
   defaultValue,
   icon,
+  noPageParams = false,
 }: Props) => {
   const { replace } = useRouter();
   const pathname = usePathname();
@@ -30,7 +32,9 @@ export const SelectFilter = ({
   const handleSearch = useCallback(
     (status: string | undefined) => {
       const params = new URLSearchParams(searchParams.toString());
-      params.set('page', '1');
+      if (!noPageParams) {
+        params.set('page', '1');
+      }
 
       if (
         status === undefined ||
