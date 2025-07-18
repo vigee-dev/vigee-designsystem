@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { cn } from '../lib/utils';
 import { useQueryState } from 'nuqs';
+import { useEffect } from 'react';
 
 interface NumberFilterProps {
   queryKey: string;
@@ -24,13 +25,27 @@ export const NumberFilter = ({
   placeholder,
   defaultValue = 0,
 }: NumberFilterProps) => {
+  const safeDefault =
+    typeof defaultValue === 'number' && !isNaN(defaultValue) ? defaultValue : 0;
+
   const [value, setValue] = useQueryState(queryKey, { shallow: false });
 
-  // Valeur affichée : celle de l'URL, sinon defaultValue
-  const numValue =
-    value !== null && value !== undefined && value !== ''
-      ? Number(value)
-      : defaultValue;
+  const parsed = Number(value);
+  const isValid =
+    value !== null &&
+    value !== undefined &&
+    value !== '' &&
+    !isNaN(parsed) &&
+    (min === undefined || parsed >= min) &&
+    (max === undefined || parsed <= max);
+
+  useEffect(() => {
+    if (value && !isValid) {
+      setValue(String(safeDefault));
+    }
+  }, [value, isValid, setValue, safeDefault]);
+
+  const numValue = isValid ? parsed : safeDefault;
 
   return (
     <div className={cn('flex items-center', className)}>
