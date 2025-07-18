@@ -1,7 +1,7 @@
 // app/components/vigee-designsystem/components/Filters/SelectMultiple.tsx
 
 'use client';
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { useQueryState } from 'nuqs';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Badge } from '../ui/badge';
@@ -17,7 +17,7 @@ export type SelectMultipleOption = {
 interface SelectMultipleProps {
   options: SelectMultipleOption[];
   placeholder?: string;
-  icon?: React.ReactNode; // <-- l'icône passée en props
+  icon?: React.ReactNode;
   queryKey?: string;
   maxVisibleBadges?: number;
 }
@@ -31,6 +31,8 @@ export default function SelectMultiple({
 }: SelectMultipleProps) {
   const [queryState, setQueryState] = useQueryState(queryKey);
 
+  const allowedValues = options.map((opt) => String(opt.value));
+
   const selectedValues = useMemo(() => {
     if (!queryState) return [];
     try {
@@ -40,6 +42,14 @@ export default function SelectMultiple({
       return queryState.split(',').map((v) => v.trim());
     }
   }, [queryState]);
+
+  useEffect(() => {
+    if (!queryState) return;
+    const filtered = selectedValues.filter((v) => allowedValues.includes(v));
+    if (filtered.length !== selectedValues.length) {
+      setQueryState(null);
+    }
+  }, [queryState, allowedValues.join(','), setQueryState]);
 
   const toggleValue = (value: string) => {
     let newSelected: string[];
