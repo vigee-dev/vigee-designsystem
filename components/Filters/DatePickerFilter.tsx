@@ -23,6 +23,7 @@ interface NewDatePickerProps {
   queryKey?: string;
   minDate?: Date;
   maxDate?: Date;
+  canChoosePastDay?: boolean;
 }
 
 export const DatePickerFilter = ({
@@ -34,6 +35,7 @@ export const DatePickerFilter = ({
   queryKey = 'start_date',
   minDate,
   maxDate,
+  canChoosePastDay = false,
 }: NewDatePickerProps) => {
   const [value, setValue] = useQueryState(queryKey, { shallow: false });
 
@@ -61,7 +63,6 @@ export const DatePickerFilter = ({
     setValue(newIso!);
   };
 
-  // Fonctions utilisées avec la props withArrow pour changer rapidement de date
   const handlePrev = () => {
     const newDate = addDays(date, -1);
     const newIso = DateTime.fromJSDate(newDate)
@@ -83,9 +84,15 @@ export const DatePickerFilter = ({
     setValue(newIso!);
   };
 
+  const prevDate = addDays(date, -1);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  prevDate.setHours(0, 0, 0, 0);
+  const isPrevDisabled = !canChoosePastDay && prevDate < today;
+
   return (
     <div
-      className={`inline-flex text-sm items-center border rounded-xl px-2 ${displayHour ? 'py-0' : 'py-2'}  ${className}`}
+      className={`inline-flex text-sm items-center border rounded-xl px-2 ${displayHour ? 'py-0' : 'py-1'}  ${className}`}
     >
       {label && (
         <span className='mr-4 font-light flex items-center h-full'>
@@ -101,10 +108,13 @@ export const DatePickerFilter = ({
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  handlePrev();
+                  if (!isPrevDisabled) handlePrev();
                 }}
-                className='mx-1 transition-colors rounded-full hover:bg-gray-100'
+                className={`mx-1 transition-colors rounded-full ${isPrevDisabled ? 'opacity-40 cursor-not-allowed' : 'hover:bg-gray-100'}`}
                 type='button'
+                disabled={isPrevDisabled}
+                tabIndex={isPrevDisabled ? -1 : 0}
+                aria-disabled={isPrevDisabled}
               >
                 <PiChevronLeftStroke />
               </button>
