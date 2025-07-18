@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { DateTime } from 'luxon';
 import { addDays } from 'date-fns';
 import { useQueryState } from 'nuqs';
@@ -41,8 +41,20 @@ export const DatePickerFilter = ({
 
   const iso = value ?? defaultValue ?? DateTime.now().toISO();
   const dt = DateTime.fromISO(iso!);
-  const date = dt.toJSDate();
-  const hour = dt.toFormat('HH:mm');
+  const isValidDate = dt.isValid;
+
+  // Utilisé pour mettre la date d'aujourd'hui en valeur si l'utilisateur tape une fausse date dans l'url, car l'url et la valeur de ce composant sont connectées =>  Permet d'avoir une UX propre pour l'utilisateur.
+  useEffect(() => {
+    if (value && !isValidDate) {
+      const todayIso = DateTime.now().toISO();
+      setValue(todayIso!);
+    }
+  }, [value, isValidDate, setValue]);
+
+  const displayIso = isValidDate ? iso : DateTime.now().toISO();
+  const displayDt = DateTime.fromISO(displayIso!);
+  const date = displayDt.toJSDate();
+  const hour = displayDt.toFormat('HH:mm');
 
   const handleDateChange = (selected?: Date) => {
     if (selected) {
@@ -119,7 +131,9 @@ export const DatePickerFilter = ({
                 <PiChevronLeftStroke />
               </button>
             )}
-            <span className='mx-2 font-light'>{dt.toFormat('dd/MM/yyyy')}</span>
+            <span className='mx-2 font-light'>
+              {displayDt.toFormat('dd/MM/yyyy')}
+            </span>
             {withArrows && (
               <button
                 onClick={(e) => {
