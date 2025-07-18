@@ -3,6 +3,7 @@
 import { useQueryState } from 'nuqs';
 import { Select } from '../Select/Select';
 import { cn } from '../lib/utils';
+import { useEffect } from 'react';
 
 interface Props {
   searchParam: string;
@@ -33,9 +34,21 @@ const SelectSearchParam = ({
     shallow,
   });
 
+  const allowedValues = status.map((opt) => opt.value);
+  useEffect(() => {
+    if (queryState && !allowedValues.includes(queryState)) {
+      setQueryState(defaultValue ?? null);
+    }
+  }, [queryState, allowedValues, defaultValue]);
+
   const handleChange = (value: string | undefined) => {
     setQueryState(value || null);
   };
+
+  const displayValue =
+    queryState && allowedValues.includes(queryState)
+      ? queryState
+      : defaultValue;
 
   return (
     <div className={cn('flex items-center', classNameWrapper)}>
@@ -45,7 +58,7 @@ const SelectSearchParam = ({
         className={cn('w-full md:w-auto', className)}
         onChange={handleChange}
         defaultValue={defaultValue}
-        value={queryState || undefined}
+        value={displayValue}
         placeholder={placeholder}
         options={status}
         clearable={clearOnDefault}
