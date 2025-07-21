@@ -45,11 +45,24 @@ export const DatePickerFilter = ({
 
   // Utilisé pour mettre la date d'aujourd'hui en valeur si l'utilisateur tape une fausse date dans l'url, car l'url et la valeur de ce composant sont connectées =>  Permet d'avoir une UX propre pour l'utilisateur.
   useEffect(() => {
+    let shouldReset = false;
     if (value && !isValidDate) {
+      shouldReset = true;
+    }
+    // Vérifie si la date est hors des bornes minDate/maxDate
+    if (isValidDate) {
+      if (minDate && dt < DateTime.fromJSDate(minDate)) {
+        shouldReset = true;
+      }
+      if (maxDate && dt > DateTime.fromJSDate(maxDate)) {
+        shouldReset = true;
+      }
+    }
+    if (shouldReset) {
       const todayIso = DateTime.now().toISO();
       setValue(todayIso!);
     }
-  }, [value, isValidDate, setValue]);
+  }, [value, isValidDate, setValue, minDate, maxDate, dt]);
 
   const displayIso = isValidDate ? iso : DateTime.now().toISO();
   const displayDt = DateTime.fromISO(displayIso!);
