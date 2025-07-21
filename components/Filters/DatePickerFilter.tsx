@@ -46,21 +46,26 @@ export const DatePickerFilter = ({
   // Utilisé pour mettre la date d'aujourd'hui en valeur si l'utilisateur tape une fausse date dans l'url, car l'url et la valeur de ce composant sont connectées =>  Permet d'avoir une UX propre pour l'utilisateur.
   useEffect(() => {
     let shouldReset = false;
+    let resetTo: string | null = null;
     if (value && !isValidDate) {
       shouldReset = true;
+      resetTo = minDate
+        ? DateTime.fromJSDate(minDate).toISO()
+        : DateTime.now().toISO();
     }
-    // Vérifie si la date est hors des bornes minDate/maxDate
+
     if (isValidDate) {
       if (minDate && dt < DateTime.fromJSDate(minDate)) {
         shouldReset = true;
+        resetTo = DateTime.fromJSDate(minDate).toISO();
       }
       if (maxDate && dt > DateTime.fromJSDate(maxDate)) {
         shouldReset = true;
+        resetTo = DateTime.now().toISO();
       }
     }
-    if (shouldReset) {
-      const todayIso = DateTime.now().toISO();
-      setValue(todayIso!);
+    if (shouldReset && resetTo) {
+      setValue(resetTo);
     }
   }, [value, isValidDate, setValue, minDate, maxDate, dt]);
 
@@ -115,6 +120,10 @@ export const DatePickerFilter = ({
   prevDate.setHours(0, 0, 0, 0);
   const isPrevDisabled = !canChoosePastDay && prevDate < today;
 
+  const maxDateExclusive = maxDate
+    ? new Date(maxDate.getTime() - 24 * 60 * 60 * 1000)
+    : undefined;
+
   return (
     <div
       className={`inline-flex text-sm items-center border rounded-xl px-2 ${displayHour ? 'py-0' : 'py-1'}  ${className}`}
@@ -167,7 +176,9 @@ export const DatePickerFilter = ({
             selected={date}
             onSelect={handleDateChange}
             fromDate={minDate}
-            toDate={maxDate}
+            disabled={
+              maxDateExclusive ? { after: maxDateExclusive } : undefined
+            }
           />
         </PopoverContent>
       </Popover>
