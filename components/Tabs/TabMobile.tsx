@@ -29,6 +29,7 @@ interface TabsResponsiveProps<T extends string = string> {
   startTransition?: (callback: () => void) => void;
   fullWidth?: boolean;
   variant?: 'default' | 'light' | 'mini';
+  pageName?: string;
 }
 
 const variants = {
@@ -50,6 +51,7 @@ export function TabMobile<T extends string = string>({
   startTransition,
   fullWidth,
   variant = 'default',
+  pageName = 'page',
 }: TabsResponsiveProps<T>) {
   const router = useRouter();
 
@@ -59,7 +61,7 @@ export function TabMobile<T extends string = string>({
     shallow: false,
   });
 
-  const [page, setPage] = useQueryState('page', {
+  const [page, setPage] = useQueryState(pageName, {
     defaultValue: '1',
     clearOnDefault: false,
     shallow: false,
@@ -73,8 +75,7 @@ export function TabMobile<T extends string = string>({
       router.push(option.href);
     } else if (option.value && query) {
       setFilter(value);
-      // Peut causer des problèmes si le param page est déja utilisé dans l'url, dece fait il est commenté pour l'instant (voir si on en a vraiment besoin par la suite)
-      // setPage("1");
+      setPage('1');
     }
     if (onChange && option.value) onChange(option.value);
   };
