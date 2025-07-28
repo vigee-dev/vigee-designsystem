@@ -39,6 +39,7 @@ type Props<T extends FieldValues> = {
   variant?: "default" | "small";
   onChange?: (value: string) => void;
   withCheckbox?: boolean;
+  noDefault?: boolean;
 };
 
 export const Toggles = <T extends FieldValues>({
@@ -55,6 +56,7 @@ export const Toggles = <T extends FieldValues>({
   variant = "default",
   onChange,
   withCheckbox = false,
+  noDefault = false,
 }: Props<T>) => {
   const handleValueChange = React.useCallback(
     (value: string | string[]) => {
@@ -68,6 +70,7 @@ export const Toggles = <T extends FieldValues>({
 
   // Force la valeur par défaut si le champ est vide
   React.useEffect(() => {
+    if (noDefault) return;
     const current = form.getValues(name);
     if (!current && options.length > 0) {
       form.setValue(name, options[0].value as PathValue<T, Path<T>>);
