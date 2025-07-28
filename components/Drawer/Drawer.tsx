@@ -53,8 +53,8 @@ export function Drawer({
         <VaulDrawer.Content
           className={cn(
             'bg-white flex flex-col fixed z-50 bottom-0 left-0 right-0 max-h-[92vh] rounded-t-[10px]',
+            fullScreen && 'min-h-dvh rounded-none bg-background',
             className,
-            fullScreen && 'min-h-dvh rounded-none bg-background'
           )}
         >
           <div className='w-full h-full overflow-auto'>
@@ -65,7 +65,7 @@ export function Drawer({
                 fullScreen && 'rounded-none'
               )}
             >
-              <VaulDrawer.Handle />
+              <VaulDrawer.Handle className='mt-2' />
               {cancelable && <Back where='retour' onClick={onClose} />}
               <div className='flex items-center gap-4'>
                 {icon}
