@@ -34,26 +34,26 @@ export function AlertInfo({
     type === "informative"
       ? "text-informative bg-informative-background"
       : type === "destructive"
-      ? "text-destructive-foreground bg-destructive-background"
-      : type === "warning"
-      ? "text-warning-foreground bg-warning-background"
-      : type === "success"
-      ? "text-success-foreground bg-success-background"
-      : type === "special"
-      ? "text-purple-600 bg-purple-100"
-      : "text-neutral-foreground bg-neutral-background";
+        ? "text-destructive-foreground bg-destructive-background"
+        : type === "warning"
+          ? "text-warning-foreground bg-warning-background"
+          : type === "success"
+            ? "text-success-foreground bg-success-background"
+            : type === "special"
+              ? "text-purple-600 bg-purple-100"
+              : "text-neutral-foreground bg-neutral-background";
   const lightColor =
     type === "informative"
       ? "text-informative-foreground-light "
       : type === "destructive"
-      ? "text-destructive-foreground-light "
-      : type === "warning"
-      ? "text-warning-foreground-light "
-      : type === "success"
-      ? "text-success-foreground-light "
-      : type === "special"
-      ? "text-purple-600-light "
-      : "text-neutral-foreground-light ";
+        ? "text-destructive-foreground-light "
+        : type === "warning"
+          ? "text-warning-foreground-light "
+          : type === "success"
+            ? "text-success-foreground-light "
+            : type === "special"
+              ? "text-purple-600-light "
+              : "text-neutral-foreground-light ";
 
   const icon =
     type === "informative" ? (
@@ -85,7 +85,7 @@ export function AlertInfo({
             {title}
           </AlertTitle>
           {description && (
-            <AlertDescription className={cn(lightColor, "text-xs")}>
+            <AlertDescription className={cn(color, "text-xs font-sans")}>
               {description}
             </AlertDescription>
           )}
