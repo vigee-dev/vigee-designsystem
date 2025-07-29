@@ -1,5 +1,5 @@
 .font-variations {
-  font-variation-settings: "wdth" 130;
+  font-variation-settings: 'wdth' 130;
   letter-spacing: -0.03em;
 }
 
@@ -24,4 +24,32 @@
 .complete:not(:first-child):before,
 .active:not(:first-child):before {
   @apply bg-primary;
+}
+
+/* Supprime le focus natif sur les inputs time (notamment celui de shadcn) (Chrome, Safari, Edge) */
+input[type='time']:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+/* Classes pour supprimer l'icone horloge par defaut sur l'input time*/
+input[type='time']::-webkit-calendar-picker-indicator {
+  display: none;
+}
+/* Pour Firefox */
+input[type='time']::-moz-focus-inner {
+  border: 0;
+}
+input[type='time']::-moz-focus-outer {
+  border: 0;
+}
+input[type='time']::-ms-clear {
+  display: none;
+}
+
+/* Classe pour effacer l'outline du composant SelectFilter car tailwind non pris en compte*/
+.hide-focus-outline:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }

@@ -1,62 +1,81 @@
-import Link from "next/link";
-import { Button as ShadButton, ButtonProps as ShadButtonProps } from "../ui/button";
-import { cn } from "../lib/utils";
+import { Loader2, XIcon } from 'lucide-react';
+import Link from 'next/link';
 import {
-  PiSendPlaneHorizontalContrast,
-  PiEye02OnContrast,
-  PiPlusSquareDuoSolid,
-  PiDownloadDownDuoSolid,
-  PiUploadUpDuoSolid,
-  PiArrowLeftStroke,
-  PiPencilEditBoxDuoSolid,
+  PiAppleLogoStroke,
   PiArrowLeftCircleContrast,
-  PiUserPlusContrast,
-  PiChevronRightStroke,
-  PiPlusDefaultStroke,
-  PiSearchDefaultStroke,
-  PiCameraStroke,
-  PiDeleteDustbin01DuoSolid,
+  PiArrowLeftStroke,
+  PiBarchartDefaultStroke,
   PiCalendarFilledStroke,
-  PiRefreshDuoStroke,
-  PiLogOutRightDuoStroke,
-  PiNavigationSlantStroke,
+  PiCalendarPlusStroke,
+  PiCameraStroke,
+  PiChatDefaultStroke,
+  PiChatPlusStroke,
+  PiCheckTickSingleStroke,
   PiChevronDownStroke,
+  PiChevronLeftStroke,
+  PiChevronRightStroke,
+  PiChevronUpStroke,
+  PiContactsBookStroke,
+  PiCopyCopiedStroke,
+  PiDeleteDustbin01DuoSolid,
+  PiDownloadDownDuoSolid,
+  PiEye02OnContrast,
+  PiFacebookStroke,
+  PiFilterLinesStroke,
   PiGithubStroke,
   PiGoogleStroke,
-  PiAppleLogoStroke,
-  PiCopyCopiedStroke,
-  PiThreeDotsMenuHorizontalStroke,
-  PiCheckTickSingleStroke,
-  PiPhoneDefaultStroke,
-  PiOpenaiStroke,
-  PiListSearchDuoSolid,
-  PiRotateLeftStroke,
-  PiChevronLeftStroke,
-  PiFilterLinesStroke,
-  PiListPlusStroke,
   PiHomeDefaultStroke,
-  PiContactsBookStroke,
-  PiBarchartDefaultStroke,
-  PiUserSettingsStroke,
-  PiChatDefaultStroke,
-  PiUserCircleStroke,
-  PiPlayBigSolid,
+  PiInstagramStroke,
+  PiLinkHorizontalStroke,
+  PiListPlusStroke,
+  PiListSearchDuoSolid,
+  PiLogOutRightDuoStroke,
+  PiNavigationSlantStroke,
+  PiOpenaiStroke,
+  PiPauseCircleDuoSolid,
+  PiPencilEditBoxDuoStroke,
+  PiPhoneDefaultStroke,
   PiPlayCircleDuoSolid,
-  PiPauseCircleDuoSolid, PiFilePlusStroke,
+  PiPlusCircleStroke,
+  PiPlusDefaultStroke,
+  PiPlusSquareDuoSolid,
+  PiRefreshDuoStroke,
+  PiRepeatSquareStroke,
+  PiRotateLeftStroke,
+  PiSearchDefaultStroke,
+  PiSendPlaneHorizontalContrast,
+  PiThreeDotsMenuHorizontalStroke,
+  PiThumbReactionLikeStroke,
+  PiUploadUpDuoSolid,
+  PiUserCircleStroke,
+  PiUserPlusStroke,
+  PiUserSettingsStroke,
+  PiPlayBigSolid,
+  PiFilePlusStroke
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
-import { Loader2, XIcon } from "lucide-react";
+import { cn } from '../lib/utils';
+import {
+  Button as ShadButton,
+  ButtonProps as ShadButtonProps,
+} from '../ui/button';
 
 export interface ButtonProps extends ShadButtonProps {
   children?: React.ReactNode;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   onPointerDown?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  type?: "button" | "submit" | "reset";
+  type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   href?: string;
   className?: string;
   pending?: boolean;
-  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
+  variant?:
+    | 'default'
+    | 'destructive'
+    | 'outline'
+    | 'secondary'
+    | 'ghost'
+    | 'link';
   icon?: keyof typeof iconMap;
   iconLeft?: keyof typeof iconMap;
   iconComponent?: React.ReactNode;
@@ -73,9 +92,9 @@ const iconMap = {
   trash: PiDeleteDustbin01DuoSolid,
   upload: PiUploadUpDuoSolid,
   back: PiArrowLeftStroke,
-  edit: PiPencilEditBoxDuoSolid,
+  edit: PiPencilEditBoxDuoStroke,
   arrowLeft: PiArrowLeftCircleContrast,
-  userAdd: PiUserPlusContrast,
+  userAdd: PiUserPlusStroke,
   user: PiUserCircleStroke,
   copy: PiCopyCopiedStroke,
   chevron: PiChevronRightStroke,
@@ -89,6 +108,7 @@ const iconMap = {
   logout: PiLogOutRightDuoStroke,
   navigation: PiNavigationSlantStroke,
   chevronDown: PiChevronDownStroke,
+  chevronUp: PiChevronUpStroke,
   github: PiGithubStroke,
   google: PiGoogleStroke,
   apple: PiAppleLogoStroke,
@@ -107,14 +127,49 @@ const iconMap = {
   chat: PiChatDefaultStroke,
   play: PiPlayCircleDuoSolid,
   pause: PiPauseCircleDuoSolid,
+  link: PiLinkHorizontalStroke,
+  thumbsUp: PiThumbReactionLikeStroke,
+  chatAdd: PiChatPlusStroke,
+  rdvAdd: PiCalendarPlusStroke,
+  plusCircle: PiPlusCircleStroke,
+  repeat: PiRepeatSquareStroke,
+  instagram: PiInstagramStroke,
+  facebook: PiFacebookStroke,
   fileAdd: PiFilePlusStroke,
 };
 
-export function Button({ children, onClick, variant, type = "button", disabled, href, className, pending, icon, iconLeft, iconComponent, tooltip, big, classNameIcon, ...props }: ButtonProps) {
+export function Button({
+  children,
+  onClick,
+  variant,
+  type = 'button',
+  disabled,
+  href,
+  className,
+  pending,
+  icon,
+  iconLeft,
+  iconComponent,
+  tooltip,
+  big,
+  classNameIcon,
+  ...props
+}: ButtonProps) {
   return pending ? (
-    <ShadButton disabled variant={variant} className={cn(className, children ? "rounded-xl font-bold text-sm flex px-3 gap-4" : "bg-transparent text-gray-800")}>
+    <ShadButton
+      disabled
+      variant={variant}
+      className={cn(
+        className,
+        children
+          ? 'rounded-xl font-bold text-sm flex px-3 gap-4'
+          : 'bg-transparent text-gray-800'
+      )}
+    >
       {children}
-      <Loader2 className={cn(`h-4 w-4 animate-spin `, children ? "mr-2" : "mr-0 ")} />
+      <Loader2
+        className={cn(`h-4 w-4 animate-spin `, children ? 'mr-2' : 'mr-0 ')}
+      />
     </ShadButton>
   ) : href ? (
     <Link href={href}>
@@ -158,8 +213,14 @@ export function Button({ children, onClick, variant, type = "button", disabled, 
 interface ButtonComponentProps extends ShadButtonProps {
   children?: React.ReactNode;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link";
-  type?: "button" | "submit" | "reset";
+  variant?:
+    | 'default'
+    | 'destructive'
+    | 'outline'
+    | 'secondary'
+    | 'ghost'
+    | 'link';
+  type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   className?: string;
   icon?: keyof typeof iconMap;
@@ -171,12 +232,27 @@ interface ButtonComponentProps extends ShadButtonProps {
   pending?: boolean;
 }
 
-const ButtonComponent = ({ children, onClick, variant, type, disabled, className, icon, iconLeft, iconComponent, tooltip, big, classNameIcon, pending, ...props }: ButtonComponentProps) => {
+const ButtonComponent = ({
+  children,
+  onClick,
+  variant,
+  type,
+  disabled,
+  className,
+  icon,
+  iconLeft,
+  iconComponent,
+  tooltip,
+  big,
+  classNameIcon,
+  pending,
+  ...props
+}: ButtonComponentProps) => {
   const Icon = icon ? iconMap[icon] : null;
   const IconLeft = iconLeft ? iconMap[iconLeft] : null;
 
   return tooltip ? (
-    <Tooltip message={tooltip ?? ""}>
+    <Tooltip message={tooltip ?? ''}>
       <ShadButton
         {...props}
         variant={variant}
@@ -184,23 +260,29 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
         type={type}
         disabled={disabled}
         className={cn(
-          "group rounded-xl font-bold text-sm flex px-3 gap-4 ",
+          'group rounded-xl font-bold text-sm flex px-3 gap-4 ',
           className,
-          !children && "bg-transparent border-none hover:bg-transparent",
-          !disabled ? "hover:cursor-pointer group-hover:text-primary" : "hover:cursor-not-allowed ",
-          pending && children && "bg-transparent text-gray-800"
-        )}>
+          !children && 'bg-transparent border-none hover:bg-transparent',
+          !disabled
+            ? 'hover:cursor-pointer group-hover:text-primary'
+            : 'hover:cursor-not-allowed ',
+          pending && children && 'bg-transparent text-gray-800'
+        )}
+      >
         {IconLeft && (
           <IconLeft
             className={cn(
-              "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
-              !children && "text-gray-400 transform transition-ease-in-out duration-300 w-6 h-6",
-              big && "w-10 h-10",
-              variant === "outline" && "text-gray-900",
-              variant === "secondary" && "text-secondary-foreground",
-              !disabled && "md:group-hover:animate-pulse",
-              !children && !disabled && "group-hover:text-primary group-hover:scale-105",
-              "bg-transparent",
+              'text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5',
+              !children &&
+                'text-gray-400 transform transition-ease-in-out duration-300 w-6 h-6',
+              big && 'w-10 h-10',
+              variant === 'outline' && 'text-gray-900',
+              variant === 'secondary' && 'text-secondary-foreground',
+              !disabled && 'md:group-hover:animate-pulse',
+              !children &&
+                !disabled &&
+                'group-hover:text-primary group-hover:scale-105',
+              'bg-transparent',
               classNameIcon
             )}
           />
@@ -213,14 +295,17 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
         {Icon && (
           <Icon
             className={cn(
-              "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
-              !children && "text-gray-400 transform transition-ease-in-out duration-300 w-6 h-6",
-              big && "w-10 h-10",
-              variant === "outline" && "text-gray-900",
-              variant === "secondary" && "text-secondary-foreground",
-              !disabled && "md:group-hover:animate-pulse",
-              !children && !disabled && "group-hover:text-primary group-hover:scale-105",
-              "bg-transparent",
+              'text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5',
+              !children &&
+                'text-gray-400 transform transition-ease-in-out duration-300 w-6 h-6',
+              big && 'w-10 h-10',
+              variant === 'outline' && 'text-gray-900',
+              variant === 'secondary' && 'text-secondary-foreground',
+              !disabled && 'md:group-hover:animate-pulse',
+              !children &&
+                !disabled &&
+                'group-hover:text-primary group-hover:scale-105',
+              'bg-transparent',
               classNameIcon
             )}
           />
@@ -235,24 +320,31 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
       type={type}
       disabled={disabled}
       className={cn(
-        "group rounded-xl font-bold text-sm flex gap-4",
+        'group rounded-xl font-bold text-sm flex gap-4',
         className,
-        !children && "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent",
-        !disabled ? "hover:cursor-pointer group-hover:text-primary" : "hover:cursor-not-allowed",
-        pending && children && "bg-transparent text-gray-800"
-      )}>
+        !children &&
+          'bg-transparent border-none group-hover:bg-transparent hover:bg-transparent',
+        !disabled
+          ? 'hover:cursor-pointer group-hover:text-primary'
+          : 'hover:cursor-not-allowed',
+        pending && children && 'bg-transparent text-gray-800'
+      )}
+    >
       {IconLeft && (
         <IconLeft
           className={cn(
-            "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
-            !children && "text-gray-400 transform transition-ease-in-out duration-300 w-6 h-6",
-            big && "w-10 h-10",
-            variant === "outline" && "text-gray-900",
-            variant === "secondary" && "text-secondary-foreground",
-            !disabled && "md:group-hover:animate-pulse",
-            !children && !disabled && "group-hover:text-primary group-hover:scale-105",
+            'text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5',
+            !children &&
+              'text-gray-400 transform transition-ease-in-out duration-300 w-6 h-6',
+            big && 'w-10 h-10',
+            variant === 'outline' && 'text-gray-900',
+            variant === 'secondary' && 'text-secondary-foreground',
+            !disabled && 'md:group-hover:animate-pulse',
+            !children &&
+              !disabled &&
+              'group-hover:text-primary group-hover:scale-105',
             className,
-            "bg-transparent",
+            'bg-transparent',
             classNameIcon
           )}
         />
@@ -264,14 +356,17 @@ const ButtonComponent = ({ children, onClick, variant, type, disabled, className
       {Icon && (
         <Icon
           className={cn(
-            "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
-            !children && "text-gray-400 transform transition-ease-in-out duration-300 w-6 h-6",
-            big && "w-10 h-10",
-            variant === "outline" && "text-gray-900",
-            variant === "secondary" && "text-secondary-foreground",
-            !disabled && "md:group-hover:animate-pulse",
-            !children && !disabled && "group-hover:text-primary group-hover:scale-105",
-            "bg-transparent",
+            'text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5',
+            !children &&
+              'text-gray-400 transform transition-ease-in-out duration-300 w-6 h-6',
+            big && 'w-10 h-10',
+            variant === 'outline' && 'text-gray-900',
+            variant === 'secondary' && 'text-secondary-foreground',
+            !disabled && 'md:group-hover:animate-pulse',
+            !children &&
+              !disabled &&
+              'group-hover:text-primary group-hover:scale-105',
+            'bg-transparent',
             classNameIcon
           )}
         />

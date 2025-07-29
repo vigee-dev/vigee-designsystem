@@ -164,6 +164,7 @@ export const Toggles = <T extends FieldValues>({
 }: Props<T>) => {
   const handleValueChange = React.useCallback(
     (value: string | string[]) => {
+      // @ts-ignore
       form.setValue(name, value as PathValue<T, Path<T>>);
       if (onChange && typeof value === 'string') {
         onChange(value);
@@ -176,6 +177,7 @@ export const Toggles = <T extends FieldValues>({
   React.useEffect(() => {
     const current = form.getValues(name);
     if (!current && options.length > 0) {
+      // @ts-ignore
       form.setValue(name, options[0].value as PathValue<T, Path<T>>);
     }
   }, [form, name, options]);

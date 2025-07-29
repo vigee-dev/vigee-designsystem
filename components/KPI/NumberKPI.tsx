@@ -1,5 +1,5 @@
-import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
-import { cn, currency } from "../lib/utils";
+import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/20/solid';
+import { cn, currency } from '../lib/utils';
 
 export interface StatItem {
   name: string;
@@ -21,7 +21,7 @@ interface NumberKPIProps {
 }
 
 function classNames(...classes: string[]): string {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 interface PreviousStatProps {
@@ -33,17 +33,17 @@ interface PreviousStatProps {
 const getColumnClass = (columns: number) => {
   switch (columns) {
     case 1:
-      return "md:grid-cols-1";
+      return 'md:grid-cols-1';
     case 2:
-      return "md:grid-cols-2";
+      return 'md:grid-cols-2';
     case 3:
-      return "md:grid-cols-3";
+      return 'md:grid-cols-3';
     case 4:
-      return "md:grid-cols-4";
+      return 'md:grid-cols-4';
     case 5:
-      return "md:grid-cols-5";
+      return 'md:grid-cols-5';
     default:
-      return "md:grid-cols-3";
+      return 'md:grid-cols-3';
   }
 };
 
@@ -64,26 +64,54 @@ const groupItemsByRows = (items: StatItem[], columns: number) => {
   return rows;
 };
 
-const PreviousStat = ({ previousStat, upNegative = false, notApplicable = false }: PreviousStatProps) => {
+const PreviousStat = ({
+  previousStat,
+  upNegative = false,
+  notApplicable = false,
+}: PreviousStatProps) => {
   return (
     <div
       className={classNames(
-        !notApplicable && previousStat > 0 ? `${!upNegative ? "text-green-600 bg-green-100" : "text-red-600 bg-red-100"}` : "",
-        !notApplicable && previousStat < 0 ? `${!upNegative ? "bg-red-100 text-red-600" : "bg-green-100 text-green-600"}` : "",
-        notApplicable || previousStat === 0 ? `bg-gray-100 text-gray-600` : "",
-        "inline-flex items-baseline rounded-full px-2.5 py-0.5 text-xs font-black md:mt-2 lg:mt-0"
-      )}>
-      {!notApplicable && previousStat > 0 && <ArrowUpIcon className={`-ml-1 mr-0.5 h-4 w-4 flex-shrink-0 self-center ${!upNegative ? "text-green-600" : "text-red-600"}`} aria-hidden="true" />}
+        !notApplicable && previousStat > 0
+          ? `${!upNegative ? 'text-green-600 bg-green-100' : 'text-red-600 bg-red-100'}`
+          : '',
+        !notApplicable && previousStat < 0
+          ? `${!upNegative ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-600'}`
+          : '',
+        notApplicable || previousStat === 0 ? `bg-gray-100 text-gray-600` : '',
+        'inline-flex items-baseline rounded-full px-2.5 py-0.5 text-xs font-black md:mt-2 lg:mt-0'
+      )}
+    >
+      {!notApplicable && previousStat > 0 && (
+        <ArrowUpIcon
+          className={`-ml-1 mr-0.5 h-4 w-4 flex-shrink-0 self-center ${!upNegative ? 'text-green-600' : 'text-red-600'}`}
+          aria-hidden='true'
+        />
+      )}
 
-      {!notApplicable && previousStat < 0 && <ArrowDownIcon className={`-ml-1 mr-0.5 h-4 w-4 flex-shrink-0 self-center ${!upNegative ? "text-red-600" : "text-green-600"}`} aria-hidden="true" />}
+      {!notApplicable && previousStat < 0 && (
+        <ArrowDownIcon
+          className={`-ml-1 mr-0.5 h-4 w-4 flex-shrink-0 self-center ${!upNegative ? 'text-red-600' : 'text-green-600'}`}
+          aria-hidden='true'
+        />
+      )}
 
-      <span className="sr-only">{previousStat < 0 ? "Increased" : "Decreased"} by </span>
-      {previousStat !== 0 && !notApplicable ? previousStat.toFixed(0) + " %" : "N/A"}
+      <span className='sr-only'>
+        {previousStat < 0 ? 'Increased' : 'Decreased'} by{' '}
+      </span>
+      {previousStat !== 0 && !notApplicable
+        ? previousStat.toFixed(0) + ' %'
+        : 'N/A'}
     </div>
   );
 };
 
-const NumberKPI = ({ stats, columns = 3, small = false, className }: NumberKPIProps) => {
+const NumberKPI = ({
+  stats,
+  columns = 3,
+  small = false,
+  className,
+}: NumberKPIProps) => {
   const variation = (previousStat: number, stat: number) => {
     const diff = stat - previousStat;
     return (diff / (previousStat === 0 ? 1 : previousStat)) * 100;
@@ -96,8 +124,13 @@ const NumberKPI = ({ stats, columns = 3, small = false, className }: NumberKPIPr
   const rows = groupItemsByRows(stats, columns);
 
   return (
-    <div className="my-2">
-      <div className={cn("overflow-hidden rounded-xl shadow-sm bg-white border border-gray-100", className)}>
+    <div className='my-2'>
+      <div
+        className={cn(
+          'overflow-hidden rounded-xl shadow-sm bg-white border border-gray-100',
+          className
+        )}
+      >
         {rows.map((rowItems, rowIndex) => {
           const isLastRow = rowIndex === rows.length - 1;
           const actualColumns = rowItems.length;
@@ -106,9 +139,9 @@ const NumberKPI = ({ stats, columns = 3, small = false, className }: NumberKPIPr
             <dl
               key={rowIndex}
               className={cn(
-                "grid grid-cols-1",
+                'grid grid-cols-1',
                 getColumnClass(actualColumns),
-                !isLastRow ? "border-b border-gray-100" : ""
+                !isLastRow ? 'border-b border-gray-100' : ''
               )}
             >
               {rowItems.map((item, itemIndex) => {
@@ -118,25 +151,56 @@ const NumberKPI = ({ stats, columns = 3, small = false, className }: NumberKPIPr
                   <div
                     key={item.name}
                     className={cn(
-                      "px-4 relative",
-                      small ? "flex gap-2 items-center justify-between py-2 px-6" : "py-5 sm:p-6",
-                      !isLastInRow && actualColumns > 1 ? "md:border-r md:border-gray-100" : ""
+                      'px-4 relative',
+                      small
+                        ? 'flex gap-2 items-center justify-between py-2 px-6'
+                        : 'py-5 sm:p-6',
+                      !isLastInRow && actualColumns > 1
+                        ? 'md:border-r md:border-gray-100'
+                        : ''
                     )}
                   >
-                    <dt className={cn(" font-medium text-gray-400", small ? "text-sm" : "text-base")}>{item.name}</dt>
-                    <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-                      <div className={cn(`flex items-center text-xl font-black text-primary gap-2 whitespace-nowrap`, item.color, small ? "text-base" : "text-xl")}>
+                    <dt
+                      className={cn(
+                        ' font-medium text-gray-400',
+                        small ? 'text-sm' : 'text-base'
+                      )}
+                    >
+                      {item.name}
+                    </dt>
+                    <dd className='mt-1 flex items-baseline justify-between md:block lg:flex'>
+                      <div
+                        className={cn(
+                          `flex items-center text-xl font-black text-primary gap-2 whitespace-nowrap`,
+                          item.color,
+                          small ? 'text-base' : 'text-xl'
+                        )}
+                      >
                         {item.icon}
-                        {item.unit === "€" ? currency(item.stat).toRoundedEuro() : item.unit ? `${item.stat} ${item.unit}` : item.stat}
+                        {item.unit === '€'
+                          ? currency(item.stat).toRoundedEuro()
+                          : item.unit
+                            ? `${item.stat} ${item.unit}`
+                            : item.stat}
                       </div>
-                      {item.previousStat != null && <PreviousStat previousStat={variation(item.previousStat, item.stat)} upNegative={item.upNegative} notApplicable={item.previousStat === 0} />}
+                      {item.previousStat != null && (
+                        <PreviousStat
+                          previousStat={variation(item.previousStat, item.stat)}
+                          upNegative={item.upNegative}
+                          notApplicable={item.previousStat === 0}
+                        />
+                      )}
                       {item.objectif != null && item.ecartType != null && (
                         <div
                           className={classNames(
-                            Math.abs(ecartType(item.stat, item.objectif)) > item.ecartType ? "text-red-600 bg-red-100" : "text-green-600 bg-green-100",
-                            "inline-flex items-baseline rounded-full px-2.5 py-0.5 text-xs font-black md:mt-2 lg:mt-0"
-                          )}>
-                          {ecartType(item.stat, item.objectif) > 0 ? "+" : ""}
+                            Math.abs(ecartType(item.stat, item.objectif)) >
+                              item.ecartType
+                              ? 'text-red-600 bg-red-100'
+                              : 'text-green-600 bg-green-100',
+                            'inline-flex items-baseline rounded-full px-2.5 py-0.5 text-xs font-black md:mt-2 lg:mt-0'
+                          )}
+                        >
+                          {ecartType(item.stat, item.objectif) > 0 ? '+' : ''}
                           {ecartType(item.stat, item.objectif)}%
                         </div>
                       )}
