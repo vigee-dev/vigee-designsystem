@@ -79,12 +79,15 @@ export default function CommandListSelect<T extends FieldValues>({
         } else {
           next.push(newValue);
         }
+        // @ts-ignore
         form.setValue(name, next as PathValue<T, Path<T>>);
         if (onChange) onChange(next as any);
       } else {
         if (!isBoolean) {
+          // @ts-ignore
           form.setValue(name, newValue as PathValue<T, Path<T>>);
         } else {
+          // @ts-ignore
           form.setValue(name, (newValue === 'true') as PathValue<T, Path<T>>);
         }
         if (onChange) onChange(newValue);

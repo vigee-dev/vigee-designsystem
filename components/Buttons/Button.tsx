@@ -50,9 +50,11 @@ import {
   PiUserCircleStroke,
   PiUserPlusStroke,
   PiUserSettingsStroke,
-} from '../../icons/PikaIcons';
+  PiPlayBigSolid,
+  PiFilePlusStroke
+} from "../../icons/PikaIcons";
+import { Tooltip } from "../Tooltip/Tooltip";
 import { cn } from '../lib/utils';
-import { Tooltip } from '../Tooltip/Tooltip';
 import {
   Button as ShadButton,
   ButtonProps as ShadButtonProps,
@@ -133,6 +135,7 @@ const iconMap = {
   repeat: PiRepeatSquareStroke,
   instagram: PiInstagramStroke,
   facebook: PiFacebookStroke,
+  fileAdd: PiFilePlusStroke,
 };
 
 export function Button({
