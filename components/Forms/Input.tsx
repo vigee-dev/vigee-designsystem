@@ -1,14 +1,23 @@
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 
+import { FieldValues, Path, UseFormReturn } from "react-hook-form";
+import {
+  PiExternalLinkCircleDuoSolid,
+  PiQuestionMarkCircleDuoStroke,
+} from "../../icons/PikaIcons";
 import { Input as ShadInput } from "../ui/input";
-import { UseFormReturn, FieldValues, Path } from "react-hook-form";
-import { PiExternalLinkCircleDuoSolid, PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
 
-import { HoverCard, HoverCardTrigger } from "../ui/hover-card";
+import React, { useState } from "react";
 import { Label } from "../../components/ui/label";
 import { cn } from "../lib/utils";
-import { useState } from "react";
-import React from "react";
+import { HoverCard, HoverCardTrigger } from "../ui/hover-card";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -56,7 +65,9 @@ export default function Input<T extends FieldValues>({
   link,
   white,
 }: Props<T>) {
-  const [charCount, setCharCount] = useState(name ? form?.getValues(name)?.length || 0 : 0);
+  const [charCount, setCharCount] = useState(
+    name ? form?.getValues(name)?.length || 0 : 0
+  );
   return form && name ? (
     <FormField
       control={form?.control}
@@ -103,13 +114,13 @@ export default function Input<T extends FieldValues>({
                 max={max}
                 step={step}
                 className={cn(
-                  "text-[16px] md:text-sm font-medium bg-input border-none ",
+                  "text-[16px] md:text-sm font-medium bg-input border-none font-sans",
                   className,
                   minimalist &&
                     "focus-visible:ring-offset-0 bg-transparent font-medium text-black placeholder:text-gray-300  focus-visible:ring-0 ring-0 border-none  ring-offset-none p-0 focus:outline-none focus:ring-0 caret-black",
                   white && "bg-white border border-zinc-200 border-solid"
                 )}
-                onChange={e => {
+                onChange={(e) => {
                   if (maxLength) setCharCount(e.target.value.length);
                   field.onChange(e);
                   if (onChange) onChange(e);
@@ -157,7 +168,10 @@ export default function Input<T extends FieldValues>({
           step={step}
           onChange={onChange}
           value={value}
-          className={cn("text-[16px] md:text-sm font-medium bg-input border-none", white && "bg-white border border-zinc-200 border-solid")}
+          className={cn(
+            "text-[16px] md:text-sm font-medium bg-input border-none",
+            white && "bg-white border border-zinc-200 border-solid"
+          )}
         />
       </HoverCard>
       {descr && <p className={"text-sm text-muted-foreground"}>{descr}</p>}
