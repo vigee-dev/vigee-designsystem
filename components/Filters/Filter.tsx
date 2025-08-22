@@ -1,14 +1,21 @@
 "use client";
 
-import * as React from "react";
 import { Check } from "lucide-react";
-import { cn } from "../lib/utils";
-import { Button } from "../ui/button";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../ui/command";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useQueryState } from "nuqs";
-import { Select } from "../Select/Select";
+import * as React from "react";
 import { PiChevronSortVerticalStroke } from "../../icons/PikaIcons";
+import { cn } from "../lib/utils";
+import { Select } from "../Select/Select";
+import { Button } from "../ui/button";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "../ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
 export const Filter = ({
   queryKey,
@@ -32,18 +39,30 @@ export const Filter = ({
     setValue(value || null);
   };
 
-  const filterItems = (item: { label: string; value: string }, search: string) => {
+  const filterItems = (
+    item: { label: string; value: string },
+    search: string
+  ) => {
     return item.label.toLowerCase().includes(search.toLowerCase());
   };
 
-  const sortedOptions = [...options].sort((a, b) => a.label.localeCompare(b.label));
+  const sortedOptions = [...options].sort((a, b) =>
+    b.label.localeCompare(a.label)
+  );
 
   if (searchable) {
     return (
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button variant="outline" role="combobox" aria-expanded={open} className="w-fit gap-2 border-none bg-transparent">
-            {value ? options.find(option => option.value === value)?.label : placeholder}
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            className="w-fit gap-2 border-none bg-transparent"
+          >
+            {value
+              ? options.find((option) => option.value === value)?.label
+              : placeholder}
             <PiChevronSortVerticalStroke className="opacity-50 h-4 w-4" />
           </Button>
         </PopoverTrigger>
@@ -53,16 +72,24 @@ export const Filter = ({
             <CommandList>
               <CommandEmpty>Aucun {placeholder} trouvé.</CommandEmpty>
               <CommandGroup>
-                {sortedOptions.map(option => (
+                {sortedOptions.map((option) => (
                   <CommandItem
                     key={option.value}
                     onSelect={() => {
-                      handleChange(value === option.value ? undefined : option.value);
+                      handleChange(
+                        value === option.value ? undefined : option.value
+                      );
                       setOpen(false);
                     }}
-                    value={option.label}>
+                    value={option.label}
+                  >
                     {option.label}
-                    <Check className={cn("ml-auto", value === option.value ? "opacity-100" : "opacity-0")} />
+                    <Check
+                      className={cn(
+                        "ml-auto",
+                        value === option.value ? "opacity-100" : "opacity-0"
+                      )}
+                    />
                   </CommandItem>
                 ))}
               </CommandGroup>
