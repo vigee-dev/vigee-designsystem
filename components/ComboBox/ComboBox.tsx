@@ -22,9 +22,10 @@ interface ComboBoxProps {
   icon?: React.ReactNode;
   className?: string;
   triggerOnHover?: boolean;
+  isModal?: boolean;
 }
 
-export function ComboBox({ items, value, onChange, label, placeholder = "Sélectionnez...", icon, className, triggerOnHover = false }: ComboBoxProps) {
+export function ComboBox({ items, value, onChange, label, placeholder = "Sélectionnez...", icon, className, triggerOnHover = false, isModal = false }: ComboBoxProps) {
   const [open, setOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
 
@@ -47,7 +48,7 @@ export function ComboBox({ items, value, onChange, label, placeholder = "Sélect
   };
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={setOpen} modal={isModal}>
       <div className="flex flex-col w-full" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <Label className="font-bold text-primary-light">{label}</Label>
 
