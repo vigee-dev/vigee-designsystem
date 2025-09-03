@@ -1,5 +1,3 @@
-// app/components/vigee-designsystem/components/Filters/SelectMultiple.tsx
-
 'use client';
 import { useMemo, useEffect } from 'react';
 import { useQueryState } from 'nuqs';
@@ -19,7 +17,6 @@ interface SelectMultipleProps {
   placeholder?: string;
   icon?: React.ReactNode;
   queryKey?: string;
-  maxVisibleBadges?: number;
 }
 
 export default function SelectMultiple({
@@ -27,7 +24,6 @@ export default function SelectMultiple({
   placeholder = 'Equipements',
   icon,
   queryKey = 'equipments',
-  maxVisibleBadges = 3,
 }: SelectMultipleProps) {
   const [queryState, setQueryState] = useQueryState(queryKey);
 
@@ -70,9 +66,6 @@ export default function SelectMultiple({
     selectedValues.includes(String(opt.value))
   );
 
-  const visibleBadges = selectedOptions.slice(0, maxVisibleBadges);
-  const hasOverflow = selectedOptions.length > maxVisibleBadges;
-
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -88,24 +81,21 @@ export default function SelectMultiple({
               <span className='text-sm'>{placeholder}</span>
             </>
           ) : (
-            <div className='flex gap-2 flex-wrap items-center'>
-              {visibleBadges.map((opt) => (
+            <div className='flex items-center gap-2 overflow-x-auto no-scrollbar '>
+              {selectedOptions.map((opt) => (
                 <Badge
                   key={opt.value}
-                  className='bg-gray-200 text-black transition hover:bg-gray-300 cursor-pointer  flex items-center gap-1 rounded-full px-3 py-1'
+                  className='bg-gray-200 text-black transition hover:bg-gray-300 cursor-pointer flex items-center gap-1 rounded-full px-3 py-1 shrink-0'
                   onClick={(e) => {
                     e.stopPropagation();
                     toggleValue(String(opt.value));
                   }}
                 >
                   {opt.icon}
-                  <span>{opt.label}</span>
+                  <span className='truncate'>{opt.label}</span>
                   <span className='ml-1 cursor-pointer'>&times;</span>
                 </Badge>
               ))}
-              {hasOverflow && (
-                <span className='text-black font-bold text-lg px-2'>...</span>
-              )}
             </div>
           )}
           <span className='ml-auto text-lg'>&#9662;</span>
