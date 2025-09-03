@@ -142,7 +142,7 @@ type Props<T extends FieldValues> = {
   multi?: boolean;
   columns?: number;
   variant?: 'default' | 'small';
-  onChange?: (value: string) => void;
+  onChange?: (value: string | string[]) => void;
   withCheckbox?: boolean;
 };
 
@@ -162,17 +162,6 @@ export const Toggles = <T extends FieldValues>({
   withCheckbox = false,
   columns,
 }: Props<T>) => {
-  const handleValueChange = React.useCallback(
-    (value: string | string[]) => {
-      // @ts-ignore
-      form.setValue(name, value as PathValue<T, Path<T>>);
-      if (onChange && typeof value === 'string') {
-        onChange(value);
-      }
-    },
-    [form, name, onChange]
-  );
-
   // Force la valeur par défaut si le champ est vide
   React.useEffect(() => {
     const current = form.getValues(name);
@@ -212,7 +201,10 @@ export const Toggles = <T extends FieldValues>({
                     variant === 'small' && 'border-none w-full'
                   )}
                   value={field.value}
-                  onValueChange={field.onChange}
+                  onValueChange={(value: string | string[]) => {
+                    field.onChange(value)
+                    if (onChange) onChange(value)
+                  }}
                   disabled={disabled}
                 >
                   {options.map((option) => (
