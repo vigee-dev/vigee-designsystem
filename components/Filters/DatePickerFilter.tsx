@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { DateTime } from 'luxon';
 import { addDays } from 'date-fns';
+import { fr } from 'date-fns/locale';
 import { useQueryState } from 'nuqs';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Calendar } from '../ui/calendar';
@@ -176,6 +177,7 @@ export const DatePickerFilter = ({
             selected={date}
             onSelect={handleDateChange}
             fromDate={minDate}
+            locale={fr}
             disabled={
               maxDateExclusive ? { after: maxDateExclusive } : undefined
             }
