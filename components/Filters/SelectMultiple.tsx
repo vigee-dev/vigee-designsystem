@@ -1,6 +1,6 @@
 'use client';
 import { useMemo, useEffect } from 'react';
-import { useQueryState } from 'nuqs';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Badge } from '../ui/badge';
 import { cn } from '../lib/utils';
@@ -25,41 +25,54 @@ export default function SelectMultiple({
   icon,
   queryKey = 'equipments',
 }: SelectMultipleProps) {
-  const [queryState, setQueryState] = useQueryState(queryKey);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const paramName = `${queryKey}[]`;
 
   const allowedValues = options.map((opt) => String(opt.value));
 
   const selectedValues = useMemo(() => {
-    if (!queryState) return [];
-    try {
-      const arr = JSON.parse(queryState);
-      return Array.isArray(arr) ? arr.map(String) : [];
-    } catch {
-      return queryState.split(',').map((v) => v.trim());
-    }
-  }, [queryState]);
+    if (!searchParams) return [];
+    const values = searchParams.getAll(paramName);
+    return values.map(String);
+  }, [searchParams, paramName]);
 
   useEffect(() => {
-    if (!queryState) return;
+    if (!searchParams) return;
     const filtered = selectedValues.filter((v) => allowedValues.includes(v));
     if (filtered.length !== selectedValues.length) {
-      setQueryState(null);
+      const params = new URLSearchParams(searchParams.toString());
+      // Reset and keep only allowed values
+      params.delete(paramName);
+      filtered.forEach((v) => params.append(paramName, v));
+      const qs = params.toString();
+      router.replace(`${pathname}${qs ? `?${qs}` : ''}`);
     }
-  }, [queryState, allowedValues.join(','), setQueryState]);
+  }, [
+    searchParams,
+    allowedValues.join(','),
+    router,
+    pathname,
+    paramName,
+    selectedValues,
+  ]);
 
   const toggleValue = (value: string) => {
-    let newSelected: string[];
-    if (selectedValues.includes(value)) {
-      newSelected = selectedValues.filter((v) => v !== value);
-    } else {
-      newSelected = [...selectedValues, value];
-    }
+    const params = new URLSearchParams(searchParams?.toString() || '');
+    const current = params.getAll(paramName).map(String);
+    const isSelected = current.includes(value);
+    const next = isSelected
+      ? current.filter((v) => v !== value)
+      : [...current, value];
 
-    if (newSelected.length > 0) {
-      setQueryState(JSON.stringify(newSelected.map(Number)));
-    } else {
-      setQueryState(null);
-    }
+    // Clear all then append one per value to get equipments[]=1&equipments[]=2
+    params.delete(paramName);
+    next.forEach((v) => params.append(paramName, v));
+
+    const qs = params.toString();
+    router.replace(`${pathname}${qs ? `?${qs}` : ''}`);
   };
 
   const selectedOptions = options.filter((opt) =>
