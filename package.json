@@ -43,7 +43,7 @@
     "cmdk": "^0.2.1",
     "date-fns": "^2.30.0",
     "embla-carousel-react": "^8.5.2",
-    "framer-motion": "^12.4.4",
+    "framer-motion": "^12.23.12",
     "lucide-react": "^0.294.0",
     "moment": "^2.30.1",
     "next-themes": "^0.3.0",
@@ -62,12 +62,12 @@
     "zod": "^3.24.1"
   },
   "peerDependencies": {
-    "react": "19.1.1",
-    "react-dom": "19.1.1",
-    "react-hook-form": "7.56.3",
     "@hookform/resolvers": "3.10.0",
     "next": "15.5.2",
-    "next-auth": "5.0.0-beta.25"
+    "next-auth": "5.0.0-beta.25",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "react-hook-form": "7.56.3"
   },
   "devDependencies": {
     "@types/animejs": "^3.1.12",

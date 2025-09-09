@@ -277,16 +277,16 @@ const DatePickerRange = ({
                         ? selectedPeriod === "thisWeek"
                           ? "Cette semaine"
                           : selectedPeriod === "thisMonth"
-                          ? "Ce mois-ci"
-                          : selectedPeriod === "thisYear"
-                          ? "Cette année"
-                          : selectedPeriod === "lastMonth"
-                          ? "Le mois dernier"
-                          : selectedPeriod === "lastYear"
-                          ? "L'année dernière"
-                          : selectedPeriod === "sameMonthLastYear"
-                          ? "Même mois l'année dernière"
-                          : ""
+                            ? "Ce mois-ci"
+                            : selectedPeriod === "thisYear"
+                              ? "Cette année"
+                              : selectedPeriod === "lastMonth"
+                                ? "Le mois dernier"
+                                : selectedPeriod === "lastYear"
+                                  ? "L'année dernière"
+                                  : selectedPeriod === "sameMonthLastYear"
+                                    ? "Même mois l'année dernière"
+                                    : ""
                         : "Choisir une période"}
                     </SelectValue>
                   </SelectTrigger>
@@ -295,9 +295,11 @@ const DatePickerRange = ({
                     <SelectItem value="thisMonth">Ce mois-ci</SelectItem>
                     <SelectItem value="thisYear">Cette année</SelectItem>
                     <SelectItem value="lastMonth">Le mois dernier</SelectItem>
-                    <SelectItem value="lastYear">L'année dernière</SelectItem>
+                    <SelectItem value="lastYear">
+                      {"L'année dernière"}
+                    </SelectItem>
                     <SelectItem value="sameMonthLastYear">
-                      Même mois l'année dernière
+                      {"Même mois l'année dernière"}
                     </SelectItem>
                   </SelectContent>
                 </Select>
