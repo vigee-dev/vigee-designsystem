@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Drawer as VaulDrawer } from "vaul";
-import Back from "../Buttons/Back";
-import { cn } from "../lib/utils";
+import { Drawer as VaulDrawer } from 'vaul';
+import Back from '../Buttons/Back';
+import { cn } from '../lib/utils';
 
 export function Drawer({
   children,
@@ -16,10 +16,11 @@ export function Drawer({
   className,
   cancelable = false,
   fullScreen = false,
-  classNameContent = "",
+  classNameContent = '',
   dismissible = true,
   headerComponent,
-  direction = "bottom",
+  direction = 'bottom',
+  large = false,
 }: {
   children: React.ReactNode;
   trigger?: React.ReactNode;
@@ -35,7 +36,8 @@ export function Drawer({
   classNameContent?: string;
   dismissible?: boolean;
   headerComponent?: React.ReactNode;
-  direction?: "bottom" | "left" | "right";
+  direction?: 'bottom' | 'left' | 'right';
+  large?: boolean;
 }) {
   return (
     <VaulDrawer.Root
@@ -47,33 +49,35 @@ export function Drawer({
     >
       <VaulDrawer.Trigger asChild>{trigger}</VaulDrawer.Trigger>
       <VaulDrawer.Portal>
-        <VaulDrawer.Overlay className="fixed inset-0 bg-black/30 z-50" />
+        <VaulDrawer.Overlay className='fixed inset-0 bg-black/30 z-50' />
         <VaulDrawer.Content
           className={cn(
-            "bg-white flex flex-col fixed z-50 bottom-0 left-0 right-0 max-h-[92vh] rounded-t-[10px]",
-            className,
-            fullScreen && "min-h-dvh rounded-none bg-background"
+            'bg-white flex flex-col fixed z-50 bottom-0 left-0 right-0 max-h-[92vh] rounded-t-[10px]',
+            fullScreen && 'min-h-dvh rounded-none bg-background',
+            className
           )}
         >
-          <div className="w-full h-full overflow-auto">
+          <div className='w-full h-full overflow-auto'>
             <div
               className={cn(
-                "max-w-lg w-full mx-auto p-4 rounded-t-[10px]",
+                `${
+                  large ? 'max-w-4xl' : 'max-w-lg'
+                } w-full mx-auto p-4 rounded-t-[10px]`,
                 classNameContent,
-                fullScreen && "rounded-none"
+                fullScreen && 'rounded-none'
               )}
             >
-              <VaulDrawer.Handle />
-              {cancelable && <Back where="retour" onClick={onClose} />}
-              <div className="flex items-center gap-4">
+              <VaulDrawer.Handle className='mt-2' />
+              {cancelable && <Back where='retour' onClick={onClose} />}
+              <div className='flex items-center gap-4'>
                 {icon}
                 {title || description ? (
-                  <div className="flex justify-between w-full">
-                    <div className="flex flex-col">
-                      <VaulDrawer.Title className="font-bold text-gray-900 mt-8 text-lg">
+                  <div className='flex justify-between w-full'>
+                    <div className='flex flex-col'>
+                      <VaulDrawer.Title className='font-bold text-gray-900 mt-8 text-lg'>
                         {title}
                       </VaulDrawer.Title>
-                      <VaulDrawer.Description className="leading-6  text-gray-600 pb-4">
+                      <VaulDrawer.Description className='leading-6  text-gray-600 pb-4'>
                         {description}
                       </VaulDrawer.Description>
                     </div>
