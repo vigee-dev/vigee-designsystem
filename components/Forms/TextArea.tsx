@@ -38,6 +38,7 @@ type Props<T extends FieldValues> = {
   rows?: number;
   white?: boolean;
   fullWidth?: boolean;
+  rezizable?: boolean;
 };
 
 export default function TextArea<T extends FieldValues>({
@@ -55,6 +56,7 @@ export default function TextArea<T extends FieldValues>({
   rows = 3,
   white,
   fullWidth,
+  rezizable,
 }: Props<T>) {
   const [charCount, setCharCount] = useState(
     name ? form?.getValues(name)?.length || 0 : 0
@@ -109,9 +111,10 @@ export default function TextArea<T extends FieldValues>({
               field.onChange(e);
             }}
             className={cn(
-              `resize-none font-medium bg-input border-none text-[16px] md:text-sm col-span-full font-sans`,
+              ` font-medium bg-input border-none text-[16px] md:text-sm col-span-full font-sans`,
               white && "bg-white border border-zinc-200 border-solid",
-              className
+              className,
+              rezizable ? "resize-vertical" : "resize-none"
             )}
             disabled={disabled}
           />
