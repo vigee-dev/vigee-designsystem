@@ -114,7 +114,7 @@ export default function Select<T extends FieldValues>({
               }
               if (onChange) onChange(e);
             }}
-            value={String(field.value)}
+            value={field.value ? String(field.value) : undefined}
             disabled={disabled}
           >
             <FormControl>
