@@ -1,6 +1,6 @@
-import { FieldValues, Path, UseFormReturn } from "react-hook-form";
-import { PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
-import { cn } from "../lib/utils";
+import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
+import { PiQuestionMarkCircleDuoStroke } from '../../icons/PikaIcons';
+import { cn } from '../lib/utils';
 import {
   FormControl,
   FormDescription,
@@ -8,20 +8,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
+} from '../ui/form';
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "../ui/hover-card";
-import { Label } from "../ui/label";
+} from '../ui/hover-card';
+import { Label } from '../ui/label';
 import {
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
   Select as ShadSelect,
-} from "../ui/select";
+} from '../ui/select';
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -45,7 +45,7 @@ type Props<T extends FieldValues> = {
     color?: string;
     disabled?: boolean;
   }[];
-  variant?: "default" | "outlined";
+  variant?: 'default' | 'outlined';
 };
 
 export default function Select<T extends FieldValues>({
@@ -64,7 +64,7 @@ export default function Select<T extends FieldValues>({
   helpComponent,
   isBoolean = false,
   options,
-  variant = "default",
+  variant = 'default',
 }: Props<T>) {
   return form?.control && name ? (
     <FormField
@@ -73,33 +73,33 @@ export default function Select<T extends FieldValues>({
       rules={{ required }}
       render={({ field }) => (
         <FormItem
-          className={cn(className, variant === "default" && "border-none")}
+          className={cn(className, variant === 'default' && 'border-none')}
         >
           <HoverCard>
-            <div className="flex items-center justify-between ">
-              <div className="flex flex-col gap-1 ">
+            <div className='flex items-center justify-between '>
+              <div className='flex flex-col gap-1 '>
                 {label && (
-                  <FormLabel className="font-black text-primary mt-2">
-                    {label}{" "}
-                    {required && <span className="text-red-600 ml-1">*</span>}
+                  <FormLabel className='font-black text-primary mt-2'>
+                    {label}{' '}
+                    {required && <span className='text-red-600 ml-1'>*</span>}
                   </FormLabel>
                 )}
                 {sublabel && (
-                  <Label className="font-medium text-gray-400">
+                  <Label className='font-medium text-gray-400'>
                     {sublabel}
                   </Label>
                 )}
               </div>
               {helpComponent && (
                 <HoverCardTrigger>
-                  <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+                  <PiQuestionMarkCircleDuoStroke className='w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400' />
                 </HoverCardTrigger>
               )}
             </div>
 
             {helpComponent && (
               <HoverCardContent>
-                <div className="p-2">{helpComponent}</div>
+                <div className='p-2'>{helpComponent}</div>
               </HoverCardContent>
             )}
           </HoverCard>
@@ -109,7 +109,7 @@ export default function Select<T extends FieldValues>({
               if (!isBoolean) {
                 field.onChange(e);
               } else {
-                let eBoolean = e === "true";
+                let eBoolean = e === 'true';
                 field.onChange(eBoolean);
               }
               if (onChange) onChange(e);
@@ -120,9 +120,9 @@ export default function Select<T extends FieldValues>({
             <FormControl>
               <SelectTrigger
                 className={cn(
-                  "font-medium bg-input",
-                  variant === "outlined" &&
-                    "border-gray-400 border rounded-lg bg-transparent",
+                  'font-medium bg-input',
+                  variant === 'outlined' &&
+                    'border-gray-400 border rounded-lg bg-transparent',
                   className
                 )}
               >
@@ -130,7 +130,7 @@ export default function Select<T extends FieldValues>({
               </SelectTrigger>
             </FormControl>
 
-            <SelectContent className="max-h-[210px] font-medium">
+            <SelectContent className='max-h-[210px] font-medium'>
               {!options
                 ? children
                 : options.map((option) => (
@@ -156,18 +156,21 @@ export default function Select<T extends FieldValues>({
     />
   ) : (
     <div className={className}>
-      {label && <Label className="font-black text-primary">{label}</Label>}
+      {label && <Label className='font-black text-primary'>{label}</Label>}
       <ShadSelect
         onValueChange={onChange}
-        value={String(value)}
+        value={value ? String(value) : undefined}
         disabled={disabled}
       >
         <SelectTrigger
-          className={`font-medium bg-input ${variant === "outlined" && "border-gray-400 border rounded-lg bg-transparent"}`}
+          className={`font-medium bg-input ${
+            variant === 'outlined' &&
+            'border-gray-400 border rounded-lg bg-transparent'
+          }`}
         >
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
-        <SelectContent className="max-h-[200px] font-medium">
+        <SelectContent className='max-h-[200px] font-medium'>
           {!options
             ? children
             : options.map((option) => (
@@ -180,7 +183,7 @@ export default function Select<T extends FieldValues>({
               ))}
         </SelectContent>
       </ShadSelect>
-      {descr && <p className={"text-sm text-muted-foreground"}>{descr}</p>}
+      {descr && <p className={'text-sm text-muted-foreground'}>{descr}</p>}
     </div>
   );
 }

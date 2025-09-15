@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { MoreHorizontal, Plus } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { MoreHorizontal, Plus } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "../../components/ui/dropdown-menu";
+} from '../../components/ui/dropdown-menu';
 import {
   Sidebar,
   SidebarContent,
@@ -23,10 +23,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "../../components/ui/sidebar";
-import { cn } from "../lib/utils";
-import FooterSidebar from "./footer-sidebar";
-import { SwitcherSidebar } from "./switcher-sidebar";
+} from '../../components/ui/sidebar';
+import { cn } from '../lib/utils';
+import FooterSidebar from './footer-sidebar';
+import { SwitcherSidebar } from './switcher-sidebar';
 
 type LinkItem =
   | { name: string; icon: React.ReactNode; href: string; onClick?: never }
@@ -50,7 +50,7 @@ const AppSidebar = ({
   headerComponent,
   switcher,
   classNameItems,
-  hoverBackground = "bg-zinc-800",
+  hoverBackground = 'bg-zinc-800',
 }: {
   items: {
     name: string;
@@ -89,7 +89,7 @@ const AppSidebar = ({
   const { open } = useSidebar();
 
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible='icon'>
       <SidebarHeader>
         {switcher && itemsSwitcher ? (
           <SwitcherSidebar
@@ -100,18 +100,18 @@ const AppSidebar = ({
         ) : logo && open ? (
           <Image
             src={logo}
-            alt="logo"
+            alt='logo'
             width={150}
             height={150}
-            className="py-4"
+            className='py-4'
           />
         ) : logoSmall && !open ? (
           <Image
             src={logoSmall}
-            alt="logoSmall"
+            alt='logoSmall'
             width={80}
             height={80}
-            className="py-4 p-1"
+            className='py-4 p-1'
           />
         ) : null}
         {headerComponent}
@@ -124,7 +124,7 @@ const AppSidebar = ({
                 <SidebarMenuItem
                   key={index}
                   className={cn(
-                    "w-full items-center  rounded-md hover:cursor-pointer transition-all duration-300",
+                    'w-full items-center  rounded-md hover:cursor-pointer transition-all duration-300',
                     (pathname === item.href || hoveredItem === item.slug) &&
                       hoverBackground
                   )}
@@ -133,7 +133,7 @@ const AppSidebar = ({
                     asChild
                     onMouseEnter={() => setHoveredItem(item.slug)}
                     onMouseLeave={() => setHoveredItem(null)}
-                    className={cn("w-full hover:bg-transparent bg-transparent")}
+                    className={cn('w-full hover:bg-transparent bg-transparent')}
                   >
                     <div
                       className={`flex items-center gap-2 w-full`}
@@ -142,18 +142,18 @@ const AppSidebar = ({
                       <span
                         className={`${
                           pathname === item.href || hoveredItem === item.slug
-                            ? "inline  transition-opacity duration-300"
-                            : "hidden  transition-opacity duration-300"
+                            ? 'inline  transition-opacity duration-300'
+                            : 'hidden  transition-opacity duration-300'
                         }`}
                       >
                         {item.iconFill}
                       </span>
                       <span
                         className={cn(
-                          "inline  transition-opacity duration-300",
+                          'inline  transition-opacity duration-300',
                           pathname !== item.href && hoveredItem !== item.slug
-                            ? "inline  transition-all duration-300"
-                            : "hidden  transition-all duration-300",
+                            ? 'inline  transition-all duration-300'
+                            : 'hidden  transition-all duration-300',
                           classNameItems
                         )}
                       >
@@ -161,10 +161,10 @@ const AppSidebar = ({
                       </span>
                       <span
                         className={cn(
-                          "font-medium text-base group",
+                          'font-medium text-base group',
                           pathname === item.href || hoveredItem === item.slug
-                            ? "text-white  transition-opacity duration-300"
-                            : "text-zinc-400  transition-opacity duration-300",
+                            ? 'text-white  transition-opacity duration-300'
+                            : 'text-zinc-400  transition-opacity duration-300',
                           classNameItems
                         )}
                       >
@@ -173,27 +173,27 @@ const AppSidebar = ({
                     </div>
                   </SidebarMenuButton>
 
-                  {item?.type === "action" && (
-                    <SidebarMenuAction asChild className="items-center">
+                  {item?.type === 'action' && (
+                    <SidebarMenuAction asChild className='items-center'>
                       <Link href={item?.href}>
                         <Plus />
-                        <span className="sr-only">Créer</span>
+                        <span className='sr-only'>Créer</span>
                       </Link>
                     </SidebarMenuAction>
                   )}
 
-                  {item?.type === "notification" &&
+                  {item?.type === 'notification' &&
                     item?.notifications &&
                     item?.notifications > 0 &&
                     (open ? (
-                      <SidebarMenuBadge className="bg-red-400 text-white rounded-full items-center">
+                      <SidebarMenuBadge className='bg-red-400 text-white rounded-full items-center'>
                         {item?.notifications}
                       </SidebarMenuBadge>
                     ) : (
-                      <div className="bg-red-400 text-white rounded-full items-center w-2 h-2 absolute top-0 right-0" />
+                      <div className='bg-red-400 text-white rounded-full items-center w-2 h-2 absolute top-0 right-0' />
                     ))}
 
-                  {item?.type === "dropdownmenu" && (
+                  {item?.type === 'dropdownmenu' && (
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <SidebarMenuAction>
@@ -201,9 +201,9 @@ const AppSidebar = ({
                         </SidebarMenuAction>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent
-                        side="right"
-                        align="start"
-                        className="h-60 overflow-y-auto"
+                        side='right'
+                        align='start'
+                        className='h-60 overflow-y-auto'
                       >
                         {item?.dropdownContent}
                       </DropdownMenuContent>
