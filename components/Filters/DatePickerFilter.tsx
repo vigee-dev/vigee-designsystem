@@ -3,10 +3,18 @@
 import React, { useEffect } from 'react';
 import { DateTime } from 'luxon';
 import { addDays } from 'date-fns';
+import { fr } from 'date-fns/locale';
 import { useQueryState } from 'nuqs';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Calendar } from '../ui/calendar';
 import { Input as ShadInput } from '../ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select';
 import {
   PiCalendarFilledStroke,
   PiChevronLeftStroke,
@@ -46,21 +54,26 @@ export const DatePickerFilter = ({
   // Utilisé pour mettre la date d'aujourd'hui en valeur si l'utilisateur tape une fausse date dans l'url, car l'url et la valeur de ce composant sont connectées =>  Permet d'avoir une UX propre pour l'utilisateur.
   useEffect(() => {
     let shouldReset = false;
+    let resetTo: string | null = null;
     if (value && !isValidDate) {
       shouldReset = true;
+      resetTo = minDate
+        ? DateTime.fromJSDate(minDate).toISO()
+        : DateTime.now().toISO();
     }
-    // Vérifie si la date est hors des bornes minDate/maxDate
+
     if (isValidDate) {
       if (minDate && dt < DateTime.fromJSDate(minDate)) {
         shouldReset = true;
+        resetTo = DateTime.fromJSDate(minDate).toISO();
       }
       if (maxDate && dt > DateTime.fromJSDate(maxDate)) {
         shouldReset = true;
+        resetTo = DateTime.now().toISO();
       }
     }
-    if (shouldReset) {
-      const todayIso = DateTime.now().toISO();
-      setValue(todayIso!);
+    if (shouldReset && resetTo) {
+      setValue(resetTo);
     }
   }, [value, isValidDate, setValue, minDate, maxDate, dt]);
 
@@ -68,6 +81,26 @@ export const DatePickerFilter = ({
   const displayDt = DateTime.fromISO(displayIso!);
   const date = displayDt.toJSDate();
   const hour = displayDt.toFormat('HH:mm');
+
+  // Générer les options d'heure toutes les 30 minutes avec désactivation des heures passées
+  const timeOptions = [];
+  const now = DateTime.now();
+
+  for (let h = 0; h < 24; h++) {
+    for (let m = 0; m < 60; m += 30) {
+      const timeString = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+      const timeDateTime = DateTime.fromJSDate(date).set({
+        hour: h,
+        minute: m,
+      });
+
+      timeOptions.push({
+        value: timeString,
+        disabled:
+          timeDateTime <= now && DateTime.fromJSDate(date).hasSame(now, 'day'),
+      });
+    }
+  }
 
   const handleDateChange = (selected?: Date) => {
     if (selected) {
@@ -80,8 +113,8 @@ export const DatePickerFilter = ({
       setValue(newIso!);
     }
   };
-  const handleHourChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const [h, m] = e.target.value.split(':');
+  const handleTimeChange = (selectedTime: string) => {
+    const [h, m] = selectedTime.split(':');
     const newIso = DateTime.fromJSDate(date)
       .set({ hour: Number(h), minute: Number(m) })
       .toISO();
@@ -114,6 +147,10 @@ export const DatePickerFilter = ({
   today.setHours(0, 0, 0, 0);
   prevDate.setHours(0, 0, 0, 0);
   const isPrevDisabled = !canChoosePastDay && prevDate < today;
+
+  const maxDateExclusive = maxDate
+    ? new Date(maxDate.getTime() - 24 * 60 * 60 * 1000)
+    : undefined;
 
   return (
     <div
@@ -167,23 +204,33 @@ export const DatePickerFilter = ({
             selected={date}
             onSelect={handleDateChange}
             fromDate={minDate}
-            toDate={maxDate}
+            locale={fr}
+            disabled={
+              maxDateExclusive ? { after: maxDateExclusive } : undefined
+            }
           />
         </PopoverContent>
       </Popover>
 
       {displayHour && (
         <div className='relative flex items-center justify-center ml-4'>
-          <PiClockDefaultStroke className='w-6 h-6 ' />
-          <ShadInput
-            type='time'
-            value={hour}
-            onChange={handleHourChange}
-            className='font-light cursor-pointer tracking-widest p-0 pl-2 bg-transparent border-none hover:bg-gray-200 transition'
-            placeholder='-- : --'
-            tabIndex={0}
-            aria-label="Choisir l'heure"
-          />
+          <PiClockDefaultStroke className='w-6 h-6 mr-2' />
+          <Select value={hour} onValueChange={handleTimeChange}>
+            <SelectTrigger className='w-20 h-8 text-sm font-light border-none bg-transparent hover:bg-gray-200 transition focus:outline-none focus:ring-0 focus:bg-transparent focus-visible:outline-none focus-visible:ring-0 focus-visible:bg-transparent active:bg-transparent'>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className='max-h-48'>
+              {timeOptions.map((option) => (
+                <SelectItem
+                  key={option.value}
+                  value={option.value}
+                  disabled={option.disabled}
+                >
+                  {option.value}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       )}
     </div>
