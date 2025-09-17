@@ -32,6 +32,8 @@ interface NewDatePickerProps {
   minDate?: Date;
   maxDate?: Date;
   canChoosePastDay?: boolean;
+  minHour?: string; // Format "HH:mm"
+  maxHour?: string; // Format "HH:mm"
 }
 
 export const DatePickerFilter = ({
@@ -44,6 +46,8 @@ export const DatePickerFilter = ({
   minDate,
   maxDate,
   canChoosePastDay = false,
+  minHour,
+  maxHour,
 }: NewDatePickerProps) => {
   const [value, setValue] = useQueryState(queryKey, { shallow: false });
 
@@ -65,11 +69,23 @@ export const DatePickerFilter = ({
     if (isValidDate) {
       if (minDate && dt < DateTime.fromJSDate(minDate)) {
         shouldReset = true;
-        resetTo = DateTime.fromJSDate(minDate).toISO();
+        // Préserver l'heure actuelle quand on reset à minDate
+        resetTo = DateTime.fromJSDate(minDate)
+          .set({
+            hour: dt.hour,
+            minute: dt.minute,
+          })
+          .toISO();
       }
       if (maxDate && dt > DateTime.fromJSDate(maxDate)) {
         shouldReset = true;
-        resetTo = DateTime.now().toISO();
+        // Préserver l'heure actuelle quand on reset à maxDate
+        resetTo = DateTime.fromJSDate(maxDate)
+          .set({
+            hour: dt.hour,
+            minute: dt.minute,
+          })
+          .toISO();
       }
     }
     if (shouldReset && resetTo) {
@@ -86,19 +102,46 @@ export const DatePickerFilter = ({
   const timeOptions = [];
   const now = DateTime.now();
 
+  // Validation simple des heures
+  const isValidMinHour = minHour && /^\d{2}:\d{2}$/.test(minHour);
+  const isValidMaxHour = maxHour && /^\d{2}:\d{2}$/.test(maxHour);
+
   for (let h = 0; h < 24; h++) {
     for (let m = 0; m < 60; m += 30) {
       const timeString = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+
+      // Comparaison simple des heures
+      let isInRange = true;
+
+      if (isValidMinHour) {
+        const [minH, minM] = minHour.split(':').map(Number);
+        const currentMinutes = h * 60 + m;
+        const minMinutes = minH * 60 + minM;
+        isInRange = isInRange && currentMinutes >= minMinutes;
+      }
+
+      if (isValidMaxHour) {
+        const [maxH, maxM] = maxHour.split(':').map(Number);
+        const currentMinutes = h * 60 + m;
+        const maxMinutes = maxH * 60 + maxM;
+        isInRange = isInRange && currentMinutes <= maxMinutes;
+      }
+
+      // Vérifier si l'heure est passée (seulement pour aujourd'hui)
       const timeDateTime = DateTime.fromJSDate(date).set({
         hour: h,
         minute: m,
       });
+      const isPast =
+        timeDateTime <= now && DateTime.fromJSDate(date).hasSame(now, 'day');
 
-      timeOptions.push({
-        value: timeString,
-        disabled:
-          timeDateTime <= now && DateTime.fromJSDate(date).hasSame(now, 'day'),
-      });
+      // Ne garder que les heures valides (dans la plage et pas passées)
+      if (isInRange && !isPast) {
+        timeOptions.push({
+          value: timeString,
+          disabled: false,
+        });
+      }
     }
   }
 
@@ -213,13 +256,16 @@ export const DatePickerFilter = ({
       </Popover>
 
       {displayHour && (
-        <div className='relative flex items-center justify-center ml-4'>
+        <div className='relative flex items-center justify-center ml-4 '>
           <PiClockDefaultStroke className='w-6 h-6 mr-2' />
           <Select value={hour} onValueChange={handleTimeChange}>
-            <SelectTrigger className='w-20 h-8 text-sm font-light border-none bg-transparent hover:bg-gray-200 transition focus:outline-none focus:ring-0 focus:bg-transparent focus-visible:outline-none focus-visible:ring-0 focus-visible:bg-transparent active:bg-transparent'>
+            <SelectTrigger
+              aria-placeholder='HH:mm'
+              className='w-20 h-8 text-sm font-light border-none bg-transparent hover:bg-gray-200 transition focus:outline-none focus:ring-0 focus:ring-offset-0 focus:bg-transparent focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:bg-transparent active:bg-transparent focus:bg-none outline-none ring-0 ring-offset-0'
+            >
               <SelectValue />
             </SelectTrigger>
-            <SelectContent className='max-h-48'>
+            <SelectContent arrowPadding={5} className='max-h-48'>
               {timeOptions.map((option) => (
                 <SelectItem
                   key={option.value}
