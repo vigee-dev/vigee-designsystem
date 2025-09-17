@@ -50,8 +50,8 @@ import {
   PiUserCircleStroke,
   PiUserPlusStroke,
   PiUserSettingsStroke,
-  PiPlayBigSolid,
-  PiFilePlusStroke
+  PiFilePlusStroke,
+  PiAnnotationStarStroke
 } from "../../icons/PikaIcons";
 import { Tooltip } from "../Tooltip/Tooltip";
 import { cn } from '../lib/utils';
@@ -136,6 +136,7 @@ const iconMap = {
   instagram: PiInstagramStroke,
   facebook: PiFacebookStroke,
   fileAdd: PiFilePlusStroke,
+  annotationStar: PiAnnotationStarStroke
 };
 
 export function Button({
