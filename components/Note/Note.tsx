@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { useForm } from "react-hook-form";
 import TextArea from "../Forms/TextArea";
 import { Form } from "../ui/form";
-import { useForm } from "react-hook-form";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
 type Note = {
   urgent: string;
@@ -31,7 +31,7 @@ export default function Notes({ initialContent }: Props) {
 
   const handleBlur = async (event: React.FocusEvent<HTMLTextAreaElement>) => {
     const { name, value } = event.target;
-    setContent(prev => ({ ...prev, [name]: value }));
+    setContent((prev) => ({ ...prev, [name]: value }));
   };
 
   type Category = {
@@ -45,16 +45,12 @@ export default function Notes({ initialContent }: Props) {
     { label: "Autres", key: "other" },
   ];
 
-  const onSubmit = async (data: Note) => {
-    console.log(data);
-  };
-
   return (
     <div className="col-span-1 bg-white rounded-md h-fit">
       <Tabs defaultValue="urgent">
         <div className="flex justify-between items-center">
           <TabsList>
-            {noteCategories.map(category => (
+            {noteCategories.map((category) => (
               <TabsTrigger key={category.key} value={category.key}>
                 {category.label}
               </TabsTrigger>
@@ -64,13 +60,13 @@ export default function Notes({ initialContent }: Props) {
 
         <Form {...form}>
           <form className="space-y-4 " id="form">
-            {noteCategories.map(category => (
+            {noteCategories.map((category) => (
               <TabsContent key={category.key} value={category.key}>
                 <TextArea
                   form={form}
                   name={category.key}
                   onBlur={handleBlur}
-                  onChange={event =>
+                  onChange={(event) =>
                     setContent({
                       ...content,
                       [category.key]: event.target.value,
