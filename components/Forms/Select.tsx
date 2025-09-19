@@ -122,6 +122,7 @@ export default function Select<T extends FieldValues>({
                   variant === 'outlined' &&
                     'border-gray-400 border rounded-lg bg-transparent'
                 )}
+                data-testid={name ? `select-${name}` : undefined}
               >
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
@@ -157,6 +158,7 @@ export default function Select<T extends FieldValues>({
       >
         <SelectTrigger
           className={`font-medium bg-input ${variant === 'outlined' && 'border-gray-400 border rounded-lg bg-transparent'}`}
+          data-testid={name ? `select-${name}` : undefined}
         >
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
