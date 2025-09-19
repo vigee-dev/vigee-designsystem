@@ -119,6 +119,7 @@ export default function Select<T extends FieldValues>({
           >
             <FormControl>
               <SelectTrigger
+                data-testid={name ? `select-${name}` : undefined}
                 className={cn(
                   'font-medium bg-input',
                   variant === 'outlined' &&
@@ -163,6 +164,7 @@ export default function Select<T extends FieldValues>({
         disabled={disabled}
       >
         <SelectTrigger
+          data-testid={name ? `select-${name}` : undefined}
           className={`font-medium bg-input ${
             variant === 'outlined' &&
             'border-gray-400 border rounded-lg bg-transparent'
