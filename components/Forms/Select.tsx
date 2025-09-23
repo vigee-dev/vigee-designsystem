@@ -46,6 +46,7 @@ type Props<T extends FieldValues> = {
     disabled?: boolean;
   }[];
   variant?: 'default' | 'outlined';
+  'data-testid'?: string;
 };
 
 export default function Select<T extends FieldValues>({
@@ -65,6 +66,7 @@ export default function Select<T extends FieldValues>({
   isBoolean = false,
   options,
   variant = 'default',
+  'data-testid': dataTestId,
 }: Props<T>) {
   return form?.control && name ? (
     <FormField
@@ -119,7 +121,9 @@ export default function Select<T extends FieldValues>({
           >
             <FormControl>
               <SelectTrigger
-                data-testid={name ? `select-${name}` : undefined}
+                data-testid={
+                  dataTestId || (name ? `select-${name}` : undefined)
+                }
                 className={cn(
                   'font-medium bg-input',
                   variant === 'outlined' &&
@@ -164,7 +168,7 @@ export default function Select<T extends FieldValues>({
         disabled={disabled}
       >
         <SelectTrigger
-          data-testid={name ? `select-${name}` : undefined}
+          data-testid={dataTestId || (name ? `select-${name}` : undefined)}
           className={`font-medium bg-input ${
             variant === 'outlined' &&
             'border-gray-400 border rounded-lg bg-transparent'

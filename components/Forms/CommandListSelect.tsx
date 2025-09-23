@@ -44,6 +44,7 @@ type Props<T extends FieldValues> = {
   searchable?: boolean;
   multi?: boolean;
   modal?: boolean;
+  'data-testid'?: string;
 };
 
 export default function CommandListSelect<T extends FieldValues>({
@@ -66,6 +67,7 @@ export default function CommandListSelect<T extends FieldValues>({
   searchable = true,
   multi = false,
   modal = false,
+  'data-testid': dataTestId,
 }: Props<T>) {
   const [open, setOpen] = React.useState(false);
 
@@ -151,6 +153,9 @@ export default function CommandListSelect<T extends FieldValues>({
                 'border-gray-400 border rounded-lg bg-transparent mt-2'
             )}
             disabled={disabled}
+            data-testid={
+              dataTestId || (name ? `command-select-${name}` : undefined)
+            }
           >
             <span className='truncate overflow-hidden text-ellipsis whitespace-nowrap block max-w-full'>
               {currentLabel}
