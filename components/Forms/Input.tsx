@@ -41,6 +41,7 @@ type Props<T extends FieldValues> = {
   maxLength?: number;
   link?: string | null;
   white?: boolean;
+  'data-testid'?: string;
 };
 
 export default function Input<T extends FieldValues>({
@@ -64,6 +65,7 @@ export default function Input<T extends FieldValues>({
   minimalist,
   link,
   white,
+  'data-testid': dataTestId,
 }: Props<T>) {
   const [charCount, setCharCount] = useState(
     name ? form?.getValues(name)?.length || 0 : 0
@@ -125,6 +127,7 @@ export default function Input<T extends FieldValues>({
                   field.onChange(e);
                   if (onChange) onChange(e);
                 }}
+                data-testid={dataTestId || (name ? `input-${name}` : undefined)}
               />
             </FormControl>
           </HoverCard>
@@ -172,6 +175,7 @@ export default function Input<T extends FieldValues>({
             'text-[16px] md:text-sm font-medium bg-input border-none',
             white && 'bg-white border border-zinc-200 border-solid'
           )}
+          data-testid={dataTestId || (name ? `input-${name}` : undefined)}
         />
       </HoverCard>
       {descr && <p className={'text-sm text-muted-foreground'}>{descr}</p>}
