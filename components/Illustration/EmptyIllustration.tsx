@@ -2,6 +2,10 @@ import Link from "next/link";
 import { Button } from "../Buttons/Button";
 import { Container } from "../Container/Container";
 import { cn } from "../lib/utils";
+import { EmptyDocuments } from "./EmptyDocuments";
+import { EmptyProjects } from "./EmptyProjects";
+import { EmptyStreet } from "./EmptyStreet";
+import { EmptyUsers } from "./EmptyUsers";
 
 interface IllustrationProps {
   text?: string;
@@ -15,6 +19,7 @@ interface IllustrationProps {
   classNameImage?: string;
   color?: string;
   image?: React.ReactNode;
+  type?: "street" | "projects" | "documents" | "users" | "default";
 }
 export default function EmptyIllustration({
   text,
@@ -27,6 +32,7 @@ export default function EmptyIllustration({
   color = "text-secondary",
   classNameImage,
   image,
+  type = "default",
 }: IllustrationProps) {
   return (
     <Container
@@ -35,7 +41,12 @@ export default function EmptyIllustration({
         className
       )}
     >
-      {image ? image : <SvgImage color={color} className={classNameImage} />}
+      {type === "street" && <EmptyStreet color={color} className={classNameImage} />}
+      {type === "projects" && <EmptyProjects color={color} className={classNameImage} />}
+      {type === "documents" && <EmptyDocuments color={color} className={classNameImage} />}
+      {type === "users" && <EmptyUsers color={color} className={classNameImage} />}
+      {type === "default" && <SvgImage color={color} className={classNameImage} />}
+ 
 
       <h2
         className={"text-lg text-gray-600 font-medium text-center font-display"}
