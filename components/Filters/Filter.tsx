@@ -46,6 +46,10 @@ export const Filter = ({
 
   const handleSingleChange = (val: string | undefined) => {
     setValue(val || null);
+    const params = new URLSearchParams(searchParams?.toString() || '');
+    params.set('page', '1');
+    const qs = params.toString();
+    router.replace(`${pathname}${qs ? `?${qs}` : ''}`);
   };
 
   // -----------------------
@@ -72,6 +76,7 @@ export const Filter = ({
 
     params.delete(paramName);
     next.forEach((v) => params.append(paramName, v));
+    params.set('page', '1');
 
     const qs = params.toString();
     router.replace(`${pathname}${qs ? `?${qs}` : ''}`);
@@ -143,8 +148,8 @@ export const Filter = ({
                 ? renderSelectedLabels()
                 : placeholder
               : value
-              ? options.find((option) => option.value === value)?.label
-              : placeholder}
+                ? options.find((option) => option.value === value)?.label
+                : placeholder}
             <PiChevronSortVerticalStroke className='opacity-50 h-4 w-4' />
           </Button>
         </PopoverTrigger>
