@@ -20,6 +20,7 @@ interface Data {
 interface Key {
   dataKey: string;
   color: string;
+  label?: string;
 }
 
 interface Props {
@@ -150,11 +151,15 @@ export const BarChart: React.FC<Props> = ({
                       {payload[0].payload.name}
                     </p>
 
-                    {payload.map((entry, index) => (
-                      <p key={index} className="text-sm text-gray-500">{`${
-                        entry.dataKey
-                      }: ${formatValue(Number(entry.value), euro)}`}</p>
-                    ))}
+                    {payload.map((entry, index) => {
+                      const key = keys?.find(k => k.dataKey === entry.dataKey);
+                      const displayName = key?.label || entry.dataKey;
+                      return (
+                        <p key={index} className="text-sm text-gray-500">{`${
+                          displayName
+                        }: ${formatValue(Number(entry.value), euro)}`}</p>
+                      );
+                    })}
                   </div>
                 );
               }
@@ -172,6 +177,7 @@ export const BarChart: React.FC<Props> = ({
               >
                 <LabelList
                   dataKey={key.dataKey}
+                  // @ts-ignore à vérifier
                   content={props =>
                     renderCustomizedLabel({
                       color: key.color,
