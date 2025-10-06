@@ -144,6 +144,7 @@ type Props<T extends FieldValues> = {
   variant?: 'default' | 'small';
   onChange?: (value: string | string[]) => void;
   withCheckbox?: boolean;
+  preventDeselect?: boolean;
 };
 
 export const Toggles = <T extends FieldValues>({
@@ -161,6 +162,7 @@ export const Toggles = <T extends FieldValues>({
   onChange,
   withCheckbox = false,
   columns,
+  preventDeselect = false,
 }: Props<T>) => {
   // Force la valeur par défaut si le champ est vide
   React.useEffect(() => {
@@ -202,8 +204,15 @@ export const Toggles = <T extends FieldValues>({
                   )}
                   value={field.value}
                   onValueChange={(value: string | string[]) => {
-                    field.onChange(value)
-                    if (onChange) onChange(value)
+                    // Empêcher la désélection si l'option preventDeselect est activée
+                    if (
+                      preventDeselect &&
+                      (!value || (Array.isArray(value) && value.length === 0))
+                    ) {
+                      return;
+                    }
+                    field.onChange(value);
+                    if (onChange) onChange(value);
                   }}
                   disabled={disabled}
                 >
