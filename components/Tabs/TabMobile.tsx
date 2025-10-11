@@ -68,6 +68,14 @@ export function TabMobile<T extends string = string>({
     shallow: false,
   });
 
+  const formatCount = (count: number): string => {
+    if (count >= 1000) {
+      const thousands = count / 1000;
+      return `${thousands.toFixed(1).replace(/\.0$/, "")}k`;
+    }
+    return count.toString();
+  };
+
   const updateValueAndNotify = (
     value: string | T,
     option: { href?: string; value?: T }
@@ -145,7 +153,7 @@ export function TabMobile<T extends string = string>({
                       option.badgeColor
                     )}
                   >
-                    {option.count}
+                    {formatCount(option.count)}
                   </Badge>
                 ) : null}
               </div>
