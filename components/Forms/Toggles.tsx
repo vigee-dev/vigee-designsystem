@@ -102,24 +102,24 @@
 // };
 
 // Ancien Toggle de main-old-14 au dessus et nouveau en dessous pour utiliser les checkobox dans le form de creation de salles
-import { motion } from 'framer-motion';
-import React from 'react';
-import { FieldValues, Path, PathValue, UseFormReturn } from 'react-hook-form';
-import { PiCheckTickSquareDuoSolid } from '../../icons/PikaIcons';
-import { Container } from '../Container/Container';
-import { cn } from '../lib/utils';
+import { motion } from "framer-motion";
+import React from "react";
+import { FieldValues, Path, PathValue, UseFormReturn } from "react-hook-form";
+import { PiCheckTickSquareDuoSolid } from "../../icons/PikaIcons";
+import { Container } from "../Container/Container";
+import { cn } from "../lib/utils";
 import {
   FormControl,
   FormDescription,
   FormField,
   FormItem,
   FormMessage,
-} from '../ui/form';
-import { Label } from '../ui/label';
+} from "../ui/form";
+import { Label } from "../ui/label";
 import {
   ToggleGroup as ShadToggleGroup,
   ToggleGroupItem,
-} from '../ui/toggle-group';
+} from "../ui/toggle-group";
 
 type Option = {
   label?: string;
@@ -141,7 +141,7 @@ type Props<T extends FieldValues> = {
   nowrap?: boolean;
   multi?: boolean;
   columns?: number;
-  variant?: 'default' | 'small';
+  variant?: "default" | "small";
   onChange?: (value: string | string[]) => void;
   withCheckbox?: boolean;
   preventDeselect?: boolean;
@@ -158,7 +158,7 @@ export const Toggles = <T extends FieldValues>({
   options,
   nowrap = false,
   multi = false,
-  variant = 'default',
+  variant = "default",
   onChange,
   withCheckbox = false,
   columns,
@@ -179,28 +179,28 @@ export const Toggles = <T extends FieldValues>({
       name={name}
       render={({ field }) => {
         const isNowrap = !!nowrap;
-        const gridColsClass = !isNowrap ? `grid-cols-${options.length}` : '';
+        const gridColsClass = !isNowrap ? `grid-cols-${options.length}` : "";
         return (
-          <FormItem className='w-full col-span-full'>
-            {label && <Label className='font-bold'>{label}</Label>}
+          <FormItem className="w-full col-span-full">
+            {label && <Label className="font-bold">{label}</Label>}
             <FormControl>
               <Container
                 className={cn(
-                  'p-1',
+                  "p-1",
                   className,
-                  variant === 'small' && 'border-none'
+                  variant === "small" && "border-none"
                 )}
               >
                 <ShadToggleGroup
-                  type={multi ? 'multiple' : 'single'}
+                  type={multi ? "multiple" : "single"}
                   className={cn(
-                    'w-full gap-2',
+                    "w-full gap-2",
                     columns
                       ? `grid grid-cols-1 md:grid-cols-${columns}`
                       : isNowrap
-                        ? 'flex md:flex-row flex-col'
-                        : 'flex flex-col',
-                    variant === 'small' && 'border-none w-full'
+                        ? "flex md:flex-row flex-col"
+                        : "flex flex-col",
+                    variant === "small" && "border-none w-full"
                   )}
                   value={field.value}
                   onValueChange={(value: string | string[]) => {
@@ -222,30 +222,30 @@ export const Toggles = <T extends FieldValues>({
                       initial={{ opacity: 0.8, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.3 }}
-                      className={cn('h-full w-full', isNowrap && 'flex-1')}
+                      className={cn("h-full w-full", isNowrap && "flex-1")}
                     >
                       <ToggleGroupItem
                         value={option.value}
-                        aria-label={option.label || ''}
+                        aria-label={option.label || ""}
                         disabled={option.disabled}
                         className={cn(
-                          'items-center h-full w-full flex-1 p-4 flex justify-between gap-4 md:px-6 rounded-lg border-none data-[state=on]:bg-input hover:bg-input',
+                          "items-center h-full w-full flex-1 p-4 flex justify-between gap-4 md:px-6 rounded-lg border-none data-[state=on]:bg-input hover:bg-input",
                           optionsClassName,
-                          variant === 'small' &&
-                            'rounded-full border-none p-1 gap-0 justify-center  data-[state=on]:bg-primary data-[state=on]:text-white md:px-0'
+                          variant === "small" &&
+                            "rounded-full border-none p-1 gap-0 justify-center  data-[state=on]:bg-primary data-[state=on]:text-white md:px-0"
                         )}
                       >
-                        <div className='flex items-center w-full gap-4'>
+                        <div className="flex items-center w-full gap-4">
                           <div>{option.icon}</div>
                           {(option.label || option.description) && (
-                            <div className='w-full text-left'>
+                            <div className="w-full text-left">
                               {option.label && (
-                                <span className='text-md font-bold'>
+                                <span className="text-md font-bold">
                                   {option.label}
                                 </span>
                               )}
                               {option.description && (
-                                <p className='text-xs text-gray-500'>
+                                <p className="text-xs text-gray-500">
                                   {option.description}
                                 </p>
                               )}
@@ -261,9 +261,9 @@ export const Toggles = <T extends FieldValues>({
                               initial={{ opacity: 0, scale: 0.5 }}
                               animate={{ opacity: 1, scale: 1 }}
                               transition={{ duration: 0.3 }}
-                              className='ml-2'
+                              className="ml-2"
                             >
-                              <PiCheckTickSquareDuoSolid className='text-success-foreground' />
+                              <PiCheckTickSquareDuoSolid className="text-success-foreground" />
                             </motion.div>
                           )}
                       </ToggleGroupItem>
