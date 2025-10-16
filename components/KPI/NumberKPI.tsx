@@ -1,4 +1,4 @@
-import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
+import { PiArrowUpDuoSolid, PiArrowDownDuoSolid } from "../../icons/PikaIcons";
 import { cn, currency } from "../lib/utils";
 
 export interface StatItem {
@@ -80,7 +80,7 @@ const PreviousStat = ({
       )}
     >
       {!notApplicable && previousStat > 0 && (
-        <ArrowUpIcon
+        <PiArrowUpDuoSolid
           className={`-ml-1 mr-0.5 h-4 w-4 flex-shrink-0 self-center ${
             !upNegative ? "text-green-600" : "text-red-600"
           }`}
@@ -88,7 +88,7 @@ const PreviousStat = ({
         />
       )}
       {!notApplicable && previousStat < 0 && (
-        <ArrowDownIcon
+        <PiArrowDownDuoSolid
           className={`-ml-1 mr-0.5 h-4 w-4 flex-shrink-0 self-center ${
             !upNegative ? "text-red-600" : "text-green-600"
           }`}
@@ -166,8 +166,8 @@ const NumberKPI = ({
                   {item.unit === "€"
                     ? currency(item.stat).toRoundedEuro()
                     : item.unit
-                      ? `${item.stat} ${item.unit}`
-                      : item.stat}
+                    ? `${item.stat} ${item.unit}`
+                    : item.stat}
                 </div>
 
                 {item.stat2 != null && (
@@ -188,8 +188,8 @@ const NumberKPI = ({
                     item.ratio.type === "positive"
                       ? "text-green-600 bg-green-100"
                       : item.ratio.type === "negative"
-                        ? "text-red-600 bg-red-100"
-                        : "text-gray-600 bg-gray-100",
+                      ? "text-red-600 bg-red-100"
+                      : "text-gray-600 bg-gray-100",
                     "inline-flex items-baseline rounded-full px-2.5 text-xs font-black  lg:mt-0 mx-2"
                   )}
                 >
