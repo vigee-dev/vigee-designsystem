@@ -1,10 +1,24 @@
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 
 import { Input as ShadInput } from "../ui/input";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
-import { PiExternalLinkCircleDuoSolid, PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
+import {
+  PiExternalLinkCircleDuoSolid,
+  PiQuestionMarkCircleDuoStroke,
+} from "../../icons/PikaIcons";
 
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "../ui/hover-card";
+import {
+  HoverCard,
+  HoverCardTrigger,
+  HoverCardContent,
+} from "../ui/hover-card";
 import { Label } from "../../components/ui/label";
 import { cn } from "../lib/utils";
 import { useEffect, useState } from "react";
@@ -32,6 +46,7 @@ type Props<T extends FieldValues> = {
   maxLength?: number;
   link?: string | null;
   white?: boolean;
+  "data-testid"?: string;
 };
 
 export default function Input<T extends FieldValues>({
@@ -55,8 +70,11 @@ export default function Input<T extends FieldValues>({
   minimalist,
   link,
   white,
+  "data-testid": dataTestId,
 }: Props<T>) {
-  const [charCount, setCharCount] = useState(name ? form?.getValues(name)?.length || 0 : 0);
+  const [charCount, setCharCount] = useState(
+    name ? form?.getValues(name)?.length || 0 : 0
+  );
   return form && name ? (
     <FormField
       control={form?.control}
@@ -102,6 +120,7 @@ export default function Input<T extends FieldValues>({
                 min={min}
                 max={max}
                 step={step}
+                data-testid={dataTestId}
                 className={cn(
                   "text-[16px] md:text-sm font-medium bg-input border-none ",
                   className,
@@ -109,7 +128,7 @@ export default function Input<T extends FieldValues>({
                     "focus-visible:ring-offset-0 bg-transparent font-medium text-black placeholder:text-gray-300  focus-visible:ring-0 ring-0 border-none  ring-offset-none p-0 focus:outline-none focus:ring-0 caret-black",
                   white && "bg-white border border-zinc-200 border-solid"
                 )}
-                onChange={e => {
+                onChange={(e) => {
                   if (maxLength) setCharCount(e.target.value.length);
                   field.onChange(e);
                   if (onChange) onChange(e);
@@ -125,27 +144,33 @@ export default function Input<T extends FieldValues>({
   ) : (
     <div className={cn("space-y-2", className)}>
       <HoverCard>
-        {(label || helpComponent) && <div className="flex items-center justify-between py-1">
-          {label && <Label className="font-black text-primary">{label}</Label>}
-          {helpComponent && (
-            <HoverCardTrigger>
-              <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400"/>
-            </HoverCardTrigger>
-          )}
-        </div>}
+        {(label || helpComponent) && (
+          <div className="flex items-center justify-between py-1">
+            {label && (
+              <Label className="font-black text-primary">{label}</Label>
+            )}
+            {helpComponent && (
+              <HoverCardTrigger>
+                <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+              </HoverCardTrigger>
+            )}
+          </div>
+        )}
 
-        {(helpComponent || link) &&<div className="flex items-center gap-2">
-          {helpComponent && (
-            <HoverCardTrigger>
-              <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400"/>
-            </HoverCardTrigger>
-          )}
-          {link && (
-            <a href={link} target="_blank" rel="noopener noreferrer">
-              <PiExternalLinkCircleDuoSolid className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400"/>
-            </a>
-          )}
-        </div>}
+        {(helpComponent || link) && (
+          <div className="flex items-center gap-2">
+            {helpComponent && (
+              <HoverCardTrigger>
+                <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+              </HoverCardTrigger>
+            )}
+            {link && (
+              <a href={link} target="_blank" rel="noopener noreferrer">
+                <PiExternalLinkCircleDuoSolid className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+              </a>
+            )}
+          </div>
+        )}
 
         <ShadInput
           placeholder={placeholder}
@@ -157,7 +182,11 @@ export default function Input<T extends FieldValues>({
           step={step}
           onChange={onChange}
           value={value}
-          className={cn("text-[16px] md:text-sm font-medium bg-input border-none", white && "bg-white border border-zinc-200 border-solid")}
+          data-testid={dataTestId}
+          className={cn(
+            "text-[16px] md:text-sm font-medium bg-input border-none",
+            white && "bg-white border border-zinc-200 border-solid"
+          )}
         />
       </HoverCard>
       {descr && <p className={"text-sm text-muted-foreground"}>{descr}</p>}
