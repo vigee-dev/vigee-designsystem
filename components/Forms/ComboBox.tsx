@@ -65,9 +65,9 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({ items, form, name
                 <CommandItem
                   className="max-h-[200px]"
                   key={item.value}
-                  value={item.value}
-                  onSelect={(currentValue: string) => {
-                    const valueToUpdate = currentValue === value ? undefined : currentValue;
+                  value={item.label}
+                  onSelect={() => {
+                    const valueToUpdate = item.value === value ? undefined : item.value;
 
                     if (form) {
                       form.setValue(name as Path<z.infer<T> & FieldValues>, valueToUpdate as any);
