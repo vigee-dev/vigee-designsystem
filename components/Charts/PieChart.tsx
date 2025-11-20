@@ -74,7 +74,7 @@ const PieChart = ({
         dominantBaseline="central"
       >
         {`${data[index].name}
-        (${(percent * 100).toFixed(0)}%)`}
+        (${data[index].value} - ${(percent * 100).toFixed(0)}%)`}
       </text>
     );
   };
