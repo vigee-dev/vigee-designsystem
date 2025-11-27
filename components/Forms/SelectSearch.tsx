@@ -1,11 +1,27 @@
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../../components/ui/form";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 import SelectAndSearch from "react-select";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
-import { GroupBase, OnChangeValue, MultiValue, SingleValue } from "react-select";
+import {
+  GroupBase,
+  OnChangeValue,
+  MultiValue,
+  SingleValue,
+} from "react-select";
 import { cn } from "../lib/utils";
 import { styles } from "./SelectSearchAsync";
 
-interface SearchSelectInterface<T extends FieldValues, Option, IsMulti extends boolean = false> {
+interface SearchSelectInterface<
+  T extends FieldValues,
+  Option,
+  IsMulti extends boolean = false,
+> {
   name: Path<T>;
   form?: UseFormReturn<T>;
   disabled?: boolean;
@@ -16,13 +32,19 @@ interface SearchSelectInterface<T extends FieldValues, Option, IsMulti extends b
   label?: string;
   isMulti?: IsMulti;
   defaultOptions?: Option[];
-  defaultValue?: IsMulti extends true ? MultiValue<Option> : SingleValue<Option>;
+  defaultValue?: IsMulti extends true
+    ? MultiValue<Option>
+    : SingleValue<Option>;
   classNameContainer?: string;
   sublabel?: string;
 }
 
 // TODO Better way to handle isMulti, Option type etc ...
-export default function SelectSearch<T extends FieldValues, Option, IsMulti extends boolean = false>({
+export default function SelectSearch<
+  T extends FieldValues,
+  Option,
+  IsMulti extends boolean = false,
+>({
   name,
   label,
   form,
@@ -43,13 +65,19 @@ export default function SelectSearch<T extends FieldValues, Option, IsMulti exte
       name={name}
       render={({ field }) => (
         <FormItem className={cn(classNameContainer, "md:text-sm text-[16px] ")}>
-          {label && <FormLabel className="font-black text-primary">{label}</FormLabel>}
-          {sublabel && <FormDescription className="text-sm text-gray-500">{sublabel}</FormDescription>}
+          {label && (
+            <FormLabel className="font-black text-primary">{label}</FormLabel>
+          )}
+          {sublabel && (
+            <FormDescription className="text-sm text-gray-500">
+              {sublabel}
+            </FormDescription>
+          )}
           <FormControl>
             {/* TODO Debounce loadoptions ? */}
             {/* TODO typeof isMulti ?*/}
             <SelectAndSearch<Option, IsMulti, GroupBase<Option>>
-              theme={theme => ({
+              theme={(theme) => ({
                 ...theme,
 
                 colors: {
@@ -61,7 +89,7 @@ export default function SelectSearch<T extends FieldValues, Option, IsMulti exte
               isClearable={isClearable}
               placeholder={placeholder}
               isDisabled={disabled} //TODO pass disabled from field.disabled ?
-              onChange={e => {
+              onChange={(e) => {
                 if (preprocessOnChange) {
                   const value = preprocessOnChange(e);
                   return field.onChange(value);

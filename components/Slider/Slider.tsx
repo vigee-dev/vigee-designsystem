@@ -1,5 +1,5 @@
 import { cn } from "../lib/utils";
-import { Slider as ShadSlider } from "../../components/ui/slider";
+import { Slider as ShadSlider } from "../ui/slider";
 import { TypographyH2 } from "../Typography/Typography";
 
 type SliderProps = React.ComponentProps<typeof ShadSlider>;

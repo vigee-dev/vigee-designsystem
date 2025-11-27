@@ -1,4 +1,4 @@
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "../../components/ui/sidebar";
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "../ui/sidebar";
 import { HeaderDataProps } from "./type-sidebar";
 import HeaderButtonSidebar from "./header-button-sidebar";
 

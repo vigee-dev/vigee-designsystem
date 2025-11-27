@@ -1,8 +1,6 @@
 "use client";
 
-import * as React from "react";
-
-import { Progress } from "../../components/ui/progress";
+import { Progress } from "../ui/progress";
 
 interface Props {
   progress: number;

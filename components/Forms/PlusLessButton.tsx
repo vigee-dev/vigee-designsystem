@@ -1,9 +1,9 @@
 "use client";
 import * as React from "react";
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
-import { Button } from "../../components/ui/button";
+import { Button } from "../ui/button";
 import { FieldValues, Path, PathValue, UseFormReturn } from "react-hook-form";
-import { FormField, FormItem, FormLabel } from "../../components/ui/form";
+import { FormField, FormItem, FormLabel } from "../ui/form";
 
 type Props<T extends FieldValues> = {
   title?: string;

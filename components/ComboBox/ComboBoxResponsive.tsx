@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { Button } from "../../components/ui/button";
+import { Button } from "../ui/button";
 import {
   Command,
   CommandEmpty,
@@ -10,17 +10,9 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "../../components/ui/command";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerTrigger,
-} from "../../components/ui/drawer";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "../../components/ui/popover";
+} from "../ui/command";
+import { Drawer, DrawerContent, DrawerTrigger } from "../ui/drawer";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Label } from "../ui/label";
 
 type Status = {
@@ -37,88 +29,88 @@ interface ComboBoxProps {
 }
 
 export function ComboBoxResponsive({
-                                     label,
-                                     items,
-                                     text,
-                                     selectedStatus,
-                                     setSelectedStatus,
-                                   }: ComboBoxProps) {
+  label,
+  items,
+  text,
+  selectedStatus,
+  setSelectedStatus,
+}: ComboBoxProps) {
   const [open, setOpen] = React.useState(false);
 
   return (
-      <>
-        <div className="hidden md:block">
-          <Popover open={open} onOpenChange={setOpen}>
-            <Label className="font-bold text-primary">{label}</Label>
-            <PopoverTrigger asChild>
-              <Button variant="outline" className="w-[150px] justify-start">
-                {selectedStatus ? <>{selectedStatus.label}</> : <>{text}</>}
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[200px] p-0" align="start">
-              <StatusList
-                  statuses={items}
-                  setOpen={setOpen}
-                  setSelectedStatus={setSelectedStatus}
-              />
-            </PopoverContent>
-          </Popover>
-        </div>
+    <>
+      <div className="hidden md:block">
+        <Popover open={open} onOpenChange={setOpen}>
+          <Label className="font-bold text-primary">{label}</Label>
+          <PopoverTrigger asChild>
+            <Button variant="outline" className="w-[150px] justify-start">
+              {selectedStatus ? <>{selectedStatus.label}</> : <>{text}</>}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-[200px] p-0" align="start">
+            <StatusList
+              statuses={items}
+              setOpen={setOpen}
+              setSelectedStatus={setSelectedStatus}
+            />
+          </PopoverContent>
+        </Popover>
+      </div>
 
-        <div className="md:hidden">
-          <Drawer open={open} onOpenChange={setOpen}>
-            <Label className="font-bold text-primary">{label}</Label>
-            <DrawerTrigger asChild>
-              <Button variant="outline" className="w-[150px] justify-start">
-                {selectedStatus ? <>{selectedStatus.label}</> : <>{text}</>}
-              </Button>
-            </DrawerTrigger>
-            <DrawerContent>
-              <div className="mt-4 border-t">
-                <StatusList
-                    statuses={items}
-                    setOpen={setOpen}
-                    setSelectedStatus={setSelectedStatus}
-                />
-              </div>
-            </DrawerContent>
-          </Drawer>
-        </div>
-      </>
+      <div className="md:hidden">
+        <Drawer open={open} onOpenChange={setOpen}>
+          <Label className="font-bold text-primary">{label}</Label>
+          <DrawerTrigger asChild>
+            <Button variant="outline" className="w-[150px] justify-start">
+              {selectedStatus ? <>{selectedStatus.label}</> : <>{text}</>}
+            </Button>
+          </DrawerTrigger>
+          <DrawerContent>
+            <div className="mt-4 border-t">
+              <StatusList
+                statuses={items}
+                setOpen={setOpen}
+                setSelectedStatus={setSelectedStatus}
+              />
+            </div>
+          </DrawerContent>
+        </Drawer>
+      </div>
+    </>
   );
 }
 
 function StatusList({
-                      statuses,
-                      setOpen,
-                      setSelectedStatus,
-                    }: {
+  statuses,
+  setOpen,
+  setSelectedStatus,
+}: {
   statuses: Status[];
   setOpen: (open: boolean) => void;
   setSelectedStatus: (status: Status | null) => void;
 }) {
   return (
-      <Command>
-        <CommandInput placeholder="Rechercher..." />
-        <CommandList>
-          <CommandEmpty>Aucun résultat.</CommandEmpty>
-          <CommandGroup>
-            {statuses.map((status) => (
-                <CommandItem
-                    key={status.value}
-                    value={status.value}
-                    onSelect={(value: string) => {
-                      setSelectedStatus(
-                          statuses.find((priority) => priority.value === value) || null,
-                      );
-                      setOpen(false);
-                    }}
-                >
-                  {status.label}
-                </CommandItem>
-            ))}
-          </CommandGroup>
-        </CommandList>
-      </Command>
+    <Command>
+      <CommandInput placeholder="Rechercher..." />
+      <CommandList>
+        <CommandEmpty>Aucun résultat.</CommandEmpty>
+        <CommandGroup>
+          {statuses.map((status) => (
+            <CommandItem
+              key={status.value}
+              value={status.value}
+              onSelect={(value: string) => {
+                setSelectedStatus(
+                  statuses.find((priority) => priority.value === value) || null
+                );
+                setOpen(false);
+              }}
+            >
+              {status.label}
+            </CommandItem>
+          ))}
+        </CommandGroup>
+      </CommandList>
+    </Command>
   );
 }

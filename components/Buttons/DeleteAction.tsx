@@ -1,4 +1,4 @@
-import { Button } from "../Buttons/Button";
+import { Button } from "./Button";
 import { AlertDialog } from "../Forms/AlertDialog";
 
 interface Props {

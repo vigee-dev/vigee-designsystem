@@ -1,5 +1,5 @@
-'use client';
-import * as React from 'react';
+"use client";
+import * as React from "react";
 import {
   Select as SelectShadCn,
   SelectContent,
@@ -8,11 +8,11 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '../../components/ui/select';
-import { cn } from '../lib/utils';
-import { Label } from '../ui/label';
-import { useEffect, useState } from 'react';
-import { Button } from '../Buttons/Button';
+} from "../ui/select";
+import { cn } from "../lib/utils";
+import { Label } from "../ui/label";
+import { useEffect, useState } from "react";
+import { Button } from "../Buttons/Button";
 
 export interface SelectOption {
   value: string;
@@ -36,7 +36,7 @@ export interface SelectProps {
 
 export function Select({
   options,
-  placeholder = 'Sélectionnez une valeur',
+  placeholder = "Sélectionnez une valeur",
   onChange,
   className,
   disabled,
@@ -59,7 +59,7 @@ export function Select({
 
   const groupedOptions = options.reduce<Record<string, SelectOption[]>>(
     (acc, option) => {
-      const group = option.group || 'Ungrouped'; // Default group name for ungrouped items
+      const group = option.group || "Ungrouped"; // Default group name for ungrouped items
       if (!acc[group]) {
         acc[group] = [];
       }
@@ -94,35 +94,35 @@ export function Select({
       value={selectedValue}
       disabled={disabled}
     >
-      {label && <Label className='font-black text-primary mt-2'>{label}</Label>}
+      {label && <Label className="font-black text-primary mt-2">{label}</Label>}
 
       <SelectTrigger
-        className={cn('w-[280px] font-medium bg-input ', className)}
+        className={cn("w-[280px] font-medium bg-input ", className)}
       >
-        <div className='flex items-center'>
+        <div className="flex items-center">
           <SelectValue placeholder={placeholder} />
           {clearable && selectedValue && (
             <Button
               onPointerDown={handleClear}
               className={`ml-2 p-0 h-4 w-4`}
-              icon={'cross'}
+              icon={"cross"}
             />
           )}
         </div>
       </SelectTrigger>
 
       <SelectContent
-        className={cn('max-h-[200px] font-medium', classNameContent)}
+        className={cn("max-h-[200px] font-medium", classNameContent)}
       >
         {Object.entries(groupedOptions).map(([groupName, groupOptions]) => (
           <SelectGroup key={groupName}>
             {/* Only render the SelectLabel if the group name is not 'Ungrouped' */}
-            {groupName !== 'Ungrouped' && (
+            {groupName !== "Ungrouped" && (
               <SelectLabel>{groupName}</SelectLabel>
             )}
             {groupOptions.map((option) => (
               <SelectItem key={option.value} value={option.value}>
-                <div className='flex items-center gap-2'>
+                <div className="flex items-center gap-2">
                   {option.icon} {option.label}
                 </div>
               </SelectItem>

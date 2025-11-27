@@ -3,9 +3,15 @@
 import React from "react";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "../../components/ui/button";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "../../components/ui/command";
-import { Popover, PopoverContent, PopoverTrigger } from "../../components/ui/popover";
+import { Button } from "../ui/button";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from "../ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "../lib/utils";
 import { FormLabel } from "../ui/form";
@@ -27,7 +33,16 @@ type ComboBoxProps<T extends z.ZodType<any, any>> = {
   onChange: (value: string | undefined) => void;
 };
 
-export function ComboBox<T extends z.ZodType<any, any, any>>({ items, form, name, label, placeholder = "Sélectionnez...", required = true, icon, onChange }: ComboBoxProps<T>) {
+export function ComboBox<T extends z.ZodType<any, any, any>>({
+  items,
+  form,
+  name,
+  label,
+  placeholder = "Sélectionnez...",
+  required = true,
+  icon,
+  onChange,
+}: ComboBoxProps<T>) {
   let value: string | undefined;
 
   if (form) {
@@ -44,13 +59,22 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({ items, form, name
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      {label && <FormLabel className="font-black text-primary pb-2">{label}</FormLabel>}
+      {label && (
+        <FormLabel className="font-black text-primary pb-2">{label}</FormLabel>
+      )}
 
       <PopoverTrigger asChild>
-        <Button variant="outline" role="combobox" aria-expanded={open} className="w-full flex gap-x-2 bg-input border-0 justify-between">
+        <Button
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className="w-full flex gap-x-2 bg-input border-0 justify-between"
+        >
           <div className="flex gap-x-2 items-center">
             {icon && icon}
-            {value ? items.find(item => item.value === value)?.label : placeholder}
+            {value
+              ? items.find((item) => item.value === value)?.label
+              : placeholder}
           </div>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -61,21 +85,31 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({ items, form, name
           <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
           <CommandGroup className="max-h-[200px]">
             <ScrollArea className="h-[200px]">
-              {items.map(item => (
+              {items.map((item) => (
                 <CommandItem
                   className="max-h-[200px]"
                   key={item.value}
                   value={item.label}
                   onSelect={() => {
-                    const valueToUpdate = item.value === value ? undefined : item.value;
+                    const valueToUpdate =
+                      item.value === value ? undefined : item.value;
 
                     if (form) {
-                      form.setValue(name as Path<z.infer<T> & FieldValues>, valueToUpdate as any);
+                      form.setValue(
+                        name as Path<z.infer<T> & FieldValues>,
+                        valueToUpdate as any
+                      );
                     }
 
                     setOpen(false);
-                  }}>
-                  <Check className={cn("mr-2 h-4 w-4", value === item.value ? "opacity-100" : "opacity-0")} />
+                  }}
+                >
+                  <Check
+                    className={cn(
+                      "mr-2 h-4 w-4",
+                      value === item.value ? "opacity-100" : "opacity-0"
+                    )}
+                  />
                   {item.label}
                 </CommandItem>
               ))}

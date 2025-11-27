@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { cn } from "../../components/lib/utils";
-import { Alert, AlertDescription, AlertTitle } from "../../components/ui/alert";
+import { cn } from "../lib/utils";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import {
   PiAlertCircleDuoSolid,
   PiAlertTriangleDuoSolid,

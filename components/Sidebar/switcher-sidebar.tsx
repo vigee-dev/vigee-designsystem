@@ -2,8 +2,20 @@
 
 import * as React from "react";
 
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuShortcut, DropdownMenuTrigger } from "../../components/ui/dropdown-menu";
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "../../components/ui/sidebar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import {
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  useSidebar,
+} from "../ui/sidebar";
 import HeaderButtonSidebar from "./header-button-sidebar";
 import { headerData } from "./datas-sidebar/header-data";
 import { usePathname, useRouter } from "next/navigation";
@@ -28,19 +40,38 @@ export function SwitcherSidebar({
   const pathname = usePathname();
   const router = useRouter();
 
-  const activeTeamFind = items.find(item => item.slug === pathname);
+  const activeTeamFind = items.find((item) => item.slug === pathname);
 
   return (
     <SidebarMenu>
       <SidebarMenuItem>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <SidebarMenuButton size="lg" asChild={headerData.type === "link"} className={"data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"}>
-              <HeaderButtonSidebar headerData={headerData} logo={logo} logoSmall={logoSmall} />
+            <SidebarMenuButton
+              size="lg"
+              asChild={headerData.type === "link"}
+              className={
+                "data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              }
+            >
+              <HeaderButtonSidebar
+                headerData={headerData}
+                logo={logo}
+                logoSmall={logoSmall}
+              />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg" align="start" side={isMobile ? "bottom" : "right"} sideOffset={4}>
-            {menuTitle && <DropdownMenuLabel className="text-xs text-muted-foreground">{menuTitle}</DropdownMenuLabel>}
+          <DropdownMenuContent
+            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+            align="start"
+            side={isMobile ? "bottom" : "right"}
+            sideOffset={4}
+          >
+            {menuTitle && (
+              <DropdownMenuLabel className="text-xs text-muted-foreground">
+                {menuTitle}
+              </DropdownMenuLabel>
+            )}
             {items.map((item, index) => (
               <DropdownMenuItem
                 key={item.name}
@@ -48,7 +79,8 @@ export function SwitcherSidebar({
                   router.push(item.slug);
                   router.refresh();
                 }}
-                className="gap-2 p-2">
+                className="gap-2 p-2"
+              >
                 {item.icon}
                 {item.name}
                 <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>

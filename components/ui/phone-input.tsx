@@ -6,7 +6,7 @@ import * as RPNInput from "react-phone-number-input";
 
 import flags from "react-phone-number-input/flags";
 
-import { Button } from "../../components/ui/button";
+import { Button } from "./button";
 import {
   Command,
   CommandEmpty,
@@ -14,13 +14,9 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "../../components/ui/command";
-import { Input, InputProps } from "../../components/ui/input";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "../../components/ui/popover";
+} from "./command";
+import { Input, InputProps } from "./input";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 import { cn } from "../lib/utils";
 
@@ -52,7 +48,7 @@ const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
            * @param {E164Number | undefined} value - The entered value
            */
           /**@ts-ignore **/
-          onChange={value => onChange?.(value || "")}
+          onChange={(value) => onChange?.(value || "")}
           {...props}
         />
       );
@@ -121,8 +117,8 @@ const CountrySelect = ({
             <CommandEmpty>Pays non trouvé.</CommandEmpty>
             <CommandGroup>
               {options
-                .filter(x => x.value)
-                .map(option => (
+                .filter((x) => x.value)
+                .map((option) => (
                   <CommandItem
                     className="gap-2"
                     key={option.value}

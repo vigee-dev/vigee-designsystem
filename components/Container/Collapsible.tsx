@@ -2,7 +2,7 @@ import {
   Collapsible as CollapsibleWrapper,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "../../components/ui/collapsible";
+} from "../ui/collapsible";
 import { useState } from "react";
 
 interface CollapsibleProps {

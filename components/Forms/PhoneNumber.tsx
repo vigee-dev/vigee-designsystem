@@ -1,12 +1,11 @@
 import {
-  Form,
   FormControl,
   FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../components/ui/form";
+} from "../ui/form";
 import { cn } from "../lib/utils";
 import { PhoneInput } from "../ui/phone-input";
 
