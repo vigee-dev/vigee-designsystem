@@ -39,8 +39,21 @@ type LinkItem =
 
 type Links = LinkItem;
 
+type MenuItem = {
+  name: string;
+  slug: string;
+  type?: string;
+  icon: React.ReactNode;
+  iconFill: React.ReactNode;
+  href: string;
+  notifications?: number;
+  actions?: { title: string; url: string }[];
+  dropdownContent?: React.ReactNode;
+};
+
 const AppSidebar = ({
   items,
+  bottomItems,
   itemsSwitcher,
   logo,
   logoSmall,
@@ -52,17 +65,8 @@ const AppSidebar = ({
   classNameItems,
   hoverBackground = "bg-slate-800",
 }: {
-  items: {
-    name: string;
-    slug: string;
-    type?: string;
-    icon: React.ReactNode;
-    iconFill: React.ReactNode;
-    href: string;
-    notifications?: number;
-    actions?: { title: string; url: string }[];
-    dropdownContent?: React.ReactNode;
-  }[];
+  items: MenuItem[];
+  bottomItems?: MenuItem[];
   itemsSwitcher?: {
     name: string;
     slug: string;
@@ -214,6 +218,68 @@ const AppSidebar = ({
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+        {bottomItems && bottomItems.length > 0 && (
+          <SidebarGroup className="mt-auto">
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {bottomItems.map((item, index) => (
+                  <SidebarMenuItem
+                    key={`bottom-${index}`}
+                    className={cn(
+                      "w-full items-center rounded-md hover:cursor-pointer transition-all duration-300",
+                      (pathname === item.href || hoveredItem === item.slug) &&
+                        hoverBackground
+                    )}
+                  >
+                    <SidebarMenuButton
+                      asChild
+                      onMouseEnter={() => setHoveredItem(item.slug)}
+                      onMouseLeave={() => setHoveredItem(null)}
+                      className={cn("w-full hover:bg-transparent bg-transparent")}
+                    >
+                      <div
+                        className="flex items-center gap-2 w-full"
+                        onClick={() => handleClick(item)}
+                      >
+                        <span
+                          className={`${
+                            pathname === item.href || hoveredItem === item.slug
+                              ? "inline transition-opacity duration-300"
+                              : "hidden transition-opacity duration-300"
+                          }`}
+                        >
+                          {item.iconFill}
+                        </span>
+                        <span
+                          className={cn(
+                            "inline transition-opacity duration-300",
+                            pathname !== item.href && hoveredItem !== item.slug
+                              ? "inline transition-all duration-300"
+                              : "hidden transition-all duration-300",
+                            classNameItems
+                          )}
+                        >
+                          {item.icon}
+                        </span>
+                        <span
+                          className={cn(
+                            "font-medium text-base group",
+                            pathname === item.href || hoveredItem === item.slug
+                              ? "text-white transition-opacity duration-300"
+                              : "text-slate-400 transition-opacity duration-300",
+                            classNameItems
+                          )}
+                        >
+                          {item.name}
+                        </span>
+                      </div>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
       </SidebarContent>
       {user && (
         <SidebarFooter className={classNameItems}>
