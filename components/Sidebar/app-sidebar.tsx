@@ -50,7 +50,7 @@ const AppSidebar = ({
   headerComponent,
   switcher,
   classNameItems,
-  hoverBackground = "bg-zinc-800",
+  hoverBackground = "bg-slate-800",
 }: {
   items: {
     name: string;
@@ -164,7 +164,7 @@ const AppSidebar = ({
                           "font-medium text-base group",
                           pathname === item.href || hoveredItem === item.slug
                             ? "text-white  transition-opacity duration-300"
-                            : "text-zinc-400  transition-opacity duration-300",
+                            : "text-slate-400  transition-opacity duration-300",
                           classNameItems
                         )}
                       >
