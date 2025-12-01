@@ -4,12 +4,20 @@ import { useDebouncedCallback } from "use-debounce";
 import { PiSearchDefaultStroke } from "../../icons/PikaIcons";
 import { cn } from "../lib/utils";
 
-export default function TableSearch({ className, placeholder, variant = "default" }: { className?: string; placeholder?: string; variant?: "default" | "light" }) {
+export default function TableSearch({
+  className,
+  placeholder,
+  variant = "default",
+}: {
+  className?: string;
+  placeholder?: string;
+  variant?: "default" | "light";
+}) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const handleSearch = useDebouncedCallback(term => {
+  const handleSearch = useDebouncedCallback((term) => {
     const params = new URLSearchParams(searchParams);
     params.set("page", "1");
     if (term) {
@@ -21,7 +29,12 @@ export default function TableSearch({ className, placeholder, variant = "default
   }, 300);
 
   return (
-    <div className={cn("relative flex flex-1 max-w-lg flex-shrink-0 md:max-w-sm min-w-[200px]", className)}>
+    <div
+      className={cn(
+        "relative flex flex-1 max-w-lg flex-shrink-0 md:max-w-sm min-w-[200px]",
+        className
+      )}
+    >
       <label htmlFor="search" className="sr-only">
         Rechercher
       </label>
@@ -31,7 +44,7 @@ export default function TableSearch({ className, placeholder, variant = "default
           variant === "light" && "bg-transparent border-none"
         )}
         placeholder={placeholder ?? "Rechercher"}
-        onChange={e => {
+        onChange={(e) => {
           handleSearch(e.target.value);
         }}
         defaultValue={searchParams.get("query")?.toString()}
