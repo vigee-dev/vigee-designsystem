@@ -10,7 +10,7 @@
     "outDir": "components/lib",
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
   "include": ["./**/*", ".", "components", "../next-auth.d.tsss"],
   "exclude": ["node_modules", "components/lib"]
