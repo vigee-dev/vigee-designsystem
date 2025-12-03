@@ -192,13 +192,13 @@ const TabsComponent = <T extends string = string>({
               `w-full flex gap-2 group min-w-0 rounded-xl`,
               fullWidth ? " md:w-full" : " md:w-fit",
               variation === "rounded"
-                ? "rounded-xl dark:bg-zinc-900 bg-zinc-100 dark:data-[state=active]:text-zinc-800 text-zinc-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-zinc-100 font-bold"
+                ? "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-slate-100 font-bold"
                 : "",
               variation === "rounded-blue"
-                ? "rounded-xl dark:bg-blue-200 dark:text-blue-600 bg-zinc-100 dark:data-[state=active]:text-blue-800 text-blue-600 dark:data-[state=active]:bg-white data-[state=active]:bg-blue-500 data-[state=active]:text-white font-bold"
+                ? "rounded-xl dark:bg-blue-200 dark:text-blue-600 bg-slate-100 dark:data-[state=active]:text-blue-800 text-blue-600 dark:data-[state=active]:bg-white data-[state=active]:bg-blue-500 data-[state=active]:text-white font-bold"
                 : "",
               variation === "rounded-green"
-                ? "rounded-xl dark:bg-emerald-900 dark:text-emerald-50 bg-zinc-100 dark:data-[state=active]:text-emerald-800 text-emerald-600 dark:data-[state=active]:bg-white data-[state=active]:bg-emerald-500 data-[state=active]:text-white font-bold"
+                ? "rounded-xl dark:bg-emerald-900 dark:text-emerald-50 bg-slate-100 dark:data-[state=active]:text-emerald-800 text-emerald-600 dark:data-[state=active]:bg-white data-[state=active]:bg-emerald-500 data-[state=active]:text-white font-bold"
                 : ""
             )}
             onClick={() =>
@@ -206,7 +206,7 @@ const TabsComponent = <T extends string = string>({
             }
           >
             {option.icon && (
-              <span className="group-data-[state=active]:text-zinc-50 text-gray-400 dark:group-data-[state=active]:text-zinc-800">
+              <span className="group-data-[state=active]:text-slate-50 text-gray-400 dark:group-data-[state=active]:text-slate-800">
                 {option.icon}
               </span>
             )}

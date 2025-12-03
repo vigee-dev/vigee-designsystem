@@ -1,22 +1,22 @@
-'use client';
-import { useState } from 'react';
-import { Textarea } from '../ui/textarea';
+"use client";
+import { useState } from "react";
+import { Textarea } from "../ui/textarea";
 
-import { FieldValues, Path, UseFormReturn } from 'react-hook-form';
-import { PiQuestionMarkCircleDuoStroke } from '../../icons/PikaIcons';
-import { cn } from '../lib/utils';
+import { FieldValues, Path, UseFormReturn } from "react-hook-form";
+import { PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
+import { cn } from "../lib/utils";
 import {
   FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '../ui/form';
+} from "../ui/form";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from '../ui/hover-card';
+} from "../ui/hover-card";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -39,7 +39,7 @@ type Props<T extends FieldValues> = {
   white?: boolean;
   fullWidth?: boolean;
   rezizable?: boolean;
-  'data-testid'?: string;
+  "data-testid"?: string;
 };
 
 export default function TextArea<T extends FieldValues>({
@@ -58,7 +58,7 @@ export default function TextArea<T extends FieldValues>({
   white,
   fullWidth,
   rezizable,
-  'data-testid': dataTestId,
+  "data-testid": dataTestId,
 }: Props<T>) {
   const [charCount, setCharCount] = useState(
     name ? form?.getValues(name)?.length || 0 : 0
@@ -70,15 +70,15 @@ export default function TextArea<T extends FieldValues>({
       name={name}
       rules={{ required }}
       render={({ field }) => (
-        <FormItem className={cn(fullWidth && 'col-span-full')}>
+        <FormItem className={cn(fullWidth && "col-span-full")}>
           <HoverCard>
-            <div className='flex items-center justify-between'>
+            <div className="flex items-center justify-between">
               {label && (
-                <FormLabel className='font-black text-primary mt-2 flex items-center gap-2'>
+                <FormLabel className="font-black text-primary mt-2 flex items-center gap-2">
                   {label}
-                  {required && <span className='text-red-600 ml-1'>*</span>}
+                  {required && <span className="text-red-600 ml-1">*</span>}
                   {max && (
-                    <div className='text-gray-500 text-xs font-medium'>
+                    <div className="text-gray-500 text-xs font-medium">
                       {charCount}
                       {max && `/ ${max}`}
                     </div>
@@ -87,15 +87,15 @@ export default function TextArea<T extends FieldValues>({
               )}
               {helpComponent && (
                 <HoverCardTrigger>
-                  <PiQuestionMarkCircleDuoStroke className='w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400' />
+                  <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
                 </HoverCardTrigger>
               )}
             </div>
-            <div className='flex items-center justify-between mt-2'>
+            <div className="flex items-center justify-between mt-2">
               <div>
                 {helpComponent && (
                   <HoverCardContent>
-                    <div className='p-2'>{helpComponent}</div>
+                    <div className="p-2">{helpComponent}</div>
                   </HoverCardContent>
                 )}
               </div>
@@ -104,7 +104,7 @@ export default function TextArea<T extends FieldValues>({
           <Textarea
             {...field}
             rows={rows}
-            placeholder={placeholder ?? ''}
+            placeholder={placeholder ?? ""}
             onBlur={onBlur ? onBlur : field.onBlur}
             onChange={(e) => {
               if (max) {
@@ -114,9 +114,9 @@ export default function TextArea<T extends FieldValues>({
             }}
             className={cn(
               ` font-medium bg-input border-none text-[16px] md:text-sm col-span-full font-sans`,
-              white && 'bg-white border border-zinc-200 border-solid',
+              white && "bg-white border border-slate-200 border-solid",
               className,
-              rezizable ? 'resize-vertical' : 'resize-none'
+              rezizable ? "resize-vertical" : "resize-none"
             )}
             disabled={disabled}
             data-testid={dataTestId || (name ? `textarea-${name}` : undefined)}

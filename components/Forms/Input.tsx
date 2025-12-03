@@ -120,7 +120,7 @@ export default function Input<T extends FieldValues>({
                   className,
                   minimalist &&
                     "focus-visible:ring-offset-0 bg-transparent font-medium text-black placeholder:text-gray-300  focus-visible:ring-0 ring-0 border-none  ring-offset-none p-0 focus:outline-none focus:ring-0 caret-black",
-                  white && "bg-white border border-zinc-200 border-solid"
+                  white && "bg-white border border-slate-200 border-solid"
                 )}
                 onChange={(e) => {
                   if (maxLength) setCharCount(e.target.value.length);
@@ -173,7 +173,7 @@ export default function Input<T extends FieldValues>({
           value={value}
           className={cn(
             "text-[16px] md:text-sm font-medium bg-input border-none",
-            white && "bg-white border border-zinc-200 border-solid"
+            white && "bg-white border border-slate-200 border-solid"
           )}
           data-testid={dataTestId || (name ? `input-${name}` : undefined)}
         />
