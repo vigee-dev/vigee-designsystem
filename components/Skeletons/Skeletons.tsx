@@ -26,7 +26,7 @@ export const ChatBubbleSkeleton = () => {
       {/* Pending dot */}
       <div className="w-2 h-2 rounded-full bg-gray-300 animate-pulse ml-2" />
       {/* Avatar skeleton */}
-      <div className="w-8 h-8 rounded-full bg-gray-200" />
+      <div className="w-8 h-8 rounded-full bg-slate-200" />
     </div>
   );
 };
@@ -204,11 +204,11 @@ export function CardSkeleton() {
       className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm`}
     >
       <div className="flex p-4">
-        <div className="h-5 w-5 rounded-md bg-gray-200" />
-        <div className="ml-2 h-6 w-16 rounded-md bg-gray-200 text-sm font-medium" />
+        <div className="h-5 w-5 rounded-md bg-slate-200" />
+        <div className="ml-2 h-6 w-16 rounded-md bg-slate-200 text-sm font-medium" />
       </div>
       <div className="flex items-center justify-center truncate rounded-xl bg-white px-4 py-8">
-        <div className="h-7 w-20 rounded-md bg-gray-200" />
+        <div className="h-7 w-20 rounded-md bg-slate-200" />
       </div>
     </div>
   );
@@ -249,8 +249,8 @@ export function RevenueChartSkeleton() {
       <div className="rounded-xl bg-gray-100 p-4">
         <div className="sm:grid-cols-13 mt-0 grid h-[410px] grid-cols-12 items-end gap-2 rounded-md  bg-white p-4 md:gap-4" />
         <div className="flex items-center pb-2 pt-6">
-          <div className="h-5 w-5 rounded-full bg-gray-200" />
-          <div className="ml-2 h-4 w-20 rounded-md bg-gray-200" />
+          <div className="h-5 w-5 rounded-full bg-slate-200" />
+          <div className="ml-2 h-4 w-20 rounded-md bg-slate-200" />
         </div>
       </div>
     </div>
@@ -261,13 +261,13 @@ export function InvoiceSkeleton() {
   return (
     <div className="flex flex-row items-center justify-between border-b border-gray-100 py-4">
       <div className="flex items-center">
-        <div className="mr-2 h-8 w-8 rounded-full bg-gray-200" />
+        <div className="mr-2 h-8 w-8 rounded-full bg-slate-200" />
         <div className="min-w-0">
-          <div className="h-5 w-40 rounded-md bg-gray-200" />
-          <div className="mt-2 h-4 w-12 rounded-md bg-gray-200" />
+          <div className="h-5 w-40 rounded-md bg-slate-200" />
+          <div className="mt-2 h-4 w-12 rounded-md bg-slate-200" />
         </div>
       </div>
-      <div className="mt-2 h-4 w-12 rounded-md bg-gray-200" />
+      <div className="mt-2 h-4 w-12 rounded-md bg-slate-200" />
     </div>
   );
 }
@@ -286,8 +286,8 @@ export function LatestInvoicesSkeleton() {
           <InvoiceSkeleton />
           <InvoiceSkeleton />
           <div className="flex items-center pb-2 pt-6">
-            <div className="h-5 w-5 rounded-full bg-gray-200" />
-            <div className="ml-2 h-4 w-20 rounded-md bg-gray-200" />
+            <div className="h-5 w-5 rounded-full bg-slate-200" />
+            <div className="ml-2 h-4 w-20 rounded-md bg-slate-200" />
           </div>
         </div>
       </div>
@@ -485,31 +485,31 @@ export function TicketResumeSkeleton({
         >
           {/* Icône de validation */}
           <div className="flex justify-center mb-4">
-            <div className="h-10 w-10 rounded-full bg-gray-200 animate-pulse" />
+            <div className="h-10 w-10 rounded-full bg-slate-200 animate-pulse" />
           </div>
 
           {/* Titre principal */}
-          <div className="h-5 w-3/4 mx-auto mb-6 rounded-md bg-gray-200 animate-pulse" />
+          <div className="h-5 w-3/4 mx-auto mb-6 rounded-md bg-slate-200 animate-pulse" />
 
           {/* Contenu principal */}
           <div className="rounded-xl bg-white p-4 shadow-sm border border-gray-100 space-y-3 animate-pulse">
             <div className="flex items-center space-x-4">
-              <div className="h-4 w-4 bg-gray-200 rounded-full" />
-              <div className="h-4 w-32 bg-gray-200 rounded-md" />
+              <div className="h-4 w-4 bg-slate-200 rounded-full" />
+              <div className="h-4 w-32 bg-slate-200 rounded-md" />
             </div>
             <div className="flex items-center space-x-4">
-              <div className="h-4 w-4 bg-gray-200 rounded-sm" />
-              <div className="h-4 w-20 bg-gray-200 rounded-md" />
+              <div className="h-4 w-4 bg-slate-200 rounded-sm" />
+              <div className="h-4 w-20 bg-slate-200 rounded-md" />
             </div>
             <div className="space-y-1 pt-2">
-              <div className="h-4 w-60 bg-gray-200 rounded-md" />
-              <div className="h-4 w-72 bg-gray-200 rounded-md" />
+              <div className="h-4 w-60 bg-slate-200 rounded-md" />
+              <div className="h-4 w-72 bg-slate-200 rounded-md" />
             </div>
           </div>
 
           {/* Bouton */}
           <div className="flex justify-center mt-6">
-            <div className="h-10 w-48 bg-gray-200 rounded-lg animate-pulse" />
+            <div className="h-10 w-48 bg-slate-200 rounded-lg animate-pulse" />
           </div>
         </div>
       </div>

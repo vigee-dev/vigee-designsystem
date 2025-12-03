@@ -67,7 +67,7 @@ export const truncateText = (text: string, length: number = 20) => {
 };
 
 export const matchStatus = (status: string) => {
-  let color = "bg-gray-200 text-gray-600";
+  let color = "bg-slate-200 text-gray-600";
   let text = "Brouillon";
 
   switch (status) {
@@ -92,7 +92,7 @@ export const matchStatus = (status: string) => {
       break;
 
     case "draft":
-      color = "bg-gray-200 text-gray-600";
+      color = "bg-slate-200 text-gray-600";
       text = "Brouillon";
       break;
 
@@ -102,7 +102,7 @@ export const matchStatus = (status: string) => {
       break;
 
     case "inactive":
-      color = "bg-gray-200 text-gray-600";
+      color = "bg-slate-200 text-gray-600";
       text = "Inactif";
       break;
 
@@ -116,7 +116,7 @@ export const matchStatus = (status: string) => {
 };
 
 export const matchRolesStatus = (status: string) => {
-  let color = "bg-gray-200 text-gray-600";
+  let color = "bg-slate-200 text-gray-600";
   let text = "admin";
 
   switch (status) {
@@ -173,5 +173,5 @@ export const currency = (number: number) => {
           maximumFractionDigits: 0, // Force l'affichage sans décimales
         })
         .replace(/\s/g, " "),
-  }
-}
+  };
+};

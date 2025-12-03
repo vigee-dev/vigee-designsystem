@@ -26,11 +26,13 @@ const Back: React.FC<BackProps> = ({
 
   return (
     <>
-      <div className={cn(" flex-grid text-gray-400 hidden md:flex", className)}>
+      <div
+        className={cn(" flex-grid text-slate-400 hidden md:flex", className)}
+      >
         {href ? (
           <Link
             href={href}
-            className="flex flex-grid text-gray-400  hover:text-primary transform ease-in-out duration-200 hover:font-bold items-center"
+            className="flex flex-grid text-slate-400  hover:text-primary transform ease-in-out duration-200 hover:font-bold items-center"
           >
             <PiChevronLeftStroke className="w-4 h-4" />
             <p className="mx-1 text-sm "> {where}</p>
@@ -38,7 +40,7 @@ const Back: React.FC<BackProps> = ({
         ) : (
           <div
             onClick={back ? () => router.back() : onClick}
-            className="flex flex-grid text-gray-400  hover:text-primary transform ease-in-out duration-200 hover:font-bold items-center hover:cursor-pointer"
+            className="flex flex-grid text-slate-400  hover:text-primary transform ease-in-out duration-200 hover:font-bold items-center hover:cursor-pointer"
           >
             <PiChevronLeftStroke />
             <p className="mx-1 text-sm "> {where}</p>

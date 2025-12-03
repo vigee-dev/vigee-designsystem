@@ -36,7 +36,10 @@ export function GridPattern({
   const [squares, setSquares] = useState(() => generateSquares(numSquares));
 
   function getPos() {
-    return [Math.floor((Math.random() * dimensions.width) / width), Math.floor((Math.random() * dimensions.height) / height)];
+    return [
+      Math.floor((Math.random() * dimensions.width) / width),
+      Math.floor((Math.random() * dimensions.height) / height),
+    ];
   }
 
   // Adjust the generateSquares function to return objects with an id, x, and y
@@ -49,8 +52,8 @@ export function GridPattern({
 
   // Function to update a single square's position
   const updateSquarePosition = (id: number) => {
-    setSquares(currentSquares =>
-      currentSquares.map(sq =>
+    setSquares((currentSquares) =>
+      currentSquares.map((sq) =>
         sq.id === id
           ? {
               ...sq,
@@ -70,7 +73,7 @@ export function GridPattern({
 
   // Resize observer to update container dimensions
   useEffect(() => {
-    const resizeObserver = new ResizeObserver(entries => {
+    const resizeObserver = new ResizeObserver((entries) => {
       for (let entry of entries) {
         setDimensions({
           width: entry.contentRect.width,
@@ -91,10 +94,29 @@ export function GridPattern({
   }, [containerRef]);
 
   return (
-    <svg ref={containerRef} aria-hidden="true" className={cn("pointer-events-none absolute inset-0 h-full w-full fill-gray-400/30 stroke-gray-400/30", className)} {...props}>
+    <svg
+      ref={containerRef}
+      aria-hidden="true"
+      className={cn(
+        "pointer-events-none absolute inset-0 h-full w-full fill-slate-400/30 stroke-slate-400/30",
+        className
+      )}
+      {...props}
+    >
       <defs>
-        <pattern id={id} width={width} height={height} patternUnits="userSpaceOnUse" x={x} y={y}>
-          <path d={`M.5 ${height}V.5H${width}`} fill="none" strokeDasharray={strokeDasharray} />
+        <pattern
+          id={id}
+          width={width}
+          height={height}
+          patternUnits="userSpaceOnUse"
+          x={x}
+          y={y}
+        >
+          <path
+            d={`M.5 ${height}V.5H${width}`}
+            fill="none"
+            strokeDasharray={strokeDasharray}
+          />
         </pattern>
       </defs>
       <rect width="100%" height="100%" fill={`url(#${id})`} />

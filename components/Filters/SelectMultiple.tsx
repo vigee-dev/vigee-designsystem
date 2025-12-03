@@ -1,10 +1,10 @@
-'use client';
-import { useMemo, useEffect } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { Badge } from '../ui/badge';
-import { cn } from '../lib/utils';
-import { PiCheckTickSingleStroke } from '../../icons/PikaIcons';
+"use client";
+import { useMemo, useEffect } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Badge } from "../ui/badge";
+import { cn } from "../lib/utils";
+import { PiCheckTickSingleStroke } from "../../icons/PikaIcons";
 
 export type SelectMultipleOption = {
   label: string;
@@ -23,7 +23,7 @@ export default function SelectMultiple({
   options,
   placeholder,
   icon,
-  queryKey = 'equipments',
+  queryKey = "equipments",
 }: SelectMultipleProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -48,11 +48,11 @@ export default function SelectMultiple({
       params.delete(paramName);
       filtered.forEach((v) => params.append(paramName, v));
       const qs = params.toString();
-      router.replace(`${pathname}${qs ? `?${qs}` : ''}`);
+      router.replace(`${pathname}${qs ? `?${qs}` : ""}`);
     }
   }, [
     searchParams,
-    allowedValues.join(','),
+    allowedValues.join(","),
     router,
     pathname,
     paramName,
@@ -60,7 +60,7 @@ export default function SelectMultiple({
   ]);
 
   const toggleValue = (value: string) => {
-    const params = new URLSearchParams(searchParams?.toString() || '');
+    const params = new URLSearchParams(searchParams?.toString() || "");
     const current = params.getAll(paramName).map(String);
     const isSelected = current.includes(value);
     const next = isSelected
@@ -72,7 +72,7 @@ export default function SelectMultiple({
     next.forEach((v) => params.append(paramName, v));
 
     const qs = params.toString();
-    router.replace(`${pathname}${qs ? `?${qs}` : ''}`);
+    router.replace(`${pathname}${qs ? `?${qs}` : ""}`);
   };
 
   const selectedOptions = options.filter((opt) =>
@@ -84,53 +84,53 @@ export default function SelectMultiple({
       <PopoverTrigger asChild>
         <div
           className={cn(
-            'flex items-center gap-2 rounded-xl border px-3 py-1 cursor-pointer',
-            selectedOptions.length === 0 && 'text-gray-500'
+            "flex items-center gap-2 rounded-xl border px-3 py-1 cursor-pointer",
+            selectedOptions.length === 0 && "text-gray-500"
           )}
         >
           {selectedOptions.length === 0 ? (
             <>
-              {icon && <span className='mr-1 flex items-center'>{icon}</span>}
-              <span className='text-sm'>{placeholder}</span>
+              {icon && <span className="mr-1 flex items-center">{icon}</span>}
+              <span className="text-sm">{placeholder}</span>
             </>
           ) : (
-            <div className='flex items-center gap-2 overflow-x-auto no-scrollbar '>
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar ">
               {selectedOptions.map((opt) => (
                 <Badge
                   key={opt.value}
-                  className='bg-gray-200 text-black transition hover:bg-gray-300 cursor-pointer flex items-center gap-1 rounded-full px-3 py-1 shrink-0'
+                  className="bg-slate-200 text-black transition hover:bg-gray-300 cursor-pointer flex items-center gap-1 rounded-full px-3 py-1 shrink-0"
                   onClick={(e) => {
                     e.stopPropagation();
                     toggleValue(String(opt.value));
                   }}
                 >
                   {opt.icon}
-                  <span className='truncate'>{opt.label}</span>
-                  <span className='ml-1 cursor-pointer'>&times;</span>
+                  <span className="truncate">{opt.label}</span>
+                  <span className="ml-1 cursor-pointer">&times;</span>
                 </Badge>
               ))}
             </div>
           )}
-          <span className='ml-auto text-lg'>&#9662;</span>
+          <span className="ml-auto text-lg">&#9662;</span>
         </div>
       </PopoverTrigger>
-      <PopoverContent className='w-56 p-0' align='start'>
-        <div className='flex flex-col max-h-60 overflow-y-auto'>
+      <PopoverContent className="w-56 p-0" align="start">
+        <div className="flex flex-col max-h-60 overflow-y-auto">
           {options.map((opt) => {
             const isSelected = selectedValues.includes(String(opt.value));
             return (
               <div
                 key={opt.value}
                 className={cn(
-                  'flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-gray-100',
-                  isSelected && 'bg-gray-100'
+                  "flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-gray-100",
+                  isSelected && "bg-gray-100"
                 )}
                 onClick={() => toggleValue(String(opt.value))}
               >
                 <span>{opt.icon}</span>
-                <span className='flex-1 truncate'>{opt.label}</span>
+                <span className="flex-1 truncate">{opt.label}</span>
                 {isSelected && (
-                  <span className='text-lg'>
+                  <span className="text-lg">
                     <PiCheckTickSingleStroke />
                   </span>
                 )}

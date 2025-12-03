@@ -19,7 +19,7 @@
   @apply bg-primary;
 }
 .complete p {
-  @apply text-gray-400;
+  @apply text-slate-400;
 }
 .complete:not(:first-child):before,
 .active:not(:first-child):before {

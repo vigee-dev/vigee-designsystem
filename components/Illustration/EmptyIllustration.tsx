@@ -41,19 +41,28 @@ export default function EmptyIllustration({
         className
       )}
     >
-      {type === "street" && <EmptyStreet color={color} className={classNameImage} />}
-      {type === "projects" && <EmptyProjects color={color} className={classNameImage} />}
-      {type === "documents" && <EmptyDocuments color={color} className={classNameImage} />}
-      {type === "users" && <EmptyUsers color={color} className={classNameImage} />}
-      {type === "default" && <SvgImage color={color} className={classNameImage} />}
- 
+      {type === "street" && (
+        <EmptyStreet color={color} className={classNameImage} />
+      )}
+      {type === "projects" && (
+        <EmptyProjects color={color} className={classNameImage} />
+      )}
+      {type === "documents" && (
+        <EmptyDocuments color={color} className={classNameImage} />
+      )}
+      {type === "users" && (
+        <EmptyUsers color={color} className={classNameImage} />
+      )}
+      {type === "default" && (
+        <SvgImage color={color} className={classNameImage} />
+      )}
 
       <h2
         className={"text-lg text-gray-600 font-medium text-center font-display"}
       >
         {text}
       </h2>
-      <p className="text-gray-400 text-sm max-w-lg mx-auto text-center">
+      <p className="text-slate-400 text-sm max-w-lg mx-auto text-center">
         {subtitle}
       </p>
 

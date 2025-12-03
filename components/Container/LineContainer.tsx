@@ -36,7 +36,7 @@ const Content = ({
             {title}
           </TypographyH4>
           {subtitle && (
-            <p className=" md:text-sm text-xs text-gray-400 transition-ease-in-out duration-100 max-w-48 md:max-w-none">
+            <p className=" md:text-sm text-xs text-slate-400 transition-ease-in-out duration-100 max-w-48 md:max-w-none">
               {subtitle}
             </p>
           )}

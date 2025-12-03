@@ -144,7 +144,7 @@ const NumberKPI = ({
           >
             <dt
               className={cn(
-                " font-medium text-gray-400",
+                " font-medium text-slate-400",
                 small ? "text-sm" : "text-base"
               )}
             >
@@ -166,8 +166,8 @@ const NumberKPI = ({
                   {item.unit === "€"
                     ? currency(item.stat).toRoundedEuro()
                     : item.unit
-                    ? `${item.stat} ${item.unit}`
-                    : item.stat}
+                      ? `${item.stat} ${item.unit}`
+                      : item.stat}
                 </div>
 
                 {item.stat2 != null && (
@@ -188,8 +188,8 @@ const NumberKPI = ({
                     item.ratio.type === "positive"
                       ? "text-green-600 bg-green-100"
                       : item.ratio.type === "negative"
-                      ? "text-red-600 bg-red-100"
-                      : "text-gray-600 bg-gray-100",
+                        ? "text-red-600 bg-red-100"
+                        : "text-gray-600 bg-gray-100",
                     "inline-flex items-baseline rounded-full px-2.5 text-xs font-black  lg:mt-0 mx-2"
                   )}
                 >

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { Check } from 'lucide-react';
-import { cn } from '../lib/utils';
-import { Button } from '../ui/button';
+import * as React from "react";
+import { Check } from "lucide-react";
+import { cn } from "../lib/utils";
+import { Button } from "../ui/button";
 import {
   Command,
   CommandEmpty,
@@ -11,12 +11,12 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '../ui/command';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { useQueryState } from 'nuqs';
-import { Select } from '../Select/Select';
-import { PiChevronSortVerticalStroke } from '../../icons/PikaIcons';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+} from "../ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { useQueryState } from "nuqs";
+import { Select } from "../Select/Select";
+import { PiChevronSortVerticalStroke } from "../../icons/PikaIcons";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export const Filter = ({
   queryKey,
@@ -46,10 +46,10 @@ export const Filter = ({
 
   const handleSingleChange = (val: string | undefined) => {
     setValue(val || null);
-    const params = new URLSearchParams(searchParams?.toString() || '');
-    params.set('page', '1');
+    const params = new URLSearchParams(searchParams?.toString() || "");
+    params.set("page", "1");
     const qs = params.toString();
-    router.replace(`${pathname}${qs ? `?${qs}` : ''}`);
+    router.replace(`${pathname}${qs ? `?${qs}` : ""}`);
   };
 
   // -----------------------
@@ -67,7 +67,7 @@ export const Filter = ({
   }, [multi, searchParams, paramName]);
 
   const toggleMultiValue = (val: string) => {
-    const params = new URLSearchParams(searchParams?.toString() || '');
+    const params = new URLSearchParams(searchParams?.toString() || "");
     const current = params.getAll(paramName).map(String);
     const isSelected = current.includes(val);
     const next = isSelected
@@ -76,10 +76,10 @@ export const Filter = ({
 
     params.delete(paramName);
     next.forEach((v) => params.append(paramName, v));
-    params.set('page', '1');
+    params.set("page", "1");
 
     const qs = params.toString();
-    router.replace(`${pathname}${qs ? `?${qs}` : ''}`);
+    router.replace(`${pathname}${qs ? `?${qs}` : ""}`);
   };
 
   // -----------------------
@@ -93,23 +93,23 @@ export const Filter = ({
     if (!multi) return null;
 
     let labels = selectedValues
-      .map((val) => options.find((o) => o.value === val)?.label || '')
+      .map((val) => options.find((o) => o.value === val)?.label || "")
       .filter(Boolean);
 
     if (maxVisibleItems && labels.length > maxVisibleItems) {
       const visible = labels.slice(0, maxVisibleItems);
       const hiddenCount = labels.length - maxVisibleItems;
       return (
-        <div className='flex gap-1 flex-wrap'>
+        <div className="flex gap-1 flex-wrap">
           {visible.map((lbl, i) => (
             <span
               key={i}
-              className='px-2 py-0.5 bg-gray-200 rounded-full text-sm truncate max-w-[100px]'
+              className="px-2 py-0.5 bg-slate-200 rounded-full text-sm truncate max-w-[100px]"
             >
               {lbl}
             </span>
           ))}
-          <span className='px-2 py-0.5 bg-gray-300 rounded-full text-sm'>
+          <span className="px-2 py-0.5 bg-gray-300 rounded-full text-sm">
             +{hiddenCount}
           </span>
         </div>
@@ -117,11 +117,11 @@ export const Filter = ({
     }
 
     return (
-      <div className='flex gap-1 flex-wrap'>
+      <div className="flex gap-1 flex-wrap">
         {labels.map((lbl, i) => (
           <span
             key={i}
-            className='px-2 py-0.5 bg-gray-200 rounded-full text-sm truncate max-w-[100px]'
+            className="px-2 py-0.5 bg-slate-200 rounded-full text-sm truncate max-w-[100px]"
           >
             {lbl}
           </span>
@@ -138,10 +138,10 @@ export const Filter = ({
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
-            variant='outline'
-            role='combobox'
+            variant="outline"
+            role="combobox"
             aria-expanded={open}
-            className='w-fit gap-2 border-none bg-transparent'
+            className="w-fit gap-2 border-none bg-transparent"
           >
             {multi
               ? selectedValues.length > 0
@@ -150,10 +150,10 @@ export const Filter = ({
               : value
                 ? options.find((option) => option.value === value)?.label
                 : placeholder}
-            <PiChevronSortVerticalStroke className='opacity-50 h-4 w-4' />
+            <PiChevronSortVerticalStroke className="opacity-50 h-4 w-4" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className='w-[200px] p-0'>
+        <PopoverContent className="w-[200px] p-0">
           <Command>
             <CommandInput placeholder={`Rechercher...`} />
             <CommandList>
@@ -180,8 +180,8 @@ export const Filter = ({
                       {option.label}
                       <Check
                         className={cn(
-                          'ml-auto',
-                          isSelected ? 'opacity-100' : 'opacity-0'
+                          "ml-auto",
+                          isSelected ? "opacity-100" : "opacity-0"
                         )}
                       />
                     </CommandItem>
@@ -203,30 +203,30 @@ export const Filter = ({
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
-            variant='outline'
-            role='combobox'
+            variant="outline"
+            role="combobox"
             aria-expanded={open}
-            className='w-fit gap-2 border-none bg-transparent'
+            className="w-fit gap-2 border-none bg-transparent"
           >
             {selectedValues.length > 0 ? renderSelectedLabels() : placeholder}
-            <PiChevronSortVerticalStroke className='opacity-50 h-4 w-4' />
+            <PiChevronSortVerticalStroke className="opacity-50 h-4 w-4" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className='w-[200px] p-0'>
-          <div className='flex flex-col max-h-60 overflow-y-auto'>
+        <PopoverContent className="w-[200px] p-0">
+          <div className="flex flex-col max-h-60 overflow-y-auto">
             {sortedOptions.map((option) => {
               const isSelected = selectedValues.includes(option.value);
               return (
                 <div
                   key={option.value}
                   className={cn(
-                    'flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-gray-100',
-                    isSelected && 'bg-gray-100'
+                    "flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-gray-100",
+                    isSelected && "bg-gray-100"
                   )}
                   onClick={() => toggleMultiValue(option.value)}
                 >
                   <span>{option.label}</span>
-                  {isSelected && <Check className='ml-auto h-4 w-4' />}
+                  {isSelected && <Check className="ml-auto h-4 w-4" />}
                 </div>
               );
             })}
@@ -244,7 +244,7 @@ export const Filter = ({
       onChange={handleSingleChange}
       options={sortedOptions}
       placeholder={placeholder}
-      className='w-fit bg-transparent border-none whitespace-nowrap'
+      className="w-fit bg-transparent border-none whitespace-nowrap"
       defaultValue={value ?? defaultValue}
       clearable={clearable}
     />

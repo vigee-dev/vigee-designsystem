@@ -87,7 +87,7 @@ export default function TextArea<T extends FieldValues>({
               )}
               {helpComponent && (
                 <HoverCardTrigger>
-                  <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+                  <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-slate-400" />
                 </HoverCardTrigger>
               )}
             </div>

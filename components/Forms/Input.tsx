@@ -94,12 +94,12 @@ export default function Input<T extends FieldValues>({
               <div className="flex items-center gap-2">
                 {helpComponent && (
                   <HoverCardTrigger>
-                    <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+                    <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-slate-400" />
                   </HoverCardTrigger>
                 )}
                 {link && (
                   <a href={link} target="_blank" rel="noopener noreferrer">
-                    <PiExternalLinkCircleDuoSolid className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+                    <PiExternalLinkCircleDuoSolid className="w-5 h-5 hover:text-primary hover:cursor-pointer text-slate-400" />
                   </a>
                 )}
               </div>
@@ -143,7 +143,7 @@ export default function Input<T extends FieldValues>({
           {label && <Label className="font-black text-primary">{label}</Label>}
           {helpComponent && (
             <HoverCardTrigger>
-              <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+              <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-slate-400" />
             </HoverCardTrigger>
           )}
         </div>
@@ -151,12 +151,12 @@ export default function Input<T extends FieldValues>({
         <div className="flex items-center gap-2">
           {helpComponent && (
             <HoverCardTrigger>
-              <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+              <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-slate-400" />
             </HoverCardTrigger>
           )}
           {link && (
             <a href={link} target="_blank" rel="noopener noreferrer">
-              <PiExternalLinkCircleDuoSolid className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+              <PiExternalLinkCircleDuoSolid className="w-5 h-5 hover:text-primary hover:cursor-pointer text-slate-400" />
             </a>
           )}
         </div>

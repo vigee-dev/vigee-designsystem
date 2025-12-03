@@ -43,7 +43,7 @@ export default function SectionHeading({
     <>
       {title && <p className={"text-gray-700 text-3xl font-bold"}>{title}</p>}
       {subtitle && (
-        <p className={"text-gray-400 text-md font-medium"}>{subtitle}</p>
+        <p className={"text-slate-400 text-md font-medium"}>{subtitle}</p>
       )}
       <div className="relative  mb-6 ">
         <div className="md:flex md:items-center md:justify-between">
@@ -56,7 +56,7 @@ export default function SectionHeading({
           </div>
         </div>
         <div className="-ml-4 md:-ml-0 ">
-          <div className="fixed md:hidden bottom-0 grow gap-y-5 overflow-y-auto  bg-white  shadow-xl z-40 border-t border-gray-200 pb-6 w-screen">
+          <div className="fixed md:hidden bottom-0 grow gap-y-5 overflow-y-auto  bg-white  shadow-xl z-40 border-t border-slate-200 pb-6 w-screen">
             <nav className="flex flex-1 flex-col ">
               <ul role="list" className="flex flex-1 flex-col gap-y-7 ">
                 <li>

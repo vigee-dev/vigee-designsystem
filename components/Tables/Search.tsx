@@ -40,7 +40,7 @@ export default function TableSearch({
       </label>
       <input
         className={cn(
-          "peer block w-full font-variations rounded-md border border-gray-200 py-[9px] pl-10 text-[16px] md:text-sm outline-2 placeholder:text-gray-400",
+          "peer block w-full font-variations rounded-md border border-slate-200 py-[9px] pl-10 text-[16px] md:text-sm outline-2 placeholder:text-slate-400",
           variant === "light" && "bg-transparent border-none"
         )}
         placeholder={placeholder ?? "Rechercher"}
@@ -49,7 +49,7 @@ export default function TableSearch({
         }}
         defaultValue={searchParams.get("query")?.toString()}
       />
-      <PiSearchDefaultStroke className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-400 peer-focus:text-gray-900" />
+      <PiSearchDefaultStroke className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-slate-400 peer-focus:text-gray-900" />
     </div>
   );
 }

@@ -32,7 +32,7 @@ export function PageHeader({
         "rounded-xl h-fit items-center flex md:flex-row justify-between gap-x-4 w-full gap-2",
         variant === "ghost"
           ? ""
-          : "bg-white border border-gray-200 rounded-xl p-4",
+          : "bg-white border border-slate-200 rounded-xl p-4",
         className
       )}
     >
@@ -48,7 +48,7 @@ export function PageHeader({
             {title}
           </TypographyH2>
           {subtitle && (
-            <p className={cn("text-gray-400 text-sm", classNameSubtitle)}>
+            <p className={cn("text-slate-400 text-sm", classNameSubtitle)}>
               {subtitle}
             </p>
           )}

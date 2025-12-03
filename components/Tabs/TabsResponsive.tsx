@@ -206,7 +206,7 @@ const TabsComponent = <T extends string = string>({
             }
           >
             {option.icon && (
-              <span className="group-data-[state=active]:text-slate-50 text-gray-400 dark:group-data-[state=active]:text-slate-800">
+              <span className="group-data-[state=active]:text-slate-50 text-slate-400 dark:group-data-[state=active]:text-slate-800">
                 {option.icon}
               </span>
             )}

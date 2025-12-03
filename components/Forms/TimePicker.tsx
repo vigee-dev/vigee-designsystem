@@ -119,14 +119,14 @@ export default function TimePicker<T extends FieldValues>({
                   </FormLabel>
                 )}
                 {sublabel && (
-                  <Label className="font-medium text-gray-400">
+                  <Label className="font-medium text-slate-400">
                     {sublabel}
                   </Label>
                 )}
               </div>
               {helpComponent && (
                 <HoverCardTrigger>
-                  <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+                  <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-slate-400" />
                 </HoverCardTrigger>
               )}
             </div>
@@ -157,7 +157,7 @@ export default function TimePicker<T extends FieldValues>({
             </FormControl>
 
             <SelectContent className="max-h-[200px] font-medium">
-              {options.map(option => (
+              {options.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
                 </SelectItem>
@@ -181,7 +181,7 @@ export default function TimePicker<T extends FieldValues>({
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent className="max-h-[200px] font-medium">
-          {options.map(option => (
+          {options.map((option) => (
             <SelectItem key={option.value} value={option.value}>
               {option.label}
             </SelectItem>

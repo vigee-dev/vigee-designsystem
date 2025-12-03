@@ -27,13 +27,30 @@ export function Unauthorized({
   const image = variant === "bro" ? unauthorizedBro : unauthorized;
   return (
     <div className="flex flex-col items-center justify-center  w-full px-12 max-w-2xl">
-      {img && <Image width={400} height={400} className="mx-auto w-64 h-64" src={image} alt="Erreur" />}
-      <h1 className={"text-xl text-primary font-bold text-center pt-6 font-display"}>{title ? title : "Une erreur s'est produite."}</h1>
+      {img && (
+        <Image
+          width={400}
+          height={400}
+          className="mx-auto w-64 h-64"
+          src={image}
+          alt="Erreur"
+        />
+      )}
+      <h1
+        className={
+          "text-xl text-primary font-bold text-center pt-6 font-display"
+        }
+      >
+        {title ? title : "Une erreur s'est produite."}
+      </h1>
 
-      {subtitle && <p className="text-gray-400">{subtitle}</p>}
+      {subtitle && <p className="text-slate-400">{subtitle}</p>}
 
       {supportEmail && (
-        <Link className="text-sm text-gray-500  items-center text-center font-display" href={supportEmail ? `mailto:${supportEmail}` : "/"}>
+        <Link
+          className="text-sm text-gray-500  items-center text-center font-display"
+          href={supportEmail ? `mailto:${supportEmail}` : "/"}
+        >
           <Button variant="outline" className=" flex gap-x-2">
             Contacter le support <PiEnvelopeArrowRightDuoSolid />
           </Button>
