@@ -135,9 +135,9 @@ export function TabMobile<T extends string = string>({
                   {option.icon && (
                     <span
                       className={cn(
-                        "group-data-[state=active]:text-primary-light text-zinc-400 dark:group-data-[state=active]:text-primary opacity-50 group-data-[state=active]:opacity-100",
+                        "group-data-[state=active]:text-primary-light text-slate-400 dark:group-data-[state=active]:text-primary opacity-50 group-data-[state=active]:opacity-100",
                         variant === "light" &&
-                          "text-zinc-400 group-data-[state=active]:text-zinc-800"
+                          "text-slate-400 group-data-[state=active]:text-slate-800"
                       )}
                     >
                       {option.icon}
