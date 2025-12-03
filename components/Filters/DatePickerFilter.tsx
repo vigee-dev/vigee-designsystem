@@ -96,10 +96,9 @@ export const DatePickerFilter = ({
   const displayIso = isValidDate ? iso : DateTime.now().toISO();
   const displayDt = DateTime.fromISO(displayIso!);
   const date = displayDt.toJSDate();
-  const hour = displayDt.toFormat('HH:mm');
 
   // Générer les options d'heure toutes les 30 minutes avec désactivation des heures passées
-  const timeOptions = [];
+  const timeOptions: Array<{ value: string; disabled: boolean }> = [];
   const now = DateTime.now();
 
   // Validation simple des heures
@@ -144,6 +143,29 @@ export const DatePickerFilter = ({
       }
     }
   }
+
+  const hour = displayDt.toFormat('HH:mm');
+
+  // Vérifier si l'heure actuelle est valide et disponible
+  useEffect(() => {
+    if (isValidDate && displayHour) {
+      const isToday = DateTime.fromJSDate(date).hasSame(now, 'day');
+      const currentHourString = displayDt.toFormat('HH:mm');
+      const isHourValid = timeOptions.some(
+        (option) => option.value === currentHourString
+      );
+
+      if (isToday && !isHourValid && timeOptions.length > 0) {
+        // Si on est aujourd'hui et l'heure n'est plus valide, utiliser la première heure disponible
+        const firstAvailableHour = timeOptions[0].value;
+        const [newHour, newMinute] = firstAvailableHour.split(':').map(Number);
+        const correctedDateTime = DateTime.fromJSDate(date)
+          .set({ hour: newHour, minute: newMinute })
+          .toISO();
+        setValue(correctedDateTime);
+      }
+    }
+  }, [isValidDate, displayDt, displayHour, timeOptions, now, date, setValue]);
 
   const handleDateChange = (selected?: Date) => {
     if (selected) {
