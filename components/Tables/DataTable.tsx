@@ -25,6 +25,14 @@ import {
 import { Table as TanstackTable } from "@tanstack/react-table";
 import { cn } from "../lib/utils";
 
+// Extension du type ColumnMeta pour inclure cellClassName
+declare module "@tanstack/react-table" {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface ColumnMeta<TData extends unknown, TValue> {
+    cellClassName?: string;
+  }
+}
+
 interface DataTableProps<TData, TValue> {
   title?: string;
   info?: string;
@@ -129,7 +137,6 @@ export function DataTable<TData, TValue>({
                   onClick={() => onRowClick && onRowClick(row)}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    // @ts-ignore TOFIX tanstack doesn't provide meta types for whatever reason ? 'https://github.com/TanStack/table/discussions/4157'
                     <TableCell
                       key={cell.id}
                       className={cell.column.columnDef.meta?.cellClassName}
