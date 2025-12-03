@@ -24,7 +24,7 @@ export const ChatBubbleSkeleton = () => {
         <div className="h-3 w-32 rounded-md bg-gray-100" />
       </div>
       {/* Pending dot */}
-      <div className="w-2 h-2 rounded-full bg-gray-300 animate-pulse ml-2" />
+      <div className="w-2 h-2 rounded-full bg-slate-300 animate-pulse ml-2" />
       {/* Avatar skeleton */}
       <div className="w-8 h-8 rounded-full bg-slate-200" />
     </div>

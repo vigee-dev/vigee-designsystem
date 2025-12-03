@@ -109,7 +109,7 @@ export const Filter = ({
               {lbl}
             </span>
           ))}
-          <span className="px-2 py-0.5 bg-gray-300 rounded-full text-sm">
+          <span className="px-2 py-0.5 bg-slate-300 rounded-full text-sm">
             +{hiddenCount}
           </span>
         </div>

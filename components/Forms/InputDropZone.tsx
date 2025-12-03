@@ -119,7 +119,7 @@ export default function InputDropZoneFile<T extends FieldValues>({
       <div
         className={`${
           dragActive ? "bg-slate-200" : "bg-slate-100"
-        } w-full flex flex-col  gap-4 p-8 items-center justify-center h-fit border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 overflow-hidden`}
+        } w-full flex flex-col  gap-4 p-8 items-center justify-center h-fit border-2 border-slate-300 border-dashed rounded-lg cursor-pointer bg-gray-50  dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600 overflow-hidden`}
         onDragEnter={handleDragEnter}
         onSubmit={(e) => e.preventDefault()}
         onDrop={handleDrop}

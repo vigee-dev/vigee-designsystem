@@ -13,7 +13,7 @@ export const LoaderPage = ({ text, logo, borderColor }: Props) => {
       <div className="relative flex items-center justify-center">
         <div
           className={`absolute h-28 w-28 border-2 ${
-            borderColor ? borderColor : "border-gray-300"
+            borderColor ? borderColor : "border-slate-300"
           } rounded-full animate-spin border-t-transparent`}
         />
 

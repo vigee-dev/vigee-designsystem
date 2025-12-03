@@ -98,7 +98,7 @@ export default function SelectMultiple({
               {selectedOptions.map((opt) => (
                 <Badge
                   key={opt.value}
-                  className="bg-slate-200 text-black transition hover:bg-gray-300 cursor-pointer flex items-center gap-1 rounded-full px-3 py-1 shrink-0"
+                  className="bg-slate-200 text-black transition hover:bg-slate-300 cursor-pointer flex items-center gap-1 rounded-full px-3 py-1 shrink-0"
                   onClick={(e) => {
                     e.stopPropagation();
                     toggleValue(String(opt.value));

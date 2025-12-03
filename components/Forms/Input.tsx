@@ -119,7 +119,7 @@ export default function Input<T extends FieldValues>({
                   "text-[16px] md:text-sm font-medium bg-input border-none font-sans",
                   className,
                   minimalist &&
-                    "focus-visible:ring-offset-0 bg-transparent font-medium text-black placeholder:text-gray-300  focus-visible:ring-0 ring-0 border-none  ring-offset-none p-0 focus:outline-none focus:ring-0 caret-black",
+                    "focus-visible:ring-offset-0 bg-transparent font-medium text-black placeholder:text-slate-300  focus-visible:ring-0 ring-0 border-none  ring-offset-none p-0 focus:outline-none focus:ring-0 caret-black",
                   white && "bg-white border border-slate-200 border-solid"
                 )}
                 onChange={(e) => {

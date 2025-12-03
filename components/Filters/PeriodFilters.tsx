@@ -283,7 +283,7 @@ export const PeriodFilters = ({
             <div className="relative flex items-center rounded-md bg-white md:items-stretch w-full ">
               <button
                 type="button"
-                className="flex border-none shadow-none h-9 w-12 items-center justify-center border-gray-300 pr-1 text-slate-400 hover:text-gray-500 focus:relative md:w-9 md:pr-0 md:hover:bg-gray-50"
+                className="flex border-none shadow-none h-9 w-12 items-center justify-center border-slate-300 pr-1 text-slate-400 hover:text-gray-500 focus:relative md:w-9 md:pr-0 md:hover:bg-gray-50"
                 onClick={goToPreviousDay}
               >
                 <span className="sr-only">Précédent</span>
