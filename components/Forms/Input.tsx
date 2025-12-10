@@ -41,6 +41,7 @@ type Props<T extends FieldValues> = {
   maxLength?: number;
   link?: string | null;
   white?: boolean;
+  autoFocus?: boolean;
   "data-testid"?: string;
 };
 
@@ -65,6 +66,7 @@ export default function Input<T extends FieldValues>({
   minimalist,
   link,
   white,
+  autoFocus,
   "data-testid": dataTestId,
 }: Props<T>) {
   const [charCount, setCharCount] = useState(
@@ -115,6 +117,7 @@ export default function Input<T extends FieldValues>({
                 min={min}
                 max={max}
                 step={step}
+                autoFocus={autoFocus}
                 className={cn(
                   "text-[16px] md:text-sm font-medium bg-input border-none font-sans",
                   className,
@@ -171,6 +174,7 @@ export default function Input<T extends FieldValues>({
           step={step}
           onChange={onChange}
           value={value}
+          autoFocus={autoFocus}
           className={cn(
             "text-[16px] md:text-sm font-medium bg-input border-none",
             white && "bg-white border border-slate-200 border-solid"
