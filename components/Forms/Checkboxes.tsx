@@ -28,6 +28,7 @@ const Checkboxes = <T extends FieldValues>({
 }: Props<T>) => {
   const currentValue = form.watch(name) as (string | number)[];
   const isMaxReached = max !== undefined && currentValue?.length >= max;
+
   return (
     <FormField
       control={form.control}
