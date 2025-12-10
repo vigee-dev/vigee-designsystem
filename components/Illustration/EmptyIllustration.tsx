@@ -48,6 +48,8 @@ export default function EmptyIllustration({
           alt="Empty Street"
           color={color}
           className={classNameImage}
+          width={300}
+          height={300}
         />
       )}
       {type === "projects" && (
