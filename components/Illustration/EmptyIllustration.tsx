@@ -4,8 +4,9 @@ import { Container } from "../Container/Container";
 import { cn } from "../lib/utils";
 import { EmptyDocuments } from "./EmptyDocuments";
 import { EmptyProjects } from "./EmptyProjects";
-import { EmptyStreet } from "./EmptyStreet";
+import street from "../../img/empty/emptyMan.svg";
 import { EmptyUsers } from "./EmptyUsers";
+import Image from "next/image";
 
 interface IllustrationProps {
   text?: string;
@@ -42,7 +43,12 @@ export default function EmptyIllustration({
       )}
     >
       {type === "street" && (
-        <EmptyStreet color={color} className={classNameImage} />
+        <Image
+          src={street}
+          alt="Empty Street"
+          color={color}
+          className={classNameImage}
+        />
       )}
       {type === "projects" && (
         <EmptyProjects color={color} className={classNameImage} />
