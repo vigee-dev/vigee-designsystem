@@ -3,8 +3,7 @@
 import { MoreHorizontal, Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useState, useTransition } from "react";
+import React, { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -64,7 +63,6 @@ const AppSidebar = ({
   switcher,
   classNameItems,
   hoverBackground = "bg-slate-800",
-  onNavigate,
 }: {
   items: MenuItem[];
   bottomItems?: MenuItem[];
@@ -83,22 +81,8 @@ const AppSidebar = ({
   switcher?: boolean;
   classNameItems?: string;
   hoverBackground?: string;
-  onNavigate?: (href: string) => void;
 }) => {
-  const router = useRouter();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
-  const [, startTransition] = useTransition();
-
-  const handleClick = (item: { href: string }) => {
-    if (onNavigate) {
-      onNavigate(item.href);
-    } else {
-      startTransition(() => {
-        router.push(item.href);
-        router.refresh();
-      });
-    }
-  };
   const { open } = useSidebar();
 
   // Fonction pour vérifier si un item est actif (match exact ou sous-route)
@@ -153,9 +137,9 @@ const AppSidebar = ({
                     onMouseLeave={() => setHoveredItem(null)}
                     className={cn("w-full hover:bg-transparent bg-transparent")}
                   >
-                    <div
-                      className={`flex items-center gap-2 w-full`}
-                      onClick={() => handleClick(item)}
+                    <Link
+                      href={item.href}
+                      className="flex items-center gap-2 w-full"
                     >
                       <span
                         className={`${
@@ -188,7 +172,7 @@ const AppSidebar = ({
                       >
                         {item.name}
                       </span>
-                    </div>
+                    </Link>
                   </SidebarMenuButton>
 
                   {item?.type === "action" && (
@@ -251,9 +235,9 @@ const AppSidebar = ({
                   onMouseLeave={() => setHoveredItem(null)}
                   className={cn("w-full hover:bg-transparent bg-transparent")}
                 >
-                  <div
+                  <Link
+                    href={item.href}
                     className="flex items-center gap-2 w-full"
-                    onClick={() => handleClick(item)}
                   >
                     <span
                       className={`${
@@ -286,7 +270,7 @@ const AppSidebar = ({
                     >
                       {item.name}
                     </span>
-                  </div>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}
