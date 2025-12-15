@@ -3,6 +3,7 @@
 import { MoreHorizontal, Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import {
   DropdownMenu,
@@ -85,9 +86,18 @@ const AppSidebar = ({
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const { open } = useSidebar();
 
+  // Utiliser le pathname côté client pour détecter la navigation
+  const currentPathname = usePathname();
+  // Utiliser le pathname client s'il est disponible, sinon utiliser celui du serveur
+  const activePath = currentPathname || pathname;
+
   // Fonction pour vérifier si un item est actif (match exact ou sous-route)
   const isItemActive = (itemHref: string) => {
-    return pathname === itemHref || pathname.startsWith(itemHref + "/");
+    // Match exact
+    if (activePath === itemHref) return true;
+    // Match sous-route (ex: /studio/opportunities/123 pour /studio/opportunities)
+    if (activePath.startsWith(itemHref + "/")) return true;
+    return false;
   };
 
   return (
