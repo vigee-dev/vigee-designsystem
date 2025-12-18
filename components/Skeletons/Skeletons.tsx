@@ -585,3 +585,99 @@ export const DocumentSkeleton = () => {
     </div>
   );
 };
+
+export const DocumentViewerSkeleton = ({
+  className,
+}: {
+  className?: string;
+}) => {
+  return (
+    <div
+      className={cn(
+        "flex flex-col h-full min-h-[60dvh] bg-slate-50 rounded-xl overflow-hidden",
+        className
+      )}
+    >
+      {/* Corps du document - simulation de page PDF */}
+      <div className="flex-1 p-4 overflow-hidden">
+        <div className="bg-white rounded-lg shadow-sm p-8 h-full flex flex-col gap-6">
+          {/* En-tête avec logo simulé */}
+          <div className="flex justify-between items-start">
+            <div
+              className={`${shimmer} relative h-12 w-32 overflow-hidden rounded-md bg-gray-100`}
+            />
+            <div className="flex flex-col gap-1 items-end">
+              <div
+                className={`${shimmer} relative h-3 w-24 overflow-hidden rounded-md bg-gray-100`}
+              />
+              <div
+                className={`${shimmer} relative h-3 w-20 overflow-hidden rounded-md bg-gray-100`}
+              />
+            </div>
+          </div>
+
+          {/* Titre du document */}
+          <div
+            className={`${shimmer} relative h-7 w-2/3 overflow-hidden rounded-md bg-gray-100 mt-4`}
+          />
+
+          {/* Lignes de texte */}
+          <div className="flex flex-col gap-3 flex-1">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div
+                key={i}
+                className={`${shimmer} relative h-3 overflow-hidden rounded-md bg-gray-100`}
+                style={{ width: `${75 + (i % 3) * 8}%` }}
+              />
+            ))}
+
+            {/* Espace */}
+            <div className="h-6" />
+
+            {/* Sous-section */}
+            <div
+              className={`${shimmer} relative h-5 w-1/3 overflow-hidden rounded-md bg-gray-100`}
+            />
+
+            {/* Plus de lignes */}
+            {Array.from({ length: 5 }).map((_, i) => (
+              <div
+                key={`second-${i}`}
+                className={`${shimmer} relative h-3 overflow-hidden rounded-md bg-gray-100`}
+                style={{ width: `${70 + (i % 4) * 7}%` }}
+              />
+            ))}
+
+            {/* Tableau simulé */}
+            <div className="mt-6 border border-gray-100 rounded-lg overflow-hidden">
+              <div className="flex bg-gray-50 p-3 gap-4">
+                <div
+                  className={`${shimmer} relative h-3 w-24 overflow-hidden rounded-md bg-gray-200`}
+                />
+                <div
+                  className={`${shimmer} relative h-3 w-32 overflow-hidden rounded-md bg-gray-200`}
+                />
+                <div
+                  className={`${shimmer} relative h-3 w-20 overflow-hidden rounded-md bg-gray-200`}
+                />
+              </div>
+              {Array.from({ length: 3 }).map((_, i) => (
+                <div key={`row-${i}`} className="flex p-3 gap-4 border-t border-gray-100">
+                  <div
+                    className={`${shimmer} relative h-3 w-24 overflow-hidden rounded-md bg-gray-100`}
+                  />
+                  <div
+                    className={`${shimmer} relative h-3 w-32 overflow-hidden rounded-md bg-gray-100`}
+                  />
+                  <div
+                    className={`${shimmer} relative h-3 w-20 overflow-hidden rounded-md bg-gray-100`}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
