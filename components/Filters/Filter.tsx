@@ -44,6 +44,15 @@ export const Filter = ({
   // -----------------------
   const [value, setValue] = useQueryState(queryKey, { shallow: false });
 
+  // Apply defaultValue to URL on mount if no value is set
+  const hasAppliedDefault = React.useRef(false);
+  React.useEffect(() => {
+    if (!multi && defaultValue && value === null && !hasAppliedDefault.current) {
+      hasAppliedDefault.current = true;
+      setValue(defaultValue);
+    }
+  }, [multi, defaultValue, value, setValue]);
+
   const handleSingleChange = (val: string | undefined) => {
     setValue(val || null);
     const params = new URLSearchParams(searchParams?.toString() || "");
