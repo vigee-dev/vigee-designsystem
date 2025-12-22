@@ -13,7 +13,7 @@ import {
   CommandList,
 } from "../ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { useQueryState } from "nuqs";
+import { useQueryState, parseAsString } from "nuqs";
 import { Select } from "../Select/Select";
 import { PiChevronSortVerticalStroke } from "../../icons/PikaIcons";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -42,16 +42,18 @@ export const Filter = ({
   // -----------------------
   // SINGLE VALUE MODE
   // -----------------------
-  const [value, setValue] = useQueryState(queryKey, { shallow: false });
-
-  // Apply defaultValue to URL on mount if no value is set
-  const hasAppliedDefault = React.useRef(false);
-  React.useEffect(() => {
-    if (!multi && defaultValue && value === null && !hasAppliedDefault.current) {
-      hasAppliedDefault.current = true;
-      setValue(defaultValue);
+  // Use parseAsString with defaultValue to ensure value is never null when defaultValue is provided
+  const parser = React.useMemo(() => {
+    if (defaultValue) {
+      return parseAsString.withDefault(defaultValue);
     }
-  }, [multi, defaultValue, value, setValue]);
+    return parseAsString;
+  }, [defaultValue]);
+
+  const [value, setValue] = useQueryState(queryKey, {
+    ...parser,
+    shallow: false
+  });
 
   const handleSingleChange = (val: string | undefined) => {
     setValue(val || null);
@@ -254,7 +256,8 @@ export const Filter = ({
       options={sortedOptions}
       placeholder={placeholder}
       className="w-fit bg-transparent border-none whitespace-nowrap"
-      defaultValue={value ?? defaultValue}
+      value={value ?? undefined}
+      defaultValue={defaultValue}
       clearable={clearable}
     />
   );

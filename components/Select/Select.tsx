@@ -47,15 +47,16 @@ export function Select({
   classNameContent,
 }: SelectProps) {
   const [selectedValue, setSelectedValue] = React.useState<string | undefined>(
-    defaultValue || undefined
+    value ?? defaultValue ?? undefined
   );
   const [key, setKey] = useState<string>(
     new Date().toISOString()
   ); /* key to control the rerender of the component */
 
   useEffect(() => {
-    setSelectedValue(value);
-  }, [value]);
+    // Sync with controlled value or fallback to defaultValue
+    setSelectedValue(value ?? defaultValue ?? undefined);
+  }, [value, defaultValue]);
 
   const groupedOptions = options.reduce<Record<string, SelectOption[]>>(
     (acc, option) => {
