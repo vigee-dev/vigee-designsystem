@@ -8,9 +8,10 @@ interface Props {
   gaugeSecondaryColor?: string;
   className?: string;
   text?: string;
+  textClassName?: string;
 }
 
-export default function ProgressCircle({ max = 100, min = 0, value = 0, gaugePrimaryColor, gaugeSecondaryColor = "#E2E8F0", className, text }: Props) {
+export default function ProgressCircle({ max = 100, min = 0, value = 0, gaugePrimaryColor, gaugeSecondaryColor = "#E2E8F0", className, text, textClassName }: Props) {
   const circumference = 2 * Math.PI * 45;
   const percentPx = circumference / 100;
   const currentPercent = ((value - min) / (max - min)) * 100;
@@ -79,8 +80,10 @@ export default function ProgressCircle({ max = 100, min = 0, value = 0, gaugePri
             }
           />
         </svg>
-        <span data-current-value={currentPercent} className="duration-[var(--transition-length)] delay-[var(--delay)] absolute inset-0 m-auto h-fit w-fit ease-linear animate-in fade-in text-primary">
-          {currentPercent} %
+        <span
+          data-current-value={currentPercent}
+          className={cn("duration-[var(--transition-length)] delay-[var(--delay)] absolute inset-0 m-auto h-fit w-fit ease-linear animate-in fade-in text-primary", textClassName)}>
+          {currentPercent.toFixed(0)} %
         </span>
       </div>
       {text && <p className="text-gray-500 mt-2 animate-pulse">{text}</p>}

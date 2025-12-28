@@ -8,7 +8,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../components/ui/select";
+} from "../ui/select";
 
 import { cn } from "../lib/utils";
 
@@ -51,7 +51,7 @@ export const UrlFilter = ({
       </SelectTrigger>
       <SelectContent className="w-full md:w-auto">
         <SelectGroup>
-          {options.map(option => (
+          {options.map((option) => (
             <SelectItem key={option.value} value={option.value}>
               {option.label}
             </SelectItem>

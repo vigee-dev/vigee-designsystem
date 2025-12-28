@@ -1,5 +1,5 @@
-import { Button } from '../Buttons/Button';
-import { AlertDialog } from '../Forms/AlertDialog';
+import { Button } from "./Button";
+import { AlertDialog } from "../Forms/AlertDialog";
 
 interface Props {
   alertTitle: string;
@@ -29,8 +29,8 @@ export const DeleteAction = ({
       onClick={deleteAction}
       trigger={
         <Button
-          icon='trash'
-          variant='outline'
+          icon="trash"
+          variant="outline"
           className={className}
           pending={isPending}
           tooltip={tooltip}

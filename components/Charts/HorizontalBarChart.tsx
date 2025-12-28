@@ -2,8 +2,20 @@
 
 import { Bar, BarChart, XAxis, YAxis, Cell, LabelList } from "recharts"; // Ajoutez LabelList ici
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../../components/ui/card";
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "../../components/ui/chart";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "../ui/chart";
 
 interface ChartDataItem {
   label: string;
@@ -17,10 +29,16 @@ interface ComponentProps {
   description: string;
   footerText?: string;
   euro?: boolean;
-  emptyMessage?: string
+  emptyMessage?: string;
 }
 
-export function HorizontalBarChart({ data, title, description, footerText, emptyMessage }: ComponentProps) {
+export function HorizontalBarChart({
+  data,
+  title,
+  description,
+  footerText,
+  emptyMessage,
+}: ComponentProps) {
   const chartConfig = data.reduce((config, item) => {
     config[item.label] = {
       label: item.label,
@@ -35,7 +53,7 @@ export function HorizontalBarChart({ data, title, description, footerText, empty
 
   // Calculer le pourcentage pour chaque barre
   const totalValue = data.reduce((sum, item) => sum + item.value, 0);
-  const dataWithPercentage = data.map(item => ({
+  const dataWithPercentage = data.map((item) => ({
     ...item,
     percentage: ((item.value / totalValue) * 100).toFixed(0) + "%",
   }));
@@ -46,11 +64,15 @@ export function HorizontalBarChart({ data, title, description, footerText, empty
   return (
     <Card className="border-gray-100 ">
       <CardHeader>
-        <CardTitle className="text-lg font-bold text-primary">{title}</CardTitle>
+        <CardTitle className="text-lg font-bold text-primary">
+          {title}
+        </CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent>
-        {!(data.length > 0) && emptyMessage && <p className="text-gray-500 text-sm">{emptyMessage}</p>}
+        {!(data.length > 0) && emptyMessage && (
+          <p className="text-gray-500 text-sm">{emptyMessage}</p>
+        )}
         <ChartContainer config={chartConfig}>
           <BarChart
             accessibilityLayer
@@ -59,20 +81,37 @@ export function HorizontalBarChart({ data, title, description, footerText, empty
             margin={{
               left: 40, // Ajoutez plus de marge à gauche
               right: 30,
-            }}>
-            <YAxis dataKey="label" type="category" tickLine={false} tickMargin={10} axisLine={false} tickFormatter={value => value} />
+            }}
+          >
+            <YAxis
+              dataKey="label"
+              type="category"
+              tickLine={false}
+              tickMargin={10}
+              axisLine={false}
+              tickFormatter={(value) => value}
+            />
             <XAxis dataKey="value" type="number" hide />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent hideLabel />}
+            />
             <Bar dataKey="value" layout="vertical" radius={5}>
               {sortedData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.color} /> // Utilisez la couleur ici
               ))}
-              <LabelList dataKey="percentage" position="right" className="text-primary" />
+              <LabelList
+                dataKey="percentage"
+                position="right"
+                className="text-primary"
+              />
             </Bar>
           </BarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">{footerText}</CardFooter>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        {footerText}
+      </CardFooter>
     </Card>
   );
 }

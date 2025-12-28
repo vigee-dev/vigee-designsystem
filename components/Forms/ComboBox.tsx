@@ -3,22 +3,17 @@
 import React from "react";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "../../components/ui/button";
+import { Button } from "../ui/button";
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from "../../components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "../../components/ui/popover";
+} from "../ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { cn } from "../lib/utils";
-import { Label } from "../ui/label";
 import { FormLabel } from "../ui/form";
 import { ScrollArea } from "../ui/scroll-area";
 
@@ -58,8 +53,6 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
 
   // Fonction de filtrage personnalisée
   const filterItems = (label = "", search = "") => {
-    // Votre logique de filtrage ici, retournez 1 pour un match, 0 sinon.
-    // Par exemple, filtrer sur le label des items
     if (label.toLowerCase().includes(search.toLowerCase())) return 1;
     return 0;
   };
@@ -80,7 +73,7 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
           <div className="flex gap-x-2 items-center">
             {icon && icon}
             {value
-              ? items.find(item => item.value === value)?.label
+              ? items.find((item) => item.value === value)?.label
               : placeholder}
           </div>
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -92,14 +85,14 @@ export function ComboBox<T extends z.ZodType<any, any, any>>({
           <CommandEmpty>Aucun élément trouvé.</CommandEmpty>
           <CommandGroup className="max-h-[200px]">
             <ScrollArea className="h-[200px]">
-              {items.map(item => (
+              {items.map((item) => (
                 <CommandItem
                   className="max-h-[200px]"
                   key={item.value}
-                  value={item.value}
-                  onSelect={(currentValue: string) => {
+                  value={item.label}
+                  onSelect={() => {
                     const valueToUpdate =
-                      currentValue === value ? undefined : currentValue;
+                      item.value === value ? undefined : item.value;
 
                     if (form) {
                       form.setValue(

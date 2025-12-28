@@ -1,6 +1,7 @@
 import { Loader2, XIcon } from "lucide-react";
 import Link from "next/link";
 import {
+  PiAnnotationStarDuoSolid,
   PiAppleLogoStroke,
   PiArrowLeftCircleContrast,
   PiArrowLeftStroke,
@@ -21,6 +22,7 @@ import {
   PiDownloadDownDuoSolid,
   PiEye02OnContrast,
   PiFacebookStroke,
+  PiFilePlusDuoSolid,
   PiFilterLinesStroke,
   PiGithubStroke,
   PiGoogleStroke,
@@ -39,7 +41,7 @@ import {
   PiPlusCircleStroke,
   PiPlusDefaultStroke,
   PiPlusSquareDuoSolid,
-  PiRefreshDuoStroke,
+  PiRefreshStroke,
   PiRepeatSquareStroke,
   PiRotateLeftStroke,
   PiSearchDefaultStroke,
@@ -50,11 +52,9 @@ import {
   PiUserCircleStroke,
   PiUserPlusStroke,
   PiUserSettingsStroke,
-  PiFilePlusStroke,
-  PiAnnotationStarStroke,
 } from "../../icons/PikaIcons";
-import { Tooltip } from "../Tooltip/Tooltip";
 import { cn } from "../lib/utils";
+import { Tooltip } from "../Tooltip/Tooltip";
 import {
   Button as ShadButton,
   ButtonProps as ShadButtonProps,
@@ -92,6 +92,8 @@ const iconMap = {
   download: PiDownloadDownDuoSolid,
   trash: PiDeleteDustbin01DuoSolid,
   upload: PiUploadUpDuoSolid,
+  fileAdd: PiFilePlusDuoSolid,
+  annotationStar: PiAnnotationStarDuoSolid,
   back: PiArrowLeftStroke,
   edit: PiPencilEditBoxDuoStroke,
   arrowLeft: PiArrowLeftCircleContrast,
@@ -105,7 +107,7 @@ const iconMap = {
   camera: PiCameraStroke,
   filter: PiFilterLinesStroke,
   calendar: PiCalendarFilledStroke,
-  refresh: PiRefreshDuoStroke,
+  refresh: PiRefreshStroke,
   logout: PiLogOutRightDuoStroke,
   navigation: PiNavigationSlantStroke,
   chevronDown: PiChevronDownStroke,
@@ -136,8 +138,6 @@ const iconMap = {
   repeat: PiRepeatSquareStroke,
   instagram: PiInstagramStroke,
   facebook: PiFacebookStroke,
-  fileAdd: PiFilePlusStroke,
-  annotationStar: PiAnnotationStarStroke,
 };
 
 export function Button({
@@ -162,13 +162,13 @@ export function Button({
     <ShadButton
       disabled
       variant={variant}
-      data-testid={dataTestId}
       className={cn(
         className,
         children
           ? "rounded-xl font-bold text-sm flex px-3 gap-4"
           : "bg-transparent text-gray-800"
       )}
+      data-testid={dataTestId}
     >
       {children}
       <Loader2
@@ -267,7 +267,6 @@ const ButtonComponent = ({
         onClick={onClick}
         type={type}
         disabled={disabled}
-        data-testid={dataTestId}
         className={cn(
           "group rounded-xl font-bold text-sm flex px-3 gap-4 ",
           className,
@@ -277,13 +276,14 @@ const ButtonComponent = ({
             : "hover:cursor-not-allowed ",
           pending && children && "bg-transparent text-gray-800"
         )}
+        data-testid={dataTestId}
       >
         {IconLeft && (
           <IconLeft
             className={cn(
               "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
               !children &&
-                "text-gray-400 transform transition-ease-in-out duration-300 w-6 h-6",
+                "text-slate-400 transform transition-ease-in-out duration-300 w-6 h-6",
               big && "w-10 h-10",
               variant === "outline" && "text-gray-900",
               variant === "secondary" && "text-secondary-foreground",
@@ -298,7 +298,6 @@ const ButtonComponent = ({
         )}
 
         {children}
-
         {iconComponent}
 
         {Icon && (
@@ -306,7 +305,7 @@ const ButtonComponent = ({
             className={cn(
               "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
               !children &&
-                "text-gray-400 transform transition-ease-in-out duration-300 w-6 h-6",
+                "text-slate-400 transform transition-ease-in-out duration-300 w-6 h-6",
               big && "w-10 h-10",
               variant === "outline" && "text-gray-900",
               variant === "secondary" && "text-secondary-foreground",
@@ -328,7 +327,6 @@ const ButtonComponent = ({
       onClick={onClick}
       type={type}
       disabled={disabled}
-      data-testid={dataTestId}
       className={cn(
         "group rounded-xl font-bold text-sm flex gap-4",
         className,
@@ -339,13 +337,14 @@ const ButtonComponent = ({
           : "hover:cursor-not-allowed",
         pending && children && "bg-transparent text-gray-800"
       )}
+      data-testid={dataTestId}
     >
       {IconLeft && (
         <IconLeft
           className={cn(
             "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
             !children &&
-              "text-gray-400 transform transition-ease-in-out duration-300 w-6 h-6",
+              "text-slate-400 transform transition-ease-in-out duration-300 w-6 h-6",
             big && "w-10 h-10",
             variant === "outline" && "text-gray-900",
             variant === "secondary" && "text-secondary-foreground",
@@ -368,7 +367,7 @@ const ButtonComponent = ({
           className={cn(
             "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
             !children &&
-              "text-gray-400 transform transition-ease-in-out duration-300 w-6 h-6",
+              "text-slate-400 transform transition-ease-in-out duration-300 w-6 h-6",
             big && "w-10 h-10",
             variant === "outline" && "text-gray-900",
             variant === "secondary" && "text-secondary-foreground",

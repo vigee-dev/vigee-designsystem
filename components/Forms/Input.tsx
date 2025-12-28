@@ -7,22 +7,17 @@ import {
   FormMessage,
 } from "../ui/form";
 
-import { Input as ShadInput } from "../ui/input";
-import { UseFormReturn, FieldValues, Path } from "react-hook-form";
+import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import {
   PiExternalLinkCircleDuoSolid,
   PiQuestionMarkCircleDuoStroke,
 } from "../../icons/PikaIcons";
+import { Input as ShadInput } from "../ui/input";
 
-import {
-  HoverCard,
-  HoverCardTrigger,
-  HoverCardContent,
-} from "../ui/hover-card";
-import { Label } from "../../components/ui/label";
+import React, { useState } from "react";
+import { Label } from "../ui/label";
 import { cn } from "../lib/utils";
-import { useEffect, useState } from "react";
-import React from "react";
+import { HoverCard, HoverCardTrigger } from "../ui/hover-card";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -46,6 +41,7 @@ type Props<T extends FieldValues> = {
   maxLength?: number;
   link?: string | null;
   white?: boolean;
+  autoFocus?: boolean;
   "data-testid"?: string;
 };
 
@@ -70,6 +66,7 @@ export default function Input<T extends FieldValues>({
   minimalist,
   link,
   white,
+  autoFocus,
   "data-testid": dataTestId,
 }: Props<T>) {
   const [charCount, setCharCount] = useState(
@@ -99,12 +96,12 @@ export default function Input<T extends FieldValues>({
               <div className="flex items-center gap-2">
                 {helpComponent && (
                   <HoverCardTrigger>
-                    <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+                    <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-slate-400" />
                   </HoverCardTrigger>
                 )}
                 {link && (
                   <a href={link} target="_blank" rel="noopener noreferrer">
-                    <PiExternalLinkCircleDuoSolid className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+                    <PiExternalLinkCircleDuoSolid className="w-5 h-5 hover:text-primary hover:cursor-pointer text-slate-400" />
                   </a>
                 )}
               </div>
@@ -120,19 +117,20 @@ export default function Input<T extends FieldValues>({
                 min={min}
                 max={max}
                 step={step}
-                data-testid={dataTestId}
+                autoFocus={autoFocus}
                 className={cn(
-                  "text-[16px] md:text-sm font-medium bg-input border-none ",
+                  "text-[16px] md:text-sm font-medium bg-input border-none font-sans",
                   className,
                   minimalist &&
-                    "focus-visible:ring-offset-0 bg-transparent font-medium text-black placeholder:text-gray-300  focus-visible:ring-0 ring-0 border-none  ring-offset-none p-0 focus:outline-none focus:ring-0 caret-black",
-                  white && "bg-white border border-zinc-200 border-solid"
+                    "focus-visible:ring-offset-0 bg-transparent font-medium text-black placeholder:text-slate-300  focus-visible:ring-0 ring-0 border-none  ring-offset-none p-0 focus:outline-none focus:ring-0 caret-black",
+                  white && "bg-white border border-slate-200 border-solid"
                 )}
                 onChange={(e) => {
                   if (maxLength) setCharCount(e.target.value.length);
                   field.onChange(e);
                   if (onChange) onChange(e);
                 }}
+                data-testid={dataTestId || (name ? `input-${name}` : undefined)}
               />
             </FormControl>
           </HoverCard>
@@ -144,33 +142,27 @@ export default function Input<T extends FieldValues>({
   ) : (
     <div className={cn("space-y-2", className)}>
       <HoverCard>
-        {(label || helpComponent) && (
-          <div className="flex items-center justify-between py-1">
-            {label && (
-              <Label className="font-black text-primary">{label}</Label>
-            )}
-            {helpComponent && (
-              <HoverCardTrigger>
-                <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
-              </HoverCardTrigger>
-            )}
-          </div>
-        )}
+        <div className="flex items-center justify-between py-1">
+          {label && <Label className="font-black text-primary">{label}</Label>}
+          {helpComponent && (
+            <HoverCardTrigger>
+              <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-slate-400" />
+            </HoverCardTrigger>
+          )}
+        </div>
 
-        {(helpComponent || link) && (
-          <div className="flex items-center gap-2">
-            {helpComponent && (
-              <HoverCardTrigger>
-                <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
-              </HoverCardTrigger>
-            )}
-            {link && (
-              <a href={link} target="_blank" rel="noopener noreferrer">
-                <PiExternalLinkCircleDuoSolid className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
-              </a>
-            )}
-          </div>
-        )}
+        <div className="flex items-center gap-2">
+          {helpComponent && (
+            <HoverCardTrigger>
+              <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-slate-400" />
+            </HoverCardTrigger>
+          )}
+          {link && (
+            <a href={link} target="_blank" rel="noopener noreferrer">
+              <PiExternalLinkCircleDuoSolid className="w-5 h-5 hover:text-primary hover:cursor-pointer text-slate-400" />
+            </a>
+          )}
+        </div>
 
         <ShadInput
           placeholder={placeholder}
@@ -182,11 +174,12 @@ export default function Input<T extends FieldValues>({
           step={step}
           onChange={onChange}
           value={value}
-          data-testid={dataTestId}
+          autoFocus={autoFocus}
           className={cn(
             "text-[16px] md:text-sm font-medium bg-input border-none",
-            white && "bg-white border border-zinc-200 border-solid"
+            white && "bg-white border border-slate-200 border-solid"
           )}
+          data-testid={dataTestId || (name ? `input-${name}` : undefined)}
         />
       </HoverCard>
       {descr && <p className={"text-sm text-muted-foreground"}>{descr}</p>}

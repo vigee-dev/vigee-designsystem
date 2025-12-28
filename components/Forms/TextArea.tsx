@@ -1,14 +1,22 @@
 "use client";
-import { Textarea } from "../ui/textarea";
-import { Label } from "../ui/label";
 import { useState } from "react";
+import { Textarea } from "../ui/textarea";
 
-import { FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
-import { UseFormReturn, FieldValues, Path } from "react-hook-form";
+import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
-import { Tooltip } from "../Tooltip/Tooltip";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card";
 import { cn } from "../lib/utils";
+import {
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "../ui/hover-card";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -30,10 +38,31 @@ type Props<T extends FieldValues> = {
   rows?: number;
   white?: boolean;
   fullWidth?: boolean;
+  rezizable?: boolean;
+  "data-testid"?: string;
 };
 
-export default function TextArea<T extends FieldValues>({ form, name, required, label, placeholder, max, onBlur, className, descr, disabled, helpComponent, rows = 3, white, fullWidth }: Props<T>) {
-  const [charCount, setCharCount] = useState(name ? form?.getValues(name)?.length || 0 : 0);
+export default function TextArea<T extends FieldValues>({
+  form,
+  name,
+  required,
+  label,
+  placeholder,
+  max,
+  onBlur,
+  className,
+  descr,
+  disabled,
+  helpComponent,
+  rows = 3,
+  white,
+  fullWidth,
+  rezizable,
+  "data-testid": dataTestId,
+}: Props<T>) {
+  const [charCount, setCharCount] = useState(
+    name ? form?.getValues(name)?.length || 0 : 0
+  );
 
   return (
     <FormField
@@ -58,7 +87,7 @@ export default function TextArea<T extends FieldValues>({ form, name, required, 
               )}
               {helpComponent && (
                 <HoverCardTrigger>
-                  <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-gray-400" />
+                  <PiQuestionMarkCircleDuoStroke className="w-5 h-5 hover:text-primary hover:cursor-pointer text-slate-400" />
                 </HoverCardTrigger>
               )}
             </div>
@@ -76,15 +105,21 @@ export default function TextArea<T extends FieldValues>({ form, name, required, 
             {...field}
             rows={rows}
             placeholder={placeholder ?? ""}
-            onBlur={onBlur}
-            onChange={e => {
+            onBlur={onBlur ? onBlur : field.onBlur}
+            onChange={(e) => {
               if (max) {
                 setCharCount(e.target.value.length); // Mise à jour du compteur de caractères
               }
               field.onChange(e);
             }}
-            className={cn(`resize-none font-medium bg-input border-none text-[16px] md:text-sm col-span-full`, white && "bg-white border border-zinc-200 border-solid", className)}
+            className={cn(
+              ` font-medium bg-input border-none text-[16px] md:text-sm col-span-full font-sans`,
+              white && "bg-white border border-slate-200 border-solid",
+              className,
+              rezizable ? "resize-vertical" : "resize-none"
+            )}
             disabled={disabled}
+            data-testid={dataTestId || (name ? `textarea-${name}` : undefined)}
           />
           {descr && <FormDescription>{descr}</FormDescription>}
           <FormMessage />

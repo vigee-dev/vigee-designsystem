@@ -54,13 +54,15 @@ export function Drawer({
           className={cn(
             'bg-white flex flex-col fixed z-50 bottom-0 left-0 right-0 max-h-[92vh] rounded-t-[10px]',
             fullScreen && 'min-h-dvh rounded-none bg-background',
-            className,
+            className
           )}
         >
           <div className='w-full h-full overflow-auto'>
             <div
               className={cn(
-                `${large ? 'max-w-4xl' : 'max-w-lg'} w-full mx-auto p-4 rounded-t-[10px]`,
+                `${
+                  large ? 'max-w-4xl' : 'max-w-lg'
+                } w-full mx-auto p-4 rounded-t-[10px]`,
                 classNameContent,
                 fullScreen && 'rounded-none'
               )}

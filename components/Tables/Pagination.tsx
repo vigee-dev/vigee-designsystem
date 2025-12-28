@@ -6,16 +6,22 @@ import Link from "next/link";
 import { generatePagination } from "../lib/utils";
 import { usePathname, useSearchParams } from "next/navigation";
 
-export default function Pagination({ totalPages }: { totalPages: number }) {
+export default function Pagination({
+  totalPages,
+  paramName = "page",
+}: {
+  totalPages: number;
+  paramName?: string;
+}) {
   // NOTE: comment in this code when you get to this point in the course
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentPage = Number(searchParams.get("page")) || 1;
+  const currentPage = Number(searchParams.get(paramName)) || 1;
   const allPages = generatePagination(currentPage, totalPages);
 
   const createPageURL = (pageNumber: number | string) => {
     const params = new URLSearchParams(searchParams);
-    params.set("page", pageNumber.toString());
+    params.set(paramName, pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   };
 
@@ -79,7 +85,7 @@ function PaginationNumber({
       "rounded-r-md": position === "last" || position === "single",
       " bg-primary border-primary text-white": isActive,
       "hover:bg-gray-100": !isActive && position !== "middle",
-      "text-gray-300": position === "middle",
+      "text-slate-300": position === "middle",
     }
   );
 
@@ -104,7 +110,7 @@ function PaginationArrow({
   const className = clsx(
     "flex h-6 w-6 items-center justify-center rounded-md border",
     {
-      "pointer-events-none text-gray-300": isDisabled,
+      "pointer-events-none text-slate-300": isDisabled,
       "hover:bg-gray-100": !isDisabled,
       "mr-2 md:mr-4": direction === "left",
       "ml-2 md:ml-4": direction === "right",

@@ -23,15 +23,15 @@ export const AnimatedList = React.memo(
     }, [childrenArray.length, delay]);
 
     const itemsToShow = useMemo(
-      () => childrenArray.slice(0, index + 1),
+      () => childrenArray.slice(0, index + 1).reverse(),
       [index, childrenArray]
     );
 
     return (
       <div className={`flex flex-col items-center gap-4 ${className}`}>
         <AnimatePresence>
-          {itemsToShow.map((item, i) => (
-            <AnimatedListItem key={(item as ReactElement).key ?? i}>
+          {itemsToShow.map((item) => (
+            <AnimatedListItem key={(item as ReactElement).key}>
               {item}
             </AnimatedListItem>
           ))}
@@ -48,7 +48,7 @@ export function AnimatedListItem({ children }: { children: React.ReactNode }) {
     initial: { scale: 0, opacity: 0 },
     animate: { scale: 1, opacity: 1, originY: 0 },
     exit: { scale: 0, opacity: 0 },
-    transition: { type: "spring", stiffness: 350, damping: 40 },
+    transition: { type: "spring" as "spring", stiffness: 350, damping: 40 },
   };
 
   return (

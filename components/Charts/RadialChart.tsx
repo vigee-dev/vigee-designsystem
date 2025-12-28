@@ -9,8 +9,8 @@ import {
   RadialBarChart,
 } from "recharts";
 
-import { Card, CardContent, CardFooter } from "../../components/ui/card";
-import { ChartConfig, ChartContainer } from "../../components/ui/chart";
+import { Card, CardContent, CardFooter } from "../ui/card";
+import { ChartConfig, ChartContainer } from "../ui/chart";
 import { cn } from "../lib/utils";
 const chartData = [
   { browser: "safari", visitors: 200, fill: "var(--color-safari)" },

@@ -222,12 +222,7 @@ export const Toggles = <T extends FieldValues>({
                       initial={{ opacity: 0.8, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.3 }}
-                      // Probleme de version entre react etla lib motion, on utilise le style pour eviter l'erreur TS avec la prop className
-                      style={{
-                        height: "100%",
-                        width: "100%",
-                        flex: isNowrap ? "1" : undefined,
-                      }}
+                      className={cn("h-full w-full", isNowrap && "flex-1")}
                     >
                       <ToggleGroupItem
                         value={option.value}
@@ -266,7 +261,7 @@ export const Toggles = <T extends FieldValues>({
                               initial={{ opacity: 0, scale: 0.5 }}
                               animate={{ opacity: 1, scale: 1 }}
                               transition={{ duration: 0.3 }}
-                              style={{ marginLeft: "0.5rem" }}
+                              className="ml-2"
                             >
                               <PiCheckTickSquareDuoSolid className="text-success-foreground" />
                             </motion.div>

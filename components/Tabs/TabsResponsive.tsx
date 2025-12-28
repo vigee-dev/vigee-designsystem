@@ -1,17 +1,17 @@
-'use client';
-import { ReactNode, useTransition } from 'react';
-import { useQueryState } from 'nuqs';
+"use client";
+import { useRouter } from "next/navigation";
+import { useQueryState } from "nuqs";
+import { ReactNode } from "react";
+import { cn } from "../lib/utils";
+import { Badge } from "../ui/badge";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../ui/select';
-import { Tabs, TabsTrigger, TabsList } from '../ui/tabs';
-import { cn } from '../lib/utils';
-import { useRouter } from 'next/navigation';
-import { Badge } from '../ui/badge';
+} from "../ui/select";
+import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 
 export type TabOption<T extends string = string> = {
   name: string | ReactNode;
@@ -34,7 +34,7 @@ interface TabsResponsiveProps<T extends string = string> {
   className?: string;
   selectLimit?: number;
   startTransition?: (callback: () => void) => void;
-  variation?: 'default' | 'rounded' | 'rounded-blue' | 'rounded-green';
+  variation?: "default" | "rounded" | "rounded-blue" | "rounded-green";
 }
 
 export function TabsResponsive<T extends string = string>({
@@ -48,18 +48,18 @@ export function TabsResponsive<T extends string = string>({
   className,
   selectLimit = 4,
   startTransition,
-  variation = 'default',
+  variation = "default",
 }: TabsResponsiveProps<T>) {
   const router = useRouter();
 
-  const [filter, setFilter] = useQueryState(query ?? '', {
-    defaultValue: defaultValue ?? '',
+  const [filter, setFilter] = useQueryState(query ?? "", {
+    defaultValue: defaultValue ?? "",
     clearOnDefault: false,
     shallow: false,
   });
 
-  const [page, setPage] = useQueryState('page', {
-    defaultValue: '1',
+  const [page, setPage] = useQueryState("page", {
+    defaultValue: "1",
     clearOnDefault: false,
     shallow: false,
   });
@@ -72,7 +72,7 @@ export function TabsResponsive<T extends string = string>({
       router.push(option.href);
     } else if (option.value && query) {
       setFilter(value);
-      setPage('1');
+      setPage("1");
     }
     if (onChange && option.value) onChange(option.value);
   };
@@ -91,9 +91,9 @@ export function TabsResponsive<T extends string = string>({
   };
 
   return (
-    <div className=''>
-      <div className={'hidden md:flex w-full items-center'}>
-        <div className={'flex items-center gap-4 w-full'}>
+    <div className="">
+      <div className={"hidden md:flex w-full items-center "}>
+        <div className={"flex items-center gap-4 w-full"}>
           {options.length < 7 ? (
             <TabsComponent
               options={options}
@@ -117,8 +117,8 @@ export function TabsResponsive<T extends string = string>({
           )}
         </div>
       </div>
-      <div className={'flex md:hidden items-center gap-5'}>
-        <div className={'flex items-center gap-4 w-full'}>
+      <div className={"flex md:hidden items-center gap-5"}>
+        <div className={"flex items-center gap-4 w-full"}>
           {options.length < selectLimit ? (
             <TabsComponent
               options={options}
@@ -156,7 +156,7 @@ interface TabProps<T extends string = string> {
   children?: ReactNode;
   fullWidth?: boolean;
   className?: string;
-  variation?: 'default' | 'rounded' | 'rounded-blue' | 'rounded-green';
+  variation?: "default" | "rounded" | "rounded-blue" | "rounded-green";
 }
 
 const TabsComponent = <T extends string = string>({
@@ -167,46 +167,46 @@ const TabsComponent = <T extends string = string>({
   children,
   fullWidth,
   className,
-  variation = 'default',
+  variation = "default",
 }: TabProps<T>) => {
   return (
     <Tabs defaultValue={defaultValue} className={cn(`w-full`)} value={value}>
       <TabsList
         className={cn(
           `w-full `,
-          fullWidth ? ' md:w-full' : ' md:w-fit',
+          fullWidth ? " md:w-full" : " md:w-fit",
           className,
-          variation === 'rounded' ||
-            variation === 'rounded-blue' ||
-            variation === 'rounded-green'
-            ? 'bg-transparent gap-2'
-            : ''
+          variation === "rounded" ||
+            variation === "rounded-blue" ||
+            variation === "rounded-green"
+            ? "bg-transparent gap-2"
+            : ""
         )}
       >
         {options.map((option, index) => (
           <TabsTrigger
             key={index}
             disabled={option.disabled}
-            value={option.href ?? option.value ?? ''}
+            value={option.href ?? option.value ?? ""}
             className={cn(
-              `w-full flex gap-2 group min-w-0`,
-              fullWidth ? ' md:w-full' : ' md:w-fit',
-              variation === 'rounded'
-                ? 'rounded-xl dark:bg-zinc-900 bg-zinc-100 dark:data-[state=active]:text-zinc-800 text-zinc-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-zinc-100 font-bold'
-                : '',
-              variation === 'rounded-blue'
-                ? 'rounded-xl dark:bg-blue-200 dark:text-blue-600 bg-zinc-100 dark:data-[state=active]:text-blue-800 text-blue-600 dark:data-[state=active]:bg-white data-[state=active]:bg-blue-500 data-[state=active]:text-white font-bold'
-                : '',
-              variation === 'rounded-green'
-                ? 'rounded-xl dark:bg-emerald-900 dark:text-emerald-50 bg-zinc-100 dark:data-[state=active]:text-emerald-800 text-emerald-600 dark:data-[state=active]:bg-white data-[state=active]:bg-emerald-500 data-[state=active]:text-white font-bold'
-                : ''
+              `w-full flex gap-2 group min-w-0 rounded-xl`,
+              fullWidth ? " md:w-full" : " md:w-fit",
+              variation === "rounded"
+                ? "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-slate-100 font-bold"
+                : "",
+              variation === "rounded-blue"
+                ? "rounded-xl dark:bg-blue-200 dark:text-blue-600 bg-slate-100 dark:data-[state=active]:text-blue-800 text-blue-600 dark:data-[state=active]:bg-white data-[state=active]:bg-blue-500 data-[state=active]:text-white font-bold"
+                : "",
+              variation === "rounded-green"
+                ? "rounded-xl dark:bg-emerald-900 dark:text-emerald-50 bg-slate-100 dark:data-[state=active]:text-emerald-800 text-emerald-600 dark:data-[state=active]:bg-white data-[state=active]:bg-emerald-500 data-[state=active]:text-white font-bold"
+                : ""
             )}
             onClick={() =>
-              handleValueChange(option.href ?? option.value ?? '', option)
+              handleValueChange(option.href ?? option.value ?? "", option)
             }
           >
             {option.icon && (
-              <span className='group-data-[state=active]:text-zinc-50 text-gray-400 dark:group-data-[state=active]:text-zinc-800'>
+              <span className="group-data-[state=active]:text-slate-50 text-slate-400 dark:group-data-[state=active]:text-slate-800">
                 {option.icon}
               </span>
             )}
@@ -214,7 +214,7 @@ const TabsComponent = <T extends string = string>({
             {option?.count && option?.count > 0 ? (
               <Badge
                 className={cn(
-                  'bg-red-400 h-5 w-5 flex items-center justify-center  mx-auto',
+                  "bg-red-400 h-5 w-5 flex items-center justify-center mx-auto",
                   option.badgeColor
                 )}
               >
@@ -238,7 +238,7 @@ const SelectComponent = <T extends string = string>({
   className,
 }: TabProps<T>) => {
   return (
-    <div className='w-full md:w-fit'>
+    <div className="w-full md:w-fit">
       <Select
         defaultValue={defaultValue}
         value={value}
@@ -254,24 +254,24 @@ const SelectComponent = <T extends string = string>({
       >
         <SelectTrigger
           className={cn(
-            'w-full md:fit font-medium h-12 md:h-fit text-md flex gap-2 items-center',
+            "w-full md:fit font-medium h-12 md:h-fit text-md flex gap-2 items-center",
             className
           )}
         >
           <SelectValue />
         </SelectTrigger>
-        <SelectContent className={cn('font-medium')}>
+        <SelectContent className={cn("font-medium")}>
           {options.map((option, index) => (
             <SelectItem
-              value={option.href ?? option.value ?? ''}
-              className='w-full md:fit flex gap-2'
+              value={option.href ?? option.value ?? ""}
+              className="w-full md:fit flex gap-2"
               key={index}
               disabled={option.disabled}
             >
-              <div className='flex items-center gap-2'>
+              <div className="flex items-center gap-2">
                 {option.icon} {option.name}
                 {option?.count && option?.count > 0 ? (
-                  <Badge className={cn('bg-red-400', option.badgeColor)}>
+                  <Badge className={cn("bg-red-400", option.badgeColor)}>
                     {option.count}
                   </Badge>
                 ) : null}

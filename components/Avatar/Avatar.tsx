@@ -4,7 +4,6 @@ import {
   AvatarImage,
 } from "../ui/avatar";
 import { PiUserCircleDuoSolid } from "../../icons/PikaIcons";
-import React from "react";
 import { cn } from "../lib/utils";
 
 interface Props {
@@ -32,7 +31,7 @@ const Avatar = ({ src, alt, onClick, className }: Props) => {
       ) : (
         <AvatarFallback>
           <PiUserCircleDuoSolid
-            className={cn("text-gray-400 w-full h-full", className)}
+            className={cn("text-slate-400 w-full h-full", className)}
           />
         </AvatarFallback>
       )}

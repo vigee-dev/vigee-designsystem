@@ -1,11 +1,11 @@
-import React from 'react';
-import { FieldValues, Path, PathValue, UseFormReturn } from 'react-hook-form';
+import React from "react";
+import { FieldValues, Path, PathValue, UseFormReturn } from "react-hook-form";
 import {
   PiCheckTickSingleStroke,
   PiSearchBigStroke,
-} from '../../icons/PikaIcons';
-import { cn } from '../lib/utils';
-import { Button } from '../ui/button';
+} from "../../icons/PikaIcons";
+import { cn } from "../lib/utils";
+import { Button } from "../ui/button";
 import {
   Command,
   CommandEmpty,
@@ -13,10 +13,10 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '../ui/command';
-import { FormDescription, FormField, FormMessage } from '../ui/form';
-import { Label } from '../ui/label';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+} from "../ui/command";
+import { FormDescription, FormField, FormMessage } from "../ui/form";
+import { Label } from "../ui/label";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
 type Props<T extends FieldValues> = {
   form?: UseFormReturn<T>;
@@ -40,10 +40,11 @@ type Props<T extends FieldValues> = {
     color?: string;
     disabled?: boolean;
   }[];
-  variant?: 'default' | 'outlined';
+  variant?: "default" | "outlined";
   searchable?: boolean;
   multi?: boolean;
   modal?: boolean;
+  "data-testid"?: string;
 };
 
 export default function CommandListSelect<T extends FieldValues>({
@@ -62,10 +63,11 @@ export default function CommandListSelect<T extends FieldValues>({
   helpComponent,
   isBoolean = false,
   options,
-  variant = 'default',
+  variant = "default",
   searchable = true,
   multi = false,
   modal = false,
+  "data-testid": dataTestId,
 }: Props<T>) {
   const [open, setOpen] = React.useState(false);
 
@@ -79,16 +81,13 @@ export default function CommandListSelect<T extends FieldValues>({
         } else {
           next.push(newValue);
         }
-        // @ts-ignore
         form.setValue(name, next as PathValue<T, Path<T>>);
         if (onChange) onChange(next as any);
       } else {
         if (!isBoolean) {
-          // @ts-ignore
           form.setValue(name, newValue as PathValue<T, Path<T>>);
         } else {
-          // @ts-ignore
-          form.setValue(name, (newValue === 'true') as PathValue<T, Path<T>>);
+          form.setValue(name, (newValue === "true") as PathValue<T, Path<T>>);
         }
         if (onChange) onChange(newValue);
       }
@@ -106,28 +105,23 @@ export default function CommandListSelect<T extends FieldValues>({
   if (multi) {
     if (Array.isArray(currentValue)) {
       selectedValues = currentValue.filter(Boolean);
-    } else if (typeof currentValue === 'string' && currentValue) {
+    } else if (typeof currentValue === "string" && currentValue) {
       selectedValues = [currentValue];
     } else {
       selectedValues = [];
     }
   } else {
     selectedValues =
-      typeof currentValue === 'string' && currentValue ? [currentValue] : [];
+      typeof currentValue === "string" && currentValue ? [currentValue] : [];
   }
 
   const currentLabel = multi
     ? selectedValues.length === 0
-      ? placeholder || 'Aucune sélection'
-      : (() => {
-          const labels = selectedValues
-            .map((val) => options?.find((o) => o.value === val)?.label)
-            .filter(Boolean);
-          if (labels.length > 2) {
-            return labels.slice(0, 2).join(', ') + ', ...';
-          }
-          return labels.join(', ');
-        })()
+      ? placeholder || "Aucune sélection"
+      : selectedValues
+          .map((val) => options?.find((o) => o.value === val)?.label)
+          .filter(Boolean)
+          .join(", ")
     : options?.find((option) => option.value === selectedValues[0])?.label ||
       placeholder ||
       options?.[0]?.label;
@@ -140,36 +134,41 @@ export default function CommandListSelect<T extends FieldValues>({
     <div
       className={cn(
         className,
-        variant === 'default' && 'border-none',
-        'flex flex-col gap-2'
+        variant === "default" && "border-none",
+        "flex flex-col gap-2"
       )}
     >
-      <Label className='font-black text-primary '>
-        {label} {required && <span className='text-red-600 ml-1'>*</span>}
+      <Label className="font-black text-primary ">
+        {label} {required && <span className="text-red-600 ml-1">*</span>}
       </Label>
       <Popover open={open} onOpenChange={setOpen} modal={modal}>
         <PopoverTrigger asChild>
           <Button
-            variant='outline'
-            role='combobox'
+            variant="outline"
+            role="combobox"
             aria-expanded={open}
             className={cn(
-              'w-full justify-between font-medium bg-input',
-              variant === 'outlined' &&
-                'border-gray-400 border rounded-lg bg-transparent mt-2'
+              "w-full justify-between font-medium bg-input",
+              variant === "outlined" &&
+                "border-slate-400 border rounded-lg bg-transparent mt-2"
             )}
             disabled={disabled}
+            data-testid={
+              dataTestId || (name ? `command-select-${name}` : undefined)
+            }
           >
-            {currentLabel}
-            <PiSearchBigStroke className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+            <span className="truncate overflow-hidden text-ellipsis whitespace-nowrap block max-w-full">
+              {currentLabel}
+            </span>
+            <PiSearchBigStroke className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className='w-[var(--radix-popover-trigger-width)] p-0'
-          align='start'
+          className="w-[var(--radix-popover-trigger-width)] p-0"
+          align="start"
         >
           <Command>
-            {searchable && <CommandInput placeholder='Rechercher...' />}
+            {searchable && <CommandInput placeholder="Rechercher..." />}
             <CommandList>
               <CommandEmpty>Aucun résultat trouvé.</CommandEmpty>
               <CommandGroup>
@@ -184,21 +183,21 @@ export default function CommandListSelect<T extends FieldValues>({
                     disabled={option.disabled}
                   >
                     <div
-                      className={cn('flex items-center gap-2', option.color)}
+                      className={cn("flex items-center gap-2", option.color)}
                     >
                       {option.icon}
                       {option.label}
                     </div>
                     <PiCheckTickSingleStroke
                       className={cn(
-                        'ml-auto h-4 w-4 text-success',
+                        "ml-auto h-4 w-4 text-success",
                         (
                           multi
                             ? selectedValues.includes(option.value)
                             : selectedValues[0] === option.value
                         )
-                          ? 'opacity-100'
-                          : 'opacity-0'
+                          ? "opacity-100"
+                          : "opacity-0"
                       )}
                     />
                   </CommandItem>

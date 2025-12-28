@@ -15,6 +15,8 @@ type Props<T extends FieldValues> = {
   name: Path<T>;
   label?: string;
   items: CheckboxItem[];
+  /** Nombre maximum d'éléments sélectionnables */
+  max?: number;
 };
 
 const Checkboxes = <T extends FieldValues>({
@@ -22,7 +24,11 @@ const Checkboxes = <T extends FieldValues>({
   name,
   label,
   items,
+  max,
 }: Props<T>) => {
+  const currentValue = form.watch(name) as (string | number)[];
+  const isMaxReached = max !== undefined && currentValue?.length >= max;
+
   return (
     <FormField
       control={form.control}
@@ -42,6 +48,8 @@ const Checkboxes = <T extends FieldValues>({
               control={form.control}
               name={name}
               render={({ field }) => {
+                const isChecked = field.value?.includes(item.value);
+                const isDisabled = !isChecked && isMaxReached;
                 return (
                   <FormItem
                     key={item.value}
@@ -49,19 +57,22 @@ const Checkboxes = <T extends FieldValues>({
                   >
                     <FormControl>
                       <Checkbox
-                        checked={field.value?.includes(item.value)}
+                        checked={isChecked}
+                        disabled={isDisabled}
                         onCheckedChange={checked => {
                           return checked
                             ? field.onChange([...field.value, item.value])
                             : field.onChange(
                                 field.value?.filter(
-                                  (value: any) => value !== item.value
+                                  (value: string | number) => value !== item.value
                                 )
                               );
                         }}
                       />
                     </FormControl>
-                    <FormLabel className=" font-medium">{item.label}</FormLabel>
+                    <FormLabel className={`font-medium ${isDisabled ? "text-slate-400" : ""}`}>
+                      {item.label}
+                    </FormLabel>
                   </FormItem>
                 );
               }}
