@@ -102,9 +102,6 @@ export const PeriodFilters = ({
   defaultPeriod = "year",
   startTransition,
   showDay = true,
-  week: showWeek,
-  month: showMonth,
-  year: showYear,
 }: Props) => {
   const now = DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE);
 
@@ -231,17 +228,17 @@ export const PeriodFilters = ({
                 Jour
               </TabsTrigger>
             )}
-            {showWeek && (
+            {params.week && (
               <TabsTrigger className="w-full md:w-fit" value="week">
                 Hebdo
               </TabsTrigger>
             )}
-            {showMonth && (
+            {params.month && (
               <TabsTrigger className="w-full md:w-fit" value="month">
                 Mois
               </TabsTrigger>
             )}
-            {showYear && (showDay || showMonth || showWeek) && (
+            {params.year && (params.day || params.month || params.week) && (
               <TabsTrigger className="w-full md:w-fit" value="year">
                 Année
               </TabsTrigger>
