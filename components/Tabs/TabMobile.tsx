@@ -1,11 +1,10 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 import { useQueryState } from "nuqs";
-import { ReactNode, useTransition } from "react";
+import { ReactNode } from "react";
 import { cn } from "../lib/utils";
 import { Badge } from "../ui/badge";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
-import NProgress from "nprogress";
 
 export type TabOption<T extends string = string> = {
   name: string | ReactNode;
@@ -56,7 +55,6 @@ export function TabMobile<T extends string = string>({
   pageName = "page",
 }: TabsResponsiveProps<T>) {
   const router = useRouter();
-  const [isPending, internalStartTransition] = useTransition();
 
   const [filter, setFilter] = useQueryState(query ?? "", {
     defaultValue: defaultValue ?? "",
@@ -95,12 +93,13 @@ export function TabMobile<T extends string = string>({
     value: T | string,
     option: { href?: string; value?: T }
   ) => {
-    const transition = startTransition || internalStartTransition;
-    NProgress.start();
-    transition(() => {
+    if (startTransition) {
+      startTransition(() => {
+        updateValueAndNotify(value, option);
+      });
+    } else {
       updateValueAndNotify(value, option);
-      NProgress.done();
-    });
+    }
   };
 
   return (

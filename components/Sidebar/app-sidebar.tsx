@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-import NProgress from "nprogress";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -150,7 +149,6 @@ const AppSidebar = ({
                   >
                     <Link
                       href={item.href}
-                      onClick={() => !isItemActive(item.href) && NProgress.start()}
                       className="flex items-center gap-2 w-full"
                     >
                       <span
@@ -249,7 +247,6 @@ const AppSidebar = ({
                 >
                   <Link
                     href={item.href}
-                    onClick={() => !isItemActive(item.href) && NProgress.start()}
                     className="flex items-center gap-2 w-full"
                   >
                     <span
