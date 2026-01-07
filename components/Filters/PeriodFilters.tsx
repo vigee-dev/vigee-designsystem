@@ -196,9 +196,12 @@ export const PeriodFilters = ({
     const selectedWeek = !isNaN(Number(value)) ? Number(value) : now.weekNumber;
     // Ne pas mettre à jour si c'est déjà la même valeur
     if (selectedWeek === Number(week)) return;
+    // Lire les valeurs directement depuis l'URL pour éviter les valeurs stale
+    const currentYear = searchParams.get("year") || year;
+    const currentMonth = searchParams.get("month") || month;
     handleSetUrlParameters(
-      Number(year),
-      Number(month),
+      Number(currentYear),
+      Number(currentMonth),
       selectedWeek,
       Number(day)
     );
@@ -209,8 +212,10 @@ export const PeriodFilters = ({
     const selectedMonth = !isNaN(Number(value)) ? Number(value) : now.month;
     // Ne pas mettre à jour si c'est déjà la même valeur
     if (selectedMonth === Number(month)) return;
+    // Lire l'année directement depuis l'URL pour éviter les valeurs stale
+    const currentYear = searchParams.get("year") || year;
     handleSetUrlParameters(
-      Number(year),
+      Number(currentYear),
       selectedMonth,
       Number(week),
       Number(day)
@@ -222,9 +227,11 @@ export const PeriodFilters = ({
     const selectedYear = !isNaN(Number(value)) ? Number(value) : now.year;
     // Ne pas mettre à jour si c'est déjà la même valeur
     if (selectedYear === Number(year)) return;
+    // Lire le mois directement depuis l'URL pour éviter les valeurs stale
+    const currentMonth = searchParams.get("month") || month;
     handleSetUrlParameters(
       selectedYear,
-      Number(month),
+      Number(currentMonth),
       Number(week),
       Number(day)
     );
