@@ -194,6 +194,8 @@ export const PeriodFilters = ({
   const handleWeekChange = (value: string | undefined) => {
     if (value === undefined) return;
     const selectedWeek = !isNaN(Number(value)) ? Number(value) : now.weekNumber;
+    // Ne pas mettre à jour si c'est déjà la même valeur
+    if (selectedWeek === Number(week)) return;
     handleSetUrlParameters(
       Number(year),
       Number(month),
@@ -205,6 +207,8 @@ export const PeriodFilters = ({
   const handleMonthChange = (value: string | undefined) => {
     if (value === undefined) return;
     const selectedMonth = !isNaN(Number(value)) ? Number(value) : now.month;
+    // Ne pas mettre à jour si c'est déjà la même valeur
+    if (selectedMonth === Number(month)) return;
     handleSetUrlParameters(
       Number(year),
       selectedMonth,
@@ -216,6 +220,8 @@ export const PeriodFilters = ({
   const handleYearChange = (value: string | undefined) => {
     if (value === undefined) return;
     const selectedYear = !isNaN(Number(value)) ? Number(value) : now.year;
+    // Ne pas mettre à jour si c'est déjà la même valeur
+    if (selectedYear === Number(year)) return;
     handleSetUrlParameters(
       selectedYear,
       Number(month),
