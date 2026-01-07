@@ -5,6 +5,12 @@ import { ReactNode } from "react";
 import { cn } from "../lib/utils";
 import { Badge } from "../ui/badge";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 
 export type TabOption<T extends string = string> = {
   name: string | ReactNode;
@@ -16,6 +22,7 @@ export type TabOption<T extends string = string> = {
   color?: string;
   disabled?: boolean;
   badgeIcon?: ReactNode;
+  tooltip?: string;
 };
 
 interface TabsResponsiveProps<T extends string = string> {
@@ -116,49 +123,58 @@ export function TabMobile<T extends string = string>({
             fullWidth || variant === "big" ? "w-full" : "w-fit"
           )}
         >
-          {options.map((option, index) => (
-            <TabsTrigger
-              key={index}
-              disabled={option.disabled}
-              value={option.href ?? option.value ?? ""}
-              className={cn(
-                `flex gap-2 group min-w-0 px-2`,
-                fullWidth || variant === "big" ? "w-full" : "w-fit",
-                variants[variant]
-              )}
-              onClick={() =>
-                handleValueChange(option.href ?? option.value ?? "", option)
-              }
-            >
-              <div className="flex items-center gap-2 justify-between ">
-                <div className="flex items-center gap-2">
-                  {option.icon && (
-                    <span
-                      className={cn(
-                        "group-data-[state=active]:text-primary-light text-slate-400 dark:group-data-[state=active]:text-primary opacity-50 group-data-[state=active]:opacity-100",
-                        variant === "light" &&
-                          "text-slate-400 group-data-[state=active]:text-slate-800"
-                      )}
-                    >
-                      {option.icon}
-                    </span>
+          <TooltipProvider>
+            {options.map((option, index) => {
+              const triggerContent = (
+                <TabsTrigger
+                  key={index}
+                  disabled={option.disabled}
+                  value={option.href ?? option.value ?? ""}
+                  className={cn(
+                    `flex gap-2 group min-w-0 px-2`,
+                    fullWidth || variant === "big" ? "w-full" : "w-fit",
+                    variants[variant]
                   )}
-                  {option.name}
-                </div>
+                  onClick={() =>
+                    handleValueChange(option.href ?? option.value ?? "", option)
+                  }
+                >
+                  <div className="flex items-center gap-2 justify-between ">
+                    <div className="flex items-center gap-2">
+                      {option.icon && (
+                        <span className="opacity-70">{option.icon}</span>
+                      )}
+                      {option.name}
+                    </div>
 
-                {option?.count && option?.count > 0 ? (
-                  <Badge
-                    className={cn(
-                      "bg-red-400 h-5 w-5 flex items-center justify-center mx-auto opacity-50 group-data-[state=active]:opacity-100",
-                      option.badgeColor
-                    )}
-                  >
-                    {formatCount(option.count)}
-                  </Badge>
-                ) : null}
-              </div>
-            </TabsTrigger>
-          ))}
+                    {option?.count && option?.count > 0 ? (
+                      <Badge
+                        className={cn(
+                          "bg-red-400 h-5 w-5 flex items-center justify-center mx-auto opacity-50 group-data-[state=active]:opacity-100",
+                          option.badgeColor
+                        )}
+                      >
+                        {formatCount(option.count)}
+                      </Badge>
+                    ) : null}
+                  </div>
+                </TabsTrigger>
+              );
+
+              if (option.tooltip) {
+                return (
+                  <Tooltip key={index}>
+                    <TooltipTrigger asChild>{triggerContent}</TooltipTrigger>
+                    <TooltipContent>
+                      <p>{option.tooltip}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                );
+              }
+
+              return triggerContent;
+            })}
+          </TooltipProvider>
         </TabsList>
         {children}
       </Tabs>
