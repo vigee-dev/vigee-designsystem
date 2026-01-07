@@ -54,9 +54,12 @@ export function Select({
   ); /* key to control the rerender of the component */
 
   useEffect(() => {
-    // Sync with controlled value or fallback to defaultValue
-    setSelectedValue(value ?? defaultValue ?? undefined);
-  }, [value, defaultValue]);
+    // Sync uniquement avec la prop value (mode contrôlé)
+    // Ne pas inclure defaultValue dans les deps pour éviter les re-syncs parasites
+    if (value !== undefined) {
+      setSelectedValue(value);
+    }
+  }, [value]);
 
   const groupedOptions = options.reduce<Record<string, SelectOption[]>>(
     (acc, option) => {
