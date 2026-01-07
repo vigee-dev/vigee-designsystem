@@ -1,7 +1,7 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import { useQueryStates, parseAsString } from "nuqs";
+import { useQueryState } from "nuqs";
 import { Select } from "../Select/Select";
 import { fr } from "date-fns/locale";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -10,6 +10,7 @@ import { PiCalendarDefaultDuoStroke } from "../../icons/PikaIcons";
 import { Calendar } from "../ui/calendar";
 import { cn } from "../lib/utils";
 import { DateTime } from "luxon";
+import { useSearchParams } from "next/navigation";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 /*
 import { useGlobalTransition } from "../../../../Contexts/GlobalTransitionContext";
@@ -103,23 +104,55 @@ export const PeriodFilters = ({
   startTransition,
   showDay = true,
 }: Props) => {
-  const now = DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE);
+  const now = DateTime.now().setZone(DEFAULT_LOCALE).setLocale(DEFAULT_LOCALE);
+  const searchParams = useSearchParams();
 
-  const [params, setParams] = useQueryStates(
-    {
-      period: parseAsString.withDefault(defaultPeriod),
-      year: parseAsString.withDefault(now.year.toString()),
-      month: parseAsString.withDefault(now.month.toString()),
-      week: parseAsString.withDefault(now.weekNumber.toString()),
-      day: parseAsString.withDefault(now.day.toString()),
-    },
-    { shallow: false }
-  );
+  const [period, setPeriod] = useQueryState("period", {
+    defaultValue: defaultPeriod,
+    shallow: false,
+  });
 
-  const weekOptions = generateWeekOptions(Number(params.year), "EEE dd MMMM");
-  const monthsOptions = generateMonthOptions(Number(params.year));
+  const [week, setWeek] = useQueryState("week", {
+    defaultValue:
+      searchParams.get("week") ||
+      DateTime.now()
+        .setZone(DEFAULT_TZ)
+        .setLocale(DEFAULT_LOCALE)
+        .weekNumber.toString(),
+    shallow: false,
+  });
+  const [month, setMonth] = useQueryState("month", {
+    defaultValue:
+      searchParams.get("month") ||
+      DateTime.now()
+        .setZone(DEFAULT_TZ)
+        .setLocale(DEFAULT_LOCALE)
+        .month.toString(),
+    shallow: false,
+  });
+  const [day, setDay] = useQueryState("day", {
+    defaultValue:
+      searchParams.get("day") ||
+      DateTime.now()
+        .setZone(DEFAULT_TZ)
+        .setLocale(DEFAULT_LOCALE)
+        .day.toString(),
+    shallow: false,
+  });
+  const [year, setYear] = useQueryState("year", {
+    defaultValue:
+      searchParams.get("year") ||
+      DateTime.now()
+        .setZone(DEFAULT_TZ)
+        .setLocale(DEFAULT_LOCALE)
+        .year.toString(),
+    shallow: false,
+  });
+
+  const weekOptions = generateWeekOptions(Number(year), "EEE dd MMMM");
+  const monthsOptions = generateMonthOptions(Number(year));
   const selectedDate = DateTime.fromObject(
-    { year: Number(params.year), month: Number(params.month), day: Number(params.day) },
+    { year: Number(year), month: Number(month), day: Number(day) },
     { zone: DEFAULT_TZ, locale: DEFAULT_LOCALE }
   );
 
@@ -129,18 +162,18 @@ export const PeriodFilters = ({
     week: number,
     day: number
   ) => {
-    const update = () =>
-      setParams({
-        year: year.toString(),
-        month: month.toString(),
-        week: week.toString(),
-        day: day.toString(),
-      });
-
     if (startTransition) {
-      startTransition(update);
+      startTransition(() => {
+        setYear(year.toString());
+        setMonth(month.toString());
+        setWeek(week.toString());
+        setDay(day.toString());
+      });
     } else {
-      update();
+      setYear(year.toString());
+      setMonth(month.toString());
+      setWeek(week.toString());
+      setDay(day.toString());
     }
   };
 
@@ -159,39 +192,54 @@ export const PeriodFilters = ({
   };
 
   const handleWeekChange = (value: string | undefined) => {
+    if (value === undefined) return;
     const selectedWeek = !isNaN(Number(value)) ? Number(value) : now.weekNumber;
     handleSetUrlParameters(
-      Number(params.year),
-      Number(params.month),
+      Number(year),
+      Number(month),
       selectedWeek,
-      Number(params.day)
+      Number(day)
     );
   };
 
   const handleMonthChange = (value: string | undefined) => {
+    if (value === undefined) return;
     const selectedMonth = !isNaN(Number(value)) ? Number(value) : now.month;
     handleSetUrlParameters(
-      Number(params.year),
+      Number(year),
       selectedMonth,
-      Number(params.week),
-      Number(params.day)
+      Number(week),
+      Number(day)
     );
   };
 
   const handleYearChange = (value: string | undefined) => {
+    if (value === undefined) return;
     const selectedYear = !isNaN(Number(value)) ? Number(value) : now.year;
     handleSetUrlParameters(
       selectedYear,
-      Number(params.month),
-      Number(params.week),
-      Number(params.day)
+      Number(month),
+      Number(week),
+      Number(day)
     );
   };
 
   const onTabChange = (value: string) => {
-    const update = () => setParams({ period: value });
-    if (startTransition) startTransition(update);
-    else update();
+    if (startTransition) {
+      startTransition(() => {
+        setPeriod(value);
+        // S'assurer que l'année est toujours dans l'URL pour éviter le reset
+        if (!searchParams.get("year")) {
+          setYear(year);
+        }
+      });
+    } else {
+      setPeriod(value);
+      // S'assurer que l'année est toujours dans l'URL pour éviter le reset
+      if (!searchParams.get("year")) {
+        setYear(year);
+      }
+    }
   };
 
   const goToPreviousDay = () => {
@@ -217,7 +265,7 @@ export const PeriodFilters = ({
   return (
     <div>
       <Tabs
-        value={params.period}
+        value={period}
         className="flex flex-col md:flex-row gap-1 md:gap-4 justify-between bg-transparent md:border border-none items-center bg-white md:bg-transparent  md:p-1 rounded-xl "
         onValueChange={onTabChange}
       >
@@ -228,17 +276,17 @@ export const PeriodFilters = ({
                 Jour
               </TabsTrigger>
             )}
-            {params.week && (
+            {week && (
               <TabsTrigger className="w-full md:w-fit" value="week">
                 Hebdo
               </TabsTrigger>
             )}
-            {params.month && (
+            {month && (
               <TabsTrigger className="w-full md:w-fit" value="month">
                 Mois
               </TabsTrigger>
             )}
-            {params.year && (params.day || params.month || params.week) && (
+            {year && (day || month || week) && (
               <TabsTrigger className="w-full md:w-fit" value="year">
                 Année
               </TabsTrigger>
@@ -301,8 +349,8 @@ export const PeriodFilters = ({
               className="w-full md:w-fit font-bold md:bg-input text-gray-800"
               options={weekOptions}
               onChange={handleWeekChange}
-              defaultValue={params.week}
-              value={params.week}
+              defaultValue={week}
+              value={week}
             />
           </TabsContent>
 
@@ -311,8 +359,8 @@ export const PeriodFilters = ({
               className="w-full md:w-fit font-bold md:bg-input text-gray-800"
               options={monthsOptions}
               onChange={handleMonthChange}
-              defaultValue={params.month}
-              value={params.month}
+              defaultValue={month}
+              value={month}
             />
           </TabsContent>
 
@@ -320,8 +368,8 @@ export const PeriodFilters = ({
             className="w-full md:w-fit font-bold md:bg-input text-gray-800"
             options={years}
             onChange={handleYearChange}
-            defaultValue={params.year}
-            value={params.year}
+            defaultValue={year}
+            value={year}
             placeholder={"Année"}
           />
         </div>
