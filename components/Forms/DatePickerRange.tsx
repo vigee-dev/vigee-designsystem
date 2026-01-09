@@ -94,6 +94,9 @@ export interface DatePickerRangeProps {
   setDate?: React.Dispatch<React.SetStateAction<DateRange | undefined>>;
 }
 
+const VIEWPORT_PADDING = 16;
+const POSITION_ADJUST_DELAY_MS = 50;
+
 const DatePickerRange = ({
   className,
   select,
@@ -106,6 +109,42 @@ const DatePickerRange = ({
 }: DatePickerRangeProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const [isManualSelection, setIsManualSelection] = React.useState(false);
+  const popoverId = React.useId();
+
+  React.useEffect(() => {
+    if (!isOpen) return;
+
+    const getPopoverElement = () =>
+      document.querySelector(`[data-datepicker-id="${popoverId}"]`) as HTMLElement | null;
+
+    const adjustPosition = () => {
+      const popover = getPopoverElement();
+      if (!popover) return;
+
+      const rect = popover.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      const offset = (() => {
+        if (rect.top < VIEWPORT_PADDING) {
+          return VIEWPORT_PADDING - rect.top;
+        }
+        if (rect.bottom > viewportHeight - VIEWPORT_PADDING) {
+          return viewportHeight - VIEWPORT_PADDING - rect.bottom;
+        }
+        return 0;
+      })();
+
+      popover.style.setProperty("--datepicker-offset", `${offset}px`);
+    };
+
+    const timer = setTimeout(adjustPosition, POSITION_ADJUST_DELAY_MS);
+
+    return () => {
+      clearTimeout(timer);
+      const popover = getPopoverElement();
+      popover?.style.removeProperty("--datepicker-offset");
+    };
+  }, [isOpen, popoverId]);
 
   const isControlled = controlledDate !== undefined || controlledSetDate !== undefined;
 
@@ -263,7 +302,12 @@ const DatePickerRange = ({
               )}
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="end">
+          <PopoverContent
+            className="w-auto p-0"
+            align="end"
+            data-datepicker-id={popoverId}
+            style={{ transform: "translateY(var(--datepicker-offset, 0px))" }}
+          >
             <div className="flex flex-col p-2">
               <Calendar
                 disabled={disabledDays || disabled}
