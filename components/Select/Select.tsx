@@ -54,9 +54,12 @@ export function Select({
   ); /* key to control the rerender of the component */
 
   useEffect(() => {
-    // Sync with controlled value or fallback to defaultValue
-    setSelectedValue(value ?? defaultValue ?? undefined);
-  }, [value, defaultValue]);
+    // Sync uniquement avec la prop value (mode contrôlé)
+    // Ne pas inclure defaultValue dans les deps pour éviter les re-syncs parasites
+    if (value !== undefined) {
+      setSelectedValue(value);
+    }
+  }, [value]);
 
   const groupedOptions = options.reduce<Record<string, SelectOption[]>>(
     (acc, option) => {
@@ -71,14 +74,11 @@ export function Select({
   );
 
   const handleValueChange = (newValue: string) => {
-    // TODO: What's the reason of this check ? When selecting the same value, the handleValueChange isn't called
-    if (newValue === String(selectedValue)) {
-      setSelectedValue(undefined);
-      onChange(undefined);
-    } else {
-      setSelectedValue(newValue);
-      onChange(newValue);
-    }
+    // Note: Radix Select ne déclenche pas onValueChange si on sélectionne la même valeur
+    // donc pas besoin de vérifier si newValue === selectedValue
+    // Pour clear la valeur, utiliser la prop clearable={true}
+    setSelectedValue(newValue);
+    onChange(newValue);
   };
 
   const handleClear = () => {

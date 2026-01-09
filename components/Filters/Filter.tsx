@@ -167,7 +167,7 @@ export const Filter = ({
         <PopoverContent className="w-[200px] p-0">
           <Command>
             <CommandInput placeholder={`Rechercher...`} />
-            <CommandList>
+            <CommandList className="pb-8">
               <CommandEmpty>Aucun {placeholder} trouvé.</CommandEmpty>
               <CommandGroup>
                 {sortedOptions.map((option) => {
@@ -224,7 +224,7 @@ export const Filter = ({
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-[200px] p-0">
-          <div className="flex flex-col max-h-60 overflow-y-auto">
+          <div className="flex flex-col max-h-60 overflow-y-auto pb-8">
             {sortedOptions.map((option) => {
               const isSelected = selectedValues.includes(option.value);
               return (

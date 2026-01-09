@@ -1,7 +1,7 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import { useQueryStates, parseAsString } from "nuqs";
+import { useQueryState } from "nuqs";
 import { Select } from "../Select/Select";
 import { fr } from "date-fns/locale";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -11,9 +11,7 @@ import { Calendar } from "../ui/calendar";
 import { cn } from "../lib/utils";
 import { DateTime } from "luxon";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-/*
-import { useGlobalTransition } from "../../../../Contexts/GlobalTransitionContext";
-*/
+import { useCallback, useMemo } from "react";
 
 const DEFAULT_TZ = process.env.NEXT_PUBLIC_DEFAULT_TIMEZONE || "Europe/Paris";
 const DEFAULT_LOCALE = process.env.NEXT_PUBLIC_DEFAULT_LOCALE || "fr-FR";
@@ -91,10 +89,8 @@ interface Props {
   startTransition?: (callback: () => void) => void;
 }
 
-// TODO duplicate with another type from WeekViewFilter, the two components should be the same
 type PeriodFilterViewType = "day" | "week" | "month" | "year";
 
-// TODO refactor WeekViewFilters and PeriodFilters together as they go the same thing, redefine it to a big 'Filters' component
 export const PeriodFilters = ({
   years = [
     { label: "Cette année", value: new Date().getFullYear().toString() },
@@ -103,98 +99,157 @@ export const PeriodFilters = ({
   startTransition,
   showDay = true,
 }: Props) => {
-  const now = DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE);
+  const now = useMemo(
+    () => DateTime.now().setZone(DEFAULT_TZ).setLocale(DEFAULT_LOCALE),
+    []
+  );
 
-  const [params, setParams] = useQueryStates(
-    {
-      period: parseAsString.withDefault(defaultPeriod),
-      year: parseAsString.withDefault(now.year.toString()),
-      month: parseAsString.withDefault(now.month.toString()),
-      week: parseAsString.withDefault(now.weekNumber.toString()),
-      day: parseAsString.withDefault(now.day.toString()),
+  // Utiliser des valeurs par défaut stables basées sur "now" au moment du mount
+  const defaultYear = useMemo(() => now.year.toString(), [now]);
+  const defaultMonth = useMemo(() => now.month.toString(), [now]);
+  const defaultWeek = useMemo(() => now.weekNumber.toString(), [now]);
+  const defaultDay = useMemo(() => now.day.toString(), [now]);
+
+  const [period, setPeriod] = useQueryState("period", {
+    defaultValue: defaultPeriod,
+    shallow: false,
+  });
+
+  const [week, setWeek] = useQueryState("week", {
+    defaultValue: defaultWeek,
+    shallow: false,
+  });
+
+  const [month, setMonth] = useQueryState("month", {
+    defaultValue: defaultMonth,
+    shallow: false,
+  });
+
+  const [day, setDay] = useQueryState("day", {
+    defaultValue: defaultDay,
+    shallow: false,
+  });
+
+  const [year, setYear] = useQueryState("year", {
+    defaultValue: defaultYear,
+    shallow: false,
+  });
+
+  const weekOptions = useMemo(
+    () => generateWeekOptions(Number(year), "EEE dd MMMM"),
+    [year]
+  );
+
+  const monthsOptions = useMemo(
+    () => generateMonthOptions(Number(year)),
+    [year]
+  );
+
+  const selectedDate = useMemo(
+    () =>
+      DateTime.fromObject(
+        { year: Number(year), month: Number(month), day: Number(day) },
+        { zone: DEFAULT_TZ, locale: DEFAULT_LOCALE }
+      ),
+    [year, month, day]
+  );
+
+  const handleSetUrlParameters = useCallback(
+    (newYear: number, newMonth: number, newWeek: number, newDay: number) => {
+      const update = () => {
+        setYear(newYear.toString());
+        setMonth(newMonth.toString());
+        setWeek(newWeek.toString());
+        setDay(newDay.toString());
+      };
+
+      if (startTransition) {
+        startTransition(update);
+      } else {
+        update();
+      }
     },
-    { shallow: false }
+    [setYear, setMonth, setWeek, setDay, startTransition]
   );
 
-  const weekOptions = generateWeekOptions(Number(params.year), "EEE dd MMMM");
-  const monthsOptions = generateMonthOptions(Number(params.year));
-  const selectedDate = DateTime.fromObject(
-    { year: Number(params.year), month: Number(params.month), day: Number(params.day) },
-    { zone: DEFAULT_TZ, locale: DEFAULT_LOCALE }
+  const handleDayChange = useCallback(
+    (date: Date | undefined) => {
+      if (date) {
+        const luxonDate = DateTime.fromJSDate(date, {
+          zone: DEFAULT_TZ,
+        }).setLocale(DEFAULT_LOCALE);
+        handleSetUrlParameters(
+          luxonDate.year,
+          luxonDate.month,
+          luxonDate.weekNumber,
+          luxonDate.day
+        );
+      }
+    },
+    [handleSetUrlParameters]
   );
 
-  const handleSetUrlParameters = (
-    year: number,
-    month: number,
-    week: number,
-    day: number
-  ) => {
-    const update = () =>
-      setParams({
-        year: year.toString(),
-        month: month.toString(),
-        week: week.toString(),
-        day: day.toString(),
-      });
-
-    if (startTransition) {
-      startTransition(update);
-    } else {
-      update();
-    }
-  };
-
-  const handleDayChange = (date: Date | undefined) => {
-    if (date) {
-      const luxonDate = DateTime.fromJSDate(date, {
-        zone: DEFAULT_TZ,
-      }).setLocale(DEFAULT_LOCALE);
+  const handleWeekChange = useCallback(
+    (value: string | undefined) => {
+      if (value === undefined) return;
+      const selectedWeek = Number(value);
+      if (isNaN(selectedWeek)) return;
+      // Garder l'année actuelle, ne changer que la semaine
       handleSetUrlParameters(
-        luxonDate.year,
-        luxonDate.month,
-        luxonDate.weekNumber,
-        luxonDate.day
+        Number(year),
+        Number(month),
+        selectedWeek,
+        Number(day)
       );
-    }
-  };
+    },
+    [year, month, day, handleSetUrlParameters]
+  );
 
-  const handleWeekChange = (value: string | undefined) => {
-    const selectedWeek = !isNaN(Number(value)) ? Number(value) : now.weekNumber;
-    handleSetUrlParameters(
-      Number(params.year),
-      Number(params.month),
-      selectedWeek,
-      Number(params.day)
-    );
-  };
+  const handleMonthChange = useCallback(
+    (value: string | undefined) => {
+      if (value === undefined) return;
+      const selectedMonth = Number(value);
+      if (isNaN(selectedMonth)) return;
+      // Garder l'année actuelle, ne changer que le mois
+      handleSetUrlParameters(
+        Number(year),
+        selectedMonth,
+        Number(week),
+        Number(day)
+      );
+    },
+    [year, week, day, handleSetUrlParameters]
+  );
 
-  const handleMonthChange = (value: string | undefined) => {
-    const selectedMonth = !isNaN(Number(value)) ? Number(value) : now.month;
-    handleSetUrlParameters(
-      Number(params.year),
-      selectedMonth,
-      Number(params.week),
-      Number(params.day)
-    );
-  };
+  const handleYearChange = useCallback(
+    (value: string | undefined) => {
+      if (value === undefined) return;
+      const selectedYear = Number(value);
+      if (isNaN(selectedYear)) return;
+      // Garder le mois actuel, ne changer que l'année
+      handleSetUrlParameters(
+        selectedYear,
+        Number(month),
+        Number(week),
+        Number(day)
+      );
+    },
+    [month, week, day, handleSetUrlParameters]
+  );
 
-  const handleYearChange = (value: string | undefined) => {
-    const selectedYear = !isNaN(Number(value)) ? Number(value) : now.year;
-    handleSetUrlParameters(
-      selectedYear,
-      Number(params.month),
-      Number(params.week),
-      Number(params.day)
-    );
-  };
+  const onTabChange = useCallback(
+    (value: string) => {
+      const update = () => setPeriod(value);
+      if (startTransition) {
+        startTransition(update);
+      } else {
+        update();
+      }
+    },
+    [setPeriod, startTransition]
+  );
 
-  const onTabChange = (value: string) => {
-    const update = () => setParams({ period: value });
-    if (startTransition) startTransition(update);
-    else update();
-  };
-
-  const goToPreviousDay = () => {
+  const goToPreviousDay = useCallback(() => {
     const previousDay = selectedDate.minus({ days: 1 });
     handleSetUrlParameters(
       previousDay.year,
@@ -202,9 +257,9 @@ export const PeriodFilters = ({
       previousDay.weekNumber,
       previousDay.day
     );
-  };
+  }, [selectedDate, handleSetUrlParameters]);
 
-  const goToNextDay = () => {
+  const goToNextDay = useCallback(() => {
     const nextDay = selectedDate.plus({ days: 1 });
     handleSetUrlParameters(
       nextDay.year,
@@ -212,12 +267,12 @@ export const PeriodFilters = ({
       nextDay.weekNumber,
       nextDay.day
     );
-  };
+  }, [selectedDate, handleSetUrlParameters]);
 
   return (
     <div>
       <Tabs
-        value={params.period}
+        value={period}
         className="flex flex-col md:flex-row gap-1 md:gap-4 justify-between bg-transparent md:border border-none items-center bg-white md:bg-transparent  md:p-1 rounded-xl "
         onValueChange={onTabChange}
       >
@@ -228,17 +283,17 @@ export const PeriodFilters = ({
                 Jour
               </TabsTrigger>
             )}
-            {params.week && (
+            {week && (
               <TabsTrigger className="w-full md:w-fit" value="week">
                 Hebdo
               </TabsTrigger>
             )}
-            {params.month && (
+            {month && (
               <TabsTrigger className="w-full md:w-fit" value="month">
                 Mois
               </TabsTrigger>
             )}
-            {params.year && (params.day || params.month || params.week) && (
+            {year && (day || month || week) && (
               <TabsTrigger className="w-full md:w-fit" value="year">
                 Année
               </TabsTrigger>
@@ -296,13 +351,13 @@ export const PeriodFilters = ({
               </button>
             </div>
           </TabsContent>
+
           <TabsContent value="week" className="w-full md:w-fit mt-0">
             <Select
               className="w-full md:w-fit font-bold md:bg-input text-gray-800"
               options={weekOptions}
               onChange={handleWeekChange}
-              defaultValue={params.week}
-              value={params.week}
+              value={week}
             />
           </TabsContent>
 
@@ -311,8 +366,7 @@ export const PeriodFilters = ({
               className="w-full md:w-fit font-bold md:bg-input text-gray-800"
               options={monthsOptions}
               onChange={handleMonthChange}
-              defaultValue={params.month}
-              value={params.month}
+              value={month}
             />
           </TabsContent>
 
@@ -320,8 +374,7 @@ export const PeriodFilters = ({
             className="w-full md:w-fit font-bold md:bg-input text-gray-800"
             options={years}
             onChange={handleYearChange}
-            defaultValue={params.year}
-            value={params.year}
+            value={year}
             placeholder={"Année"}
           />
         </div>

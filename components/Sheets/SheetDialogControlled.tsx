@@ -102,11 +102,11 @@ export default function SheetDialogControlled({
   }, []);
 
   const triggerWithHandler = trigger ? React.cloneElement(
-    trigger as React.ReactElement,
+    trigger as React.ReactElement<{ onClick?: (e: React.MouseEvent) => void }>,
     {
       onClick: (e: React.MouseEvent) => {
         e.stopPropagation();
-        const originalOnClick = (trigger as React.ReactElement).props?.onClick;
+        const originalOnClick = (trigger as React.ReactElement<{ onClick?: (e: React.MouseEvent) => void }>).props?.onClick;
         if (originalOnClick) {
           originalOnClick(e);
         }
