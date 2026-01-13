@@ -37,8 +37,21 @@ export function useSheetContext() {
 
 export default function SheetDialog({ trigger, title, description, children, side = "bottom", icon, size = "md", scroll = true, sheet = false }: Props) {
   const [open, setOpen] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
   const contextValue: SheetContextType = { open, setOpen };
   const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <SheetContext.Provider value={contextValue}>
+        <div>{trigger}</div>
+      </SheetContext.Provider>
+    );
+  }
 
   if (isDesktop && !sheet) {
     return (
