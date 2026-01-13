@@ -58,7 +58,7 @@ export default function SheetDialog({ trigger, title, description, children, sid
       <SheetContext.Provider value={contextValue}>
         <div>
           <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger onClick={e => e.stopPropagation()} asChild>
+            <DialogTrigger onClick={e => e.stopPropagation()}>
               {trigger}
             </DialogTrigger>
 
