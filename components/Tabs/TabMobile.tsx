@@ -12,6 +12,8 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 
+export type TabStatus = "blue" | "green" | "orange" | "red";
+
 export type TabOption<T extends string = string> = {
   name: string | ReactNode;
   href?: string;
@@ -23,6 +25,7 @@ export type TabOption<T extends string = string> = {
   disabled?: boolean;
   badgeIcon?: ReactNode;
   tooltip?: string;
+  status?: TabStatus;
 };
 
 interface TabsResponsiveProps<T extends string = string> {
@@ -47,6 +50,13 @@ const variants = {
   mini: "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold text-sm p-1 px-2",
   big: "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold text-lg py-3 px-4",
 } as const;
+
+const statusColors: Record<TabStatus, string> = {
+  blue: "bg-blue-500",
+  green: "bg-green-500",
+  orange: "bg-orange-500",
+  red: "bg-red-500",
+};
 
 export function TabMobile<T extends string = string>({
   onChange,
@@ -145,6 +155,14 @@ export function TabMobile<T extends string = string>({
                         <span className="opacity-70">{option.icon}</span>
                       )}
                       {option.name}
+                      {option.status && (
+                        <span
+                          className={cn(
+                            "h-2 w-2 rounded-full animate-pulse",
+                            statusColors[option.status]
+                          )}
+                        />
+                      )}
                     </div>
 
                     {option?.count && option?.count > 0 ? (
