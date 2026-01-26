@@ -135,7 +135,7 @@ export function TabMobile<T extends string = string>({
         >
           <TooltipProvider>
             {options.map((option, index) => {
-              const triggerContent = (
+              const tabTrigger = (
                 <TabsTrigger
                   key={index}
                   disabled={option.disabled}
@@ -181,8 +181,8 @@ export function TabMobile<T extends string = string>({
 
               if (option.tooltip) {
                 return (
-                  <Tooltip key={index}>
-                    <TooltipTrigger asChild>{triggerContent}</TooltipTrigger>
+                  <Tooltip key={`tooltip-${index}`}>
+                    <TooltipTrigger asChild>{tabTrigger}</TooltipTrigger>
                     <TooltipContent>
                       <p>{option.tooltip}</p>
                     </TooltipContent>
@@ -190,7 +190,7 @@ export function TabMobile<T extends string = string>({
                 );
               }
 
-              return triggerContent;
+              return tabTrigger;
             })}
           </TooltipProvider>
         </TabsList>
