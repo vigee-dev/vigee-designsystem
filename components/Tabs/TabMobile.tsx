@@ -44,11 +44,11 @@ interface TabsResponsiveProps<T extends string = string> {
 
 const variants = {
   default:
-    "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold",
+    "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-700 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold",
   light:
-    "rounded-xl bg-transparent data-[state=active]:text-primary text-primary-light font-bold data-[state=active]:bg-transparent data-[state=active]:shadow-none border-none pl-0",
-  mini: "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold text-sm p-1 px-2",
-  big: "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold text-lg py-3 px-4",
+    "rounded-xl bg-transparent data-[state=active]:text-primary text-slate-700 font-bold data-[state=active]:bg-transparent data-[state=active]:shadow-none border-none pl-0",
+  mini: "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-700 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold text-sm p-1 px-2",
+  big: "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-700 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold text-lg py-3 px-4",
 } as const;
 
 const statusColors: Record<TabStatus, string> = {
