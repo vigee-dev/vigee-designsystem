@@ -47,14 +47,29 @@ type MenuItem = {
   iconFill: React.ReactNode;
   href: string;
   notifications?: number;
+  notificationColor?: string;
   actions?: { title: string; url: string }[];
   dropdownContent?: React.ReactNode;
+};
+
+type SwitcherItem = {
+  name: string;
+  slug: string;
+  icon: React.ReactNode;
+  type?: string;
+  subtitle?: string;
+  counts?: {
+    devisCount: number;
+    studioCount: number;
+    supportCount: number;
+  };
 };
 
 const AppSidebar = ({
   items,
   bottomItems,
   itemsSwitcher,
+  showSwitcher = true,
   logo,
   logoSmall,
   pathname,
@@ -67,12 +82,8 @@ const AppSidebar = ({
 }: {
   items: MenuItem[];
   bottomItems?: MenuItem[];
-  itemsSwitcher?: {
-    name: string;
-    slug: string;
-    type: string;
-    icon: React.ReactNode;
-  }[];
+  itemsSwitcher?: SwitcherItem[];
+  showSwitcher?: boolean;
   logo?: string;
   logoSmall?: string;
   pathname: string;
@@ -103,11 +114,13 @@ const AppSidebar = ({
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        {switcher && itemsSwitcher ? (
+        {itemsSwitcher && itemsSwitcher.length > 0 ? (
           <SwitcherSidebar
             items={itemsSwitcher}
             logo={logo}
             logoSmall={logoSmall}
+            showSwitcher={showSwitcher}
+            currentPath={activePath}
           />
         ) : logo && open ? (
           <Image
@@ -194,16 +207,16 @@ const AppSidebar = ({
                     </SidebarMenuAction>
                   )}
 
-                  {item?.type === "notification" &&
-                    item?.notifications &&
-                    item?.notifications > 0 &&
-                    (open ? (
-                      <SidebarMenuBadge className="bg-red-400 text-white rounded-full items-center">
+                  {/* Afficher le badge si notifications > 0, peu importe le type */}
+                  {item?.notifications && item?.notifications > 0 && (
+                    open ? (
+                      <SidebarMenuBadge className={cn("text-white rounded-full items-center", item?.notificationColor || "bg-red-400")}>
                         {item?.notifications}
                       </SidebarMenuBadge>
                     ) : (
-                      <div className="bg-red-400 text-white rounded-full items-center w-2 h-2 absolute top-0 right-0" />
-                    ))}
+                      <div className={cn("text-white rounded-full items-center w-2 h-2 absolute top-0 right-0", item?.notificationColor || "bg-red-400")} />
+                    )
+                  )}
 
                   {item?.type === "dropdownmenu" && (
                     <DropdownMenu>
