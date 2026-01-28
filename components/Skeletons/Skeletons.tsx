@@ -651,6 +651,87 @@ export const DocumentsListSkeleton = ({
   );
 };
 
+/**
+ * Skeleton pour le tracker de progression des modules
+ * Représente visuellement le VersionProgressTracker
+ */
+export const ModuleTrackerSkeleton = ({
+  className,
+}: {
+  className?: string;
+}) => {
+  return (
+    <div
+      className={cn(
+        "bg-white border border-slate-200 rounded-2xl p-6 mb-4 animate-pulse",
+        className
+      )}
+    >
+      {/* Header */}
+      <div className="flex items-start justify-between mb-6">
+        <div className="flex flex-col gap-2">
+          {/* Nom du projet */}
+          <div className="h-4 w-32 rounded-md bg-slate-200" />
+          {/* Version */}
+          <div className="h-3 w-24 rounded-md bg-slate-100" />
+        </div>
+        <div className="flex flex-col items-end gap-1">
+          {/* Pourcentage */}
+          <div className="h-7 w-16 rounded-md bg-emerald-100" />
+          {/* Heures */}
+          <div className="h-3 w-20 rounded-md bg-slate-100" />
+        </div>
+      </div>
+
+      {/* Progress Track */}
+      <div className="pb-2">
+        {/* Illustration au centre */}
+        <div className="flex justify-center mb-4">
+          <div className="h-12 w-12 rounded-full bg-slate-100" />
+        </div>
+
+        {/* Ligne de progression avec étapes */}
+        <div className="flex items-center w-full">
+          {/* Étape 1 */}
+          <div className="flex-1 flex items-center relative">
+            <div className="absolute h-1 bg-slate-200 left-1/2 right-0 top-1/2 -translate-y-1/2" />
+            <div className="relative z-10 mx-auto">
+              <div className="w-8 h-8 rounded-full bg-slate-200" />
+            </div>
+          </div>
+          {/* Étape 2 */}
+          <div className="flex-[2] flex items-center relative">
+            <div className="absolute h-1 bg-slate-200 left-0 right-0 top-1/2 -translate-y-1/2" />
+            <div className="relative z-10 mx-auto">
+              <div className="w-10 h-10 rounded-full bg-slate-200" />
+            </div>
+          </div>
+          {/* Étape 3 */}
+          <div className="flex-1 flex items-center relative">
+            <div className="absolute h-1 bg-slate-200 left-0 right-1/2 top-1/2 -translate-y-1/2" />
+            <div className="relative z-10 mx-auto">
+              <div className="w-8 h-8 rounded-full bg-slate-100" />
+            </div>
+          </div>
+        </div>
+
+        {/* Labels des étapes */}
+        <div className="flex items-start w-full mt-4">
+          <div className="flex-1 flex justify-center">
+            <div className="h-3 w-16 rounded-md bg-slate-100" />
+          </div>
+          <div className="flex-[2] flex justify-center">
+            <div className="h-3 w-24 rounded-md bg-slate-200" />
+          </div>
+          <div className="flex-1 flex justify-center">
+            <div className="h-3 w-16 rounded-md bg-slate-100" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export const DocumentViewerSkeleton = ({
   className,
 }: {
