@@ -143,7 +143,6 @@ export function SwitcherSidebar({
                   <DropdownMenuItem
                     onClick={() => {
                       router.push(adminItem.slug);
-                      router.refresh();
                     }}
                     className={cn(
                       "gap-2 p-3 cursor-pointer",
@@ -170,7 +169,6 @@ export function SwitcherSidebar({
                       key={item.slug}
                       onClick={() => {
                         router.push(item.slug);
-                        router.refresh();
                       }}
                       className={cn(
                         "gap-2 p-2 cursor-pointer",
