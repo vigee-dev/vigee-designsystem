@@ -32,6 +32,7 @@ type SwitcherItem = {
   icon: React.ReactNode;
   type?: string;
   subtitle?: string;
+  projectId?: number;
   counts?: {
     devisCount: number;
     studioCount: number;
@@ -186,26 +187,44 @@ export function SwitcherSidebar({
                           )}
                         </div>
                       </div>
-                      {/* Indicateurs d'activité avec icônes - badges ronds */}
-                      {item.counts && (
+                      {/* Indicateurs d'activité avec icônes - badges ronds cliquables */}
+                      {item.counts && item.projectId && (
                         <div className="flex items-center gap-1">
                           {item.counts.devisCount > 0 && (
-                            <span className="text-[10px] font-medium bg-emerald-500 text-white min-w-5 h-5 px-1 rounded-full flex items-center justify-center gap-0.5">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                router.push(`/studio/projects/${item.projectId}/devis`);
+                              }}
+                              className="text-[10px] font-medium bg-emerald-100 text-emerald-600 min-w-5 h-5 px-1 rounded-full flex items-center justify-center gap-0.5 hover:bg-emerald-200 transition-colors"
+                            >
                               <PiFileTextStroke className="w-3 h-3" />
                               {item.counts.devisCount}
-                            </span>
+                            </button>
                           )}
                           {item.counts.studioCount > 0 && (
-                            <span className="text-[10px] font-medium bg-sky-500 text-white min-w-5 h-5 px-1 rounded-full flex items-center justify-center gap-0.5">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                router.push(`/studio/projects/${item.projectId}/developpement`);
+                              }}
+                              className="text-[10px] font-medium bg-sky-100 text-sky-600 min-w-5 h-5 px-1 rounded-full flex items-center justify-center gap-0.5 hover:bg-sky-200 transition-colors"
+                            >
                               <PiCodeStroke className="w-3 h-3" />
                               {item.counts.studioCount}
-                            </span>
+                            </button>
                           )}
                           {item.counts.supportCount > 0 && (
-                            <span className="text-[10px] font-medium bg-red-400 text-white min-w-5 h-5 px-1 rounded-full flex items-center justify-center gap-0.5">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                router.push(`/studio/projects/${item.projectId}/support`);
+                              }}
+                              className="text-[10px] font-medium bg-red-100 text-red-600 min-w-5 h-5 px-1 rounded-full flex items-center justify-center gap-0.5 hover:bg-red-200 transition-colors"
+                            >
                               <PiChatChattingStroke className="w-3 h-3" />
                               {item.counts.supportCount}
-                            </span>
+                            </button>
                           )}
                         </div>
                       )}
