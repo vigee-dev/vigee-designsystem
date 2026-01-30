@@ -50,6 +50,7 @@ type MenuItem = {
   notificationColor?: string;
   actions?: { title: string; url: string }[];
   dropdownContent?: React.ReactNode;
+  hasSeparatorAfter?: boolean;
 };
 
 type SwitcherItem = {
@@ -146,95 +147,99 @@ const AppSidebar = ({
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item, index) => (
-                <SidebarMenuItem
-                  key={index}
-                  className={cn(
-                    "w-full items-center  rounded-md hover:cursor-pointer transition-all duration-300",
-                    (isItemActive(item.href) || hoveredItem === item.slug) &&
-                      hoverBackground
-                  )}
-                >
-                  <SidebarMenuButton
-                    asChild
-                    onMouseEnter={() => setHoveredItem(item.slug)}
-                    onMouseLeave={() => setHoveredItem(null)}
-                    className={cn("w-full hover:bg-transparent bg-transparent")}
+                <React.Fragment key={index}>
+                  <SidebarMenuItem
+                    className={cn(
+                      "w-full items-center  rounded-md hover:cursor-pointer transition-all duration-300",
+                      (isItemActive(item.href) || hoveredItem === item.slug) &&
+                        hoverBackground
+                    )}
                   >
-                    <Link
-                      href={item.href}
-                      className="flex items-center gap-2 w-full"
+                    <SidebarMenuButton
+                      asChild
+                      onMouseEnter={() => setHoveredItem(item.slug)}
+                      onMouseLeave={() => setHoveredItem(null)}
+                      className={cn("w-full hover:bg-transparent bg-transparent")}
                     >
-                      <span
-                        className={`${
-                          isItemActive(item.href) || hoveredItem === item.slug
-                            ? "inline  transition-opacity duration-300"
-                            : "hidden  transition-opacity duration-300"
-                        }`}
+                      <Link
+                        href={item.href}
+                        className="flex items-center gap-2 w-full"
                       >
-                        {item.iconFill}
-                      </span>
-                      <span
-                        className={cn(
-                          "inline  transition-opacity duration-300",
-                          !isItemActive(item.href) && hoveredItem !== item.slug
-                            ? "inline  transition-all duration-300"
-                            : "hidden  transition-all duration-300",
-                          classNameItems
-                        )}
-                      >
-                        {item.icon}
-                      </span>
-                      <span
-                        className={cn(
-                          "font-medium text-base group",
-                          isItemActive(item.href) || hoveredItem === item.slug
-                            ? "text-white  transition-opacity duration-300"
-                            : "text-slate-400  transition-opacity duration-300",
-                          classNameItems
-                        )}
-                      >
-                        {item.name}
-                      </span>
-                    </Link>
-                  </SidebarMenuButton>
-
-                  {item?.type === "action" && (
-                    <SidebarMenuAction asChild className="items-center">
-                      <Link href={item?.href}>
-                        <Plus />
-                        <span className="sr-only">Créer</span>
+                        <span
+                          className={`${
+                            isItemActive(item.href) || hoveredItem === item.slug
+                              ? "inline  transition-opacity duration-300"
+                              : "hidden  transition-opacity duration-300"
+                          }`}
+                        >
+                          {item.iconFill}
+                        </span>
+                        <span
+                          className={cn(
+                            "inline  transition-opacity duration-300",
+                            !isItemActive(item.href) && hoveredItem !== item.slug
+                              ? "inline  transition-all duration-300"
+                              : "hidden  transition-all duration-300",
+                            classNameItems
+                          )}
+                        >
+                          {item.icon}
+                        </span>
+                        <span
+                          className={cn(
+                            "font-medium text-base group",
+                            isItemActive(item.href) || hoveredItem === item.slug
+                              ? "text-white  transition-opacity duration-300"
+                              : "text-slate-400  transition-opacity duration-300",
+                            classNameItems
+                          )}
+                        >
+                          {item.name}
+                        </span>
                       </Link>
-                    </SidebarMenuAction>
-                  )}
+                    </SidebarMenuButton>
 
-                  {/* Afficher le badge si notifications > 0, peu importe le type */}
-                  {item?.notifications && item?.notifications > 0 && (
-                    open ? (
-                      <SidebarMenuBadge className={cn("text-white rounded-full items-center", item?.notificationColor || "bg-red-400")}>
-                        {item?.notifications}
-                      </SidebarMenuBadge>
-                    ) : (
-                      <div className={cn("text-white rounded-full items-center w-2 h-2 absolute top-0 right-0", item?.notificationColor || "bg-red-400")} />
-                    )
-                  )}
+                    {item?.type === "action" && (
+                      <SidebarMenuAction asChild className="items-center">
+                        <Link href={item?.href}>
+                          <Plus />
+                          <span className="sr-only">Créer</span>
+                        </Link>
+                      </SidebarMenuAction>
+                    )}
 
-                  {item?.type === "dropdownmenu" && (
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <SidebarMenuAction>
-                          <MoreHorizontal />
-                        </SidebarMenuAction>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent
-                        side="right"
-                        align="start"
-                        className="h-60 overflow-y-auto"
-                      >
-                        {item?.dropdownContent}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    {/* Afficher le badge si notifications > 0, peu importe le type */}
+                    {item?.notifications && item?.notifications > 0 && (
+                      open ? (
+                        <SidebarMenuBadge className={cn("text-white rounded-full items-center", item?.notificationColor || "bg-red-400")}>
+                          {item?.notifications}
+                        </SidebarMenuBadge>
+                      ) : (
+                        <div className={cn("text-white rounded-full items-center w-2 h-2 absolute top-0 right-0", item?.notificationColor || "bg-red-400")} />
+                      )
+                    )}
+
+                    {item?.type === "dropdownmenu" && (
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <SidebarMenuAction>
+                            <MoreHorizontal />
+                          </SidebarMenuAction>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent
+                          side="right"
+                          align="start"
+                          className="h-60 overflow-y-auto"
+                        >
+                          {item?.dropdownContent}
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    )}
+                  </SidebarMenuItem>
+                  {item.hasSeparatorAfter && (
+                    <div className="my-2 mx-2 border-t border-slate-700/50" />
                   )}
-                </SidebarMenuItem>
+                </React.Fragment>
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
