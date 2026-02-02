@@ -104,11 +104,13 @@ const AppSidebar = ({
   const activePath = currentPathname || pathname;
 
   // Fonction pour vérifier si un item est actif (match exact ou sous-route)
-  const isItemActive = (itemHref: string) => {
+  const isItemActive = (itemHref: string, itemSlug?: string) => {
     // Match exact
     if (activePath === itemHref) return true;
     // Match sous-route (ex: /studio/opportunities/123 pour /studio/opportunities)
     if (activePath.startsWith(itemHref + "/")) return true;
+    // Cas spécial: les pages /studio/tickets/* doivent activer l'item "Support"
+    if (itemSlug === "support" && activePath.startsWith("/studio/tickets/")) return true;
     return false;
   };
 
@@ -151,7 +153,7 @@ const AppSidebar = ({
                   <SidebarMenuItem
                     className={cn(
                       "w-full items-center  rounded-md hover:cursor-pointer transition-all duration-300",
-                      (isItemActive(item.href) || hoveredItem === item.slug) &&
+                      (isItemActive(item.href, item.slug) || hoveredItem === item.slug) &&
                         hoverBackground
                     )}
                   >
@@ -167,7 +169,7 @@ const AppSidebar = ({
                       >
                         <span
                           className={`${
-                            isItemActive(item.href) || hoveredItem === item.slug
+                            isItemActive(item.href, item.slug) || hoveredItem === item.slug
                               ? "inline  transition-opacity duration-300"
                               : "hidden  transition-opacity duration-300"
                           }`}
@@ -177,7 +179,7 @@ const AppSidebar = ({
                         <span
                           className={cn(
                             "inline  transition-opacity duration-300",
-                            !isItemActive(item.href) && hoveredItem !== item.slug
+                            !isItemActive(item.href, item.slug) && hoveredItem !== item.slug
                               ? "inline  transition-all duration-300"
                               : "hidden  transition-all duration-300",
                             classNameItems
@@ -188,7 +190,7 @@ const AppSidebar = ({
                         <span
                           className={cn(
                             "font-medium text-base group",
-                            isItemActive(item.href) || hoveredItem === item.slug
+                            isItemActive(item.href, item.slug) || hoveredItem === item.slug
                               ? "text-white  transition-opacity duration-300"
                               : "text-slate-400  transition-opacity duration-300",
                             classNameItems
@@ -253,7 +255,7 @@ const AppSidebar = ({
                 key={`bottom-${index}`}
                 className={cn(
                   "w-full items-center rounded-md hover:cursor-pointer transition-all duration-300",
-                  (isItemActive(item.href) || hoveredItem === item.slug) &&
+                  (isItemActive(item.href, item.slug) || hoveredItem === item.slug) &&
                     hoverBackground
                 )}
               >
@@ -269,7 +271,7 @@ const AppSidebar = ({
                   >
                     <span
                       className={`${
-                        isItemActive(item.href) || hoveredItem === item.slug
+                        isItemActive(item.href, item.slug) || hoveredItem === item.slug
                           ? "inline transition-opacity duration-300"
                           : "hidden transition-opacity duration-300"
                       }`}
@@ -279,7 +281,7 @@ const AppSidebar = ({
                     <span
                       className={cn(
                         "inline transition-opacity duration-300",
-                        !isItemActive(item.href) && hoveredItem !== item.slug
+                        !isItemActive(item.href, item.slug) && hoveredItem !== item.slug
                           ? "inline transition-all duration-300"
                           : "hidden transition-all duration-300",
                         classNameItems
@@ -290,7 +292,7 @@ const AppSidebar = ({
                     <span
                       className={cn(
                         "font-medium text-base group",
-                        isItemActive(item.href) || hoveredItem === item.slug
+                        isItemActive(item.href, item.slug) || hoveredItem === item.slug
                           ? "text-white transition-opacity duration-300"
                           : "text-slate-400 transition-opacity duration-300",
                         classNameItems
