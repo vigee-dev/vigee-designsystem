@@ -179,12 +179,11 @@ export function TabMobile<T extends string = string>({
                 </TabsTrigger>
               );
 
-              // Note: We don't use asChild here to avoid interference with TabsTrigger's data-[state] attributes
-              // The TooltipTrigger will render its own button but display:contents makes it transparent in layout
+              // Use asChild to avoid button-inside-button hydration error
               if (option.tooltip) {
                 return (
                   <Tooltip key={`tooltip-${index}`} delayDuration={300}>
-                    <TooltipTrigger className="contents">
+                    <TooltipTrigger asChild>
                       {tabTrigger}
                     </TooltipTrigger>
                     <TooltipContent>
