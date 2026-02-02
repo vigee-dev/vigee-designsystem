@@ -24,7 +24,7 @@ export function Drawer({
 }: {
   children: React.ReactNode;
   trigger?: React.ReactNode;
-  title?: string;
+  title?: React.ReactNode;
   description?: string;
   icon?: React.ReactNode;
   open?: boolean;
@@ -52,7 +52,10 @@ export function Drawer({
         <VaulDrawer.Overlay className='fixed inset-0 bg-black/30 z-50' />
         <VaulDrawer.Content
           className={cn(
-            'bg-white flex flex-col fixed z-50 bottom-0 left-0 right-0 max-h-[92vh] rounded-t-[10px]',
+            'bg-white flex flex-col fixed z-50',
+            direction === 'bottom' && 'bottom-0 left-0 right-0 max-h-[92vh] rounded-t-[10px]',
+            direction === 'right' && 'top-0 right-0 bottom-0 h-full w-[90vw] max-w-[1200px] rounded-l-[10px]',
+            direction === 'left' && 'top-0 left-0 bottom-0 h-full w-[90vw] max-w-[1200px] rounded-r-[10px]',
             fullScreen && 'min-h-dvh rounded-none bg-background',
             className
           )}
@@ -67,7 +70,7 @@ export function Drawer({
                 fullScreen && 'rounded-none'
               )}
             >
-              <VaulDrawer.Handle className='mt-2' />
+              {direction === 'bottom' && <VaulDrawer.Handle className='mt-2' />}
               {cancelable && <Back where='retour' onClick={onClose} />}
               <div className='flex items-center gap-4'>
                 {icon}
