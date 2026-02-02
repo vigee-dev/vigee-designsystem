@@ -44,11 +44,11 @@ interface TabsResponsiveProps<T extends string = string> {
 
 const variants = {
   default:
-    "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 data-[state=active]:text-slate-800 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold",
+    "rounded-xl dark:bg-slate-900 bg-slate-100 dark:aria-selected:text-slate-800 text-slate-500 aria-selected:text-slate-800 dark:aria-selected:bg-white aria-selected:bg-primary aria-selected:text-primary-foreground font-bold",
   light:
-    "rounded-xl bg-transparent text-slate-400 data-[state=active]:text-slate-900 font-bold data-[state=active]:bg-transparent data-[state=active]:shadow-none border-none pl-0",
-  mini: "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 data-[state=active]:text-slate-800 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold text-sm p-1 px-2",
-  big: "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 data-[state=active]:text-slate-800 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold text-lg py-3 px-4",
+    "rounded-xl bg-transparent text-slate-400 aria-selected:text-slate-900 font-bold aria-selected:bg-transparent aria-selected:shadow-none border-none pl-0",
+  mini: "rounded-xl dark:bg-slate-900 bg-slate-100 dark:aria-selected:text-slate-800 text-slate-500 aria-selected:text-slate-800 dark:aria-selected:bg-white aria-selected:bg-primary aria-selected:text-primary-foreground font-bold text-sm p-1 px-2",
+  big: "rounded-xl dark:bg-slate-900 bg-slate-100 dark:aria-selected:text-slate-800 text-slate-500 aria-selected:text-slate-800 dark:aria-selected:bg-white aria-selected:bg-primary aria-selected:text-primary-foreground font-bold text-lg py-3 px-4",
 } as const;
 
 const statusColors: Record<TabStatus, string> = {
@@ -168,7 +168,7 @@ export function TabMobile<T extends string = string>({
                     {option?.count && option?.count > 0 ? (
                       <Badge
                         className={cn(
-                          "bg-red-400 h-5 w-5 flex items-center justify-center mx-auto opacity-50 group-data-[state=active]:opacity-100",
+                          "bg-red-400 h-5 w-5 flex items-center justify-center mx-auto opacity-50 group-aria-selected:opacity-100",
                           option.badgeColor
                         )}
                       >
