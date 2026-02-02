@@ -46,7 +46,7 @@ const variants = {
   default:
     "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 data-[state=active]:text-slate-800 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold",
   light:
-    "rounded-xl bg-transparent data-[state=active]:text-primary text-slate-500 data-[state=active]:text-slate-800 font-bold data-[state=active]:bg-transparent data-[state=active]:shadow-none border-none pl-0",
+    "rounded-xl bg-transparent text-slate-400 data-[state=active]:text-slate-900 font-bold data-[state=active]:bg-transparent data-[state=active]:shadow-none border-none pl-0",
   mini: "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 data-[state=active]:text-slate-800 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold text-sm p-1 px-2",
   big: "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 data-[state=active]:text-slate-800 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold text-lg py-3 px-4",
 } as const;
