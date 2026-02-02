@@ -191,6 +191,10 @@ const TabsComponent = <T extends string = string>({
             className={cn(
               `w-full flex gap-2 group min-w-0 rounded-xl`,
               fullWidth ? " md:w-full" : " md:w-fit",
+              // Default variation - styles from original TabsTrigger base
+              variation === "default"
+                ? "data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm"
+                : "",
               variation === "rounded"
                 ? "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-slate-100 font-bold"
                 : "",
