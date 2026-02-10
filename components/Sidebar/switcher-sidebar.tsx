@@ -69,7 +69,9 @@ export function SwitcherSidebar({
       // Si on est sur un projet, chercher le projet correspondant
       const projectMatch = activePath.match(/\/studio\/projects\/(\d+)/);
       if (projectMatch) {
-        return item.slug.includes(`/studio/projects/${projectMatch[1]}`);
+        // Utiliser une regex avec word boundary pour éviter que /projects/1 matche /projects/11
+        const projectPattern = new RegExp(`/studio/projects/${projectMatch[1]}(/|$)`);
+        return projectPattern.test(item.slug);
       }
     }
     // Sinon, vérifier si c'est l'item Admin
