@@ -18,7 +18,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "../ui/sidebar";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { cn } from "../lib/utils";
 import {
   PiCodeStroke,
@@ -57,6 +57,7 @@ export function SwitcherSidebar({
 }) {
   const { isMobile, open } = useSidebar();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   // Utiliser usePathname pour détecter les changements de route côté client
   const clientPath = usePathname();
@@ -73,6 +74,12 @@ export function SwitcherSidebar({
         const projectPattern = new RegExp(`/studio/projects/${projectMatch[1]}(/|$)`);
         return projectPattern.test(item.slug);
       }
+    }
+    // Sur une page ticket avec projectId en query param, garder le contexte projet
+    const projectIdParam = searchParams?.get("projectId");
+    if (activePath?.startsWith("/studio/tickets/") && projectIdParam) {
+      const projectPattern = new RegExp(`/studio/projects/${projectIdParam}(/|$)`);
+      return projectPattern.test(item.slug);
     }
     // Sinon, vérifier si c'est l'item Admin
     return item.type === "admin" && !activePath?.includes("/studio/projects/");
