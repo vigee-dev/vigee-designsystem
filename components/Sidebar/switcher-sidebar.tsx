@@ -24,7 +24,7 @@ import {
   PiCodeStroke,
   PiChatChattingStroke,
   PiFileTextStroke,
-} from "@/vigee-designsystem/icons/PikaIcons";
+} from "../../icons/PikaIcons";
 
 type SwitcherItem = {
   name: string;
