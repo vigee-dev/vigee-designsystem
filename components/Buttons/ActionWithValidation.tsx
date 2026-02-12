@@ -9,7 +9,7 @@ interface ActionWithValidationProps {
   className?: string;
   isPending?: boolean;
   action: () => void;
-  icon: "trash" | "check" | "cross";
+  icon: "trash" | "check" | "cross" | "refresh";
   children?: React.ReactNode;
   tooltip?: string;
   classNameIcon?: string;

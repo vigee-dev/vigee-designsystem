@@ -191,14 +191,19 @@ const TabsComponent = <T extends string = string>({
             className={cn(
               `w-full flex gap-2 group min-w-0 rounded-xl`,
               fullWidth ? " md:w-full" : " md:w-fit",
+              // Default variation - styles from original TabsTrigger base
+              // Use aria-selected instead of data-[state=active] to avoid conflicts with Tooltip
+              variation === "default"
+                ? "aria-selected:bg-background aria-selected:text-foreground aria-selected:shadow-sm"
+                : "",
               variation === "rounded"
-                ? "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-slate-100 font-bold"
+                ? "rounded-xl dark:bg-slate-900 bg-slate-100 dark:aria-selected:text-slate-800 text-slate-500 dark:aria-selected:bg-white aria-selected:bg-primary aria-selected:text-slate-100 font-bold"
                 : "",
               variation === "rounded-blue"
-                ? "rounded-xl dark:bg-blue-200 dark:text-blue-600 bg-slate-100 dark:data-[state=active]:text-blue-800 text-blue-600 dark:data-[state=active]:bg-white data-[state=active]:bg-blue-500 data-[state=active]:text-white font-bold"
+                ? "rounded-xl dark:bg-blue-200 dark:text-blue-600 bg-slate-100 dark:aria-selected:text-blue-800 text-blue-600 dark:aria-selected:bg-white aria-selected:bg-blue-500 aria-selected:text-white font-bold"
                 : "",
               variation === "rounded-green"
-                ? "rounded-xl dark:bg-emerald-900 dark:text-emerald-50 bg-slate-100 dark:data-[state=active]:text-emerald-800 text-emerald-600 dark:data-[state=active]:bg-white data-[state=active]:bg-emerald-500 data-[state=active]:text-white font-bold"
+                ? "rounded-xl dark:bg-emerald-900 dark:text-emerald-50 bg-slate-100 dark:aria-selected:text-emerald-800 text-emerald-600 dark:aria-selected:bg-white aria-selected:bg-emerald-500 aria-selected:text-white font-bold"
                 : ""
             )}
             onClick={() =>
@@ -206,7 +211,7 @@ const TabsComponent = <T extends string = string>({
             }
           >
             {option.icon && (
-              <span className="group-data-[state=active]:text-slate-50 text-slate-400 dark:group-data-[state=active]:text-slate-800">
+              <span className="group-aria-selected:text-slate-50 text-slate-400 dark:group-aria-selected:text-slate-800">
                 {option.icon}
               </span>
             )}

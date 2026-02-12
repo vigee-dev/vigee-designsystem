@@ -12,6 +12,8 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 
+export type TabStatus = "blue" | "green" | "orange" | "red";
+
 export type TabOption<T extends string = string> = {
   name: string | ReactNode;
   href?: string;
@@ -23,6 +25,7 @@ export type TabOption<T extends string = string> = {
   disabled?: boolean;
   badgeIcon?: ReactNode;
   tooltip?: string;
+  status?: TabStatus;
 };
 
 interface TabsResponsiveProps<T extends string = string> {
@@ -41,12 +44,19 @@ interface TabsResponsiveProps<T extends string = string> {
 
 const variants = {
   default:
-    "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold",
+    "rounded-xl dark:bg-slate-900 bg-slate-100 dark:aria-selected:text-slate-800 text-slate-500 aria-selected:text-slate-800 dark:aria-selected:bg-white aria-selected:bg-primary aria-selected:text-primary-foreground font-bold",
   light:
-    "rounded-xl bg-transparent data-[state=active]:text-primary text-primary-light font-bold data-[state=active]:bg-transparent data-[state=active]:shadow-none border-none pl-0",
-  mini: "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold text-sm p-1 px-2",
-  big: "rounded-xl dark:bg-slate-900 bg-slate-100 dark:data-[state=active]:text-slate-800 text-slate-500 dark:data-[state=active]:bg-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground font-bold text-lg py-3 px-4",
+    "rounded-xl bg-transparent text-slate-400 aria-selected:text-slate-900 font-bold aria-selected:bg-transparent aria-selected:shadow-none border-none pl-0",
+  mini: "rounded-xl dark:bg-slate-900 bg-slate-100 dark:aria-selected:text-slate-800 text-slate-500 aria-selected:text-slate-800 dark:aria-selected:bg-white aria-selected:bg-primary aria-selected:text-primary-foreground font-bold text-sm p-1 px-2",
+  big: "rounded-xl dark:bg-slate-900 bg-slate-100 dark:aria-selected:text-slate-800 text-slate-500 aria-selected:text-slate-800 dark:aria-selected:bg-white aria-selected:bg-primary aria-selected:text-primary-foreground font-bold text-lg py-3 px-4",
 } as const;
+
+const statusColors: Record<TabStatus, string> = {
+  blue: "bg-blue-500",
+  green: "bg-green-500",
+  orange: "bg-orange-500",
+  red: "bg-red-500",
+};
 
 export function TabMobile<T extends string = string>({
   onChange,
@@ -125,7 +135,7 @@ export function TabMobile<T extends string = string>({
         >
           <TooltipProvider>
             {options.map((option, index) => {
-              const triggerContent = (
+              const tabTrigger = (
                 <TabsTrigger
                   key={index}
                   disabled={option.disabled}
@@ -145,12 +155,20 @@ export function TabMobile<T extends string = string>({
                         <span className="opacity-70">{option.icon}</span>
                       )}
                       {option.name}
+                      {option.status && (
+                        <span
+                          className={cn(
+                            "h-2 w-2 rounded-full animate-pulse",
+                            statusColors[option.status]
+                          )}
+                        />
+                      )}
                     </div>
 
                     {option?.count && option?.count > 0 ? (
                       <Badge
                         className={cn(
-                          "bg-red-400 h-5 w-5 flex items-center justify-center mx-auto opacity-50 group-data-[state=active]:opacity-100",
+                          "bg-red-400 h-5 w-5 flex items-center justify-center mx-auto opacity-50 group-aria-selected:opacity-100",
                           option.badgeColor
                         )}
                       >
@@ -161,10 +179,13 @@ export function TabMobile<T extends string = string>({
                 </TabsTrigger>
               );
 
+              // Use asChild to avoid button-inside-button hydration error
               if (option.tooltip) {
                 return (
-                  <Tooltip key={index}>
-                    <TooltipTrigger asChild>{triggerContent}</TooltipTrigger>
+                  <Tooltip key={`tooltip-${index}`} delayDuration={300}>
+                    <TooltipTrigger asChild>
+                      {tabTrigger}
+                    </TooltipTrigger>
                     <TooltipContent>
                       <p>{option.tooltip}</p>
                     </TooltipContent>
@@ -172,7 +193,7 @@ export function TabMobile<T extends string = string>({
                 );
               }
 
-              return triggerContent;
+              return tabTrigger;
             })}
           </TooltipProvider>
         </TabsList>
