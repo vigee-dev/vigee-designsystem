@@ -62,7 +62,7 @@ export default function SheetDialog({ trigger, title, description, children, sid
               {trigger}
             </DialogTrigger>
 
-            <DialogContent onClick={e => e.stopPropagation()} className={`max-w-[425px]  ${size === "sm" ? "md:max-w-[425px]" : size === "md" ? "md:max-w-[650px]" : "md:max-w-[1080px]"} `}>
+            <DialogContent onPointerDown={e => e.stopPropagation()} onTouchStart={e => e.stopPropagation()} onClick={e => e.stopPropagation()} className={`max-w-[425px]  ${size === "sm" ? "md:max-w-[425px]" : size === "md" ? "md:max-w-[650px]" : "md:max-w-[1080px]"} `}>
               <DialogHeader>
                 <div className="flex items-center gap-x-4 p-4 py-2">
                   {icon}
@@ -88,7 +88,7 @@ export default function SheetDialog({ trigger, title, description, children, sid
           {trigger}
         </SheetTrigger>
 
-        <SheetContent side={side} className={`rounded-t-2xl lg:max-w-screen-lg max-h-dvh overflow-y-auto`} onClick={e => e.stopPropagation()}>
+        <SheetContent side={side} className={`rounded-t-2xl lg:max-w-screen-lg max-h-dvh overflow-y-auto`} onPointerDown={e => e.stopPropagation()} onTouchStart={e => e.stopPropagation()} onClick={e => e.stopPropagation()}>
           <SheetHeader className="text-left flex pb-4">
             <SheetTitle className="text-primary">{title}</SheetTitle>
             <SheetDescription>{description}</SheetDescription>
