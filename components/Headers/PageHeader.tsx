@@ -54,7 +54,7 @@ export function PageHeader({
           )}
         </div>
       </div>
-      <div className="flex gap-x-4">{children}</div>
+      <div className="flex gap-x-4 flex-shrink-0">{children}</div>
     </div>
   );
 }
