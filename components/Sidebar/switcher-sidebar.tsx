@@ -144,7 +144,7 @@ export function SwitcherSidebar({
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <SidebarMenuButton
-                size="md"
+                size="lg"
                 className="mt-2 data-[state=open]:bg-white hover:bg-white bg-slate-50 rounded-2xl border border-slate-200"
               >
                 <div className="flex items-center gap-2 flex-1 min-w-0">
@@ -187,7 +187,14 @@ export function SwitcherSidebar({
                     <span className="flex items-center justify-center w-5 h-5 [&>svg]:w-4 [&>svg]:h-4 text-slate-600">
                       {item.iconFill || item.icon}
                     </span>
-                    <span className="font-medium">{item.name}</span>
+                    <div className="flex flex-col min-w-0">
+                      <span className="font-medium">{item.name}</span>
+                      {item.subtitle && (
+                        <span className="text-[11px] text-slate-400 -mt-0.5">
+                          {item.subtitle}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </DropdownMenuItem>
               ))}
@@ -208,12 +215,11 @@ export function SwitcherSidebar({
                         router.push(item.slug);
                       }}
                       className={cn(
-                        "gap-2 p-2 cursor-pointer",
+                        "gap-2 px-3 py-2 cursor-pointer",
                         activeItem?.slug === item.slug && "bg-slate-100",
                       )}
                     >
                       <div className="flex items-center gap-2 flex-1 min-w-0">
-                        {item.icon}
                         <div className="flex flex-col min-w-0 flex-1">
                           <span className="font-medium truncate">
                             {item.name}
