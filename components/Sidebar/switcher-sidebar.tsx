@@ -92,9 +92,8 @@ export function SwitcherSidebar({
     return false;
   });
 
-  // Séparer Studio, Apps et Projets
-  const studioItem = items.find((item) => item.type === "studio");
-  const appItems = items.filter((item) => item.type === "app");
+  // Séparer les items principaux (apps + studio) des projets
+  const mainItems = items.filter((item) => item.type === "app" || item.type === "studio");
   const projectItems = items.filter((item) => item.type === "project");
 
   // Logo component - aligné à gauche
@@ -155,53 +154,27 @@ export function SwitcherSidebar({
               side={isMobile ? "bottom" : "right"}
               sideOffset={4}
             >
-              {/* Section Studio (ex-Admin) */}
-              {studioItem && (
-                <>
-                  <DropdownMenuItem
-                    onClick={() => {
-                      router.push(studioItem.slug);
-                    }}
-                    className={cn(
-                      "gap-2 p-3 cursor-pointer",
-                      activeItem?.slug === studioItem.slug && "bg-slate-100"
-                    )}
-                  >
-                    <div className="flex items-center gap-2 flex-1">
-                      {studioItem.icon}
-                      <span className="font-medium">{studioItem.name}</span>
-                    </div>
-                  </DropdownMenuItem>
-                  {(appItems.length > 0 || projectItems.length > 0) && <DropdownMenuSeparator />}
-                </>
-              )}
-
-              {/* Section Apps (Leads, RH, Finances) */}
-              {appItems.length > 0 && (
-                <>
-                  <DropdownMenuLabel className="text-xs text-muted-foreground px-2 py-1.5">
-                    Apps
-                  </DropdownMenuLabel>
-                  {appItems.map((item) => (
-                    <DropdownMenuItem
-                      key={item.slug}
-                      onClick={() => {
-                        router.push(item.slug);
-                      }}
-                      className={cn(
-                        "gap-2 p-2 cursor-pointer",
-                        activeItem?.slug === item.slug && "bg-slate-100"
-                      )}
-                    >
-                      <div className="flex items-center gap-2 flex-1">
-                        {item.icon}
-                        <span className="font-medium">{item.name}</span>
-                      </div>
-                    </DropdownMenuItem>
-                  ))}
-                  {projectItems.length > 0 && <DropdownMenuSeparator />}
-                </>
-              )}
+              {/* Items principaux : Leads, Talents, Finances, Studio */}
+              {mainItems.map((item) => (
+                <DropdownMenuItem
+                  key={item.slug}
+                  onClick={() => {
+                    router.push(item.slug);
+                  }}
+                  className={cn(
+                    "gap-2 p-2 cursor-pointer",
+                    activeItem?.slug === item.slug && "bg-slate-100"
+                  )}
+                >
+                  <div className="flex items-center gap-2 flex-1">
+                    <span className="flex items-center justify-center w-5 h-5 [&>svg]:w-4 [&>svg]:h-4 text-slate-600">
+                      {item.icon}
+                    </span>
+                    <span className="font-medium">{item.name}</span>
+                  </div>
+                </DropdownMenuItem>
+              ))}
+              {mainItems.length > 0 && projectItems.length > 0 && <DropdownMenuSeparator />}
 
               {/* Section Projets */}
               {projectItems.length > 0 && (
