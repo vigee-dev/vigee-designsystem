@@ -66,11 +66,15 @@ export function SwitcherSidebar({
 
   // Trouver l'item actif basé sur le path courant
   const activeItem = items.find((item) => {
+    // Apps indépendantes — détecter par préfixe de route
+    if (activePath?.startsWith("/leads") && item.slug.startsWith("/leads")) return true;
+    if (activePath?.startsWith("/rh") && item.slug.startsWith("/rh")) return true;
+    if (activePath?.startsWith("/finances") && item.slug.startsWith("/finances")) return true;
+
     if (activePath?.includes("/studio/projects/")) {
       // Si on est sur un projet, chercher le projet correspondant
       const projectMatch = activePath.match(/\/studio\/projects\/(\d+)/);
       if (projectMatch) {
-        // Utiliser une regex avec word boundary pour éviter que /projects/1 matche /projects/11
         const projectPattern = new RegExp(`/studio/projects/${projectMatch[1]}(/|$)`);
         return projectPattern.test(item.slug);
       }
@@ -81,12 +85,16 @@ export function SwitcherSidebar({
       const projectPattern = new RegExp(`/studio/projects/${projectIdParam}(/|$)`);
       return projectPattern.test(item.slug);
     }
-    // Sinon, vérifier si c'est l'item Admin
-    return item.type === "admin" && !activePath?.includes("/studio/projects/");
+    // Studio = tout /studio sauf les pages projets
+    if (item.type === "studio" && activePath?.startsWith("/studio") && !activePath?.includes("/studio/projects/")) {
+      return true;
+    }
+    return false;
   });
 
-  // Séparer Admin et Projets
-  const adminItem = items.find((item) => item.type === "admin");
+  // Séparer Studio, Apps et Projets
+  const studioItem = items.find((item) => item.type === "studio");
+  const appItems = items.filter((item) => item.type === "app");
   const projectItems = items.filter((item) => item.type === "project");
 
   // Logo component - aligné à gauche
@@ -147,23 +155,50 @@ export function SwitcherSidebar({
               side={isMobile ? "bottom" : "right"}
               sideOffset={4}
             >
-              {/* Section Admin */}
-              {adminItem && (
+              {/* Section Studio (ex-Admin) */}
+              {studioItem && (
                 <>
                   <DropdownMenuItem
                     onClick={() => {
-                      router.push(adminItem.slug);
+                      router.push(studioItem.slug);
                     }}
                     className={cn(
                       "gap-2 p-3 cursor-pointer",
-                      activeItem?.slug === adminItem.slug && "bg-slate-100"
+                      activeItem?.slug === studioItem.slug && "bg-slate-100"
                     )}
                   >
                     <div className="flex items-center gap-2 flex-1">
-                      {adminItem.icon}
-                      <span className="font-medium">{adminItem.name}</span>
+                      {studioItem.icon}
+                      <span className="font-medium">{studioItem.name}</span>
                     </div>
                   </DropdownMenuItem>
+                  {(appItems.length > 0 || projectItems.length > 0) && <DropdownMenuSeparator />}
+                </>
+              )}
+
+              {/* Section Apps (Leads, RH, Finances) */}
+              {appItems.length > 0 && (
+                <>
+                  <DropdownMenuLabel className="text-xs text-muted-foreground px-2 py-1.5">
+                    Apps
+                  </DropdownMenuLabel>
+                  {appItems.map((item) => (
+                    <DropdownMenuItem
+                      key={item.slug}
+                      onClick={() => {
+                        router.push(item.slug);
+                      }}
+                      className={cn(
+                        "gap-2 p-2 cursor-pointer",
+                        activeItem?.slug === item.slug && "bg-slate-100"
+                      )}
+                    >
+                      <div className="flex items-center gap-2 flex-1">
+                        {item.icon}
+                        <span className="font-medium">{item.name}</span>
+                      </div>
+                    </DropdownMenuItem>
+                  ))}
                   {projectItems.length > 0 && <DropdownMenuSeparator />}
                 </>
               )}
