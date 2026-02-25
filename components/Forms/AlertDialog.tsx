@@ -23,6 +23,8 @@ type Props = {
   btnQuestion: string;
   isPending?: boolean;
   isOpen?: boolean;
+  cancelLabel?: string;
+  confirmLabel?: string;
 };
 
 type AlertContextType = {
@@ -53,6 +55,8 @@ export function AlertDialog({
   trigger,
   isPending,
   isOpen,
+  cancelLabel = "Annuler",
+  confirmLabel = "Confirmer",
 }: Props) {
   const [open, setOpen] = React.useState(false);
   const contextValue: AlertContextType = {
@@ -71,18 +75,18 @@ export function AlertDialog({
           )}
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={onCancel}>Annuler</AlertDialogCancel>
+          {onCancel && <AlertDialogCancel onClick={onCancel}>{cancelLabel}</AlertDialogCancel>}
           {!isPending ? (
             <AlertDialogAction
               onClick={onClick}
               className="text-white bg-red-500"
               disabled={isPending}
             >
-              Confirmer
+              {confirmLabel}
             </AlertDialogAction>
           ) : (
             <Button onClick={onClick} variant={colorBtn} pending>
-              Confirmer
+              {confirmLabel}
             </Button>
           )}
         </AlertDialogFooter>
