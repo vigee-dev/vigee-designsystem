@@ -30,6 +30,7 @@ type SwitcherItem = {
   name: string;
   slug: string;
   icon: React.ReactNode;
+  iconFill?: React.ReactNode;
   type?: string;
   subtitle?: string;
   projectId?: number;
@@ -66,31 +67,54 @@ export function SwitcherSidebar({
 
   // Trouver l'item actif basé sur le path courant
   const activeItem = items.find((item) => {
+    // Apps indépendantes — détecter par préfixe de route
+    if (activePath?.startsWith("/leads") && item.slug.startsWith("/leads"))
+      return true;
+    if (activePath?.startsWith("/rh") && item.slug.startsWith("/rh"))
+      return true;
+    if (
+      activePath?.startsWith("/finances") &&
+      item.slug.startsWith("/finances")
+    )
+      return true;
+
     if (activePath?.includes("/studio/projects/")) {
       // Si on est sur un projet, chercher le projet correspondant
       const projectMatch = activePath.match(/\/studio\/projects\/(\d+)/);
       if (projectMatch) {
-        // Utiliser une regex avec word boundary pour éviter que /projects/1 matche /projects/11
-        const projectPattern = new RegExp(`/studio/projects/${projectMatch[1]}(/|$)`);
+        const projectPattern = new RegExp(
+          `/studio/projects/${projectMatch[1]}(/|$)`,
+        );
         return projectPattern.test(item.slug);
       }
     }
     // Sur une page ticket avec projectId en query param, garder le contexte projet
     const projectIdParam = searchParams?.get("projectId");
     if (activePath?.startsWith("/studio/tickets/") && projectIdParam) {
-      const projectPattern = new RegExp(`/studio/projects/${projectIdParam}(/|$)`);
+      const projectPattern = new RegExp(
+        `/studio/projects/${projectIdParam}(/|$)`,
+      );
       return projectPattern.test(item.slug);
     }
-    // Sinon, vérifier si c'est l'item Admin
-    return item.type === "admin" && !activePath?.includes("/studio/projects/");
+    // Studio = tout /studio sauf les pages projets
+    if (
+      item.type === "studio" &&
+      activePath?.startsWith("/studio") &&
+      !activePath?.includes("/studio/projects/")
+    ) {
+      return true;
+    }
+    return false;
   });
 
-  // Séparer Admin et Projets
-  const adminItem = items.find((item) => item.type === "admin");
+  // Séparer les items principaux (apps + studio) des projets
+  const mainItems = items.filter(
+    (item) => item.type === "app" || item.type === "studio",
+  );
   const projectItems = items.filter((item) => item.type === "project");
 
-  // Logo component - aligné à gauche
-  const LogoComponent = () => (
+  // Logo inline
+  const logoElement = (
     <div className="flex items-center justify-start py-2 px-2">
       {logo && open ? (
         <Image src={logo} alt="logo" width={120} height={40} />
@@ -104,7 +128,7 @@ export function SwitcherSidebar({
   if (!showSwitcher) {
     return (
       <div className="flex flex-col">
-        <LogoComponent />
+        {logoElement}
       </div>
     );
   }
@@ -112,7 +136,7 @@ export function SwitcherSidebar({
   return (
     <div className="flex flex-col gap-2">
       {/* Logo en haut */}
-      <LogoComponent />
+      {logoElement}
 
       {/* Switcher en dessous */}
       <SidebarMenu>
@@ -121,13 +145,13 @@ export function SwitcherSidebar({
             <DropdownMenuTrigger asChild>
               <SidebarMenuButton
                 size="lg"
-                className="data-[state=open]:bg-slate-800 hover:bg-slate-800 bg-slate-800/50 rounded-lg border border-slate-700"
+                className="mt-2 data-[state=open]:bg-white hover:bg-white bg-slate-50 rounded-2xl border border-slate-200"
               >
                 <div className="flex items-center gap-2 flex-1 min-w-0">
-                  {activeItem?.icon}
+                  {activeItem?.iconFill || activeItem?.icon}
                   {open && (
                     <div className="flex flex-col min-w-0 flex-1 text-left">
-                      <span className="font-semibold text-sm text-white truncate">
+                      <span className="font-medium text-sm text-gray-500 truncate">
                         {activeItem?.name || "Sélectionner"}
                       </span>
                       {activeItem?.subtitle && (
@@ -142,30 +166,40 @@ export function SwitcherSidebar({
               </SidebarMenuButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent
-              className="w-[--radix-dropdown-menu-trigger-width] min-w-72 rounded-lg max-h-96 overflow-y-auto"
+              className="w-[--radix-dropdown-menu-trigger-width] min-w-72 rounded-2xl max-h-96 overflow-y-auto"
               align="start"
               side={isMobile ? "bottom" : "right"}
               sideOffset={4}
             >
-              {/* Section Admin */}
-              {adminItem && (
-                <>
-                  <DropdownMenuItem
-                    onClick={() => {
-                      router.push(adminItem.slug);
-                    }}
-                    className={cn(
-                      "gap-2 p-3 cursor-pointer",
-                      activeItem?.slug === adminItem.slug && "bg-slate-100"
-                    )}
-                  >
-                    <div className="flex items-center gap-2 flex-1">
-                      {adminItem.icon}
-                      <span className="font-medium">{adminItem.name}</span>
+              {/* Items principaux : Leads, Talents, Finances, Studio */}
+              {mainItems.map((item) => (
+                <DropdownMenuItem
+                  key={item.slug}
+                  onClick={() => {
+                    router.push(item.slug);
+                  }}
+                  className={cn(
+                    "gap-2 p-2 cursor-pointer",
+                    activeItem?.slug === item.slug && "bg-slate-100",
+                  )}
+                >
+                  <div className="flex items-center gap-2 flex-1">
+                    <span className="flex items-center justify-center w-5 h-5 [&>svg]:w-4 [&>svg]:h-4 text-slate-600">
+                      {item.iconFill || item.icon}
+                    </span>
+                    <div className="flex flex-col min-w-0">
+                      <span className="font-medium">{item.name}</span>
+                      {item.subtitle && (
+                        <span className="text-[11px] text-slate-400 -mt-0.5">
+                          {item.subtitle}
+                        </span>
+                      )}
                     </div>
-                  </DropdownMenuItem>
-                  {projectItems.length > 0 && <DropdownMenuSeparator />}
-                </>
+                  </div>
+                </DropdownMenuItem>
+              ))}
+              {mainItems.length > 0 && projectItems.length > 0 && (
+                <DropdownMenuSeparator />
               )}
 
               {/* Section Projets */}
@@ -181,14 +215,15 @@ export function SwitcherSidebar({
                         router.push(item.slug);
                       }}
                       className={cn(
-                        "gap-2 p-2 cursor-pointer",
-                        activeItem?.slug === item.slug && "bg-slate-100"
+                        "gap-2 px-3 py-2 cursor-pointer",
+                        activeItem?.slug === item.slug && "bg-slate-100",
                       )}
                     >
                       <div className="flex items-center gap-2 flex-1 min-w-0">
-                        {item.icon}
                         <div className="flex flex-col min-w-0 flex-1">
-                          <span className="font-medium truncate">{item.name}</span>
+                          <span className="font-medium truncate">
+                            {item.name}
+                          </span>
                           {item.subtitle && (
                             <span className="text-xs text-muted-foreground truncate">
                               {item.subtitle}
@@ -203,7 +238,9 @@ export function SwitcherSidebar({
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
-                                router.push(`/studio/projects/${item.projectId}/devis`);
+                                router.push(
+                                  `/studio/projects/${item.projectId}/devis`,
+                                );
                               }}
                               className="text-[10px] font-medium bg-emerald-100 text-emerald-600 min-w-5 h-5 px-1 rounded-full flex items-center justify-center gap-0.5 hover:bg-emerald-200 transition-colors"
                             >
@@ -215,7 +252,9 @@ export function SwitcherSidebar({
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
-                                router.push(`/studio/projects/${item.projectId}/developpement`);
+                                router.push(
+                                  `/studio/projects/${item.projectId}/developpement`,
+                                );
                               }}
                               className="text-[10px] font-medium bg-sky-100 text-sky-600 min-w-5 h-5 px-1 rounded-full flex items-center justify-center gap-0.5 hover:bg-sky-200 transition-colors"
                             >
@@ -227,7 +266,9 @@ export function SwitcherSidebar({
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
-                                router.push(`/studio/projects/${item.projectId}/support`);
+                                router.push(
+                                  `/studio/projects/${item.projectId}/support`,
+                                );
                               }}
                               className="text-[10px] font-medium bg-red-100 text-red-600 min-w-5 h-5 px-1 rounded-full flex items-center justify-center gap-0.5 hover:bg-red-200 transition-colors"
                             >

@@ -58,7 +58,7 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
                     <span>Choisir une date</span>
                   )}
 
-                  <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                  <CalendarIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </FormControl>
             </PopoverTrigger>
