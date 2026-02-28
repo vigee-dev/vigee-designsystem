@@ -295,32 +295,92 @@ export function LatestInvoicesSkeleton() {
   );
 }
 
+/** Bloc KPI skeleton individuel */
+const KpiBlock = ({ wide = false }: { wide?: boolean }) => (
+  <div className={cn("flex items-center justify-between gap-2 px-5 py-3", wide ? "min-w-0" : "")}>
+    <div className="h-3 w-24 rounded-md bg-slate-100" />
+    <div className="h-5 w-12 rounded-md bg-slate-200" />
+  </div>
+);
+
+/** Ligne de KPI (style NumberKPI) */
+const KpiRowSkeleton = ({ count, small = false }: { count: number; small?: boolean }) => (
+  <div
+    className={cn(
+      "rounded-xl bg-white border border-slate-100 divide-x divide-slate-100 grid",
+      small ? "h-10" : "h-14",
+    )}
+    style={{ gridTemplateColumns: `repeat(${count}, minmax(0, 1fr))` }}
+  >
+    {Array.from({ length: count }).map((_, i) => (
+      <KpiBlock key={i} />
+    ))}
+  </div>
+);
+
+/** Faux bar chart (barres verticales de hauteurs variées) */
+const ChartBarsSkeleton = () => {
+  const heights = [40, 65, 50, 80, 55, 70, 45, 90, 60, 75, 35, 55];
+  return (
+    <div className="flex items-end gap-3 h-[280px] px-4 pt-10 pb-6">
+      {heights.map((h, i) => (
+        <div key={i} className="flex-1 flex flex-col items-center gap-2">
+          <div
+            className="w-full rounded-t-md bg-slate-100"
+            style={{ height: `${h}%` }}
+          />
+          <div className="h-2 w-6 rounded bg-slate-100" />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+/** Carte chart skeleton */
+const ChartCardSkeleton = () => (
+  <div className="rounded-xl bg-white border border-slate-100 p-6">
+    <div className="flex flex-col gap-1 mb-2">
+      <div className="h-4 w-40 rounded-md bg-slate-200" />
+      <div className="h-3 w-56 rounded-md bg-slate-100" />
+    </div>
+    <ChartBarsSkeleton />
+  </div>
+);
+
 interface DashboardSkeletonProps {
   noTop?: boolean;
 }
 export default function DashboardSkeleton({ noTop }: DashboardSkeletonProps) {
   return (
-    <>
+    <div className="flex flex-col gap-2 animate-pulse">
+      {/* Header : titre + filtres */}
       {!noTop && (
-        <div
-          className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-slate-100`}
-        />
+        <div className="flex items-center justify-between mb-2">
+          <div className="flex flex-col gap-1">
+            <div className="h-6 w-40 rounded-md bg-slate-200" />
+            <div className="h-3 w-28 rounded-md bg-slate-100" />
+          </div>
+          <div className="flex gap-2">
+            <div className="h-8 w-24 rounded-lg bg-slate-100" />
+            <div className="h-8 w-24 rounded-lg bg-slate-100" />
+            <div className="h-8 w-28 rounded-lg bg-slate-100" />
+          </div>
+        </div>
       )}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <CardSkeleton />
-        <CardSkeleton />
-        <CardSkeleton />
-        <CardSkeleton />
-      </div>
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-        <div className="col-span-full md:col-span-3 lg:col-span-6">
-          <RevenueChartSkeleton />
-        </div>
-        <div className="col-span-full md:col-span-1 lg:col-span-2">
-          <LatestInvoicesSkeleton />
-        </div>
-      </div>
-    </>
+
+      {/* KPI row 1 : 5 colonnes */}
+      <KpiRowSkeleton count={5} />
+
+      {/* KPI row 2 : 3 colonnes small */}
+      <KpiRowSkeleton count={3} small />
+
+      {/* KPI row 3 : 3 colonnes small (contrats/DPAE) */}
+      <KpiRowSkeleton count={3} small />
+
+      {/* Charts */}
+      <ChartCardSkeleton />
+      <ChartCardSkeleton />
+    </div>
   );
 }
 
