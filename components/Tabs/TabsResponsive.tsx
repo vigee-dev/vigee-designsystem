@@ -216,10 +216,10 @@ const TabsComponent = <T extends string = string>({
               </span>
             )}
             {option.name}
-            {option?.count && option?.count > 0 ? (
+            {option?.count != null && option?.count > 0 ? (
               <Badge
                 className={cn(
-                  "bg-red-400 h-5 w-5 flex items-center justify-center mx-auto",
+                  "bg-red-400 h-5 min-w-5 px-1 flex items-center justify-center",
                   option.badgeColor
                 )}
               >
@@ -275,7 +275,7 @@ const SelectComponent = <T extends string = string>({
             >
               <div className="flex items-center gap-2">
                 {option.icon} {option.name}
-                {option?.count && option?.count > 0 ? (
+                {option?.count != null && option?.count > 0 ? (
                   <Badge className={cn("bg-red-400", option.badgeColor)}>
                     {option.count}
                   </Badge>
