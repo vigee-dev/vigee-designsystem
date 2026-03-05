@@ -194,7 +194,7 @@ export const Toggles = <T extends FieldValues>({
                 <ShadToggleGroup
                   type={multi ? "multiple" : "single"}
                   className={cn(
-                    "w-full gap-2",
+                    "w-full gap-2 items-stretch",
                     columns
                       ? `grid grid-cols-1 md:grid-cols-${columns}`
                       : isNowrap
