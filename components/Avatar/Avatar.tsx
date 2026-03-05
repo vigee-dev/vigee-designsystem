@@ -7,13 +7,18 @@ import { PiUserCircleDuoSolid } from "../../icons/PikaIcons";
 import { cn } from "../lib/utils";
 
 interface Props {
+  /** Direct image URL (signed S3 URL or external URL) */
   src?: string | null;
+  /** User ID — uses proxy /api/user/avatar/[userId] to avoid expired signed URLs */
+  userId?: string | null;
   alt?: string;
   onClick?: () => void;
   className?: string;
 }
 
-const Avatar = ({ src, alt, onClick, className }: Props) => {
+const Avatar = ({ src, userId, alt, onClick, className }: Props) => {
+  const imageSrc = userId ? `/api/user/avatar/${userId}` : src;
+
   return (
     <ShadcnAvatar
       className={cn(
@@ -22,9 +27,9 @@ const Avatar = ({ src, alt, onClick, className }: Props) => {
       )}
       onClick={onClick}
     >
-      {src && (
+      {imageSrc && (
         <AvatarImage
-          src={src}
+          src={imageSrc}
           alt={alt || "Photo de profil"}
           className="object-cover"
         />
