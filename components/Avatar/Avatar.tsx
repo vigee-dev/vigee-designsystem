@@ -17,24 +17,23 @@ const Avatar = ({ src, alt, onClick, className }: Props) => {
   return (
     <ShadcnAvatar
       className={cn(
-        "border shadow w-16 h-16 flex justify-center items-center ",
+        "border shadow w-16 h-16 flex justify-center items-center",
         className
       )}
       onClick={onClick}
     >
-      {src != null ? (
+      {src && (
         <AvatarImage
           src={src}
           alt={alt || "Photo de profil"}
           className="object-cover"
         />
-      ) : (
-        <AvatarFallback>
-          <PiUserCircleDuoSolid
-            className={cn("text-slate-400 w-full h-full", className)}
-          />
-        </AvatarFallback>
       )}
+      <AvatarFallback>
+        <PiUserCircleDuoSolid
+          className={cn("text-slate-400 w-full h-full", className)}
+        />
+      </AvatarFallback>
     </ShadcnAvatar>
   );
 };
