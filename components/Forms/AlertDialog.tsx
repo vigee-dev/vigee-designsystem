@@ -15,7 +15,7 @@ import { Button } from "../Buttons/Button";
 import React from "react";
 
 type Props = {
-  btnSubAlert?: string;
+  btnSubAlert?: React.ReactNode;
   onClick: () => void;
   onCancel?: () => void;
   colorBtn?: "outline" | "destructive";
