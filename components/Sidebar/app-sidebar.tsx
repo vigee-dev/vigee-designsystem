@@ -113,6 +113,8 @@ const AppSidebar = ({
     if (itemSlug === "support" && activePath.startsWith("/studio/tickets/")) return true;
     // Cas spécial: les pages cadrage (/studio/projects/X/cadrage/*) doivent activer "Dev"
     if (itemSlug === "developpement" && activePath.match(/\/studio\/projects\/\d+\/cadrage\//)) return true;
+    // Cas spécial: les pages version (/studio/projects/X/version/*) doivent activer "Dev"
+    if (itemSlug === "developpement" && activePath.match(/\/studio\/projects\/\d+\/version\//)) return true;
     return false;
   };
 
