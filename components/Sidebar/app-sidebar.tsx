@@ -119,7 +119,7 @@ const AppSidebar = ({
   };
 
   return (
-    <Sidebar collapsible="none">
+    <Sidebar collapsible="icon">
       <SidebarHeader>
         {itemsSwitcher && itemsSwitcher.length > 0 ? (
           <SwitcherSidebar
