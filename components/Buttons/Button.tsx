@@ -53,6 +53,7 @@ import {
   PiUserCircleStroke,
   PiUserPlusStroke,
   PiUserSettingsStroke,
+  PiSettings02Stroke,
 } from "../../icons/PikaIcons";
 import { cn } from "../lib/utils";
 import { Tooltip } from "../Tooltip/Tooltip";
@@ -140,6 +141,7 @@ const iconMap = {
   repeat: PiRepeatSquareStroke,
   instagram: PiInstagramStroke,
   facebook: PiFacebookStroke,
+  configuration: PiSettings02Stroke,
 };
 
 export function Button({
