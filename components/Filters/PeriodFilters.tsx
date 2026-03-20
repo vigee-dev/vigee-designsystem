@@ -279,22 +279,22 @@ export const PeriodFilters = ({
         <div className="gap-4 flex items-center w-full">
           <TabsList className="w-full md:w-fit">
             {showDay && (
-              <TabsTrigger className="w-full md:w-fit" value="day">
+              <TabsTrigger className="w-full md:w-fit data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm" value="day">
                 Jour
               </TabsTrigger>
             )}
             {week && (
-              <TabsTrigger className="w-full md:w-fit" value="week">
+              <TabsTrigger className="w-full md:w-fit data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm" value="week">
                 Hebdo
               </TabsTrigger>
             )}
             {month && (
-              <TabsTrigger className="w-full md:w-fit" value="month">
+              <TabsTrigger className="w-full md:w-fit data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm" value="month">
                 Mois
               </TabsTrigger>
             )}
             {year && (day || month || week) && (
-              <TabsTrigger className="w-full md:w-fit" value="year">
+              <TabsTrigger className="w-full md:w-fit data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm" value="year">
                 Année
               </TabsTrigger>
             )}
