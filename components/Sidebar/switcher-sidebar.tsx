@@ -24,6 +24,7 @@ import {
   PiCodeStroke,
   PiChatChattingStroke,
   PiFileTextStroke,
+  PiNotebookStroke,
 } from "../../icons/PikaIcons";
 
 type SwitcherItem = {
@@ -35,6 +36,7 @@ type SwitcherItem = {
   subtitle?: string;
   projectId?: number;
   counts?: {
+    cadrageCount: number;
     devisCount: number;
     studioCount: number;
     supportCount: number;
@@ -234,6 +236,20 @@ export function SwitcherSidebar({
                       {/* Indicateurs d'activité avec icônes - badges ronds cliquables */}
                       {item.counts && item.projectId && (
                         <div className="flex items-center gap-1">
+                          {item.counts.cadrageCount > 0 && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                router.push(
+                                  `/studio/projects/${item.projectId}/cadrage`,
+                                );
+                              }}
+                              className="text-[10px] font-medium bg-orange-100 text-orange-600 min-w-5 h-5 px-1 rounded-full flex items-center justify-center gap-0.5 hover:bg-orange-200 transition-colors"
+                            >
+                              <PiNotebookStroke className="w-3 h-3" />
+                              {item.counts.cadrageCount}
+                            </button>
+                          )}
                           {item.counts.devisCount > 0 && (
                             <button
                               onClick={(e) => {
