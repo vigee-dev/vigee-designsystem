@@ -60,6 +60,7 @@ type SwitcherItem = {
   type?: string;
   subtitle?: string;
   counts?: {
+    cadrageCount: number;
     devisCount: number;
     studioCount: number;
     supportCount: number;
