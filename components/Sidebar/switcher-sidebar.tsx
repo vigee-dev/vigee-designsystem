@@ -24,7 +24,7 @@ import {
   PiCodeStroke,
   PiChatChattingStroke,
   PiFileTextStroke,
-  PiNotebookStroke,
+  PiSearchDefaultStroke,
 } from "../../icons/PikaIcons";
 
 type SwitcherItem = {
@@ -246,7 +246,7 @@ export function SwitcherSidebar({
                               }}
                               className="text-[10px] font-medium bg-orange-100 text-orange-600 min-w-5 h-5 px-1 rounded-full flex items-center justify-center gap-0.5 hover:bg-orange-200 transition-colors"
                             >
-                              <PiNotebookStroke className="w-3 h-3" />
+                              <PiSearchDefaultStroke className="w-3 h-3" />
                               {item.counts.cadrageCount}
                             </button>
                           )}
