@@ -20,6 +20,7 @@ interface ProfileImageUploaderProps<TFormValues extends FieldValues> {
   label?: string;
   disabled?: boolean;
   className?: string;
+  required?: boolean;
 }
 
 export const ProfileImageUploader = <TFormValues extends FieldValues>({
@@ -28,8 +29,10 @@ export const ProfileImageUploader = <TFormValues extends FieldValues>({
   label,
   disabled = false,
   className,
+  required,
 }: ProfileImageUploaderProps<TFormValues>) => {
-  const { watch, setValue } = form;
+  const { watch, setValue, formState: { errors } } = form;
+  const fieldError = errors[name];
   const profileImage:
     | File
     | { id: number; signedUrl: string; filename: string } = watch(name);
@@ -50,7 +53,11 @@ export const ProfileImageUploader = <TFormValues extends FieldValues>({
   return (
     <div className={cn("flex items-center gap-2", className)}>
       <Avatar
-        className={`border shadow w-16 h-16 flex justify-center items-center ${!disabled ? "cursor-pointer" : ""}`}
+        className={cn(
+          "border shadow w-16 h-16 flex justify-center items-center",
+          !disabled && "cursor-pointer",
+          fieldError && "border-red-400 ring-2 ring-red-100",
+        )}
         onClick={handleAvatarClick}
       >
         {profileImage ? (
@@ -87,7 +94,19 @@ export const ProfileImageUploader = <TFormValues extends FieldValues>({
           onChange={onProfileImageChange}
         />
       )}
-      {<p className="text-sm text-gray-500">{label}</p>}
+      <div className="flex flex-col gap-1">
+        {label && (
+          <p className="text-sm text-gray-500">
+            {label}
+            {required && <span className="text-red-400 ml-0.5">*</span>}
+          </p>
+        )}
+        {fieldError && (
+          <p className="text-xs text-red-500">
+            {fieldError.message as string}
+          </p>
+        )}
+      </div>
     </div>
   );
 };
