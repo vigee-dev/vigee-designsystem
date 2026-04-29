@@ -187,7 +187,10 @@ export default function CommandListSelect<T extends FieldValues>({
                 const renderItem = (option: (typeof sortedOptions)[number]) => (
                   <CommandItem
                     key={option.value}
-                    value={option.label}
+                    // cmdk utilise `value` comme cle de filtrage ET de hover/selection.
+                    // Doit etre UNIQUE par item, sinon hover sur un item highlight tous ceux qui partagent la meme value.
+                    // On combine label (pour que la recherche texte fonctionne) + value (pour l'unicite).
+                    value={`${option.label} ${option.value}`}
                     onSelect={() => {
                       handleChange(option.value);
                       if (!multi) setOpen(false);
