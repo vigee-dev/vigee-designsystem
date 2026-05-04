@@ -303,7 +303,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       <main
         className={`${sidebarOpen ? "pl-56" : hiddenMobile ? "lg:pl-16" : " pl-16"} bg-gray-50  h-full min-h-screen `}
       >
-        <div className={`${!notDisplayMobileMenu ? "pb-24" : ""}`}>
+        <div className={`${!notDisplayMobileMenu ? "pb-24 lg:pb-0" : ""}`}>
           {!sidebarOpen && (
             <div
               className="flex shrink-0 items-center justify-start md:justify-start "
