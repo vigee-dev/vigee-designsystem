@@ -39,6 +39,7 @@ type Props<T extends FieldValues> = {
     icon?: React.ReactNode;
     color?: string;
     disabled?: boolean;
+    groupLabel?: string;
   }[];
   variant?: "default" | "outlined";
   searchable?: boolean;
@@ -130,6 +131,17 @@ export default function CommandListSelect<T extends FieldValues>({
     a.label.localeCompare(b.label)
   );
 
+  // Si au moins une option a un groupLabel, on rend groupé (un CommandGroup par groupLabel).
+  // Sinon, comportement historique : un seul CommandGroup.
+  const hasGroups = sortedOptions.some((o) => !!o.groupLabel);
+  const groupedOptions = hasGroups
+    ? sortedOptions.reduce<Record<string, typeof sortedOptions>>((acc, opt) => {
+        const key = opt.groupLabel ?? "";
+        (acc[key] ||= []).push(opt);
+        return acc;
+      }, {})
+    : null;
+
   const renderContent = () => (
     <div
       className={cn(
@@ -171,11 +183,14 @@ export default function CommandListSelect<T extends FieldValues>({
             {searchable && <CommandInput placeholder="Rechercher..." />}
             <CommandList>
               <CommandEmpty>Aucun résultat trouvé.</CommandEmpty>
-              <CommandGroup>
-                {sortedOptions.map((option) => (
+              {(() => {
+                const renderItem = (option: (typeof sortedOptions)[number]) => (
                   <CommandItem
                     key={option.value}
-                    value={option.label}
+                    // cmdk utilise `value` comme cle de filtrage ET de hover/selection.
+                    // Doit etre UNIQUE par item, sinon hover sur un item highlight tous ceux qui partagent la meme value.
+                    // On combine label (pour que la recherche texte fonctionne) + value (pour l'unicite).
+                    value={`${option.label} ${option.value}`}
                     onSelect={() => {
                       handleChange(option.value);
                       if (!multi) setOpen(false);
@@ -201,8 +216,24 @@ export default function CommandListSelect<T extends FieldValues>({
                       )}
                     />
                   </CommandItem>
-                ))}
-              </CommandGroup>
+                );
+
+                if (groupedOptions) {
+                  return Object.entries(groupedOptions).map(
+                    ([groupLabel, items]) => (
+                      <CommandGroup
+                        key={groupLabel || "_default"}
+                        heading={groupLabel || undefined}
+                        className="[&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wider [&_[cmdk-group-heading]]:text-slate-400"
+                      >
+                        {items.map(renderItem)}
+                      </CommandGroup>
+                    )
+                  );
+                }
+
+                return <CommandGroup>{sortedOptions.map(renderItem)}</CommandGroup>;
+              })()}
             </CommandList>
           </Command>
         </PopoverContent>
