@@ -1,3 +1,9 @@
+/**
+ * @description Carte flottante affichée au survol d'un élément déclencheur, pour révéler des infos contextuelles sans clic.
+ * @useWhen survol d'un avatar/nom d'utilisateur pour afficher son profil → utiliser HoverCard | survol d'un libellé court pour afficher une description détaillée → utiliser HoverCard
+ * @dontUseFor action à déclencher au clic → utiliser DropdownMenu | contenu riche interactif persistant → utiliser Sheet | message d'aide court sur une icône → utiliser Tooltip
+ * @example <HoverCard><HoverCardTrigger>@utilisateur</HoverCardTrigger><HoverCardContent><p>Profil de l'utilisateur</p></HoverCardContent></HoverCard>
+ */
 "use client";
 
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card";

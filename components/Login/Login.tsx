@@ -1,3 +1,9 @@
+/**
+ * @description Page de connexion complète avec email/mot de passe, validation Zod et authentification via NextAuth credentials.
+ * @useWhen page d'authentification d'une app Vigee → utiliser Login | intégration NextAuth avec provider credentials → utiliser Login | besoin d'un écran login brandé avec logo client → utiliser Login
+ * @dontUseFor formulaire de connexion embarqué dans une page existante → utiliser Form + Input | réinitialisation de mot de passe → page dédiée avec Input
+ * @example <Login logo={clientLogo} clientName="Acme" callbackUrl="/dashboard" />
+ */
 "use client";
 
 import Image, { StaticImageData } from "next/image";

@@ -1,3 +1,9 @@
+/**
+ * @description Indicateur de chargement centré avec logo Vigee animé (spin + pulse) et texte optionnel.
+ * @useWhen chargement d'une page ou section entière → afficher Loader | besoin d'un logo custom pendant le chargement → passer `logo` | couleur de bordure à adapter à un thème → passer `borderColor`
+ * @dontUseFor spinner léger inline → utiliser Spinner | chargement d'une page complète avec layout → utiliser LoaderPage
+ * @example <Loader text="Chargement en cours..." />
+ */
 import VigeeLoaderTransparent from "../../img/logos/VigeeGrayLogo.png";
 import Image, { StaticImageData } from "next/image";
 

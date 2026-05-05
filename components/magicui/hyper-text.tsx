@@ -1,3 +1,9 @@
+/**
+ * @description Affiche un texte avec un effet de déchiffrement lettre par lettre, rejoué au survol de la souris.
+ * @useWhen titre de page ou hero section avec animation d'entrée → utiliser HyperText | texte décoratif à révéler au survol → utiliser HyperText | mise en valeur d'un mot-clé dans un SplashScreen ou landing → utiliser HyperText
+ * @dontUseFor contenu textuel long ou paragraphe → utiliser TypographyH1 | texte animé mot par mot → utiliser WordPullUp | révélation progressive d'un bloc entier → utiliser BoxReveal
+ * @example <HyperText text="VIGEE" duration={600} className="text-4xl text-primary" />
+ */
 "use client";
 
 import { useEffect, useRef, useState } from "react";

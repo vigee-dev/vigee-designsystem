@@ -1,3 +1,9 @@
+/**
+ * @description Groupe de boutons radio Radix UI pour sélection exclusive parmi plusieurs options dans un formulaire Vigee.
+ * @useWhen choix unique parmi options fixes (civilité, statut, type) → utiliser RadioGroup | intégration dans Form react-hook-form avec champ contrôlé → utiliser RadioGroup + RadioGroupItem | alternatives visuelles en liste verticale ou grille → utiliser RadioGroup
+ * @dontUseFor sélection multiple → utiliser Checkboxes | liste d'options longue avec recherche → utiliser Select | activation/désactivation binaire → utiliser Switch
+ * @example <RadioGroup defaultValue="option1"><RadioGroupItem value="option1" id="o1" /><RadioGroupItem value="option2" id="o2" /></RadioGroup>
+ */
 "use client";
 
 import * as React from "react";

@@ -1,3 +1,9 @@
+/**
+ * @description Filtre par sélection simple piloté par les search params URL, réinitialise la pagination à la page 1 à chaque changement.
+ * @useWhen filtrer une liste par statut dans l'URL → utiliser SelectFilter | filtrer par catégorie/type avec navigation Next.js → utiliser SelectFilter | synchroniser un Select avec les query params sans état local → utiliser SelectFilter
+ * @dontUseFor sélection multiple → utiliser SelectMultiple | filtrage par date → utiliser DatePickerFilter | filtrage par plage numérique → utiliser NumberFilter
+ * @example <SelectFilter statusName="status" placeholder="Tous les statuts" status={[{ label: "Actif", value: "active" }, { label: "Inactif", value: "inactive" }]} />
+ */
 "use client";
 import { useCallback } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";

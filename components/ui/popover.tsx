@@ -1,3 +1,9 @@
+/**
+ * @description Popover flottant Radix UI avec animation et positionnement automatique, pour afficher du contenu contextuel ancré à un déclencheur.
+ * @useWhen afficher des options/détails supplémentaires au clic sur un bouton | saisie inline sans ouvrir un Dialog | formulaire court contextuel (filtre, date, couleur) ancré à un élément
+ * @dontUseFor contenu long ou structuré nécessitant une pleine page → utiliser Sheet | confirmation d'action destructive → utiliser AlertDialog | sélection dans une liste → utiliser Select
+ * @example <Popover><PopoverTrigger asChild><Button icon="settings" /></PopoverTrigger><PopoverContent>Contenu contextuel</PopoverContent></Popover>
+ */
 "use client";
 
 import * as React from "react";

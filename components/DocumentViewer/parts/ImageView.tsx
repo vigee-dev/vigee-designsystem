@@ -1,3 +1,9 @@
+/**
+ * @description Affiche une image dans un conteneur stylisé (fond blanc, ombre, bordure) avec largeur max contrôlée.
+ * @useWhen prévisualisation d'une image dans un DocumentViewer → utiliser ImageView | affichage d'un document image (PNG, JPG) avec contrainte de largeur → utiliser ImageView
+ * @dontUseFor affichage d'avatar → utiliser Avatar | galerie ou liste d'images interactives → utiliser DataTable
+ * @example <ImageView url="/docs/contrat.png" alt="Contrat signé" width={800} />
+ */
 'use client';
 
 export interface ImageViewProps {

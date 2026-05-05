@@ -1,3 +1,9 @@
+/**
+ * @description Indicateur visuel animé (spinner → check → icône repeat) positionné en absolu pour signaler un refetch de données en cours.
+ * @useWhen carte ou widget avec polling/refetch react-query → placer en enfant du conteneur relatif | tableau ou KPI rechargé en arrière-plan → indiquer l'activité sans bloquer l'UI | zone avec `isFetching` de react-query/SWR → feedback non-intrusif
+ * @dontUseFor chargement initial d'une page → utiliser LoaderPage | skeleton au premier rendu → utiliser DashboardSkeleton | spinner plein écran → utiliser Spinner
+ * @example <RefetchIndicator isRefetching={isFetching} size="sm" />
+ */
 "use client"
 
 import React, { useEffect, useState } from 'react';

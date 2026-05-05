@@ -1,3 +1,9 @@
+/**
+ * @description Zone de notes tabulée en 3 catégories (Urgent / Important / Autres) avec sauvegarde locale au blur.
+ * @useWhen fiche entité (contact, projet, dossier) nécessitant des notes priorisées → utiliser Notes | sidebar de détail avec mémos rapides à catégoriser → utiliser Notes
+ * @dontUseFor saisie de texte simple sans catégorie → utiliser TextArea | commentaires collaboratifs ou historisés → utiliser un système dédié
+ * @example <Notes initialContent={{ urgent: "", important: "", other: "" }} />
+ */
 "use client";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";

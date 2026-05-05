@@ -1,3 +1,9 @@
+/**
+ * @description Page de connexion complète avec magic link (Resend), credentials et OAuth (GitHub, Google, Apple) via NextAuth.
+ * @useWhen page de login avec authentification par lien magique email → utiliser LoginMagic | login avec email + mot de passe (credentials) → utiliser LoginMagic avec `credentials={true}` | connexion OAuth GitHub/Google/Apple → utiliser LoginMagic avec les props `github`, `google`, `apple` à `true`
+ * @dontUseFor formulaire de login embarqué dans une page existante → utiliser Login | affichage d'un simple champ email isolé → utiliser Forms/Input
+ * @example <LoginMagic logo={myLogo} clientName="MonApp" callbackUrl="/dashboard" google github />
+ */
 "use client";
 import Image, { StaticImageData } from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";

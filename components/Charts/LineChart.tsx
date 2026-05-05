@@ -1,3 +1,9 @@
+/**
+ * @description Graphique en aires (area chart) avec dégradé pour visualiser l'évolution d'une ou plusieurs métriques dans le temps.
+ * @useWhen afficher l'évolution d'un chiffre d'affaires sur plusieurs mois → utiliser LineChart | visualiser plusieurs séries temporelles superposées avec `keys` → utiliser LineChart | afficher des montants en euros avec formatage automatique k/M → utiliser LineChart avec `euro={true}`
+ * @dontUseFor comparer des catégories entre elles → utiliser BarChart | visualiser des proportions → utiliser PieChart | données sans dimension temporelle → utiliser HorizontalBarChart
+ * @example <LineChart data={[{ name: "Jan", total: 4200 }, { name: "Fév", total: 8700 }]} color="#6366f1" title="Revenus" euro={true} container />
+ */
 "use client";
 
 import {

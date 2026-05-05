@@ -1,3 +1,9 @@
+/**
+ * @description Affiche une page individuelle d'un PDF avec numéro de page, rotation optionnelle et skeleton de chargement.
+ * @useWhen rendu page par page dans un visualiseur PDF → utiliser PdfPage | affichage avec contrôles de rotation par page → utiliser PdfPage avec showRotate={true}
+ * @dontUseFor affichage d'un document complet sans gestion page par page → gérer au niveau parent du DocumentViewer
+ * @example <PdfPage pageNumber={1} width={600} rotation={0} showRotate={true} rotateLeftLabel="Tourner à gauche" rotateRightLabel="Tourner à droite" onRotateLeft={() => {}} onRotateRight={() => {}} />
+ */
 'use client';
 
 import { Page } from 'react-pdf';

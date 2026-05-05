@@ -1,3 +1,9 @@
+/**
+ * @description Panneau illustratif pleine hauteur sur fond primaire, avec image animée (framer-motion), titre bicolore et sous-titre — typiquement la colonne gauche d'une page de login ou d'onboarding.
+ * @useWhen colonne décorative d'une page d'authentification splitée (login/register) → utiliser Illustration | page d'onboarding avec visuel de marque → utiliser Illustration | écran de bienvenue nécessitant un titre accrocheur avec image animée → utiliser Illustration
+ * @dontUseFor état vide d'une liste ou section → utiliser EmptyIllustration, EmptyDocuments, EmptyUsers | page de splash/chargement → utiliser SplashScreen
+ * @example <Illustration title="Bienvenue sur" title2="Vigee" subtitle="La plateforme de gestion intelligente." img={heroImage} />
+ */
 "use client";
 
 import Image, { StaticImageData } from "next/image";

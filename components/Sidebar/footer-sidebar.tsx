@@ -1,3 +1,9 @@
+/**
+ * @description Bouton utilisateur en pied de sidebar affichant avatar/nom/email avec un menu déroulant de liens et actions.
+ * @useWhen pied de sidebar applicative → afficher le profil connecté avec accès rapide aux actions utilisateur | sidebar avec déconnexion/paramètres compte → passer les liens via `links` avec `onClick` ou `href`
+ * @dontUseFor navigation principale de la sidebar → utiliser AppSidebar | menu contextuel sans lien utilisateur → utiliser DropdownMenu
+ * @example <FooterSidebar user={{ name: "Alice", email: "alice@vigee.fr", avatar: "/avatar.png" }} links={[{ name: "Profil", icon: <UserIcon />, href: "/profil" }, { name: "Déconnexion", icon: <LogOutIcon />, onClick: () => signOut() }]} />
+ */
 "use client";
 
 import {

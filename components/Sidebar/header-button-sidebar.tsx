@@ -1,3 +1,9 @@
+/**
+ * @description Affiche l'en-tête de la sidebar avec logo adaptatif (plié/déplié), titre, sous-titre et icône chevron selon le type (lien ou bouton).
+ * @useWhen header de sidebar avec logo différent selon l'état ouvert/fermé → utiliser HeaderButtonSidebar | header cliquable redirigeant vers une URL → passer `type: "link"` dans headerData | header déclenchant un dropdown/switcher → passer `type: "button"` dans headerData
+ * @dontUseFor navigation principale de la sidebar → utiliser AppSidebar | switcher d'espace de travail complet → utiliser SwitcherSidebar
+ * @example <HeaderButtonSidebar headerData={{ title: "Mon App", subtitle: "Workspace", iconUrl: "/icon.png", type: "link", url: "/" }} logo="/logo.svg" logoSmall="/logo-small.svg" />
+ */
 "use client";
 
 import Image from "next/image";

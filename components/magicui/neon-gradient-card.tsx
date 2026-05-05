@@ -1,3 +1,9 @@
+/**
+ * @description Carte avec bordure gradient néon animée (dégradé tournant) pour mettre en valeur un contenu de manière visuelle forte.
+ * @useWhen mise en avant d'un plan tarifaire premium → entourer la carte avec NeonGradientCard | élément hero ou CTA accrocheur sur une landing page → wrapper le bloc avec NeonGradientCard | distinction visuelle d'un item sélectionné ou recommandé → remplacer la bordure classique par NeonGradientCard
+ * @dontUseFor listes d'items standards → utiliser ui/Card | contenu dense ou tableau de données → utiliser DataTable | usage discret ou institutionnel où l'effet néon serait trop agressif → utiliser RoundedContainer
+ * @example <NeonGradientCard borderSize={2} borderRadius={16} neonColors={{ firstColor: "#ff00aa", secondColor: "#00FFF1" }}>Contenu premium</NeonGradientCard>
+ */
 "use client";
 
 import { CSSProperties, ReactElement, ReactNode, useEffect, useRef, useState } from "react";

@@ -1,3 +1,9 @@
+/**
+ * @description Slider avec affichage du titre, de la valeur courante en % et des bornes min/max, intégré au DS Vigee.
+ * @useWhen sélection d'un pourcentage (ex: taux, avancement) → utiliser Slider | réglage d'une valeur numérique bornée avec feedback visuel immédiat → utiliser Slider
+ * @dontUseFor saisie d'une valeur numérique précise → utiliser Input | sélection dans une plage de dates → utiliser DatePickerWithPresets
+ * @example <Slider title="Avancement" value={[42]} min={0} max={100} step={1} defaultValue={[42]} />
+ */
 import { cn } from "../lib/utils";
 import { Slider as ShadSlider } from "../ui/slider";
 import { TypographyH2 } from "../Typography/Typography";

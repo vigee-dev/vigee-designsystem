@@ -1,3 +1,9 @@
+/**
+ * @description Onglets navigables (valeur, URL ou query param) avec badges compteurs, icônes, statuts colorés et tooltips, optimisés mobile.
+ * @useWhen navigation entre vues filtrées via query param (ex: statut commande) → utiliser avec `query` | navigation entre pages via `href` par onglet | affichage d'un compteur par onglet (ex: tâches en attente) → utiliser `count` | taille d'onglet variable selon contexte → utiliser `variant` ("mini", "big", "light")
+ * @dontUseFor navigation principale de l'app → utiliser Sidebar | onglets simples sans badges ni query params → utiliser TabsResponsive | filtres multiples simultanés → utiliser SelectMultiple
+ * @example <TabMobile options={[{ name: "Actifs", value: "active", count: 12 }, { name: "Archivés", value: "archived" }]} query="status" defaultValue="active" />
+ */
 "use client";
 import { useRouter } from "next/navigation";
 import { useQueryState } from "nuqs";

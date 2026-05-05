@@ -1,3 +1,9 @@
+/**
+ * @description Barre de navigation horizontale avec sous-menus animés, basée sur Radix NavigationMenu — pour les navs principales desktop.
+ * @useWhen navigation principale d'une app avec sous-menus déroulants → utiliser NavigationMenu + NavigationMenuTrigger + NavigationMenuContent | liens de navigation groupés en catégories → utiliser NavigationMenuList + NavigationMenuItem | nav desktop avec animations d'entrée/sortie fluides → utiliser NavigationMenuViewport
+ * @dontUseFor navigation latérale persistante → utiliser Sidebar | menu contextuel sur clic droit → utiliser DropdownMenu | navigation mobile → utiliser MobileMenu
+ * @example <NavigationMenu><NavigationMenuList><NavigationMenuItem><NavigationMenuTrigger>Produits</NavigationMenuTrigger><NavigationMenuContent><NavigationMenuLink href="/produits">Voir tout</NavigationMenuLink></NavigationMenuContent></NavigationMenuItem></NavigationMenuList></NavigationMenu>
+ */
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { cva } from "class-variance-authority";
 import { ChevronDown } from "lucide-react";

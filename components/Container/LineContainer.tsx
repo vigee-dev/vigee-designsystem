@@ -1,3 +1,9 @@
+/**
+ * @description Ligne cliquable avec titre, sous-titre optionnel et icône, utilisable comme lien de navigation ou déclencheur d'action.
+ * @useWhen liste de paramètres/réglages cliquables dans un menu → utiliser avec `href` | item d'une liste menant à une page détail → utiliser avec `href` | ligne actionnable sans navigation → utiliser avec `onClick` | affichage d'une info synthétique avec action custom à droite → utiliser avec `children`
+ * @dontUseFor navigation principale de l'app → utiliser Sidebar | actions groupées en tableau → utiliser DataTable
+ * @example <LineContainer title="Informations personnelles" subtitle="Nom, prénom, email" icon={<UserIcon />} href="/profile/info" />
+ */
 import Link from "next/link";
 import { PiChevronRightStroke } from "../../icons/PikaIcons";
 import { cn } from "../lib/utils";

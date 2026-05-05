@@ -1,3 +1,9 @@
+/**
+ * @description Conteneur Recharts avec injection de tokens couleur light/dark, tooltip stylisé et contexte de config pour les charts Vigee.
+ * @useWhen wrapping un chart Recharts (AreaChart, BarChart, PieChart…) pour appliquer les couleurs du DS | afficher un tooltip cohérent avec le thème Vigee | gérer les variantes couleur light/dark via ChartConfig
+ * @dontUseFor afficher une métrique seule → utiliser KPI | afficher une progression → utiliser ProgressBar ou ProgressCircle
+ * @example <ChartContainer config={{ revenue: { color: "#6366f1", label: "Revenus" } }}><BarChart data={data}><Bar dataKey="revenue" /></BarChart></ChartContainer>
+ */
 "use client";
 
 import * as React from "react";

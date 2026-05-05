@@ -1,3 +1,9 @@
+/**
+ * @description Zone de défilement personnalisée avec scrollbar stylisée Vigee, verticale ou horizontale, sans overflow natif visible.
+ * @useWhen liste déroulante trop longue dans un Drawer ou Sheet → wrapper le contenu dans ScrollArea | sidebar avec navigation dense → limiter la hauteur et scroller proprement | tableau ou contenu débordant dans un Container contraint en hauteur → éviter l'overflow natif du navigateur
+ * @dontUseFor défilement d'une page entière → utiliser le scroll natif du navigateur | listes avec pagination → utiliser Pagination
+ * @example <ScrollArea className="h-72"><div>{items.map(i => <div key={i}>{i}</div>)}</div></ScrollArea>
+ */
 "use client";
 
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";

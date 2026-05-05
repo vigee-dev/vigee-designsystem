@@ -1,3 +1,9 @@
+/**
+ * @description Upload et prévisualisation d'une photo de profil intégré react-hook-form, avec gestion File local et URL signée existante.
+ * @useWhen formulaire de création/édition de profil utilisateur → afficher et modifier l'avatar | champ image obligatoire avec validation RHF → afficher l'erreur sous l'avatar | image déjà enregistrée (signedUrl) à réafficher → passer l'objet `{ id, signedUrl, filename }` comme valeur initiale.
+ * @dontUseFor upload de fichiers non-image → utiliser InputDropZoneFile | upload multiple de documents → utiliser InputDropZoneFile.
+ * @example <ProfileImageUploader form={form} name="avatar" label="Photo de profil" required />
+ */
 "use client";
 import React, { useRef } from "react";
 import {

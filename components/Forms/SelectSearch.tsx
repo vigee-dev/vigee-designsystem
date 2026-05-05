@@ -1,3 +1,9 @@
+/**
+ * @description Select avec recherche intégrée (react-select) connecté à react-hook-form, support mono et multi-sélection avec options statiques.
+ * @useWhen liste d'options statiques courte à moyenne avec filtrage par saisie → utiliser SelectSearch | sélection unique ou multiple dans un Form Vigee → utiliser SelectSearch | besoin d'un champ clearable avec label/sublabel dans un formulaire → utiliser SelectSearch
+ * @dontUseFor source de données distante/asynchrone → utiliser SearchSelectAsync | dataset plat sans recherche nécessaire → utiliser Select | sélection multiple avec affichage en tags avancé → utiliser MultiSelect
+ * @example <SelectSearch form={form} name="category" label="Catégorie" options={[{ value: "a", label: "Alpha" }]} />
+ */
 import {
   FormControl,
   FormDescription,

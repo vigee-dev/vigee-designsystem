@@ -1,3 +1,9 @@
+/**
+ * @description Champ de recherche textuelle avec debounce intégré, icône loupe et label optionnel.
+ * @useWhen filtrer une liste ou tableau en temps réel → utiliser Search | recherche avec délai personnalisé pour limiter les appels API → utiliser Search avec debounceTime | champ de recherche standalone hors formulaire react-hook-form → utiliser Search
+ * @dontUseFor recherche avec suggestions/autocomplétion → utiliser ComboBox | recherche avancée multi-critères → utiliser Filter | champ texte dans un formulaire validé → utiliser Forms/Input
+ * @example <Search onChange={(value) => setQuery(value)} placeholder="Rechercher un projet..." />
+ */
 "use client";
 
 import { useDebouncedCallback } from "use-debounce";

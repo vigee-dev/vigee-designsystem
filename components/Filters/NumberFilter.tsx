@@ -1,3 +1,9 @@
+/**
+ * @description Input numérique synchronisé avec un query param URL via nuqs, pour filtrer des listes par valeur numérique.
+ * @useWhen filtrer une liste par nombre (ex: quantité minimale, nombre de jours) → utiliser NumberFilter | paramètre numérique persistant dans l'URL sans rechargement → utiliser NumberFilter
+ * @dontUseFor saisie numérique dans un formulaire → utiliser Input | sélection parmi des valeurs prédéfinies → utiliser SelectFilter | plage de dates → utiliser DatePickerFilter
+ * @example <NumberFilter queryKey="minQuantity" placeholder="Quantité min" min={1} icon={<PackageIcon />} />
+ */
 'use client';
 import * as React from 'react';
 import { cn } from '../lib/utils';

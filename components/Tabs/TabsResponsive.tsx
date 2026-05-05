@@ -1,3 +1,9 @@
+/**
+ * @description Onglets adaptatifs (tabs → select selon le nombre d'options et la taille d'écran) avec support query string, navigation href et badges de comptage.
+ * @useWhen navigation par onglets synchronisée avec l'URL via query param (ex: ?tab=xxx) | basculer entre vues/filtres avec compteurs affichés | navigation vers des routes différentes par onglet via `href` | réduire automatiquement les onglets en Select sur mobile
+ * @dontUseFor filtres multiples simultanés → utiliser SelectMultiple | sélection dans un formulaire → utiliser Select | un seul niveau de filtre simple sans URL → utiliser TabMobile
+ * @example <TabsResponsive query="tab" defaultValue="overview" options={[{ name: "Vue générale", value: "overview" }, { name: "Détails", value: "details", count: 3 }]} />
+ */
 "use client";
 import { useRouter } from "next/navigation";
 import { useQueryState } from "nuqs";

@@ -1,3 +1,9 @@
+/**
+ * @description Illustration SVG d'état vide pour une liste ou page de projets, avec couleur et taille personnalisables.
+ * @useWhen page de liste de projets sans données → afficher EmptyProjects | dashboard vide en attente de création de projet → afficher EmptyProjects
+ * @dontUseFor absence d'utilisateurs → utiliser EmptyUsers | absence de documents → utiliser EmptyDocuments | état vide générique non lié aux projets → utiliser EmptyIllustration
+ * @example <EmptyProjects color="text-primary" className="mx-auto" />
+ */
 import { cn } from "../lib/utils";
 
 export const EmptyProjects = ({

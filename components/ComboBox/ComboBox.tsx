@@ -1,3 +1,9 @@
+/**
+ * @description Sélecteur searchable avec popover, recherche intégrée et déselection, pour choisir une valeur parmi une liste d'items.
+ * @useWhen sélection simple parmi une liste modérée avec besoin de recherche → utiliser ComboBox | champ de sélection avec icône décorative → utiliser ComboBox avec prop `icon` | ouverture au survol souhaitée → utiliser ComboBox avec `triggerOnHover`
+ * @dontUseFor sélection multiple → utiliser MultiSelect | affichage adaptatif mobile/desktop → utiliser ComboBoxResponsive | dataset très volumineux avec chargement async → utiliser SearchSelectAsync
+ * @example <ComboBox items={[{ value: "fr", label: "France" }]} value={value} onChange={setValue} label="Pays" />
+ */
 "use client";
 import React, { useState } from "react";
 import { Button } from "../ui/button";

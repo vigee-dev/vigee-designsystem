@@ -1,3 +1,9 @@
+/**
+ * @description États visuels internes du DocumentViewer : chargement global, message vide, et squelette de page PDF en cours de rendu.
+ * @useWhen document en cours de fetch → utiliser `LoadingState` | aucun document disponible ou erreur métier → utiliser `EmptyState` | page PDF individuelle pas encore rendue → utiliser `PageSkeleton`
+ * @dontUseFor chargement de page entière → utiliser LoaderPage | squelette de dashboard → utiliser DashboardSkeleton
+ * @example <LoadingState label="Chargement du contrat…" />
+ */
 'use client';
 
 import { Loader2 } from 'lucide-react';

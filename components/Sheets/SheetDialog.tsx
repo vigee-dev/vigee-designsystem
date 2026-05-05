@@ -1,3 +1,9 @@
+/**
+ * @description Panneau latéral/modal adaptatif : Dialog centré sur desktop, Sheet glissante sur mobile, avec titre, description et contenu personnalisable.
+ * @useWhen afficher un formulaire ou détail dans une modale responsive desktop/mobile → SheetDialog | ouvrir un panneau contextuel depuis un bouton ou une ligne de tableau → SheetDialog | forcer le rendu Sheet même sur desktop (sheet=true) → SheetDialog
+ * @dontUseFor contenu simple sans interaction → utiliser Sheet | panneau contrôlé de l'extérieur avec état open géré par le parent → utiliser SheetDialogControlled
+ * @example <SheetDialog title="Modifier le projet" description="Mettez à jour les informations" trigger={<Button icon="edit" />} size="md"><MonFormulaire /></SheetDialog>
+ */
 "use client";
 
 import React from "react";

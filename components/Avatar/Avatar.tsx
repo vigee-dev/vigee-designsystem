@@ -1,3 +1,9 @@
+/**
+ * @description Affiche la photo de profil d'un utilisateur via userId (proxy S3) ou URL directe, avec fallback icône.
+ * @useWhen afficher la photo de profil dans un header/sidebar → passer `userId` | afficher un avatar depuis une URL externe signée → passer `src` | liste d'utilisateurs avec photo → combiner `userId` + `className` pour adapter la taille
+ * @dontUseFor groupe d'avatars empilés → utiliser ui/Avatar directement | contexte sans image utilisateur → utiliser une icône simple
+ * @example <Avatar userId={user.id} alt={user.name} className="w-10 h-10" />
+ */
 import {
   Avatar as ShadcnAvatar,
   AvatarFallback,

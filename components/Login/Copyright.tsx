@@ -1,3 +1,9 @@
+/**
+ * @description Affiche le pied de page de copyright avec l'année courante, le nom du client et un lien vers Vigee.
+ * @useWhen page de login → placer en bas du formulaire d'authentification | page publique nécessitant une mention légale → afficher le copyright client
+ * @dontUseFor contenu juridique détaillé → utiliser une page dédiée | affichage dans l'application principale → réserver aux écrans Login
+ * @example <Copyright clientName="MonEntreprise" />
+ */
 import Link from "next/link";
 
 interface Props {

@@ -1,3 +1,9 @@
+/**
+ * @description Primitive de mise en page sidebar responsive : drawer mobile via Sheet, rail rétractable desktop avec état persisté en cookie.
+ * @useWhen mise en page principale de l'application avec navigation latérale → utiliser Sidebar + SidebarProvider | sidebar rétractable en icônes sur desktop → collapsible="icon" | sidebar fixe sans collapse → collapsible="none" | contrôle externe de l'état ouvert/fermé → props open + onOpenChange sur SidebarProvider
+ * @dontUseFor navigation contextuelle flottante → utiliser Sheet | menu mobile isolé → utiliser MobileMenu
+ * @example <SidebarProvider defaultOpen={true}><Sidebar side="left" variant="sidebar" collapsible="icon">{children}</Sidebar></SidebarProvider>
+ */
 "use client";
 
 import * as React from "react";

@@ -1,3 +1,9 @@
+/**
+ * @description Titre animé h1 où chaque mot apparaît en remontant progressivement avec un effet stagger framer-motion.
+ * @useWhen splash screen ou hero section nécessitant un titre d'accroche animé | page d'accueil avec headline impactante | SplashScreen Vigee pour animer le titre principal.
+ * @dontUseFor body text ou paragraphes → utiliser TypographyH1 | titres statiques sans animation → utiliser TitleGradual | sous-titres de section → utiliser TitleBold.
+ * @example <WordPullUp words="Bienvenue sur Vigee" className="text-primary" />
+ */
 "use client";
 
 import { motion, Variants } from "framer-motion";

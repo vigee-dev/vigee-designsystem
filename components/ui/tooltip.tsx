@@ -1,3 +1,9 @@
+/**
+ * @description Bulle d'information contextuelle au survol, basée sur Radix UI, avec animation et positionnement automatique.
+ * @useWhen icône sans libellé nécessitant une explication → envelopper avec Tooltip | bouton d'action dont le rôle n'est pas évident → ajouter un TooltipContent | information complémentaire non critique à afficher au survol sans encombrer l'UI.
+ * @dontUseFor contenu interactif complexe (liens, boutons) dans la bulle → utiliser HoverCard | messages d'alerte importants → utiliser AlertInfo.
+ * @example <TooltipProvider><Tooltip><TooltipTrigger><Button icon="info" /></TooltipTrigger><TooltipContent>Informations supplémentaires</TooltipContent></Tooltip></TooltipProvider>
+ */
 "use client";
 
 import * as React from "react";

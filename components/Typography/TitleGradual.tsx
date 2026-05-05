@@ -1,3 +1,9 @@
+/**
+ * @description Titre animé lettre par lettre avec glissement horizontal, idéal pour les en-têtes de pages d'accueil ou splash screens.
+ * @useWhen page d'accueil ou hero section nécessitant un titre impactant → utiliser TitleGradual | SplashScreen avec titre animé → utiliser TitleGradual | première impression visuelle d'une app → utiliser TitleGradual
+ * @dontUseFor titres dans des listes ou tableaux → utiliser TypographyH1 | titres répétés dans des cards → utiliser TypographyH1
+ * @example <TitleGradual text="Bienvenue sur Vigee" className="text-4xl font-bold" />
+ */
 "use client";
 
 import { cn } from "../lib/utils";

@@ -1,3 +1,9 @@
+/**
+ * @description Barre de navigation latérale principale de l'application, avec items de menu, badges de notifications, switcher de contexte et footer utilisateur.
+ * @useWhen navigation principale d'une app Next.js avec plusieurs sections → utiliser AppSidebar | sidebar avec switcher de workspace/projet → utiliser AppSidebar | menu avec icônes actives/inactives et sous-routes → utiliser AppSidebar
+ * @dontUseFor navigation secondaire dans une page → utiliser SectionHeading | menu contextuel sur un élément → utiliser DropdownMenu
+ * @example <AppSidebar items={menuItems} bottomItems={bottomMenuItems} links={footerLinks} pathname="/studio" logo="/logo.png" logoSmall="/logo-small.png" user={{ name: "Alice", email: "alice@vigee.fr", avatar: "/avatar.png" }} />
+ */
 "use client";
 
 import { MoreHorizontal, Plus } from "lucide-react";

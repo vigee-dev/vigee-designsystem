@@ -1,3 +1,9 @@
+/**
+ * @description Textarea multi-lignes intégré react-hook-form avec label, compteur de caractères, aide au survol et validation.
+ * @useWhen champ de saisie longue (notes, description, commentaire) dans un formulaire react-hook-form Vigee | besoin d'un compteur de caractères avec limite (`max`) | affichage d'une aide contextuelle via `helpComponent` | textarea redimensionnable (`rezizable`) dans un formulaire structuré
+ * @dontUseFor saisie courte sur une seule ligne → utiliser Input | saisie de notes structurées avec contexte métier → utiliser Notes
+ * @example <TextArea form={form} name="description" label="Description" placeholder="Décrivez le projet..." rows={5} max={500} required />
+ */
 "use client";
 import { useState } from "react";
 import { Textarea } from "../ui/textarea";

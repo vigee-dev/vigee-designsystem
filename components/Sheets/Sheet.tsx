@@ -1,3 +1,9 @@
+/**
+ * @description Panneau latéral droit déclenché par un bouton fixe en bas à droite de l'écran, avec titre, description et contenu libre.
+ * @useWhen action contextuelle flottante qui ouvre un panneau de détail/édition → utiliser Sheet | afficher un formulaire secondaire sans quitter la page → utiliser Sheet | exposer des filtres ou options avancées via un bouton fixe → utiliser Sheet
+ * @dontUseFor contenu nécessitant une confirmation explicite → utiliser SheetDialog | flux multi-étapes → utiliser Stepper | actions rapides sans panneau → utiliser DropdownMenu
+ * @example <Sheet title="Détails" description="Informations complémentaires" triggerText="Ouvrir" icon={<PanelRightOpen />}><p>Contenu du panneau</p></Sheet>
+ */
 "use client";
 
 import React from "react";

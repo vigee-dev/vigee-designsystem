@@ -1,3 +1,9 @@
+/**
+ * @description Filtre de période (jour/semaine/mois/année) synchronisé avec les query params URL via nuqs, avec sélecteurs dynamiques.
+ * @useWhen dashboard avec filtrage temporel par période → utiliser PeriodFilters | page analytics nécessitant navigation jour/semaine/mois/année dans l'URL → utiliser PeriodFilters | vue planning ou rapport avec changement de granularité temporelle → utiliser PeriodFilters
+ * @dontUseFor sélection d'une plage de dates libre → utiliser DatePickerRange | filtre de date unique sans notion de période → utiliser DatePickerFilter
+ * @example <PeriodFilters years={[{ label: "2024", value: "2024" }, { label: "2025", value: "2025" }]} defaultPeriod="month" />
+ */
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";

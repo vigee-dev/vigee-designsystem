@@ -1,3 +1,9 @@
+/**
+ * @description Champ de recherche debounced (300ms) qui synchronise la saisie utilisateur avec le paramètre URL `query` et remet la pagination à 1.
+ * @useWhen barre de recherche au-dessus d'un DataTable avec filtrage côté serveur via URL params | recherche dans une liste paginée Next.js App Router | intégration avec TableSearch et Pagination sur la même page.
+ * @dontUseFor recherche sans synchronisation URL (état local suffisant) → utiliser Search | filtres multi-critères combinés → utiliser CheckboxFilter ou SelectFilter.
+ * @example <TableSearch placeholder="Rechercher un client..." variant="default" />
+ */
 "use client";
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";

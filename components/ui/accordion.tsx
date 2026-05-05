@@ -1,3 +1,9 @@
+/**
+ * @description Accordéon accessible basé sur Radix UI pour afficher/masquer des sections de contenu avec animation.
+ * @useWhen FAQ ou aide contextuelle avec plusieurs questions/réponses → utiliser Accordion | sections de paramètres avancés à révéler à la demande → utiliser Accordion | contenu long à segmenter verticalement sans changer de page → utiliser Accordion
+ * @dontUseFor navigation entre vues distinctes → utiliser Tabs | contenu toujours visible → utiliser Container | panneau latéral révélable → utiliser Collapsible
+ * @example <Accordion type="single" collapsible><AccordionItem value="item-1"><AccordionTrigger>Question ?</AccordionTrigger><AccordionContent>Réponse.</AccordionContent></AccordionItem></Accordion>
+ */
 "use client";
 
 import * as React from "react";

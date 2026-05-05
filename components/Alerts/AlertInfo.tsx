@@ -1,3 +1,9 @@
+/**
+ * @description Bandeau d'alerte contextuel avec icône, titre, description optionnelle et lien externe, déclinable en 7 niveaux sémantiques.
+ * @useWhen confirmer une action réussie (type="success") | signaler une erreur ou un blocage (type="destructive") | avertir l'utilisateur d'un risque (type="warning") | afficher une info contextuelle dans une page ou un formulaire (type="informative")
+ * @dontUseFor retours de validation champ par champ → utiliser Form | messages éphémères/toasts → utiliser Toaster
+ * @example <AlertInfo type="warning" title="Données non sauvegardées" description="Vos modifications seront perdues si vous quittez la page." />
+ */
 import Link from "next/link";
 import { cn } from "../../components/lib/utils";
 import { Alert, AlertDescription, AlertTitle } from "../../components/ui/alert";

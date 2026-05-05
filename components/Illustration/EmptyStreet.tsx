@@ -1,3 +1,9 @@
+/**
+ * @description Illustration SVG d'une rue vide, utilisée comme visuel décoratif pour les états vides liés à des lieux ou adresses.
+ * @useWhen page de résultats vide liée à une adresse/localisation → utiliser EmptyStreet | écran d'absence de données géographiques ou de quartiers → utiliser EmptyStreet
+ * @dontUseFor états vides génériques → utiliser EmptyIllustration | absence de documents → utiliser EmptyDocuments | absence d'utilisateurs → utiliser EmptyUsers
+ * @example <EmptyStreet className="mx-auto" />
+ */
 import { cn } from "../lib/utils";
 
 export const EmptyStreet = ({ color, className }: { color?: string; className?: string }) => {

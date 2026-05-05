@@ -1,3 +1,9 @@
+/**
+ * @description Label accessible Radix UI, stylisé Vigee, à associer à un champ de formulaire via `htmlFor`.
+ * @useWhen associer un libellé à un Input, Select ou Checkbox natif | afficher un label désactivé (grisé automatiquement via `peer-disabled`) | construire un champ custom sans passer par les composants Forms Vigee
+ * @dontUseFor champs dans un Form Vigee → la prop `label` des composants Forms (Input, Select, etc.) gère déjà le Label | texte décoratif sans lien avec un champ → utiliser la typographie standard
+ * @example <Label htmlFor="email">Adresse e-mail</Label>
+ */
 "use client";
 
 import * as React from "react";

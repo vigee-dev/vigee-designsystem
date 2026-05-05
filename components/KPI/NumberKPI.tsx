@@ -1,3 +1,9 @@
+/**
+ * @description Grille de KPIs numériques avec variation vs période précédente, ratio coloré et support devise/unité.
+ * @useWhen dashboard affichant plusieurs métriques chiffrées côte à côte → utiliser NumberKPI | KPI avec comparaison période N-1 (évolution en %) → utiliser NumberKPI | indicateurs avec objectif ou écart-type à afficher → utiliser NumberKPI
+ * @dontUseFor tendances temporelles → utiliser AreaChart ou LineChart | KPI isolé avec animation → utiliser NumberTicker | classement ordonné → utiliser Ranking
+ * @example <NumberKPI stats={[{ name: "Chiffre d'affaires", stat: 42000, previousStat: 38000, unit: "€" }, { name: "Clients", stat: 120, previousStat: 110 }]} columns={2} />
+ */
 import { PiArrowUpDuoSolid, PiArrowDownDuoSolid } from "../../icons/PikaIcons";
 import { cn, currency } from "../lib/utils";
 

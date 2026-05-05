@@ -1,3 +1,9 @@
+/**
+ * @description Affiche une vignette cliquable qui ouvre une vidéo en plein écran dans une modale animée avec overlay.
+ * @useWhen page marketing/landing → présenter une vidéo de démo produit | onboarding utilisateur → afficher un tutoriel vidéo | section hero → illustrer une fonctionnalité avec une vidéo YouTube/Vimeo.
+ * @dontUseFor lecture vidéo inline sans overlay → utiliser une balise vidéo native | contenu interactif non-vidéo → utiliser Dialog.
+ * @example <HeroVideoDialog videoSrc="https://www.youtube.com/embed/abc123" thumbnailSrc="/thumbnail.png" thumbnailAlt="Démo Vigee" animationStyle="from-center" />
+ */
 "use client";
 
 import { useState } from "react";

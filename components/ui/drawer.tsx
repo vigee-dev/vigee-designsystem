@@ -1,3 +1,9 @@
+/**
+ * @description Panneau glissant depuis le bas de l'écran (bottom sheet) basé sur vaul, avec overlay, poignée de drag et structure Header/Footer/Title/Description.
+ * @useWhen actions contextuelles sur mobile nécessitant un panneau glissant → utiliser Drawer | confirmation ou formulaire léger sur petit écran → utiliser Drawer | affichage de détails secondaires sans quitter la page courante → utiliser Drawer
+ * @dontUseFor contenu riche ou formulaire complexe sur desktop → utiliser Sheet | dialogue de confirmation court → utiliser SheetDialog | navigation latérale persistante → utiliser Sidebar
+ * @example <Drawer><DrawerTrigger>Ouvrir</DrawerTrigger><DrawerContent><DrawerHeader><DrawerTitle>Titre</DrawerTitle></DrawerHeader></DrawerContent></Drawer>
+ */
 "use client";
 
 import * as React from "react";

@@ -1,3 +1,9 @@
+/**
+ * @description Groupe de boutons toggle (sélection unique ou multiple) intégré react-hook-form, avec support icône, description, checkbox et grille.
+ * @useWhen choix exclusif entre options visuelles dans un formulaire (ex: type de salle, mode de facturation) → utiliser Toggles | sélection multiple d'options avec rendu carte dans un Form → utiliser Toggles avec `multi` | options avec icône + description à présenter sous forme de grille → utiliser Toggles avec `columns`
+ * @dontUseFor sélection dans une longue liste textuelle → utiliser Select | filtrage de données hors formulaire → utiliser CheckboxFilter | cases à cocher simples sans visuel carte → utiliser Checkboxes
+ * @example <Toggles form={form} name="type" label="Type de salle" options={[{ value: "reunion", label: "Réunion", icon: <IconReunion /> }, { value: "bureau", label: "Bureau" }]} />
+ */
 // import React from 'react';
 // import { UseFormReturn, FieldValues, Path } from 'react-hook-form';
 // import { Container } from '../Container/Container';

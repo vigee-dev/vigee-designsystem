@@ -1,6 +1,6 @@
 {
   "version": "1.4.28",
-  "generatedAt": "2026-03-06T17:44:57.692Z",
+  "generatedAt": "2026-05-05T17:16:35.090Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -8,7 +8,19 @@
       "importPath": "@vigee-designsystem/components/Alerts/AlertInfo",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Bandeau d'alerte contextuel avec icône, titre, description optionnelle et lien externe, déclinable en 7 niveaux sémantiques.",
+      "useWhen": [
+        "confirmer une action réussie (type=\"success\")",
+        "signaler une erreur ou un blocage (type=\"destructive\")",
+        "avertir l'utilisateur d'un risque (type=\"warning\")",
+        "afficher une info contextuelle dans une page ou un formulaire (type=\"informative\")"
+      ],
+      "dontUseFor": [
+        "retours de validation champ par champ → utiliser Form",
+        "messages éphémères/toasts → utiliser Toaster"
+      ],
+      "example": "<AlertInfo type=\"warning\" title=\"Données non sauvegardées\" description=\"Vos modifications seront perdues si vous quittez la page.\" />"
     },
     {
       "name": "FadeInOut",
@@ -21,7 +33,18 @@
         "duration?: number",
         "className?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Affiche/masque un contenu avec une animation fade + slide vertical, piloté par un booléen.",
+      "useWhen": [
+        "afficher un message contextuel après une action (succès, erreur) → utiliser FadeInOut",
+        "révéler un panneau ou section conditionnelle avec transition douce → utiliser FadeInOut",
+        "animer l'apparition d'un tooltip ou d'une aide inline → utiliser FadeInOut"
+      ],
+      "dontUseFor": [
+        "transition entre pages ou routes → utiliser FadeIn",
+        "contenu toujours visible sans condition → pas besoin d'animation conditionnelle"
+      ],
+      "example": "<FadeInOut isVisible={isSubmitted}><AlertInfo message=\"Enregistrement réussi\" /></FadeInOut>"
     },
     {
       "name": "Avatar",
@@ -35,7 +58,18 @@
         "onClick?: () => void",
         "className?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Affiche la photo de profil d'un utilisateur via userId (proxy S3) ou URL directe, avec fallback icône.",
+      "useWhen": [
+        "afficher la photo de profil dans un header/sidebar → passer `userId`",
+        "afficher un avatar depuis une URL externe signée → passer `src`",
+        "liste d'utilisateurs avec photo → combiner `userId` + `className` pour adapter la taille"
+      ],
+      "dontUseFor": [
+        "groupe d'avatars empilés → utiliser ui/Avatar directement",
+        "contexte sans image utilisateur → utiliser une icône simple"
+      ],
+      "example": "<Avatar userId={user.id} alt={user.name} className=\"w-10 h-10\" />"
     },
     {
       "name": "ActionWithValidation",
@@ -54,7 +88,18 @@
         "tooltip?: string",
         "classNameIcon?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Bouton avec modale de confirmation intégrée pour sécuriser les actions destructives ou irréversibles.",
+      "useWhen": [
+        "suppression d'un enregistrement → utiliser ActionWithValidation avec icon=\"trash\"",
+        "validation d'une action critique → utiliser ActionWithValidation avec icon=\"check\"",
+        "réinitialisation de données → utiliser ActionWithValidation avec icon=\"refresh\""
+      ],
+      "dontUseFor": [
+        "actions sans confirmation nécessaire → utiliser Button",
+        "suppression avec feedback visuel de chargement géré ailleurs → utiliser DeleteAction"
+      ],
+      "example": "<ActionWithValidation icon=\"trash\" title=\"Supprimer cet élément ?\" subtitle=\"Cette action est irréversible.\" action={() => handleDelete(id)} isPending={isPending} />"
     },
     {
       "name": "Back",
@@ -69,7 +114,18 @@
         "className?: string",
         "back?: boolean"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Bouton de retour arrière avec lien texte (desktop) et bouton flottant chevron (mobile), adaptatif selon le contexte de navigation.",
+      "useWhen": [
+        "naviguer vers une page précise connue → utiliser avec `href` et `where`",
+        "revenir à la page précédente dans l'historique → utiliser avec `back={true}`",
+        "action de retour personnalisée → utiliser avec `onClick` et `where`"
+      ],
+      "dontUseFor": [
+        "action principale d'une page → utiliser Button",
+        "soumission ou confirmation → utiliser ButtonSubmit"
+      ],
+      "example": "<Back href=\"/projets\" where=\"Projets\" />"
     },
     {
       "name": "Button",
@@ -94,7 +150,20 @@
         "classNameIcon?: string",
         "data-testid?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Bouton polyvalent Vigee avec icônes Pika intégrées, états pending/disabled, navigation href et tooltip optionnel.",
+      "useWhen": [
+        "action iconique sans libellé dans une interface (ex: éditer, supprimer, télécharger) → `icon` seul",
+        "navigation vers une page → `href`",
+        "état de chargement async → `pending={true}`",
+        "action avec label uniquement pour validation finale → `children` + `type=\"submit\"`"
+      ],
+      "dontUseFor": [
+        "validation de formulaire avec logique de confirmation → utiliser ActionWithValidation",
+        "ajout d'entité dédié → utiliser ButtonAdd",
+        "soumission de formulaire stylisée → utiliser ButtonSubmit"
+      ],
+      "example": "<Button icon=\"edit\" onClick={handleEdit} tooltip=\"Modifier\" />"
     },
     {
       "name": "ButtonAdd",
@@ -109,7 +178,19 @@
         "className?: string",
         "href?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Bouton d'ajout visuel avec icône centrée au-dessus d'un label, pour déclencher une création ou naviguer vers une page d'ajout.",
+      "useWhen": [
+        "page vide ou section sans contenu → inviter l'utilisateur à créer un premier élément",
+        "action d'ajout principale d'une section avec navigation via href",
+        "action d'ajout sans navigation via onClick"
+      ],
+      "dontUseFor": [
+        "action rapide dans une toolbar → utiliser Button",
+        "soumission de formulaire → utiliser ButtonSubmit",
+        "suppression ou action destructive → utiliser DeleteAction"
+      ],
+      "example": "<ButtonAdd text=\"Ajouter un projet\" icon={<PlusCircle />} href=\"/projets/nouveau\" />"
     },
     {
       "name": "ButtonSubmit",
@@ -117,7 +198,18 @@
       "importPath": "@vigee-designsystem/components/Buttons/ButtonSubmit",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Bouton de soumission de formulaire avec état de chargement automatique via `useFormStatus` de React DOM.",
+      "useWhen": [
+        "formulaire React DOM (Server Actions) nécessitant un submit → utiliser ButtonSubmit",
+        "état `pending` à gérer automatiquement sans prop manuelle → utiliser ButtonSubmit"
+      ],
+      "dontUseFor": [
+        "formulaires react-hook-form → utiliser Button avec `type=\"submit\"`",
+        "actions destructives → utiliser ActionWithValidation",
+        "suppression → utiliser DeleteAction"
+      ],
+      "example": "<ButtonSubmit />"
     },
     {
       "name": "DeleteAction",
@@ -134,7 +226,18 @@
         "tooltip?: string",
         "classNameIcon?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Bouton corbeille avec modale de confirmation AlertDialog intégrée pour sécuriser les suppressions.",
+      "useWhen": [
+        "supprimer une entité (utilisateur, projet, document) avec confirmation obligatoire → utiliser DeleteAction",
+        "action de suppression dans une ligne de tableau → utiliser DeleteAction",
+        "suppression avec état de chargement asynchrone → utiliser DeleteAction avec isPending"
+      ],
+      "dontUseFor": [
+        "action destructrice sans confirmation requise → utiliser Button",
+        "suppression groupée de plusieurs éléments → utiliser ActionWithValidation"
+      ],
+      "example": "<DeleteAction alertTitle=\"Supprimer ce projet ?\" alertSubTitle=\"Cette action est irréversible.\" deleteAction={() => handleDelete(id)} isPending={isPending} />"
     },
     {
       "name": "ShimmerButton",
@@ -150,7 +253,19 @@
         "className?: string",
         "children?: ReactNode"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Bouton avec animation shimmer tournante, conçu pour les CTAs visuellement impactants (landing pages, splash screens, mise en avant).",
+      "useWhen": [
+        "call-to-action principal sur une page marketing → utiliser ShimmerButton",
+        "bouton de mise en avant sur SplashScreen → utiliser ShimmerButton",
+        "action unique à fort impact visuel → utiliser ShimmerButton"
+      ],
+      "dontUseFor": [
+        "actions standard dans un formulaire → utiliser ButtonSubmit",
+        "suppression ou action destructive → utiliser DeleteAction",
+        "navigation simple → utiliser Back"
+      ],
+      "example": "<ShimmerButton onClick={handleClick}>Commencer maintenant</ShimmerButton>"
     },
     {
       "name": "AreaChart",
@@ -162,7 +277,18 @@
         "title: string",
         "description: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Graphique en aires empilées (desktop/mobile) avec gradient, tooltip et footer de tendance, affiché dans une Card.",
+      "useWhen": [
+        "visualiser l'évolution de deux métriques dans le temps sur un dashboard → utiliser AreaChart",
+        "afficher une tendance mensuelle avec label et description → utiliser AreaChart"
+      ],
+      "dontUseFor": [
+        "comparer des catégories sans notion temporelle → utiliser BarChart",
+        "afficher une seule courbe sans remplissage → utiliser LineChart",
+        "visualiser des proportions → utiliser PieChart"
+      ],
+      "example": "<AreaChart title=\"Trafic mensuel\" description=\"Janvier – Juin 2024\" />"
     },
     {
       "name": "BarChart",
@@ -179,7 +305,19 @@
         "euro?: boolean; // Prop pour activer le formatage en euro",
         "noY?: boolean"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Graphique à barres verticales (Recharts) avec tooltip, labels formatés (k/M/€) et support multi-séries via `keys`.",
+      "useWhen": [
+        "visualiser une distribution de valeurs par catégorie (ex: CA par mois) → BarChart",
+        "comparer plusieurs métriques sur un même axe → BarChart avec `keys`",
+        "afficher des montants financiers avec formatage automatique → BarChart avec `euro={true}`"
+      ],
+      "dontUseFor": [
+        "évolution temporelle continue → utiliser LineChart",
+        "proportions d'un tout → utiliser PieChart",
+        "comparaison horizontale de valeurs longues → utiliser HorizontalBarChart"
+      ],
+      "example": "<BarChart data={[{ name: \"Jan\", total: 4200 }]} keys={[{ dataKey: \"total\", color: \"#6366f1\", label: \"CA\" }]} title=\"Chiffre d'affaires\" euro />"
     },
     {
       "name": "HorizontalBarChart",
@@ -194,7 +332,19 @@
         "euro?: boolean",
         "emptyMessage?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Graphique à barres horizontales avec pourcentages, tri décroissant automatique et couleurs par catégorie, encapsulé dans une Card.",
+      "useWhen": [
+        "visualiser la répartition de valeurs entre catégories (ex: CA par produit) → HorizontalBarChart",
+        "comparer des volumes classés du plus grand au plus petit → HorizontalBarChart",
+        "afficher un message vide conditionnel quand aucune donnée n'est disponible → HorizontalBarChart"
+      ],
+      "dontUseFor": [
+        "comparaisons temporelles en série chronologique → utiliser AreaChart ou LineChart",
+        "distribution de proportions en secteurs → utiliser PieChart",
+        "métriques uniques sans comparaison → utiliser KPI"
+      ],
+      "example": "<HorizontalBarChart data={[{ label: \"Produit A\", value: 420, color: \"#6366f1\" }]} title=\"Ventes par produit\" description=\"Répartition du CA\" footerText=\"Données 2024\" />"
     },
     {
       "name": "LineChart",
@@ -210,7 +360,19 @@
         "keys?: Key[]",
         "euro?: boolean; // Prop pour activer le formatage en euro"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Graphique en aires (area chart) avec dégradé pour visualiser l'évolution d'une ou plusieurs métriques dans le temps.",
+      "useWhen": [
+        "afficher l'évolution d'un chiffre d'affaires sur plusieurs mois → utiliser LineChart",
+        "visualiser plusieurs séries temporelles superposées avec `keys` → utiliser LineChart",
+        "afficher des montants en euros avec formatage automatique k/M → utiliser LineChart avec `euro={true}`"
+      ],
+      "dontUseFor": [
+        "comparer des catégories entre elles → utiliser BarChart",
+        "visualiser des proportions → utiliser PieChart",
+        "données sans dimension temporelle → utiliser HorizontalBarChart"
+      ],
+      "example": "<LineChart data={[{ name: \"Jan\", total: 4200 }, { name: \"Fév\", total: 8700 }]} color=\"#6366f1\" title=\"Revenus\" euro={true} container />"
     },
     {
       "name": "PieChart",
@@ -226,7 +388,20 @@
         "colors?: string[]",
         "startAngle?: number"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Graphique en anneau (donut) Recharts pour visualiser la répartition proportionnelle de données catégorielles.",
+      "useWhen": [
+        "afficher la distribution d'un ensemble de catégories (ex: répartition des types de contrats) → utiliser PieChart",
+        "intégrer un chart dans un dashboard avec titre/sous-titre → activer `container`",
+        "varier les couleurs par segment → passer `colors` ou `color`",
+        "ajuster l'angle de départ de l'anneau → utiliser `startAngle`."
+      ],
+      "dontUseFor": [
+        "comparer des évolutions dans le temps → utiliser LineChart",
+        "afficher des valeurs absolues côte à côte → utiliser BarChart",
+        "représenter des tendances cumulées → utiliser AreaChart."
+      ],
+      "example": "<PieChart title=\"Répartition des contrats\" subtitle=\"Par type\" data={[{ name: \"CDI\", value: 40 }, { name: \"CDD\", value: 20 }]} container />"
     },
     {
       "name": "RadialChart",
@@ -236,7 +411,19 @@
       "props": [
         "className?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Graphique radial circulaire affichant une valeur unique (visitors) avec label centré et tendance en pied de carte.",
+      "useWhen": [
+        "afficher un KPI circulaire de type \"progression vers un objectif\"",
+        "visualiser un taux ou score unique sous forme d'arc",
+        "widget de dashboard avec indicateur de tendance mensuelle."
+      ],
+      "dontUseFor": [
+        "comparer plusieurs séries de données → utiliser BarChart",
+        "afficher une répartition en parts → utiliser PieChart",
+        "suivre une évolution temporelle → utiliser LineChart."
+      ],
+      "example": "<RadialChart className=\"w-full max-w-sm\" />"
     },
     {
       "name": "ComboBox",
@@ -253,7 +440,19 @@
         "className?: string",
         "triggerOnHover?: boolean"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Sélecteur searchable avec popover, recherche intégrée et déselection, pour choisir une valeur parmi une liste d'items.",
+      "useWhen": [
+        "sélection simple parmi une liste modérée avec besoin de recherche → utiliser ComboBox",
+        "champ de sélection avec icône décorative → utiliser ComboBox avec prop `icon`",
+        "ouverture au survol souhaitée → utiliser ComboBox avec `triggerOnHover`"
+      ],
+      "dontUseFor": [
+        "sélection multiple → utiliser MultiSelect",
+        "affichage adaptatif mobile/desktop → utiliser ComboBoxResponsive",
+        "dataset très volumineux avec chargement async → utiliser SearchSelectAsync"
+      ],
+      "example": "<ComboBox items={[{ value: \"fr\", label: \"France\" }]} value={value} onChange={setValue} label=\"Pays\" />"
     },
     {
       "name": "ComboBoxResponsive",
@@ -267,7 +466,18 @@
         "selectedStatus: Status | null",
         "setSelectedStatus: (status: Status | null) => void"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Sélecteur avec recherche textuelle adaptatif : Popover sur desktop, Drawer natif sur mobile.",
+      "useWhen": [
+        "filtrer une liste d'options sur mobile et desktop sans gestion manuelle du breakpoint → utiliser ComboBoxResponsive",
+        "sélection d'un statut, d'une catégorie ou d'un type parmi une liste courte avec recherche intégrée → utiliser ComboBoxResponsive"
+      ],
+      "dontUseFor": [
+        "sélection multiple → utiliser MultiSelect",
+        "gros datasets avec chargement asynchrone → utiliser ComboBox",
+        "usage dans un formulaire react-hook-form → utiliser Forms/ComboBox"
+      ],
+      "example": "<ComboBoxResponsive label=\"Statut\" text=\"Choisir...\" items={statuses} selectedStatus={selected} setSelectedStatus={setSelected} />"
     },
     {
       "name": "Collapsible",
@@ -280,7 +490,19 @@
         "children: ReactNode",
         "trigger: ReactNode"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Section rétractable avec un déclencheur personnalisable pour masquer/afficher un contenu secondaire.",
+      "useWhen": [
+        "filtres avancés à cacher par défaut → utiliser Collapsible",
+        "bloc de détails optionnels dans une fiche → utiliser Collapsible",
+        "contenu long à rendre progressif dans une page → utiliser Collapsible"
+      ],
+      "dontUseFor": [
+        "navigation entre vues → utiliser TabsResponsive",
+        "contenu dans une modale latérale → utiliser Drawer",
+        "liste d'items tous indépendamment rétractables → utiliser Accordion"
+      ],
+      "example": "<Collapsible trigger={<Button icon=\"chevron-down\" />} className=\"w-full\">Contenu masqué</Collapsible>"
     },
     {
       "name": "Container",
@@ -291,7 +513,18 @@
         "children: ReactNode",
         "className?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Conteneur blanc avec bordure arrondie pour regrouper visuellement un bloc de contenu dans une page Vigee.",
+      "useWhen": [
+        "encapsuler une section de page (formulaire, liste, détails) → utiliser Container",
+        "créer une carte de contenu avec fond blanc et bords arrondis → utiliser Container",
+        "structurer verticalement des éléments enfants dans un bloc délimité → utiliser Container"
+      ],
+      "dontUseFor": [
+        "contenu nécessitant un padding/layout horizontal spécifique → utiliser LineContainer",
+        "contenu avec coins arrondis et styles avancés → utiliser RoundedContainer"
+      ],
+      "example": "<Container><p>Contenu de la section</p></Container>"
     },
     {
       "name": "LineContainer",
@@ -309,7 +542,19 @@
         "subtitle?: string",
         "minimalistic?: boolean"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Ligne cliquable avec titre, sous-titre optionnel et icône, utilisable comme lien de navigation ou déclencheur d'action.",
+      "useWhen": [
+        "liste de paramètres/réglages cliquables dans un menu → utiliser avec `href`",
+        "item d'une liste menant à une page détail → utiliser avec `href`",
+        "ligne actionnable sans navigation → utiliser avec `onClick`",
+        "affichage d'une info synthétique avec action custom à droite → utiliser avec `children`"
+      ],
+      "dontUseFor": [
+        "navigation principale de l'app → utiliser Sidebar",
+        "actions groupées en tableau → utiliser DataTable"
+      ],
+      "example": "<LineContainer title=\"Informations personnelles\" subtitle=\"Nom, prénom, email\" icon={<UserIcon />} href=\"/profile/info\" />"
     },
     {
       "name": "RoundedContainer",
@@ -319,7 +564,17 @@
       "props": [
         "children: ReactNode"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Conteneur centré à fond blanc avec coins arrondis, ombre légère et padding généreux pour encadrer du contenu de page.",
+      "useWhen": [
+        "wrapper d'une section principale de page nécessitant une délimitation visuelle → utiliser RoundedContainer",
+        "contenu centré avec largeur max (7xl) → utiliser RoundedContainer"
+      ],
+      "dontUseFor": [
+        "contenu pleine largeur sans contrainte max → utiliser Container",
+        "sections imbriquées légères → utiliser LineContainer"
+      ],
+      "example": "<RoundedContainer><UserForm /></RoundedContainer>"
     },
     {
       "name": "DatePickerWithPresets",
@@ -334,7 +589,208 @@
         "presets?: DatePreset[]",
         "showPresets?: boolean"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Sélecteur de date unique avec calendrier et raccourcis prédéfinis (aujourd'hui, demain, dans une semaine…) en français.",
+      "useWhen": [
+        "champ de date dans un formulaire avec des raccourcis temporels courants → utiliser DatePickerWithPresets",
+        "date unique à sélectionner avec presets personnalisés via `presets` → utiliser DatePickerWithPresets",
+        "date de début ou d'échéance avec suggestions rapides → utiliser DatePickerWithPresets"
+      ],
+      "dontUseFor": [
+        "plage de dates (début/fin) → utiliser DatePickerRange",
+        "filtre de date dans une liste ou tableau → utiliser DatePickerFilter"
+      ],
+      "example": "<DatePickerWithPresets value={date} onChange={setDate} placeholder=\"Choisir une date\" />"
+    },
+    {
+      "name": "DocumentViewer",
+      "category": "DocumentViewer",
+      "importPath": "@vigee-designsystem/components/DocumentViewer/DocumentViewer",
+      "exportType": "named",
+      "props": [
+        "documents: ViewableDocument[]",
+        "initialIndex?: number",
+        "open: boolean",
+        "onOpenChange: (open: boolean) => void",
+        "onRotate?: (doc: ViewableDocument, rotations: RotationChange) => void",
+        "onDownload?: (doc: ViewableDocument) => void",
+        "onIndexChange?: (index: number, doc: ViewableDocument) => void",
+        "features?: DocumentViewerFeatures",
+        "appearance?: DocumentViewerAppearance",
+        "labels?: DocumentViewerLabels"
+      ],
+      "formIntegration": false,
+      "description": "Visionneuse plein écran de documents PDF et images avec zoom, rotation par page, navigation entre documents et raccourcis clavier.",
+      "useWhen": [
+        "prévisualisation read-only d'un PDF ou image depuis une liste de documents → utiliser DocumentViewer",
+        "navigation multi-documents avec persistance des rotations serveur → utiliser DocumentViewer",
+        "affichage de pièces jointes (contrats, justificatifs) dans une modale fullscreen → utiliser DocumentViewer"
+      ],
+      "dontUseFor": [
+        "upload ou sélection de fichier → utiliser InputDropZoneFile",
+        "simple affichage inline sans contrôles → utiliser ui/Card"
+      ],
+      "example": "<DocumentViewer documents={docs} open={open} onOpenChange={setOpen} onRotate={(doc, r) => persist(doc, r)} />"
+    },
+    {
+      "name": "ImageView",
+      "category": "DocumentViewer",
+      "importPath": "@vigee-designsystem/components/DocumentViewer/parts/ImageView",
+      "exportType": "named",
+      "props": [
+        "url: string",
+        "alt: string",
+        "width: number"
+      ],
+      "formIntegration": false,
+      "description": "Affiche une image dans un conteneur stylisé (fond blanc, ombre, bordure) avec largeur max contrôlée.",
+      "useWhen": [
+        "prévisualisation d'une image dans un DocumentViewer → utiliser ImageView",
+        "affichage d'un document image (PNG, JPG) avec contrainte de largeur → utiliser ImageView"
+      ],
+      "dontUseFor": [
+        "affichage d'avatar → utiliser Avatar",
+        "galerie ou liste d'images interactives → utiliser DataTable"
+      ],
+      "example": "<ImageView url=\"/docs/contrat.png\" alt=\"Contrat signé\" width={800} />"
+    },
+    {
+      "name": "LoadingState",
+      "category": "DocumentViewer",
+      "importPath": "@vigee-designsystem/components/DocumentViewer/parts/states",
+      "exportType": "named",
+      "props": [],
+      "formIntegration": false,
+      "description": "États visuels internes du DocumentViewer : chargement global, message vide, et squelette de page PDF en cours de rendu.",
+      "useWhen": [
+        "document en cours de fetch → utiliser `LoadingState`",
+        "aucun document disponible ou erreur métier → utiliser `EmptyState`",
+        "page PDF individuelle pas encore rendue → utiliser `PageSkeleton`"
+      ],
+      "dontUseFor": [
+        "chargement de page entière → utiliser LoaderPage",
+        "squelette de dashboard → utiliser DashboardSkeleton"
+      ],
+      "example": "<LoadingState label=\"Chargement du contrat…\" />"
+    },
+    {
+      "name": "PdfPage",
+      "category": "DocumentViewer",
+      "importPath": "@vigee-designsystem/components/DocumentViewer/parts/PdfPage",
+      "exportType": "named",
+      "props": [
+        "pageNumber: number",
+        "width: number",
+        "rotation: number",
+        "showRotate: boolean",
+        "rotateLeftLabel: string",
+        "rotateRightLabel: string",
+        "onRotateLeft: () => void",
+        "onRotateRight: () => void"
+      ],
+      "formIntegration": false,
+      "description": "Affiche une page individuelle d'un PDF avec numéro de page, rotation optionnelle et skeleton de chargement.",
+      "useWhen": [
+        "rendu page par page dans un visualiseur PDF → utiliser PdfPage",
+        "affichage avec contrôles de rotation par page → utiliser PdfPage avec showRotate={true}"
+      ],
+      "dontUseFor": [
+        "affichage d'un document complet sans gestion page par page → gérer au niveau parent du DocumentViewer"
+      ],
+      "example": "<PdfPage pageNumber={1} width={600} rotation={0} showRotate={true} rotateLeftLabel=\"Tourner à gauche\" rotateRightLabel=\"Tourner à droite\" onRotateLeft={() => {}} onRotateRight={() => {}} />"
+    },
+    {
+      "name": "PdfView",
+      "category": "DocumentViewer",
+      "importPath": "@vigee-designsystem/components/DocumentViewer/parts/PdfView",
+      "exportType": "named",
+      "props": [
+        "url: string",
+        "pageWidth: number",
+        "rotations: Record<number, number>",
+        "showRotate: boolean",
+        "loadingLabel: string",
+        "errorLabel: string",
+        "rotateLeftLabel: string",
+        "rotateRightLabel: string",
+        "onRotate: (page: number, direction: 1 | -1) => void",
+        "onLoadSuccess: (info: { numPages: number"
+      ],
+      "formIntegration": false,
+      "description": "Affiche toutes les pages d'un PDF depuis une URL, avec rotation par page et gestion des états de chargement/erreur.",
+      "useWhen": [
+        "visualisation d'un document PDF paginé dans un viewer → utiliser PdfView",
+        "besoin de rotation individuelle par page → utiliser PdfView",
+        "intégration dans un DocumentViewer avec contrôle du nombre de pages → utiliser PdfView"
+      ],
+      "dontUseFor": [
+        "affichage d'images ou documents non-PDF → utiliser Illustration",
+        "preview simple sans interaction → utiliser Sheet"
+      ],
+      "example": "<PdfView url=\"/doc.pdf\" pageWidth={800} rotations={{}} showRotate={true} loadingLabel=\"Chargement...\" errorLabel=\"Erreur\" rotateLeftLabel=\"Gauche\" rotateRightLabel=\"Droite\" onRotate={(p, d) => {}} onLoadSuccess={({ numPages }) => {}} />"
+    },
+    {
+      "name": "SideArrow",
+      "category": "DocumentViewer",
+      "importPath": "@vigee-designsystem/components/DocumentViewer/parts/SideArrow",
+      "exportType": "named",
+      "props": [
+        "direction: 'left' | 'right'",
+        "disabled: boolean",
+        "onClick: () => void",
+        "label: string | null",
+        "ariaLabel: string"
+      ],
+      "formIntegration": false,
+      "description": "Flèche de navigation latérale fixe (gauche/droite) pour parcourir les documents dans un DocumentViewer.",
+      "useWhen": [
+        "navigation entre documents dans un viewer plein écran → utiliser SideArrow",
+        "afficher le titre du document adjacent sous la flèche → utiliser SideArrow avec `label`"
+      ],
+      "dontUseFor": [
+        "pagination de tableau → utiliser Pagination",
+        "navigation entre étapes → utiliser Stepper"
+      ],
+      "example": "<SideArrow direction=\"left\" disabled={false} onClick={handlePrev} label=\"Contrat_2024.pdf\" ariaLabel=\"Document précédent\" />"
+    },
+    {
+      "name": "Toolbar",
+      "category": "DocumentViewer",
+      "importPath": "@vigee-designsystem/components/DocumentViewer/parts/Toolbar",
+      "exportType": "named",
+      "props": [
+        "doc: ViewableDocument",
+        "index: number",
+        "total: number",
+        "numPages: number | null",
+        "isImage: boolean",
+        "zoom: number",
+        "fitMode: 'fit' | 'manual'",
+        "zoomMin: number",
+        "zoomMax: number",
+        "sizeLabel: string | null",
+        "showZoom: boolean",
+        "showDownload: boolean",
+        "labels: {",
+        "close: string",
+        "download: string",
+        "zoomIn: string",
+        "zoomOut: string",
+        "fitWidth: string",
+        "pageCount: (n: number) => string"
+      ],
+      "formIntegration": false,
+      "description": "Barre d'outils du visualiseur de documents : titre, pagination, zoom PDF et téléchargement.",
+      "useWhen": [
+        "afficher les contrôles d'un document dans DocumentViewer → utiliser Toolbar",
+        "piloter le zoom/reset sur un PDF → utiliser Toolbar",
+        "afficher le nom, l'index et la taille d'un document visionné → utiliser Toolbar"
+      ],
+      "dontUseFor": [
+        "actions globales de page → utiliser PageHeader",
+        "menu d'actions contextuelles sur un item → utiliser DropdownMenu"
+      ],
+      "example": "<Toolbar doc={doc} index={0} total={3} numPages={5} isImage={false} zoom={1} fitMode=\"fit\" zoomMin={0.5} zoomMax={3} sizeLabel=\"2 Mo\" showZoom showDownload labels={labels} onClose={handleClose} onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} onResetZoom={handleResetZoom} onDownload={handleDownload} />"
     },
     {
       "name": "Drawer",
@@ -342,7 +798,20 @@
       "importPath": "@vigee-designsystem/components/Drawer/Drawer",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Panneau glissant (vaul) depuis le bas, la droite ou la gauche, avec titre, description, icône et contenu libre.",
+      "useWhen": [
+        "afficher un formulaire contextuel sans quitter la page → utiliser Drawer",
+        "afficher un détail ou une fiche latérale → utiliser Drawer avec direction=\"right\"",
+        "flux en plusieurs étapes sur mobile → utiliser Drawer avec fullScreen={true}",
+        "panneau contrôlé programmatiquement (open/onOpenChange) → utiliser Drawer sans trigger"
+      ],
+      "dontUseFor": [
+        "confirmation destructive courte → utiliser ActionWithValidation",
+        "contenu segmenté en onglets dans un panneau → utiliser SheetDialog",
+        "sélection d'une valeur dans une liste → utiliser ComboBoxResponsive"
+      ],
+      "example": "<Drawer trigger={<button>Ouvrir</button>} title=\"Détails\" description=\"Informations complémentaires\" direction=\"right\">{content}</Drawer>"
     },
     {
       "name": "Error",
@@ -358,7 +827,18 @@
         "onClick?: () => void",
         "variant?: \"bro\" | \"classic\""
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Page d'erreur illustrée avec titre, sous-titre, lien support et bouton de retry, en variante \"bro\" ou \"classic\".",
+      "useWhen": [
+        "erreur inattendue côté serveur/réseau → afficher avec `onClick` pour retry",
+        "absence de données critique → afficher avec `subtitle` explicatif",
+        "besoin de contacter le support → passer `supportEmail`"
+      ],
+      "dontUseFor": [
+        "accès refusé/non autorisé → utiliser Unauthorized",
+        "message d'information non bloquant → utiliser AlertInfo"
+      ],
+      "example": "<Error title=\"Impossible de charger les données\" subtitle=\"Vérifiez votre connexion.\" onClick={() => refetch()} supportEmail=\"support@vigee.fr\" />"
     },
     {
       "name": "Unauthorized",
@@ -374,7 +854,18 @@
         "onClick?: () => void",
         "variant?: \"bro\" | \"classic\""
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Page d'erreur 403 avec illustration, message configurable et actions de récupération (support, retry).",
+      "useWhen": [
+        "route protégée accessible sans permission → afficher à la place du contenu",
+        "guard d'autorisation échoue → remplacer le contenu de la page",
+        "accès refusé API → afficher en pleine page ou dans un Container"
+      ],
+      "dontUseFor": [
+        "erreurs 404 ou serveur → utiliser Error",
+        "contenu conditionnel selon rôle → utiliser ContentGuard"
+      ],
+      "example": "<Unauthorized supportEmail=\"support@vigee.fr\" onClick={() => router.refresh()} />"
     },
     {
       "name": "FadeIn",
@@ -382,7 +873,18 @@
       "importPath": "@vigee-designsystem/components/FadeIn/FadeIn",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Anime l'apparition d'un bloc en fondu + glissement vers le haut au scroll, avec support du mode reduced-motion et du stagger group.",
+      "useWhen": [
+        "révéler une section ou carte au scroll → utiliser FadeIn",
+        "animer une liste d'éléments en cascade au scroll → envelopper avec FadeInStagger et mettre chaque item dans FadeIn",
+        "landing page / page marketing avec animations d'entrée → utiliser FadeInStagger + FadeIn"
+      ],
+      "dontUseFor": [
+        "transitions conditionnelles show/hide → utiliser FadeInOut",
+        "animations complexes de liste avec état → utiliser AnimatedListItem"
+      ],
+      "example": "<FadeInStagger faster><FadeIn><Card /></FadeIn><FadeIn><Card /></FadeIn></FadeInStagger>"
     },
     {
       "name": "CheckboxFilter",
@@ -395,7 +897,19 @@
         "className?: string",
         "defaultChecked?: boolean"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Filtre booléen synchronisé avec l'URL via nuqs — coche/décoche pour ajouter un paramètre query string à la navigation.",
+      "useWhen": [
+        "filtrer une liste par un critère binaire (ex: \"Uniquement les actifs\") → CheckboxFilter",
+        "masquer/afficher des éléments via l'URL sans state React",
+        "conserver l'état du filtre au rechargement de page via query param."
+      ],
+      "dontUseFor": [
+        "sélection multiple de valeurs → utiliser SelectMultiple",
+        "filtre sur une plage de valeurs → utiliser NumberFilter",
+        "case à cocher dans un formulaire → utiliser Checkboxes."
+      ],
+      "example": "<CheckboxFilter queryKey=\"active\" label=\"Uniquement les actifs\" defaultChecked={false} />"
     },
     {
       "name": "DatePickerFilter",
@@ -415,7 +929,20 @@
         "minHour?: string",
         "maxHour?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Filtre de date (et heure optionnelle) synchronisé avec l'URL via nuqs, avec calendrier popover et navigation jour par jour.",
+      "useWhen": [
+        "filtrer une liste/tableau par date via query param URL → utiliser DatePickerFilter",
+        "filtrer par créneau horaire (ex: réservations, plannings) avec `displayHour`",
+        "borner la sélection à une plage de dates avec `minDate`/`maxDate`",
+        "naviguer jour par jour avec les flèches via `withArrows`"
+      ],
+      "dontUseFor": [
+        "saisie de date dans un formulaire react-hook-form → utiliser DatePicker",
+        "sélection d'une plage de dates → utiliser DatePickerRange",
+        "choix parmi des presets prédéfinis → utiliser DatePickerWithPresets"
+      ],
+      "example": "<DatePickerFilter label=\"Date\" queryKey=\"start_date\" withArrows displayHour minHour=\"08:00\" maxHour=\"20:00\" />"
     },
     {
       "name": "Filter",
@@ -423,7 +950,19 @@
       "importPath": "@vigee-designsystem/components/Filters/Filter",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Filtre URL-driven (single ou multi) avec synchronisation nuqs/searchParams, optionnellement searchable via Popover+Command.",
+      "useWhen": [
+        "liste de résultats à filtrer par une valeur unique persistée en query string → utiliser Filter",
+        "filtres multiples cumulables (ex: statuts, tags) avec `multi={true}` → utiliser Filter",
+        "filtre avec recherche textuelle dans les options → utiliser Filter avec `searchable={true}`"
+      ],
+      "dontUseFor": [
+        "sélection dans un formulaire react-hook-form → utiliser Select",
+        "filtres sur gros volumes avec recherche serveur → utiliser ComboBox",
+        "filtre booléen simple → utiliser CheckboxFilter"
+      ],
+      "example": "<Filter queryKey=\"status\" options={[{ label: \"Actif\", value: \"active\" }, { label: \"Inactif\", value: \"inactive\" }]} placeholder=\"Statut\" searchable clearable />"
     },
     {
       "name": "generateWeekOptions",
@@ -435,7 +974,18 @@
         "value: string",
         "label: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Filtre de période (jour/semaine/mois/année) synchronisé avec les query params URL via nuqs, avec sélecteurs dynamiques.",
+      "useWhen": [
+        "dashboard avec filtrage temporel par période → utiliser PeriodFilters",
+        "page analytics nécessitant navigation jour/semaine/mois/année dans l'URL → utiliser PeriodFilters",
+        "vue planning ou rapport avec changement de granularité temporelle → utiliser PeriodFilters"
+      ],
+      "dontUseFor": [
+        "sélection d'une plage de dates libre → utiliser DatePickerRange",
+        "filtre de date unique sans notion de période → utiliser DatePickerFilter"
+      ],
+      "example": "<PeriodFilters years={[{ label: \"2024\", value: \"2024\" }, { label: \"2025\", value: \"2025\" }]} defaultPeriod=\"month\" />"
     },
     {
       "name": "NumberFilter",
@@ -452,7 +1002,18 @@
         "placeholder?: string",
         "defaultValue?: number"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Input numérique synchronisé avec un query param URL via nuqs, pour filtrer des listes par valeur numérique.",
+      "useWhen": [
+        "filtrer une liste par nombre (ex: quantité minimale, nombre de jours) → utiliser NumberFilter",
+        "paramètre numérique persistant dans l'URL sans rechargement → utiliser NumberFilter"
+      ],
+      "dontUseFor": [
+        "saisie numérique dans un formulaire → utiliser Input",
+        "sélection parmi des valeurs prédéfinies → utiliser SelectFilter",
+        "plage de dates → utiliser DatePickerFilter"
+      ],
+      "example": "<NumberFilter queryKey=\"minQuantity\" placeholder=\"Quantité min\" min={1} icon={<PackageIcon />} />"
     },
     {
       "name": "SelectFilter",
@@ -464,7 +1025,19 @@
         "placeholder?: string",
         "status?: { label: string; value: string; icon?: ReactNode"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Filtre par sélection simple piloté par les search params URL, réinitialise la pagination à la page 1 à chaque changement.",
+      "useWhen": [
+        "filtrer une liste par statut dans l'URL → utiliser SelectFilter",
+        "filtrer par catégorie/type avec navigation Next.js → utiliser SelectFilter",
+        "synchroniser un Select avec les query params sans état local → utiliser SelectFilter"
+      ],
+      "dontUseFor": [
+        "sélection multiple → utiliser SelectMultiple",
+        "filtrage par date → utiliser DatePickerFilter",
+        "filtrage par plage numérique → utiliser NumberFilter"
+      ],
+      "example": "<SelectFilter statusName=\"status\" placeholder=\"Tous les statuts\" status={[{ label: \"Actif\", value: \"active\" }, { label: \"Inactif\", value: \"inactive\" }]} />"
     },
     {
       "name": "SelectMultiple",
@@ -477,7 +1050,19 @@
         "icon?: ReactNode",
         "queryKey?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Filtre multi-sélection piloté par les search params URL, avec badges cliquables pour les valeurs actives.",
+      "useWhen": [
+        "filtrer une liste par plusieurs équipements/catégories via l'URL → utiliser SelectMultiple",
+        "besoin de partager/bookmarker un état de filtre multi-valeurs → utiliser SelectMultiple",
+        "page avec plusieurs filtres combinables en query string → utiliser SelectMultiple"
+      ],
+      "dontUseFor": [
+        "sélection multiple dans un formulaire react-hook-form → utiliser MultiSelect",
+        "sélection unique dans l'URL → utiliser SelectSearchParam",
+        "dataset large avec recherche → utiliser ComboBox"
+      ],
+      "example": "<SelectMultiple options={[{ label: \"Vélo\", value: 1, icon: <BikeIcon /> }]} placeholder=\"Équipements\" queryKey=\"equipments\" />"
     },
     {
       "name": "SelectSearchParam",
@@ -489,7 +1074,19 @@
         "placeholder?: string",
         "status?: { label: string; value: string; icon?: ReactNode"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Select lié à un query param URL (nuqs) pour filtrer des listes via l'URL sans rechargement de page.",
+      "useWhen": [
+        "filtre de statut/type synchronisé avec l'URL sur une page de liste → utiliser SelectSearchParam",
+        "filtre persistant après navigation/refresh → utiliser SelectSearchParam",
+        "filtre partageable via URL → utiliser SelectSearchParam"
+      ],
+      "dontUseFor": [
+        "sélection multiple dans les filtres → utiliser SelectMultiple",
+        "filtre non lié à l'URL dans un formulaire → utiliser Select",
+        "filtre date → utiliser DatePickerFilter"
+      ],
+      "example": "<SelectSearchParam searchParam=\"status\" placeholder=\"Statut\" status={[{ label: \"Actif\", value: \"active\" }, { label: \"Inactif\", value: \"inactive\" }]} />"
     },
     {
       "name": "UrlFilter",
@@ -501,7 +1098,19 @@
         "placeholder?: string",
         "options: { label: string; value: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Select synchronisé avec l'URL (query string) via nuqs pour filtrer des listes sans état React local.",
+      "useWhen": [
+        "filtrer une liste paginée par statut/catégorie avec persistance dans l'URL → utiliser UrlFilter",
+        "partager un état de filtre via un lien → utiliser UrlFilter",
+        "réinitialiser un filtre en re-sélectionnant la même valeur → utiliser UrlFilter"
+      ],
+      "dontUseFor": [
+        "filtre multi-valeurs → utiliser SelectMultiple",
+        "filtre sur une plage de dates → utiliser DatePickerFilter",
+        "filtre numérique min/max → utiliser NumberFilter"
+      ],
+      "example": "<UrlFilter name=\"status\" placeholder=\"Statut\" options={[{ label: \"Actif\", value: \"active\" }, { label: \"Inactif\", value: \"inactive\" }]} />"
     },
     {
       "name": "Checkboxes",
@@ -515,7 +1124,19 @@
         "items: CheckboxItem[]",
         "max?: number"
       ],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Groupe de cases à cocher multi-sélection intégré react-hook-form, avec limite optionnelle de sélections.",
+      "useWhen": [
+        "Sélectionner plusieurs options dans un formulaire RHF (ex: préférences, catégories) → utiliser Checkboxes",
+        "Limiter le nombre de choix possibles (ex: \"3 compétences max\") → utiliser Checkboxes avec `max`",
+        "Choix multiples sur une liste courte et fixe → utiliser Checkboxes."
+      ],
+      "dontUseFor": [
+        "Sélection unique parmi plusieurs options → utiliser Select ou Toggles",
+        "Liste dynamique/recherchable → utiliser ComboBox",
+        "Sélection booléenne simple (on/off) → utiliser Switch."
+      ],
+      "example": "<Checkboxes form={form} name=\"categories\" label=\"Catégories\" items={[{ label: \"Sport\", value: \"sport\" }, { label: \"Culture\", value: \"culture\" }]} max={2} />"
     },
     {
       "name": "ComboBox",
@@ -532,7 +1153,19 @@
         "icon?: ReactNode",
         "onChange: (value: string | undefined) => void"
       ],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Sélecteur unique avec recherche intégrée, connecté à react-hook-form via Zod, avec toggle de désélection.",
+      "useWhen": [
+        "champ de sélection unique avec recherche textuelle dans un formulaire react-hook-form",
+        "liste d'items modérée (< ~100) nécessitant un filtre rapide",
+        "champ avec icône décorative devant la valeur sélectionnée"
+      ],
+      "dontUseFor": [
+        "sélection multiple → utiliser MultiSelect",
+        "recherche asynchrone sur API → utiliser SearchSelectAsync",
+        "usage hors formulaire sans react-hook-form → utiliser ComboBoxResponsive"
+      ],
+      "example": "<ComboBox form={form} name=\"country\" label=\"Pays\" items={[{ value: \"fr\", label: \"France\" }]} onChange={(v) => console.log(v)} />"
     },
     {
       "name": "CommandListSelect",
@@ -559,9 +1192,23 @@
         "value: string",
         "icon?: ReactNode",
         "color?: string",
-        "disabled?: boolean"
+        "disabled?: boolean",
+        "groupLabel?: string"
       ],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Sélecteur avec recherche intégrée et support multi-valeurs, connecté à react-hook-form via Popover/Command.",
+      "useWhen": [
+        "choix unique dans une liste avec recherche texte dans un Form → utiliser CommandListSelect",
+        "sélection multiple d'options dans un formulaire Vigee → utiliser CommandListSelect avec `multi`",
+        "options regroupées par catégorie (groupLabel) dans un Form → utiliser CommandListSelect",
+        "usage contrôlé sans form (value + onChange) pour filtres inline → utiliser CommandListSelect"
+      ],
+      "dontUseFor": [
+        "sélection simple sans recherche → utiliser Select",
+        "autocomplétion sur données distantes/asynchrones → utiliser SearchSelectAsync",
+        "filtrage par URL côté liste → utiliser SelectSearchParam"
+      ],
+      "example": "<CommandListSelect form={form} name=\"status\" label=\"Statut\" options={[{ label: \"Actif\", value: \"active\" }, { label: \"Inactif\", value: \"inactive\" }]} />"
     },
     {
       "name": "DatePicker",
@@ -584,7 +1231,20 @@
         "classNameInput?: string",
         "classNameButton?: string"
       ],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Sélecteur de date intégré react-hook-form avec saisie clavier (DD/MM/YYYY) ou calendrier popover, supportant des bornes min/max.",
+      "useWhen": [
+        "champ de date dans un formulaire react-hook-form avec validation",
+        "besoin de restreindre la plage de dates sélectionnables via `starting_date` / `ending_date`",
+        "retour de valeur en string ISO (`returnString`) ou en objet Date selon le backend",
+        "saisie clavier désactivée au profit d'un bouton calendrier (`disabledKeys`)"
+      ],
+      "dontUseFor": [
+        "plage de deux dates (début + fin) → utiliser DatePickerRange",
+        "filtre de date hors formulaire → utiliser DatePickerFilter",
+        "présélection de périodes courantes → utiliser DatePickerWithPresets"
+      ],
+      "example": "<DatePicker form={form} name=\"birthdate\" label=\"Date de naissance\" required returnString />"
     },
     {
       "name": "DatePicker",
@@ -599,7 +1259,18 @@
         "starting_date?: Date",
         "disabled?: boolean"
       ],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Sélecteur de date intégré react-hook-form qui stocke la valeur au format string \"YYYY-MM-DD\" et l'affiche en \"DD/MM/YYYY\".",
+      "useWhen": [
+        "formulaire RHF nécessitant une date stockée en string ISO (ex: API REST) → utiliser DatePickerString",
+        "date de début/fin avec borne minimale configurable → utiliser DatePickerString via `starting_date`",
+        "champ date simple dans un Form Zod → utiliser DatePickerString"
+      ],
+      "dontUseFor": [
+        "sélection d'une plage de dates → utiliser DatePickerRange",
+        "date avec presets (aujourd'hui, semaine dernière…) → utiliser DatePickerWithPresets"
+      ],
+      "example": "<DatePickerString form={form} name=\"birth_date\" label=\"Date de naissance\" />"
     },
     {
       "name": "DatePickerRange",
@@ -616,7 +1287,19 @@
         "date?: DateRange | undefined",
         "setDate?: React.Dispatch<React.SetStateAction<DateRange | undefined>>"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Sélecteur de plage de dates avec raccourcis de périodes (semaine, mois, année) et synchronisation URL via nuqs.",
+      "useWhen": [
+        "filtrer des données par période dans un tableau de bord → utiliser DatePickerRange",
+        "sélection manuelle de plage de dates avec calendrier → utiliser DatePickerRange",
+        "contrôle contrôlé via state React (date + setDate) → utiliser DatePickerRange",
+        "synchronisation automatique de la plage dans les query params URL → utiliser DatePickerRange"
+      ],
+      "dontUseFor": [
+        "sélection d'une date unique → utiliser DatePicker",
+        "filtre de date dans une barre de filtres URL → utiliser DatePickerFilter"
+      ],
+      "example": "<DatePickerRange label=\"Période\" select onChange={(range) => console.log(range)} />"
     },
     {
       "name": "DatePickerRange",
@@ -636,7 +1319,19 @@
         "helpComponent?: ReactNode",
         "disabledDates?: Matcher | Matcher[] | undefined"
       ],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Sélecteur de plage de dates (from → to) intégré react-hook-form, avec calendrier en popover et affichage formaté dd/MM/yyyy.",
+      "useWhen": [
+        "filtrage par période dans un formulaire RHF → utiliser DatePickerRange",
+        "saisie de dates de début et fin (contrat, mission, congé) → utiliser DatePickerRange",
+        "plage avec dates désactivées (indisponibilités, jours fériés) → utiliser DatePickerRange avec disabledDates"
+      ],
+      "dontUseFor": [
+        "date unique → utiliser DatePicker",
+        "filtre URL sans formulaire RHF → utiliser DatePickerFilter",
+        "présélections rapides (cette semaine, ce mois) → utiliser DatePickerWithPresets"
+      ],
+      "example": "<DatePickerRange form={form} name=\"periode\" label=\"Période\" required disabledDates={{ before: new Date() }} />"
     },
     {
       "name": "Input",
@@ -668,7 +1363,20 @@
         "autoFocus?: boolean",
         "data-testid?: string"
       ],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Input texte intégré react-hook-form pour formulaires Vigee, avec label, validation, compteur de caractères et lien externe optionnel.",
+      "useWhen": [
+        "formulaire avec `react-hook-form` → utiliser avec `form` + `name`",
+        "champ texte/email/number/password dans un `Form`",
+        "affichage d'aide contextuelle → utiliser `helpComponent`",
+        "input standalone sans form → utiliser sans `form` ni `name`, avec `value` + `onChange`"
+      ],
+      "dontUseFor": [
+        "sélection dans une liste → utiliser Select",
+        "recherche avec suggestions → utiliser ComboBox",
+        "saisie longue multi-lignes → utiliser TextArea"
+      ],
+      "example": "<Input form={form} name=\"email\" label=\"Email\" placeholder=\"john@example.com\" type=\"email\" required />"
     },
     {
       "name": "InputDropZoneFile",
@@ -682,7 +1390,19 @@
         "multiple?: boolean",
         "accept?: string"
       ],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Zone de dépôt de fichiers (drag & drop + clic) intégrée react-hook-form, avec prévisualisation et suppression des fichiers sélectionnés.",
+      "useWhen": [
+        "upload de fichiers dans un formulaire Vigee (PDF, images, docs) → utiliser InputDropZoneFile",
+        "upload unique (ex: pièce jointe) → passer `multiple={false}`",
+        "upload multiple (ex: galerie, documents) → passer `multiple={true}`",
+        "restreindre les formats acceptés → utiliser `extensions` et `accept`"
+      ],
+      "dontUseFor": [
+        "upload d'avatar ou photo de profil → utiliser ProfileImageUploader",
+        "saisie de données structurées → utiliser Input"
+      ],
+      "example": "<InputDropZoneFile form={form} name=\"documents\" extensions={[\".pdf\", \".docx\"]} accept=\".pdf,.docx\" multiple />"
     },
     {
       "name": "PhoneNumber",
@@ -699,7 +1419,18 @@
         "disabled?: boolean",
         "className?: string"
       ],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Champ téléphone international intégré react-hook-form, préconfiguré en France (+33) avec sélecteur de pays.",
+      "useWhen": [
+        "formulaire de création/édition de contact nécessitant un numéro mobile → utiliser PhoneNumber",
+        "champ téléphone avec validation react-hook-form dans un Form Vigee → utiliser PhoneNumber",
+        "champ obligatoire avec indicatif pays sélectionnable → utiliser PhoneNumber"
+      ],
+      "dontUseFor": [
+        "saisie d'un numéro fixe sans sélecteur de pays → utiliser Input",
+        "champ texte générique → utiliser Input"
+      ],
+      "example": "<PhoneNumber form={form} name=\"phone\" label=\"Téléphone mobile\" required />"
     },
     {
       "name": "PlusLessButton",
@@ -717,7 +1448,18 @@
         "name: Path<T>",
         "onChange?: (e: number) => void"
       ],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Sélecteur numérique +/- intégré react-hook-form pour choisir une valeur par incréments (ex: durée, quantité, note).",
+      "useWhen": [
+        "saisie d'une durée en heures/demi-heures dans un formulaire RHF → PlusLessButton",
+        "sélection d'une quantité bornée avec min/max → PlusLessButton",
+        "ajustement pas-à-pas d'un nombre dans un Form Vigee → PlusLessButton"
+      ],
+      "dontUseFor": [
+        "saisie d'une valeur numérique libre → utiliser Input",
+        "sélection dans une plage continue → utiliser Slider"
+      ],
+      "example": "<PlusLessButton form={form} name=\"duration\" title=\"Durée\" unit=\"heures\" min={0.5} max={8} interval={0.5} />"
     },
     {
       "name": "ProfileImageUploader",
@@ -729,9 +1471,21 @@
         "name: Path<TFormValues>",
         "label?: string",
         "disabled?: boolean",
-        "className?: string"
+        "className?: string",
+        "required?: boolean"
       ],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Upload et prévisualisation d'une photo de profil intégré react-hook-form, avec gestion File local et URL signée existante.",
+      "useWhen": [
+        "formulaire de création/édition de profil utilisateur → afficher et modifier l'avatar",
+        "champ image obligatoire avec validation RHF → afficher l'erreur sous l'avatar",
+        "image déjà enregistrée (signedUrl) à réafficher → passer l'objet `{ id, signedUrl, filename }` comme valeur initiale."
+      ],
+      "dontUseFor": [
+        "upload de fichiers non-image → utiliser InputDropZoneFile",
+        "upload multiple de documents → utiliser InputDropZoneFile."
+      ],
+      "example": "<ProfileImageUploader form={form} name=\"avatar\" label=\"Photo de profil\" required />"
     },
     {
       "name": "SearchSelectAsync",
@@ -739,7 +1493,20 @@
       "importPath": "@vigee-designsystem/components/Forms/SelectSearchAsync",
       "exportType": "default",
       "props": [],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Select avec recherche asynchrone (react-select/async) intégrable dans un Form react-hook-form ou en standalone, mono ou multi-valeur.",
+      "useWhen": [
+        "recherche d'entités distantes via API au fil de la frappe (utilisateurs, clients, projets…) dans un Form RHF → utiliser avec `form` + `name` + `loadOptions`",
+        "sélection asynchrone hors formulaire (filtres, modales) → utiliser sans `form`, avec `onChange` + `value`",
+        "sélection multiple d'entités distantes → utiliser avec `isMulti={true}`",
+        "besoin de transformer la valeur avant de la passer à RHF → utiliser `preprocessOnChange`"
+      ],
+      "dontUseFor": [
+        "liste d'options statiques et courte → utiliser Select",
+        "recherche sur options locales déjà chargées → utiliser ComboBox",
+        "sélection multiple sur dataset statique → utiliser MultiSelect"
+      ],
+      "example": "<SearchSelectAsync form={form} name=\"client\" label=\"Client\" loadOptions={fetchClients} placeholder=\"Rechercher un client...\" />"
     },
     {
       "name": "SectionTitle",
@@ -751,7 +1518,17 @@
         "subtitle?: string",
         "className?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Titre de section H2 stylisé avec sous-titre optionnel pour structurer visuellement un formulaire ou une page.",
+      "useWhen": [
+        "séparation de groupes de champs dans un formulaire long → utiliser SectionTitle",
+        "introduction d'une section de contenu avec description courte → utiliser SectionTitle"
+      ],
+      "dontUseFor": [
+        "titre principal de page → utiliser PageHeader",
+        "titre avec animation → utiliser TitleGradual ou TypographyH1"
+      ],
+      "example": "<SectionTitle title=\"Informations personnelles\" subtitle=\"Renseignez vos coordonnées de contact.\" />"
     },
     {
       "name": "Select",
@@ -780,7 +1557,20 @@
         "color?: string",
         "disabled?: boolean"
       ],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Select déroulant intégré react-hook-form (ou standalone) avec label, aide contextuelle HoverCard et support booléen.",
+      "useWhen": [
+        "champ de sélection unique dans un formulaire RHF avec validation → utiliser avec `form` + `name` + `options`",
+        "sélection standalone sans formulaire → utiliser avec `value` + `onChange` + `options`",
+        "valeur booléenne stockée comme string → utiliser avec `isBoolean={true}`",
+        "option d'aide contextuelle nécessaire → utiliser avec `helpComponent`"
+      ],
+      "dontUseFor": [
+        "sélection multiple → utiliser MultiSelect",
+        "recherche dans une longue liste → utiliser ComboBox",
+        "filtres URL sans formulaire → utiliser SelectFilter"
+      ],
+      "example": "<Select form={form} name=\"status\" label=\"Statut\" options={[{ label: \"Actif\", value: \"active\" }, { label: \"Inactif\", value: \"inactive\" }]} />"
     },
     {
       "name": "SelectSearch",
@@ -788,7 +1578,19 @@
       "importPath": "@vigee-designsystem/components/Forms/SelectSearch",
       "exportType": "default",
       "props": [],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Select avec recherche intégrée (react-select) connecté à react-hook-form, support mono et multi-sélection avec options statiques.",
+      "useWhen": [
+        "liste d'options statiques courte à moyenne avec filtrage par saisie → utiliser SelectSearch",
+        "sélection unique ou multiple dans un Form Vigee → utiliser SelectSearch",
+        "besoin d'un champ clearable avec label/sublabel dans un formulaire → utiliser SelectSearch"
+      ],
+      "dontUseFor": [
+        "source de données distante/asynchrone → utiliser SearchSelectAsync",
+        "dataset plat sans recherche nécessaire → utiliser Select",
+        "sélection multiple avec affichage en tags avancé → utiliser MultiSelect"
+      ],
+      "example": "<SelectSearch form={form} name=\"category\" label=\"Catégorie\" options={[{ value: \"a\", label: \"Alpha\" }]} />"
     },
     {
       "name": "Switch",
@@ -811,7 +1613,20 @@
         "icon?: ReactNode",
         "pending?: boolean"
       ],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Toggle on/off intégré react-hook-form ou contrôlé manuellement, affiché dans un encadré arrondi avec label, description et icône optionnelle.",
+      "useWhen": [
+        "activer/désactiver une option dans un formulaire react-hook-form → utiliser avec `form` + `name`",
+        "toggle contrôlé hors formulaire → utiliser avec `value` + `onChange`",
+        "logique inversée (ex: \"désactiver les notifications\") → utiliser avec `inverted`",
+        "état en attente de réponse serveur → utiliser avec `pending`"
+      ],
+      "dontUseFor": [
+        "sélection parmi plusieurs options exclusives → utiliser Select",
+        "activation d'une option parmi une liste de choix booléens groupés → utiliser Toggles",
+        "case à cocher dans un formulaire → utiliser Checkboxes"
+      ],
+      "example": "<Switch form={form} name=\"isActive\" label=\"Activer le service\" descr=\"Le service sera disponible immédiatement.\" />"
     },
     {
       "name": "TextArea",
@@ -841,7 +1656,19 @@
         "rezizable?: boolean",
         "data-testid?: string"
       ],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Textarea multi-lignes intégré react-hook-form avec label, compteur de caractères, aide au survol et validation.",
+      "useWhen": [
+        "champ de saisie longue (notes, description, commentaire) dans un formulaire react-hook-form Vigee",
+        "besoin d'un compteur de caractères avec limite (`max`)",
+        "affichage d'une aide contextuelle via `helpComponent`",
+        "textarea redimensionnable (`rezizable`) dans un formulaire structuré"
+      ],
+      "dontUseFor": [
+        "saisie courte sur une seule ligne → utiliser Input",
+        "saisie de notes structurées avec contexte métier → utiliser Notes"
+      ],
+      "example": "<TextArea form={form} name=\"description\" label=\"Description\" placeholder=\"Décrivez le projet...\" rows={5} max={500} required />"
     },
     {
       "name": "TimePicker",
@@ -867,7 +1694,20 @@
         "minTime?: string",
         "maxTime?: string"
       ],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Sélecteur d'heure par créneaux (pas configurable) intégré react-hook-form ou en mode contrôlé standalone, avec plage min/max.",
+      "useWhen": [
+        "champ heure dans un formulaire RHF (réservation, planning) → utiliser avec `form` + `name`",
+        "sélection d'heure hors formulaire → utiliser avec `value` + `onChange`",
+        "restreindre les créneaux disponibles → utiliser `minTime` / `maxTime`",
+        "ajuster la granularité des créneaux → utiliser `step`"
+      ],
+      "dontUseFor": [
+        "sélection d'une date complète → utiliser DatePicker",
+        "sélection d'une plage de dates → utiliser DatePickerRange",
+        "sélection d'un créneau avec presets → utiliser DatePickerWithPresets"
+      ],
+      "example": "<TimePicker form={form} name=\"startTime\" label=\"Heure de début\" step={15} minTime=\"08:00\" maxTime=\"18:00\" />"
     },
     {
       "name": "TitleBold",
@@ -875,7 +1715,17 @@
       "importPath": "@vigee-designsystem/components/Forms/TitleBold",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Titre de section H2 gras en slate-400, utilisé pour structurer visuellement les blocs d'un formulaire.",
+      "useWhen": [
+        "séparation de sections dans un formulaire long → utiliser TitleBold",
+        "entête d'un groupe de champs liés → utiliser TitleBold"
+      ],
+      "dontUseFor": [
+        "titre principal de page → utiliser TypographyH1",
+        "titre avec animation → utiliser TitleGradual"
+      ],
+      "example": "<TitleBold title=\"Informations personnelles\" />"
     },
     {
       "name": "Toggles",
@@ -883,7 +1733,19 @@
       "importPath": "@vigee-designsystem/components/Forms/Toggles",
       "exportType": "named",
       "props": [],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Groupe de boutons toggle (sélection unique ou multiple) intégré react-hook-form, avec support icône, description, checkbox et grille.",
+      "useWhen": [
+        "choix exclusif entre options visuelles dans un formulaire (ex: type de salle, mode de facturation) → utiliser Toggles",
+        "sélection multiple d'options avec rendu carte dans un Form → utiliser Toggles avec `multi`",
+        "options avec icône + description à présenter sous forme de grille → utiliser Toggles avec `columns`"
+      ],
+      "dontUseFor": [
+        "sélection dans une longue liste textuelle → utiliser Select",
+        "filtrage de données hors formulaire → utiliser CheckboxFilter",
+        "cases à cocher simples sans visuel carte → utiliser Checkboxes"
+      ],
+      "example": "<Toggles form={form} name=\"type\" label=\"Type de salle\" options={[{ value: \"reunion\", label: \"Réunion\", icon: <IconReunion /> }, { value: \"bureau\", label: \"Bureau\" }]} />"
     },
     {
       "name": "useAlertContext",
@@ -891,7 +1753,7 @@
       "importPath": "@vigee-designsystem/components/Forms/AlertDialog",
       "exportType": "named",
       "props": [
-        "btnSubAlert?: string",
+        "btnSubAlert?: ReactNode",
         "onClick: () => void",
         "onCancel?: () => void",
         "colorBtn?: \"outline\" | \"destructive\"",
@@ -902,7 +1764,18 @@
         "cancelLabel?: string",
         "confirmLabel?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Modale de confirmation avec titre, description optionnelle et boutons Annuler/Confirmer, typiquement pour valider une action destructive.",
+      "useWhen": [
+        "suppression d'une ressource nécessitant une confirmation explicite → utiliser AlertDialog",
+        "action irréversible déclenchée par un bouton → utiliser AlertDialog",
+        "soumission critique avec état pending à gérer → utiliser AlertDialog"
+      ],
+      "dontUseFor": [
+        "suppression directe sans confirmation → utiliser DeleteAction",
+        "action avec validation de formulaire → utiliser ActionWithValidation"
+      ],
+      "example": "<AlertDialog btnQuestion=\"Supprimer ce projet ?\" btnSubAlert=\"Cette action est irréversible.\" onClick={handleDelete} onCancel={handleCancel} trigger={<Button icon=\"trash\" />} />"
     },
     {
       "name": "useDrawerContext",
@@ -921,7 +1794,19 @@
         "setOpenForced?: React.Dispatch<React.SetStateAction<boolean>>",
         "size?: \"sm\" | \"md\" | \"lg\""
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Panneau contextuel responsive : Dialog sur desktop (≥768px) et Drawer bas d'écran sur mobile, avec ScrollArea intégrée.",
+      "useWhen": [
+        "formulaire secondaire déclenché par un bouton dans une liste → encapsuler dans DrawerMobile",
+        "affichage de détails ou d'édition rapide sans quitter la page → utiliser DrawerMobile",
+        "contenu contextuel avec titre/description qui doit s'adapter mobile/desktop automatiquement → utiliser DrawerMobile"
+      ],
+      "dontUseFor": [
+        "navigation entre pages ou étapes multiples → utiliser Stepper",
+        "confirmation d'action destructive → utiliser ActionWithValidation",
+        "panneau latéral persistant → utiliser Drawer"
+      ],
+      "example": "<DrawerMobile title=\"Modifier l'adresse\" trigger={<Button icon=\"edit\" />} size=\"md\">{children}</DrawerMobile>"
     },
     {
       "name": "useDrawerContext",
@@ -940,7 +1825,19 @@
         "setOpenForced?: React.Dispatch<React.SetStateAction<boolean>>",
         "size?: \"sm\" | \"md\" | \"lg\""
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Drawer (mobile) / Dialog (desktop) responsive auto-switché, sans context externe requis, pour afficher du contenu ou des formulaires dans un panneau flottant.",
+      "useWhen": [
+        "afficher un formulaire secondaire dans un panneau sans setup de context",
+        "ouvrir un sous-formulaire depuis une ligne de tableau",
+        "afficher des détails supplémentaires au clic sur un élément",
+        "encapsuler un contenu long avec ScrollArea automatique sur mobile et desktop."
+      ],
+      "dontUseFor": [
+        "gestion d'état d'ouverture contrôlée depuis le parent → utiliser Drawer",
+        "contenu nécessitant un contexte partagé entre composants → utiliser useDrawerContext."
+      ],
+      "example": "<DrawerMobileWithoutContext title=\"Modifier\" trigger={<Button icon=\"edit\" />} size=\"md\">{children}</DrawerMobileWithoutContext>"
     },
     {
       "name": "ContentGuard",
@@ -956,7 +1853,19 @@
         "ErrorComponent?: ReactElement | ComponentType",
         "EmptyComponent?: ReactElement | ComponentType"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Garde conditionnel qui affiche loading / erreur / vide ou le contenu réel selon l'état d'un fetch.",
+      "useWhen": [
+        "affichage d'une liste ou table après un appel API → wrapper le contenu avec ContentGuard",
+        "données potentiellement vides → passer isEmpty pour afficher EmptyIllustration",
+        "erreur de fetch → passer isError pour afficher Error",
+        "skeleton personnalisé nécessaire → passer LoadingComponent"
+      ],
+      "dontUseFor": [
+        "protection par rôle ou permission → utiliser Unauthorized",
+        "affichage d'une alerte non bloquante → utiliser AlertInfo"
+      ],
+      "example": "<ContentGuard isLoading={isLoading} isError={isError} isEmpty={!data?.length}><DataTable data={data} /></ContentGuard>"
     },
     {
       "name": "PageHeader",
@@ -975,7 +1884,18 @@
         "classNameTitle?: string",
         "classNameSubtitle?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Bandeau de titre de page avec sous-titre optionnel, icône et zone d'actions à droite.",
+      "useWhen": [
+        "en-tête d'une page principale avec titre + boutons d'action → utiliser PageHeader",
+        "page avec contexte visuel → ajouter `icon` et `subtitle`",
+        "section sans fond blanc (tableau de bord) → utiliser `variant=\"ghost\"`"
+      ],
+      "dontUseFor": [
+        "titre de section interne dans une page → utiliser SectionTitle",
+        "titre de carte ou panneau → utiliser RoundedContainer"
+      ],
+      "example": "<PageHeader title=\"Projets\" subtitle=\"Liste de vos projets actifs\" icon={<FolderIcon />}><Button icon=\"add\" onClick={handleAdd} /></PageHeader>"
     },
     {
       "name": "EmptyDocuments",
@@ -983,7 +1903,18 @@
       "importPath": "@vigee-designsystem/components/Illustration/EmptyDocuments",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Illustration SVG d'état vide pour les listes ou pages sans documents.",
+      "useWhen": [
+        "page de liste de documents sans résultat → afficher EmptyDocuments",
+        "état initial d'un espace documentaire vide → guider l'utilisateur à créer son premier document"
+      ],
+      "dontUseFor": [
+        "absence d'utilisateurs → utiliser EmptyUsers",
+        "absence de projets → utiliser EmptyProjects",
+        "illustration générique non liée aux documents → utiliser EmptyIllustration"
+      ],
+      "example": "<EmptyDocuments color=\"text-primary\" className=\"mx-auto\" />"
     },
     {
       "name": "EmptyIllustration",
@@ -1004,7 +1935,18 @@
         "image?: ReactNode",
         "type?: \"street\" | \"projects\" | \"documents\" | \"users\" | \"default\""
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Placeholder visuel état vide avec illustration thématique, titre, sous-titre et bouton d'action optionnel.",
+      "useWhen": [
+        "liste sans données à afficher (projets, documents, utilisateurs) → afficher un état vide engageant",
+        "page sans résultats après filtrage → guider l'utilisateur vers une action",
+        "onboarding d'une section vierge → orienter vers la création du premier élément"
+      ],
+      "dontUseFor": [
+        "erreurs serveur ou accès refusé → utiliser Error ou Unauthorized",
+        "chargement en cours → utiliser Loader ou DashboardSkeleton"
+      ],
+      "example": "<EmptyIllustration type=\"documents\" text=\"Aucun document\" subtitle=\"Ajoutez votre premier document pour commencer.\" buttonLink=\"/documents/new\" buttonText=\"Créer un document\" />"
     },
     {
       "name": "EmptyProjects",
@@ -1012,7 +1954,18 @@
       "importPath": "@vigee-designsystem/components/Illustration/EmptyProjects",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Illustration SVG d'état vide pour une liste ou page de projets, avec couleur et taille personnalisables.",
+      "useWhen": [
+        "page de liste de projets sans données → afficher EmptyProjects",
+        "dashboard vide en attente de création de projet → afficher EmptyProjects"
+      ],
+      "dontUseFor": [
+        "absence d'utilisateurs → utiliser EmptyUsers",
+        "absence de documents → utiliser EmptyDocuments",
+        "état vide générique non lié aux projets → utiliser EmptyIllustration"
+      ],
+      "example": "<EmptyProjects color=\"text-primary\" className=\"mx-auto\" />"
     },
     {
       "name": "EmptyStreet",
@@ -1020,7 +1973,18 @@
       "importPath": "@vigee-designsystem/components/Illustration/EmptyStreet",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Illustration SVG d'une rue vide, utilisée comme visuel décoratif pour les états vides liés à des lieux ou adresses.",
+      "useWhen": [
+        "page de résultats vide liée à une adresse/localisation → utiliser EmptyStreet",
+        "écran d'absence de données géographiques ou de quartiers → utiliser EmptyStreet"
+      ],
+      "dontUseFor": [
+        "états vides génériques → utiliser EmptyIllustration",
+        "absence de documents → utiliser EmptyDocuments",
+        "absence d'utilisateurs → utiliser EmptyUsers"
+      ],
+      "example": "<EmptyStreet className=\"mx-auto\" />"
     },
     {
       "name": "EmptyUsers",
@@ -1028,7 +1992,19 @@
       "importPath": "@vigee-designsystem/components/Illustration/EmptyUsers",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Illustration SVG \"liste d'utilisateurs vide\" pour les états zéro-donnée dans les vues de gestion d'utilisateurs.",
+      "useWhen": [
+        "page utilisateurs sans aucun membre → afficher EmptyUsers",
+        "onboarding sans équipe configurée → afficher EmptyUsers",
+        "état vide après recherche/filtre sans résultat sur des utilisateurs → afficher EmptyUsers"
+      ],
+      "dontUseFor": [
+        "absence de documents → utiliser EmptyDocuments",
+        "absence de projets → utiliser EmptyProjects",
+        "illustration générique non liée aux utilisateurs → utiliser EmptyIllustration"
+      ],
+      "example": "<EmptyUsers color=\"text-indigo-200\" className=\"mx-auto\" />"
     },
     {
       "name": "Illustration",
@@ -1044,7 +2020,18 @@
         "width?: number",
         "height?: number"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Panneau illustratif pleine hauteur sur fond primaire, avec image animée (framer-motion), titre bicolore et sous-titre — typiquement la colonne gauche d'une page de login ou d'onboarding.",
+      "useWhen": [
+        "colonne décorative d'une page d'authentification splitée (login/register) → utiliser Illustration",
+        "page d'onboarding avec visuel de marque → utiliser Illustration",
+        "écran de bienvenue nécessitant un titre accrocheur avec image animée → utiliser Illustration"
+      ],
+      "dontUseFor": [
+        "état vide d'une liste ou section → utiliser EmptyIllustration, EmptyDocuments, EmptyUsers",
+        "page de splash/chargement → utiliser SplashScreen"
+      ],
+      "example": "<Illustration title=\"Bienvenue sur\" title2=\"Vigee\" subtitle=\"La plateforme de gestion intelligente.\" img={heroImage} />"
     },
     {
       "name": "AlertInfo",
@@ -1052,7 +2039,19 @@
       "importPath": "@vigee-designsystem/components/Informations/AlertInfo",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Bandeau d'alerte contextuel avec icône, titre, description optionnelle et lien externe, décliné en 7 niveaux sémantiques.",
+      "useWhen": [
+        "afficher un message d'erreur de formulaire ou d'API → utiliser type=\"destructive\"",
+        "signaler une action irréversible ou un risque → utiliser type=\"warning\"",
+        "confirmer une action réussie → utiliser type=\"success\"",
+        "fournir une info contextuelle ou une astuce → utiliser type=\"informative\""
+      ],
+      "dontUseFor": [
+        "notifications éphémères qui disparaissent → utiliser Toaster",
+        "messages nécessitant une action de confirmation utilisateur → utiliser AlertDialog"
+      ],
+      "example": "<AlertInfo type=\"warning\" title=\"Données non sauvegardées\" description=\"Vos modifications seront perdues si vous quittez la page.\" />"
     },
     {
       "name": "KPI",
@@ -1062,7 +2061,17 @@
       "props": [
         "stats: StatItem[]"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Grille de KPIs cliquables (max 3 colonnes) affichant un libellé, une valeur principale et une stat secondaire.",
+      "useWhen": [
+        "dashboard avec 2–3 métriques clés navigables → utiliser KPI",
+        "résumé chiffré en haut de page avec liens vers détails → utiliser KPI"
+      ],
+      "dontUseFor": [
+        "métrique unique isolée → utiliser NumberKPI",
+        "valeurs sans navigation ni contexte dashboard → utiliser NumberTicker"
+      ],
+      "example": "<KPI stats={[{ name: \"Projets\", children: \"42\", stat: \"+5\", href: \"/projets\" }, { name: \"Utilisateurs\", children: \"128\", href: \"/users\" }]} />"
     },
     {
       "name": "NumberKPI",
@@ -1075,7 +2084,19 @@
         "small?: boolean",
         "className?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Grille de KPIs numériques avec variation vs période précédente, ratio coloré et support devise/unité.",
+      "useWhen": [
+        "dashboard affichant plusieurs métriques chiffrées côte à côte → utiliser NumberKPI",
+        "KPI avec comparaison période N-1 (évolution en %) → utiliser NumberKPI",
+        "indicateurs avec objectif ou écart-type à afficher → utiliser NumberKPI"
+      ],
+      "dontUseFor": [
+        "tendances temporelles → utiliser AreaChart ou LineChart",
+        "KPI isolé avec animation → utiliser NumberTicker",
+        "classement ordonné → utiliser Ranking"
+      ],
+      "example": "<NumberKPI stats={[{ name: \"Chiffre d'affaires\", stat: 42000, previousStat: 38000, unit: \"€\" }, { name: \"Clients\", stat: 120, previousStat: 110 }]} columns={2} />"
     },
     {
       "name": "NumberTicker",
@@ -1083,7 +2104,18 @@
       "importPath": "@vigee-designsystem/components/KPI/NumberTicket",
       "exportType": "default",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Affiche un nombre animé qui défile jusqu'à sa valeur cible dès que le composant entre dans le viewport.",
+      "useWhen": [
+        "afficher un KPI chiffré avec effet d'animation au scroll → utiliser NumberTicker",
+        "mettre en valeur un compteur (CA, utilisateurs, score) sur une page de dashboard ou landing",
+        "animer un chiffre en sens inverse (countdown) → passer direction=\"down\""
+      ],
+      "dontUseFor": [
+        "valeur non numérique ou texte formaté complexe → utiliser KPI",
+        "affichage statique sans animation → utiliser NumberKPI"
+      ],
+      "example": "<NumberTicker value={42000} direction=\"up\" delay={0.3} className=\"text-4xl font-bold\" />"
     },
     {
       "name": "Ranking",
@@ -1101,7 +2133,18 @@
         "iconTitle?: ReactNode",
         "classNameContent?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Liste classée d'entités (personnes, projets…) avec avatar, nom, et un ou deux montants formatés en devise ou k€.",
+      "useWhen": [
+        "afficher un top N de commerciaux/clients avec leur CA",
+        "comparer deux métriques (ex: CA réalisé vs objectif) par entité",
+        "dashboard KPI avec classement scrollable"
+      ],
+      "dontUseFor": [
+        "visualisation de tendances sur le temps → utiliser AreaChart ou LineChart",
+        "comparaison de volumes entre catégories → utiliser BarChart"
+      ],
+      "example": "<Ranking title=\"Top clients\" data={[{ name: \"Dupont SA\", amount: 45000, currency: \"€\" }]} kiloEuros />"
     },
     {
       "name": "Loader",
@@ -1113,7 +2156,18 @@
         "logo?: StaticImageData",
         "borderColor?: String"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Indicateur de chargement centré avec logo Vigee animé (spin + pulse) et texte optionnel.",
+      "useWhen": [
+        "chargement d'une page ou section entière → afficher Loader",
+        "besoin d'un logo custom pendant le chargement → passer `logo`",
+        "couleur de bordure à adapter à un thème → passer `borderColor`"
+      ],
+      "dontUseFor": [
+        "spinner léger inline → utiliser Spinner",
+        "chargement d'une page complète avec layout → utiliser LoaderPage"
+      ],
+      "example": "<Loader text=\"Chargement en cours...\" />"
     },
     {
       "name": "LoaderPage",
@@ -1125,7 +2179,19 @@
         "logo?: StaticImageData",
         "borderColor?: String"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Loader pleine page centré avec spinner animé, logo Vigee pulsant et texte optionnel — bloque toute l'interface pendant un chargement global.",
+      "useWhen": [
+        "chargement initial d'une page entière (SSR/CSR) → utiliser LoaderPage",
+        "attente d'une authentification ou redirection → utiliser LoaderPage",
+        "splash screen de chargement avec branding personnalisé → utiliser LoaderPage"
+      ],
+      "dontUseFor": [
+        "chargement d'un bloc partiel → utiliser Loader",
+        "indicateur de rechargement discret → utiliser RefetchIndicator",
+        "skeleton de dashboard → utiliser DashboardSkeleton"
+      ],
+      "example": "<LoaderPage text=\"Chargement en cours...\" />"
     },
     {
       "name": "Spinner",
@@ -1133,7 +2199,17 @@
       "importPath": "@vigee-designsystem/components/Loaders/Spinner",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Indicateur de chargement circulaire animé, à intégrer inline dans un bouton, une carte ou une zone de contenu.",
+      "useWhen": [
+        "état de chargement local dans un bouton ou une carte → utiliser Spinner",
+        "remplacement d'un contenu en attente de données → utiliser Spinner"
+      ],
+      "dontUseFor": [
+        "chargement de page entière → utiliser LoaderPage",
+        "chargement global de l'application → utiliser Loader"
+      ],
+      "example": "<Spinner className=\"text-white\" />"
     },
     {
       "name": "Copyright",
@@ -1143,7 +2219,17 @@
       "props": [
         "clientName?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Affiche le pied de page de copyright avec l'année courante, le nom du client et un lien vers Vigee.",
+      "useWhen": [
+        "page de login → placer en bas du formulaire d'authentification",
+        "page publique nécessitant une mention légale → afficher le copyright client"
+      ],
+      "dontUseFor": [
+        "contenu juridique détaillé → utiliser une page dédiée",
+        "affichage dans l'application principale → réserver aux écrans Login"
+      ],
+      "example": "<Copyright clientName=\"MonEntreprise\" />"
     },
     {
       "name": "Login",
@@ -1159,7 +2245,18 @@
         "imageWidth?: number",
         "imageHeight?: number"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Page de connexion complète avec email/mot de passe, validation Zod et authentification via NextAuth credentials.",
+      "useWhen": [
+        "page d'authentification d'une app Vigee → utiliser Login",
+        "intégration NextAuth avec provider credentials → utiliser Login",
+        "besoin d'un écran login brandé avec logo client → utiliser Login"
+      ],
+      "dontUseFor": [
+        "formulaire de connexion embarqué dans une page existante → utiliser Form + Input",
+        "réinitialisation de mot de passe → page dédiée avec Input"
+      ],
+      "example": "<Login logo={clientLogo} clientName=\"Acme\" callbackUrl=\"/dashboard\" />"
     },
     {
       "name": "Login",
@@ -1179,7 +2276,18 @@
         "apple?: boolean",
         "credentials?: boolean"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Page de connexion complète avec magic link (Resend), credentials et OAuth (GitHub, Google, Apple) via NextAuth.",
+      "useWhen": [
+        "page de login avec authentification par lien magique email → utiliser LoginMagic",
+        "login avec email + mot de passe (credentials) → utiliser LoginMagic avec `credentials={true}`",
+        "connexion OAuth GitHub/Google/Apple → utiliser LoginMagic avec les props `github`, `google`, `apple` à `true`"
+      ],
+      "dontUseFor": [
+        "formulaire de login embarqué dans une page existante → utiliser Login",
+        "affichage d'un simple champ email isolé → utiliser Forms/Input"
+      ],
+      "example": "<LoginMagic logo={myLogo} clientName=\"MonApp\" callbackUrl=\"/dashboard\" google github />"
     },
     {
       "name": "VariableLogo",
@@ -1193,7 +2301,18 @@
         "className?: string",
         "href?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Logo Vigee cliquable (gris ou blanc, taille normale ou grande) avec titre optionnel, wrappé dans un Next.js Link.",
+      "useWhen": [
+        "header/navbar de l'application → afficher le logo de marque Vigee",
+        "splash screen ou page de login → version blanche sur fond sombre",
+        "sidebar → logo compact sans titre"
+      ],
+      "dontUseFor": [
+        "illustration décorative sans navigation → utiliser une balise `<Image>` directement",
+        "page d'erreur avec navigation complexe → utiliser PageHeader"
+      ],
+      "example": "<VariableLogo title=\"Vigee\" href=\"/dashboard\" big white />"
     },
     {
       "name": "AnimatedListItem",
@@ -1205,7 +2324,17 @@
         "children: ReactNode",
         "delay?: number"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Affiche une liste d'éléments qui apparaissent un par un avec animation spring, en boucle à intervalle configurable.",
+      "useWhen": [
+        "feed de notifications animé sur un dashboard ou landing page → utiliser AnimatedList",
+        "mise en avant séquentielle d'items marketing ou d'alertes → utiliser AnimatedList"
+      ],
+      "dontUseFor": [
+        "liste statique sans animation → utiliser ui/Table ou Container",
+        "notifications interactives persistantes → utiliser Alerts/AlertInfo"
+      ],
+      "example": "<AnimatedList delay={800}><NotifCard /><NotifCard /><NotifCard /></AnimatedList>"
     },
     {
       "name": "BorderBeam",
@@ -1222,7 +2351,19 @@
         "colorTo?: string",
         "delay?: number"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Effet de bordure animée avec un faisceau lumineux qui tourne autour d'un conteneur pour attirer l'attention.",
+      "useWhen": [
+        "carte ou section à mettre en avant visuellement → envelopper avec BorderBeam",
+        "bouton ou bloc \"premium\" nécessitant un effet visuel dynamique → ajouter BorderBeam en enfant absolu",
+        "SplashScreen ou landing page → accentuer un élément clé avec BorderBeam."
+      ],
+      "dontUseFor": [
+        "tableaux de données ou listes → utiliser DataTable",
+        "navigation ou menus → utiliser Sidebar",
+        "indicateurs de progression → utiliser ProgressBar."
+      ],
+      "example": "<BorderBeam size={150} duration={10} colorFrom=\"#ffaa40\" colorTo=\"#9c40ff\" />"
     },
     {
       "name": "BoxReveal",
@@ -1235,7 +2376,18 @@
         "boxColor?: string",
         "duration?: number"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Anime l'apparition d'un élément avec un bloc coloré qui glisse pour révéler le contenu au scroll.",
+      "useWhen": [
+        "titres ou textes hero à révéler au scroll → BoxReveal",
+        "mise en valeur d'un KPI ou stat clé sur une landing",
+        "animation d'onboarding ou splash screen pour attirer l'attention"
+      ],
+      "dontUseFor": [
+        "listes entières à animer → utiliser AnimatedListItem",
+        "animations de page globales → utiliser FadeIn"
+      ],
+      "example": "<BoxReveal boxColor=\"#5046e6\" duration={0.5}><h1>Bienvenue sur Vigee</h1></BoxReveal>"
     },
     {
       "name": "Dock",
@@ -1254,7 +2406,18 @@
         "Dock",
         "DockIcon",
         "dockVariants"
-      ]
+      ],
+      "description": "Barre de navigation style macOS avec effet de grossissement magnétique au survol, basée sur Framer Motion.",
+      "useWhen": [
+        "navigation principale flottante avec icônes animées → utiliser Dock + DockIcon",
+        "barre d'actions rapides style desktop dans une interface riche → utiliser Dock",
+        "icône individuelle dans la barre avec effet zoom → utiliser DockIcon"
+      ],
+      "dontUseFor": [
+        "navigation textuelle classique → utiliser Sidebar",
+        "menu déroulant d'actions → utiliser DropdownMenu"
+      ],
+      "example": "<Dock magnification={70} distance={120} direction=\"bottom\"><DockIcon><HomeIcon /></DockIcon></Dock>"
     },
     {
       "name": "DotPattern",
@@ -1271,7 +2434,17 @@
         "cr?: any",
         "className?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Fond décoratif SVG en grille de points, positionné en absolute pour couvrir le conteneur parent.",
+      "useWhen": [
+        "arrière-plan visuel d'une section hero ou splash screen → utiliser DotPattern",
+        "fond texturé pour une card ou un bloc mise en avant → utiliser DotPattern"
+      ],
+      "dontUseFor": [
+        "contenu interactif ou porteur de sens → utiliser un vrai composant",
+        "fond animé → utiliser GridPattern ou RetroGrid"
+      ],
+      "example": "<DotPattern className=\"opacity-50\" width={20} height={20} cr={1.5} />"
     },
     {
       "name": "HeroVideoDialog",
@@ -1285,7 +2458,18 @@
         "thumbnailAlt?: string",
         "className?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Affiche une vignette cliquable qui ouvre une vidéo en plein écran dans une modale animée avec overlay.",
+      "useWhen": [
+        "page marketing/landing → présenter une vidéo de démo produit",
+        "onboarding utilisateur → afficher un tutoriel vidéo",
+        "section hero → illustrer une fonctionnalité avec une vidéo YouTube/Vimeo."
+      ],
+      "dontUseFor": [
+        "lecture vidéo inline sans overlay → utiliser une balise vidéo native",
+        "contenu interactif non-vidéo → utiliser Dialog."
+      ],
+      "example": "<HeroVideoDialog videoSrc=\"https://www.youtube.com/embed/abc123\" thumbnailSrc=\"/thumbnail.png\" thumbnailAlt=\"Démo Vigee\" animationStyle=\"from-center\" />"
     },
     {
       "name": "HyperText",
@@ -1299,7 +2483,19 @@
         "className?: string",
         "animateOnLoad?: boolean"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Affiche un texte avec un effet de déchiffrement lettre par lettre, rejoué au survol de la souris.",
+      "useWhen": [
+        "titre de page ou hero section avec animation d'entrée → utiliser HyperText",
+        "texte décoratif à révéler au survol → utiliser HyperText",
+        "mise en valeur d'un mot-clé dans un SplashScreen ou landing → utiliser HyperText"
+      ],
+      "dontUseFor": [
+        "contenu textuel long ou paragraphe → utiliser TypographyH1",
+        "texte animé mot par mot → utiliser WordPullUp",
+        "révélation progressive d'un bloc entier → utiliser BoxReveal"
+      ],
+      "example": "<HyperText text=\"VIGEE\" duration={600} className=\"text-4xl text-primary\" />"
     },
     {
       "name": "Marquee",
@@ -1314,7 +2510,18 @@
         "vertical?: boolean",
         "repeat?: number"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Défilement infini en boucle d'éléments enfants, horizontalement ou verticalement, avec pause optionnelle au survol.",
+      "useWhen": [
+        "afficher un bandeau de logos partenaires en défilement continu",
+        "présenter des témoignages/cards en boucle sur une landing page",
+        "créer un ticker de contenu animé horizontal ou vertical"
+      ],
+      "dontUseFor": [
+        "navigation entre contenus → utiliser TabsResponsive",
+        "listes statiques sans animation → utiliser Container"
+      ],
+      "example": "<Marquee pauseOnHover repeat={3}><Card /><Card /><Card /></Marquee>"
     },
     {
       "name": "NeonGradientCard",
@@ -1325,7 +2532,19 @@
         "firstColor: string",
         "secondColor: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Carte avec bordure gradient néon animée (dégradé tournant) pour mettre en valeur un contenu de manière visuelle forte.",
+      "useWhen": [
+        "mise en avant d'un plan tarifaire premium → entourer la carte avec NeonGradientCard",
+        "élément hero ou CTA accrocheur sur une landing page → wrapper le bloc avec NeonGradientCard",
+        "distinction visuelle d'un item sélectionné ou recommandé → remplacer la bordure classique par NeonGradientCard"
+      ],
+      "dontUseFor": [
+        "listes d'items standards → utiliser ui/Card",
+        "contenu dense ou tableau de données → utiliser DataTable",
+        "usage discret ou institutionnel où l'effet néon serait trop agressif → utiliser RoundedContainer"
+      ],
+      "example": "<NeonGradientCard borderSize={2} borderRadius={16} neonColors={{ firstColor: \"#ff00aa\", secondColor: \"#00FFF1\" }}>Contenu premium</NeonGradientCard>"
     },
     {
       "name": "RetroGrid",
@@ -1333,7 +2552,17 @@
       "importPath": "@vigee-designsystem/components/magicui/retro-grid",
       "exportType": "default",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Grille perspective animée style rétro-futuriste, posée en arrière-plan décoratif absolu avec effet de profondeur.",
+      "useWhen": [
+        "section hero ou splash screen nécessitant un fond animé → utiliser RetroGrid",
+        "page de login/landing pour un effet visuel immersif → utiliser RetroGrid"
+      ],
+      "dontUseFor": [
+        "fond de dashboard fonctionnel → utiliser DashboardSkeleton",
+        "arrière-plan de modale ou dialog → utiliser SplashScreen"
+      ],
+      "example": "<RetroGrid angle={65} className=\"opacity-20\" />"
     },
     {
       "name": "WordPullUp",
@@ -1347,7 +2576,19 @@
         "framerProps?: Variants",
         "className?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Titre animé h1 où chaque mot apparaît en remontant progressivement avec un effet stagger framer-motion.",
+      "useWhen": [
+        "splash screen ou hero section nécessitant un titre d'accroche animé",
+        "page d'accueil avec headline impactante",
+        "SplashScreen Vigee pour animer le titre principal."
+      ],
+      "dontUseFor": [
+        "body text ou paragraphes → utiliser TypographyH1",
+        "titres statiques sans animation → utiliser TitleGradual",
+        "sous-titres de section → utiliser TitleBold."
+      ],
+      "example": "<WordPullUp words=\"Bienvenue sur Vigee\" className=\"text-primary\" />"
     },
     {
       "name": "DropdownMenu",
@@ -1359,7 +2600,18 @@
         "items: DropDownMenuItemType[],",
         "menuClassName?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Menu déroulant contextuel avec support d'items cliquables, cases à cocher, séparateurs et labels de section.",
+      "useWhen": [
+        "actions contextuelles sur une entité (éditer, supprimer, archiver) → passer un Button icon comme trigger",
+        "options de configuration rapide avec états cochés → utiliser items `item-checkbox`",
+        "regrouper des actions secondaires pour ne pas surcharger l'UI → remplacer plusieurs boutons isolés"
+      ],
+      "dontUseFor": [
+        "navigation principale entre pages → utiliser Sidebar",
+        "sélection d'une valeur dans un formulaire → utiliser Select ou ComboBox"
+      ],
+      "example": "<DropdownMenu trigger={<Button icon=\"more-horizontal\" />} items={[{ type: 'item', content: 'Modifier', onClick: handleEdit }, { type: 'separator' }, { type: 'item', content: 'Supprimer', onClick: handleDelete, className: 'text-red-500' }]} />"
     },
     {
       "name": "MobileMenu",
@@ -1370,7 +2622,19 @@
         "nav?: MenuItem[]",
         "buttonComponent?: ReactNode"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Barre de navigation mobile fixée en bas d'écran (max 4 items + 1 bouton central), avec highlight automatique selon l'URL active.",
+      "useWhen": [
+        "navigation principale sur mobile avec 2 à 4 sections → utiliser MobileMenu",
+        "ajout d'un bouton d'action central (ex: créer) entre les items de nav → passer `buttonComponent`",
+        "remplacement du Sidebar sur petits écrans → utiliser MobileMenu en complément de AppSidebar."
+      ],
+      "dontUseFor": [
+        "navigation desktop → utiliser AppSidebar",
+        "plus de 4 items de navigation → utiliser Sidebar",
+        "menus contextuels ou actions secondaires → utiliser DropdownMenu."
+      ],
+      "example": "<MobileMenu nav={[{ name: \"Accueil\", href: \"/\", slug: \"accueil\", icon: <HomeIcon />, iconFill: <HomeIconFill /> }]} buttonComponent={<ButtonAdd onClick={handleCreate} />} />"
     },
     {
       "name": "SectionHeading",
@@ -1385,7 +2649,19 @@
         "nav?: MenuItem[]",
         "route?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "En-tête de section avec titre, sous-titre, navigation par onglets responsive (tabs desktop / barre fixe mobile) et bouton d'action optionnel.",
+      "useWhen": [
+        "page avec sous-navigation entre plusieurs vues liées → afficher SectionHeading avec `nav`",
+        "page nécessitant un titre + bouton d'action positionné à droite → passer `buttonTitle` + `buttonLink`",
+        "layout avec barre de navigation fixe en bas sur mobile → fournir `nav` avec `slug` et `icon`"
+      ],
+      "dontUseFor": [
+        "navigation principale de l'application → utiliser Sidebar",
+        "onglets sans routing URL → utiliser TabsResponsive",
+        "navigation mobile autonome → utiliser MobileMenu"
+      ],
+      "example": "<SectionHeading title=\"Projets\" subtitle=\"Gérez vos projets\" nav={[{ name: \"Liste\", slug: \"liste\", href: \"/projets/liste\", icon: \"FolderIcon\" }]} route=\"/projets\" buttonTitle=\"Nouveau\" buttonLink=\"/projets/nouveau\" />"
     },
     {
       "name": "Sidebar",
@@ -1409,7 +2685,20 @@
         "notifications?: number | undefined | null",
         "persist?: boolean"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Barre de navigation latérale rétractable avec logo, liens actifs, badges de notifications et bouton de déconnexion.",
+      "useWhen": [
+        "layout principal d'une app Vigee avec navigation entre sections → utiliser Sidebar",
+        "sidebar avec sélecteur de contexte (ex: changer d'organisation) → utiliser Sidebar avec `withSelect`",
+        "navigation à masquer sur mobile → utiliser Sidebar avec `hiddenMobile`",
+        "sidebar intégrant une commande de recherche rapide → utiliser Sidebar avec `commandComponent`"
+      ],
+      "dontUseFor": [
+        "navigation mobile légère → utiliser MobileMenu",
+        "navigation par onglets horizontaux → utiliser TabsResponsive",
+        "menu contextuel sur un élément → utiliser DropdownMenu"
+      ],
+      "example": "<Sidebar navigation={navItems} open={true} signout={() => signOut()} logo={logo} logoSmall={logoSmall}>{children}</Sidebar>"
     },
     {
       "name": "Notes",
@@ -1419,7 +2708,17 @@
       "props": [
         "initialContent: Note"
       ],
-      "formIntegration": true
+      "formIntegration": true,
+      "description": "Zone de notes tabulée en 3 catégories (Urgent / Important / Autres) avec sauvegarde locale au blur.",
+      "useWhen": [
+        "fiche entité (contact, projet, dossier) nécessitant des notes priorisées → utiliser Notes",
+        "sidebar de détail avec mémos rapides à catégoriser → utiliser Notes"
+      ],
+      "dontUseFor": [
+        "saisie de texte simple sans catégorie → utiliser TextArea",
+        "commentaires collaboratifs ou historisés → utiliser un système dédié"
+      ],
+      "example": "<Notes initialContent={{ urgent: \"\", important: \"\", other: \"\" }} />"
     },
     {
       "name": "ProgressBar",
@@ -1430,7 +2729,18 @@
         "progress: number",
         "text?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Barre de progression horizontale centrée avec pourcentage et texte optionnel sous la barre.",
+      "useWhen": [
+        "upload de fichier en cours → afficher l'avancement",
+        "traitement serveur asynchrone → indiquer la progression",
+        "onboarding multi-étapes → visualiser le taux de complétion"
+      ],
+      "dontUseFor": [
+        "progression par étapes nommées → utiliser Stepper",
+        "indicateur circulaire → utiliser ProgressCircle"
+      ],
+      "example": "<ProgressBar progress={72} text=\"72% complété\" />"
     },
     {
       "name": "ProgressCircle",
@@ -1447,7 +2757,19 @@
         "text?: string",
         "textClassName?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Jauge circulaire SVG animée affichant un pourcentage calculé entre min et max, avec couleurs configurables.",
+      "useWhen": [
+        "afficher la progression d'un chargement ou d'un calcul en cours → ProgressCircle avec `text` animé en pulse",
+        "visualiser un taux d'avancement (ex: complétion de profil, score) → ProgressCircle dans un KPI ou une Card",
+        "remplacer une barre de progression quand l'espace est carré/centré → ProgressCircle avec `className` pour ajuster la taille."
+      ],
+      "dontUseFor": [
+        "progression linéaire dans un formulaire multi-étapes → utiliser ProgressBar",
+        "afficher plusieurs métriques comparatives → utiliser RadialChart",
+        "suivi d'étapes ordonnées → utiliser Stepper."
+      ],
+      "example": "<ProgressCircle min={0} max={200} value={120} gaugePrimaryColor=\"#6366f1\" text=\"Traitement en cours...\" />"
     },
     {
       "name": "RefetchIndicator",
@@ -1459,7 +2781,19 @@
         "className?: string",
         "size?: 'sm' | 'md'"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Indicateur visuel animé (spinner → check → icône repeat) positionné en absolu pour signaler un refetch de données en cours.",
+      "useWhen": [
+        "carte ou widget avec polling/refetch react-query → placer en enfant du conteneur relatif",
+        "tableau ou KPI rechargé en arrière-plan → indiquer l'activité sans bloquer l'UI",
+        "zone avec `isFetching` de react-query/SWR → feedback non-intrusif"
+      ],
+      "dontUseFor": [
+        "chargement initial d'une page → utiliser LoaderPage",
+        "skeleton au premier rendu → utiliser DashboardSkeleton",
+        "spinner plein écran → utiliser Spinner"
+      ],
+      "example": "<RefetchIndicator isRefetching={isFetching} size=\"sm\" />"
     },
     {
       "name": "Search",
@@ -1467,7 +2801,19 @@
       "importPath": "@vigee-designsystem/components/Search/Search",
       "exportType": "default",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Champ de recherche textuelle avec debounce intégré, icône loupe et label optionnel.",
+      "useWhen": [
+        "filtrer une liste ou tableau en temps réel → utiliser Search",
+        "recherche avec délai personnalisé pour limiter les appels API → utiliser Search avec debounceTime",
+        "champ de recherche standalone hors formulaire react-hook-form → utiliser Search"
+      ],
+      "dontUseFor": [
+        "recherche avec suggestions/autocomplétion → utiliser ComboBox",
+        "recherche avancée multi-critères → utiliser Filter",
+        "champ texte dans un formulaire validé → utiliser Forms/Input"
+      ],
+      "example": "<Search onChange={(value) => setQuery(value)} placeholder=\"Rechercher un projet...\" />"
     },
     {
       "name": "MultiSelect",
@@ -1480,7 +2826,19 @@
         "value: string",
         "icon?: React.ComponentType<{ className?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Sélecteur multi-valeurs avec popover, recherche intégrée, badges de sélection et option \"tout sélectionner\".",
+      "useWhen": [
+        "filtres multi-critères (ex: sélection de plusieurs rôles, tags, statuts) → utiliser MultiSelect",
+        "champ de formulaire nécessitant plusieurs valeurs parmi une liste fixe → utiliser MultiSelect",
+        "affichage condensé des sélections avec compteur quand maxCount dépassé → utiliser MultiSelect"
+      ],
+      "dontUseFor": [
+        "sélection d'une seule valeur → utiliser Select",
+        "liste avec recherche asynchrone ou gros dataset → utiliser ComboBox",
+        "filtres URL-based dans une page de listing → utiliser SelectMultiple"
+      ],
+      "example": "<MultiSelect options={[{ label: \"Admin\", value: \"admin\" }, { label: \"User\", value: \"user\" }]} onValueChange={(vals) => setRoles(vals)} label=\"Rôles\" placeholder=\"Choisir des rôles\" />"
     },
     {
       "name": "Select",
@@ -1499,7 +2857,20 @@
         "clearable?: boolean",
         "classNameContent?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Select déroulant contrôlé/non-contrôlé avec support groupes, icônes par option et bouton clear intégré.",
+      "useWhen": [
+        "choix unique parmi une liste courte à moyenne (< ~50 options) → utiliser Select",
+        "options organisées par catégories via `group` → utiliser Select",
+        "valeur effaçable requise → utiliser Select avec `clearable={true}`",
+        "select standalone hors react-hook-form → utiliser Select"
+      ],
+      "dontUseFor": [
+        "sélection multiple → utiliser MultiSelect",
+        "recherche/filtrage texte dans les options → utiliser ComboBox",
+        "select dans un formulaire react-hook-form → utiliser Forms/Select"
+      ],
+      "example": "<Select options={[{ value: \"fr\", label: \"France\" }, { value: \"de\", label: \"Allemagne\" }]} onChange={(v) => console.log(v)} label=\"Pays\" clearable />"
     },
     {
       "name": "useDebounce",
@@ -1531,7 +2902,19 @@
         "inputProps?: Omit<",
         "hideClearAllButton?: boolean"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Sélecteur multi-valeurs avec badges, recherche synchrone/async, groupement et création d'options à la volée.",
+      "useWhen": [
+        "sélection de plusieurs tags/catégories dans un formulaire → utiliser MultipleSelector",
+        "recherche async avec debounce pour charger des options distantes → utiliser MultipleSelector",
+        "options groupées par clé avec limite de sélection → utiliser MultipleSelector"
+      ],
+      "dontUseFor": [
+        "sélection d'une seule valeur → utiliser Select",
+        "recherche et sélection unique avec suggestions → utiliser ComboBox",
+        "filtrage multi-valeurs sur URL → utiliser SelectMultiple"
+      ],
+      "example": "<MultipleSelector options={options} value={selected} onChange={setSelected} placeholder=\"Choisir des tags...\" />"
     },
     {
       "name": "Sheet",
@@ -1545,7 +2928,19 @@
         "children?: ReactNode",
         "icon?: ReactNode"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Panneau latéral droit déclenché par un bouton fixe en bas à droite de l'écran, avec titre, description et contenu libre.",
+      "useWhen": [
+        "action contextuelle flottante qui ouvre un panneau de détail/édition → utiliser Sheet",
+        "afficher un formulaire secondaire sans quitter la page → utiliser Sheet",
+        "exposer des filtres ou options avancées via un bouton fixe → utiliser Sheet"
+      ],
+      "dontUseFor": [
+        "contenu nécessitant une confirmation explicite → utiliser SheetDialog",
+        "flux multi-étapes → utiliser Stepper",
+        "actions rapides sans panneau → utiliser DropdownMenu"
+      ],
+      "example": "<Sheet title=\"Détails\" description=\"Informations complémentaires\" triggerText=\"Ouvrir\" icon={<PanelRightOpen />}><p>Contenu du panneau</p></Sheet>"
     },
     {
       "name": "SheetDialog",
@@ -1563,7 +2958,18 @@
         "scroll?: boolean",
         "sheet?: boolean"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Panneau latéral/modal adaptatif : Dialog centré sur desktop, Sheet glissante sur mobile, avec titre, description et contenu personnalisable.",
+      "useWhen": [
+        "afficher un formulaire ou détail dans une modale responsive desktop/mobile → SheetDialog",
+        "ouvrir un panneau contextuel depuis un bouton ou une ligne de tableau → SheetDialog",
+        "forcer le rendu Sheet même sur desktop (sheet=true) → SheetDialog"
+      ],
+      "dontUseFor": [
+        "contenu simple sans interaction → utiliser Sheet",
+        "panneau contrôlé de l'extérieur avec état open géré par le parent → utiliser SheetDialogControlled"
+      ],
+      "example": "<SheetDialog title=\"Modifier le projet\" description=\"Mettez à jour les informations\" trigger={<Button icon=\"edit\" />} size=\"md\"><MonFormulaire /></SheetDialog>"
     },
     {
       "name": "SheetDialogControlled",
@@ -1583,7 +2989,18 @@
         "forceSheet?: boolean",
         "className?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Panneau Sheet (mobile) ou Dialog (desktop) responsive à état contrôlé externement, avec titre, description et icône optionnels.",
+      "useWhen": [
+        "état d'ouverture géré par le parent (open/onOpenChange) → utiliser SheetDialogControlled",
+        "affichage conditionnel déclenché par une action externe sans trigger intégré → utiliser SheetDialogControlled",
+        "forcer l'affichage en Sheet sur desktop (ex: formulaire latéral) → utiliser SheetDialogControlled avec forceSheet"
+      ],
+      "dontUseFor": [
+        "état d'ouverture géré localement sans logique externe → utiliser SheetDialog",
+        "drawer de navigation latérale → utiliser Drawer"
+      ],
+      "example": "<SheetDialogControlled open={open} onOpenChange={setOpen} title=\"Modifier\" description=\"Modifiez les informations\" icon={<PenIcon />} size=\"md\">{children}</SheetDialogControlled>"
     },
     {
       "name": "AppSidebar",
@@ -1591,7 +3008,18 @@
       "importPath": "@vigee-designsystem/components/Sidebar/app-sidebar",
       "exportType": "default",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Barre de navigation latérale principale de l'application, avec items de menu, badges de notifications, switcher de contexte et footer utilisateur.",
+      "useWhen": [
+        "navigation principale d'une app Next.js avec plusieurs sections → utiliser AppSidebar",
+        "sidebar avec switcher de workspace/projet → utiliser AppSidebar",
+        "menu avec icônes actives/inactives et sous-routes → utiliser AppSidebar"
+      ],
+      "dontUseFor": [
+        "navigation secondaire dans une page → utiliser SectionHeading",
+        "menu contextuel sur un élément → utiliser DropdownMenu"
+      ],
+      "example": "<AppSidebar items={menuItems} bottomItems={bottomMenuItems} links={footerLinks} pathname=\"/studio\" logo=\"/logo.png\" logoSmall=\"/logo-small.png\" user={{ name: \"Alice\", email: \"alice@vigee.fr\", avatar: \"/avatar.png\" }} />"
     },
     {
       "name": "FooterSidebar",
@@ -1604,7 +3032,17 @@
         "email: string",
         "avatar: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Bouton utilisateur en pied de sidebar affichant avatar/nom/email avec un menu déroulant de liens et actions.",
+      "useWhen": [
+        "pied de sidebar applicative → afficher le profil connecté avec accès rapide aux actions utilisateur",
+        "sidebar avec déconnexion/paramètres compte → passer les liens via `links` avec `onClick` ou `href`"
+      ],
+      "dontUseFor": [
+        "navigation principale de la sidebar → utiliser AppSidebar",
+        "menu contextuel sans lien utilisateur → utiliser DropdownMenu"
+      ],
+      "example": "<FooterSidebar user={{ name: \"Alice\", email: \"alice@vigee.fr\", avatar: \"/avatar.png\" }} links={[{ name: \"Profil\", icon: <UserIcon />, href: \"/profil\" }, { name: \"Déconnexion\", icon: <LogOutIcon />, onClick: () => signOut() }]} />"
     },
     {
       "name": "HeaderButtonSidebar",
@@ -1616,7 +3054,18 @@
         "logo?: string",
         "logoSmall?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Affiche l'en-tête de la sidebar avec logo adaptatif (plié/déplié), titre, sous-titre et icône chevron selon le type (lien ou bouton).",
+      "useWhen": [
+        "header de sidebar avec logo différent selon l'état ouvert/fermé → utiliser HeaderButtonSidebar",
+        "header cliquable redirigeant vers une URL → passer `type: \"link\"` dans headerData",
+        "header déclenchant un dropdown/switcher → passer `type: \"button\"` dans headerData"
+      ],
+      "dontUseFor": [
+        "navigation principale de la sidebar → utiliser AppSidebar",
+        "switcher d'espace de travail complet → utiliser SwitcherSidebar"
+      ],
+      "example": "<HeaderButtonSidebar headerData={{ title: \"Mon App\", subtitle: \"Workspace\", iconUrl: \"/icon.png\", type: \"link\", url: \"/\" }} logo=\"/logo.svg\" logoSmall=\"/logo-small.svg\" />"
     },
     {
       "name": "headerData",
@@ -1624,7 +3073,17 @@
       "importPath": "@vigee-designsystem/components/Sidebar/datas-sidebar/header-data",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Données statiques de configuration du header sidebar (titre, icône, type) pour l'instance Vigee Flow.",
+      "useWhen": [
+        "initialisation de AppSidebar → passer headerData comme prop header",
+        "personnalisation du header sidebar → modifier ce fichier de config"
+      ],
+      "dontUseFor": [
+        "rendu dynamique du header → utiliser HeaderSidebar",
+        "affichage d'un logo variable → utiliser VariableLogo"
+      ],
+      "example": "<AppSidebar header={headerData} />"
     },
     {
       "name": "HeaderSidebar",
@@ -1634,7 +3093,17 @@
       "props": [
         "headerData: HeaderDataProps"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Affiche le bouton d'en-tête de la sidebar (logo, nom d'app, etc.) encapsulé dans un SidebarMenu Vigee.",
+      "useWhen": [
+        "zone haute de la sidebar pour identifier l'application ou l'organisation",
+        "wrapping de HeaderButtonSidebar dans la structure SidebarMenu standard"
+      ],
+      "dontUseFor": [
+        "navigation principale → utiliser AppSidebar",
+        "affichage d'infos utilisateur → utiliser FooterSidebar"
+      ],
+      "example": "<HeaderSidebar headerData={{ name: \"Vigee\", logo: LogoIcon, plan: \"Pro\" }} />"
     },
     {
       "name": "SwitcherSidebar",
@@ -1642,7 +3111,19 @@
       "importPath": "@vigee-designsystem/components/Sidebar/switcher-sidebar",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Switcher de contexte dans la sidebar : permet de naviguer entre les apps principales et les projets via un dropdown avec logo et item actif auto-détecté.",
+      "useWhen": [
+        "sidebar multi-apps (Leads, RH, Finances, Studio) → afficher le switcher de contexte",
+        "navigation entre projets Studio avec détection de route active",
+        "sidebar avec logo variable selon l'état ouvert/réduit"
+      ],
+      "dontUseFor": [
+        "navigation par onglets horizontaux → utiliser TabsResponsive",
+        "menu secondaire dans la sidebar → utiliser SectionHeading",
+        "sélection d'une valeur dans un formulaire → utiliser Select"
+      ],
+      "example": "<SwitcherSidebar items={appItems} menuTitle=\"Espace\" logo=\"/logo.svg\" logoSmall=\"/icon.svg\" showSwitcher={true} />"
     },
     {
       "name": "userSidebar",
@@ -1650,7 +3131,17 @@
       "importPath": "@vigee-designsystem/components/Sidebar/datas-sidebar/footer-data",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Données statiques de l'utilisateur affiché dans le footer de la sidebar (nom, email, avatar).",
+      "useWhen": [
+        "initialiser FooterSidebar avec un utilisateur par défaut en dev/démo",
+        "remplacer par les données réelles de session avant mise en production"
+      ],
+      "dontUseFor": [
+        "affichage dynamique de l'utilisateur connecté → injecter directement les données de session dans FooterSidebar",
+        "gestion de profil → utiliser ProfileImageUploader"
+      ],
+      "example": "<FooterSidebar user={userSidebar} />"
     },
     {
       "name": "DashboardSkeleton",
@@ -1660,7 +3151,20 @@
       "props": [
         "noTop?: boolean"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Collection de squelettes de chargement animés (shimmer + pulse) pour tâches, tickets, inputs, calendrier et bulles de chat.",
+      "useWhen": [
+        "affichage en attente de données async pour une liste de tâches → utiliser TaskSkeleton / PlanningTaskSkeleton",
+        "chargement d'un formulaire → utiliser InputSkeleton ou MultiInputsSkeleton",
+        "chargement d'une liste de tickets → utiliser TicketsSkeleton",
+        "chargement d'un calendrier → utiliser CalendarSkeleton"
+      ],
+      "dontUseFor": [
+        "chargement d'une page entière → utiliser LoaderPage",
+        "chargement d'un dashboard complet → utiliser DashboardSkeleton",
+        "indicateur de rechargement en arrière-plan → utiliser RefetchIndicator"
+      ],
+      "example": "<TicketsSkeleton className=\"mt-4\" />"
     },
     {
       "name": "Slider",
@@ -1668,7 +3172,17 @@
       "importPath": "@vigee-designsystem/components/Slider/Slider",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Slider avec affichage du titre, de la valeur courante en % et des bornes min/max, intégré au DS Vigee.",
+      "useWhen": [
+        "sélection d'un pourcentage (ex: taux, avancement) → utiliser Slider",
+        "réglage d'une valeur numérique bornée avec feedback visuel immédiat → utiliser Slider"
+      ],
+      "dontUseFor": [
+        "saisie d'une valeur numérique précise → utiliser Input",
+        "sélection dans une plage de dates → utiliser DatePickerWithPresets"
+      ],
+      "example": "<Slider title=\"Avancement\" value={[42]} min={0} max={100} step={1} defaultValue={[42]} />"
     },
     {
       "name": "GridPattern",
@@ -1687,7 +3201,17 @@
         "duration?: number",
         "repeatDelay?: number"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Fond SVG animé avec une grille de carrés qui clignotent aléatoirement via Framer Motion, pour habiller visuellement une page.",
+      "useWhen": [
+        "arrière-plan décoratif d'une SplashScreen → utiliser GridPattern",
+        "fond animé pour une page de login ou d'accueil → utiliser GridPattern"
+      ],
+      "dontUseFor": [
+        "contenu interactif ou cliquable → utiliser Button",
+        "illustration métier → utiliser Illustration"
+      ],
+      "example": "<GridPattern numSquares={30} maxOpacity={0.4} duration={3} className=\"text-blue-500\" />"
     },
     {
       "name": "SplashScreen",
@@ -1699,7 +3223,19 @@
         "dark?: boolean",
         "finishLoading?: () => void"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Écran de chargement plein écran animé (spinner + grille SVG) affiché au démarrage de l'application avant le rendu principal.",
+      "useWhen": [
+        "initialisation de l'app Next.js avant hydratation → afficher SplashScreen",
+        "attente d'un chargement global (auth, config) → masquer le contenu avec SplashScreen",
+        "thème sombre activé → passer `dark` pour adapter les couleurs."
+      ],
+      "dontUseFor": [
+        "chargement de sections partielles → utiliser LoaderPage",
+        "indicateur de rechargement de données → utiliser RefetchIndicator",
+        "skeleton de dashboard → utiliser DashboardSkeleton."
+      ],
+      "example": "<SplashScreen finishLoading={() => setReady(true)} dark={false} />"
     },
     {
       "name": "SplashScreenManager",
@@ -1707,7 +3243,18 @@
       "importPath": "@vigee-designsystem/components/SplashScreen/SplashScreenManager",
       "exportType": "default",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Affiche un écran de chargement (SplashScreen) au premier rendu, puis remplace par le contenu enfant une fois l'animation terminée.",
+      "useWhen": [
+        "initialisation d'une app Next.js pour masquer le chargement initial → SplashScreenManager",
+        "wrapping du layout racine pour une intro animée avant affichage du contenu",
+        "mode sombre activé sur le splash → passer `dark`"
+      ],
+      "dontUseFor": [
+        "transitions entre pages → utiliser FadeIn",
+        "états de chargement de données → utiliser LoaderPage"
+      ],
+      "example": "<SplashScreenManager dark><App /></SplashScreenManager>"
     },
     {
       "name": "Stepper",
@@ -1719,7 +3266,18 @@
       "exports": [
         "Stepper",
         "useStepper"
-      ]
+      ],
+      "description": "Indicateur visuel de progression multi-étapes avec hook `useStepper` pour naviguer entre étapes nommées.",
+      "useWhen": [
+        "formulaire découpé en étapes séquentielles (onboarding, création guidée) → utiliser `Stepper` + `useStepper`",
+        "afficher la progression courante et les étapes complétées → utiliser `Stepper`",
+        "contrôler la navigation entre étapes (next/prev/goToStep) depuis le parent → utiliser `useStepper`"
+      ],
+      "dontUseFor": [
+        "navigation entre vues indépendantes → utiliser TabsResponsive",
+        "progression en pourcentage sans étapes nommées → utiliser ProgressBar"
+      ],
+      "example": "<Stepper stepper={useStepper(0, [\"Informations\", \"Documents\", \"Confirmation\"])} />"
     },
     {
       "name": "DataTable",
@@ -1741,7 +3299,20 @@
         "classNames?: ClassNames",
         "onReachBottom?: () => void"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Table de données TanStack avec tri, filtres, pagination et détection de scroll bas intégrés pour afficher des listes structurées.",
+      "useWhen": [
+        "liste d'entités avec colonnes personnalisées (clients, projets, factures) → DataTable",
+        "table cliquable pour naviguer vers une fiche détail → passer `onRowClick`",
+        "chargement infini au scroll → utiliser `onReachBottom`",
+        "affichage de squelettes de chargement en bas de liste → `displayBottomRowsSkeleton`"
+      ],
+      "dontUseFor": [
+        "simple sélection d'une valeur dans une liste → utiliser ComboBox",
+        "tableau avec filtres URL persistants côté serveur → utiliser FilterableSelect",
+        "affichage d'un seul KPI ou ranking → utiliser Ranking"
+      ],
+      "example": "<DataTable columns={columns} data={projets} onRowClick={(row) => router.push(`/projets/${row.original.id}`)} lines={20} />"
     },
     {
       "name": "FilterableSelect",
@@ -1754,7 +3325,19 @@
         "query: string",
         "preselected?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Select qui synchronise la valeur choisie avec un paramètre d'URL (query string) pour filtrer des données tabulaires.",
+      "useWhen": [
+        "filtre d'une colonne de tableau via l'URL → utiliser SelectSearch",
+        "valeur présélectionnée à conserver dans l'URL → utiliser SelectSearch avec `preselected`",
+        "navigation avec état persistant dans l'URL → utiliser SelectSearch"
+      ],
+      "dontUseFor": [
+        "sélection multiple → utiliser MultiSelect",
+        "filtres combinés avancés → utiliser Filter",
+        "sélection sans impact sur l'URL → utiliser Select"
+      ],
+      "example": "<SelectSearch items={[{ value: \"Actif\" }, { value: \"Inactif\" }]} placeholder=\"Statut\" query=\"status\" />"
     },
     {
       "name": "Pagination",
@@ -1762,7 +3345,18 @@
       "importPath": "@vigee-designsystem/components/Tables/Pagination",
       "exportType": "default",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Pagination URL-based pour tables et listes, synchronisée avec les search params Next.js — se cache automatiquement si une seule page.",
+      "useWhen": [
+        "table avec résultats paginés côté serveur → afficher la navigation entre pages",
+        "plusieurs listes paginées sur la même page → utiliser `paramName` distinct par liste",
+        "navigation paginée sans état client (URL comme source de vérité) → utiliser ce composant."
+      ],
+      "dontUseFor": [
+        "pagination avec état client pur (sans URL) → utiliser DataTable",
+        "filtres complexes combinés à la pagination → utiliser FilterableSelect."
+      ],
+      "example": "<Pagination totalPages={10} paramName=\"page\" />"
     },
     {
       "name": "TableSearch",
@@ -1770,7 +3364,18 @@
       "importPath": "@vigee-designsystem/components/Tables/Search",
       "exportType": "default",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Champ de recherche debounced (300ms) qui synchronise la saisie utilisateur avec le paramètre URL `query` et remet la pagination à 1.",
+      "useWhen": [
+        "barre de recherche au-dessus d'un DataTable avec filtrage côté serveur via URL params",
+        "recherche dans une liste paginée Next.js App Router",
+        "intégration avec TableSearch et Pagination sur la même page."
+      ],
+      "dontUseFor": [
+        "recherche sans synchronisation URL (état local suffisant) → utiliser Search",
+        "filtres multi-critères combinés → utiliser CheckboxFilter ou SelectFilter."
+      ],
+      "example": "<TableSearch placeholder=\"Rechercher un client...\" variant=\"default\" />"
     },
     {
       "name": "TabMobile",
@@ -1790,7 +3395,20 @@
         "variant?: \"default\" | \"light\" | \"mini\" | \"big\"",
         "pageName?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Onglets navigables (valeur, URL ou query param) avec badges compteurs, icônes, statuts colorés et tooltips, optimisés mobile.",
+      "useWhen": [
+        "navigation entre vues filtrées via query param (ex: statut commande) → utiliser avec `query`",
+        "navigation entre pages via `href` par onglet",
+        "affichage d'un compteur par onglet (ex: tâches en attente) → utiliser `count`",
+        "taille d'onglet variable selon contexte → utiliser `variant` (\"mini\", \"big\", \"light\")"
+      ],
+      "dontUseFor": [
+        "navigation principale de l'app → utiliser Sidebar",
+        "onglets simples sans badges ni query params → utiliser TabsResponsive",
+        "filtres multiples simultanés → utiliser SelectMultiple"
+      ],
+      "example": "<TabMobile options={[{ name: \"Actifs\", value: \"active\", count: 12 }, { name: \"Archivés\", value: \"archived\" }]} query=\"status\" defaultValue=\"active\" />"
     },
     {
       "name": "TabsResponsive",
@@ -1810,7 +3428,20 @@
         "startTransition?: (callback: () => void) => void",
         "variation?: \"default\" | \"rounded\" | \"rounded-blue\" | \"rounded-green\""
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Onglets adaptatifs (tabs → select selon le nombre d'options et la taille d'écran) avec support query string, navigation href et badges de comptage.",
+      "useWhen": [
+        "navigation par onglets synchronisée avec l'URL via query param (ex: ?tab=xxx)",
+        "basculer entre vues/filtres avec compteurs affichés",
+        "navigation vers des routes différentes par onglet via `href`",
+        "réduire automatiquement les onglets en Select sur mobile"
+      ],
+      "dontUseFor": [
+        "filtres multiples simultanés → utiliser SelectMultiple",
+        "sélection dans un formulaire → utiliser Select",
+        "un seul niveau de filtre simple sans URL → utiliser TabMobile"
+      ],
+      "example": "<TabsResponsive query=\"tab\" defaultValue=\"overview\" options={[{ name: \"Vue générale\", value: \"overview\" }, { name: \"Détails\", value: \"details\", count: 3 }]} />"
     },
     {
       "name": "Tooltip",
@@ -1821,7 +3452,18 @@
         "message: string",
         "children: ReactNode"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Enveloppe n'importe quel élément pour lui ajouter une infobulle texte au survol.",
+      "useWhen": [
+        "icône sans libellé (Button, action) → wrapper avec Tooltip pour expliciter l'action",
+        "cellule de tableau tronquée → afficher le contenu complet",
+        "badge ou KPI → apporter un contexte supplémentaire"
+      ],
+      "dontUseFor": [
+        "contenu riche ou interactif dans la bulle → utiliser HoverCard",
+        "message d'erreur de formulaire → utiliser le système de validation du Form"
+      ],
+      "example": "<Tooltip message=\"Supprimer l'élément\"><Button icon=\"trash\" onClick={handleDelete} /></Tooltip>"
     },
     {
       "name": "TitleGradual",
@@ -1835,7 +3477,18 @@
         "framerProps?: Variants",
         "className?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Titre animé lettre par lettre avec glissement horizontal, idéal pour les en-têtes de pages d'accueil ou splash screens.",
+      "useWhen": [
+        "page d'accueil ou hero section nécessitant un titre impactant → utiliser TitleGradual",
+        "SplashScreen avec titre animé → utiliser TitleGradual",
+        "première impression visuelle d'une app → utiliser TitleGradual"
+      ],
+      "dontUseFor": [
+        "titres dans des listes ou tableaux → utiliser TypographyH1",
+        "titres répétés dans des cards → utiliser TypographyH1"
+      ],
+      "example": "<TitleGradual text=\"Bienvenue sur Vigee\" className=\"text-4xl font-bold\" />"
     },
     {
       "name": "TypographyH1",
@@ -1843,7 +3496,20 @@
       "importPath": "@vigee-designsystem/components/Typography/Typography",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Composants typographiques Vigee (H1→H4, Body, BodySmall, Caption, Blockquote) appliquant les styles de la charte via Tailwind.",
+      "useWhen": [
+        "titre principal de page → utiliser TypographyH1",
+        "titre de section → utiliser TypographyH2",
+        "sous-titre avec couleur primaire → utiliser TypographyH3",
+        "texte courant de contenu → utiliser Body",
+        "métadonnées, labels secondaires → utiliser Caption"
+      ],
+      "dontUseFor": [
+        "titres animés → utiliser TitleGradual",
+        "titre de page avec actions et breadcrumb → utiliser PageHeader"
+      ],
+      "example": "<TypographyH1>Tableau de bord</TypographyH1>"
     },
     {
       "name": "Accordion",
@@ -1857,7 +3523,19 @@
         "AccordionItem",
         "AccordionTrigger",
         "AccordionContent"
-      ]
+      ],
+      "description": "Accordéon accessible basé sur Radix UI pour afficher/masquer des sections de contenu avec animation.",
+      "useWhen": [
+        "FAQ ou aide contextuelle avec plusieurs questions/réponses → utiliser Accordion",
+        "sections de paramètres avancés à révéler à la demande → utiliser Accordion",
+        "contenu long à segmenter verticalement sans changer de page → utiliser Accordion"
+      ],
+      "dontUseFor": [
+        "navigation entre vues distinctes → utiliser Tabs",
+        "contenu toujours visible → utiliser Container",
+        "panneau latéral révélable → utiliser Collapsible"
+      ],
+      "example": "<Accordion type=\"single\" collapsible><AccordionItem value=\"item-1\"><AccordionTrigger>Question ?</AccordionTrigger><AccordionContent>Réponse.</AccordionContent></AccordionItem></Accordion>"
     },
     {
       "name": "Alert",
@@ -1870,7 +3548,18 @@
         "Alert",
         "AlertTitle",
         "AlertDescription"
-      ]
+      ],
+      "description": "Bloc d'alerte statique avec titre et description, en variante neutre ou destructive (erreur/danger).",
+      "useWhen": [
+        "afficher un message d'erreur contextuel dans un formulaire → utiliser Alert variant=\"destructive\"",
+        "signaler un avertissement non-bloquant dans une page → utiliser Alert variant=\"default\"",
+        "accompagner une icône SVG d'un message structuré titre + description → utiliser Alert + AlertTitle + AlertDescription"
+      ],
+      "dontUseFor": [
+        "notifications temporaires/toasts → utiliser Toaster",
+        "messages d'information métier Vigee avec styles pré-configurés → utiliser AlertInfo"
+      ],
+      "example": "<Alert variant=\"destructive\"><AlertTitle>Erreur</AlertTitle><AlertDescription>Identifiants invalides.</AlertDescription></Alert>"
     },
     {
       "name": "AlertDialog",
@@ -1891,7 +3580,19 @@
         "AlertDialogDescription",
         "AlertDialogAction",
         "AlertDialogCancel"
-      ]
+      ],
+      "description": "Modale de confirmation bloquante (Radix) avec overlay, titre, description, et boutons Action/Cancel stylés Vigee.",
+      "useWhen": [
+        "confirmation d'une suppression irréversible → utiliser AlertDialog",
+        "validation d'une action critique (archivage, déconnexion) → utiliser AlertDialog",
+        "remplacer un `window.confirm()` natif → utiliser AlertDialog"
+      ],
+      "dontUseFor": [
+        "actions destructives avec contexte riche → utiliser ActionWithValidation",
+        "affichage d'informations sans confirmation → utiliser AlertInfo",
+        "formulaires multi-champs dans une modale → utiliser Sheet"
+      ],
+      "example": "<AlertDialog><AlertDialogTrigger>Supprimer</AlertDialogTrigger><AlertDialogContent><AlertDialogHeader><AlertDialogTitle>Confirmer la suppression</AlertDialogTitle><AlertDialogDescription>Cette action est irréversible.</AlertDialogDescription></AlertDialogHeader><AlertDialogFooter><AlertDialogCancel>Annuler</AlertDialogCancel><AlertDialogAction>Supprimer</AlertDialogAction></AlertDialogFooter></AlertDialogContent></AlertDialog>"
     },
     {
       "name": "Avatar",
@@ -1904,7 +3605,18 @@
         "Avatar",
         "AvatarImage",
         "AvatarFallback"
-      ]
+      ],
+      "description": "Affiche une photo de profil circulaire avec fallback automatique sur initiales ou placeholder si l'image est absente.",
+      "useWhen": [
+        "afficher l'avatar d'un utilisateur avec une URL d'image → utiliser Avatar + AvatarImage + AvatarFallback",
+        "image potentiellement absente ou en erreur → AvatarFallback prend le relais automatiquement",
+        "liste d'utilisateurs, commentaires, profils → associer un visuel à une identité"
+      ],
+      "dontUseFor": [
+        "upload ou modification de photo de profil → utiliser Forms/ProfileImageUploader",
+        "affichage d'un avatar Vigee enrichi (avec statut, taille normalisée, etc.) → utiliser Avatar/Avatar"
+      ],
+      "example": "<Avatar><AvatarImage src={user.photoUrl} alt={user.name} /><AvatarFallback>AB</AvatarFallback></Avatar>"
     },
     {
       "name": "Badge",
@@ -1916,7 +3628,18 @@
       "exports": [
         "Badge",
         "badgeVariants"
-      ]
+      ],
+      "description": "Étiquette visuelle inline pour signaler un statut, une catégorie ou un compteur sur un élément UI.",
+      "useWhen": [
+        "afficher le statut d'une entité (actif, archivé, en attente) → utiliser Badge",
+        "indiquer un type ou une catégorie sur une carte ou une ligne de tableau → utiliser Badge",
+        "signaler un compteur ou une nouveauté sur un élément → utiliser Badge"
+      ],
+      "dontUseFor": [
+        "actions utilisateur → utiliser Button",
+        "notifications système avec message détaillé → utiliser AlertInfo"
+      ],
+      "example": "<Badge variant=\"destructive\">Annulé</Badge>"
     },
     {
       "name": "Button",
@@ -1930,7 +3653,20 @@
       "exports": [
         "Button",
         "buttonVariants"
-      ]
+      ],
+      "description": "Primitif bouton Radix/CVA avec variantes visuelles et tailles, base de tous les boutons du DS Vigee.",
+      "useWhen": [
+        "composant de bas niveau à étendre via `asChild` pour rendre un lien ou un élément custom comme bouton",
+        "besoin d'une variante spécifique (destructive, outline, ghost, link) non couverte par les boutons Vigee",
+        "construction d'un nouveau composant bouton dans le DS."
+      ],
+      "dontUseFor": [
+        "actions courantes dans l'UI → utiliser Button (Buttons)",
+        "soumission de formulaire → utiliser ButtonSubmit",
+        "suppression avec confirmation → utiliser DeleteAction",
+        "ajout d'élément → utiliser ButtonAdd."
+      ],
+      "example": "<Button variant=\"outline\" size=\"sm\" onClick={handleClick}>Label</Button>"
     },
     {
       "name": "Calendar",
@@ -1938,7 +3674,19 @@
       "importPath": "@vigee-designsystem/components/ui/calendar",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Sélecteur de date(s) visuel basé sur react-day-picker, stylisé Vigee, avec navigation mois et support plage de dates.",
+      "useWhen": [
+        "afficher un calendrier inline pour sélection de date unique → utiliser Calendar",
+        "construire un DatePicker custom avec Popover → utiliser Calendar",
+        "sélection de plage de dates avec mode=\"range\" → utiliser Calendar"
+      ],
+      "dontUseFor": [
+        "sélection date dans un formulaire react-hook-form → utiliser DatePicker",
+        "sélection date avec presets (hier, semaine dernière…) → utiliser DatePickerWithPresets",
+        "sélection plage avec champs texte → utiliser DatePickerRange"
+      ],
+      "example": "<Calendar mode=\"single\" selected={date} onSelect={setDate} />"
     },
     {
       "name": "Card",
@@ -1954,7 +3702,19 @@
         "CardTitle",
         "CardDescription",
         "CardContent"
-      ]
+      ],
+      "description": "Conteneur visuel avec bordure, fond et ombre pour regrouper des informations connexes en surface délimitée.",
+      "useWhen": [
+        "afficher un bloc d'informations structuré (titre + contenu + actions) → utiliser Card + CardHeader + CardContent + CardFooter",
+        "encapsuler un KPI, un chart ou un résumé dans un dashboard → utiliser Card avec prop `title`",
+        "isoler une section dans une page → utiliser Card comme wrapper visuel"
+      ],
+      "dontUseFor": [
+        "liste d'éléments répétitifs avec interactions complexes → utiliser DataTable",
+        "contenu rétractable → utiliser Collapsible",
+        "simple séparation de sections sans fond → utiliser Container"
+      ],
+      "example": "<Card title=\"Informations client\"><CardContent><p>Nom : Dupont</p></CardContent></Card>"
     },
     {
       "name": "ChartContainer",
@@ -1972,7 +3732,18 @@
         "ChartLegend",
         "ChartLegendContent",
         "ChartStyle"
-      ]
+      ],
+      "description": "Conteneur Recharts avec injection de tokens couleur light/dark, tooltip stylisé et contexte de config pour les charts Vigee.",
+      "useWhen": [
+        "wrapping un chart Recharts (AreaChart, BarChart, PieChart…) pour appliquer les couleurs du DS",
+        "afficher un tooltip cohérent avec le thème Vigee",
+        "gérer les variantes couleur light/dark via ChartConfig"
+      ],
+      "dontUseFor": [
+        "afficher une métrique seule → utiliser KPI",
+        "afficher une progression → utiliser ProgressBar ou ProgressCircle"
+      ],
+      "example": "<ChartContainer config={{ revenue: { color: \"#6366f1\", label: \"Revenus\" } }}><BarChart data={data}><Bar dataKey=\"revenue\" /></BarChart></ChartContainer>"
     },
     {
       "name": "Checkbox",
@@ -1980,7 +3751,18 @@
       "importPath": "@vigee-designsystem/components/ui/checkbox",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Primitive checkbox Radix UI stylée Vigee, avec support data-testid et états checked/disabled/focus.",
+      "useWhen": [
+        "case à cocher unique dans un formulaire react-hook-form → combiner avec Forms/Checkboxes",
+        "consentement ou option booléenne isolée → utiliser directement",
+        "tests automatisés nécessitant un sélecteur stable → passer data-testid"
+      ],
+      "dontUseFor": [
+        "sélection de plusieurs options liées → utiliser Forms/Checkboxes",
+        "activation/désactivation d'un paramètre → utiliser Switch"
+      ],
+      "example": "<Checkbox checked={isChecked} onCheckedChange={setIsChecked} data-testid=\"accept-terms\" />"
     },
     {
       "name": "Collapsible",
@@ -1993,7 +3775,18 @@
         "Collapsible",
         "CollapsibleTrigger",
         "CollapsibleContent"
-      ]
+      ],
+      "description": "Primitives Radix UI pour créer une section affichable/masquable avec trigger et contenu animé.",
+      "useWhen": [
+        "panneau de détails secondaires à masquer par défaut → utiliser Collapsible",
+        "FAQ ou accordéon simple à un seul item → utiliser Collapsible",
+        "zone de filtres avancés rétractable → utiliser Collapsible"
+      ],
+      "dontUseFor": [
+        "plusieurs sections accordéon imbriquées → utiliser Accordion",
+        "contenu dans un panneau latéral → utiliser Drawer"
+      ],
+      "example": "<Collapsible><CollapsibleTrigger>Voir plus</CollapsibleTrigger><CollapsibleContent>Contenu masqué</CollapsibleContent></Collapsible>"
     },
     {
       "name": "Command",
@@ -2012,7 +3805,19 @@
         "CommandItem",
         "CommandShortcut",
         "CommandSeparator"
-      ]
+      ],
+      "description": "Palette de commandes clavier (cmdk) avec recherche filtrante, groupes et items sélectionnables, utilisable inline ou dans une Dialog.",
+      "useWhen": [
+        "palette de commandes globale accessible au clavier (ex: ⌘K) → utiliser CommandDialog",
+        "liste filtrante inline dans un popover ou une sidebar → utiliser Command + CommandInput + CommandList",
+        "affichage de raccourcis clavier associés à des actions → utiliser CommandItem + CommandShortcut"
+      ],
+      "dontUseFor": [
+        "sélection simple dans un formulaire → utiliser Select",
+        "recherche avec chargement asynchrone → utiliser Forms/SearchSelectAsync",
+        "sélection multiple avec tags → utiliser MultiSelect"
+      ],
+      "example": "<CommandDialog open={open} onOpenChange={setOpen}><CommandInput placeholder=\"Rechercher...\" /><CommandList><CommandEmpty>Aucun résultat.</CommandEmpty><CommandGroup heading=\"Actions\"><CommandItem>Créer un projet</CommandItem></CommandGroup></CommandList></CommandDialog>"
     },
     {
       "name": "ContextMenu",
@@ -2037,7 +3842,19 @@
         "ContextMenuSubContent",
         "ContextMenuSubTrigger",
         "ContextMenuRadioGroup"
-      ]
+      ],
+      "description": "Menu contextuel natif (clic droit) basé sur Radix UI, avec support des items, sous-menus, checkboxes et radio buttons.",
+      "useWhen": [
+        "clic droit sur une ligne de tableau pour actions rapides (éditer, supprimer, dupliquer)",
+        "clic droit sur un élément canvas/carte pour options contextuelles",
+        "menu d'actions alternatif sans bouton visible dans l'UI."
+      ],
+      "dontUseFor": [
+        "actions principales visibles → utiliser Button ou ActionWithValidation",
+        "menu déclenché par un bouton → utiliser DropdownMenu",
+        "suppression avec confirmation → utiliser DeleteAction."
+      ],
+      "example": "<ContextMenu><ContextMenuTrigger><div>Clic droit ici</div></ContextMenuTrigger><ContextMenuContent><ContextMenuItem>Éditer</ContextMenuItem><ContextMenuItem>Supprimer</ContextMenuItem></ContextMenuContent></ContextMenu>"
     },
     {
       "name": "Dialog",
@@ -2057,7 +3874,19 @@
         "DialogFooter",
         "DialogTitle",
         "DialogDescription"
-      ]
+      ],
+      "description": "Modale centrée avec overlay, animation d'entrée/sortie et bouton de fermeture intégré, basée sur Radix Dialog.",
+      "useWhen": [
+        "confirmation d'une action critique → utiliser Dialog",
+        "affichage d'un formulaire secondaire sans quitter la page → utiliser Dialog",
+        "présentation d'un détail contextuel nécessitant le focus utilisateur → utiliser Dialog"
+      ],
+      "dontUseFor": [
+        "contenu latéral ou panneau glissant → utiliser Sheet",
+        "actions destructives avec double confirmation → utiliser AlertDialog",
+        "contenu riche sur mobile nécessitant un tiroir → utiliser Drawer"
+      ],
+      "example": "<Dialog><DialogTrigger asChild><Button icon=\"info\" /></DialogTrigger><DialogContent><DialogHeader><DialogTitle>Titre</DialogTitle><DialogDescription>Description</DialogDescription></DialogHeader></DialogContent></Dialog>"
     },
     {
       "name": "Drawer",
@@ -2077,7 +3906,19 @@
         "DrawerFooter",
         "DrawerTitle",
         "DrawerDescription"
-      ]
+      ],
+      "description": "Panneau glissant depuis le bas de l'écran (bottom sheet) basé sur vaul, avec overlay, poignée de drag et structure Header/Footer/Title/Description.",
+      "useWhen": [
+        "actions contextuelles sur mobile nécessitant un panneau glissant → utiliser Drawer",
+        "confirmation ou formulaire léger sur petit écran → utiliser Drawer",
+        "affichage de détails secondaires sans quitter la page courante → utiliser Drawer"
+      ],
+      "dontUseFor": [
+        "contenu riche ou formulaire complexe sur desktop → utiliser Sheet",
+        "dialogue de confirmation court → utiliser SheetDialog",
+        "navigation latérale persistante → utiliser Sidebar"
+      ],
+      "example": "<Drawer><DrawerTrigger>Ouvrir</DrawerTrigger><DrawerContent><DrawerHeader><DrawerTitle>Titre</DrawerTitle></DrawerHeader></DrawerContent></Drawer>"
     },
     {
       "name": "DropdownMenu",
@@ -2102,7 +3943,19 @@
         "DropdownMenuSubContent",
         "DropdownMenuSubTrigger",
         "DropdownMenuRadioGroup"
-      ]
+      ],
+      "description": "Menu déroulant accessible basé sur Radix UI, avec items, sous-menus, checkboxes et groupes radio.",
+      "useWhen": [
+        "menu contextuel sur un bouton d'action (3 points, kebab) → utiliser DropdownMenu",
+        "options de navigation secondaires dans un header/sidebar → utiliser DropdownMenu",
+        "liste d'actions sur une ligne de tableau → utiliser DropdownMenu"
+      ],
+      "dontUseFor": [
+        "sélection de valeur dans un formulaire → utiliser Select",
+        "sélection multiple → utiliser MultiSelect",
+        "navigation principale → utiliser Sidebar"
+      ],
+      "example": "<DropdownMenu><DropdownMenuTrigger asChild><Button icon=\"more\" /></DropdownMenuTrigger><DropdownMenuContent><DropdownMenuItem>Modifier</DropdownMenuItem><DropdownMenuItem>Supprimer</DropdownMenuItem></DropdownMenuContent></DropdownMenu>"
     },
     {
       "name": "Form",
@@ -2120,7 +3973,18 @@
         "FormLabel",
         "FormMessage",
         "useFormField"
-      ]
+      ],
+      "description": "Primitives de formulaire react-hook-form (Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage) avec gestion d'état et d'erreurs intégrée.",
+      "useWhen": [
+        "wrapping d'un formulaire react-hook-form pour connecter les champs à la validation → utiliser Form + FormField",
+        "afficher le message d'erreur d'un champ → utiliser FormMessage",
+        "associer un label accessible à un input → utiliser FormLabel + FormControl"
+      ],
+      "dontUseFor": [
+        "champ isolé sans formulaire react-hook-form → utiliser directement Input",
+        "formulaire avec état local simple sans validation → utiliser ui/Input directement"
+      ],
+      "example": "<Form {...form}><FormField control={form.control} name=\"email\" render={({ field }) => (<FormItem><FormLabel>Email</FormLabel><FormControl><input {...field} /></FormControl><FormMessage /></FormItem>)} /></Form>"
     },
     {
       "name": "HoverCard",
@@ -2133,7 +3997,18 @@
         "HoverCard",
         "HoverCardTrigger",
         "HoverCardContent"
-      ]
+      ],
+      "description": "Carte flottante affichée au survol d'un élément déclencheur, pour révéler des infos contextuelles sans clic.",
+      "useWhen": [
+        "survol d'un avatar/nom d'utilisateur pour afficher son profil → utiliser HoverCard",
+        "survol d'un libellé court pour afficher une description détaillée → utiliser HoverCard"
+      ],
+      "dontUseFor": [
+        "action à déclencher au clic → utiliser DropdownMenu",
+        "contenu riche interactif persistant → utiliser Sheet",
+        "message d'aide court sur une icône → utiliser Tooltip"
+      ],
+      "example": "<HoverCard><HoverCardTrigger>@utilisateur</HoverCardTrigger><HoverCardContent><p>Profil de l'utilisateur</p></HoverCardContent></HoverCard>"
     },
     {
       "name": "Input",
@@ -2141,7 +4016,19 @@
       "importPath": "@vigee-designsystem/components/ui/input",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Primitif input HTML stylisé Vigee : champ texte brut avec gestion focus, disabled et upload de fichier.",
+      "useWhen": [
+        "composition d'un champ personnalisé sans react-hook-form → utiliser Input directement",
+        "input non contrôlé par un Form Vigee → utiliser Input",
+        "besoin d'un input de type file simple → utiliser Input avec type=\"file\""
+      ],
+      "dontUseFor": [
+        "formulaire avec validation react-hook-form → utiliser Forms/Input",
+        "saisie téléphone → utiliser PhoneNumber",
+        "recherche avec suggestions → utiliser ComboBox"
+      ],
+      "example": "<Input type=\"email\" placeholder=\"email@exemple.com\" disabled={false} />"
     },
     {
       "name": "Label",
@@ -2149,7 +4036,18 @@
       "importPath": "@vigee-designsystem/components/ui/label",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Label accessible Radix UI, stylisé Vigee, à associer à un champ de formulaire via `htmlFor`.",
+      "useWhen": [
+        "associer un libellé à un Input, Select ou Checkbox natif",
+        "afficher un label désactivé (grisé automatiquement via `peer-disabled`)",
+        "construire un champ custom sans passer par les composants Forms Vigee"
+      ],
+      "dontUseFor": [
+        "champs dans un Form Vigee → la prop `label` des composants Forms (Input, Select, etc.) gère déjà le Label",
+        "texte décoratif sans lien avec un champ → utiliser la typographie standard"
+      ],
+      "example": "<Label htmlFor=\"email\">Adresse e-mail</Label>"
     },
     {
       "name": "ModeToggle",
@@ -2157,7 +4055,17 @@
       "importPath": "@vigee-designsystem/components/ui/mode-toggle",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Bouton icône soleil/lune avec dropdown pour basculer entre les thèmes Light, Dark et System via next-themes.",
+      "useWhen": [
+        "barre de navigation ou header → placer ModeToggle pour permettre le changement de thème",
+        "sidebar ou zone de paramètres utilisateur → offrir le contrôle du thème sans texte visible."
+      ],
+      "dontUseFor": [
+        "gestion d'autres préférences utilisateur → utiliser Switch",
+        "affichage d'options multiples non liées au thème → utiliser DropdownMenu directement."
+      ],
+      "example": "<ModeToggle />"
     },
     {
       "name": "NavigationMenu",
@@ -2176,7 +4084,19 @@
         "NavigationMenuTrigger",
         "navigationMenuTriggerStyle",
         "NavigationMenuViewport"
-      ]
+      ],
+      "description": "Barre de navigation horizontale avec sous-menus animés, basée sur Radix NavigationMenu — pour les navs principales desktop.",
+      "useWhen": [
+        "navigation principale d'une app avec sous-menus déroulants → utiliser NavigationMenu + NavigationMenuTrigger + NavigationMenuContent",
+        "liens de navigation groupés en catégories → utiliser NavigationMenuList + NavigationMenuItem",
+        "nav desktop avec animations d'entrée/sortie fluides → utiliser NavigationMenuViewport"
+      ],
+      "dontUseFor": [
+        "navigation latérale persistante → utiliser Sidebar",
+        "menu contextuel sur clic droit → utiliser DropdownMenu",
+        "navigation mobile → utiliser MobileMenu"
+      ],
+      "example": "<NavigationMenu><NavigationMenuList><NavigationMenuItem><NavigationMenuTrigger>Produits</NavigationMenuTrigger><NavigationMenuContent><NavigationMenuLink href=\"/produits\">Voir tout</NavigationMenuLink></NavigationMenuContent></NavigationMenuItem></NavigationMenuList></NavigationMenu>"
     },
     {
       "name": "PhoneInput",
@@ -2189,7 +4109,18 @@
         "onChange: (value: RPNInput.Country) => void",
         "options: CountrySelectOption[]"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Input téléphonique international avec sélecteur de pays (drapeau + indicatif) basé sur react-phone-number-input, format E.164.",
+      "useWhen": [
+        "saisie d'un numéro de téléphone avec indicatif pays dans un formulaire",
+        "champ téléphone nécessitant une validation au format E.164",
+        "formulaire d'inscription/contact avec utilisateurs internationaux"
+      ],
+      "dontUseFor": [
+        "saisie de texte simple → utiliser Input",
+        "formulaire react-hook-form intégré → utiliser PhoneNumber (Forms)"
+      ],
+      "example": "<PhoneInput value={phone} onChange={(value) => setPhone(value)} defaultCountry=\"FR\" />"
     },
     {
       "name": "Popover",
@@ -2202,7 +4133,19 @@
         "Popover",
         "PopoverTrigger",
         "PopoverContent"
-      ]
+      ],
+      "description": "Popover flottant Radix UI avec animation et positionnement automatique, pour afficher du contenu contextuel ancré à un déclencheur.",
+      "useWhen": [
+        "afficher des options/détails supplémentaires au clic sur un bouton",
+        "saisie inline sans ouvrir un Dialog",
+        "formulaire court contextuel (filtre, date, couleur) ancré à un élément"
+      ],
+      "dontUseFor": [
+        "contenu long ou structuré nécessitant une pleine page → utiliser Sheet",
+        "confirmation d'action destructive → utiliser AlertDialog",
+        "sélection dans une liste → utiliser Select"
+      ],
+      "example": "<Popover><PopoverTrigger asChild><Button icon=\"settings\" /></PopoverTrigger><PopoverContent>Contenu contextuel</PopoverContent></Popover>"
     },
     {
       "name": "Progress",
@@ -2210,7 +4153,19 @@
       "importPath": "@vigee-designsystem/components/ui/progress",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Barre de progression horizontale Radix UI pour afficher un pourcentage d'avancement (0–100).",
+      "useWhen": [
+        "chargement d'un fichier ou upload → indiquer la progression en %",
+        "étapes d'un onboarding → montrer l'avancement global",
+        "calcul/traitement long → feedback visuel de complétion"
+      ],
+      "dontUseFor": [
+        "progression par étapes discrètes → utiliser Stepper",
+        "indicateur circulaire → utiliser ProgressCircle",
+        "barre de complétion de profil avec segments → utiliser ProgressBar"
+      ],
+      "example": "<Progress value={42} />"
     },
     {
       "name": "RadioGroup",
@@ -2222,7 +4177,19 @@
       "exports": [
         "RadioGroup",
         "RadioGroupItem"
-      ]
+      ],
+      "description": "Groupe de boutons radio Radix UI pour sélection exclusive parmi plusieurs options dans un formulaire Vigee.",
+      "useWhen": [
+        "choix unique parmi options fixes (civilité, statut, type) → utiliser RadioGroup",
+        "intégration dans Form react-hook-form avec champ contrôlé → utiliser RadioGroup + RadioGroupItem",
+        "alternatives visuelles en liste verticale ou grille → utiliser RadioGroup"
+      ],
+      "dontUseFor": [
+        "sélection multiple → utiliser Checkboxes",
+        "liste d'options longue avec recherche → utiliser Select",
+        "activation/désactivation binaire → utiliser Switch"
+      ],
+      "example": "<RadioGroup defaultValue=\"option1\"><RadioGroupItem value=\"option1\" id=\"o1\" /><RadioGroupItem value=\"option2\" id=\"o2\" /></RadioGroup>"
     },
     {
       "name": "ResizablePanelGroup",
@@ -2235,7 +4202,18 @@
         "ResizablePanelGroup",
         "ResizablePanel",
         "ResizableHandle"
-      ]
+      ],
+      "description": "Panneaux redimensionnables par drag horizontal ou vertical, avec poignée optionnelle, basés sur react-resizable-panels.",
+      "useWhen": [
+        "layout éditeur avec panneau code / prévisualisation côte à côte → utiliser ResizablePanelGroup + ResizablePanel",
+        "interface avec sidebar redimensionnable manuellement → utiliser ResizablePanelGroup + ResizableHandle",
+        "découpage vertical ajustable (ex: liste / détail) → utiliser ResizablePanelGroup direction=\"vertical\""
+      ],
+      "dontUseFor": [
+        "redimensionnement d'une modale ou d'un sheet → utiliser Sheet",
+        "affichage de panneaux fixes sans interaction drag → utiliser ResizablePanelGroup"
+      ],
+      "example": "<ResizablePanelGroup direction=\"horizontal\"><ResizablePanel defaultSize={30} /><ResizableHandle withHandle /><ResizablePanel /></ResizablePanelGroup>"
     },
     {
       "name": "ScrollArea",
@@ -2247,7 +4225,18 @@
       "exports": [
         "ScrollArea",
         "ScrollBar"
-      ]
+      ],
+      "description": "Zone de défilement personnalisée avec scrollbar stylisée Vigee, verticale ou horizontale, sans overflow natif visible.",
+      "useWhen": [
+        "liste déroulante trop longue dans un Drawer ou Sheet → wrapper le contenu dans ScrollArea",
+        "sidebar avec navigation dense → limiter la hauteur et scroller proprement",
+        "tableau ou contenu débordant dans un Container contraint en hauteur → éviter l'overflow natif du navigateur"
+      ],
+      "dontUseFor": [
+        "défilement d'une page entière → utiliser le scroll natif du navigateur",
+        "listes avec pagination → utiliser Pagination"
+      ],
+      "example": "<ScrollArea className=\"h-72\"><div>{items.map(i => <div key={i}>{i}</div>)}</div></ScrollArea>"
     },
     {
       "name": "Select",
@@ -2265,7 +4254,20 @@
         "SelectLabel",
         "SelectItem",
         "SelectSeparator"
-      ]
+      ],
+      "description": "Primitives Radix UI pour construire un menu déroulant de sélection unique stylisé Vigee (trigger, content, items, groupes, séparateurs).",
+      "useWhen": [
+        "choix unique parmi une liste courte et statique → utiliser Select + SelectItem",
+        "remplacement d'un `<select>` HTML natif dans un formulaire non react-hook-form",
+        "affichage d'options groupées avec SelectGroup + SelectLabel",
+        "séparation visuelle d'options avec SelectSeparator."
+      ],
+      "dontUseFor": [
+        "sélection multiple → utiliser MultiSelect",
+        "liste avec recherche textuelle → utiliser ComboBox",
+        "formulaire react-hook-form avec validation → utiliser Select (Forms)."
+      ],
+      "example": "<Select onValueChange={setValue}><SelectTrigger><SelectValue placeholder=\"Choisir...\" /></SelectTrigger><SelectContent><SelectItem value=\"a\">Option A</SelectItem></SelectContent></Select>"
     },
     {
       "name": "Separator",
@@ -2273,7 +4275,18 @@
       "importPath": "@vigee-designsystem/components/ui/separator",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Ligne de séparation visuelle horizontale ou verticale basée sur Radix UI, accessible et stylée avec la couleur `border` du thème.",
+      "useWhen": [
+        "diviser des sections dans une carte ou un panneau → utiliser Separator",
+        "séparer des items dans un menu ou une liste → utiliser Separator",
+        "tracer une ligne entre un header et son contenu → utiliser Separator"
+      ],
+      "dontUseFor": [
+        "structurer des blocs de contenu avec espacement → utiliser Container",
+        "créer des sections titrées → utiliser SectionHeading"
+      ],
+      "example": "<Separator orientation=\"horizontal\" />"
     },
     {
       "name": "Sheet",
@@ -2293,7 +4306,19 @@
         "SheetFooter",
         "SheetTitle",
         "SheetDescription"
-      ]
+      ],
+      "description": "Panneau glissant (drawer) basé sur Radix Dialog, s'ouvrant depuis top/bottom/left/right avec overlay et bouton de fermeture intégré.",
+      "useWhen": [
+        "affichage d'un formulaire secondaire sans quitter la page → utiliser Sheet",
+        "détails d'un élément en contexte → utiliser Sheet",
+        "navigation mobile complémentaire → utiliser Sheet"
+      ],
+      "dontUseFor": [
+        "confirmation destructive simple → utiliser AlertDialog",
+        "contenu complexe pleine page → utiliser Drawer",
+        "boîte de dialogue centrée modale → utiliser Dialog"
+      ],
+      "example": "<Sheet><SheetTrigger>Ouvrir</SheetTrigger><SheetContent side=\"right\"><SheetHeader><SheetTitle>Détails</SheetTitle></SheetHeader></SheetContent></Sheet>"
     },
     {
       "name": "Sidebar",
@@ -2327,7 +4352,19 @@
         "SidebarSeparator",
         "SidebarTrigger",
         "useSidebar"
-      ]
+      ],
+      "description": "Primitive de mise en page sidebar responsive : drawer mobile via Sheet, rail rétractable desktop avec état persisté en cookie.",
+      "useWhen": [
+        "mise en page principale de l'application avec navigation latérale → utiliser Sidebar + SidebarProvider",
+        "sidebar rétractable en icônes sur desktop → collapsible=\"icon\"",
+        "sidebar fixe sans collapse → collapsible=\"none\"",
+        "contrôle externe de l'état ouvert/fermé → props open + onOpenChange sur SidebarProvider"
+      ],
+      "dontUseFor": [
+        "navigation contextuelle flottante → utiliser Sheet",
+        "menu mobile isolé → utiliser MobileMenu"
+      ],
+      "example": "<SidebarProvider defaultOpen={true}><Sidebar side=\"left\" variant=\"sidebar\" collapsible=\"icon\">{children}</Sidebar></SidebarProvider>"
     },
     {
       "name": "Skeleton",
@@ -2335,7 +4372,18 @@
       "importPath": "@vigee-designsystem/components/ui/skeleton",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Bloc de chargement animé (pulse) pour masquer le contenu en attente de données.",
+      "useWhen": [
+        "contenu asynchrone en cours de chargement → remplacer temporairement texte/image/card",
+        "squelette de mise en page avant hydratation",
+        "placeholder visuel dans une liste ou tableau"
+      ],
+      "dontUseFor": [
+        "pages entières en chargement → utiliser LoaderPage",
+        "tableaux avec structure complexe → utiliser DashboardSkeleton"
+      ],
+      "example": "<Skeleton className=\"h-4 w-48 rounded\" />"
     },
     {
       "name": "Slider",
@@ -2343,7 +4391,17 @@
       "importPath": "@vigee-designsystem/components/ui/slider",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Primitif Radix UI pour sélectionner une valeur numérique dans une plage via un curseur glissant.",
+      "useWhen": [
+        "réglage d'une valeur numérique dans une plage (volume, budget, opacité) → utiliser Slider",
+        "filtre de plage simple sur une valeur unique → utiliser Slider"
+      ],
+      "dontUseFor": [
+        "sélection d'une plage min/max avec deux curseurs → utiliser Slider (DS Vigee, catégorie Slider)",
+        "filtrage numérique dans une interface de filtres → utiliser NumberFilter"
+      ],
+      "example": "<Slider min={0} max={100} step={1} defaultValue={[50]} onValueChange={(val) => console.log(val)} />"
     },
     {
       "name": "Switch",
@@ -2351,7 +4409,17 @@
       "importPath": "@vigee-designsystem/components/ui/switch",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Interrupteur bascule (on/off) basé sur Radix UI Switch, pour activer ou désactiver une option de façon binaire.",
+      "useWhen": [
+        "activation/désactivation d'une fonctionnalité (notifications, mode sombre) → utiliser Switch",
+        "préférence utilisateur booléenne dans un formulaire de settings → utiliser Switch"
+      ],
+      "dontUseFor": [
+        "choix parmi plusieurs options → utiliser ui/Tabs ou ui/RadioGroup",
+        "cases à cocher indépendantes dans une liste → utiliser ui/Checkbox"
+      ],
+      "example": "<Switch checked={isEnabled} onCheckedChange={setIsEnabled} />"
     },
     {
       "name": "Table",
@@ -2369,7 +4437,18 @@
         "TableRow",
         "TableCell",
         "TableCaption"
-      ]
+      ],
+      "description": "Primitives HTML table stylisées Vigee : bordure, hover sur les lignes, header gris, scroll horizontal automatique.",
+      "useWhen": [
+        "affichage de données tabulaires simples avec structure manuelle (thead/tbody) → utiliser Table + TableHeader + TableBody + TableRow + TableHead + TableCell",
+        "besoin d'un footer récapitulatif → utiliser TableFooter",
+        "légende sous le tableau → utiliser TableCaption"
+      ],
+      "dontUseFor": [
+        "données avec tri/filtrage/pagination → utiliser DataTable",
+        "recherche intégrée dans le tableau → utiliser DataTable + TableSearch"
+      ],
+      "example": "<Table><TableHeader><TableRow><TableHead>Nom</TableHead></TableRow></TableHeader><TableBody><TableRow><TableCell>Alice</TableCell></TableRow></TableBody></Table>"
     },
     {
       "name": "Tabs",
@@ -2383,7 +4462,18 @@
         "TabsList",
         "TabsTrigger",
         "TabsContent"
-      ]
+      ],
+      "description": "Primitives d'onglets Radix UI stylisées Vigee : conteneur, barre de navigation, déclencheur et panneau de contenu.",
+      "useWhen": [
+        "segmenter une page en vues alternatives (ex: Détails / Historique / Documents) → utiliser Tabs+TabsList+TabsTrigger+TabsContent",
+        "navigation par onglets simple sur desktop → utiliser Tabs",
+        "besoin d'accessibilité clavier native sur les onglets → utiliser Tabs"
+      ],
+      "dontUseFor": [
+        "navigation responsive mobile/desktop → utiliser TabsResponsive",
+        "onglets sur mobile avec swipe → utiliser TabMobile"
+      ],
+      "example": "<Tabs defaultValue=\"details\"><TabsList><TabsTrigger value=\"details\">Détails</TabsTrigger></TabsList><TabsContent value=\"details\">Contenu</TabsContent></Tabs>"
     },
     {
       "name": "Textarea",
@@ -2391,7 +4481,18 @@
       "importPath": "@vigee-designsystem/components/ui/textarea",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Textarea stylisée Vigee, compatible ref-forwarding, pour saisie de texte multi-lignes dans les formulaires.",
+      "useWhen": [
+        "saisie de texte long (description, commentaire, note) dans un formulaire",
+        "champ contrôlé ou non-contrôlé natif HTML",
+        "intégration avec react-hook-form via `{...field}` spread"
+      ],
+      "dontUseFor": [
+        "saisie courte (nom, email, mot de passe) → utiliser Input",
+        "texte riche avec formatage → utiliser TextArea (Forms)"
+      ],
+      "example": "<Textarea placeholder=\"Décrivez votre projet...\" rows={4} />"
     },
     {
       "name": "Toaster",
@@ -2399,7 +4500,17 @@
       "importPath": "@vigee-designsystem/components/ui/sonner",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Toaster Sonner adapté au thème Vigee (light/dark/system) à monter une seule fois dans le layout racine.",
+      "useWhen": [
+        "mise en place des notifications toast dans le layout racine → monter `<Toaster />`",
+        "afficher des retours utilisateur (succès, erreur, info) via `toast()` de sonner dans n'importe quel composant enfant."
+      ],
+      "dontUseFor": [
+        "feedback bloquant nécessitant une confirmation → utiliser AlertDialog",
+        "messages persistants contextuels dans la page → utiliser AlertInfo."
+      ],
+      "example": "<Toaster />"
     },
     {
       "name": "Toaster",
@@ -2407,7 +4518,17 @@
       "importPath": "@vigee-designsystem/components/ui/toaster",
       "exportType": "named",
       "props": [],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Conteneur global qui affiche les toasts déclenchés via `useToast()` — à placer une seule fois dans le layout racine.",
+      "useWhen": [
+        "layout racine de l'app → placer `<Toaster />` une fois pour activer le système de notifications",
+        "feedback utilisateur (succès, erreur, info) déclenché depuis n'importe quel composant via `useToast()`"
+      ],
+      "dontUseFor": [
+        "messages persistants visibles en page → utiliser AlertInfo",
+        "modales de confirmation bloquantes → utiliser AlertDialog"
+      ],
+      "example": "<Toaster />"
     },
     {
       "name": "Toggle",
@@ -2419,7 +4540,19 @@
       "exports": [
         "Toggle",
         "toggleVariants"
-      ]
+      ],
+      "description": "Bouton bascule accessible (on/off) basé sur Radix UI, avec variantes default/outline et tailles sm/default/lg.",
+      "useWhen": [
+        "activation d'un mode bold/italic dans un éditeur de texte → utiliser Toggle",
+        "bouton filtre visuel pressé/non-pressé → utiliser Toggle",
+        "option binaire isolée sans libellé formulaire → utiliser Toggle"
+      ],
+      "dontUseFor": [
+        "état on/off avec libellé texte dans un formulaire → utiliser Switch",
+        "groupe de toggles liés → utiliser ToggleGroup",
+        "sélection parmi plusieurs options → utiliser Tabs"
+      ],
+      "example": "<Toggle variant=\"outline\" size=\"sm\" aria-label=\"Gras\" pressed={bold} onPressedChange={setBold} />"
     },
     {
       "name": "ToggleGroup",
@@ -2431,7 +4564,19 @@
       "exports": [
         "ToggleGroup",
         "ToggleGroupItem"
-      ]
+      ],
+      "description": "Groupe de boutons toggle mutuellement exclusifs ou à sélection multiple, basé sur Radix UI, avec variants et tailles partagés.",
+      "useWhen": [
+        "sélection d'un mode parmi plusieurs options (vue liste/grille/carte) → utiliser ToggleGroup",
+        "filtre visuel par type avec état actif visible → utiliser ToggleGroup",
+        "barre d'outils avec options activables groupées → utiliser ToggleGroup"
+      ],
+      "dontUseFor": [
+        "sélection multiple avec labels longs → utiliser MultiSelect",
+        "navigation entre vues avec URL → utiliser TabsResponsive",
+        "filtres combinables avec recherche → utiliser CheckboxFilter"
+      ],
+      "example": "<ToggleGroup type=\"single\" defaultValue=\"list\"><ToggleGroupItem value=\"list\">Liste</ToggleGroupItem><ToggleGroupItem value=\"grid\">Grille</ToggleGroupItem></ToggleGroup>"
     },
     {
       "name": "Tooltip",
@@ -2445,7 +4590,18 @@
         "TooltipTrigger",
         "TooltipContent",
         "TooltipProvider"
-      ]
+      ],
+      "description": "Bulle d'information contextuelle au survol, basée sur Radix UI, avec animation et positionnement automatique.",
+      "useWhen": [
+        "icône sans libellé nécessitant une explication → envelopper avec Tooltip",
+        "bouton d'action dont le rôle n'est pas évident → ajouter un TooltipContent",
+        "information complémentaire non critique à afficher au survol sans encombrer l'UI."
+      ],
+      "dontUseFor": [
+        "contenu interactif complexe (liens, boutons) dans la bulle → utiliser HoverCard",
+        "messages d'alerte importants → utiliser AlertInfo."
+      ],
+      "example": "<TooltipProvider><Tooltip><TooltipTrigger><Button icon=\"info\" /></TooltipTrigger><TooltipContent>Informations supplémentaires</TooltipContent></Tooltip></TooltipProvider>"
     },
     {
       "name": "type CarouselApi",
@@ -2468,7 +4624,18 @@
         "CarouselItem",
         "CarouselPrevious",
         "CarouselNext"
-      ]
+      ],
+      "description": "Carrousel de slides horizontal ou vertical basé sur Embla, avec navigation clavier et boutons précédent/suivant.",
+      "useWhen": [
+        "afficher une galerie d'images ou de cards en défilement → utiliser Carousel + CarouselContent + CarouselItem",
+        "présenter des étapes ou contenus paginés visuellement → utiliser Carousel avec orientation=\"horizontal\"",
+        "exposer un accès programmatique au carousel → utiliser Carousel avec setApi pour récupérer l'instance Embla"
+      ],
+      "dontUseFor": [
+        "navigation entre vues ou onglets → utiliser TabsResponsive",
+        "affichage d'une liste scrollable longue → utiliser ScrollArea"
+      ],
+      "example": "<Carousel><CarouselContent><CarouselItem>Slide 1</CarouselItem></CarouselContent><CarouselPrevious /><CarouselNext /></Carousel>"
     },
     {
       "name": "type ToastProps",
@@ -2487,7 +4654,18 @@
         "ToastDescription",
         "ToastClose",
         "ToastAction"
-      ]
+      ],
+      "description": "Primitives Radix UI pour afficher des notifications toast transitoires avec variantes default/destructive et bouton de fermeture.",
+      "useWhen": [
+        "confirmation d'une action (sauvegarde, suppression) → utiliser Toast + ToastTitle + ToastDescription",
+        "erreur critique non bloquante → utiliser Toast variant=\"destructive\"",
+        "toast avec action inline (ex: \"Annuler\") → utiliser Toast + ToastAction"
+      ],
+      "dontUseFor": [
+        "messages persistants nécessitant une interaction obligatoire → utiliser AlertDialog",
+        "informations contextuelles statiques dans la page → utiliser AlertInfo"
+      ],
+      "example": "<Toast variant=\"destructive\"><ToastTitle>Erreur</ToastTitle><ToastDescription>Une erreur est survenue.</ToastDescription><ToastClose /></Toast>"
     },
     {
       "name": "ByVigee",
@@ -2497,7 +4675,18 @@
       "props": [
         "dark: boolean"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Mention \"Developed by Vigee\" cliquable avec logo, en version claire ou sombre, à placer en pied de page ou d'écran de connexion.",
+      "useWhen": [
+        "bas de page d'une app Vigee → créditer l'éditeur",
+        "écran de login ou splash screen → afficher la signature Vigee en dark",
+        "footer de sidebar → intégrer la mention dans un contexte sombre ou clair"
+      ],
+      "dontUseFor": [
+        "logo principal de l'app → utiliser VariableLogo",
+        "écran de chargement → utiliser SplashScreen"
+      ],
+      "example": "<ByVigee dark={true} />"
     }
   ],
   "icons": {
@@ -6910,6 +9099,7 @@
     "apple": "PiAppleLogoStroke",
     "dots": "PiThreeDotsMenuHorizontalStroke",
     "check": "PiCheckTickSingleStroke",
+    "clock": "PiClockDefaultStroke",
     "phone": "PiPhoneDefaultStroke",
     "ai": "PiOpenaiStroke",
     "settings": "PiUserSettingsStroke",
@@ -6931,7 +9121,8 @@
     "plusCircle": "PiPlusCircleStroke",
     "repeat": "PiRepeatSquareStroke",
     "instagram": "PiInstagramStroke",
-    "facebook": "PiFacebookStroke"
+    "facebook": "PiFacebookStroke",
+    "configuration": "PiSettings02Stroke"
   },
   "patterns": {
     "form": "import { useForm } from 'react-hook-form';\nimport { zodResolver } from '@hookform/resolvers/zod';\nimport { Form } from '@vigee-designsystem/components/ui/form';\nimport Input from '@vigee-designsystem/components/Forms/Input';\nimport Select from '@vigee-designsystem/components/Forms/Select';\nimport Switch from '@vigee-designsystem/components/Forms/Switch';\n\nconst form = useForm({ resolver: zodResolver(schema), defaultValues: {...} });\n<Form {...form}><form onSubmit={form.handleSubmit(onSubmit)}>\n  <Input form={form} name=\"field\" label=\"Label\" />\n</form></Form>",

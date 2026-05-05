@@ -1,3 +1,9 @@
+/**
+ * @description Bouton avec modale de confirmation intégrée pour sécuriser les actions destructives ou irréversibles.
+ * @useWhen suppression d'un enregistrement → utiliser ActionWithValidation avec icon="trash" | validation d'une action critique → utiliser ActionWithValidation avec icon="check" | réinitialisation de données → utiliser ActionWithValidation avec icon="refresh"
+ * @dontUseFor actions sans confirmation nécessaire → utiliser Button | suppression avec feedback visuel de chargement géré ailleurs → utiliser DeleteAction
+ * @example <ActionWithValidation icon="trash" title="Supprimer cet élément ?" subtitle="Cette action est irréversible." action={() => handleDelete(id)} isPending={isPending} />
+ */
 import { Button } from "./Button";
 import { AlertDialog } from "../Forms/AlertDialog";
 import { cn } from "../lib/utils";

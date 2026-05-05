@@ -1,3 +1,9 @@
+/**
+ * @description Bandeau de titre de page avec sous-titre optionnel, icône et zone d'actions à droite.
+ * @useWhen en-tête d'une page principale avec titre + boutons d'action → utiliser PageHeader | page avec contexte visuel → ajouter `icon` et `subtitle` | section sans fond blanc (tableau de bord) → utiliser `variant="ghost"`
+ * @dontUseFor titre de section interne dans une page → utiliser SectionTitle | titre de carte ou panneau → utiliser RoundedContainer
+ * @example <PageHeader title="Projets" subtitle="Liste de vos projets actifs" icon={<FolderIcon />}><Button icon="add" onClick={handleAdd} /></PageHeader>
+ */
 import { TypographyH2 } from "../Typography/Typography";
 import { cn } from "../lib/utils";
 

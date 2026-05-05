@@ -1,3 +1,9 @@
+/**
+ * @description Panneau contextuel responsive : Dialog sur desktop (≥768px) et Drawer bas d'écran sur mobile, avec ScrollArea intégrée.
+ * @useWhen formulaire secondaire déclenché par un bouton dans une liste → encapsuler dans DrawerMobile | affichage de détails ou d'édition rapide sans quitter la page → utiliser DrawerMobile | contenu contextuel avec titre/description qui doit s'adapter mobile/desktop automatiquement → utiliser DrawerMobile
+ * @dontUseFor navigation entre pages ou étapes multiples → utiliser Stepper | confirmation d'action destructive → utiliser ActionWithValidation | panneau latéral persistant → utiliser Drawer
+ * @example <DrawerMobile title="Modifier l'adresse" trigger={<Button icon="edit" />} size="md">{children}</DrawerMobile>
+ */
 "use client";
 import * as React from "react";
 import { Button } from "../ui/button";

@@ -1,3 +1,9 @@
+/**
+ * @description Effet de bordure animée avec un faisceau lumineux qui tourne autour d'un conteneur pour attirer l'attention.
+ * @useWhen carte ou section à mettre en avant visuellement → envelopper avec BorderBeam | bouton ou bloc "premium" nécessitant un effet visuel dynamique → ajouter BorderBeam en enfant absolu | SplashScreen ou landing page → accentuer un élément clé avec BorderBeam.
+ * @dontUseFor tableaux de données ou listes → utiliser DataTable | navigation ou menus → utiliser Sidebar | indicateurs de progression → utiliser ProgressBar.
+ * @example <BorderBeam size={150} duration={10} colorFrom="#ffaa40" colorTo="#9c40ff" />
+ */
 import { cn } from "../lib/utils";
 
 interface BorderBeamProps {

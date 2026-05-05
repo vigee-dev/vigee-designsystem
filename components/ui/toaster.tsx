@@ -1,3 +1,9 @@
+/**
+ * @description Conteneur global qui affiche les toasts déclenchés via `useToast()` — à placer une seule fois dans le layout racine.
+ * @useWhen layout racine de l'app → placer `<Toaster />` une fois pour activer le système de notifications | feedback utilisateur (succès, erreur, info) déclenché depuis n'importe quel composant via `useToast()`
+ * @dontUseFor messages persistants visibles en page → utiliser AlertInfo | modales de confirmation bloquantes → utiliser AlertDialog
+ * @example <Toaster />
+ */
 "use client";
 
 import {

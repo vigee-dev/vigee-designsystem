@@ -1,3 +1,9 @@
+/**
+ * @description Liste classée d'entités (personnes, projets…) avec avatar, nom, et un ou deux montants formatés en devise ou k€.
+ * @useWhen afficher un top N de commerciaux/clients avec leur CA | comparer deux métriques (ex: CA réalisé vs objectif) par entité | dashboard KPI avec classement scrollable
+ * @dontUseFor visualisation de tendances sur le temps → utiliser AreaChart ou LineChart | comparaison de volumes entre catégories → utiliser BarChart
+ * @example <Ranking title="Top clients" data={[{ name: "Dupont SA", amount: 45000, currency: "€" }]} kiloEuros />
+ */
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { TypographyH3 } from "../Typography/Typography";
 import {

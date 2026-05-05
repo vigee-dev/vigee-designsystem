@@ -1,3 +1,9 @@
+/**
+ * @description Filtre de date (et heure optionnelle) synchronisé avec l'URL via nuqs, avec calendrier popover et navigation jour par jour.
+ * @useWhen filtrer une liste/tableau par date via query param URL → utiliser DatePickerFilter | filtrer par créneau horaire (ex: réservations, plannings) avec `displayHour` | borner la sélection à une plage de dates avec `minDate`/`maxDate` | naviguer jour par jour avec les flèches via `withArrows`
+ * @dontUseFor saisie de date dans un formulaire react-hook-form → utiliser DatePicker | sélection d'une plage de dates → utiliser DatePickerRange | choix parmi des presets prédéfinis → utiliser DatePickerWithPresets
+ * @example <DatePickerFilter label="Date" queryKey="start_date" withArrows displayHour minHour="08:00" maxHour="20:00" />
+ */
 "use client";
 
 import { useEffect } from "react";

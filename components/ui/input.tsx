@@ -1,3 +1,9 @@
+/**
+ * @description Primitif input HTML stylisé Vigee : champ texte brut avec gestion focus, disabled et upload de fichier.
+ * @useWhen composition d'un champ personnalisé sans react-hook-form → utiliser Input directement | input non contrôlé par un Form Vigee → utiliser Input | besoin d'un input de type file simple → utiliser Input avec type="file"
+ * @dontUseFor formulaire avec validation react-hook-form → utiliser Forms/Input | saisie téléphone → utiliser PhoneNumber | recherche avec suggestions → utiliser ComboBox
+ * @example <Input type="email" placeholder="email@exemple.com" disabled={false} />
+ */
 import { cn } from '../lib/utils';
 import * as React from 'react';
 export interface InputProps

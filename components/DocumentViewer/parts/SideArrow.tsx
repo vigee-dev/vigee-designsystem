@@ -1,3 +1,9 @@
+/**
+ * @description Flèche de navigation latérale fixe (gauche/droite) pour parcourir les documents dans un DocumentViewer.
+ * @useWhen navigation entre documents dans un viewer plein écran → utiliser SideArrow | afficher le titre du document adjacent sous la flèche → utiliser SideArrow avec `label`
+ * @dontUseFor pagination de tableau → utiliser Pagination | navigation entre étapes → utiliser Stepper
+ * @example <SideArrow direction="left" disabled={false} onClick={handlePrev} label="Contrat_2024.pdf" ariaLabel="Document précédent" />
+ */
 'use client';
 
 import { ChevronLeft, ChevronRight } from 'lucide-react';

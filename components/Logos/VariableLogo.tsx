@@ -1,3 +1,9 @@
+/**
+ * @description Logo Vigee cliquable (gris ou blanc, taille normale ou grande) avec titre optionnel, wrappé dans un Next.js Link.
+ * @useWhen header/navbar de l'application → afficher le logo de marque Vigee | splash screen ou page de login → version blanche sur fond sombre | sidebar → logo compact sans titre
+ * @dontUseFor illustration décorative sans navigation → utiliser une balise `<Image>` directement | page d'erreur avec navigation complexe → utiliser PageHeader
+ * @example <VariableLogo title="Vigee" href="/dashboard" big white />
+ */
 import Link from "next/link";
 import VigeeGrayLogo from "../../img/logos/VigeeGrayLogo.png";
 import VigeeWhiteLogo from "../../img/logos/VigeeWhiteLogo.png";

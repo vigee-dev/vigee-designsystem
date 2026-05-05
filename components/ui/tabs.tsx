@@ -1,3 +1,9 @@
+/**
+ * @description Primitives d'onglets Radix UI stylisées Vigee : conteneur, barre de navigation, déclencheur et panneau de contenu.
+ * @useWhen segmenter une page en vues alternatives (ex: Détails / Historique / Documents) → utiliser Tabs+TabsList+TabsTrigger+TabsContent | navigation par onglets simple sur desktop → utiliser Tabs | besoin d'accessibilité clavier native sur les onglets → utiliser Tabs
+ * @dontUseFor navigation responsive mobile/desktop → utiliser TabsResponsive | onglets sur mobile avec swipe → utiliser TabMobile
+ * @example <Tabs defaultValue="details"><TabsList><TabsTrigger value="details">Détails</TabsTrigger></TabsList><TabsContent value="details">Contenu</TabsContent></Tabs>
+ */
 'use client';
 
 import * as TabsPrimitive from '@radix-ui/react-tabs';

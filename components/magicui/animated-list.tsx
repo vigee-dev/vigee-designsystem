@@ -1,3 +1,9 @@
+/**
+ * @description Affiche une liste d'éléments qui apparaissent un par un avec animation spring, en boucle à intervalle configurable.
+ * @useWhen feed de notifications animé sur un dashboard ou landing page → utiliser AnimatedList | mise en avant séquentielle d'items marketing ou d'alertes → utiliser AnimatedList
+ * @dontUseFor liste statique sans animation → utiliser ui/Table ou Container | notifications interactives persistantes → utiliser Alerts/AlertInfo
+ * @example <AnimatedList delay={800}><NotifCard /><NotifCard /><NotifCard /></AnimatedList>
+ */
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";

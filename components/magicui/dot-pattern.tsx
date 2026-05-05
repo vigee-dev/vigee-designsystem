@@ -1,3 +1,9 @@
+/**
+ * @description Fond décoratif SVG en grille de points, positionné en absolute pour couvrir le conteneur parent.
+ * @useWhen arrière-plan visuel d'une section hero ou splash screen → utiliser DotPattern | fond texturé pour une card ou un bloc mise en avant → utiliser DotPattern
+ * @dontUseFor contenu interactif ou porteur de sens → utiliser un vrai composant | fond animé → utiliser GridPattern ou RetroGrid
+ * @example <DotPattern className="opacity-50" width={20} height={20} cr={1.5} />
+ */
 import { useId } from "react";
 
 import { cn } from "../lib/utils";

@@ -1,3 +1,9 @@
+/**
+ * @description Zone de dépôt de fichiers (drag & drop + clic) intégrée react-hook-form, avec prévisualisation et suppression des fichiers sélectionnés.
+ * @useWhen upload de fichiers dans un formulaire Vigee (PDF, images, docs) → utiliser InputDropZoneFile | upload unique (ex: pièce jointe) → passer `multiple={false}` | upload multiple (ex: galerie, documents) → passer `multiple={true}` | restreindre les formats acceptés → utiliser `extensions` et `accept`
+ * @dontUseFor upload d'avatar ou photo de profil → utiliser ProfileImageUploader | saisie de données structurées → utiliser Input
+ * @example <InputDropZoneFile form={form} name="documents" extensions={[".pdf", ".docx"]} accept=".pdf,.docx" multiple />
+ */
 "use client";
 
 import { UseFormReturn, FieldValues, Path, PathValue } from "react-hook-form";

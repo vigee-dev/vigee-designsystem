@@ -1,3 +1,9 @@
+/**
+ * @description Sélecteur de plage de dates avec raccourcis de périodes (semaine, mois, année) et synchronisation URL via nuqs.
+ * @useWhen filtrer des données par période dans un tableau de bord → utiliser DatePickerRange | sélection manuelle de plage de dates avec calendrier → utiliser DatePickerRange | contrôle contrôlé via state React (date + setDate) → utiliser DatePickerRange | synchronisation automatique de la plage dans les query params URL → utiliser DatePickerRange
+ * @dontUseFor sélection d'une date unique → utiliser DatePicker | filtre de date dans une barre de filtres URL → utiliser DatePickerFilter
+ * @example <DatePickerRange label="Période" select onChange={(range) => console.log(range)} />
+ */
 "use client";
 
 import {

@@ -1,3 +1,9 @@
+/**
+ * @description Modale de confirmation bloquante (Radix) avec overlay, titre, description, et boutons Action/Cancel stylés Vigee.
+ * @useWhen confirmation d'une suppression irréversible → utiliser AlertDialog | validation d'une action critique (archivage, déconnexion) → utiliser AlertDialog | remplacer un `window.confirm()` natif → utiliser AlertDialog
+ * @dontUseFor actions destructives avec contexte riche → utiliser ActionWithValidation | affichage d'informations sans confirmation → utiliser AlertInfo | formulaires multi-champs dans une modale → utiliser Sheet
+ * @example <AlertDialog><AlertDialogTrigger>Supprimer</AlertDialogTrigger><AlertDialogContent><AlertDialogHeader><AlertDialogTitle>Confirmer la suppression</AlertDialogTitle><AlertDialogDescription>Cette action est irréversible.</AlertDialogDescription></AlertDialogHeader><AlertDialogFooter><AlertDialogCancel>Annuler</AlertDialogCancel><AlertDialogAction>Supprimer</AlertDialogAction></AlertDialogFooter></AlertDialogContent></AlertDialog>
+ */
 "use client";
 
 import * as React from "react";

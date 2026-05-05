@@ -1,3 +1,9 @@
+/**
+ * @description Interrupteur bascule (on/off) basé sur Radix UI Switch, pour activer ou désactiver une option de façon binaire.
+ * @useWhen activation/désactivation d'une fonctionnalité (notifications, mode sombre) → utiliser Switch | préférence utilisateur booléenne dans un formulaire de settings → utiliser Switch
+ * @dontUseFor choix parmi plusieurs options → utiliser ui/Tabs ou ui/RadioGroup | cases à cocher indépendantes dans une liste → utiliser ui/Checkbox
+ * @example <Switch checked={isEnabled} onCheckedChange={setIsEnabled} />
+ */
 "use client";
 
 import * as SwitchPrimitives from "@radix-ui/react-switch";

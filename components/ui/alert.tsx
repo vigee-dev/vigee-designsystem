@@ -1,3 +1,9 @@
+/**
+ * @description Bloc d'alerte statique avec titre et description, en variante neutre ou destructive (erreur/danger).
+ * @useWhen afficher un message d'erreur contextuel dans un formulaire → utiliser Alert variant="destructive" | signaler un avertissement non-bloquant dans une page → utiliser Alert variant="default" | accompagner une icône SVG d'un message structuré titre + description → utiliser Alert + AlertTitle + AlertDescription
+ * @dontUseFor notifications temporaires/toasts → utiliser Toaster | messages d'information métier Vigee avec styles pré-configurés → utiliser AlertInfo
+ * @example <Alert variant="destructive"><AlertTitle>Erreur</AlertTitle><AlertDescription>Identifiants invalides.</AlertDescription></Alert>
+ */
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 

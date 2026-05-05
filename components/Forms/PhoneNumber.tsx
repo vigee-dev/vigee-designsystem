@@ -1,3 +1,9 @@
+/**
+ * @description Champ téléphone international intégré react-hook-form, préconfiguré en France (+33) avec sélecteur de pays.
+ * @useWhen formulaire de création/édition de contact nécessitant un numéro mobile → utiliser PhoneNumber | champ téléphone avec validation react-hook-form dans un Form Vigee → utiliser PhoneNumber | champ obligatoire avec indicatif pays sélectionnable → utiliser PhoneNumber
+ * @dontUseFor saisie d'un numéro fixe sans sélecteur de pays → utiliser Input | champ texte générique → utiliser Input
+ * @example <PhoneNumber form={form} name="phone" label="Téléphone mobile" required />
+ */
 import {
   FormControl,
   FormDescription,

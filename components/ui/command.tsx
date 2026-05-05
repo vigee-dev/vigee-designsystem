@@ -1,3 +1,9 @@
+/**
+ * @description Palette de commandes clavier (cmdk) avec recherche filtrante, groupes et items sélectionnables, utilisable inline ou dans une Dialog.
+ * @useWhen palette de commandes globale accessible au clavier (ex: ⌘K) → utiliser CommandDialog | liste filtrante inline dans un popover ou une sidebar → utiliser Command + CommandInput + CommandList | affichage de raccourcis clavier associés à des actions → utiliser CommandItem + CommandShortcut
+ * @dontUseFor sélection simple dans un formulaire → utiliser Select | recherche avec chargement asynchrone → utiliser Forms/SearchSelectAsync | sélection multiple avec tags → utiliser MultiSelect
+ * @example <CommandDialog open={open} onOpenChange={setOpen}><CommandInput placeholder="Rechercher..." /><CommandList><CommandEmpty>Aucun résultat.</CommandEmpty><CommandGroup heading="Actions"><CommandItem>Créer un projet</CommandItem></CommandGroup></CommandList></CommandDialog>
+ */
 "use client";
 
 import * as React from "react";

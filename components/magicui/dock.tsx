@@ -1,3 +1,9 @@
+/**
+ * @description Barre de navigation style macOS avec effet de grossissement magnétique au survol, basée sur Framer Motion.
+ * @useWhen navigation principale flottante avec icônes animées → utiliser Dock + DockIcon | barre d'actions rapides style desktop dans une interface riche → utiliser Dock | icône individuelle dans la barre avec effet zoom → utiliser DockIcon
+ * @dontUseFor navigation textuelle classique → utiliser Sidebar | menu déroulant d'actions → utiliser DropdownMenu
+ * @example <Dock magnification={70} distance={120} direction="bottom"><DockIcon><HomeIcon /></DockIcon></Dock>
+ */
 "use client";
 
 import React, { PropsWithChildren, useRef } from "react";

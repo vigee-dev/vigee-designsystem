@@ -1,3 +1,9 @@
+/**
+ * @description Écran de chargement plein écran animé (spinner + grille SVG) affiché au démarrage de l'application avant le rendu principal.
+ * @useWhen initialisation de l'app Next.js avant hydratation → afficher SplashScreen | attente d'un chargement global (auth, config) → masquer le contenu avec SplashScreen | thème sombre activé → passer `dark` pour adapter les couleurs.
+ * @dontUseFor chargement de sections partielles → utiliser LoaderPage | indicateur de rechargement de données → utiliser RefetchIndicator | skeleton de dashboard → utiliser DashboardSkeleton.
+ * @example <SplashScreen finishLoading={() => setReady(true)} dark={false} />
+ */
 "use client";
 
 import { useEffect, useState } from "react";

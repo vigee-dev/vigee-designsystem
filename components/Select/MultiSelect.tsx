@@ -1,3 +1,9 @@
+/**
+ * @description Sélecteur multi-valeurs avec popover, recherche intégrée, badges de sélection et option "tout sélectionner".
+ * @useWhen filtres multi-critères (ex: sélection de plusieurs rôles, tags, statuts) → utiliser MultiSelect | champ de formulaire nécessitant plusieurs valeurs parmi une liste fixe → utiliser MultiSelect | affichage condensé des sélections avec compteur quand maxCount dépassé → utiliser MultiSelect
+ * @dontUseFor sélection d'une seule valeur → utiliser Select | liste avec recherche asynchrone ou gros dataset → utiliser ComboBox | filtres URL-based dans une page de listing → utiliser SelectMultiple
+ * @example <MultiSelect options={[{ label: "Admin", value: "admin" }, { label: "User", value: "user" }]} onValueChange={(vals) => setRoles(vals)} label="Rôles" placeholder="Choisir des rôles" />
+ */
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import {

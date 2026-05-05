@@ -1,3 +1,9 @@
+/**
+ * @description Filtre multi-sélection piloté par les search params URL, avec badges cliquables pour les valeurs actives.
+ * @useWhen filtrer une liste par plusieurs équipements/catégories via l'URL → utiliser SelectMultiple | besoin de partager/bookmarker un état de filtre multi-valeurs → utiliser SelectMultiple | page avec plusieurs filtres combinables en query string → utiliser SelectMultiple
+ * @dontUseFor sélection multiple dans un formulaire react-hook-form → utiliser MultiSelect | sélection unique dans l'URL → utiliser SelectSearchParam | dataset large avec recherche → utiliser ComboBox
+ * @example <SelectMultiple options={[{ label: "Vélo", value: 1, icon: <BikeIcon /> }]} placeholder="Équipements" queryKey="equipments" />
+ */
 "use client";
 import { useMemo, useEffect } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";

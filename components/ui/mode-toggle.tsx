@@ -1,3 +1,9 @@
+/**
+ * @description Bouton icône soleil/lune avec dropdown pour basculer entre les thèmes Light, Dark et System via next-themes.
+ * @useWhen barre de navigation ou header → placer ModeToggle pour permettre le changement de thème | sidebar ou zone de paramètres utilisateur → offrir le contrôle du thème sans texte visible.
+ * @dontUseFor gestion d'autres préférences utilisateur → utiliser Switch | affichage d'options multiples non liées au thème → utiliser DropdownMenu directement.
+ * @example <ModeToggle />
+ */
 "use client";
 
 import * as React from "react";

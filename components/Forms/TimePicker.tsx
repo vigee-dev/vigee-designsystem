@@ -1,3 +1,9 @@
+/**
+ * @description Sélecteur d'heure par créneaux (pas configurable) intégré react-hook-form ou en mode contrôlé standalone, avec plage min/max.
+ * @useWhen champ heure dans un formulaire RHF (réservation, planning) → utiliser avec `form` + `name` | sélection d'heure hors formulaire → utiliser avec `value` + `onChange` | restreindre les créneaux disponibles → utiliser `minTime` / `maxTime` | ajuster la granularité des créneaux → utiliser `step`
+ * @dontUseFor sélection d'une date complète → utiliser DatePicker | sélection d'une plage de dates → utiliser DatePickerRange | sélection d'un créneau avec presets → utiliser DatePickerWithPresets
+ * @example <TimePicker form={form} name="startTime" label="Heure de début" step={15} minTime="08:00" maxTime="18:00" />
+ */
 import React, { useEffect, useState } from "react";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import {

@@ -1,3 +1,9 @@
+/**
+ * @description Graphique en anneau (donut) Recharts pour visualiser la répartition proportionnelle de données catégorielles.
+ * @useWhen afficher la distribution d'un ensemble de catégories (ex: répartition des types de contrats) → utiliser PieChart | intégrer un chart dans un dashboard avec titre/sous-titre → activer `container` | varier les couleurs par segment → passer `colors` ou `color` | ajuster l'angle de départ de l'anneau → utiliser `startAngle`.
+ * @dontUseFor comparer des évolutions dans le temps → utiliser LineChart | afficher des valeurs absolues côte à côte → utiliser BarChart | représenter des tendances cumulées → utiliser AreaChart.
+ * @example <PieChart title="Répartition des contrats" subtitle="Par type" data={[{ name: "CDI", value: 40 }, { name: "CDD", value: 20 }]} container />
+ */
 "use client";
 
 import {

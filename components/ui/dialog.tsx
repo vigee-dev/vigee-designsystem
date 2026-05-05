@@ -1,3 +1,9 @@
+/**
+ * @description Modale centrée avec overlay, animation d'entrée/sortie et bouton de fermeture intégré, basée sur Radix Dialog.
+ * @useWhen confirmation d'une action critique → utiliser Dialog | affichage d'un formulaire secondaire sans quitter la page → utiliser Dialog | présentation d'un détail contextuel nécessitant le focus utilisateur → utiliser Dialog
+ * @dontUseFor contenu latéral ou panneau glissant → utiliser Sheet | actions destructives avec double confirmation → utiliser AlertDialog | contenu riche sur mobile nécessitant un tiroir → utiliser Drawer
+ * @example <Dialog><DialogTrigger asChild><Button icon="info" /></DialogTrigger><DialogContent><DialogHeader><DialogTitle>Titre</DialogTitle><DialogDescription>Description</DialogDescription></DialogHeader></DialogContent></Dialog>
+ */
 "use client";
 
 import * as React from "react";

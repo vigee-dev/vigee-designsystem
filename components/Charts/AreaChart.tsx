@@ -1,3 +1,9 @@
+/**
+ * @description Graphique en aires empilées (desktop/mobile) avec gradient, tooltip et footer de tendance, affiché dans une Card.
+ * @useWhen visualiser l'évolution de deux métriques dans le temps sur un dashboard → utiliser AreaChart | afficher une tendance mensuelle avec label et description → utiliser AreaChart
+ * @dontUseFor comparer des catégories sans notion temporelle → utiliser BarChart | afficher une seule courbe sans remplissage → utiliser LineChart | visualiser des proportions → utiliser PieChart
+ * @example <AreaChart title="Trafic mensuel" description="Janvier – Juin 2024" />
+ */
 "use client";
 
 import { TrendingUp } from "lucide-react";

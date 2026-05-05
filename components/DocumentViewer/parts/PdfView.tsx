@@ -1,3 +1,9 @@
+/**
+ * @description Affiche toutes les pages d'un PDF depuis une URL, avec rotation par page et gestion des états de chargement/erreur.
+ * @useWhen visualisation d'un document PDF paginé dans un viewer → utiliser PdfView | besoin de rotation individuelle par page → utiliser PdfView | intégration dans un DocumentViewer avec contrôle du nombre de pages → utiliser PdfView
+ * @dontUseFor affichage d'images ou documents non-PDF → utiliser Illustration | preview simple sans interaction → utiliser Sheet
+ * @example <PdfView url="/doc.pdf" pageWidth={800} rotations={{}} showRotate={true} loadingLabel="Chargement..." errorLabel="Erreur" rotateLeftLabel="Gauche" rotateRightLabel="Droite" onRotate={(p, d) => {}} onLoadSuccess={({ numPages }) => {}} />
+ */
 'use client';
 
 import { useState } from 'react';

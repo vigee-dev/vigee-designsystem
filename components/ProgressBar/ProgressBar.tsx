@@ -1,3 +1,9 @@
+/**
+ * @description Barre de progression horizontale centrée avec pourcentage et texte optionnel sous la barre.
+ * @useWhen upload de fichier en cours → afficher l'avancement | traitement serveur asynchrone → indiquer la progression | onboarding multi-étapes → visualiser le taux de complétion
+ * @dontUseFor progression par étapes nommées → utiliser Stepper | indicateur circulaire → utiliser ProgressCircle
+ * @example <ProgressBar progress={72} text="72% complété" />
+ */
 "use client";
 
 import { Progress } from "../ui/progress";

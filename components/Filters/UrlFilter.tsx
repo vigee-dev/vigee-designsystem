@@ -1,3 +1,9 @@
+/**
+ * @description Select synchronisé avec l'URL (query string) via nuqs pour filtrer des listes sans état React local.
+ * @useWhen filtrer une liste paginée par statut/catégorie avec persistance dans l'URL → utiliser UrlFilter | partager un état de filtre via un lien → utiliser UrlFilter | réinitialiser un filtre en re-sélectionnant la même valeur → utiliser UrlFilter
+ * @dontUseFor filtre multi-valeurs → utiliser SelectMultiple | filtre sur une plage de dates → utiliser DatePickerFilter | filtre numérique min/max → utiliser NumberFilter
+ * @example <UrlFilter name="status" placeholder="Statut" options={[{ label: "Actif", value: "active" }, { label: "Inactif", value: "inactive" }]} />
+ */
 "use client";
 
 import { useQueryState } from "nuqs";

@@ -1,3 +1,9 @@
+/**
+ * @description Primitives Radix UI pour construire un menu déroulant de sélection unique stylisé Vigee (trigger, content, items, groupes, séparateurs).
+ * @useWhen choix unique parmi une liste courte et statique → utiliser Select + SelectItem | remplacement d'un `<select>` HTML natif dans un formulaire non react-hook-form | affichage d'options groupées avec SelectGroup + SelectLabel | séparation visuelle d'options avec SelectSeparator.
+ * @dontUseFor sélection multiple → utiliser MultiSelect | liste avec recherche textuelle → utiliser ComboBox | formulaire react-hook-form avec validation → utiliser Select (Forms).
+ * @example <Select onValueChange={setValue}><SelectTrigger><SelectValue placeholder="Choisir..." /></SelectTrigger><SelectContent><SelectItem value="a">Option A</SelectItem></SelectContent></Select>
+ */
 "use client";
 
 import * as SelectPrimitive from "@radix-ui/react-select";

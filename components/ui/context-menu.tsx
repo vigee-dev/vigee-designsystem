@@ -1,3 +1,9 @@
+/**
+ * @description Menu contextuel natif (clic droit) basé sur Radix UI, avec support des items, sous-menus, checkboxes et radio buttons.
+ * @useWhen clic droit sur une ligne de tableau pour actions rapides (éditer, supprimer, dupliquer) | clic droit sur un élément canvas/carte pour options contextuelles | menu d'actions alternatif sans bouton visible dans l'UI.
+ * @dontUseFor actions principales visibles → utiliser Button ou ActionWithValidation | menu déclenché par un bouton → utiliser DropdownMenu | suppression avec confirmation → utiliser DeleteAction.
+ * @example <ContextMenu><ContextMenuTrigger><div>Clic droit ici</div></ContextMenuTrigger><ContextMenuContent><ContextMenuItem>Éditer</ContextMenuItem><ContextMenuItem>Supprimer</ContextMenuItem></ContextMenuContent></ContextMenu>
+ */
 "use client";
 
 import * as React from "react";

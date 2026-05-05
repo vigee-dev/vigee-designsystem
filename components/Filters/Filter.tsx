@@ -1,3 +1,9 @@
+/**
+ * @description Filtre URL-driven (single ou multi) avec synchronisation nuqs/searchParams, optionnellement searchable via Popover+Command.
+ * @useWhen liste de résultats à filtrer par une valeur unique persistée en query string → utiliser Filter | filtres multiples cumulables (ex: statuts, tags) avec `multi={true}` → utiliser Filter | filtre avec recherche textuelle dans les options → utiliser Filter avec `searchable={true}`
+ * @dontUseFor sélection dans un formulaire react-hook-form → utiliser Select | filtres sur gros volumes avec recherche serveur → utiliser ComboBox | filtre booléen simple → utiliser CheckboxFilter
+ * @example <Filter queryKey="status" options={[{ label: "Actif", value: "active" }, { label: "Inactif", value: "inactive" }]} placeholder="Statut" searchable clearable />
+ */
 "use client";
 
 import * as React from "react";

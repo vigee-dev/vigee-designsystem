@@ -1,3 +1,9 @@
+/**
+ * @description Fond SVG animé avec une grille de carrés qui clignotent aléatoirement via Framer Motion, pour habiller visuellement une page.
+ * @useWhen arrière-plan décoratif d'une SplashScreen → utiliser GridPattern | fond animé pour une page de login ou d'accueil → utiliser GridPattern
+ * @dontUseFor contenu interactif ou cliquable → utiliser Button | illustration métier → utiliser Illustration
+ * @example <GridPattern numSquares={30} maxOpacity={0.4} duration={3} className="text-blue-500" />
+ */
 "use client";
 
 import { cn } from "../lib/utils";

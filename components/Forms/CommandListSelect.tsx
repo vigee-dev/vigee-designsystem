@@ -1,3 +1,9 @@
+/**
+ * @description Sélecteur avec recherche intégrée et support multi-valeurs, connecté à react-hook-form via Popover/Command.
+ * @useWhen choix unique dans une liste avec recherche texte dans un Form → utiliser CommandListSelect | sélection multiple d'options dans un formulaire Vigee → utiliser CommandListSelect avec `multi` | options regroupées par catégorie (groupLabel) dans un Form → utiliser CommandListSelect | usage contrôlé sans form (value + onChange) pour filtres inline → utiliser CommandListSelect
+ * @dontUseFor sélection simple sans recherche → utiliser Select | autocomplétion sur données distantes/asynchrones → utiliser SearchSelectAsync | filtrage par URL côté liste → utiliser SelectSearchParam
+ * @example <CommandListSelect form={form} name="status" label="Statut" options={[{ label: "Actif", value: "active" }, { label: "Inactif", value: "inactive" }]} />
+ */
 import React from "react";
 import { FieldValues, Path, PathValue, UseFormReturn } from "react-hook-form";
 import {

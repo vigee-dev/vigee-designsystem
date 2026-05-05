@@ -1,3 +1,9 @@
+/**
+ * @description Pagination URL-based pour tables et listes, synchronisée avec les search params Next.js — se cache automatiquement si une seule page.
+ * @useWhen table avec résultats paginés côté serveur → afficher la navigation entre pages | plusieurs listes paginées sur la même page → utiliser `paramName` distinct par liste | navigation paginée sans état client (URL comme source de vérité) → utiliser ce composant.
+ * @dontUseFor pagination avec état client pur (sans URL) → utiliser DataTable | filtres complexes combinés à la pagination → utiliser FilterableSelect.
+ * @example <Pagination totalPages={10} paramName="page" />
+ */
 "use client";
 
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";

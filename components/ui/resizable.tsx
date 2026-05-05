@@ -1,3 +1,9 @@
+/**
+ * @description Panneaux redimensionnables par drag horizontal ou vertical, avec poignée optionnelle, basés sur react-resizable-panels.
+ * @useWhen layout éditeur avec panneau code / prévisualisation côte à côte → utiliser ResizablePanelGroup + ResizablePanel | interface avec sidebar redimensionnable manuellement → utiliser ResizablePanelGroup + ResizableHandle | découpage vertical ajustable (ex: liste / détail) → utiliser ResizablePanelGroup direction="vertical"
+ * @dontUseFor redimensionnement d'une modale ou d'un sheet → utiliser Sheet | affichage de panneaux fixes sans interaction drag → utiliser ResizablePanelGroup
+ * @example <ResizablePanelGroup direction="horizontal"><ResizablePanel defaultSize={30} /><ResizableHandle withHandle /><ResizablePanel /></ResizablePanelGroup>
+ */
 import { GripVertical } from "lucide-react";
 import * as ResizablePrimitive from "react-resizable-panels";
 import * as React from "react";

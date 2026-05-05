@@ -1,3 +1,9 @@
+/**
+ * @description Conteneur visuel avec bordure, fond et ombre pour regrouper des informations connexes en surface délimitée.
+ * @useWhen afficher un bloc d'informations structuré (titre + contenu + actions) → utiliser Card + CardHeader + CardContent + CardFooter | encapsuler un KPI, un chart ou un résumé dans un dashboard → utiliser Card avec prop `title` | isoler une section dans une page → utiliser Card comme wrapper visuel
+ * @dontUseFor liste d'éléments répétitifs avec interactions complexes → utiliser DataTable | contenu rétractable → utiliser Collapsible | simple séparation de sections sans fond → utiliser Container
+ * @example <Card title="Informations client"><CardContent><p>Nom : Dupont</p></CardContent></Card>
+ */
 import * as React from "react";
 import { cn } from "../lib/utils";
 

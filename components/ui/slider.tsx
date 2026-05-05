@@ -1,3 +1,9 @@
+/**
+ * @description Primitif Radix UI pour sélectionner une valeur numérique dans une plage via un curseur glissant.
+ * @useWhen réglage d'une valeur numérique dans une plage (volume, budget, opacité) → utiliser Slider | filtre de plage simple sur une valeur unique → utiliser Slider
+ * @dontUseFor sélection d'une plage min/max avec deux curseurs → utiliser Slider (DS Vigee, catégorie Slider) | filtrage numérique dans une interface de filtres → utiliser NumberFilter
+ * @example <Slider min={0} max={100} step={1} defaultValue={[50]} onValueChange={(val) => console.log(val)} />
+ */
 "use client";
 
 import * as React from "react";

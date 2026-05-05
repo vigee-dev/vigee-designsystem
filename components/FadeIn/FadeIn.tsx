@@ -1,3 +1,9 @@
+/**
+ * @description Anime l'apparition d'un bloc en fondu + glissement vers le haut au scroll, avec support du mode reduced-motion et du stagger group.
+ * @useWhen révéler une section ou carte au scroll → utiliser FadeIn | animer une liste d'éléments en cascade au scroll → envelopper avec FadeInStagger et mettre chaque item dans FadeIn | landing page / page marketing avec animations d'entrée → utiliser FadeInStagger + FadeIn
+ * @dontUseFor transitions conditionnelles show/hide → utiliser FadeInOut | animations complexes de liste avec état → utiliser AnimatedListItem
+ * @example <FadeInStagger faster><FadeIn><Card /></FadeIn><FadeIn><Card /></FadeIn></FadeInStagger>
+ */
 "use client";
 
 import { createContext, useContext } from "react";

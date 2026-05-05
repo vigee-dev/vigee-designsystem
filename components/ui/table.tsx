@@ -1,3 +1,9 @@
+/**
+ * @description Primitives HTML table stylisées Vigee : bordure, hover sur les lignes, header gris, scroll horizontal automatique.
+ * @useWhen affichage de données tabulaires simples avec structure manuelle (thead/tbody) → utiliser Table + TableHeader + TableBody + TableRow + TableHead + TableCell | besoin d'un footer récapitulatif → utiliser TableFooter | légende sous le tableau → utiliser TableCaption
+ * @dontUseFor données avec tri/filtrage/pagination → utiliser DataTable | recherche intégrée dans le tableau → utiliser DataTable + TableSearch
+ * @example <Table><TableHeader><TableRow><TableHead>Nom</TableHead></TableRow></TableHeader><TableBody><TableRow><TableCell>Alice</TableCell></TableRow></TableBody></Table>
+ */
 import { cn } from "../lib/utils";
 import * as React from "react";
 

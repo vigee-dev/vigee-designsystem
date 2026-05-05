@@ -1,3 +1,9 @@
+/**
+ * @description Page d'erreur 403 avec illustration, message configurable et actions de récupération (support, retry).
+ * @useWhen route protégée accessible sans permission → afficher à la place du contenu | guard d'autorisation échoue → remplacer le contenu de la page | accès refusé API → afficher en pleine page ou dans un Container
+ * @dontUseFor erreurs 404 ou serveur → utiliser Error | contenu conditionnel selon rôle → utiliser ContentGuard
+ * @example <Unauthorized supportEmail="support@vigee.fr" onClick={() => router.refresh()} />
+ */
 import Image, { StaticImageData } from "next/image";
 
 import unauthorized from "../../img/error/unauthorized.svg";

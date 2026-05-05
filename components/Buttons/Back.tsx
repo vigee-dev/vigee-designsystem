@@ -1,3 +1,9 @@
+/**
+ * @description Bouton de retour arrière avec lien texte (desktop) et bouton flottant chevron (mobile), adaptatif selon le contexte de navigation.
+ * @useWhen naviguer vers une page précise connue → utiliser avec `href` et `where` | revenir à la page précédente dans l'historique → utiliser avec `back={true}` | action de retour personnalisée → utiliser avec `onClick` et `where`
+ * @dontUseFor action principale d'une page → utiliser Button | soumission ou confirmation → utiliser ButtonSubmit
+ * @example <Back href="/projets" where="Projets" />
+ */
 "use client";
 
 import Link from "next/link";

@@ -1,3 +1,9 @@
+/**
+ * @description Drawer (mobile) / Dialog (desktop) responsive auto-switché, sans context externe requis, pour afficher du contenu ou des formulaires dans un panneau flottant.
+ * @useWhen afficher un formulaire secondaire dans un panneau sans setup de context | ouvrir un sous-formulaire depuis une ligne de tableau | afficher des détails supplémentaires au clic sur un élément | encapsuler un contenu long avec ScrollArea automatique sur mobile et desktop.
+ * @dontUseFor gestion d'état d'ouverture contrôlée depuis le parent → utiliser Drawer | contenu nécessitant un contexte partagé entre composants → utiliser useDrawerContext.
+ * @example <DrawerMobileWithoutContext title="Modifier" trigger={<Button icon="edit" />} size="md">{children}</DrawerMobileWithoutContext>
+ */
 "use client";
 import * as React from "react";
 import { Button } from "../ui/button";

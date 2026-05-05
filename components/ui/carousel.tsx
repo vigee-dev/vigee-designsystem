@@ -1,3 +1,9 @@
+/**
+ * @description Carrousel de slides horizontal ou vertical basé sur Embla, avec navigation clavier et boutons précédent/suivant.
+ * @useWhen afficher une galerie d'images ou de cards en défilement → utiliser Carousel + CarouselContent + CarouselItem | présenter des étapes ou contenus paginés visuellement → utiliser Carousel avec orientation="horizontal" | exposer un accès programmatique au carousel → utiliser Carousel avec setApi pour récupérer l'instance Embla
+ * @dontUseFor navigation entre vues ou onglets → utiliser TabsResponsive | affichage d'une liste scrollable longue → utiliser ScrollArea
+ * @example <Carousel><CarouselContent><CarouselItem>Slide 1</CarouselItem></CarouselContent><CarouselPrevious /><CarouselNext /></Carousel>
+ */
 "use client";
 
 import * as React from "react";

@@ -1,3 +1,9 @@
+/**
+ * @description Sélecteur de date(s) visuel basé sur react-day-picker, stylisé Vigee, avec navigation mois et support plage de dates.
+ * @useWhen afficher un calendrier inline pour sélection de date unique → utiliser Calendar | construire un DatePicker custom avec Popover → utiliser Calendar | sélection de plage de dates avec mode="range" → utiliser Calendar
+ * @dontUseFor sélection date dans un formulaire react-hook-form → utiliser DatePicker | sélection date avec presets (hier, semaine dernière…) → utiliser DatePickerWithPresets | sélection plage avec champs texte → utiliser DatePickerRange
+ * @example <Calendar mode="single" selected={date} onSelect={setDate} />
+ */
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";

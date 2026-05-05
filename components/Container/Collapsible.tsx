@@ -1,3 +1,9 @@
+/**
+ * @description Section rétractable avec un déclencheur personnalisable pour masquer/afficher un contenu secondaire.
+ * @useWhen filtres avancés à cacher par défaut → utiliser Collapsible | bloc de détails optionnels dans une fiche → utiliser Collapsible | contenu long à rendre progressif dans une page → utiliser Collapsible
+ * @dontUseFor navigation entre vues → utiliser TabsResponsive | contenu dans une modale latérale → utiliser Drawer | liste d'items tous indépendamment rétractables → utiliser Accordion
+ * @example <Collapsible trigger={<Button icon="chevron-down" />} className="w-full">Contenu masqué</Collapsible>
+ */
 import {
   Collapsible as CollapsibleWrapper,
   CollapsibleContent,

@@ -1,3 +1,9 @@
+/**
+ * @description Placeholder visuel état vide avec illustration thématique, titre, sous-titre et bouton d'action optionnel.
+ * @useWhen liste sans données à afficher (projets, documents, utilisateurs) → afficher un état vide engageant | page sans résultats après filtrage → guider l'utilisateur vers une action | onboarding d'une section vierge → orienter vers la création du premier élément
+ * @dontUseFor erreurs serveur ou accès refusé → utiliser Error ou Unauthorized | chargement en cours → utiliser Loader ou DashboardSkeleton
+ * @example <EmptyIllustration type="documents" text="Aucun document" subtitle="Ajoutez votre premier document pour commencer." buttonLink="/documents/new" buttonText="Créer un document" />
+ */
 import Link from "next/link";
 import { Button } from "../Buttons/Button";
 import { Container } from "../Container/Container";

@@ -1,3 +1,9 @@
+/**
+ * @description Primitives de formulaire react-hook-form (Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage) avec gestion d'état et d'erreurs intégrée.
+ * @useWhen wrapping d'un formulaire react-hook-form pour connecter les champs à la validation → utiliser Form + FormField | afficher le message d'erreur d'un champ → utiliser FormMessage | associer un label accessible à un input → utiliser FormLabel + FormControl
+ * @dontUseFor champ isolé sans formulaire react-hook-form → utiliser directement Input | formulaire avec état local simple sans validation → utiliser ui/Input directement
+ * @example <Form {...form}><FormField control={form.control} name="email" render={({ field }) => (<FormItem><FormLabel>Email</FormLabel><FormControl><input {...field} /></FormControl><FormMessage /></FormItem>)} /></Form>
+ */
 'use client';
 
 import * as LabelPrimitive from '@radix-ui/react-label';

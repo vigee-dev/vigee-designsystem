@@ -1,3 +1,9 @@
+/**
+ * @description Input texte intégré react-hook-form pour formulaires Vigee, avec label, validation, compteur de caractères et lien externe optionnel.
+ * @useWhen formulaire avec `react-hook-form` → utiliser avec `form` + `name` | champ texte/email/number/password dans un `Form` | affichage d'aide contextuelle → utiliser `helpComponent` | input standalone sans form → utiliser sans `form` ni `name`, avec `value` + `onChange`
+ * @dontUseFor sélection dans une liste → utiliser Select | recherche avec suggestions → utiliser ComboBox | saisie longue multi-lignes → utiliser TextArea
+ * @example <Input form={form} name="email" label="Email" placeholder="john@example.com" type="email" required />
+ */
 import {
   FormControl,
   FormDescription,

@@ -1,3 +1,9 @@
+/**
+ * @description Menu déroulant accessible basé sur Radix UI, avec items, sous-menus, checkboxes et groupes radio.
+ * @useWhen menu contextuel sur un bouton d'action (3 points, kebab) → utiliser DropdownMenu | options de navigation secondaires dans un header/sidebar → utiliser DropdownMenu | liste d'actions sur une ligne de tableau → utiliser DropdownMenu
+ * @dontUseFor sélection de valeur dans un formulaire → utiliser Select | sélection multiple → utiliser MultiSelect | navigation principale → utiliser Sidebar
+ * @example <DropdownMenu><DropdownMenuTrigger asChild><Button icon="more" /></DropdownMenuTrigger><DropdownMenuContent><DropdownMenuItem>Modifier</DropdownMenuItem><DropdownMenuItem>Supprimer</DropdownMenuItem></DropdownMenuContent></DropdownMenu>
+ */
 'use client';
 
 import * as React from 'react';

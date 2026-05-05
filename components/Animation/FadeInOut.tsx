@@ -1,3 +1,9 @@
+/**
+ * @description Affiche/masque un contenu avec une animation fade + slide vertical, piloté par un booléen.
+ * @useWhen afficher un message contextuel après une action (succès, erreur) → utiliser FadeInOut | révéler un panneau ou section conditionnelle avec transition douce → utiliser FadeInOut | animer l'apparition d'un tooltip ou d'une aide inline → utiliser FadeInOut
+ * @dontUseFor transition entre pages ou routes → utiliser FadeIn | contenu toujours visible sans condition → pas besoin d'animation conditionnelle
+ * @example <FadeInOut isVisible={isSubmitted}><AlertInfo message="Enregistrement réussi" /></FadeInOut>
+ */
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";

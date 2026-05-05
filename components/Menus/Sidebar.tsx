@@ -1,3 +1,9 @@
+/**
+ * @description Barre de navigation latérale rétractable avec logo, liens actifs, badges de notifications et bouton de déconnexion.
+ * @useWhen layout principal d'une app Vigee avec navigation entre sections → utiliser Sidebar | sidebar avec sélecteur de contexte (ex: changer d'organisation) → utiliser Sidebar avec `withSelect` | navigation à masquer sur mobile → utiliser Sidebar avec `hiddenMobile` | sidebar intégrant une commande de recherche rapide → utiliser Sidebar avec `commandComponent`
+ * @dontUseFor navigation mobile légère → utiliser MobileMenu | navigation par onglets horizontaux → utiliser TabsResponsive | menu contextuel sur un élément → utiliser DropdownMenu
+ * @example <Sidebar navigation={navItems} open={true} signout={() => signOut()} logo={logo} logoSmall={logoSmall}>{children}</Sidebar>
+ */
 "use client";
 
 import { useEffect, useState } from "react";

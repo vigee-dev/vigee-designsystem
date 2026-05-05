@@ -1,3 +1,9 @@
+/**
+ * @description Groupe de boutons toggle mutuellement exclusifs ou à sélection multiple, basé sur Radix UI, avec variants et tailles partagés.
+ * @useWhen sélection d'un mode parmi plusieurs options (vue liste/grille/carte) → utiliser ToggleGroup | filtre visuel par type avec état actif visible → utiliser ToggleGroup | barre d'outils avec options activables groupées → utiliser ToggleGroup
+ * @dontUseFor sélection multiple avec labels longs → utiliser MultiSelect | navigation entre vues avec URL → utiliser TabsResponsive | filtres combinables avec recherche → utiliser CheckboxFilter
+ * @example <ToggleGroup type="single" defaultValue="list"><ToggleGroupItem value="list">Liste</ToggleGroupItem><ToggleGroupItem value="grid">Grille</ToggleGroupItem></ToggleGroup>
+ */
 "use client";
 
 import * as React from "react";

@@ -1,3 +1,9 @@
+/**
+ * @description Input téléphonique international avec sélecteur de pays (drapeau + indicatif) basé sur react-phone-number-input, format E.164.
+ * @useWhen saisie d'un numéro de téléphone avec indicatif pays dans un formulaire | champ téléphone nécessitant une validation au format E.164 | formulaire d'inscription/contact avec utilisateurs internationaux
+ * @dontUseFor saisie de texte simple → utiliser Input | formulaire react-hook-form intégré → utiliser PhoneNumber (Forms)
+ * @example <PhoneInput value={phone} onChange={(value) => setPhone(value)} defaultCountry="FR" />
+ */
 import { CheckIcon, ChevronsUpDown } from "lucide-react";
 
 import * as React from "react";

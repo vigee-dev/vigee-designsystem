@@ -1,3 +1,9 @@
+/**
+ * @description Sélecteur avec recherche textuelle adaptatif : Popover sur desktop, Drawer natif sur mobile.
+ * @useWhen filtrer une liste d'options sur mobile et desktop sans gestion manuelle du breakpoint → utiliser ComboBoxResponsive | sélection d'un statut, d'une catégorie ou d'un type parmi une liste courte avec recherche intégrée → utiliser ComboBoxResponsive
+ * @dontUseFor sélection multiple → utiliser MultiSelect | gros datasets avec chargement asynchrone → utiliser ComboBox | usage dans un formulaire react-hook-form → utiliser Forms/ComboBox
+ * @example <ComboBoxResponsive label="Statut" text="Choisir..." items={statuses} selectedStatus={selected} setSelectedStatus={setSelected} />
+ */
 "use client";
 
 import * as React from "react";

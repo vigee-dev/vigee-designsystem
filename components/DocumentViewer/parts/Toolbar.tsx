@@ -1,3 +1,9 @@
+/**
+ * @description Barre d'outils du visualiseur de documents : titre, pagination, zoom PDF et téléchargement.
+ * @useWhen afficher les contrôles d'un document dans DocumentViewer → utiliser Toolbar | piloter le zoom/reset sur un PDF → utiliser Toolbar | afficher le nom, l'index et la taille d'un document visionné → utiliser Toolbar
+ * @dontUseFor actions globales de page → utiliser PageHeader | menu d'actions contextuelles sur un item → utiliser DropdownMenu
+ * @example <Toolbar doc={doc} index={0} total={3} numPages={5} isImage={false} zoom={1} fitMode="fit" zoomMin={0.5} zoomMax={3} sizeLabel="2 Mo" showZoom showDownload labels={labels} onClose={handleClose} onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} onResetZoom={handleResetZoom} onDownload={handleDownload} />
+ */
 'use client';
 
 import {

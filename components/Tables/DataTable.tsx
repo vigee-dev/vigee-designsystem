@@ -1,3 +1,9 @@
+/**
+ * @description Table de données TanStack avec tri, filtres, pagination et détection de scroll bas intégrés pour afficher des listes structurées.
+ * @useWhen liste d'entités avec colonnes personnalisées (clients, projets, factures) → DataTable | table cliquable pour naviguer vers une fiche détail → passer `onRowClick` | chargement infini au scroll → utiliser `onReachBottom` | affichage de squelettes de chargement en bas de liste → `displayBottomRowsSkeleton`
+ * @dontUseFor simple sélection d'une valeur dans une liste → utiliser ComboBox | tableau avec filtres URL persistants côté serveur → utiliser FilterableSelect | affichage d'un seul KPI ou ranking → utiliser Ranking
+ * @example <DataTable columns={columns} data={projets} onRowClick={(row) => router.push(`/projets/${row.original.id}`)} lines={20} />
+ */
 "use client";
 import React, { ReactNode, useRef, useEffect } from "react";
 

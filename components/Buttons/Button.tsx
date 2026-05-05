@@ -1,3 +1,9 @@
+/**
+ * @description Bouton polyvalent Vigee avec icônes Pika intégrées, états pending/disabled, navigation href et tooltip optionnel.
+ * @useWhen action iconique sans libellé dans une interface (ex: éditer, supprimer, télécharger) → `icon` seul | navigation vers une page → `href` | état de chargement async → `pending={true}` | action avec label uniquement pour validation finale → `children` + `type="submit"`
+ * @dontUseFor validation de formulaire avec logique de confirmation → utiliser ActionWithValidation | ajout d'entité dédié → utiliser ButtonAdd | soumission de formulaire stylisée → utiliser ButtonSubmit
+ * @example <Button icon="edit" onClick={handleEdit} tooltip="Modifier" />
+ */
 import { Loader2, XIcon } from "lucide-react";
 import Link from "next/link";
 import {

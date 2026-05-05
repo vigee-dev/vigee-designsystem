@@ -1,3 +1,9 @@
+/**
+ * @description Panneau Sheet (mobile) ou Dialog (desktop) responsive à état contrôlé externement, avec titre, description et icône optionnels.
+ * @useWhen état d'ouverture géré par le parent (open/onOpenChange) → utiliser SheetDialogControlled | affichage conditionnel déclenché par une action externe sans trigger intégré → utiliser SheetDialogControlled | forcer l'affichage en Sheet sur desktop (ex: formulaire latéral) → utiliser SheetDialogControlled avec forceSheet
+ * @dontUseFor état d'ouverture géré localement sans logique externe → utiliser SheetDialog | drawer de navigation latérale → utiliser Drawer
+ * @example <SheetDialogControlled open={open} onOpenChange={setOpen} title="Modifier" description="Modifiez les informations" icon={<PenIcon />} size="md">{children}</SheetDialogControlled>
+ */
 "use client";
 
 import React, { useState, useEffect } from "react";

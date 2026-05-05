@@ -1,3 +1,9 @@
+/**
+ * @description Groupe de cases à cocher multi-sélection intégré react-hook-form, avec limite optionnelle de sélections.
+ * @useWhen Sélectionner plusieurs options dans un formulaire RHF (ex: préférences, catégories) → utiliser Checkboxes | Limiter le nombre de choix possibles (ex: "3 compétences max") → utiliser Checkboxes avec `max` | Choix multiples sur une liste courte et fixe → utiliser Checkboxes.
+ * @dontUseFor Sélection unique parmi plusieurs options → utiliser Select ou Toggles | Liste dynamique/recherchable → utiliser ComboBox | Sélection booléenne simple (on/off) → utiliser Switch.
+ * @example <Checkboxes form={form} name="categories" label="Catégories" items={[{ label: "Sport", value: "sport" }, { label: "Culture", value: "culture" }]} max={2} />
+ */
 import {
   FormControl,
   FormField,

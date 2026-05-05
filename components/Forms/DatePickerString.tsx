@@ -1,3 +1,9 @@
+/**
+ * @description Sélecteur de date intégré react-hook-form qui stocke la valeur au format string "YYYY-MM-DD" et l'affiche en "DD/MM/YYYY".
+ * @useWhen formulaire RHF nécessitant une date stockée en string ISO (ex: API REST) → utiliser DatePickerString | date de début/fin avec borne minimale configurable → utiliser DatePickerString via `starting_date` | champ date simple dans un Form Zod → utiliser DatePickerString
+ * @dontUseFor sélection d'une plage de dates → utiliser DatePickerRange | date avec presets (aujourd'hui, semaine dernière…) → utiliser DatePickerWithPresets
+ * @example <DatePickerString form={form} name="birth_date" label="Date de naissance" />
+ */
 import {
   Form,
   FormControl,

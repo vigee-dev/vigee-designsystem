@@ -1,3 +1,9 @@
+/**
+ * @description Graphique à barres horizontales avec pourcentages, tri décroissant automatique et couleurs par catégorie, encapsulé dans une Card.
+ * @useWhen visualiser la répartition de valeurs entre catégories (ex: CA par produit) → HorizontalBarChart | comparer des volumes classés du plus grand au plus petit → HorizontalBarChart | afficher un message vide conditionnel quand aucune donnée n'est disponible → HorizontalBarChart
+ * @dontUseFor comparaisons temporelles en série chronologique → utiliser AreaChart ou LineChart | distribution de proportions en secteurs → utiliser PieChart | métriques uniques sans comparaison → utiliser KPI
+ * @example <HorizontalBarChart data={[{ label: "Produit A", value: 420, color: "#6366f1" }]} title="Ventes par produit" description="Répartition du CA" footerText="Données 2024" />
+ */
 "use client";
 
 import { Bar, BarChart, XAxis, YAxis, Cell, LabelList } from "recharts"; // Ajoutez LabelList ici

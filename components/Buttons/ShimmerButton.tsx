@@ -1,3 +1,9 @@
+/**
+ * @description Bouton avec animation shimmer tournante, conçu pour les CTAs visuellement impactants (landing pages, splash screens, mise en avant).
+ * @useWhen call-to-action principal sur une page marketing → utiliser ShimmerButton | bouton de mise en avant sur SplashScreen → utiliser ShimmerButton | action unique à fort impact visuel → utiliser ShimmerButton
+ * @dontUseFor actions standard dans un formulaire → utiliser ButtonSubmit | suppression ou action destructive → utiliser DeleteAction | navigation simple → utiliser Back
+ * @example <ShimmerButton onClick={handleClick}>Commencer maintenant</ShimmerButton>
+ */
 import React, { CSSProperties } from "react";
 
 import { cn } from "../lib/utils";

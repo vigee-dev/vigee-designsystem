@@ -1,3 +1,9 @@
+/**
+ * @description Select déroulant contrôlé/non-contrôlé avec support groupes, icônes par option et bouton clear intégré.
+ * @useWhen choix unique parmi une liste courte à moyenne (< ~50 options) → utiliser Select | options organisées par catégories via `group` → utiliser Select | valeur effaçable requise → utiliser Select avec `clearable={true}` | select standalone hors react-hook-form → utiliser Select
+ * @dontUseFor sélection multiple → utiliser MultiSelect | recherche/filtrage texte dans les options → utiliser ComboBox | select dans un formulaire react-hook-form → utiliser Forms/Select
+ * @example <Select options={[{ value: "fr", label: "France" }, { value: "de", label: "Allemagne" }]} onChange={(v) => console.log(v)} label="Pays" clearable />
+ */
 "use client";
 import * as React from "react";
 import {

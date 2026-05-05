@@ -1,3 +1,9 @@
+/**
+ * @description Grille perspective animée style rétro-futuriste, posée en arrière-plan décoratif absolu avec effet de profondeur.
+ * @useWhen section hero ou splash screen nécessitant un fond animé → utiliser RetroGrid | page de login/landing pour un effet visuel immersif → utiliser RetroGrid
+ * @dontUseFor fond de dashboard fonctionnel → utiliser DashboardSkeleton | arrière-plan de modale ou dialog → utiliser SplashScreen
+ * @example <RetroGrid angle={65} className="opacity-20" />
+ */
 import { cn } from "../lib/utils";
 
 export default function RetroGrid({ className, angle = 65 }: { className?: string; angle?: number }) {

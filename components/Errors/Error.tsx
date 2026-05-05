@@ -1,3 +1,9 @@
+/**
+ * @description Page d'erreur illustrée avec titre, sous-titre, lien support et bouton de retry, en variante "bro" ou "classic".
+ * @useWhen erreur inattendue côté serveur/réseau → afficher avec `onClick` pour retry | absence de données critique → afficher avec `subtitle` explicatif | besoin de contacter le support → passer `supportEmail`
+ * @dontUseFor accès refusé/non autorisé → utiliser Unauthorized | message d'information non bloquant → utiliser AlertInfo
+ * @example <Error title="Impossible de charger les données" subtitle="Vérifiez votre connexion." onClick={() => refetch()} supportEmail="support@vigee.fr" />
+ */
 import Image, { StaticImageData } from "next/image";
 import error from "../../img/error/error.svg";
 import errorBro from "../../img/error/error-bro.svg";

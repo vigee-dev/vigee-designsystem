@@ -1,3 +1,9 @@
+/**
+ * @description Affiche une photo de profil circulaire avec fallback automatique sur initiales ou placeholder si l'image est absente.
+ * @useWhen afficher l'avatar d'un utilisateur avec une URL d'image → utiliser Avatar + AvatarImage + AvatarFallback | image potentiellement absente ou en erreur → AvatarFallback prend le relais automatiquement | liste d'utilisateurs, commentaires, profils → associer un visuel à une identité
+ * @dontUseFor upload ou modification de photo de profil → utiliser Forms/ProfileImageUploader | affichage d'un avatar Vigee enrichi (avec statut, taille normalisée, etc.) → utiliser Avatar/Avatar
+ * @example <Avatar><AvatarImage src={user.photoUrl} alt={user.name} /><AvatarFallback>AB</AvatarFallback></Avatar>
+ */
 "use client";
 
 import * as React from "react";

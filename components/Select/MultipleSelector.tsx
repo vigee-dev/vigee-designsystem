@@ -1,3 +1,9 @@
+/**
+ * @description Sélecteur multi-valeurs avec badges, recherche synchrone/async, groupement et création d'options à la volée.
+ * @useWhen sélection de plusieurs tags/catégories dans un formulaire → utiliser MultipleSelector | recherche async avec debounce pour charger des options distantes → utiliser MultipleSelector | options groupées par clé avec limite de sélection → utiliser MultipleSelector
+ * @dontUseFor sélection d'une seule valeur → utiliser Select | recherche et sélection unique avec suggestions → utiliser ComboBox | filtrage multi-valeurs sur URL → utiliser SelectMultiple
+ * @example <MultipleSelector options={options} value={selected} onChange={setSelected} placeholder="Choisir des tags..." />
+ */
 'use client';
 
 import { Command as CommandPrimitive, useCommandState } from 'cmdk';

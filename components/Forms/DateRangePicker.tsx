@@ -1,3 +1,9 @@
+/**
+ * @description Sélecteur de plage de dates (from → to) intégré react-hook-form, avec calendrier en popover et affichage formaté dd/MM/yyyy.
+ * @useWhen filtrage par période dans un formulaire RHF → utiliser DatePickerRange | saisie de dates de début et fin (contrat, mission, congé) → utiliser DatePickerRange | plage avec dates désactivées (indisponibilités, jours fériés) → utiliser DatePickerRange avec disabledDates
+ * @dontUseFor date unique → utiliser DatePicker | filtre URL sans formulaire RHF → utiliser DatePickerFilter | présélections rapides (cette semaine, ce mois) → utiliser DatePickerWithPresets
+ * @example <DatePickerRange form={form} name="periode" label="Période" required disabledDates={{ before: new Date() }} />
+ */
 "use client"
 
 import { format } from "date-fns"

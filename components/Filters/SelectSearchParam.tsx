@@ -1,3 +1,9 @@
+/**
+ * @description Select lié à un query param URL (nuqs) pour filtrer des listes via l'URL sans rechargement de page.
+ * @useWhen filtre de statut/type synchronisé avec l'URL sur une page de liste → utiliser SelectSearchParam | filtre persistant après navigation/refresh → utiliser SelectSearchParam | filtre partageable via URL → utiliser SelectSearchParam
+ * @dontUseFor sélection multiple dans les filtres → utiliser SelectMultiple | filtre non lié à l'URL dans un formulaire → utiliser Select | filtre date → utiliser DatePickerFilter
+ * @example <SelectSearchParam searchParam="status" placeholder="Statut" status={[{ label: "Actif", value: "active" }, { label: "Inactif", value: "inactive" }]} />
+ */
 'use client';
 
 import { useQueryState } from 'nuqs';

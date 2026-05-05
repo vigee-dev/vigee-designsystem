@@ -1,3 +1,9 @@
+/**
+ * @description Sélecteur numérique +/- intégré react-hook-form pour choisir une valeur par incréments (ex: durée, quantité, note).
+ * @useWhen saisie d'une durée en heures/demi-heures dans un formulaire RHF → PlusLessButton | sélection d'une quantité bornée avec min/max → PlusLessButton | ajustement pas-à-pas d'un nombre dans un Form Vigee → PlusLessButton
+ * @dontUseFor saisie d'une valeur numérique libre → utiliser Input | sélection dans une plage continue → utiliser Slider
+ * @example <PlusLessButton form={form} name="duration" title="Durée" unit="heures" min={0.5} max={8} interval={0.5} />
+ */
 "use client";
 import * as React from "react";
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";

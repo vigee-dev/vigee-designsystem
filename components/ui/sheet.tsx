@@ -1,3 +1,9 @@
+/**
+ * @description Panneau glissant (drawer) basé sur Radix Dialog, s'ouvrant depuis top/bottom/left/right avec overlay et bouton de fermeture intégré.
+ * @useWhen affichage d'un formulaire secondaire sans quitter la page → utiliser Sheet | détails d'un élément en contexte → utiliser Sheet | navigation mobile complémentaire → utiliser Sheet
+ * @dontUseFor confirmation destructive simple → utiliser AlertDialog | contenu complexe pleine page → utiliser Drawer | boîte de dialogue centrée modale → utiliser Dialog
+ * @example <Sheet><SheetTrigger>Ouvrir</SheetTrigger><SheetContent side="right"><SheetHeader><SheetTitle>Détails</SheetTitle></SheetHeader></SheetContent></Sheet>
+ */
 "use client";
 
 import * as SheetPrimitive from "@radix-ui/react-dialog";

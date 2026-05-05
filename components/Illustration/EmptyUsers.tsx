@@ -1,3 +1,9 @@
+/**
+ * @description Illustration SVG "liste d'utilisateurs vide" pour les états zéro-donnée dans les vues de gestion d'utilisateurs.
+ * @useWhen page utilisateurs sans aucun membre → afficher EmptyUsers | onboarding sans équipe configurée → afficher EmptyUsers | état vide après recherche/filtre sans résultat sur des utilisateurs → afficher EmptyUsers
+ * @dontUseFor absence de documents → utiliser EmptyDocuments | absence de projets → utiliser EmptyProjects | illustration générique non liée aux utilisateurs → utiliser EmptyIllustration
+ * @example <EmptyUsers color="text-indigo-200" className="mx-auto" />
+ */
 import { cn } from "../lib/utils";
 
 export const EmptyUsers = ({

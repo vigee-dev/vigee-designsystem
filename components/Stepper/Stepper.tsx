@@ -1,3 +1,9 @@
+/**
+ * @description Indicateur visuel de progression multi-étapes avec hook `useStepper` pour naviguer entre étapes nommées.
+ * @useWhen formulaire découpé en étapes séquentielles (onboarding, création guidée) → utiliser `Stepper` + `useStepper` | afficher la progression courante et les étapes complétées → utiliser `Stepper` | contrôler la navigation entre étapes (next/prev/goToStep) depuis le parent → utiliser `useStepper`
+ * @dontUseFor navigation entre vues indépendantes → utiliser TabsResponsive | progression en pourcentage sans étapes nommées → utiliser ProgressBar
+ * @example <Stepper stepper={useStepper(0, ["Informations", "Documents", "Confirmation"])} />
+ */
 "use client";
 
 import { useState } from "react";

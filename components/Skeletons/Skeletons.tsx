@@ -1,3 +1,9 @@
+/**
+ * @description Collection de squelettes de chargement animés (shimmer + pulse) pour tâches, tickets, inputs, calendrier et bulles de chat.
+ * @useWhen affichage en attente de données async pour une liste de tâches → utiliser TaskSkeleton / PlanningTaskSkeleton | chargement d'un formulaire → utiliser InputSkeleton ou MultiInputsSkeleton | chargement d'une liste de tickets → utiliser TicketsSkeleton | chargement d'un calendrier → utiliser CalendarSkeleton
+ * @dontUseFor chargement d'une page entière → utiliser LoaderPage | chargement d'un dashboard complet → utiliser DashboardSkeleton | indicateur de rechargement en arrière-plan → utiliser RefetchIndicator
+ * @example <TicketsSkeleton className="mt-4" />
+ */
 import { cn } from "../lib/utils";
 
 // Loading animation

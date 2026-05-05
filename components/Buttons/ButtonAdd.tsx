@@ -1,3 +1,9 @@
+/**
+ * @description Bouton d'ajout visuel avec icône centrée au-dessus d'un label, pour déclencher une création ou naviguer vers une page d'ajout.
+ * @useWhen page vide ou section sans contenu → inviter l'utilisateur à créer un premier élément | action d'ajout principale d'une section avec navigation via href | action d'ajout sans navigation via onClick
+ * @dontUseFor action rapide dans une toolbar → utiliser Button | soumission de formulaire → utiliser ButtonSubmit | suppression ou action destructive → utiliser DeleteAction
+ * @example <ButtonAdd text="Ajouter un projet" icon={<PlusCircle />} href="/projets/nouveau" />
+ */
 import { TypographyH2 } from "../Typography/Typography";
 import { cn } from "../lib/utils";
 import Link from "next/link";

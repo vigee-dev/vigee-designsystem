@@ -1,3 +1,9 @@
+/**
+ * @description Filtre booléen synchronisé avec l'URL via nuqs — coche/décoche pour ajouter un paramètre query string à la navigation.
+ * @useWhen filtrer une liste par un critère binaire (ex: "Uniquement les actifs") → CheckboxFilter | masquer/afficher des éléments via l'URL sans state React | conserver l'état du filtre au rechargement de page via query param.
+ * @dontUseFor sélection multiple de valeurs → utiliser SelectMultiple | filtre sur une plage de valeurs → utiliser NumberFilter | case à cocher dans un formulaire → utiliser Checkboxes.
+ * @example <CheckboxFilter queryKey="active" label="Uniquement les actifs" defaultChecked={false} />
+ */
 'use client';
 import * as React from 'react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';

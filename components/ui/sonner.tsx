@@ -1,3 +1,9 @@
+/**
+ * @description Toaster Sonner adapté au thème Vigee (light/dark/system) à monter une seule fois dans le layout racine.
+ * @useWhen mise en place des notifications toast dans le layout racine → monter `<Toaster />` | afficher des retours utilisateur (succès, erreur, info) via `toast()` de sonner dans n'importe quel composant enfant.
+ * @dontUseFor feedback bloquant nécessitant une confirmation → utiliser AlertDialog | messages persistants contextuels dans la page → utiliser AlertInfo.
+ * @example <Toaster />
+ */
 "use client";
 
 import * as React from "react";

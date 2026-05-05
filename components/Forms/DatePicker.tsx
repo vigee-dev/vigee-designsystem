@@ -1,3 +1,9 @@
+/**
+ * @description Sélecteur de date intégré react-hook-form avec saisie clavier (DD/MM/YYYY) ou calendrier popover, supportant des bornes min/max.
+ * @useWhen champ de date dans un formulaire react-hook-form avec validation | besoin de restreindre la plage de dates sélectionnables via `starting_date` / `ending_date` | retour de valeur en string ISO (`returnString`) ou en objet Date selon le backend | saisie clavier désactivée au profit d'un bouton calendrier (`disabledKeys`)
+ * @dontUseFor plage de deux dates (début + fin) → utiliser DatePickerRange | filtre de date hors formulaire → utiliser DatePickerFilter | présélection de périodes courantes → utiliser DatePickerWithPresets
+ * @example <DatePicker form={form} name="birthdate" label="Date de naissance" required returnString />
+ */
 import React, { useEffect, useState } from "react";
 import { FormField, FormItem, FormLabel, FormDescription, FormMessage, FormControl } from "../ui/form";
 import moment from "moment";

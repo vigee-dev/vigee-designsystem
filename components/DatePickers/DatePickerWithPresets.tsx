@@ -1,3 +1,9 @@
+/**
+ * @description Sélecteur de date unique avec calendrier et raccourcis prédéfinis (aujourd'hui, demain, dans une semaine…) en français.
+ * @useWhen champ de date dans un formulaire avec des raccourcis temporels courants → utiliser DatePickerWithPresets | date unique à sélectionner avec presets personnalisés via `presets` → utiliser DatePickerWithPresets | date de début ou d'échéance avec suggestions rapides → utiliser DatePickerWithPresets
+ * @dontUseFor plage de dates (début/fin) → utiliser DatePickerRange | filtre de date dans une liste ou tableau → utiliser DatePickerFilter
+ * @example <DatePickerWithPresets value={date} onChange={setDate} placeholder="Choisir une date" />
+ */
 "use client"
 
 import * as React from "react"

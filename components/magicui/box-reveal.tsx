@@ -1,3 +1,9 @@
+/**
+ * @description Anime l'apparition d'un élément avec un bloc coloré qui glisse pour révéler le contenu au scroll.
+ * @useWhen titres ou textes hero à révéler au scroll → BoxReveal | mise en valeur d'un KPI ou stat clé sur une landing | animation d'onboarding ou splash screen pour attirer l'attention
+ * @dontUseFor listes entières à animer → utiliser AnimatedListItem | animations de page globales → utiliser FadeIn
+ * @example <BoxReveal boxColor="#5046e6" duration={0.5}><h1>Bienvenue sur Vigee</h1></BoxReveal>
+ */
 "use client";
 
 import { useEffect, useRef, type JSX } from "react";

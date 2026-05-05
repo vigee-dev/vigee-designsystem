@@ -1,3 +1,9 @@
+/**
+ * @description Primitives Radix UI pour afficher des notifications toast transitoires avec variantes default/destructive et bouton de fermeture.
+ * @useWhen confirmation d'une action (sauvegarde, suppression) → utiliser Toast + ToastTitle + ToastDescription | erreur critique non bloquante → utiliser Toast variant="destructive" | toast avec action inline (ex: "Annuler") → utiliser Toast + ToastAction
+ * @dontUseFor messages persistants nécessitant une interaction obligatoire → utiliser AlertDialog | informations contextuelles statiques dans la page → utiliser AlertInfo
+ * @example <Toast variant="destructive"><ToastTitle>Erreur</ToastTitle><ToastDescription>Une erreur est survenue.</ToastDescription><ToastClose /></Toast>
+ */
 import * as React from "react";
 import * as ToastPrimitives from "@radix-ui/react-toast";
 import { cva, type VariantProps } from "class-variance-authority";

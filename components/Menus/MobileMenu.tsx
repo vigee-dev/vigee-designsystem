@@ -1,3 +1,9 @@
+/**
+ * @description Barre de navigation mobile fixée en bas d'écran (max 4 items + 1 bouton central), avec highlight automatique selon l'URL active.
+ * @useWhen navigation principale sur mobile avec 2 à 4 sections → utiliser MobileMenu | ajout d'un bouton d'action central (ex: créer) entre les items de nav → passer `buttonComponent` | remplacement du Sidebar sur petits écrans → utiliser MobileMenu en complément de AppSidebar.
+ * @dontUseFor navigation desktop → utiliser AppSidebar | plus de 4 items de navigation → utiliser Sidebar | menus contextuels ou actions secondaires → utiliser DropdownMenu.
+ * @example <MobileMenu nav={[{ name: "Accueil", href: "/", slug: "accueil", icon: <HomeIcon />, iconFill: <HomeIconFill /> }]} buttonComponent={<ButtonAdd onClick={handleCreate} />} />
+ */
 "use client";
 
 import Link from "next/link";

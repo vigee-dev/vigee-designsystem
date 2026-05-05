@@ -1,3 +1,9 @@
+/**
+ * @description En-tête de section avec titre, sous-titre, navigation par onglets responsive (tabs desktop / barre fixe mobile) et bouton d'action optionnel.
+ * @useWhen page avec sous-navigation entre plusieurs vues liées → afficher SectionHeading avec `nav` | page nécessitant un titre + bouton d'action positionné à droite → passer `buttonTitle` + `buttonLink` | layout avec barre de navigation fixe en bas sur mobile → fournir `nav` avec `slug` et `icon`
+ * @dontUseFor navigation principale de l'application → utiliser Sidebar | onglets sans routing URL → utiliser TabsResponsive | navigation mobile autonome → utiliser MobileMenu
+ * @example <SectionHeading title="Projets" subtitle="Gérez vos projets" nav={[{ name: "Liste", slug: "liste", href: "/projets/liste", icon: "FolderIcon" }]} route="/projets" buttonTitle="Nouveau" buttonLink="/projets/nouveau" />
+ */
 "use client";
 import { useState } from "react";
 import { Button } from "../Buttons/Button";

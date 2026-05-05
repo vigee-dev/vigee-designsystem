@@ -1,3 +1,9 @@
+/**
+ * @description Graphique radial circulaire affichant une valeur unique (visitors) avec label centré et tendance en pied de carte.
+ * @useWhen afficher un KPI circulaire de type "progression vers un objectif" | visualiser un taux ou score unique sous forme d'arc | widget de dashboard avec indicateur de tendance mensuelle.
+ * @dontUseFor comparer plusieurs séries de données → utiliser BarChart | afficher une répartition en parts → utiliser PieChart | suivre une évolution temporelle → utiliser LineChart.
+ * @example <RadialChart className="w-full max-w-sm" />
+ */
 "use client";
 
 import { TrendingUp } from "lucide-react";

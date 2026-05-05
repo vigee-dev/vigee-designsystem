@@ -1,3 +1,9 @@
+/**
+ * @description Menu déroulant contextuel avec support d'items cliquables, cases à cocher, séparateurs et labels de section.
+ * @useWhen actions contextuelles sur une entité (éditer, supprimer, archiver) → passer un Button icon comme trigger | options de configuration rapide avec états cochés → utiliser items `item-checkbox` | regrouper des actions secondaires pour ne pas surcharger l'UI → remplacer plusieurs boutons isolés
+ * @dontUseFor navigation principale entre pages → utiliser Sidebar | sélection d'une valeur dans un formulaire → utiliser Select ou ComboBox
+ * @example <DropdownMenu trigger={<Button icon="more-horizontal" />} items={[{ type: 'item', content: 'Modifier', onClick: handleEdit }, { type: 'separator' }, { type: 'item', content: 'Supprimer', onClick: handleDelete, className: 'text-red-500' }]} />
+ */
 import {
   DropdownMenu as DropdownMenuPrimitive, DropdownMenuCheckboxItem,
   DropdownMenuContent, DropdownMenuItem,

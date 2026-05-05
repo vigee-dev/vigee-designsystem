@@ -1,3 +1,9 @@
+/**
+ * @description Défilement infini en boucle d'éléments enfants, horizontalement ou verticalement, avec pause optionnelle au survol.
+ * @useWhen afficher un bandeau de logos partenaires en défilement continu | présenter des témoignages/cards en boucle sur une landing page | créer un ticker de contenu animé horizontal ou vertical
+ * @dontUseFor navigation entre contenus → utiliser TabsResponsive | listes statiques sans animation → utiliser Container
+ * @example <Marquee pauseOnHover repeat={3}><Card /><Card /><Card /></Marquee>
+ */
 import { cn } from "../lib/utils";
 
 interface MarqueeProps {

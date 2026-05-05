@@ -1,3 +1,9 @@
+/**
+ * @description Panneau glissant (vaul) depuis le bas, la droite ou la gauche, avec titre, description, icône et contenu libre.
+ * @useWhen afficher un formulaire contextuel sans quitter la page → utiliser Drawer | afficher un détail ou une fiche latérale → utiliser Drawer avec direction="right" | flux en plusieurs étapes sur mobile → utiliser Drawer avec fullScreen={true} | panneau contrôlé programmatiquement (open/onOpenChange) → utiliser Drawer sans trigger
+ * @dontUseFor confirmation destructive courte → utiliser ActionWithValidation | contenu segmenté en onglets dans un panneau → utiliser SheetDialog | sélection d'une valeur dans une liste → utiliser ComboBoxResponsive
+ * @example <Drawer trigger={<button>Ouvrir</button>} title="Détails" description="Informations complémentaires" direction="right">{content}</Drawer>
+ */
 'use client';
 
 import { Drawer as VaulDrawer } from 'vaul';

@@ -1,3 +1,9 @@
+/**
+ * @description Primitif bouton Radix/CVA avec variantes visuelles et tailles, base de tous les boutons du DS Vigee.
+ * @useWhen composant de bas niveau à étendre via `asChild` pour rendre un lien ou un élément custom comme bouton | besoin d'une variante spécifique (destructive, outline, ghost, link) non couverte par les boutons Vigee | construction d'un nouveau composant bouton dans le DS.
+ * @dontUseFor actions courantes dans l'UI → utiliser Button (Buttons) | soumission de formulaire → utiliser ButtonSubmit | suppression avec confirmation → utiliser DeleteAction | ajout d'élément → utiliser ButtonAdd.
+ * @example <Button variant="outline" size="sm" onClick={handleClick}>Label</Button>
+ */
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";

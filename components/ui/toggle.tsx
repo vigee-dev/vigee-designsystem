@@ -1,3 +1,9 @@
+/**
+ * @description Bouton bascule accessible (on/off) basé sur Radix UI, avec variantes default/outline et tailles sm/default/lg.
+ * @useWhen activation d'un mode bold/italic dans un éditeur de texte → utiliser Toggle | bouton filtre visuel pressé/non-pressé → utiliser Toggle | option binaire isolée sans libellé formulaire → utiliser Toggle
+ * @dontUseFor état on/off avec libellé texte dans un formulaire → utiliser Switch | groupe de toggles liés → utiliser ToggleGroup | sélection parmi plusieurs options → utiliser Tabs
+ * @example <Toggle variant="outline" size="sm" aria-label="Gras" pressed={bold} onPressedChange={setBold} />
+ */
 "use client";
 
 import * as React from "react";

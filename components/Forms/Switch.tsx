@@ -1,3 +1,9 @@
+/**
+ * @description Toggle on/off intégré react-hook-form ou contrôlé manuellement, affiché dans un encadré arrondi avec label, description et icône optionnelle.
+ * @useWhen activer/désactiver une option dans un formulaire react-hook-form → utiliser avec `form` + `name` | toggle contrôlé hors formulaire → utiliser avec `value` + `onChange` | logique inversée (ex: "désactiver les notifications") → utiliser avec `inverted` | état en attente de réponse serveur → utiliser avec `pending`
+ * @dontUseFor sélection parmi plusieurs options exclusives → utiliser Select | activation d'une option parmi une liste de choix booléens groupés → utiliser Toggles | case à cocher dans un formulaire → utiliser Checkboxes
+ * @example <Switch form={form} name="isActive" label="Activer le service" descr="Le service sera disponible immédiatement." />
+ */
 import {
   FormControl,
   FormDescription,

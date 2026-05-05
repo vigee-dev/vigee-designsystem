@@ -1,3 +1,9 @@
+/**
+ * @description Sélecteur unique avec recherche intégrée, connecté à react-hook-form via Zod, avec toggle de désélection.
+ * @useWhen champ de sélection unique avec recherche textuelle dans un formulaire react-hook-form | liste d'items modérée (< ~100) nécessitant un filtre rapide | champ avec icône décorative devant la valeur sélectionnée
+ * @dontUseFor sélection multiple → utiliser MultiSelect | recherche asynchrone sur API → utiliser SearchSelectAsync | usage hors formulaire sans react-hook-form → utiliser ComboBoxResponsive
+ * @example <ComboBox form={form} name="country" label="Pays" items={[{ value: "fr", label: "France" }]} onChange={(v) => console.log(v)} />
+ */
 "use client";
 
 import React from "react";

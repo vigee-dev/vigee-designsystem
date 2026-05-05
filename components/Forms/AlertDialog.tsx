@@ -1,3 +1,9 @@
+/**
+ * @description Modale de confirmation avec titre, description optionnelle et boutons Annuler/Confirmer, typiquement pour valider une action destructive.
+ * @useWhen suppression d'une ressource nécessitant une confirmation explicite → utiliser AlertDialog | action irréversible déclenchée par un bouton → utiliser AlertDialog | soumission critique avec état pending à gérer → utiliser AlertDialog
+ * @dontUseFor suppression directe sans confirmation → utiliser DeleteAction | action avec validation de formulaire → utiliser ActionWithValidation
+ * @example <AlertDialog btnQuestion="Supprimer ce projet ?" btnSubAlert="Cette action est irréversible." onClick={handleDelete} onCancel={handleCancel} trigger={<Button icon="trash" />} />
+ */
 "use client";
 
 import {

@@ -1,3 +1,9 @@
+/**
+ * @description Barre de progression horizontale Radix UI pour afficher un pourcentage d'avancement (0–100).
+ * @useWhen chargement d'un fichier ou upload → indiquer la progression en % | étapes d'un onboarding → montrer l'avancement global | calcul/traitement long → feedback visuel de complétion
+ * @dontUseFor progression par étapes discrètes → utiliser Stepper | indicateur circulaire → utiliser ProgressCircle | barre de complétion de profil avec segments → utiliser ProgressBar
+ * @example <Progress value={42} />
+ */
 "use client";
 
 import * as React from "react";

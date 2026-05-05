@@ -1,3 +1,9 @@
+/**
+ * @description Visionneuse plein écran de documents PDF et images avec zoom, rotation par page, navigation entre documents et raccourcis clavier.
+ * @useWhen prévisualisation read-only d'un PDF ou image depuis une liste de documents → utiliser DocumentViewer | navigation multi-documents avec persistance des rotations serveur → utiliser DocumentViewer | affichage de pièces jointes (contrats, justificatifs) dans une modale fullscreen → utiliser DocumentViewer
+ * @dontUseFor upload ou sélection de fichier → utiliser InputDropZoneFile | simple affichage inline sans contrôles → utiliser ui/Card
+ * @example <DocumentViewer documents={docs} open={open} onOpenChange={setOpen} onRotate={(doc, r) => persist(doc, r)} />
+ */
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';

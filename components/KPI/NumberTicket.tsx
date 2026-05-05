@@ -1,3 +1,9 @@
+/**
+ * @description Affiche un nombre animé qui défile jusqu'à sa valeur cible dès que le composant entre dans le viewport.
+ * @useWhen afficher un KPI chiffré avec effet d'animation au scroll → utiliser NumberTicker | mettre en valeur un compteur (CA, utilisateurs, score) sur une page de dashboard ou landing | animer un chiffre en sens inverse (countdown) → passer direction="down"
+ * @dontUseFor valeur non numérique ou texte formaté complexe → utiliser KPI | affichage statique sans animation → utiliser NumberKPI
+ * @example <NumberTicker value={42000} direction="up" delay={0.3} className="text-4xl font-bold" />
+ */
 "use client";
 
 import { useEffect, useRef } from "react";

@@ -1,3 +1,9 @@
+/**
+ * @description Grille de KPIs cliquables (max 3 colonnes) affichant un libellé, une valeur principale et une stat secondaire.
+ * @useWhen dashboard avec 2–3 métriques clés navigables → utiliser KPI | résumé chiffré en haut de page avec liens vers détails → utiliser KPI
+ * @dontUseFor métrique unique isolée → utiliser NumberKPI | valeurs sans navigation ni contexte dashboard → utiliser NumberTicker
+ * @example <KPI stats={[{ name: "Projets", children: "42", stat: "+5", href: "/projets" }, { name: "Utilisateurs", children: "128", href: "/users" }]} />
+ */
 import Link from "next/link";
 
 interface StatItem {

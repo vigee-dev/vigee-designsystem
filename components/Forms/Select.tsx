@@ -1,3 +1,9 @@
+/**
+ * @description Select déroulant intégré react-hook-form (ou standalone) avec label, aide contextuelle HoverCard et support booléen.
+ * @useWhen champ de sélection unique dans un formulaire RHF avec validation → utiliser avec `form` + `name` + `options` | sélection standalone sans formulaire → utiliser avec `value` + `onChange` + `options` | valeur booléenne stockée comme string → utiliser avec `isBoolean={true}` | option d'aide contextuelle nécessaire → utiliser avec `helpComponent`
+ * @dontUseFor sélection multiple → utiliser MultiSelect | recherche dans une longue liste → utiliser ComboBox | filtres URL sans formulaire → utiliser SelectFilter
+ * @example <Select form={form} name="status" label="Statut" options={[{ label: "Actif", value: "active" }, { label: "Inactif", value: "inactive" }]} />
+ */
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { PiQuestionMarkCircleDuoStroke } from "../../icons/PikaIcons";
 import { cn } from "../lib/utils";

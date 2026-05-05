@@ -1,3 +1,9 @@
+/**
+ * @description Étiquette visuelle inline pour signaler un statut, une catégorie ou un compteur sur un élément UI.
+ * @useWhen afficher le statut d'une entité (actif, archivé, en attente) → utiliser Badge | indiquer un type ou une catégorie sur une carte ou une ligne de tableau → utiliser Badge | signaler un compteur ou une nouveauté sur un élément → utiliser Badge
+ * @dontUseFor actions utilisateur → utiliser Button | notifications système avec message détaillé → utiliser AlertInfo
+ * @example <Badge variant="destructive">Annulé</Badge>
+ */
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "../lib/utils";

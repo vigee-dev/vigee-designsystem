@@ -1,3 +1,9 @@
+/**
+ * @description Loader pleine page centré avec spinner animé, logo Vigee pulsant et texte optionnel — bloque toute l'interface pendant un chargement global.
+ * @useWhen chargement initial d'une page entière (SSR/CSR) → utiliser LoaderPage | attente d'une authentification ou redirection → utiliser LoaderPage | splash screen de chargement avec branding personnalisé → utiliser LoaderPage
+ * @dontUseFor chargement d'un bloc partiel → utiliser Loader | indicateur de rechargement discret → utiliser RefetchIndicator | skeleton de dashboard → utiliser DashboardSkeleton
+ * @example <LoaderPage text="Chargement en cours..." />
+ */
 import VigeeLoaderTransparent from "../../img/logos/VigeeGrayLogo.png";
 import Image, { StaticImageData } from "next/image";
 

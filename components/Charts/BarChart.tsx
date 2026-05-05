@@ -1,3 +1,9 @@
+/**
+ * @description Graphique à barres verticales (Recharts) avec tooltip, labels formatés (k/M/€) et support multi-séries via `keys`.
+ * @useWhen visualiser une distribution de valeurs par catégorie (ex: CA par mois) → BarChart | comparer plusieurs métriques sur un même axe → BarChart avec `keys` | afficher des montants financiers avec formatage automatique → BarChart avec `euro={true}`
+ * @dontUseFor évolution temporelle continue → utiliser LineChart | proportions d'un tout → utiliser PieChart | comparaison horizontale de valeurs longues → utiliser HorizontalBarChart
+ * @example <BarChart data={[{ name: "Jan", total: 4200 }]} keys={[{ dataKey: "total", color: "#6366f1", label: "CA" }]} title="Chiffre d'affaires" euro />
+ */
 "use client";
 
 import {

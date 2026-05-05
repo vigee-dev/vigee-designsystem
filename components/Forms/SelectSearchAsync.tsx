@@ -1,3 +1,9 @@
+/**
+ * @description Select avec recherche asynchrone (react-select/async) intégrable dans un Form react-hook-form ou en standalone, mono ou multi-valeur.
+ * @useWhen recherche d'entités distantes via API au fil de la frappe (utilisateurs, clients, projets…) dans un Form RHF → utiliser avec `form` + `name` + `loadOptions` | sélection asynchrone hors formulaire (filtres, modales) → utiliser sans `form`, avec `onChange` + `value` | sélection multiple d'entités distantes → utiliser avec `isMulti={true}` | besoin de transformer la valeur avant de la passer à RHF → utiliser `preprocessOnChange`
+ * @dontUseFor liste d'options statiques et courte → utiliser Select | recherche sur options locales déjà chargées → utiliser ComboBox | sélection multiple sur dataset statique → utiliser MultiSelect
+ * @example <SearchSelectAsync form={form} name="client" label="Client" loadOptions={fetchClients} placeholder="Rechercher un client..." />
+ */
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import SelectAndSearchAsync from "react-select/async";
 import { UseFormReturn, FieldValues, Path } from "react-hook-form";

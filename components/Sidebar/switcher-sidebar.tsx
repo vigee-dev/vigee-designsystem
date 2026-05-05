@@ -1,3 +1,9 @@
+/**
+ * @description Switcher de contexte dans la sidebar : permet de naviguer entre les apps principales et les projets via un dropdown avec logo et item actif auto-détecté.
+ * @useWhen sidebar multi-apps (Leads, RH, Finances, Studio) → afficher le switcher de contexte | navigation entre projets Studio avec détection de route active | sidebar avec logo variable selon l'état ouvert/réduit
+ * @dontUseFor navigation par onglets horizontaux → utiliser TabsResponsive | menu secondaire dans la sidebar → utiliser SectionHeading | sélection d'une valeur dans un formulaire → utiliser Select
+ * @example <SwitcherSidebar items={appItems} menuTitle="Espace" logo="/logo.svg" logoSmall="/icon.svg" showSwitcher={true} />
+ */
 "use client";
 
 import * as React from "react";

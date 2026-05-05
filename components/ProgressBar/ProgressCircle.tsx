@@ -1,3 +1,9 @@
+/**
+ * @description Jauge circulaire SVG animée affichant un pourcentage calculé entre min et max, avec couleurs configurables.
+ * @useWhen afficher la progression d'un chargement ou d'un calcul en cours → ProgressCircle avec `text` animé en pulse | visualiser un taux d'avancement (ex: complétion de profil, score) → ProgressCircle dans un KPI ou une Card | remplacer une barre de progression quand l'espace est carré/centré → ProgressCircle avec `className` pour ajuster la taille.
+ * @dontUseFor progression linéaire dans un formulaire multi-étapes → utiliser ProgressBar | afficher plusieurs métriques comparatives → utiliser RadialChart | suivi d'étapes ordonnées → utiliser Stepper.
+ * @example <ProgressCircle min={0} max={200} value={120} gaugePrimaryColor="#6366f1" text="Traitement en cours..." />
+ */
 import { cn } from "../lib/utils";
 
 interface Props {

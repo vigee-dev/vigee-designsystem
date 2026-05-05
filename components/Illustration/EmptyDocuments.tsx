@@ -1,3 +1,9 @@
+/**
+ * @description Illustration SVG d'état vide pour les listes ou pages sans documents.
+ * @useWhen page de liste de documents sans résultat → afficher EmptyDocuments | état initial d'un espace documentaire vide → guider l'utilisateur à créer son premier document
+ * @dontUseFor absence d'utilisateurs → utiliser EmptyUsers | absence de projets → utiliser EmptyProjects | illustration générique non liée aux documents → utiliser EmptyIllustration
+ * @example <EmptyDocuments color="text-primary" className="mx-auto" />
+ */
 import { cn } from "../lib/utils";
 
 export const EmptyDocuments = ({ color, className }: { color?: string; className?: string }) => {
