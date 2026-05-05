@@ -1,6 +1,6 @@
 {
   "version": "1.4.28",
-  "generatedAt": "2026-05-05T20:08:31.157Z",
+  "generatedAt": "2026-05-05T20:16:20.077Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -268,29 +268,6 @@
       "example": "<ShimmerButton onClick={handleClick}>Commencer maintenant</ShimmerButton>"
     },
     {
-      "name": "AreaChart",
-      "category": "Charts",
-      "importPath": "@vigee-designsystem/components/Charts/AreaChart",
-      "exportType": "named",
-      "props": [
-        "className?: string",
-        "title: string",
-        "description: string"
-      ],
-      "formIntegration": false,
-      "description": "Graphique en aires empilées (desktop/mobile) avec gradient, tooltip et footer de tendance, affiché dans une Card.",
-      "useWhen": [
-        "visualiser l'évolution de deux métriques dans le temps sur un dashboard → utiliser AreaChart",
-        "afficher une tendance mensuelle avec label et description → utiliser AreaChart"
-      ],
-      "dontUseFor": [
-        "comparer des catégories sans notion temporelle → utiliser BarChart",
-        "afficher une seule courbe sans remplissage → utiliser LineChart",
-        "visualiser des proportions → utiliser PieChart"
-      ],
-      "example": "<AreaChart title=\"Trafic mensuel\" description=\"Janvier – Juin 2024\" />"
-    },
-    {
       "name": "BarChart",
       "category": "Charts",
       "importPath": "@vigee-designsystem/components/Charts/BarChart",
@@ -404,28 +381,6 @@
       "example": "<PieChart title=\"Répartition des contrats\" subtitle=\"Par type\" data={[{ name: \"CDI\", value: 40 }, { name: \"CDD\", value: 20 }]} container />"
     },
     {
-      "name": "RadialChart",
-      "category": "Charts",
-      "importPath": "@vigee-designsystem/components/Charts/RadialChart",
-      "exportType": "named",
-      "props": [
-        "className?: string"
-      ],
-      "formIntegration": false,
-      "description": "Graphique radial circulaire affichant une valeur unique (visitors) avec label centré et tendance en pied de carte.",
-      "useWhen": [
-        "afficher un KPI circulaire de type \"progression vers un objectif\"",
-        "visualiser un taux ou score unique sous forme d'arc",
-        "widget de dashboard avec indicateur de tendance mensuelle."
-      ],
-      "dontUseFor": [
-        "comparer plusieurs séries de données → utiliser BarChart",
-        "afficher une répartition en parts → utiliser PieChart",
-        "suivre une évolution temporelle → utiliser LineChart."
-      ],
-      "example": "<RadialChart className=\"w-full max-w-sm\" />"
-    },
-    {
       "name": "ComboBox",
       "category": "ComboBox",
       "importPath": "@vigee-designsystem/components/ComboBox/ComboBox",
@@ -453,31 +408,6 @@
         "dataset très volumineux avec chargement async → utiliser SearchSelectAsync"
       ],
       "example": "<ComboBox items={[{ value: \"fr\", label: \"France\" }]} value={value} onChange={setValue} label=\"Pays\" />"
-    },
-    {
-      "name": "ComboBoxResponsive",
-      "category": "ComboBox",
-      "importPath": "@vigee-designsystem/components/ComboBox/ComboBoxResponsive",
-      "exportType": "named",
-      "props": [
-        "label: string",
-        "items: Status[]",
-        "text: string",
-        "selectedStatus: Status | null",
-        "setSelectedStatus: (status: Status | null) => void"
-      ],
-      "formIntegration": false,
-      "description": "Sélecteur avec recherche textuelle adaptatif : Popover sur desktop, Drawer natif sur mobile.",
-      "useWhen": [
-        "filtrer une liste d'options sur mobile et desktop sans gestion manuelle du breakpoint → utiliser ComboBoxResponsive",
-        "sélection d'un statut, d'une catégorie ou d'un type parmi une liste courte avec recherche intégrée → utiliser ComboBoxResponsive"
-      ],
-      "dontUseFor": [
-        "sélection multiple → utiliser MultiSelect",
-        "gros datasets avec chargement asynchrone → utiliser ComboBox",
-        "usage dans un formulaire react-hook-form → utiliser Forms/ComboBox"
-      ],
-      "example": "<ComboBoxResponsive label=\"Statut\" text=\"Choisir...\" items={statuses} selectedStatus={selected} setSelectedStatus={setSelected} />"
     },
     {
       "name": "Collapsible",
@@ -555,26 +485,6 @@
         "actions groupées en tableau → utiliser DataTable"
       ],
       "example": "<LineContainer title=\"Informations personnelles\" subtitle=\"Nom, prénom, email\" icon={<UserIcon />} href=\"/profile/info\" />"
-    },
-    {
-      "name": "RoundedContainer",
-      "category": "Container",
-      "importPath": "@vigee-designsystem/components/Container/RoundedContainer",
-      "exportType": "named",
-      "props": [
-        "children: ReactNode"
-      ],
-      "formIntegration": false,
-      "description": "Conteneur centré à fond blanc avec coins arrondis, ombre légère et padding généreux pour encadrer du contenu de page.",
-      "useWhen": [
-        "wrapper d'une section principale de page nécessitant une délimitation visuelle → utiliser RoundedContainer",
-        "contenu centré avec largeur max (7xl) → utiliser RoundedContainer"
-      ],
-      "dontUseFor": [
-        "contenu pleine largeur sans contrainte max → utiliser Container",
-        "sections imbriquées légères → utiliser LineContainer"
-      ],
-      "example": "<RoundedContainer><UserForm /></RoundedContainer>"
     },
     {
       "name": "DatePickerWithPresets",
@@ -839,33 +749,6 @@
         "message d'information non bloquant → utiliser AlertInfo"
       ],
       "example": "<Error title=\"Impossible de charger les données\" subtitle=\"Vérifiez votre connexion.\" onClick={() => refetch()} supportEmail=\"support@vigee.fr\" />"
-    },
-    {
-      "name": "Unauthorized",
-      "category": "Errors",
-      "importPath": "@vigee-designsystem/components/Errors/Unauthorized",
-      "exportType": "named",
-      "props": [
-        "title?: string",
-        "subtitle?: string",
-        "children?: ReactNode",
-        "supportEmail?: string",
-        "img?: StaticImageData",
-        "onClick?: () => void",
-        "variant?: \"bro\" | \"classic\""
-      ],
-      "formIntegration": false,
-      "description": "Page d'erreur 403 avec illustration, message configurable et actions de récupération (support, retry).",
-      "useWhen": [
-        "route protégée accessible sans permission → afficher à la place du contenu",
-        "guard d'autorisation échoue → remplacer le contenu de la page",
-        "accès refusé API → afficher en pleine page ou dans un Container"
-      ],
-      "dontUseFor": [
-        "erreurs 404 ou serveur → utiliser Error",
-        "contenu conditionnel selon rôle → utiliser ContentGuard"
-      ],
-      "example": "<Unauthorized supportEmail=\"support@vigee.fr\" onClick={() => router.refresh()} />"
     },
     {
       "name": "FadeIn",
@@ -1968,25 +1851,6 @@
       "example": "<EmptyProjects color=\"text-primary\" className=\"mx-auto\" />"
     },
     {
-      "name": "EmptyStreet",
-      "category": "Illustration",
-      "importPath": "@vigee-designsystem/components/Illustration/EmptyStreet",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": false,
-      "description": "Illustration SVG d'une rue vide, utilisée comme visuel décoratif pour les états vides liés à des lieux ou adresses.",
-      "useWhen": [
-        "page de résultats vide liée à une adresse/localisation → utiliser EmptyStreet",
-        "écran d'absence de données géographiques ou de quartiers → utiliser EmptyStreet"
-      ],
-      "dontUseFor": [
-        "états vides génériques → utiliser EmptyIllustration",
-        "absence de documents → utiliser EmptyDocuments",
-        "absence d'utilisateurs → utiliser EmptyUsers"
-      ],
-      "example": "<EmptyStreet className=\"mx-auto\" />"
-    },
-    {
       "name": "EmptyUsers",
       "category": "Illustration",
       "importPath": "@vigee-designsystem/components/Illustration/EmptyUsers",
@@ -2259,37 +2123,6 @@
       "example": "<Login logo={clientLogo} clientName=\"Acme\" callbackUrl=\"/dashboard\" />"
     },
     {
-      "name": "Login",
-      "category": "Login",
-      "importPath": "@vigee-designsystem/components/Login/LoginMagic",
-      "exportType": "default",
-      "props": [
-        "logo: StaticImageData",
-        "clientName?: string",
-        "variant?: \"default\" | \"destructive\" | \"outline\" | \"secondary\" | \"ghost\"",
-        "callbackUrl?: string",
-        "noCopyright?: boolean",
-        "imageWidth?: number",
-        "imageHeight?: number",
-        "github?: boolean",
-        "google?: boolean",
-        "apple?: boolean",
-        "credentials?: boolean"
-      ],
-      "formIntegration": false,
-      "description": "Page de connexion complète avec magic link (Resend), credentials et OAuth (GitHub, Google, Apple) via NextAuth.",
-      "useWhen": [
-        "page de login avec authentification par lien magique email → utiliser LoginMagic",
-        "login avec email + mot de passe (credentials) → utiliser LoginMagic avec `credentials={true}`",
-        "connexion OAuth GitHub/Google/Apple → utiliser LoginMagic avec les props `github`, `google`, `apple` à `true`"
-      ],
-      "dontUseFor": [
-        "formulaire de login embarqué dans une page existante → utiliser Login",
-        "affichage d'un simple champ email isolé → utiliser Forms/Input"
-      ],
-      "example": "<LoginMagic logo={myLogo} clientName=\"MonApp\" callbackUrl=\"/dashboard\" google github />"
-    },
-    {
       "name": "VariableLogo",
       "category": "Logos",
       "importPath": "@vigee-designsystem/components/Logos/VariableLogo",
@@ -2420,33 +2253,6 @@
       "example": "<Dock magnification={70} distance={120} direction=\"bottom\"><DockIcon><HomeIcon /></DockIcon></Dock>"
     },
     {
-      "name": "DotPattern",
-      "category": "magicui",
-      "importPath": "@vigee-designsystem/components/magicui/dot-pattern",
-      "exportType": "named",
-      "props": [
-        "width?: any",
-        "height?: any",
-        "x?: any",
-        "y?: any",
-        "cx?: any",
-        "cy?: any",
-        "cr?: any",
-        "className?: string"
-      ],
-      "formIntegration": false,
-      "description": "Fond décoratif SVG en grille de points, positionné en absolute pour couvrir le conteneur parent.",
-      "useWhen": [
-        "arrière-plan visuel d'une section hero ou splash screen → utiliser DotPattern",
-        "fond texturé pour une card ou un bloc mise en avant → utiliser DotPattern"
-      ],
-      "dontUseFor": [
-        "contenu interactif ou porteur de sens → utiliser un vrai composant",
-        "fond animé → utiliser GridPattern ou RetroGrid"
-      ],
-      "example": "<DotPattern className=\"opacity-50\" width={20} height={20} cr={1.5} />"
-    },
-    {
       "name": "HeroVideoDialog",
       "category": "magicui",
       "importPath": "@vigee-designsystem/components/magicui/hero-video-dialog",
@@ -2470,32 +2276,6 @@
         "contenu interactif non-vidéo → utiliser Dialog."
       ],
       "example": "<HeroVideoDialog videoSrc=\"https://www.youtube.com/embed/abc123\" thumbnailSrc=\"/thumbnail.png\" thumbnailAlt=\"Démo Vigee\" animationStyle=\"from-center\" />"
-    },
-    {
-      "name": "HyperText",
-      "category": "magicui",
-      "importPath": "@vigee-designsystem/components/magicui/hyper-text",
-      "exportType": "default",
-      "props": [
-        "text: string",
-        "duration?: number",
-        "framerProps?: Variants",
-        "className?: string",
-        "animateOnLoad?: boolean"
-      ],
-      "formIntegration": false,
-      "description": "Affiche un texte avec un effet de déchiffrement lettre par lettre, rejoué au survol de la souris.",
-      "useWhen": [
-        "titre de page ou hero section avec animation d'entrée → utiliser HyperText",
-        "texte décoratif à révéler au survol → utiliser HyperText",
-        "mise en valeur d'un mot-clé dans un SplashScreen ou landing → utiliser HyperText"
-      ],
-      "dontUseFor": [
-        "contenu textuel long ou paragraphe → utiliser TypographyH1",
-        "texte animé mot par mot → utiliser WordPullUp",
-        "révélation progressive d'un bloc entier → utiliser BoxReveal"
-      ],
-      "example": "<HyperText text=\"VIGEE\" duration={600} className=\"text-4xl text-primary\" />"
     },
     {
       "name": "Marquee",
@@ -2522,47 +2302,6 @@
         "listes statiques sans animation → utiliser Container"
       ],
       "example": "<Marquee pauseOnHover repeat={3}><Card /><Card /><Card /></Marquee>"
-    },
-    {
-      "name": "NeonGradientCard",
-      "category": "magicui",
-      "importPath": "@vigee-designsystem/components/magicui/neon-gradient-card",
-      "exportType": "named",
-      "props": [
-        "firstColor: string",
-        "secondColor: string"
-      ],
-      "formIntegration": false,
-      "description": "Carte avec bordure gradient néon animée (dégradé tournant) pour mettre en valeur un contenu de manière visuelle forte.",
-      "useWhen": [
-        "mise en avant d'un plan tarifaire premium → entourer la carte avec NeonGradientCard",
-        "élément hero ou CTA accrocheur sur une landing page → wrapper le bloc avec NeonGradientCard",
-        "distinction visuelle d'un item sélectionné ou recommandé → remplacer la bordure classique par NeonGradientCard"
-      ],
-      "dontUseFor": [
-        "listes d'items standards → utiliser ui/Card",
-        "contenu dense ou tableau de données → utiliser DataTable",
-        "usage discret ou institutionnel où l'effet néon serait trop agressif → utiliser RoundedContainer"
-      ],
-      "example": "<NeonGradientCard borderSize={2} borderRadius={16} neonColors={{ firstColor: \"#ff00aa\", secondColor: \"#00FFF1\" }}>Contenu premium</NeonGradientCard>"
-    },
-    {
-      "name": "RetroGrid",
-      "category": "magicui",
-      "importPath": "@vigee-designsystem/components/magicui/retro-grid",
-      "exportType": "default",
-      "props": [],
-      "formIntegration": false,
-      "description": "Grille perspective animée style rétro-futuriste, posée en arrière-plan décoratif absolu avec effet de profondeur.",
-      "useWhen": [
-        "section hero ou splash screen nécessitant un fond animé → utiliser RetroGrid",
-        "page de login/landing pour un effet visuel immersif → utiliser RetroGrid"
-      ],
-      "dontUseFor": [
-        "fond de dashboard fonctionnel → utiliser DashboardSkeleton",
-        "arrière-plan de modale ou dialog → utiliser SplashScreen"
-      ],
-      "example": "<RetroGrid angle={65} className=\"opacity-20\" />"
     },
     {
       "name": "WordPullUp",
@@ -2614,56 +2353,6 @@
       "example": "<DropdownMenu trigger={<Button icon=\"more-horizontal\" />} items={[{ type: 'item', content: 'Modifier', onClick: handleEdit }, { type: 'separator' }, { type: 'item', content: 'Supprimer', onClick: handleDelete, className: 'text-red-500' }]} />"
     },
     {
-      "name": "MobileMenu",
-      "category": "Menus",
-      "importPath": "@vigee-designsystem/components/Menus/MobileMenu",
-      "exportType": "default",
-      "props": [
-        "nav?: MenuItem[]",
-        "buttonComponent?: ReactNode"
-      ],
-      "formIntegration": false,
-      "description": "Barre de navigation mobile fixée en bas d'écran (max 4 items + 1 bouton central), avec highlight automatique selon l'URL active.",
-      "useWhen": [
-        "navigation principale sur mobile avec 2 à 4 sections → utiliser MobileMenu",
-        "ajout d'un bouton d'action central (ex: créer) entre les items de nav → passer `buttonComponent`",
-        "remplacement du Sidebar sur petits écrans → utiliser MobileMenu en complément de AppSidebar."
-      ],
-      "dontUseFor": [
-        "navigation desktop → utiliser AppSidebar",
-        "plus de 4 items de navigation → utiliser Sidebar",
-        "menus contextuels ou actions secondaires → utiliser DropdownMenu."
-      ],
-      "example": "<MobileMenu nav={[{ name: \"Accueil\", href: \"/\", slug: \"accueil\", icon: <HomeIcon />, iconFill: <HomeIconFill /> }]} buttonComponent={<ButtonAdd onClick={handleCreate} />} />"
-    },
-    {
-      "name": "SectionHeading",
-      "category": "Menus",
-      "importPath": "@vigee-designsystem/components/Menus/SectionHeading",
-      "exportType": "default",
-      "props": [
-        "title?: string | undefined",
-        "subtitle?: string | undefined",
-        "buttonTitle?: string",
-        "buttonLink?: string",
-        "nav?: MenuItem[]",
-        "route?: string"
-      ],
-      "formIntegration": false,
-      "description": "En-tête de section avec titre, sous-titre, navigation par onglets responsive (tabs desktop / barre fixe mobile) et bouton d'action optionnel.",
-      "useWhen": [
-        "page avec sous-navigation entre plusieurs vues liées → afficher SectionHeading avec `nav`",
-        "page nécessitant un titre + bouton d'action positionné à droite → passer `buttonTitle` + `buttonLink`",
-        "layout avec barre de navigation fixe en bas sur mobile → fournir `nav` avec `slug` et `icon`"
-      ],
-      "dontUseFor": [
-        "navigation principale de l'application → utiliser Sidebar",
-        "onglets sans routing URL → utiliser TabsResponsive",
-        "navigation mobile autonome → utiliser MobileMenu"
-      ],
-      "example": "<SectionHeading title=\"Projets\" subtitle=\"Gérez vos projets\" nav={[{ name: \"Liste\", slug: \"liste\", href: \"/projets/liste\", icon: \"FolderIcon\" }]} route=\"/projets\" buttonTitle=\"Nouveau\" buttonLink=\"/projets/nouveau\" />"
-    },
-    {
       "name": "Sidebar",
       "category": "Menus",
       "importPath": "@vigee-designsystem/components/Menus/Sidebar",
@@ -2699,48 +2388,6 @@
         "menu contextuel sur un élément → utiliser DropdownMenu"
       ],
       "example": "<Sidebar navigation={navItems} open={true} signout={() => signOut()} logo={logo} logoSmall={logoSmall}>{children}</Sidebar>"
-    },
-    {
-      "name": "Notes",
-      "category": "Note",
-      "importPath": "@vigee-designsystem/components/Note/Note",
-      "exportType": "default",
-      "props": [
-        "initialContent: Note"
-      ],
-      "formIntegration": true,
-      "description": "Zone de notes tabulée en 3 catégories (Urgent / Important / Autres) avec sauvegarde locale au blur.",
-      "useWhen": [
-        "fiche entité (contact, projet, dossier) nécessitant des notes priorisées → utiliser Notes",
-        "sidebar de détail avec mémos rapides à catégoriser → utiliser Notes"
-      ],
-      "dontUseFor": [
-        "saisie de texte simple sans catégorie → utiliser TextArea",
-        "commentaires collaboratifs ou historisés → utiliser un système dédié"
-      ],
-      "example": "<Notes initialContent={{ urgent: \"\", important: \"\", other: \"\" }} />"
-    },
-    {
-      "name": "ProgressBar",
-      "category": "ProgressBar",
-      "importPath": "@vigee-designsystem/components/ProgressBar/ProgressBar",
-      "exportType": "named",
-      "props": [
-        "progress: number",
-        "text?: string"
-      ],
-      "formIntegration": false,
-      "description": "Barre de progression horizontale centrée avec pourcentage et texte optionnel sous la barre.",
-      "useWhen": [
-        "upload de fichier en cours → afficher l'avancement",
-        "traitement serveur asynchrone → indiquer la progression",
-        "onboarding multi-étapes → visualiser le taux de complétion"
-      ],
-      "dontUseFor": [
-        "progression par étapes nommées → utiliser Stepper",
-        "indicateur circulaire → utiliser ProgressCircle"
-      ],
-      "example": "<ProgressBar progress={72} text=\"72% complété\" />"
     },
     {
       "name": "ProgressCircle",
@@ -2794,26 +2441,6 @@
         "spinner plein écran → utiliser Spinner"
       ],
       "example": "<RefetchIndicator isRefetching={isFetching} size=\"sm\" />"
-    },
-    {
-      "name": "Search",
-      "category": "Search",
-      "importPath": "@vigee-designsystem/components/Search/Search",
-      "exportType": "default",
-      "props": [],
-      "formIntegration": false,
-      "description": "Champ de recherche textuelle avec debounce intégré, icône loupe et label optionnel.",
-      "useWhen": [
-        "filtrer une liste ou tableau en temps réel → utiliser Search",
-        "recherche avec délai personnalisé pour limiter les appels API → utiliser Search avec debounceTime",
-        "champ de recherche standalone hors formulaire react-hook-form → utiliser Search"
-      ],
-      "dontUseFor": [
-        "recherche avec suggestions/autocomplétion → utiliser ComboBox",
-        "recherche avancée multi-critères → utiliser Filter",
-        "champ texte dans un formulaire validé → utiliser Forms/Input"
-      ],
-      "example": "<Search onChange={(value) => setQuery(value)} placeholder=\"Rechercher un projet...\" />"
     },
     {
       "name": "MultiSelect",
@@ -2871,50 +2498,6 @@
         "select dans un formulaire react-hook-form → utiliser Forms/Select"
       ],
       "example": "<Select options={[{ value: \"fr\", label: \"France\" }, { value: \"de\", label: \"Allemagne\" }]} onChange={(v) => console.log(v)} label=\"Pays\" clearable />"
-    },
-    {
-      "name": "useDebounce",
-      "category": "Select",
-      "importPath": "@vigee-designsystem/components/Select/MultipleSelector",
-      "exportType": "named",
-      "props": [
-        "value?: Option[]",
-        "defaultOptions?: Option[]",
-        "options?: Option[]",
-        "placeholder?: string",
-        "loadingIndicator?: ReactNode",
-        "emptyIndicator?: ReactNode",
-        "delay?: number",
-        "triggerSearchOnFocus?: boolean",
-        "onSearch?: (value: string) => Promise<Option[]>",
-        "onSearchSync?: (value: string) => Option[]",
-        "onChange?: (options: Option[]) => void",
-        "maxSelected?: number",
-        "onMaxSelected?: (maxLimit: number) => void",
-        "hidePlaceholderWhenSelected?: boolean",
-        "disabled?: boolean",
-        "groupBy?: string",
-        "className?: string",
-        "badgeClassName?: string",
-        "selectFirstItem?: boolean",
-        "creatable?: boolean",
-        "commandProps?: React.ComponentPropsWithoutRef<typeof Command>",
-        "inputProps?: Omit<",
-        "hideClearAllButton?: boolean"
-      ],
-      "formIntegration": false,
-      "description": "Sélecteur multi-valeurs avec badges, recherche synchrone/async, groupement et création d'options à la volée.",
-      "useWhen": [
-        "sélection de plusieurs tags/catégories dans un formulaire → utiliser MultipleSelector",
-        "recherche async avec debounce pour charger des options distantes → utiliser MultipleSelector",
-        "options groupées par clé avec limite de sélection → utiliser MultipleSelector"
-      ],
-      "dontUseFor": [
-        "sélection d'une seule valeur → utiliser Select",
-        "recherche et sélection unique avec suggestions → utiliser ComboBox",
-        "filtrage multi-valeurs sur URL → utiliser SelectMultiple"
-      ],
-      "example": "<MultipleSelector options={options} value={selected} onChange={setSelected} placeholder=\"Choisir des tags...\" />"
     },
     {
       "name": "Sheet",
@@ -3068,44 +2651,6 @@
       "example": "<HeaderButtonSidebar headerData={{ title: \"Mon App\", subtitle: \"Workspace\", iconUrl: \"/icon.png\", type: \"link\", url: \"/\" }} logo=\"/logo.svg\" logoSmall=\"/logo-small.svg\" />"
     },
     {
-      "name": "headerData",
-      "category": "Sidebar",
-      "importPath": "@vigee-designsystem/components/Sidebar/datas-sidebar/header-data",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": false,
-      "description": "Données statiques de configuration du header sidebar (titre, icône, type) pour l'instance Vigee Flow.",
-      "useWhen": [
-        "initialisation de AppSidebar → passer headerData comme prop header",
-        "personnalisation du header sidebar → modifier ce fichier de config"
-      ],
-      "dontUseFor": [
-        "rendu dynamique du header → utiliser HeaderSidebar",
-        "affichage d'un logo variable → utiliser VariableLogo"
-      ],
-      "example": "<AppSidebar header={headerData} />"
-    },
-    {
-      "name": "HeaderSidebar",
-      "category": "Sidebar",
-      "importPath": "@vigee-designsystem/components/Sidebar/header-sidebar",
-      "exportType": "default",
-      "props": [
-        "headerData: HeaderDataProps"
-      ],
-      "formIntegration": false,
-      "description": "Affiche le bouton d'en-tête de la sidebar (logo, nom d'app, etc.) encapsulé dans un SidebarMenu Vigee.",
-      "useWhen": [
-        "zone haute de la sidebar pour identifier l'application ou l'organisation",
-        "wrapping de HeaderButtonSidebar dans la structure SidebarMenu standard"
-      ],
-      "dontUseFor": [
-        "navigation principale → utiliser AppSidebar",
-        "affichage d'infos utilisateur → utiliser FooterSidebar"
-      ],
-      "example": "<HeaderSidebar headerData={{ name: \"Vigee\", logo: LogoIcon, plan: \"Pro\" }} />"
-    },
-    {
       "name": "SwitcherSidebar",
       "category": "Sidebar",
       "importPath": "@vigee-designsystem/components/Sidebar/switcher-sidebar",
@@ -3124,24 +2669,6 @@
         "sélection d'une valeur dans un formulaire → utiliser Select"
       ],
       "example": "<SwitcherSidebar items={appItems} menuTitle=\"Espace\" logo=\"/logo.svg\" logoSmall=\"/icon.svg\" showSwitcher={true} />"
-    },
-    {
-      "name": "userSidebar",
-      "category": "Sidebar",
-      "importPath": "@vigee-designsystem/components/Sidebar/datas-sidebar/footer-data",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": false,
-      "description": "Données statiques de l'utilisateur affiché dans le footer de la sidebar (nom, email, avatar).",
-      "useWhen": [
-        "initialiser FooterSidebar avec un utilisateur par défaut en dev/démo",
-        "remplacer par les données réelles de session avant mise en production"
-      ],
-      "dontUseFor": [
-        "affichage dynamique de l'utilisateur connecté → injecter directement les données de session dans FooterSidebar",
-        "gestion de profil → utiliser ProfileImageUploader"
-      ],
-      "example": "<FooterSidebar user={userSidebar} />"
     },
     {
       "name": "DashboardSkeleton",
@@ -3165,24 +2692,6 @@
         "indicateur de rechargement en arrière-plan → utiliser RefetchIndicator"
       ],
       "example": "<TicketsSkeleton className=\"mt-4\" />"
-    },
-    {
-      "name": "Slider",
-      "category": "Slider",
-      "importPath": "@vigee-designsystem/components/Slider/Slider",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": false,
-      "description": "Slider avec affichage du titre, de la valeur courante en % et des bornes min/max, intégré au DS Vigee.",
-      "useWhen": [
-        "sélection d'un pourcentage (ex: taux, avancement) → utiliser Slider",
-        "réglage d'une valeur numérique bornée avec feedback visuel immédiat → utiliser Slider"
-      ],
-      "dontUseFor": [
-        "saisie d'une valeur numérique précise → utiliser Input",
-        "sélection dans une plage de dates → utiliser DatePickerWithPresets"
-      ],
-      "example": "<Slider title=\"Avancement\" value={[42]} min={0} max={100} step={1} defaultValue={[42]} />"
     },
     {
       "name": "GridPattern",
@@ -3315,31 +2824,6 @@
       "example": "<DataTable columns={columns} data={projets} onRowClick={(row) => router.push(`/projets/${row.original.id}`)} lines={20} />"
     },
     {
-      "name": "FilterableSelect",
-      "category": "Tables",
-      "importPath": "@vigee-designsystem/components/Tables/SelectSearch",
-      "exportType": "default",
-      "props": [
-        "items: Item[]",
-        "placeholder: string",
-        "query: string",
-        "preselected?: string"
-      ],
-      "formIntegration": false,
-      "description": "Select qui synchronise la valeur choisie avec un paramètre d'URL (query string) pour filtrer des données tabulaires.",
-      "useWhen": [
-        "filtre d'une colonne de tableau via l'URL → utiliser SelectSearch",
-        "valeur présélectionnée à conserver dans l'URL → utiliser SelectSearch avec `preselected`",
-        "navigation avec état persistant dans l'URL → utiliser SelectSearch"
-      ],
-      "dontUseFor": [
-        "sélection multiple → utiliser MultiSelect",
-        "filtres combinés avancés → utiliser Filter",
-        "sélection sans impact sur l'URL → utiliser Select"
-      ],
-      "example": "<SelectSearch items={[{ value: \"Actif\" }, { value: \"Inactif\" }]} placeholder=\"Statut\" query=\"status\" />"
-    },
-    {
       "name": "Pagination",
       "category": "Tables",
       "importPath": "@vigee-designsystem/components/Tables/Pagination",
@@ -3464,31 +2948,6 @@
         "message d'erreur de formulaire → utiliser le système de validation du Form"
       ],
       "example": "<Tooltip message=\"Supprimer l'élément\"><Button icon=\"trash\" onClick={handleDelete} /></Tooltip>"
-    },
-    {
-      "name": "TitleGradual",
-      "category": "Typography",
-      "importPath": "@vigee-designsystem/components/Typography/TitleGradual",
-      "exportType": "default",
-      "props": [
-        "text: string",
-        "duration?: number",
-        "delayMultiple?: number",
-        "framerProps?: Variants",
-        "className?: string"
-      ],
-      "formIntegration": false,
-      "description": "Titre animé lettre par lettre avec glissement horizontal, idéal pour les en-têtes de pages d'accueil ou splash screens.",
-      "useWhen": [
-        "page d'accueil ou hero section nécessitant un titre impactant → utiliser TitleGradual",
-        "SplashScreen avec titre animé → utiliser TitleGradual",
-        "première impression visuelle d'une app → utiliser TitleGradual"
-      ],
-      "dontUseFor": [
-        "titres dans des listes ou tableaux → utiliser TypographyH1",
-        "titres répétés dans des cards → utiliser TypographyH1"
-      ],
-      "example": "<TitleGradual text=\"Bienvenue sur Vigee\" className=\"text-4xl font-bold\" />"
     },
     {
       "name": "TypographyH1",
@@ -4050,24 +3509,6 @@
       "example": "<Label htmlFor=\"email\">Adresse e-mail</Label>"
     },
     {
-      "name": "ModeToggle",
-      "category": "ui",
-      "importPath": "@vigee-designsystem/components/ui/mode-toggle",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": false,
-      "description": "Bouton icône soleil/lune avec dropdown pour basculer entre les thèmes Light, Dark et System via next-themes.",
-      "useWhen": [
-        "barre de navigation ou header → placer ModeToggle pour permettre le changement de thème",
-        "sidebar ou zone de paramètres utilisateur → offrir le contrôle du thème sans texte visible."
-      ],
-      "dontUseFor": [
-        "gestion d'autres préférences utilisateur → utiliser Switch",
-        "affichage d'options multiples non liées au thème → utiliser DropdownMenu directement."
-      ],
-      "example": "<ModeToggle />"
-    },
-    {
       "name": "NavigationMenu",
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/navigation-menu",
@@ -4190,30 +3631,6 @@
         "activation/désactivation binaire → utiliser Switch"
       ],
       "example": "<RadioGroup defaultValue=\"option1\"><RadioGroupItem value=\"option1\" id=\"o1\" /><RadioGroupItem value=\"option2\" id=\"o2\" /></RadioGroup>"
-    },
-    {
-      "name": "ResizablePanelGroup",
-      "category": "ui",
-      "importPath": "@vigee-designsystem/components/ui/resizable",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": false,
-      "exports": [
-        "ResizablePanelGroup",
-        "ResizablePanel",
-        "ResizableHandle"
-      ],
-      "description": "Panneaux redimensionnables par drag horizontal ou vertical, avec poignée optionnelle, basés sur react-resizable-panels.",
-      "useWhen": [
-        "layout éditeur avec panneau code / prévisualisation côte à côte → utiliser ResizablePanelGroup + ResizablePanel",
-        "interface avec sidebar redimensionnable manuellement → utiliser ResizablePanelGroup + ResizableHandle",
-        "découpage vertical ajustable (ex: liste / détail) → utiliser ResizablePanelGroup direction=\"vertical\""
-      ],
-      "dontUseFor": [
-        "redimensionnement d'une modale ou d'un sheet → utiliser Sheet",
-        "affichage de panneaux fixes sans interaction drag → utiliser ResizablePanelGroup"
-      ],
-      "example": "<ResizablePanelGroup direction=\"horizontal\"><ResizablePanel defaultSize={30} /><ResizableHandle withHandle /><ResizablePanel /></ResizablePanelGroup>"
     },
     {
       "name": "ScrollArea",
@@ -4493,24 +3910,6 @@
         "texte riche avec formatage → utiliser TextArea (Forms)"
       ],
       "example": "<Textarea placeholder=\"Décrivez votre projet...\" rows={4} />"
-    },
-    {
-      "name": "Toaster",
-      "category": "ui",
-      "importPath": "@vigee-designsystem/components/ui/sonner",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": false,
-      "description": "Toaster Sonner adapté au thème Vigee (light/dark/system) à monter une seule fois dans le layout racine.",
-      "useWhen": [
-        "mise en place des notifications toast dans le layout racine → monter `<Toaster />`",
-        "afficher des retours utilisateur (succès, erreur, info) via `toast()` de sonner dans n'importe quel composant enfant."
-      ],
-      "dontUseFor": [
-        "feedback bloquant nécessitant une confirmation → utiliser AlertDialog",
-        "messages persistants contextuels dans la page → utiliser AlertInfo."
-      ],
-      "example": "<Toaster />"
     },
     {
       "name": "Toaster",
