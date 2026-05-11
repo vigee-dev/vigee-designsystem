@@ -24,7 +24,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { PiUserCircleDuoSolid } from "../../icons/PikaIcons";
+import { PiUserCircleSolid } from "../../icons/PikaIcons";
 
 type Props = {
   user: {
@@ -55,7 +55,7 @@ const FooterSidebar = ({ user, links }: Props) => {
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage src={user.avatar} alt={user.name} />
                 <AvatarFallback className="rounded-lg">
-                  <PiUserCircleDuoSolid className="h-8 w-8" />
+                  <PiUserCircleSolid className="h-8 w-8" />
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
@@ -76,7 +76,7 @@ const FooterSidebar = ({ user, links }: Props) => {
                 <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage src={user.avatar} alt={user.name} />
                   <AvatarFallback className="rounded-lg">
-                    <PiUserCircleDuoSolid className="h-8 w-8" />
+                    <PiUserCircleSolid className="h-8 w-8" />
                   </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
