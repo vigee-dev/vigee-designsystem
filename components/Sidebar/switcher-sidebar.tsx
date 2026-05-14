@@ -85,6 +85,11 @@ export function SwitcherSidebar({
       item.slug.startsWith("/finances")
     )
       return true;
+    if (
+      activePath?.startsWith("/administration") &&
+      item.slug.startsWith("/administration")
+    )
+      return true;
 
     if (activePath?.includes("/studio/projects/")) {
       // Si on est sur un projet, chercher le projet correspondant
