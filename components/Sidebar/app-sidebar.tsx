@@ -114,6 +114,10 @@ const AppSidebar = ({
   const isItemActive = (itemHref: string, itemSlug?: string) => {
     // Match exact
     if (activePath === itemHref) return true;
+    // Les racines d'app (ex: /system, /leads) ne doivent pas être actives
+    // sur leurs sous-pages — sinon "Accueil" reste sélectionné partout.
+    const APP_ROOTS = ["/system", "/leads", "/rh", "/finances", "/administration", "/studio"];
+    if (APP_ROOTS.includes(itemHref)) return false;
     // Match sous-route (ex: /studio/opportunities/123 pour /studio/opportunities)
     if (activePath.startsWith(itemHref + "/")) return true;
     // Cas spécial: les pages /studio/tickets/* doivent activer l'item "Support"
