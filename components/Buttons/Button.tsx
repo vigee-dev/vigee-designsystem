@@ -284,7 +284,13 @@ const ButtonComponent = ({
           className,
           !children && "bg-transparent border-none hover:bg-transparent",
           !disabled
-            ? "hover:cursor-pointer group-hover:text-primary"
+            ? cn(
+                "hover:cursor-pointer",
+                // group-hover:text-primary uniquement pour les boutons icon-only
+                // (sinon le texte des boutons avec children passe en bleu foncé
+                // sur fond bleu foncé au survol → invisible)
+                !children && "group-hover:text-primary",
+              )
             : "hover:cursor-not-allowed ",
           pending && children && "bg-transparent text-gray-800"
         )}
@@ -345,7 +351,13 @@ const ButtonComponent = ({
         !children &&
           "bg-transparent border-none group-hover:bg-transparent hover:bg-transparent",
         !disabled
-          ? "hover:cursor-pointer group-hover:text-primary"
+          ? cn(
+              "hover:cursor-pointer",
+              // group-hover:text-primary uniquement pour les boutons icon-only
+              // (sinon le texte des boutons avec children passe en bleu foncé
+              // sur fond bleu foncé au survol → invisible)
+              !children && "group-hover:text-primary",
+            )
           : "hover:cursor-not-allowed",
         pending && children && "bg-transparent text-gray-800"
       )}
