@@ -1,6 +1,6 @@
 {
-  "version": "1.4.28",
-  "generatedAt": "2026-05-05T20:16:20.077Z",
+  "version": "1.4.29",
+  "generatedAt": "2026-05-19T18:26:30.538Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -4086,6 +4086,35 @@
         "écran de chargement → utiliser SplashScreen"
       ],
       "example": "<ByVigee dark={true} />"
+    },
+    {
+      "name": "WorkInProgress",
+      "category": "WorkInProgress",
+      "importPath": "@vigee-designsystem/components/WorkInProgress/WorkInProgress",
+      "exportType": "named",
+      "props": [
+        "title?: string",
+        "subtitle?: string",
+        "progress?: number",
+        "showIllustration?: boolean",
+        "showProgress?: boolean",
+        "children?: ReactNode",
+        "className?: string",
+        "eta?: string",
+        "data-testid?: string"
+      ],
+      "formIntegration": false
+    },
+    {
+      "name": "WorkInProgressIllustration",
+      "category": "WorkInProgress",
+      "importPath": "@vigee-designsystem/components/WorkInProgress/WorkInProgressIllustration",
+      "exportType": "named",
+      "props": [
+        "color?: string",
+        "className?: string"
+      ],
+      "formIntegration": false
     }
   ],
   "icons": {

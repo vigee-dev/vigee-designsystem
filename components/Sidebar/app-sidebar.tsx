@@ -87,6 +87,7 @@ const AppSidebar = ({
   switcher,
   classNameItems,
   hoverBackground = "bg-slate-800",
+  footerSlot,
 }: {
   items: MenuItem[];
   bottomItems?: MenuItem[];
@@ -101,6 +102,8 @@ const AppSidebar = ({
   switcher?: boolean;
   classNameItems?: string;
   hoverBackground?: string;
+  /** Rendu dans le SidebarFooter juste au-dessus du bloc utilisateur (FooterSidebar). */
+  footerSlot?: React.ReactNode;
 }) => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const { open } = useSidebar();
@@ -321,6 +324,7 @@ const AppSidebar = ({
             ))}
           </SidebarMenu>
         )}
+        {footerSlot}
         {user && <FooterSidebar user={user} links={links} />}
       </SidebarFooter>
     </Sidebar>
