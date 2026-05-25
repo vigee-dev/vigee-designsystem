@@ -113,6 +113,35 @@ const AppSidebar = ({
   // Utiliser le pathname client s'il est disponible, sinon utiliser celui du serveur
   const activePath = currentPathname || pathname;
 
+  // Mapping admin sub-routes -> section parent (pour conserver l'item sidebar
+  // actif quand on navigue dans une sous-page d'administration).
+  // Les pages sont sous /administration/<slug> directement (pas
+  // /administration/studio/<slug>) pour des raisons historiques, on rattrape
+  // ici sans casser les URLs.
+  const ADMIN_STUDIO_SUB = new Set([
+    "templates",
+    "document-templates",
+    "pricing",
+    "integrations",
+    "neon-vercel",
+    "qonto",
+    "google-calendar",
+    "apollo",
+    "orchestrator",
+    "dev-instructions",
+    "action-models",
+    "mcp-tokens",
+    "emails",
+  ]);
+  const ADMIN_MAINTENANCE_SUB = new Set([
+    "sla",
+    "diagnostic",
+    "agent-quality-gates",
+    "cybersecurity-audit",
+    "cron-monitoring",
+    "feedback",
+  ]);
+
   // Fonction pour vérifier si un item est actif (match exact ou sous-route)
   const isItemActive = (itemHref: string, itemSlug?: string) => {
     // Match exact
@@ -129,6 +158,16 @@ const AppSidebar = ({
     if (itemSlug === "developpement" && activePath.match(/\/studio\/projects\/\d+\/cadrage\//)) return true;
     // Cas spécial: les pages version (/studio/projects/X/version/*) doivent activer "Dev"
     if (itemSlug === "developpement" && activePath.match(/\/studio\/projects\/\d+\/version\//)) return true;
+    // Cas spécial admin : /administration/<slug> -> active Studio ou Maintenance
+    // selon le mapping ci-dessus
+    if (itemSlug === "studio" || itemSlug === "maintenance") {
+      const m = activePath.match(/^\/administration\/([^/]+)(?:\/|$)/);
+      const sub = m?.[1];
+      if (sub) {
+        if (itemSlug === "studio" && ADMIN_STUDIO_SUB.has(sub)) return true;
+        if (itemSlug === "maintenance" && ADMIN_MAINTENANCE_SUB.has(sub)) return true;
+      }
+    }
     return false;
   };
 
