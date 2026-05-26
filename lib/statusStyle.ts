@@ -34,12 +34,12 @@ export type StatusStyle = {
 
 const STYLES: Record<StatusKind, StatusStyle> = {
   todo: {
-    badge: "bg-slate-100 text-slate-600 border border-slate-200",
-    pill: "bg-slate-100 text-slate-600",
-    text: "text-slate-600",
-    bg: "bg-slate-100",
-    border: "border-slate-200",
-    dot: "bg-slate-400",
+    badge: "bg-slate-50 text-slate-500 border border-slate-100",
+    pill: "bg-slate-50 text-slate-500",
+    text: "text-slate-500",
+    bg: "bg-slate-50",
+    border: "border-slate-100",
+    dot: "bg-slate-300",
   },
   doing: {
     badge: "bg-sky-100 text-sky-700 border border-sky-200",
