@@ -128,10 +128,10 @@ import {
 } from "../ui/toggle-group";
 
 type Option = {
-  label?: string;
+  label?: React.ReactNode;
   value: string;
   icon?: React.ReactNode;
-  description?: string;
+  description?: React.ReactNode;
   disabled?: boolean;
 };
 
@@ -232,7 +232,9 @@ export const Toggles = <T extends FieldValues>({
                     >
                       <ToggleGroupItem
                         value={option.value}
-                        aria-label={option.label || ""}
+                        aria-label={
+                          typeof option.label === "string" ? option.label : option.value
+                        }
                         disabled={option.disabled}
                         className={cn(
                           "items-center h-full w-full flex-1 p-4 flex justify-between gap-4 md:px-6 rounded-lg border-none data-[state=on]:bg-input hover:bg-input",
