@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-05-19T18:26:30.538Z",
+  "generatedAt": "2026-05-27T08:33:03.943Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -1412,6 +1412,38 @@
         "titre avec animation → utiliser TitleGradual ou TypographyH1"
       ],
       "example": "<SectionTitle title=\"Informations personnelles\" subtitle=\"Renseignez vos coordonnées de contact.\" />"
+    },
+    {
+      "name": "SegmentedControl",
+      "category": "Forms",
+      "importPath": "@vigee-designsystem/components/Forms/SegmentedControl",
+      "exportType": "default",
+      "props": [
+        "form?: UseFormReturn<T>",
+        "name?: Path<T>",
+        "label?: string",
+        "descr?: string",
+        "options: SegmentedOption[]",
+        "size?: Size",
+        "disabled?: boolean",
+        "className?: string",
+        "value?: string",
+        "onValueChange?: (value: string) => void",
+        "testId?: string"
+      ],
+      "formIntegration": true,
+      "description": "Sélecteur exclusif compact (style \"pill segmented\") intégré react-hook-form ou contrôlé manuellement. Idéal pour 2 à 4 options courtes à choisir d'un coup d'œil.",
+      "useWhen": [
+        "choix exclusif rapide entre 2-4 options textuelles courtes dans un formulaire RHF → utiliser avec `form` + `name`",
+        "toggle de mode (ex: \"Moi\" / \"Au nom du client\", \"Mensuel\" / \"Annuel\") hors formulaire → utiliser avec `value` + `onValueChange`",
+        "filtrage rapide d'une vue (ex: \"Tous\" / \"Actifs\" / \"Archivés\")"
+      ],
+      "dontUseFor": [
+        "liste longue ou texte des options > ~20 caractères → utiliser Select",
+        "choix multiple → utiliser Checkboxes ou Toggles avec multi",
+        "toggle binaire booléen sans label par état → utiliser Switch"
+      ],
+      "example": "<SegmentedControl form={form} name=\"period\" label=\"Période\" options={[{ value: \"monthly\", label: \"Mensuel\" }, { value: \"yearly\", label: \"Annuel\" }]} />"
     },
     {
       "name": "Select",
