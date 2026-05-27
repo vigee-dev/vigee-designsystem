@@ -251,7 +251,7 @@ export const Toggles = <T extends FieldValues>({
                                 </span>
                               )}
                               {option.description && (
-                                <p className="text-xs text-gray-500">
+                                <p className="text-xs text-gray-500 leading-relaxed mt-1 tracking-wide">
                                   {option.description}
                                 </p>
                               )}
