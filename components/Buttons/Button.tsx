@@ -188,7 +188,7 @@ export function Button({
       />
     </ShadButton>
   ) : href ? (
-    <Link href={href}>
+    <Link href={href} className="inline-flex">
       <ButtonComponent
         variant={variant}
         icon={icon}
