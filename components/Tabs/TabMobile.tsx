@@ -79,15 +79,19 @@ export function TabMobile<T extends string = string>({
 }: TabsResponsiveProps<T>) {
   const router = useRouter();
 
+  // clearOnDefault: true → l'URL reste propre quand on est sur les valeurs
+  // par défaut (ex. /qualite/questionnaires au lieu de
+  // /qualite/questionnaires?status=ACTIVE&page=1). Les pages lisent les params
+  // avec un fallback (?? "ACTIVE", ?? 1) donc l'état initial reste correct.
   const [filter, setFilter] = useQueryState(query ?? "", {
     defaultValue: defaultValue ?? "",
-    clearOnDefault: false,
+    clearOnDefault: true,
     shallow: false,
   });
 
   const [page, setPage] = useQueryState(pageName, {
     defaultValue: "1",
-    clearOnDefault: false,
+    clearOnDefault: true,
     shallow: false,
   });
 
