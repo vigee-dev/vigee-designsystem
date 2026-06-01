@@ -233,19 +233,32 @@ export function DocumentViewer({
       onDownload(doc);
       return;
     }
-    try {
-      const res = await fetch(doc.url);
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
+    const filename = doc.title || doc.name;
+    // Fallback fiable : un <a target="_blank" download> évite l'aléatoire du
+    // fetch (CORS S3, presigned URLs sans CORS configuré → blob échoue
+    // silencieusement). On essaie blob d'abord pour forcer le nom de fichier ;
+    // si le fetch échoue, on retombe sur un lien direct dans un nouvel onglet.
+    const triggerLink = (href: string, download = true) => {
       const a = document.createElement('a');
-      a.href = url;
-      a.download = doc.title || doc.name;
+      a.href = href;
+      if (download) a.download = filename;
+      a.rel = 'noopener noreferrer';
+      a.target = '_blank';
       document.body.appendChild(a);
       a.click();
-      URL.revokeObjectURL(url);
       a.remove();
+    };
+    try {
+      const res = await fetch(doc.url, { mode: 'cors', credentials: 'omit' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      triggerLink(url);
+      // Laisser le navigateur démarrer le DL avant de libérer l'URL.
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
     } catch (e) {
-      console.error('[DocumentViewer] download failed', e);
+      console.warn('[DocumentViewer] blob download failed, fallback to direct link', e);
+      triggerLink(doc.url);
     }
   }, [doc, onDownload]);
 
