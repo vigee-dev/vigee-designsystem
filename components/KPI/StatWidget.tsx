@@ -147,7 +147,7 @@ export const StatWidget = ({
     <div
       data-testid={dataTestId}
       className={cn(
-        "relative flex flex-col rounded-2xl border border-gray-100 bg-white p-6 shadow-sm",
+        "relative flex flex-col rounded-2xl border border-gray-100 bg-white p-6 shadow-[0_2px_12px_rgba(15,23,42,0.05)]",
         className
       )}
     >
