@@ -10,7 +10,7 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { VariantProps, cva } from "class-variance-authority";
 import { PanelLeft } from "lucide-react";
-import { useIsMobile } from "../../hooks/use-mobile";
+import { useIsMobile, useIsTablet } from "../../hooks/use-mobile";
 import { cn } from "../lib/utils";
 import { Button } from "./button";
 import { Input } from "./input";
@@ -38,6 +38,10 @@ type SidebarContext = {
   openMobile: boolean;
   setOpenMobile: (open: boolean) => void;
   isMobile: boolean;
+  isTablet: boolean;
+  /** Sur tablette : la sidebar repliée est déployée en overlay. */
+  tabletExpanded: boolean;
+  setTabletExpanded: (open: boolean) => void;
   toggleSidebar: () => void;
 };
 
@@ -73,7 +77,10 @@ const SidebarProvider = React.forwardRef<
     ref
   ) => {
     const isMobile = useIsMobile();
+    const isTablet = useIsTablet();
     const [openMobile, setOpenMobile] = React.useState(false);
+    // Sur tablette : la sidebar est repliée (icônes) et se déploie en overlay.
+    const [tabletExpanded, setTabletExpanded] = React.useState(false);
 
     // This is the internal state of the sidebar.
     // We use openProp and setOpenProp for control from outside the component.
@@ -96,16 +103,27 @@ const SidebarProvider = React.forwardRef<
 
     // Helper to toggle the sidebar.
     const toggleSidebar = React.useCallback(() => {
-      return isMobile
-        ? setOpenMobile((open) => !open)
-        : setOpen((open) => !open);
-    }, [isMobile, setOpen, setOpenMobile]);
+      if (isMobile) return setOpenMobile((o) => !o);
+      if (isTablet) return setTabletExpanded((o) => !o);
+      return setOpen((o) => !o);
+    }, [isMobile, isTablet, setOpen, setOpenMobile]);
+
+    // Replie automatiquement l'overlay tablette quand on quitte la plage tablette.
+    React.useEffect(() => {
+      if (!isTablet) setTabletExpanded(false);
+    }, [isTablet]);
 
     // Keyboard shortcut disabled — Cmd+B conflicts with TipTap bold formatting.
 
     // We add a state so that we can do data-state="expanded" or "collapsed".
-    // This makes it easier to style the sidebar with Tailwind classes.
-    const state = open ? "expanded" : "collapsed";
+    // Sur tablette : repliée (icônes) sauf si déployée en overlay.
+    const state: "expanded" | "collapsed" = isTablet
+      ? tabletExpanded
+        ? "expanded"
+        : "collapsed"
+      : open
+        ? "expanded"
+        : "collapsed";
 
     const contextValue = React.useMemo<SidebarContext>(
       () => ({
@@ -113,11 +131,24 @@ const SidebarProvider = React.forwardRef<
         open,
         setOpen,
         isMobile,
+        isTablet,
+        tabletExpanded,
+        setTabletExpanded,
         openMobile,
         setOpenMobile,
         toggleSidebar,
       }),
-      [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
+      [
+        state,
+        open,
+        setOpen,
+        isMobile,
+        isTablet,
+        tabletExpanded,
+        openMobile,
+        setOpenMobile,
+        toggleSidebar,
+      ]
     );
 
     return (
@@ -168,7 +199,15 @@ const Sidebar = React.forwardRef<
     },
     ref
   ) => {
-    const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
+    const {
+      isMobile,
+      isTablet,
+      state,
+      openMobile,
+      setOpenMobile,
+      tabletExpanded,
+      setTabletExpanded,
+    } = useSidebar();
 
     if (collapsible === "none") {
       return (
@@ -205,6 +244,10 @@ const Sidebar = React.forwardRef<
       );
     }
 
+    // Sur tablette, la sidebar déployée flotte en overlay (la réserve d'espace
+    // reste à la largeur d'icône). Sinon comportement desktop classique.
+    const tabletOverlayOpen = isTablet && tabletExpanded;
+
     return (
       <div
         ref={ref}
@@ -214,6 +257,14 @@ const Sidebar = React.forwardRef<
         data-variant={variant}
         data-side={side}
       >
+        {/* Backdrop tablette : clic en dehors referme l'overlay. */}
+        {tabletOverlayOpen && (
+          <div
+            className="fixed inset-0 z-[9] bg-black/40 backdrop-blur-[1px] lg:hidden"
+            onClick={() => setTabletExpanded(false)}
+            aria-hidden="true"
+          />
+        )}
         {/* This is what handles the sidebar gap on desktop */}
         <div
           className={cn(
@@ -222,7 +273,9 @@ const Sidebar = React.forwardRef<
             "group-data-[side=right]:rotate-180",
             variant === "floating" || variant === "inset"
               ? "group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4))]"
-              : "group-data-[collapsible=icon]:w-[--sidebar-width-icon]"
+              : "group-data-[collapsible=icon]:w-[--sidebar-width-icon]",
+            // Tablette : la réserve d'espace reste toujours à la largeur d'icône.
+            tabletOverlayOpen && "!w-[--sidebar-width-icon]"
           )}
         />
         <div
@@ -235,6 +288,8 @@ const Sidebar = React.forwardRef<
             variant === "floating" || variant === "inset"
               ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]"
               : "group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l",
+            // Tablette déployée : largeur pleine + au-dessus du backdrop + ombre.
+            tabletOverlayOpen && "z-10 !w-[--sidebar-width] shadow-xl",
             className
           )}
           {...props}

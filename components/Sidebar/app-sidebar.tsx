@@ -106,7 +106,10 @@ const AppSidebar = ({
   footerSlot?: React.ReactNode;
 }) => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
-  const { open } = useSidebar();
+  // On dérive "open" de l'état effectif (state) pour gérer aussi la tablette,
+  // où la sidebar est repliée (icônes) même si `open` reste vrai côté desktop.
+  const { state } = useSidebar();
+  const open = state === "expanded";
 
   // Utiliser le pathname côté client pour détecter la navigation
   const currentPathname = usePathname();

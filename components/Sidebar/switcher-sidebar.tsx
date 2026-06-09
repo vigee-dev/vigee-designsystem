@@ -64,7 +64,9 @@ export function SwitcherSidebar({
   showSwitcher?: boolean;
   currentPath?: string;
 }) {
-  const { isMobile, open } = useSidebar();
+  // "open" dérivé de l'état effectif (gère la tablette repliée).
+  const { isMobile, state } = useSidebar();
+  const open = state === "expanded";
   const router = useRouter();
   const searchParams = useSearchParams();
 
