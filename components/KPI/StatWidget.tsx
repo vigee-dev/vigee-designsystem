@@ -27,7 +27,7 @@ export interface StatWidgetProps {
   /** Unité affichée (€ formate via currency, sinon suffixe simple). */
   unit?: "€" | "h" | "%" | string;
   /** Sous-libellé discret sous la valeur (ex. "30 derniers jours"). */
-  sublabel?: string;
+  sublabel?: React.ReactNode;
   /** Couleur d'accent (halo d'icône + liseré). */
   accent?: StatWidgetAccent;
   /** Icône affichée dans le halo en haut à gauche. */
@@ -40,8 +40,69 @@ export interface StatWidgetProps {
   detail?: React.ReactNode;
   /** Slot optionnel rendu sous la valeur (mini-chart, jauge). */
   children?: React.ReactNode;
+  /** Série de valeurs pour un sparkline discret (évolution) sous la valeur. */
+  sparkline?: number[];
   className?: string;
   "data-testid"?: string;
+}
+
+const ACCENT_STROKE: Record<StatWidgetAccent, string> = {
+  indigo: "#6366F1",
+  emerald: "#10B981",
+  amber: "#F59E0B",
+  rose: "#F43F5E",
+  slate: "#94A3B8",
+  sky: "#0EA5E9",
+};
+
+/** Mini courbe d'évolution discrète (area sparkline, sans axes). */
+function Sparkline({
+  data,
+  color,
+}: {
+  data: number[];
+  color: string;
+}) {
+  if (data.length < 2) return null;
+  const w = 240;
+  const h = 36;
+  const min = Math.min(...data);
+  const max = Math.max(...data);
+  const span = max - min || 1;
+  const step = w / (data.length - 1);
+  const points = data.map((v, i) => {
+    const x = i * step;
+    const y = h - ((v - min) / span) * (h - 4) - 2;
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  });
+  const line = `M${points.join(" L")}`;
+  const area = `${line} L${w},${h} L0,${h} Z`;
+  const gradId = `spark-${color.replace("#", "")}`;
+
+  return (
+    <svg
+      viewBox={`0 0 ${w} ${h}`}
+      preserveAspectRatio="none"
+      className="mt-3 h-9 w-full"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={color} stopOpacity="0.18" />
+          <stop offset="100%" stopColor={color} stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <path d={area} fill={`url(#${gradId})`} />
+      <path
+        d={line}
+        fill="none"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
 }
 
 const ACCENT_HALO: Record<StatWidgetAccent, string> = {
@@ -78,6 +139,7 @@ export const StatWidget = ({
   footer,
   detail,
   children,
+  sparkline,
   className,
   "data-testid": dataTestId,
 }: StatWidgetProps) => {
@@ -135,15 +197,19 @@ export const StatWidget = ({
       </div>
 
       <div className="mt-4 flex items-baseline gap-2">
-        <span className="text-3xl font-black tracking-tight text-primary">
+        <span className="text-[28px] font-semibold leading-none tracking-tight text-slate-900">
           {formatValue(value, unit)}
         </span>
       </div>
 
       {sublabel != null && (
-        <span className="mt-1 text-xs font-medium text-slate-400">
+        <span className="mt-1.5 text-xs font-medium text-slate-400">
           {sublabel}
         </span>
+      )}
+
+      {sparkline != null && sparkline.length >= 2 && (
+        <Sparkline data={sparkline} color={ACCENT_STROKE[accent]} />
       )}
 
       {children}

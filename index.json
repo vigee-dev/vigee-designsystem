@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-06-09T16:09:45.290Z",
+  "generatedAt": "2026-06-09T17:52:01.386Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -2135,7 +2135,7 @@
         "label: string",
         "value: string | number",
         "unit?: \"€\" | \"h\" | \"%\" | string",
-        "sublabel?: string",
+        "sublabel?: ReactNode",
         "accent?: StatWidgetAccent",
         "icon?: ReactNode",
         "trend?: { value: string; type: \"positive\" | \"negative\" | \"neutral\""
