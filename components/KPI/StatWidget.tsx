@@ -7,7 +7,7 @@
 "use client";
 
 import * as React from "react";
-import { PiInformationCircleDuoStroke } from "../../icons/PikaIcons";
+import { PiInformationCircleDuoSolid } from "../../icons/PikaIcons";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { cn, currency } from "../lib/utils";
 
@@ -185,7 +185,7 @@ export const StatWidget = ({
                   aria-label={`Détail ${label}`}
                   className="rounded-full p-1 text-slate-300 transition-colors hover:bg-slate-50 hover:text-slate-500"
                 >
-                  <PiInformationCircleDuoStroke className="h-4 w-4" />
+                  <PiInformationCircleDuoSolid className="h-4 w-4" />
                 </button>
               </PopoverTrigger>
               <PopoverContent align="end" className="w-80">
