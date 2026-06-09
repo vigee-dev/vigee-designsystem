@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-05-29T16:53:44.276Z",
+  "generatedAt": "2026-06-09T13:15:23.367Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -511,6 +511,38 @@
         "filtre de date dans une liste ou tableau → utiliser DatePickerFilter"
       ],
       "example": "<DatePickerWithPresets value={date} onChange={setDate} placeholder=\"Choisir une date\" />"
+    },
+    {
+      "name": "StatusDialog",
+      "category": "Dialogs",
+      "importPath": "@vigee-designsystem/components/Dialogs/StatusDialog",
+      "exportType": "named",
+      "props": [
+        "open: boolean",
+        "onOpenChange: (open: boolean) => void",
+        "status: StatusDialogStatus",
+        "title: string",
+        "description?: string",
+        "image?: ReactNode",
+        "autoCloseMs?: number",
+        "withAiSpark?: boolean",
+        "lockWhileLoading?: boolean",
+        "className?: string",
+        "classNameImage?: string"
+      ],
+      "formIntegration": false,
+      "description": "Popup d'état (attente → succès/erreur) avec grande illustration, badge animé, titre + description, et fermeture automatique optionnelle. Idéale pour une action asynchrone visible (envoi, génération, traitement).",
+      "useWhen": [
+        "action asynchrone qu'on veut rendre visible (envoi d'email, génération IA, import) → afficher la progression puis la conclusion",
+        "confirmation auto-disparaissante d'une opération réussie → passer `autoCloseMs`",
+        "feedback bloquant non interrompable pendant un traitement → `status=\"loading\"`"
+      ],
+      "dontUseFor": [
+        "confirmation d'action critique avec choix utilisateur → utiliser AlertDialog",
+        "formulaire ou contenu riche → utiliser Dialog",
+        "simple toast non bloquant → utiliser sonner toast"
+      ],
+      "example": "<StatusDialog open={open} onOpenChange={setOpen} status={status} title=\"Envoi en cours\" description=\"Patientez…\" image={<Image src={illu} alt=\"\" />} autoCloseMs={2200} />"
     },
     {
       "name": "DocumentViewer",
