@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-06-09T13:15:23.367Z",
+  "generatedAt": "2026-06-09T16:09:45.290Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -1403,6 +1403,31 @@
       "example": "<ProfileImageUploader form={form} name=\"avatar\" label=\"Photo de profil\" required />"
     },
     {
+      "name": "RatingSlider",
+      "category": "Forms",
+      "importPath": "@vigee-designsystem/components/Forms/RatingSlider",
+      "exportType": "named",
+      "props": [
+        "value: number",
+        "onChange: (next: number) => void",
+        "step?: number",
+        "disabled?: boolean",
+        "className?: string",
+        "data-testid?: string"
+      ],
+      "formIntegration": false,
+      "description": "Slider de notation 0–20 avec gradient fondu rouge → orange → vert et pommeau rond glissable. Idéal pour les notes de satisfaction client (CSAT, NPS-like).",
+      "useWhen": [
+        "capter une note sur 20 avec retour visuel immédiat (couleur) → utiliser RatingSlider",
+        "saisir une note client à la fin d'un parcours → utiliser RatingSlider"
+      ],
+      "dontUseFor": [
+        "sélection libre dans une plage continue sans sémantique de note → utiliser un input range natif",
+        "choix discret parmi peu d'options → utiliser SegmentedToggle"
+      ],
+      "example": "<RatingSlider value={note} onChange={setNote} />"
+    },
+    {
       "name": "SearchSelectAsync",
       "category": "Forms",
       "importPath": "@vigee-designsystem/components/Forms/SelectSearchAsync",
@@ -1476,6 +1501,33 @@
         "toggle binaire booléen sans label par état → utiliser Switch"
       ],
       "example": "<SegmentedControl form={form} name=\"period\" label=\"Période\" options={[{ value: \"monthly\", label: \"Mensuel\" }, { value: \"yearly\", label: \"Annuel\" }]} />"
+    },
+    {
+      "name": "SegmentedToggle",
+      "category": "Forms",
+      "importPath": "@vigee-designsystem/components/Forms/SegmentedToggle",
+      "exportType": "named",
+      "props": [
+        "value: string",
+        "onChange: (value: string) => void",
+        "options: SegmentedOption[]",
+        "className?: string",
+        "optionsClassName?: string",
+        "disabled?: boolean",
+        "nowrap?: boolean",
+        "data-testid?: string"
+      ],
+      "formIntegration": false,
+      "description": "Groupe de boutons toggle à sélection unique, CONTRÔLÉ (value/onChange) — variante non-react-hook-form de Toggles, pour les actions immédiates. Supporte icône, description et rendu carte.",
+      "useWhen": [
+        "choix exclusif déclenchant une action immédiate hors formulaire (ex: statut Actif/Inactif, mode de déclenchement) → utiliser SegmentedToggle",
+        "besoin du même rendu visuel que Toggles sans react-hook-form → utiliser SegmentedToggle"
+      ],
+      "dontUseFor": [
+        "choix intégré à un react-hook-form → utiliser Toggles",
+        "filtrage hors formulaire synchronisé URL → utiliser CheckboxFilter"
+      ],
+      "example": "<SegmentedToggle value={mode} onChange={setMode} options={[{ value: \"a\", label: \"A\", icon: <IconA /> }, { value: \"b\", label: \"B\" }]} />"
     },
     {
       "name": "Select",
@@ -2073,6 +2125,59 @@
         "comparaison de volumes entre catégories → utiliser BarChart"
       ],
       "example": "<Ranking title=\"Top clients\" data={[{ name: \"Dupont SA\", amount: 45000, currency: \"€\" }]} kiloEuros />"
+    },
+    {
+      "name": "StatWidget",
+      "category": "KPI",
+      "importPath": "@vigee-designsystem/components/KPI/StatWidget",
+      "exportType": "named",
+      "props": [
+        "label: string",
+        "value: string | number",
+        "unit?: \"€\" | \"h\" | \"%\" | string",
+        "sublabel?: string",
+        "accent?: StatWidgetAccent",
+        "icon?: ReactNode",
+        "trend?: { value: string; type: \"positive\" | \"negative\" | \"neutral\""
+      ],
+      "formIntegration": false,
+      "description": "Carte KPI premium sur fond blanc : libellé, grande valeur, sous-libellé, accent coloré, footer et popover de détail optionnel. Style « cockpit de pilotage ».",
+      "useWhen": [
+        "mettre en avant un indicateur financier/commercial clé (ARR, trésorerie, CA) → utiliser StatWidget",
+        "KPI isolé qui mérite une carte dédiée avec accent couleur → utiliser StatWidget",
+        "besoin d'un détail au clic (par client, par criticité) → utiliser la prop detail"
+      ],
+      "dontUseFor": [
+        "plusieurs métriques compactes côte à côte avec variation N-1 → utiliser NumberKPI",
+        "tendance temporelle → utiliser AreaChart/LineChart",
+        "classement ordonné → utiliser Ranking"
+      ],
+      "example": "<StatWidget label=\"ARR Maintenance\" value={4200} unit=\"€\" sublabel=\"par mois\" accent=\"indigo\" />"
+    },
+    {
+      "name": "StatWidgetGroup",
+      "category": "KPI",
+      "importPath": "@vigee-designsystem/components/KPI/StatWidgetGroup",
+      "exportType": "named",
+      "props": [
+        "title: string",
+        "columns?: 1 | 2 | 3 | 4",
+        "action?: ReactNode",
+        "children: ReactNode",
+        "className?: string",
+        "data-testid?: string"
+      ],
+      "formIntegration": false,
+      "description": "Groupe de StatWidget sous un titre de section discret (slate grisé) avec grille responsive. Structure les sous-groupes thématiques d'un dashboard cockpit.",
+      "useWhen": [
+        "regrouper plusieurs StatWidget sous un thème (Finances, Commercial…) → utiliser StatWidgetGroup",
+        "titrer une section de KPI sur une page de pilotage → utiliser StatWidgetGroup"
+      ],
+      "dontUseFor": [
+        "un KPI isolé → utiliser StatWidget seul",
+        "une grille de métriques compactes → utiliser NumberKPI"
+      ],
+      "example": "<StatWidgetGroup title=\"Finances\" action={<button>Détail</button>}><StatWidget label=\"ARR\" value={4200} unit=\"€\" /></StatWidgetGroup>"
     },
     {
       "name": "Loader",
