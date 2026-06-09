@@ -203,6 +203,7 @@ const Sidebar = React.forwardRef<
       isMobile,
       isTablet,
       state,
+      setOpen,
       openMobile,
       setOpenMobile,
       tabletExpanded,
@@ -262,6 +263,14 @@ const Sidebar = React.forwardRef<
           <div
             className="fixed inset-0 z-[9] bg-black/40 backdrop-blur-[1px] lg:hidden"
             onClick={() => setTabletExpanded(false)}
+            aria-hidden="true"
+          />
+        )}
+        {/* Backdrop desktop : sidebar ouverte → clic sur le fond la referme. */}
+        {!isMobile && !isTablet && state === "expanded" && (
+          <div
+            className="fixed inset-0 z-[9] hidden bg-black/30 lg:block"
+            onClick={() => setOpen(false)}
             aria-hidden="true"
           />
         )}

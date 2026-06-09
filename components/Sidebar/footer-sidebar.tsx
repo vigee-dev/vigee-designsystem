@@ -41,7 +41,8 @@ type Props = {
 };
 
 const FooterSidebar = ({ user, links }: Props) => {
-  const { isMobile } = useSidebar();
+  const { isMobile, state } = useSidebar();
+  const collapsed = state === "collapsed";
 
   return (
     <SidebarMenu>
@@ -50,19 +51,25 @@ const FooterSidebar = ({ user, links }: Props) => {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              className="text-sidebar-foreground group-data-[collapsible=icon]:!p-0 group-data-[collapsible=icon]:justify-center data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <Avatar className="h-8 w-8 rounded-lg">
+              <Avatar className="h-8 w-8 shrink-0 rounded-lg">
                 <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">
+                <AvatarFallback className="rounded-lg bg-sidebar-accent text-sidebar-foreground">
                   <PiUserCircleSolid className="h-8 w-8" />
                 </AvatarFallback>
               </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
-              </div>
-              <ChevronRight className="ml-auto size-4" />
+              {!collapsed && (
+                <>
+                  <div className="grid flex-1 text-left text-sm leading-tight">
+                    <span className="truncate font-semibold">{user.name}</span>
+                    <span className="truncate text-xs opacity-70">
+                      {user.email}
+                    </span>
+                  </div>
+                  <ChevronRight className="ml-auto size-4 opacity-70" />
+                </>
+              )}
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent

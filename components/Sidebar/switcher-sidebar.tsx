@@ -162,24 +162,30 @@ export function SwitcherSidebar({
             <DropdownMenuTrigger asChild>
               <SidebarMenuButton
                 size="lg"
-                className="mt-2 data-[state=open]:bg-white hover:bg-white bg-slate-50 rounded-2xl border border-slate-200"
+                className="mt-2 rounded-2xl border border-slate-200 bg-slate-50 hover:bg-white data-[state=open]:bg-white group-data-[collapsible=icon]:!size-9 group-data-[collapsible=icon]:!p-0 group-data-[collapsible=icon]:justify-center"
               >
-                <div className="flex items-center gap-2 flex-1 min-w-0">
+                <div
+                  className={
+                    open
+                      ? "flex min-w-0 flex-1 items-center gap-2"
+                      : "flex items-center justify-center [&>svg]:size-5"
+                  }
+                >
                   {activeItem?.iconFill || activeItem?.icon}
                   {open && (
-                    <div className="flex flex-col min-w-0 flex-1 text-left">
-                      <span className="font-medium text-sm text-gray-500 truncate">
+                    <div className="flex min-w-0 flex-1 flex-col text-left">
+                      <span className="truncate text-sm font-medium text-gray-500">
                         {activeItem?.name || "Sélectionner"}
                       </span>
                       {activeItem?.subtitle && (
-                        <span className="text-xs text-slate-400 truncate">
+                        <span className="truncate text-xs text-slate-400">
                           {activeItem.subtitle}
                         </span>
                       )}
                     </div>
                   )}
                 </div>
-                {open && <ChevronsUpDown className="w-4 h-4 text-slate-400" />}
+                {open && <ChevronsUpDown className="h-4 w-4 text-slate-400" />}
               </SidebarMenuButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent
