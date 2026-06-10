@@ -108,7 +108,7 @@ const AppSidebar = ({
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   // On dérive "open" de l'état effectif (state) pour gérer aussi la tablette,
   // où la sidebar est repliée (icônes) même si `open` reste vrai côté desktop.
-  const { state } = useSidebar();
+  const { state, toggleSidebar } = useSidebar();
   const open = state === "expanded";
 
   // Utiliser le pathname côté client pour détecter la navigation
@@ -306,6 +306,14 @@ const AppSidebar = ({
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        {/* Zone vide cliquable : ouvre/ferme la sidebar sans backdrop ni blocage. */}
+        <button
+          type="button"
+          aria-label="Ouvrir ou fermer la sidebar"
+          onClick={toggleSidebar}
+          className="flex-1 cursor-pointer"
+        />
       </SidebarContent>
       <SidebarFooter className={classNameItems}>
         {bottomItems && bottomItems.length > 0 && (
