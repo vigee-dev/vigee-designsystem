@@ -133,7 +133,7 @@ const NumberKPI = ({
     <div className="my-2">
       <dl
         className={cn(
-          `grid grid-cols-1 divide-y divide-gray-100 overflow-hidden rounded-xl shadow-sm ${getColumnClass(
+          `grid grid-cols-1 divide-y divide-gray-100 overflow-hidden rounded-3xl shadow-sm ${getColumnClass(
             columns
           )} md:divide-x md:divide-gray-100 md:divide-y-0 bg-white border border-gray-100`,
           className
