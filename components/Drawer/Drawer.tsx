@@ -59,9 +59,9 @@ export function Drawer({
         <VaulDrawer.Content
           className={cn(
             'bg-white flex flex-col fixed z-50',
-            direction === 'bottom' && 'bottom-0 left-0 right-0 max-h-[92vh] rounded-t-[10px]',
-            direction === 'right' && 'top-0 right-0 bottom-0 h-full w-[90vw] max-w-[1200px] rounded-l-[10px]',
-            direction === 'left' && 'top-0 left-0 bottom-0 h-full w-[90vw] max-w-[1200px] rounded-r-[10px]',
+            direction === 'bottom' && 'bottom-0 left-0 right-0 max-h-[92vh] rounded-t-3xl',
+            direction === 'right' && 'top-0 right-0 bottom-0 h-full w-[90vw] max-w-[1200px] rounded-l-3xl',
+            direction === 'left' && 'top-0 left-0 bottom-0 h-full w-[90vw] max-w-[1200px] rounded-r-3xl',
             fullScreen && 'min-h-dvh rounded-none bg-background',
             className
           )}
@@ -71,7 +71,7 @@ export function Drawer({
               className={cn(
                 `${
                   large ? 'max-w-4xl' : 'max-w-lg'
-                } w-full mx-auto p-4 rounded-t-[10px]`,
+                } w-full mx-auto p-4 rounded-t-3xl`,
                 classNameContent,
                 fullScreen && 'rounded-none'
               )}
