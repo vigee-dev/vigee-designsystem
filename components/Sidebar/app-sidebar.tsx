@@ -151,7 +151,7 @@ const AppSidebar = ({
     if (activePath === itemHref) return true;
     // Les racines d'app (ex: /system, /leads) ne doivent pas être actives
     // sur leurs sous-pages — sinon "Accueil" reste sélectionné partout.
-    const APP_ROOTS = ["/system", "/leads", "/rh", "/finances", "/administration", "/studio"];
+    const APP_ROOTS = ["/system", "/leads", "/mail", "/rh", "/finances", "/administration", "/studio"];
     if (APP_ROOTS.includes(itemHref)) return false;
     // Match sous-route (ex: /studio/opportunities/123 pour /studio/opportunities)
     if (activePath.startsWith(itemHref + "/")) return true;

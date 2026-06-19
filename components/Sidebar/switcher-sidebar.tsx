@@ -80,6 +80,8 @@ export function SwitcherSidebar({
     // Apps indépendantes — détecter par préfixe de route
     if (activePath?.startsWith("/leads") && item.slug.startsWith("/leads"))
       return true;
+    if (activePath?.startsWith("/mail") && item.slug.startsWith("/mail"))
+      return true;
     if (activePath?.startsWith("/rh") && item.slug.startsWith("/rh"))
       return true;
     if (
