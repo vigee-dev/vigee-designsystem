@@ -24,6 +24,9 @@ interface Props {
   disabled?: boolean;
   /** Libellés affichés sous les étoiles (index 1..5). */
   labels?: string[];
+  /** Texte affiché sous les étoiles tant qu'aucune n'est survolée/choisie.
+   *  Remplacé par le label de la note au survol. */
+  placeholder?: string;
   /** Taille des étoiles. */
   size?: "md" | "lg";
   /** Préfixe des data-testid (ex: "review" → "review-star-3"). */
@@ -41,6 +44,7 @@ export function StarRating({
   readOnly = false,
   disabled = false,
   labels = DEFAULT_LABELS,
+  placeholder,
   size = "md",
   testIdPrefix = "rating",
   className,
@@ -100,10 +104,14 @@ export function StarRating({
         })}
       </div>
 
-      {display > 0 && labels[display] && (
+      {display > 0 && labels[display] ? (
         <span className="text-xs font-medium text-amber-500">
           {labels[display]}
         </span>
+      ) : (
+        placeholder && (
+          <span className="text-xs text-slate-400">{placeholder}</span>
+        )
       )}
     </div>
   );
