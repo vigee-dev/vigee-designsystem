@@ -41,6 +41,8 @@ type SwitcherItem = {
   type?: string;
   subtitle?: string;
   projectId?: number;
+  /** Compteur affiché en pastille à droite de l'item (ex. mails à traiter). */
+  badge?: number;
   counts?: {
     cadrageCount: number;
     devisCount: number;
@@ -208,7 +210,7 @@ export function SwitcherSidebar({
                     activeItem?.slug === item.slug && "bg-slate-100",
                   )}
                 >
-                  <div className="flex items-center gap-2 flex-1">
+                  <div className="flex items-center gap-2 flex-1 min-w-0">
                     <span className="flex items-center justify-center w-5 h-5 [&>svg]:w-4 [&>svg]:h-4 text-slate-600">
                       {item.iconFill || item.icon}
                     </span>
@@ -220,6 +222,12 @@ export function SwitcherSidebar({
                         </span>
                       )}
                     </div>
+                    {/* Pastille de compteur (ex. mails à traiter). */}
+                    {item.badge ? (
+                      <span className="ml-auto text-[10px] font-medium bg-blue-100 text-blue-600 min-w-5 h-5 px-1.5 rounded-full flex items-center justify-center">
+                        {item.badge > 99 ? "99+" : item.badge}
+                      </span>
+                    ) : null}
                   </div>
                 </DropdownMenuItem>
               ))}

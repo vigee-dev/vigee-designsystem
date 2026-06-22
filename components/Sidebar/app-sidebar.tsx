@@ -65,6 +65,7 @@ type SwitcherItem = {
   icon: React.ReactNode;
   type?: string;
   subtitle?: string;
+  badge?: number;
   counts?: {
     cadrageCount: number;
     devisCount: number;
