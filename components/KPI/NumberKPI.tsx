@@ -9,7 +9,7 @@ import { cn, currency } from "../lib/utils";
 
 export interface StatItem {
   name: string;
-  stat: number;
+  stat: number | string;
   previousStat?: number;
   color?: string;
   upNegative?: boolean;
@@ -171,7 +171,7 @@ const NumberKPI = ({
                 >
                   {item.icon}
                   {item.unit === "€"
-                    ? currency(item.stat).toRoundedEuro()
+                    ? currency(Number(item.stat)).toRoundedEuro()
                     : item.unit
                       ? `${item.stat} ${item.unit}`
                       : item.stat}
@@ -206,7 +206,7 @@ const NumberKPI = ({
 
               {item.previousStat != null && (
                 <PreviousStat
-                  previousStat={variation(item.previousStat, item.stat)}
+                  previousStat={variation(item.previousStat, Number(item.stat))}
                   upNegative={item.upNegative}
                   notApplicable={item.previousStat === 0}
                 />
@@ -215,15 +215,15 @@ const NumberKPI = ({
               {item.objectif != null && item.ecartType != null && (
                 <div
                   className={classNames(
-                    Math.abs(ecartType(item.stat, item.objectif)) >
+                    Math.abs(ecartType(Number(item.stat), item.objectif)) >
                       item.ecartType
                       ? "text-red-600 bg-red-100"
                       : "text-green-600 bg-green-100",
                     "inline-flex items-baseline rounded-full px-2.5 py-0.5 text-xs font-black md:mt-2 lg:mt-0"
                   )}
                 >
-                  {ecartType(item.stat, item.objectif) > 0 ? "+" : ""}
-                  {ecartType(item.stat, item.objectif)}%
+                  {ecartType(Number(item.stat), item.objectif) > 0 ? "+" : ""}
+                  {ecartType(Number(item.stat), item.objectif)}%
                 </div>
               )}
             </dd>

@@ -114,7 +114,7 @@ export const BarChart: React.FC<Props> = ({
     <div
       className={`${
         container
-          ? "bg-white p-8 rounded-xl border border-gray-100 shadow-sm"
+          ? "bg-white p-8 rounded-3xl border border-gray-100 shadow-sm"
           : ""
       } items-center mb-2 `}
     >
