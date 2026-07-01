@@ -130,11 +130,13 @@ export function SwitcherSidebar({
     return false;
   });
 
-  // Séparer les items principaux (apps + studio) des projets
+  // Ordre d'affichage : items principaux (apps + studio) en haut, projets au milieu,
+  // items "bottom" (Mail, Vigee System) tout en bas après la liste des projets.
   const mainItems = items.filter(
     (item) => item.type === "app" || item.type === "studio",
   );
   const projectItems = items.filter((item) => item.type === "project");
+  const bottomItems = items.filter((item) => item.type === "bottom");
 
   // Logo inline
   const logoElement = (
@@ -340,6 +342,43 @@ export function SwitcherSidebar({
                     </React.Fragment>
                     );
                   })}
+                </>
+              )}
+              {/* Items du bas (Mail, Vigee System) : tout en bas, après les projets. */}
+              {bottomItems.length > 0 && (
+                <>
+                  <DropdownMenuSeparator />
+                  {bottomItems.map((item) => (
+                    <DropdownMenuItem
+                      key={item.slug}
+                      onClick={() => {
+                        router.push(item.slug);
+                      }}
+                      className={cn(
+                        "gap-2 p-2 cursor-pointer",
+                        activeItem?.slug === item.slug && "bg-slate-100",
+                      )}
+                    >
+                      <div className="flex items-center gap-2 flex-1 min-w-0">
+                        <span className="flex items-center justify-center w-5 h-5 [&>svg]:w-4 [&>svg]:h-4 text-slate-600">
+                          {item.iconFill || item.icon}
+                        </span>
+                        <div className="flex flex-col min-w-0">
+                          <span className="font-medium">{item.name}</span>
+                          {item.subtitle && (
+                            <span className="text-[11px] text-slate-400 -mt-0.5">
+                              {item.subtitle}
+                            </span>
+                          )}
+                        </div>
+                        {item.badge ? (
+                          <span className="ml-auto text-[10px] font-medium bg-blue-100 text-blue-600 min-w-5 h-5 px-1.5 rounded-full flex items-center justify-center">
+                            {item.badge > 99 ? "99+" : item.badge}
+                          </span>
+                        ) : null}
+                      </div>
+                    </DropdownMenuItem>
+                  ))}
                 </>
               )}
             </DropdownMenuContent>
