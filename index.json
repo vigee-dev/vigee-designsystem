@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-06-22T14:47:40.334Z",
+  "generatedAt": "2026-07-01T16:50:44.469Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -1602,6 +1602,7 @@
         "readOnly?: boolean",
         "disabled?: boolean",
         "labels?: string[]",
+        "placeholder?: string",
         "size?: \"md\" | \"lg\"",
         "testIdPrefix?: string",
         "className?: string"

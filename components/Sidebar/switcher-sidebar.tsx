@@ -41,6 +41,8 @@ type SwitcherItem = {
   type?: string;
   subtitle?: string;
   projectId?: number;
+  /** Projet à l'étude → regroupé tout en bas de la liste, après un séparateur. */
+  isStudy?: boolean;
   /** Compteur affiché en pastille à droite de l'item (ex. mails à traiter). */
   badge?: number;
   counts?: {
@@ -241,9 +243,18 @@ export function SwitcherSidebar({
                   <DropdownMenuLabel className="text-xs text-muted-foreground px-2 py-1.5">
                     Projets
                   </DropdownMenuLabel>
-                  {projectItems.map((item) => (
+                  {projectItems.map((item, projectIndex) => {
+                    // Trait avant le PREMIER projet à l'étude (les études sont groupées
+                    // en fin de liste par l'appelant) : sépare visuellement "à l'étude".
+                    const isFirstStudy =
+                      item.isStudy &&
+                      (projectIndex === 0 || !projectItems[projectIndex - 1]?.isStudy);
+                    return (
+                    <React.Fragment key={item.slug}>
+                      {isFirstStudy && (
+                        <div className="my-1.5 mx-2 border-t border-slate-100" />
+                      )}
                     <DropdownMenuItem
-                      key={item.slug}
                       onClick={() => {
                         router.push(item.slug);
                       }}
@@ -326,7 +337,9 @@ export function SwitcherSidebar({
                         </div>
                       )}
                     </DropdownMenuItem>
-                  ))}
+                    </React.Fragment>
+                    );
+                  })}
                 </>
               )}
             </DropdownMenuContent>
