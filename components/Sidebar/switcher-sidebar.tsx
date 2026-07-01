@@ -242,19 +242,26 @@ export function SwitcherSidebar({
               {/* Section Projets */}
               {projectItems.length > 0 && (
                 <>
-                  <DropdownMenuLabel className="text-xs text-muted-foreground px-2 py-1.5">
-                    Projets
-                  </DropdownMenuLabel>
+                  {/* Le premier projet actif n'a pas de titre "Projets" si tous sont à
+                      l'étude → on affiche le titre approprié devant chaque bascule. */}
                   {projectItems.map((item, projectIndex) => {
-                    // Trait avant le PREMIER projet à l'étude (les études sont groupées
-                    // en fin de liste par l'appelant) : sépare visuellement "à l'étude".
-                    const isFirstStudy =
-                      item.isStudy &&
-                      (projectIndex === 0 || !projectItems[projectIndex - 1]?.isStudy);
+                    const prev = projectItems[projectIndex - 1];
+                    // Titre de groupe : "Projets" devant le 1er actif, "Projets à l'étude"
+                    // devant le 1er projet à l'étude (les études sont groupées en fin de liste).
+                    const isFirstOverall = projectIndex === 0;
+                    const isFirstStudy = item.isStudy && (isFirstOverall || !prev?.isStudy);
+                    const isFirstActive = !item.isStudy && isFirstOverall;
                     return (
                     <React.Fragment key={item.slug}>
+                      {isFirstActive && (
+                        <DropdownMenuLabel className="text-xs font-semibold text-slate-500 px-2 py-1.5">
+                          Projets
+                        </DropdownMenuLabel>
+                      )}
                       {isFirstStudy && (
-                        <div className="my-1.5 mx-2 border-t border-slate-100" />
+                        <DropdownMenuLabel className="text-xs font-semibold text-slate-500 px-2 py-1.5 mt-1">
+                          Projets à l&apos;étude
+                        </DropdownMenuLabel>
                       )}
                     <DropdownMenuItem
                       onClick={() => {
@@ -267,13 +274,8 @@ export function SwitcherSidebar({
                     >
                       <div className="flex items-center gap-2 flex-1 min-w-0">
                         <div className="flex flex-col min-w-0 flex-1">
-                          <span className="flex items-center gap-1.5 font-medium truncate">
-                            <span className="truncate">{item.name}</span>
-                            {item.isStudy && (
-                              <span className="shrink-0 text-[9px] font-semibold uppercase tracking-wide bg-violet-100 text-violet-600 px-1.5 py-0.5 rounded">
-                                Étude
-                              </span>
-                            )}
+                          <span className="font-medium truncate">
+                            {item.name}
                           </span>
                           {item.subtitle && (
                             <span className="text-xs text-muted-foreground truncate">
