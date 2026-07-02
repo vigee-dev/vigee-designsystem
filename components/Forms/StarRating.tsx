@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { cn } from "@/vigee-designsystem/components/lib/utils";
-import { PiStarSolid, PiStarStroke } from "@/vigee-designsystem/icons/PikaIcons";
+import { cn } from "../lib/utils";
+import { PiStarSolid, PiStarStroke } from "../../icons/PikaIcons";
 
 const DEFAULT_LABELS = [
   "",
