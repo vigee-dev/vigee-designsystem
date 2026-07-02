@@ -20,6 +20,7 @@ interface Props {
   trigger?: React.ReactNode;
   children?: React.ReactNode;
   icon?: React.ReactNode;
+  headerActions?: React.ReactNode;
   side?: "left" | "right" | "top" | "bottom";
   size?: "sm" | "md" | "lg";
   scroll?: boolean;
@@ -41,7 +42,7 @@ export function useSheetContext() {
   return context;
 }
 
-export default function SheetDialog({ trigger, title, description, children, side = "bottom", icon, size = "md", scroll = true, sheet = false }: Props) {
+export default function SheetDialog({ trigger, title, description, children, side = "bottom", icon, headerActions, size = "md", scroll = true, sheet = false }: Props) {
   const [open, setOpen] = React.useState(false);
   const [mounted, setMounted] = React.useState(false);
   const contextValue: SheetContextType = { open, setOpen };
@@ -76,6 +77,7 @@ export default function SheetDialog({ trigger, title, description, children, sid
                     <DialogTitle className="text-primary">{title}</DialogTitle>
                     <DialogDescription>{description}</DialogDescription>
                   </div>
+                  {headerActions && <div className="ml-auto">{headerActions}</div>}
                 </div>
               </DialogHeader>
 
@@ -96,8 +98,13 @@ export default function SheetDialog({ trigger, title, description, children, sid
 
         <SheetContent side={side} className={`rounded-t-2xl lg:max-w-screen-lg max-h-dvh overflow-y-auto`} onPointerDown={e => e.stopPropagation()} onClick={e => e.stopPropagation()}>
           <SheetHeader className="text-left flex pb-4">
-            <SheetTitle className="text-primary">{title}</SheetTitle>
-            <SheetDescription>{description}</SheetDescription>
+            <div className="flex items-start justify-between gap-2">
+              <div className="flex flex-col">
+                <SheetTitle className="text-primary">{title}</SheetTitle>
+                <SheetDescription>{description}</SheetDescription>
+              </div>
+              {headerActions}
+            </div>
           </SheetHeader>
 
           <div className={cn("p-1")}>{children}</div>
