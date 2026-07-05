@@ -17,7 +17,8 @@ export type StatWidgetAccent =
   | "amber"
   | "rose"
   | "slate"
-  | "sky";
+  | "sky"
+  | "violet";
 
 export interface StatWidgetProps {
   /** Libellé du KPI (ex. "ARR Maintenance") */
@@ -42,6 +43,8 @@ export interface StatWidgetProps {
   children?: React.ReactNode;
   /** Série de valeurs pour un sparkline discret (évolution) sous la valeur. */
   sparkline?: number[];
+  /** Classe optionnelle appliquée à la valeur (ex. couleur selon un seuil). */
+  valueClassName?: string;
   className?: string;
   "data-testid"?: string;
 }
@@ -53,6 +56,7 @@ const ACCENT_STROKE: Record<StatWidgetAccent, string> = {
   rose: "#F43F5E",
   slate: "#94A3B8",
   sky: "#0EA5E9",
+  violet: "#8B5CF6",
 };
 
 /** Mini courbe d'évolution discrète (area sparkline, sans axes). */
@@ -112,6 +116,7 @@ const ACCENT_HALO: Record<StatWidgetAccent, string> = {
   rose: "bg-rose-50 text-rose-500",
   slate: "bg-slate-100 text-slate-500",
   sky: "bg-sky-50 text-sky-500",
+  violet: "bg-violet-50 text-violet-500",
 };
 
 const TREND_CLASS: Record<NonNullable<StatWidgetProps["trend"]>["type"], string> =
@@ -140,6 +145,7 @@ export const StatWidget = ({
   detail,
   children,
   sparkline,
+  valueClassName,
   className,
   "data-testid": dataTestId,
 }: StatWidgetProps) => {
@@ -197,7 +203,12 @@ export const StatWidget = ({
       </div>
 
       <div className="mt-4 flex items-baseline gap-2">
-        <span className="text-[28px] font-semibold leading-none tracking-tight text-slate-900">
+        <span
+          className={cn(
+            "text-[28px] font-semibold leading-none tracking-tight text-slate-900",
+            valueClassName
+          )}
+        >
           {formatValue(value, unit)}
         </span>
       </div>
