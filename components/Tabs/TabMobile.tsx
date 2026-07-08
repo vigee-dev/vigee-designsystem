@@ -25,6 +25,8 @@ export type TabOption<T extends string = string> = {
   href?: string;
   value?: T;
   icon?: ReactNode;
+  /** Icône affichée quand l'onglet est actif (ex. variante Fill). Fallback : `icon`. */
+  activeIcon?: ReactNode;
   count?: number;
   badgeColor?: string;
   color?: string;
@@ -162,7 +164,16 @@ export function TabMobile<T extends string = string>({
                   <div className="flex items-center gap-2 justify-between ">
                     <div className="flex items-center gap-2">
                       {option.icon && (
-                        <span className="opacity-70">{option.icon}</span>
+                        <>
+                          {/* Icône inactive (stroke) : masquée quand l'onglet est sélectionné. */}
+                          <span className="opacity-70 group-aria-selected:hidden">
+                            {option.icon}
+                          </span>
+                          {/* Icône active (fill) : visible seulement quand sélectionné. */}
+                          <span className="hidden group-aria-selected:inline-flex">
+                            {option.activeIcon ?? option.icon}
+                          </span>
+                        </>
                       )}
                       {option.name}
                       {option.status && (
