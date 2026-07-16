@@ -34,6 +34,8 @@ interface Props {
   container?: boolean;
   keys?: Key[];
   euro?: boolean; // Prop pour activer le formatage en euro
+  /** Hauteur du graphe en px (défaut 350). Réduire pour un rendu compact. */
+  height?: number;
 }
 
 // Fonction de formattage unifiée
@@ -62,23 +64,29 @@ export const LineChart: React.FC<Props> = ({
   container,
   euro = false,
   keys = [{ dataKey: "total", color: color }],
+  height = 350,
 }) => {
+  // Rendu compact : titre resserré et padding réduit quand on demande une petite hauteur.
+  const compact = height < 260;
   return (
     <div
       className={`${
         container
-          ? "bg-white p-8 rounded-xl border border-gray-100 shadow-sm"
+          ? `bg-white ${compact ? "p-5" : "p-8"} rounded-xl border border-gray-100 shadow-sm`
           : ""
       } items-center mb-2 w-full`}
     >
-      <div className="flex flex-col pb-12">
-        <p className={`font-bold text-xl`} style={{ color: color }}>
+      <div className={`flex flex-col ${compact ? "pb-4" : "pb-12"}`}>
+        <p
+          className={compact ? "font-bold text-sm" : "font-bold text-xl"}
+          style={{ color: color }}
+        >
           {title}
         </p>
         <p className="text-gray-500 text-sm">{subtitle}</p>
       </div>
 
-      <ResponsiveContainer width="100%" height={350}>
+      <ResponsiveContainer width="100%" height={height}>
         <AreaChart
           width={730}
           height={250}
