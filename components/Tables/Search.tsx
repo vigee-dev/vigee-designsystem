@@ -12,10 +12,13 @@ import { cn } from "../lib/utils";
 
 export default function TableSearch({
   className,
+  inputClassName,
   placeholder,
   variant = "default",
 }: {
   className?: string;
+  /** Applique au champ lui-même ; `className` ne vise que le conteneur. */
+  inputClassName?: string;
   placeholder?: string;
   variant?: "default" | "light";
 }) {
@@ -47,7 +50,8 @@ export default function TableSearch({
       <input
         className={cn(
           "peer block w-full font-variations rounded-md border border-slate-200 py-[9px] pl-10 text-[16px] md:text-sm outline-2 placeholder:text-slate-400",
-          variant === "light" && "bg-transparent border-none"
+          variant === "light" && "bg-transparent border-none",
+          inputClassName
         )}
         placeholder={placeholder ?? "Rechercher"}
         onChange={(e) => {
