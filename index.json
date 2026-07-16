@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-07-01T18:45:13.708Z",
+  "generatedAt": "2026-07-16T09:24:33.906Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -2723,6 +2723,7 @@
         "trigger?: ReactNode",
         "children?: ReactNode",
         "icon?: ReactNode",
+        "headerActions?: ReactNode",
         "side?: \"left\" | \"right\" | \"top\" | \"bottom\"",
         "size?: \"sm\" | \"md\" | \"lg\"",
         "scroll?: boolean",

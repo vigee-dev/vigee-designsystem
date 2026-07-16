@@ -72,11 +72,13 @@ export default function EmptyIllustration({
       )}
 
       <h2
-        className={"text-lg text-gray-600 font-medium text-center font-display"}
+        className={
+          "mt-5 text-base text-slate-400 font-medium text-center font-display"
+        }
       >
         {text}
       </h2>
-      <p className="text-slate-400 text-sm max-w-lg mx-auto text-center">
+      <p className="mt-1 text-slate-300 text-sm max-w-lg mx-auto text-center">
         {subtitle}
       </p>
 
