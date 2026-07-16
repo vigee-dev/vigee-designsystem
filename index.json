@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-07-16T09:24:33.906Z",
+  "generatedAt": "2026-07-16T15:11:49.401Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -8690,6 +8690,7 @@
     "download": "PiDownloadDownStroke",
     "trash": "PiDeleteDustbin01Stroke",
     "upload": "PiUploadUpStroke",
+    "import": "PiFileArrowUpStroke",
     "fileAdd": "PiFilePlusStroke",
     "annotationStar": "PiAnnotationStarStroke",
     "back": "PiArrowLeftStroke",

@@ -57,6 +57,7 @@ import {
   PiThreeDotsMenuHorizontalStroke,
   PiThumbReactionLikeStroke,
   PiUploadUpStroke,
+  PiFileArrowUpStroke,
   PiUserCircleStroke,
   PiUserPlusStroke,
   PiUserSettingsStroke,
@@ -101,6 +102,8 @@ const iconMap = {
   download: PiDownloadDownStroke,
   trash: PiDeleteDustbin01Stroke,
   upload: PiUploadUpStroke,
+  /** Importer un document : un fichier qui entre, distinct de `upload` (flèche seule) */
+  import: PiFileArrowUpStroke,
   fileAdd: PiFilePlusStroke,
   annotationStar: PiAnnotationStarStroke,
   back: PiArrowLeftStroke,
