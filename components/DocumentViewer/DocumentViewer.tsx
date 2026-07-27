@@ -49,6 +49,7 @@ const ZOOM_STEP = 0.15;
 const DEFAULT_LABELS: Required<DocumentViewerLabels> = {
   close: 'Fermer (Esc)',
   download: 'Télécharger',
+  delete: 'Supprimer',
   zoomIn: 'Zoom avant',
   zoomOut: 'Zoom arrière',
   fitWidth: 'Ajuster à la largeur',
@@ -95,6 +96,12 @@ export interface DocumentViewerProps {
    * triggers a browser download with `name` as filename).
    */
   onDownload?: (doc: ViewableDocument) => void;
+  /**
+   * Optionnel : quand fourni, un bouton de suppression apparaît dans l'en-tête
+   * et appelle ce callback avec le document courant. La fermeture éventuelle du
+   * viewer après suppression est à la charge de l'appelant.
+   */
+  onDelete?: (doc: ViewableDocument) => void;
   /** Called every time the active document changes. */
   onIndexChange?: (index: number, doc: ViewableDocument) => void;
   /** Toggle individual features. */
@@ -121,6 +128,7 @@ export function DocumentViewer({
   onOpenChange,
   onRotate,
   onDownload,
+  onDelete,
   onIndexChange,
   features,
   appearance,
@@ -354,6 +362,7 @@ export function DocumentViewer({
                 zoomIn: l.zoomIn,
                 zoomOut: l.zoomOut,
                 fitWidth: l.fitWidth,
+                delete: l.delete,
                 pageCount: l.pageCount,
               }}
               onClose={() => onOpenChange(false)}
@@ -361,6 +370,7 @@ export function DocumentViewer({
               onZoomOut={zoomOut}
               onResetZoom={resetZoom}
               onDownload={handleDownload}
+              onDelete={onDelete ? () => onDelete(doc) : undefined}
             />
 
             <div ref={measureRef} className="relative flex-1 overflow-hidden">

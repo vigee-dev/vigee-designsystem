@@ -74,6 +74,7 @@ export interface DocumentViewerAppearance {
 export interface DocumentViewerLabels {
   close?: string;
   download?: string;
+  delete?: string;
   zoomIn?: string;
   zoomOut?: string;
   fitWidth?: string;

@@ -10,6 +10,7 @@ import {
   Download,
   Maximize2,
   Minimize2,
+  Trash2,
   X,
   ZoomIn,
   ZoomOut,
@@ -36,6 +37,7 @@ export interface ToolbarProps {
     zoomIn: string;
     zoomOut: string;
     fitWidth: string;
+    delete: string;
     pageCount: (n: number) => string;
   };
   onClose: () => void;
@@ -43,6 +45,8 @@ export interface ToolbarProps {
   onZoomOut: () => void;
   onResetZoom: () => void;
   onDownload: () => void;
+  /** Optionnel : affiche un bouton de suppression dans l'en-tête. */
+  onDelete?: () => void;
 }
 
 export function Toolbar({
@@ -64,6 +68,7 @@ export function Toolbar({
   onZoomOut,
   onResetZoom,
   onDownload,
+  onDelete,
 }: ToolbarProps) {
   const zoomLabel = fitMode === 'fit' ? 'Ajusté' : `${Math.round(zoom * 100)} %`;
 
@@ -126,6 +131,11 @@ export function Toolbar({
             <Download className="w-4 h-4" />
           </ToolButton>
         )}
+        {onDelete && (
+          <ToolButton onClick={onDelete} label={labels.delete} danger>
+            <Trash2 className="w-4 h-4" />
+          </ToolButton>
+        )}
         <ToolButton onClick={onClose} label={labels.close}>
           <X className="w-4 h-4" />
         </ToolButton>
@@ -139,11 +149,13 @@ function ToolButton({
   onClick,
   label,
   disabled,
+  danger,
 }: {
   children: React.ReactNode;
   onClick: () => void;
   label: string;
   disabled?: boolean;
+  danger?: boolean;
 }) {
   return (
     <button
@@ -154,7 +166,9 @@ function ToolButton({
       aria-label={label}
       className={cn(
         'inline-flex items-center justify-center w-8 h-8 rounded-md transition-colors',
-        'text-gray-600 hover:text-primary hover:bg-white',
+        danger
+          ? 'text-gray-600 hover:text-red-600 hover:bg-red-50'
+          : 'text-gray-600 hover:text-primary hover:bg-white',
         'disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent'
       )}
     >

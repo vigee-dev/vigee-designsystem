@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-07-16T15:11:49.401Z",
+  "generatedAt": "2026-07-27T12:28:41.066Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -335,7 +335,8 @@
         "color?: string",
         "container?: boolean",
         "keys?: Key[]",
-        "euro?: boolean; // Prop pour activer le formatage en euro"
+        "euro?: boolean; // Prop pour activer le formatage en euro",
+        "height?: number"
       ],
       "formIntegration": false,
       "description": "Graphique en aires (area chart) avec dégradé pour visualiser l'évolution d'une ou plusieurs métriques dans le temps.",
@@ -556,6 +557,7 @@
         "onOpenChange: (open: boolean) => void",
         "onRotate?: (doc: ViewableDocument, rotations: RotationChange) => void",
         "onDownload?: (doc: ViewableDocument) => void",
+        "onDelete?: (doc: ViewableDocument) => void",
         "onIndexChange?: (index: number, doc: ViewableDocument) => void",
         "features?: DocumentViewerFeatures",
         "appearance?: DocumentViewerAppearance",
@@ -719,6 +721,7 @@
         "zoomIn: string",
         "zoomOut: string",
         "fitWidth: string",
+        "delete: string",
         "pageCount: (n: number) => string"
       ],
       "formIntegration": false,
