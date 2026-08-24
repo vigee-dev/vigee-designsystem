@@ -89,6 +89,7 @@ const AppSidebar = ({
   classNameItems,
   hoverBackground = "bg-slate-800",
   footerSlot,
+  activeSlug,
 }: {
   items: MenuItem[];
   bottomItems?: MenuItem[];
@@ -105,6 +106,12 @@ const AppSidebar = ({
   hoverBackground?: string;
   /** Rendu dans le SidebarFooter juste au-dessus du bloc utilisateur (FooterSidebar). */
   footerSlot?: React.ReactNode;
+  /**
+   * Force l'item actif par son slug, quand l'URL seule ne suffit pas à
+   * déterminer la section (ex : une page partagée par deux sections).
+   * Prioritaire sur toutes les règles de matching de pathname.
+   */
+  activeSlug?: string;
 }) => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   // On dérive "open" de l'état effectif (state) pour gérer aussi la tablette,
@@ -148,6 +155,8 @@ const AppSidebar = ({
 
   // Fonction pour vérifier si un item est actif (match exact ou sous-route)
   const isItemActive = (itemHref: string, itemSlug?: string) => {
+    // Section forcée par l'appelant : elle prime sur tout le reste.
+    if (activeSlug) return itemSlug === activeSlug;
     // Match exact
     if (activePath === itemHref) return true;
     // Les racines d'app (ex: /system, /leads) ne doivent pas être actives
