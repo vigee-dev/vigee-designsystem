@@ -31,6 +31,7 @@ export const Filter = ({
   defaultValue,
   searchable,
   clearable,
+  clearToValue,
   multi = false,
   maxVisibleItems,
 }: {
@@ -40,6 +41,12 @@ export const Filter = ({
   defaultValue?: string;
   searchable?: boolean;
   clearable?: boolean;
+  /**
+   * Valeur écrite dans l'URL quand on efface le filtre, au lieu de supprimer
+   * le paramètre. Nécessaire quand la page pré-filtre par défaut : sans
+   * sentinelle, effacer referait apparaître le pré-filtre aussitôt.
+   */
+  clearToValue?: string;
   multi?: boolean;
   maxVisibleItems?: number;
 }) => {
@@ -62,7 +69,7 @@ export const Filter = ({
   });
 
   const handleSingleChange = (val: string | undefined) => {
-    setValue(val || null);
+    setValue(val || clearToValue || null);
     const params = new URLSearchParams(searchParams?.toString() || "");
     params.set("page", "1");
     const qs = params.toString();
