@@ -189,7 +189,9 @@ export function TabMobile<T extends string = string>({
                     {option?.count && option?.count > 0 ? (
                       <Badge
                         className={cn(
-                          "bg-red-400 h-5 w-5 flex items-center justify-center mx-auto opacity-50 group-aria-selected:opacity-100",
+                          // Rond STRICT : le padding par défaut du Badge
+                          // l'ovalisait ; min-w laisse grandir « 12 » ou « 1k ».
+                          "bg-red-400 h-5 min-w-5 px-[5px] py-0 rounded-full shrink-0 flex items-center justify-center mx-auto text-[10px] font-semibold leading-none tabular-nums opacity-50 group-aria-selected:opacity-100",
                           option.badgeColor
                         )}
                       >
