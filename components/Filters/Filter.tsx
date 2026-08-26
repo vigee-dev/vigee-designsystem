@@ -36,7 +36,7 @@ export const Filter = ({
   maxVisibleItems,
 }: {
   queryKey: string;
-  options: { label: string; value: string }[];
+  options: { label: string; value: string; icon?: React.ReactNode }[];
   placeholder?: string;
   defaultValue?: string;
   searchable?: boolean;
@@ -171,9 +171,20 @@ export const Filter = ({
               ? selectedValues.length > 0
                 ? renderSelectedLabels()
                 : placeholder
-              : value
-                ? options.find((option) => option.value === value)?.label
-                : placeholder}
+              : (() => {
+                  // L'option choisie s'affiche avec son icône (avatar d'un
+                  // assigné, par exemple), pas seulement son libellé.
+                  const selected = options.find(
+                    (option) => option.value === value
+                  );
+                  if (!selected) return placeholder;
+                  return (
+                    <span className="flex items-center gap-2">
+                      {selected.icon}
+                      {selected.label}
+                    </span>
+                  );
+                })()}
             <PiChevronSortVerticalStroke className="opacity-50 h-4 w-4" />
           </Button>
         </PopoverTrigger>
