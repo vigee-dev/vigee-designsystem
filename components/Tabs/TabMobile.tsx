@@ -175,7 +175,9 @@ export function TabMobile<T extends string = string>({
                           </span>
                         </>
                       )}
-                      {option.name}
+                      {/* Un onglet peut n'être qu'une icône (name vide) :
+                          ne rien rendre évite l'espace mort du gap. */}
+                      {option.name ? option.name : null}
                       {option.status && (
                         <span
                           className={cn(
