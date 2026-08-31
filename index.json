@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-08-26T15:30:02.873Z",
+  "generatedAt": "2026-08-31T15:08:50.520Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -1459,7 +1459,8 @@
       "props": [
         "title: string",
         "subtitle?: string",
-        "className?: string"
+        "className?: string",
+        "variant?: \"default\" | \"muted\""
       ],
       "formIntegration": false,
       "description": "Titre de section H2 stylisé avec sous-titre optionnel pour structurer visuellement un formulaire ou une page.",
@@ -1471,7 +1472,7 @@
         "titre principal de page → utiliser PageHeader",
         "titre avec animation → utiliser TitleGradual ou TypographyH1"
       ],
-      "example": "<SectionTitle title=\"Informations personnelles\" subtitle=\"Renseignez vos coordonnées de contact.\" />"
+      "example": "<SectionTitle title=\"Équipe Vigee\" variant=\"muted\" />"
     },
     {
       "name": "SegmentedControl",
