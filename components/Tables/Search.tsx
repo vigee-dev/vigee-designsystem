@@ -49,7 +49,7 @@ export default function TableSearch({
       </label>
       <input
         className={cn(
-          "peer block w-full font-variations rounded-md border border-slate-200 py-[9px] pl-10 text-[16px] md:text-sm outline-2 placeholder:text-slate-400",
+          "peer block w-full font-variations rounded-xl border border-slate-200 py-[9px] pl-10 text-[16px] md:text-sm outline-2 placeholder:text-slate-400",
           variant === "light" && "bg-transparent border-none",
           inputClassName
         )}
