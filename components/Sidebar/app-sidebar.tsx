@@ -74,30 +74,6 @@ type SwitcherItem = {
   };
 };
 
-/**
- * Couleur de texte correspondant au fond d'un badge de notification, pour que
- * l'icône active d'une entrée reprenne la couleur de son compteur.
- *
- * Table explicite plutôt qu'un remplacement `bg-` → `text-` : Tailwind ne
- * génère que les classes qu'il voit écrites en toutes lettres. Une couleur
- * absente d'ici laisse simplement l'icône hériter — jamais de classe morte.
- */
-const BADGE_TEXT_COLORS: Record<string, string> = {
-  "bg-red-400": "text-red-400",
-  "bg-red-500": "text-red-500",
-  "bg-orange-400": "text-orange-400",
-  "bg-amber-500": "text-amber-500",
-  "bg-emerald-500": "text-emerald-500",
-  "bg-blue-500": "text-blue-500",
-  "bg-sky-500": "text-sky-500",
-  "bg-violet-500": "text-violet-500",
-  "bg-slate-300": "text-slate-300",
-  "bg-slate-400": "text-slate-400",
-};
-
-const badgeTextColor = (notificationColor?: string) =>
-  notificationColor ? BADGE_TEXT_COLORS[notificationColor] : undefined;
-
 const AppSidebar = ({
   items,
   bottomItems,
@@ -262,18 +238,11 @@ const AppSidebar = ({
                         className="flex items-center gap-2 w-full"
                       >
                         <span
-                          className={cn(
+                          className={
                             isItemActive(item.href, item.slug) || hoveredItem === item.slug
                               ? "inline  transition-opacity duration-300"
-                              : "hidden  transition-opacity duration-300",
-                            // L'icône active reprend la couleur du compteur
-                            // AFFICHÉ : un badge rouge donne une icône rouge,
-                            // sans que chaque entrée redéclare sa couleur. Sans
-                            // compteur, l'icône garde la sienne.
-                            item.notifications && item.notifications > 0
-                              ? badgeTextColor(item.notificationColor)
-                              : undefined,
-                          )}
+                              : "hidden  transition-opacity duration-300"
+                          }
                         >
                           {item.iconFill}
                         </span>
