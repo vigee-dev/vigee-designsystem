@@ -215,7 +215,10 @@ export function SwitcherSidebar({
                   )}
                 >
                   <div className="flex items-center gap-2 flex-1 min-w-0">
-                    <span className="flex items-center justify-center w-5 h-5 [&>svg]:w-4 [&>svg]:h-4 text-slate-600">
+                    {/* Pas de couleur imposée ici : chaque app porte la
+                        sienne (Studio bleu, Leads ambre…). Le gris uniforme
+                        les rendait toutes identiques dans le sélecteur. */}
+                    <span className="flex items-center justify-center w-5 h-5 [&>svg]:w-4 [&>svg]:h-4">
                       {item.iconFill || item.icon}
                     </span>
                     <div className="flex flex-col min-w-0">
@@ -367,7 +370,9 @@ export function SwitcherSidebar({
                       )}
                     >
                       <div className="flex items-center gap-2 flex-1 min-w-0">
-                        <span className="flex items-center justify-center w-5 h-5 [&>svg]:w-4 [&>svg]:h-4 text-slate-600">
+                        {/* Même règle que la liste au-dessus : l'icône garde
+                            la couleur de son app. */}
+                        <span className="flex items-center justify-center w-5 h-5 [&>svg]:w-4 [&>svg]:h-4">
                           {item.iconFill || item.icon}
                         </span>
                         <div className="flex flex-col min-w-0">
