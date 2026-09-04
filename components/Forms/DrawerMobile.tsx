@@ -40,8 +40,17 @@ export function useDrawerContext() {
   return context;
 }
 
-export function DrawerMobile({ children, title, description, trigger, icon, cancelButton, size = "sm" }: Props) {
-  const [open, setOpen] = React.useState(false);
+export function DrawerMobile({ children, title, description, trigger, icon, cancelButton, size = "sm", openForced, setOpenForced }: Props) {
+  const [internalOpen, setInternalOpen] = React.useState(false);
+
+  // Ouverture PILOTÉE quand l'appelant la fournit : un formulaire déclenché
+  // depuis un popover doit vivre hors de lui, sinon la fermeture du popover
+  // le démonte à l'instant même où il s'ouvre.
+  const isControlled = openForced !== undefined && setOpenForced !== undefined;
+  const open = isControlled ? openForced : internalOpen;
+  const setOpen = (isControlled ? setOpenForced : setInternalOpen) as React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
 
   const contextValue: DrawerContextType = { open, setOpen };
   const isDesktop = useMediaQuery("(min-width: 768px)");
