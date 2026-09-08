@@ -151,6 +151,8 @@ type Props<T extends FieldValues> = {
   onChange?: (value: string | string[]) => void;
   withCheckbox?: boolean;
   preventDeselect?: boolean;
+  /** Laisser le champ vide au lieu de sélectionner la première option d'office. */
+  allowEmpty?: boolean;
   "data-testid"?: string;
 };
 
@@ -170,10 +172,14 @@ export const Toggles = <T extends FieldValues>({
   withCheckbox = false,
   columns,
   preventDeselect = false,
+  allowEmpty = false,
   "data-testid": dataTestId,
 }: Props<T>) => {
-  // Force la valeur par défaut si le champ est vide
+  // Force la valeur par défaut si le champ est vide — sauf si le parent veut
+  // un état « rien de choisi » : une carte qui paraît cochée sans que rien
+  // n'ait été enregistré oblige à la décocher puis la recocher pour agir.
   React.useEffect(() => {
+    if (allowEmpty) return;
     const current = form.getValues(name);
     if (!current && options.length > 0) {
       // @ts-ignore
