@@ -14,25 +14,25 @@ import {
   FormMessage,
 } from "../ui/form";
 import moment from "moment";
+import { useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { Button } from "../ui/button";
 import { cn } from "../lib/utils";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { Calendar } from "../ui/calendar";
-import { z } from "zod";
 import { fr } from "date-fns/locale";
 
-interface Props<T extends z.ZodType<any, any>> {
+interface Props<T extends FieldValues> {
   label?: string;
-  form: UseFormReturn<z.infer<T> & FieldValues>;
-  name: Path<z.infer<T> & FieldValues>;
+  form: UseFormReturn<T>;
+  name: Path<T>;
   className?: string;
   starting_date?: Date;
   disabled?: boolean;
 }
 
-export default function DatePicker<T extends z.ZodType<any, any, any>>({
+export default function DatePicker<T extends FieldValues>({
   label,
   form,
   name,
@@ -40,6 +40,8 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
   starting_date,
   disabled,
 }: Props<T>) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <FormField
       control={form.control}
@@ -47,7 +49,9 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
       render={({ field }) => (
         <FormItem className="flex flex-col py-2">
           <FormLabel className="font-black text-primary">{label}</FormLabel>
-          <Popover>
+          {/* `modal` est indispensable : sans lui, le calendrier ouvert dans un
+              Drawer (vaul) ou un Dialog s'affiche mais ne reçoit aucun clic. */}
+          <Popover open={isOpen} onOpenChange={setIsOpen} modal={true}>
             <PopoverTrigger asChild>
               <FormControl>
                 <Button
@@ -71,14 +75,26 @@ export default function DatePicker<T extends z.ZodType<any, any, any>>({
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
                 mode="single"
-                selected={field.value}
+                // La valeur est stockée en chaîne : le calendrier attend une
+                // Date, sinon rien n'apparaît jamais sélectionné.
+                selected={field.value ? moment(field.value).toDate() : undefined}
+                defaultMonth={
+                  field.value ? moment(field.value).toDate() : starting_date
+                }
                 onSelect={date => {
-                  const formatted_date = moment(date).format("YYYY-MM-DD");
-                  field.onChange(formatted_date);
+                  if (!date) return;
+                  field.onChange(moment(date).format("YYYY-MM-DD"));
+                  // Le choix est fait : on referme, comme dans tout sélecteur.
+                  setIsOpen(false);
                 }}
                 disabled={date => {
                   if (starting_date) {
-                    return date < starting_date;
+                    // Comparaison au jour près : une borne portant une heure
+                    // interdisait sinon le jour même.
+                    return (
+                      moment(date).startOf("day") <
+                      moment(starting_date).startOf("day")
+                    );
                   }
 
                   return false;
