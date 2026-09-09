@@ -101,15 +101,14 @@ export function SwitcherSidebar({
     if (activePath?.startsWith("/system") && item.slug.startsWith("/system"))
       return true;
 
-    if (activePath?.includes("/studio/projects/")) {
-      // Si on est sur un projet, chercher le projet correspondant
-      const projectMatch = activePath.match(/\/studio\/projects\/(\d+)/);
-      if (projectMatch) {
-        const projectPattern = new RegExp(
-          `/studio/projects/${projectMatch[1]}(/|$)`,
-        );
-        return projectPattern.test(item.slug);
-      }
+    // Un projet ouvert se reconnaît à son IDENTIFIANT, pas au seul préfixe :
+    // /studio/projects/delegation est une page du Studio, pas un projet.
+    const projectMatch = activePath?.match(/\/studio\/projects\/(\d+)/);
+    if (projectMatch) {
+      const projectPattern = new RegExp(
+        `/studio/projects/${projectMatch[1]}(/|$)`,
+      );
+      return projectPattern.test(item.slug);
     }
     // Sur une page ticket avec projectId en query param, garder le contexte projet
     const projectIdParam = searchParams?.get("projectId");
@@ -119,11 +118,12 @@ export function SwitcherSidebar({
       );
       return projectPattern.test(item.slug);
     }
-    // Studio = tout /studio sauf les pages projets
+    // Studio = tout /studio, sauf quand un projet précis est ouvert (traité
+    // plus haut). Une page transverse comme /studio/projects/delegation reste
+    // du Studio : sans ça, le sélecteur n'affichait plus aucune app.
     if (
       item.type === "studio" &&
-      activePath?.startsWith("/studio") &&
-      !activePath?.includes("/studio/projects/")
+      activePath?.startsWith("/studio")
     ) {
       return true;
     }
