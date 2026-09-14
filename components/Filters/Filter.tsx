@@ -301,6 +301,7 @@ export const Filter = ({
       value={value ?? undefined}
       defaultValue={defaultValue}
       clearable={clearable}
+      compactWhenSelected={compactWhenSelected}
     />
   );
 };

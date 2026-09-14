@@ -38,6 +38,12 @@ export interface SelectProps {
   value?: string;
   clearable?: boolean;
   classNameContent?: string;
+  /**
+   * Une fois une option choisie, le déclencheur ne montre que son icône
+   * (l'avatar d'une personne) : le nom se lit dans la liste au moment de
+   * changer. Sans icône, le libellé reste.
+   */
+  compactWhenSelected?: boolean;
 }
 
 export function Select({
@@ -51,6 +57,7 @@ export function Select({
   value,
   clearable = false,
   classNameContent,
+  compactWhenSelected = false,
 }: SelectProps) {
   const [selectedValue, setSelectedValue] = React.useState<string | undefined>(
     value ?? defaultValue ?? undefined
@@ -107,7 +114,28 @@ export function Select({
         className={cn("w-[280px] font-medium bg-input ", className)}
       >
         <div className="flex items-center">
-          <SelectValue placeholder={placeholder} />
+          {(() => {
+            const selected = compactWhenSelected
+              ? options.find((option) => option.value === selectedValue)
+              : undefined;
+            if (selected?.icon) {
+              return (
+                <>
+                  <span className="sr-only">
+                    <SelectValue placeholder={placeholder} />
+                  </span>
+                  <span
+                    className="flex items-center"
+                    title={selected.label}
+                    aria-label={selected.label}
+                  >
+                    {selected.icon}
+                  </span>
+                </>
+              );
+            }
+            return <SelectValue placeholder={placeholder} />;
+          })()}
           {clearable && selectedValue && (
             <Button
               onPointerDown={handleClear}
