@@ -34,6 +34,7 @@ export const Filter = ({
   clearToValue,
   multi = false,
   maxVisibleItems,
+  compactWhenSelected = false,
 }: {
   queryKey: string;
   options: { label: string; value: string; icon?: React.ReactNode }[];
@@ -49,6 +50,12 @@ export const Filter = ({
   clearToValue?: string;
   multi?: boolean;
   maxVisibleItems?: number;
+  /**
+   * Une fois une option choisie, n'afficher que son icône (l'avatar d'une
+   * personne, par exemple) : le nom se lit dans la liste au moment de
+   * changer. Sans icône, le libellé reste.
+   */
+  compactWhenSelected?: boolean;
 }) => {
   const [open, setOpen] = React.useState(false);
 
@@ -178,6 +185,17 @@ export const Filter = ({
                     (option) => option.value === value
                   );
                   if (!selected) return placeholder;
+                  if (compactWhenSelected && selected.icon) {
+                    return (
+                      <span
+                        className="flex items-center"
+                        title={selected.label}
+                        aria-label={selected.label}
+                      >
+                        {selected.icon}
+                      </span>
+                    );
+                  }
                   return (
                     <span className="flex items-center gap-2">
                       {selected.icon}
