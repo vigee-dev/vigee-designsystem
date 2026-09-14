@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-09-14T17:04:19.170Z",
+  "generatedAt": "2026-09-14T17:48:48.241Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -2673,7 +2673,8 @@
         "label?: string",
         "value?: string",
         "clearable?: boolean",
-        "classNameContent?: string"
+        "classNameContent?: string",
+        "compactWhenSelected?: boolean"
       ],
       "formIntegration": false,
       "description": "Select déroulant contrôlé/non-contrôlé avec support groupes, icônes par option et bouton clear intégré.",
