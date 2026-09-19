@@ -302,12 +302,13 @@ const ButtonComponent = ({
         {IconLeft && (
           <IconLeft
             className={cn(
-              "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+              // L'icône suit la couleur du texte du bouton : elle reste lisible sur
+              // tous les variants (default, outline, ghost, link…) sans liste de
+              // cas à tenir à jour.
+              "text-current transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
               !children &&
                 "text-slate-400 transform transition-ease-in-out duration-300 w-6 h-6",
               big && "w-10 h-10",
-              variant === "outline" && "text-gray-900",
-              variant === "secondary" && "text-secondary-foreground",
               !disabled && "md:group-hover:animate-pulse",
               !children &&
                 !disabled &&
@@ -324,12 +325,13 @@ const ButtonComponent = ({
         {Icon && (
           <Icon
             className={cn(
-              "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+              // L'icône suit la couleur du texte du bouton : elle reste lisible sur
+              // tous les variants (default, outline, ghost, link…) sans liste de
+              // cas à tenir à jour.
+              "text-current transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
               !children &&
                 "text-slate-400 transform transition-ease-in-out duration-300 w-6 h-6",
               big && "w-10 h-10",
-              variant === "outline" && "text-gray-900",
-              variant === "secondary" && "text-secondary-foreground",
               !disabled && "md:group-hover:animate-pulse",
               !children &&
                 !disabled &&
@@ -369,12 +371,13 @@ const ButtonComponent = ({
       {IconLeft && (
         <IconLeft
           className={cn(
-            "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+            // L'icône suit la couleur du texte du bouton : elle reste lisible sur
+            // tous les variants (default, outline, ghost, link…) sans liste de
+            // cas à tenir à jour.
+            "text-current transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
             !children &&
               "text-slate-400 transform transition-ease-in-out duration-300 w-6 h-6",
             big && "w-10 h-10",
-            variant === "outline" && "text-gray-900",
-            variant === "secondary" && "text-secondary-foreground",
             !disabled && "md:group-hover:animate-pulse",
             !children &&
               !disabled &&
@@ -392,12 +395,13 @@ const ButtonComponent = ({
       {Icon && (
         <Icon
           className={cn(
-            "text-gray-100 transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
+            // L'icône suit la couleur du texte du bouton : elle reste lisible sur
+            // tous les variants (default, outline, ghost, link…) sans liste de
+            // cas à tenir à jour.
+            "text-current transform transition-ease-in-out duration-300 ease-in-out w-5 h-5",
             !children &&
               "text-slate-400 transform transition-ease-in-out duration-300 w-6 h-6",
             big && "w-10 h-10",
-            variant === "outline" && "text-gray-900",
-            variant === "secondary" && "text-secondary-foreground",
             !disabled && "md:group-hover:animate-pulse",
             !children &&
               !disabled &&
