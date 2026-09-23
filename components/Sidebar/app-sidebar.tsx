@@ -54,6 +54,15 @@ type MenuItem = {
   href: string;
   notifications?: number;
   notificationColor?: string;
+  /**
+   * SECOND compte, posé à côté du premier.
+   *
+   * Un badge unique ne dit pas de qui dépend le travail : sur les évolutions,
+   * l'ambre annonce ce qui attend un geste de l'équipe et le violet ce qui
+   * attend le client. Optionnel — la plupart des entrées n'ont qu'un compte.
+   */
+  notificationsSecondary?: number;
+  notificationSecondaryColor?: string;
   actions?: { title: string; url: string }[];
   dropdownContent?: React.ReactNode;
   hasSeparatorAfter?: boolean;
@@ -280,16 +289,55 @@ const AppSidebar = ({
                       </SidebarMenuAction>
                     )}
 
-                    {/* Afficher le badge si notifications > 0, peu importe le type */}
-                    {item?.notifications && item?.notifications > 0 && (
-                      open ? (
-                        <SidebarMenuBadge className={cn("text-white rounded-full items-center", item?.notificationColor || "bg-red-400")}>
-                          {item?.notifications}
+                    {/* Afficher le badge si notifications > 0, peu importe le type.
+                        Un second compte se pose à sa gauche : deux pastilles
+                        côte à côte, chacune de sa couleur. Repliée, la barre
+                        garde un point par compte. */}
+                    {((item?.notifications ?? 0) > 0 ||
+                      (item?.notificationsSecondary ?? 0) > 0) &&
+                      (open ? (
+                        <SidebarMenuBadge className="flex items-center gap-1 bg-transparent p-0">
+                          {(item?.notificationsSecondary ?? 0) > 0 && (
+                            <span
+                              className={cn(
+                                "rounded-full px-1.5 text-white",
+                                item?.notificationSecondaryColor || "bg-violet-500",
+                              )}
+                            >
+                              {item?.notificationsSecondary}
+                            </span>
+                          )}
+                          {(item?.notifications ?? 0) > 0 && (
+                            <span
+                              className={cn(
+                                "rounded-full px-1.5 text-white",
+                                item?.notificationColor || "bg-red-400",
+                              )}
+                            >
+                              {item?.notifications}
+                            </span>
+                          )}
                         </SidebarMenuBadge>
                       ) : (
-                        <div className={cn("text-white rounded-full items-center w-2 h-2 absolute top-0 right-0", item?.notificationColor || "bg-red-400")} />
-                      )
-                    )}
+                        <div className="absolute right-0 top-0 flex items-center gap-0.5">
+                          {(item?.notifications ?? 0) > 0 && (
+                            <div
+                              className={cn(
+                                "h-2 w-2 rounded-full",
+                                item?.notificationColor || "bg-red-400",
+                              )}
+                            />
+                          )}
+                          {(item?.notificationsSecondary ?? 0) > 0 && (
+                            <div
+                              className={cn(
+                                "h-2 w-2 rounded-full",
+                                item?.notificationSecondaryColor || "bg-violet-500",
+                              )}
+                            />
+                          )}
+                        </div>
+                      ))}
 
                     {item?.type === "dropdownmenu" && (
                       <DropdownMenu>
