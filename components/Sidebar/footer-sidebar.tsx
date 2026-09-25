@@ -2,6 +2,8 @@
  * @description Bouton utilisateur en pied de sidebar affichant avatar/nom/email avec un menu déroulant de liens et actions.
  * @useWhen pied de sidebar applicative → afficher le profil connecté avec accès rapide aux actions utilisateur | sidebar avec déconnexion/paramètres compte → passer les liens via `links` avec `onClick` ou `href`
  * @dontUseFor navigation principale de la sidebar → utiliser AppSidebar | menu contextuel sans lien utilisateur → utiliser DropdownMenu
+ * Le menu déroulant ne porte que ses actions (profil, notifications,
+ * déconnexion) : le nom et l'e-mail sont déjà sur le bouton qui l'ouvre.
  * @example <FooterSidebar user={{ name: "Alice", email: "alice@vigee.fr", avatar: "/avatar.png" }} links={[{ name: "Profil", icon: <UserIcon />, href: "/profil" }, { name: "Déconnexion", icon: <LogOutIcon />, onClick: () => signOut() }]} />
  */
 "use client";
@@ -17,8 +19,6 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
@@ -78,21 +78,8 @@ const FooterSidebar = ({ user, links }: Props) => {
             align="end"
             sideOffset={4}
           >
-            <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">
-                    <PiUserCircleSolid className="h-8 w-8" />
-                  </AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">{user.name}</span>
-                  <span className="truncate text-xs">{user.email}</span>
-                </div>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
+            {/* Pas d'en-tête nom + e-mail : le bouton juste à côté les
+                affiche déjà. Le menu ne porte que ses actions. */}
             <DropdownMenuGroup>
               {links.map((link) => (
                 <DropdownMenuItem key={link.name}>
@@ -116,7 +103,6 @@ const FooterSidebar = ({ user, links }: Props) => {
                 </DropdownMenuItem>
               ))}
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
