@@ -34,6 +34,7 @@ type Props<T extends FieldValues> = {
   inverted?: boolean;
   icon?: React.ReactNode;
   pending?: boolean;
+  "data-testid"?: string;
 };
 
 export default function Switch<T extends FieldValues>({
@@ -49,6 +50,7 @@ export default function Switch<T extends FieldValues>({
   inverted = false,
   icon,
   pending = false,
+  "data-testid": dataTestId,
 }: Props<T>) {
   return form?.control && name ? (
     <FormField
@@ -79,6 +81,7 @@ export default function Switch<T extends FieldValues>({
                 field.onChange(inverted ? !checked : checked);
               }}
               className='data-[state=unchecked]:bg-slate-200'
+              data-testid={dataTestId}
             />
           </FormControl>
         </FormItem>
@@ -91,7 +94,8 @@ export default function Switch<T extends FieldValues>({
         className
       )}
     >
-      <div className='space-y-0.5'>
+      {icon && <div className='flex flex-row items-center gap-2'>{icon}</div>}
+      <div className='flex-1 space-y-0.5'>
         {label && <Label className='text-base'>{label}</Label>}
         {descr && (
           <p className={cn('text-sm text-muted-foreground')}>{descr}</p>
@@ -100,8 +104,9 @@ export default function Switch<T extends FieldValues>({
       <SwitchShadcn
         disabled={disabled || pending}
         checked={inverted ? !value : value}
-        onCheckedChange={onChange}
+        onCheckedChange={(checked) => onChange?.(inverted ? !checked : checked)}
         className='data-[state=unchecked]:bg-slate-200'
+        data-testid={dataTestId}
       />
     </div>
   );
