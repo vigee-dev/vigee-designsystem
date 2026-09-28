@@ -3,6 +3,7 @@
  * @useWhen afficher la progression d'un chargement ou d'un calcul en cours → ProgressCircle avec `text` animé en pulse | visualiser un taux d'avancement (ex: complétion de profil, score) → ProgressCircle dans un KPI ou une Card | remplacer une barre de progression quand l'espace est carré/centré → ProgressCircle avec `className` pour ajuster la taille.
  * @dontUseFor progression linéaire dans un formulaire multi-étapes → utiliser ProgressBar | afficher plusieurs métriques comparatives → utiliser RadialChart | suivi d'étapes ordonnées → utiliser Stepper.
  * @example <ProgressCircle min={0} max={200} value={120} gaugePrimaryColor="#6366f1" text="Traitement en cours..." />
+ * @example <ProgressCircle min={0} max={5} value={1} gaugePrimaryColor="#0f172a" className="h-12 w-12" strokeWidth={6} label="1/5" /> — petit anneau fin avec un libellé libre au centre
  */
 import { cn } from "../lib/utils";
 
@@ -15,9 +16,13 @@ interface Props {
   className?: string;
   text?: string;
   textClassName?: string;
+  /** Contenu du centre ; par défaut le pourcentage. */
+  label?: React.ReactNode;
+  /** Épaisseur du trait (sur 100) ; 10 par défaut. */
+  strokeWidth?: number;
 }
 
-export default function ProgressCircle({ max = 100, min = 0, value = 0, gaugePrimaryColor, gaugeSecondaryColor = "#E2E8F0", className, text, textClassName }: Props) {
+export default function ProgressCircle({ max = 100, min = 0, value = 0, gaugePrimaryColor, gaugeSecondaryColor = "#E2E8F0", className, text, textClassName, label, strokeWidth = 10 }: Props) {
   const circumference = 2 * Math.PI * 45;
   const percentPx = circumference / 100;
   const currentPercent = ((value - min) / (max - min)) * 100;
@@ -46,7 +51,7 @@ export default function ProgressCircle({ max = 100, min = 0, value = 0, gaugePri
               cx="50"
               cy="50"
               r="45"
-              strokeWidth="10"
+              strokeWidth={strokeWidth}
               strokeDashoffset="0"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -68,7 +73,7 @@ export default function ProgressCircle({ max = 100, min = 0, value = 0, gaugePri
             cx="50"
             cy="50"
             r="45"
-            strokeWidth="10"
+            strokeWidth={strokeWidth}
             strokeDashoffset="0"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -89,7 +94,7 @@ export default function ProgressCircle({ max = 100, min = 0, value = 0, gaugePri
         <span
           data-current-value={currentPercent}
           className={cn("duration-[var(--transition-length)] delay-[var(--delay)] absolute inset-0 m-auto h-fit w-fit ease-linear animate-in fade-in text-primary", textClassName)}>
-          {currentPercent.toFixed(0)} %
+          {label ?? `${currentPercent.toFixed(0)} %`}
         </span>
       </div>
       {text && <p className="text-gray-500 mt-2 animate-pulse">{text}</p>}
