@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-09-23T14:01:58.711Z",
+  "generatedAt": "2026-09-25T16:11:57.278Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -2816,7 +2816,7 @@
       ],
       "dontUseFor": [
         "navigation principale de la sidebar → utiliser AppSidebar",
-        "menu contextuel sans lien utilisateur → utiliser DropdownMenu"
+        "menu contextuel sans lien utilisateur → utiliser DropdownMenu Le menu déroulant ne porte que ses actions (profil, notifications, déconnexion) : le nom et l'e-mail sont déjà sur le bouton qui l'ouvre."
       ],
       "example": "<FooterSidebar user={{ name: \"Alice\", email: \"alice@vigee.fr\", avatar: \"/avatar.png\" }} links={[{ name: \"Profil\", icon: <UserIcon />, href: \"/profil\" }, { name: \"Déconnexion\", icon: <LogOutIcon />, onClick: () => signOut() }]} />"
     },
