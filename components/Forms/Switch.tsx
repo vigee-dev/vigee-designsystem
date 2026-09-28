@@ -66,7 +66,7 @@ export default function Switch<T extends FieldValues>({
           {icon && (
             <div className='flex flex-row items-center gap-2'>{icon}</div>
           )}
-          <div className='space-y-0.5'>
+          <div className='flex-1 space-y-0.5'>
             <FormLabel className='text-base '>
               {children ? children : label}
             </FormLabel>

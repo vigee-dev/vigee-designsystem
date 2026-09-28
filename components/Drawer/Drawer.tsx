@@ -3,6 +3,7 @@
  * @useWhen afficher un formulaire contextuel sans quitter la page → utiliser Drawer | afficher un détail ou une fiche latérale → utiliser Drawer avec direction="right" | flux en plusieurs étapes sur mobile → utiliser Drawer avec fullScreen={true} | panneau contrôlé programmatiquement (open/onOpenChange) → utiliser Drawer sans trigger
  * @dontUseFor confirmation destructive courte → utiliser ActionWithValidation | contenu segmenté en onglets dans un panneau → utiliser SheetDialog | sélection d'une valeur dans une liste → utiliser ComboBoxResponsive
  * @example <Drawer trigger={<button>Ouvrir</button>} title="Détails" description="Informations complémentaires" direction="right">{content}</Drawer>
+ * @example <Drawer open={open} onOpenChange={setOpen} title="Modifier la tâche" hideTitle>{form}</Drawer> — titre lu par les lecteurs d'écran, non affiché
  */
 'use client';
 
@@ -14,6 +15,7 @@ export function Drawer({
   children,
   trigger,
   title,
+  hideTitle = false,
   description,
   icon,
   open,
@@ -31,6 +33,8 @@ export function Drawer({
   children: React.ReactNode;
   trigger?: React.ReactNode;
   title?: React.ReactNode;
+  /** Titre lu par les lecteurs d'écran mais non affiché (tiroir épuré). */
+  hideTitle?: boolean;
   description?: string;
   icon?: React.ReactNode;
   open?: boolean;
@@ -80,7 +84,9 @@ export function Drawer({
               {cancelable && <Back where='retour' onClick={onClose} />}
               <div className='flex items-center gap-4'>
                 {icon}
-                {title || description ? (
+                {hideTitle ? (
+                  <VaulDrawer.Title className='sr-only'>{title}</VaulDrawer.Title>
+                ) : title || description ? (
                   <div className='flex justify-between w-full'>
                     <div className='flex flex-col'>
                       <VaulDrawer.Title className='font-bold text-gray-900 mt-8 text-lg'>
@@ -94,6 +100,7 @@ export function Drawer({
                   </div>
                 ) : null}
               </div>
+              {hideTitle && <div className='h-6' aria-hidden />}
               {children}
             </div>
           </div>

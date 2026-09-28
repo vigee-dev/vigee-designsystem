@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-09-28T10:13:29.452Z",
+  "generatedAt": "2026-09-28T10:35:13.321Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -757,7 +757,7 @@
         "contenu segmenté en onglets dans un panneau → utiliser SheetDialog",
         "sélection d'une valeur dans une liste → utiliser ComboBoxResponsive"
       ],
-      "example": "<Drawer trigger={<button>Ouvrir</button>} title=\"Détails\" description=\"Informations complémentaires\" direction=\"right\">{content}</Drawer>"
+      "example": "<Drawer open={open} onOpenChange={setOpen} title=\"Modifier la tâche\" hideTitle>{form}</Drawer> — titre lu par les lecteurs d'écran, non affiché"
     },
     {
       "name": "Error",
