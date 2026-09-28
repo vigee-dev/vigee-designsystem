@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-09-28T08:10:40.040Z",
+  "generatedAt": "2026-09-28T08:33:05.959Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -8753,6 +8753,7 @@
     "back": "PiArrowLeftStroke",
     "edit": "PiPencilEditBoxStroke",
     "pen": "PiPencilEditStroke",
+    "flag": "PiFlagStroke",
     "arrowLeft": "PiArrowLeftCircleStroke",
     "userAdd": "PiUserPlusStroke",
     "user": "PiUserCircleStroke",

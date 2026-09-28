@@ -46,6 +46,7 @@ import {
   PiPauseCircleStroke,
   PiPencilEditBoxStroke,
   PiPencilEditStroke,
+  PiFlagStroke,
   PiPhoneDefaultStroke,
   PiPlayCircleStroke,
   PiPlusCircleStroke,
@@ -119,6 +120,8 @@ const iconMap = {
   edit: PiPencilEditBoxStroke,
   /** Stylo seul, sans cadre : l'édition discrète d'une ligne. */
   pen: PiPencilEditStroke,
+  /** Drapeau : marquer une chose comme urgente. */
+  flag: PiFlagStroke,
   arrowLeft: PiArrowLeftCircleStroke,
   userAdd: PiUserPlusStroke,
   user: PiUserCircleStroke,
