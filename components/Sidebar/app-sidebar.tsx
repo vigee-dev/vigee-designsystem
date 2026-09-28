@@ -63,6 +63,12 @@ type MenuItem = {
    */
   notificationsSecondary?: number;
   notificationSecondaryColor?: string;
+  /**
+   * Point discret à la place du compte : la barre signale seulement qu'un
+   * geste est attendu, sans chiffre. Le nombre reste porté par `notifications`
+   * (0 = rien), la couleur par `notificationColor`.
+   */
+  notificationDot?: boolean;
   actions?: { title: string; url: string }[];
   dropdownContent?: React.ReactNode;
   hasSeparatorAfter?: boolean;
@@ -293,8 +299,24 @@ const AppSidebar = ({
                         Un second compte se pose à sa gauche : deux pastilles
                         côte à côte, chacune de sa couleur. Repliée, la barre
                         garde un point par compte. */}
-                    {((item?.notifications ?? 0) > 0 ||
-                      (item?.notificationsSecondary ?? 0) > 0) &&
+                    {item?.notificationDot &&
+                      (item?.notifications ?? 0) > 0 && (
+                        <SidebarMenuBadge
+                          className="flex items-center bg-transparent p-0"
+                          data-testid={`nav-${item.slug}-dot`}
+                        >
+                          <span
+                            className={cn(
+                              "block h-2 w-2 rounded-full",
+                              item?.notificationColor || "bg-red-400",
+                            )}
+                          />
+                        </SidebarMenuBadge>
+                      )}
+
+                    {!item?.notificationDot &&
+                      ((item?.notifications ?? 0) > 0 ||
+                        (item?.notificationsSecondary ?? 0) > 0) &&
                       (open ? (
                         <SidebarMenuBadge className="flex items-center gap-1 bg-transparent p-0">
                           {(item?.notificationsSecondary ?? 0) > 0 && (
