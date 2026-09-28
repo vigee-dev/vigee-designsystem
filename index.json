@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-09-28T07:22:36.486Z",
+  "generatedAt": "2026-09-28T07:55:25.075Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -1057,6 +1057,30 @@
       "example": "<Checkboxes form={form} name=\"categories\" label=\"Catégories\" items={[{ label: \"Sport\", value: \"sport\" }, { label: \"Culture\", value: \"culture\" }]} max={2} />"
     },
     {
+      "name": "CheckCircle",
+      "category": "Forms",
+      "importPath": "@vigee-designsystem/components/Forms/CheckCircle",
+      "exportType": "named",
+      "props": [
+        "checked: boolean",
+        "onCheckedChange: (checked: boolean) => void",
+        "size?: \"md\" | \"lg\"",
+        "disabled?: boolean",
+        "aria-label?: string",
+        "data-testid?: string"
+      ],
+      "formIntegration": false,
+      "description": "Rond à cocher : cercle fin vide, plein et coché une fois fait. Pour marquer une chose comme faite d'un seul clic, sans menu.",
+      "useWhen": [
+        "cocher / décocher une tâche ou un item de liste en action immédiate → utiliser CheckCircle"
+      ],
+      "dontUseFor": [
+        "case dans un formulaire react-hook-form → utiliser Checkbox",
+        "choix entre plusieurs statuts → utiliser un Popover de statuts"
+      ],
+      "example": "<CheckCircle checked={done} onCheckedChange={toggle} aria-label=\"Marquer comme faite\" data-testid=\"today-task-check-btn\" />"
+    },
+    {
       "name": "ComboBox",
       "category": "Forms",
       "importPath": "@vigee-designsystem/components/Forms/ComboBox",
@@ -1429,6 +1453,32 @@
         "choix discret parmi peu d'options → utiliser SegmentedToggle"
       ],
       "example": "<RatingSlider value={note} onChange={setNote} />"
+    },
+    {
+      "name": "resolveInlineCommit",
+      "category": "Forms",
+      "importPath": "@vigee-designsystem/components/Forms/InlineText",
+      "exportType": "named",
+      "props": [
+        "value: string",
+        "onCommit: (next: string) => void",
+        "placeholder?: string",
+        "disabled?: boolean",
+        "maxLength?: number",
+        "className?: string",
+        "aria-label?: string",
+        "data-testid?: string"
+      ],
+      "formIntegration": false,
+      "description": "Texte éditable en place, sans cadre : se lit comme un libellé, se modifie en tapant dedans. Entrée ou perte de focus enregistre, Échap annule.",
+      "useWhen": [
+        "renommer un élément directement dans une liste ou une carte (titre de tâche, nom d'item) sans ouvrir de formulaire → utiliser InlineText"
+      ],
+      "dontUseFor": [
+        "champ de formulaire avec label et validation → utiliser Forms/Input",
+        "texte multi-lignes → utiliser Forms/TextArea"
+      ],
+      "example": "<InlineText value={task.title} onCommit={(title) => rename(title)} data-testid=\"today-task-title-input\" />"
     },
     {
       "name": "SearchSelectAsync",
