@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-09-28T07:55:25.075Z",
+  "generatedAt": "2026-09-28T08:10:40.040Z",
   "components": [
     {
       "name": "AlertInfo",
@@ -148,6 +148,7 @@
         "tooltip?: string",
         "big?: boolean",
         "classNameIcon?: string",
+        "subtle?: boolean",
         "data-testid?: string"
       ],
       "formIntegration": false,
@@ -163,7 +164,7 @@
         "ajout d'entité dédié → utiliser ButtonAdd",
         "soumission de formulaire stylisée → utiliser ButtonSubmit"
       ],
-      "example": "<Button icon=\"edit\" onClick={handleEdit} tooltip=\"Modifier\" />"
+      "example": "<Button icon=\"pen\" subtle tooltip=\"Modifier\" /> — geste discret dans une ligne de liste (petite icône grise)"
     },
     {
       "name": "ButtonAdd",
@@ -1465,6 +1466,7 @@
         "placeholder?: string",
         "disabled?: boolean",
         "maxLength?: number",
+        "fitContent?: boolean",
         "className?: string",
         "aria-label?: string",
         "data-testid?: string"
@@ -1478,7 +1480,7 @@
         "champ de formulaire avec label et validation → utiliser Forms/Input",
         "texte multi-lignes → utiliser Forms/TextArea"
       ],
-      "example": "<InlineText value={task.title} onCommit={(title) => rename(title)} data-testid=\"today-task-title-input\" />"
+      "example": "<InlineText fitContent value={task.title} onCommit={rename} /> — le champ prend la largeur de son texte, pour coller un repère juste après le nom"
     },
     {
       "name": "SearchSelectAsync",
@@ -8750,6 +8752,7 @@
     "annotationStar": "PiAnnotationStarStroke",
     "back": "PiArrowLeftStroke",
     "edit": "PiPencilEditBoxStroke",
+    "pen": "PiPencilEditStroke",
     "arrowLeft": "PiArrowLeftCircleStroke",
     "userAdd": "PiUserPlusStroke",
     "user": "PiUserCircleStroke",

@@ -3,6 +3,7 @@
  * @useWhen action iconique sans libellé dans une interface (ex: éditer, supprimer, télécharger) → `icon` seul | navigation vers une page → `href` | état de chargement async → `pending={true}` | action avec label uniquement pour validation finale → `children` + `type="submit"`
  * @dontUseFor validation de formulaire avec logique de confirmation → utiliser ActionWithValidation | ajout d'entité dédié → utiliser ButtonAdd | soumission de formulaire stylisée → utiliser ButtonSubmit
  * @example <Button icon="edit" onClick={handleEdit} tooltip="Modifier" />
+ * @example <Button icon="pen" subtle tooltip="Modifier" /> — geste discret dans une ligne de liste (petite icône grise)
  */
 import { Loader2, XIcon } from "lucide-react";
 import Link from "next/link";
@@ -44,6 +45,7 @@ import {
   PiOpenaiStroke,
   PiPauseCircleStroke,
   PiPencilEditBoxStroke,
+  PiPencilEditStroke,
   PiPhoneDefaultStroke,
   PiPlayCircleStroke,
   PiPlusCircleStroke,
@@ -92,8 +94,15 @@ export interface ButtonProps extends ShadButtonProps {
   tooltip?: string;
   big?: boolean;
   classNameIcon?: string;
+  /** Icône seule, petite et grise, sans animation : un geste discret dans une ligne. */
+  subtle?: boolean;
   "data-testid"?: string;
 }
+
+/** Variante `subtle` : petite icône grise, sans pulsation ni agrandissement. */
+const SUBTLE_BUTTON = "h-7 w-7 px-0 py-0 rounded-lg justify-center items-center";
+const SUBTLE_ICON =
+  "w-3.5 h-3.5 text-slate-400 group-hover:text-slate-600 group-hover:scale-100 md:group-hover:animate-none";
 
 const iconMap = {
   send: PiSendPlaneHorizontalStroke,
@@ -108,6 +117,8 @@ const iconMap = {
   annotationStar: PiAnnotationStarStroke,
   back: PiArrowLeftStroke,
   edit: PiPencilEditBoxStroke,
+  /** Stylo seul, sans cadre : l'édition discrète d'une ligne. */
+  pen: PiPencilEditStroke,
   arrowLeft: PiArrowLeftCircleStroke,
   userAdd: PiUserPlusStroke,
   user: PiUserCircleStroke,
@@ -251,6 +262,7 @@ interface ButtonComponentProps extends ShadButtonProps {
   big?: boolean;
   classNameIcon?: string;
   pending?: boolean;
+  subtle?: boolean;
   "data-testid"?: string;
 }
 
@@ -268,6 +280,7 @@ const ButtonComponent = ({
   big,
   classNameIcon,
   pending,
+  subtle,
   "data-testid": dataTestId,
   ...props
 }: ButtonComponentProps) => {
@@ -295,7 +308,8 @@ const ButtonComponent = ({
                 !children && "group-hover:text-primary",
               )
             : "hover:cursor-not-allowed ",
-          pending && children && "bg-transparent text-gray-800"
+          pending && children && "bg-transparent text-gray-800",
+          subtle && !children && SUBTLE_BUTTON
         )}
         data-testid={dataTestId}
       >
@@ -314,6 +328,7 @@ const ButtonComponent = ({
                 !disabled &&
                 "group-hover:text-primary group-hover:scale-105",
               "bg-transparent",
+              subtle && !children && SUBTLE_ICON,
               classNameIcon
             )}
           />
@@ -337,6 +352,7 @@ const ButtonComponent = ({
                 !disabled &&
                 "group-hover:text-primary group-hover:scale-105",
               "bg-transparent",
+              subtle && !children && SUBTLE_ICON,
               classNameIcon
             )}
           />
@@ -364,7 +380,8 @@ const ButtonComponent = ({
               !children && "group-hover:text-primary",
             )
           : "hover:cursor-not-allowed",
-        pending && children && "bg-transparent text-gray-800"
+        pending && children && "bg-transparent text-gray-800",
+        subtle && !children && SUBTLE_BUTTON
       )}
       data-testid={dataTestId}
     >
@@ -384,6 +401,7 @@ const ButtonComponent = ({
               "group-hover:text-primary group-hover:scale-105",
             className,
             "bg-transparent",
+            subtle && !children && SUBTLE_ICON,
             classNameIcon
           )}
         />
@@ -407,6 +425,7 @@ const ButtonComponent = ({
               !disabled &&
               "group-hover:text-primary group-hover:scale-105",
             "bg-transparent",
+            subtle && !children && SUBTLE_ICON,
             classNameIcon
           )}
         />
