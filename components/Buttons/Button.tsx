@@ -402,7 +402,11 @@ const ButtonComponent = ({
             !children &&
               !disabled &&
               "group-hover:text-primary group-hover:scale-105",
-            className,
+            // La classe du bouton ne descend sur l'icône que pour un bouton
+            // icône seule. Avec du texte, elle portait la mise en page du
+            // bouton (w-full, mt-3…) : l'icône s'étirait sur toute la largeur
+            // et repoussait le libellé contre le bord droit.
+            !children && className,
             "bg-transparent",
             subtle && !children && SUBTLE_ICON,
             classNameIcon
