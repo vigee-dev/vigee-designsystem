@@ -14,7 +14,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground",
+        // Pas de `hover:text-*` ici : un bouton aux couleurs personnalisées
+        // (fond blanc, texte violet…) gardait ce texte blanc forcé au survol
+        // et devenait illisible (30/09). Le texte blanc de base suffit.
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
           "bg-destructive text-destructive-foreground hover:opacity-90",
         outline:
