@@ -299,18 +299,33 @@ const AppSidebar = ({
                         Un second compte se pose à sa gauche : deux pastilles
                         côte à côte, chacune de sa couleur. Repliée, la barre
                         garde un point par compte. */}
+                    {/* Mode point : un point par compte non nul, côte à côte —
+                        le second compte (ex. cadrage, orange) à gauche du
+                        premier (ex. développement, bleu). */}
                     {item?.notificationDot &&
-                      (item?.notifications ?? 0) > 0 && (
+                      ((item?.notifications ?? 0) > 0 ||
+                        (item?.notificationsSecondary ?? 0) > 0) && (
                         <SidebarMenuBadge
-                          className="flex items-center bg-transparent p-0"
+                          className="flex items-center gap-1 bg-transparent p-0"
                           data-testid={`nav-${item.slug}-dot`}
                         >
-                          <span
-                            className={cn(
-                              "block h-2 w-2 rounded-full",
-                              item?.notificationColor || "bg-red-400",
-                            )}
-                          />
+                          {(item?.notificationsSecondary ?? 0) > 0 && (
+                            <span
+                              className={cn(
+                                "block h-2 w-2 rounded-full",
+                                item?.notificationSecondaryColor || "bg-violet-500",
+                              )}
+                              data-testid={`nav-${item.slug}-dot-secondary`}
+                            />
+                          )}
+                          {(item?.notifications ?? 0) > 0 && (
+                            <span
+                              className={cn(
+                                "block h-2 w-2 rounded-full",
+                                item?.notificationColor || "bg-red-400",
+                              )}
+                            />
+                          )}
                         </SidebarMenuBadge>
                       )}
 
