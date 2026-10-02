@@ -45,6 +45,8 @@ type SwitcherItem = {
   isStudy?: boolean;
   /** Compteur affiché en pastille à droite de l'item (ex. mails à traiter). */
   badge?: number;
+  /** Petit repère juste après le nom (ex. le mini logo d'un abonnement). */
+  nameBadge?: React.ReactNode;
   counts?: {
     cadrageCount: number;
     devisCount: number;
@@ -277,8 +279,13 @@ export function SwitcherSidebar({
                     >
                       <div className="flex items-center gap-2 flex-1 min-w-0">
                         <div className="flex flex-col min-w-0 flex-1">
-                          <span className="font-medium truncate">
-                            {item.name}
+                          <span className="flex min-w-0 items-center gap-1.5">
+                            <span className="font-medium truncate">
+                              {item.name}
+                            </span>
+                            {item.nameBadge ? (
+                              <span className="flex shrink-0 items-center">{item.nameBadge}</span>
+                            ) : null}
                           </span>
                           {item.subtitle && (
                             <span className="text-xs text-muted-foreground truncate">
