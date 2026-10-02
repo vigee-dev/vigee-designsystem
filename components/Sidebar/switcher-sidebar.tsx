@@ -181,11 +181,20 @@ export function SwitcherSidebar({
                       : "flex items-center justify-center [&>svg]:size-5"
                   }
                 >
-                  {activeItem?.iconFill || activeItem?.icon}
+                  {/* Ouvert sur un PROJET : le nom suffit, sans icône de
+                      valise — son repère (ex. point Vigee One) suit le nom.
+                      Replié, l'icône reste le seul signe visible. */}
+                  {!(open && activeItem?.type === "project") &&
+                    (activeItem?.iconFill || activeItem?.icon)}
                   {open && (
                     <div className="flex min-w-0 flex-1 flex-col text-left">
-                      <span className="truncate text-sm font-medium text-gray-500">
-                        {activeItem?.name || "Sélectionner"}
+                      <span className="flex min-w-0 items-center gap-1.5">
+                        <span className="truncate text-sm font-medium text-gray-500">
+                          {activeItem?.name || "Sélectionner"}
+                        </span>
+                        {activeItem?.nameBadge ? (
+                          <span className="flex shrink-0 items-center">{activeItem.nameBadge}</span>
+                        ) : null}
                       </span>
                       {activeItem?.subtitle && (
                         <span className="truncate text-xs text-slate-400">
