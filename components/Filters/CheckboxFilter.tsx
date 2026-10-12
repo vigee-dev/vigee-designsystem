@@ -28,8 +28,9 @@ export const CheckboxFilter = ({
 
   const checked = value === 'true' || (value == null && defaultChecked);
 
-  const handleCheckedChange = (checked: boolean) => {
-    setValue(checked ? 'true' : 'false');
+  // CheckedState = boolean | 'indeterminate' : typage compatible avec toutes les versions de radix.
+  const handleCheckedChange = (checked: CheckboxPrimitive.CheckedState) => {
+    setValue(checked === true ? 'true' : 'false');
   };
 
   return (
