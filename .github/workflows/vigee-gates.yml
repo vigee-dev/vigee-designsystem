@@ -1,0 +1,11 @@
+# Gates Vigee partagées (tsc + tests unitaires + lint strict des fichiers modifiés).
+# Définies une fois dans vigee-flow ; ce fichier ne fait qu'appeler le workflow réutilisable.
+name: Vigee Gates
+on:
+  pull_request:
+  push:
+    branches: [main, dev]
+jobs:
+  gates:
+    uses: vigee-dev/vigee-flow/.github/workflows/vigee-gates.yml@main
+    secrets: inherit
