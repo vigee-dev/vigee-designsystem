@@ -1,6 +1,6 @@
 /**
  * @description Bouton de retour arrière avec lien texte (desktop) et bouton flottant chevron (mobile), adaptatif selon le contexte de navigation.
- * @useWhen naviguer vers une page précise connue → utiliser avec `href` et `where` | revenir à la page précédente dans l'historique → utiliser avec `back={true}` | action de retour personnalisée → utiliser avec `onClick` et `where`
+ * @useWhen naviguer vers une page précise connue → utiliser avec `href` et `where` | revenir à la page précédente dans l'historique → utiliser avec `back={true}` | action de retour personnalisée → utiliser avec `onClick` et `where` | fil d'Ariane avec la page courante → utiliser `current`
  * @dontUseFor action principale d'une page → utiliser Button | soumission ou confirmation → utiliser ButtonSubmit
  * @example <Back href="/projets" where="Projets" />
  */
@@ -19,6 +19,7 @@ interface BackProps {
   linkBtn?: boolean;
   className?: string;
   back?: boolean;
+  current?: string;
 }
 
 const Back: React.FC<BackProps> = ({
@@ -27,13 +28,18 @@ const Back: React.FC<BackProps> = ({
   onClick,
   className,
   back = false,
+  current,
 }) => {
   const router = useRouter();
 
   return (
     <>
       <div
-        className={cn(" flex-grid text-slate-400 hidden md:flex", className)}
+        data-testid="nav-back"
+        className={cn(
+          " flex-grid text-slate-400 hidden md:flex items-center",
+          className,
+        )}
       >
         {href ? (
           <Link
@@ -51,6 +57,12 @@ const Back: React.FC<BackProps> = ({
             <PiChevronLeftStroke />
             <p className="mx-1 text-sm "> {where}</p>
           </div>
+        )}
+        {current && (
+          <>
+            <span className="text-sm" aria-hidden="true">/</span>
+            <p className="mx-1 text-sm" aria-current="page">{current}</p>
+          </>
         )}
       </div>
 
