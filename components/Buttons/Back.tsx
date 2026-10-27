@@ -60,8 +60,8 @@ const Back: React.FC<BackProps> = ({
         )}
         {current && (
           <>
-            <span className="text-sm">/</span>
-            <p className="mx-1 text-sm">{current}</p>
+            <span className="text-sm" aria-hidden="true">/</span>
+            <p className="mx-1 text-sm" aria-current="page">{current}</p>
           </>
         )}
       </div>
