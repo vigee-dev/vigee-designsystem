@@ -121,7 +121,7 @@
         "naviguer vers une page précise connue → utiliser avec `href` et `where`",
         "revenir à la page précédente dans l'historique → utiliser avec `back={true}`",
         "action de retour personnalisée → utiliser avec `onClick` et `where`",
-        "fil d'Ariane avec la page courante → ajouter `current`"
+        "fil d'Ariane avec la page courante → utiliser `current`"
       ],
       "dontUseFor": [
         "action principale d'une page → utiliser Button",
