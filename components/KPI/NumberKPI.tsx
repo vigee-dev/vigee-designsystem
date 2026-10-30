@@ -24,6 +24,7 @@ export interface StatItem {
   ecartType?: number;
   stat2?: string;
   stat2ClassName?: string;
+  stat2TestId?: string;
 }
 
 interface NumberKPIProps {
@@ -179,6 +180,7 @@ const NumberKPI = ({
 
                 {item.stat2 != null && (
                   <div
+                    data-testid={item.stat2TestId}
                     className={cn(
                       `flex items-center text-xs font-medium gap-2 whitespace-nowrap`,
                       item.stat2ClassName ?? cn("text-primary", item.color)
