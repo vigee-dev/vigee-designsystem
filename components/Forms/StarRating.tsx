@@ -1,3 +1,9 @@
+/**
+ * @description Notation sur 5 étoiles contrôlée par le parent (`value` / `onChange`), avec le libellé de la note sous les étoiles ; recliquer la note choisie la remet à zéro.
+ * @useWhen recueillir une note de satisfaction ou d'évaluation (recette, avis client) → utiliser avec `value` + `onChange` | afficher une note déjà donnée, sans interaction → utiliser `readOnly` | bloquer la saisie pendant un enregistrement → utiliser `disabled`
+ * @dontUseFor note sur une échelle continue ou sur plus de 5 → utiliser RatingSlider | choix oui / non → utiliser Switch | champ branché sur react-hook-form par `form` + `name` → ce composant ne l'est pas : garder la note dans un état et la reporter dans le formulaire
+ * @example <StarRating value={rating} onChange={setRating} placeholder="Votre avis" testIdPrefix="review" />
+ */
 "use client";
 
 import { useState } from "react";

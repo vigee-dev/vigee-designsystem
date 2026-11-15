@@ -1,3 +1,9 @@
+/**
+ * @description Bloc d'attente « en cours de développement » : illustration, titre, sous-titre, barre de progression (animée, ou réglée par `progress`) et date estimée de livraison.
+ * @useWhen annoncer une section ou une page pas encore livrée → utiliser avec `title`, `subtitle` et `eta` | montrer l'avancement d'un travail dont on connaît le pourcentage → passer `progress` (0 à 100) | ajouter une action sous le bloc → passer des `children`
+ * @dontUseFor écran ou liste vide faute de données → utiliser EmptyIllustration | chargement de données → utiliser les Skeletons | erreur de chargement → utiliser Error
+ * @example <WorkInProgress title="Export comptable" subtitle="Disponible très prochainement." eta="Décembre 2026" />
+ */
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";

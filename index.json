@@ -1,50 +1,630 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-10-30T17:02:52.470Z",
+  "generatedAt": "2026-11-15T19:22:39.839Z",
+  "readme": "Design system Vigee. Lis `rules`, puis les composants de `essentials` : ce sont les premières fiches de `components` (essential: true). Chaque fiche dit à quoi sert le composant (description), quand l'utiliser (useWhen), quand ne pas l'utiliser (dontUseFor), ses propriétés (props : « nom?: type = défaut ») et un exemple. Avant de créer un élément d'interface, cherche-le ici par son nom ou par son usage ; s'il n'existe pas, dis-le dans le ticket plutôt que d'en créer un à côté. `patterns` donne les assemblages courants (formulaire, dialogue, tableau). Les icônes sont à la fin : `iconMap` pour les raccourcis du Button, `icons.names` pour le reste.",
+  "rules": [
+    "UTILISE UNIQUEMENT les composants listés dans cet index — ne recrée jamais un composant existant.",
+    "Pour les formulaires, utilise TOUJOURS le pattern react-hook-form + zodResolver + composants Forms/ (Input, Select, Switch, etc.).",
+    "NE PAS utiliser ui/input, ui/select, ui/checkbox directement — utiliser les wrappers Forms/Input, Forms/Select, Forms/Checkboxes.",
+    "Les composants ui/ (dialog, sheet, accordion, etc.) sont des primitives Radix/shadcn : utilise-les directement pour le layout.",
+    "Pour les icônes, utiliser le shortcut iconMap du Button (icon='add') quand possible, sinon importer depuis PikaIcons.",
+    "Respecter les import paths exacts : @vigee-designsystem/components/{Category}/{Component} ou @vigee-designsystem/icons/PikaIcons.",
+    "Ne jamais importer depuis des chemins relatifs vers le design system — toujours utiliser l'alias @vigee-designsystem/."
+  ],
+  "essentials": [
+    "@vigee-designsystem/components/Buttons/Button",
+    "@vigee-designsystem/components/Forms/Input",
+    "@vigee-designsystem/components/Forms/Select",
+    "@vigee-designsystem/components/Forms/TextArea",
+    "@vigee-designsystem/components/Forms/Switch",
+    "@vigee-designsystem/components/Forms/Checkboxes",
+    "@vigee-designsystem/components/Forms/DatePicker",
+    "@vigee-designsystem/components/Forms/Toggles",
+    "@vigee-designsystem/components/Forms/DrawerMobile",
+    "@vigee-designsystem/components/ui/form",
+    "@vigee-designsystem/components/Headers/PageHeader",
+    "@vigee-designsystem/components/Container/Container",
+    "@vigee-designsystem/components/Typography/Typography",
+    "@vigee-designsystem/components/Illustration/EmptyIllustration",
+    "@vigee-designsystem/components/Skeletons/Skeletons",
+    "@vigee-designsystem/components/Errors/Error",
+    "@vigee-designsystem/components/Avatar/Avatar",
+    "@vigee-designsystem/components/ui/badge",
+    "@vigee-designsystem/components/ui/dialog",
+    "@vigee-designsystem/components/Drawer/Drawer",
+    "@vigee-designsystem/components/ui/popover",
+    "@vigee-designsystem/components/ui/tooltip",
+    "@vigee-designsystem/components/ui/separator",
+    "@vigee-designsystem/components/Tabs/TabMobile",
+    "@vigee-designsystem/components/Tables/Pagination",
+    "@vigee-designsystem/components/Buttons/DeleteAction"
+  ],
+  "patterns": {
+    "form": "import { useForm } from 'react-hook-form';\nimport { zodResolver } from '@hookform/resolvers/zod';\nimport { Form } from '@vigee-designsystem/components/ui/form';\nimport Input from '@vigee-designsystem/components/Forms/Input';\nimport Select from '@vigee-designsystem/components/Forms/Select';\nimport Switch from '@vigee-designsystem/components/Forms/Switch';\n\nconst form = useForm({ resolver: zodResolver(schema), defaultValues: {...} });\n<Form {...form}><form onSubmit={form.handleSubmit(onSubmit)}>\n  <Input form={form} name=\"field\" label=\"Label\" />\n</form></Form>",
+    "dialog": "import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@vigee-designsystem/components/ui/dialog';\n\n<Dialog><DialogTrigger asChild><Button>Open</Button></DialogTrigger>\n<DialogContent><DialogHeader><DialogTitle>Title</DialogTitle></DialogHeader>\n  {/* content */}\n<DialogFooter><Button>Confirm</Button></DialogFooter>\n</DialogContent></Dialog>",
+    "table": "import { DataTable } from '@vigee-designsystem/components/Tables/DataTable';\nimport { ColumnDef } from '@tanstack/react-table';\n\nconst columns: ColumnDef<T>[] = [{ accessorKey: 'name', header: 'Nom' }];\n<DataTable columns={columns} data={data} />",
+    "toast": "import { toast } from 'sonner';\n\ntoast.success('Message de succès');\ntoast.error('Message d\\'erreur');",
+    "dropdown": "import { DropdownMenu } from '@vigee-designsystem/components/Menus/DropdownMenu';\n\n<DropdownMenu items={[{ label: 'Edit', onClick: handleEdit }]} />",
+    "sheet": "import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@vigee-designsystem/components/ui/sheet';\n\n<Sheet><SheetTrigger asChild><Button>Open</Button></SheetTrigger>\n<SheetContent><SheetHeader><SheetTitle>Title</SheetTitle></SheetHeader>\n  {/* content */}\n</SheetContent></Sheet>"
+  },
   "components": [
     {
-      "name": "AlertInfo",
-      "category": "Alerts",
-      "importPath": "@vigee-designsystem/components/Alerts/AlertInfo",
+      "name": "Button",
+      "category": "Buttons",
+      "importPath": "@vigee-designsystem/components/Buttons/Button",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "children?: ReactNode",
+        "onClick?: (e: MouseEvent) => void",
+        "onPointerDown?: (e: MouseEvent) => void",
+        "type?: \"button\" | \"submit\" | \"reset\" = \"button\"",
+        "disabled?: boolean",
+        "href?: string",
+        "className?: string",
+        "pending?: boolean",
+        "variant?: \"default\" | \"destructive\" | \"outline\" | \"secondary\" | \"ghost\" | \"link\"",
+        "icon?: keyof typeof iconMap",
+        "iconLeft?: keyof typeof iconMap",
+        "iconComponent?: ReactNode",
+        "tooltip?: string",
+        "big?: boolean",
+        "classNameIcon?: string",
+        "subtle?: boolean",
+        "data-testid?: string"
+      ],
       "formIntegration": false,
-      "description": "Bandeau d'alerte contextuel avec icône, titre, description optionnelle et lien externe, déclinable en 7 niveaux sémantiques.",
+      "description": "Bouton polyvalent Vigee avec icônes Pika intégrées, états pending/disabled, navigation href et tooltip optionnel.",
       "useWhen": [
-        "confirmer une action réussie (type=\"success\")",
-        "signaler une erreur ou un blocage (type=\"destructive\")",
-        "avertir l'utilisateur d'un risque (type=\"warning\")",
-        "afficher une info contextuelle dans une page ou un formulaire (type=\"informative\")"
+        "action iconique sans libellé dans une interface (ex: éditer, supprimer, télécharger) → `icon` seul",
+        "navigation vers une page → `href`",
+        "état de chargement async → `pending={true}`",
+        "action avec label uniquement pour validation finale → `children` + `type=\"submit\"`"
       ],
       "dontUseFor": [
-        "retours de validation champ par champ → utiliser Form",
-        "messages éphémères/toasts → utiliser Toaster"
+        "validation de formulaire avec logique de confirmation → utiliser ActionWithValidation",
+        "ajout d'entité dédié → utiliser ButtonAdd",
+        "soumission de formulaire stylisée → utiliser ButtonSubmit"
       ],
-      "example": "<AlertInfo type=\"warning\" title=\"Données non sauvegardées\" description=\"Vos modifications seront perdues si vous quittez la page.\" />"
+      "example": "<Button icon=\"pen\" subtle tooltip=\"Modifier\" /> — geste discret dans une ligne de liste (petite icône grise)",
+      "essential": true
     },
     {
-      "name": "FadeInOut",
-      "category": "Animation",
-      "importPath": "@vigee-designsystem/components/Animation/FadeInOut",
+      "name": "Input",
+      "category": "Forms",
+      "importPath": "@vigee-designsystem/components/Forms/Input",
+      "exportType": "default",
+      "props": [
+        "form?: UseFormReturn<T>",
+        "label?: string",
+        "placeholder?: string",
+        "type?: string = \"text\"",
+        "required?: boolean = false",
+        "requiredFields?: boolean",
+        "name?: Path<T>",
+        "descr?: string",
+        "className?: string",
+        "disabled?: boolean",
+        "id?: string",
+        "min?: number | string",
+        "max?: number | string",
+        "step?: number",
+        "helpComponent?: ReactNode",
+        "onChange?: (e: ChangeEvent) => void",
+        "value?: string",
+        "minimalist?: boolean",
+        "maxLength?: number",
+        "link?: string | null",
+        "white?: boolean",
+        "autoFocus?: boolean",
+        "data-testid?: string"
+      ],
+      "formIntegration": true,
+      "description": "Input texte intégré react-hook-form pour formulaires Vigee, avec label, validation, compteur de caractères et lien externe optionnel.",
+      "useWhen": [
+        "formulaire avec `react-hook-form` → utiliser avec `form` + `name`",
+        "champ texte/email/number/password dans un `Form`",
+        "affichage d'aide contextuelle → utiliser `helpComponent`",
+        "input standalone sans form → utiliser sans `form` ni `name`, avec `value` + `onChange`"
+      ],
+      "dontUseFor": [
+        "sélection dans une liste → utiliser Select",
+        "recherche avec suggestions → utiliser ComboBox",
+        "saisie longue multi-lignes → utiliser TextArea"
+      ],
+      "example": "<Input form={form} name=\"email\" label=\"Email\" placeholder=\"john@example.com\" type=\"email\" required />",
+      "essential": true
+    },
+    {
+      "name": "Select",
+      "category": "Forms",
+      "importPath": "@vigee-designsystem/components/Forms/Select",
+      "exportType": "default",
+      "props": [
+        "form?: UseFormReturn<T>",
+        "label?: string",
+        "sublabel?: string",
+        "placeholder?: string",
+        "required?: boolean = true",
+        "name?: Path<T>",
+        "descr?: string",
+        "children?: ReactNode",
+        "className?: string",
+        "disabled?: boolean",
+        "onChange?: (value: string) => void",
+        "value?: string",
+        "helpComponent?: ReactNode",
+        "isBoolean?: boolean = false",
+        "options?: { label: string; value: string; icon?: ReactNode; color?: string; disabled?: boolean; }[]",
+        "variant?: \"default\" | \"outlined\" = \"default\"",
+        "data-testid?: string"
+      ],
+      "formIntegration": true,
+      "description": "Select déroulant intégré react-hook-form (ou standalone) avec label, aide contextuelle HoverCard et support booléen.",
+      "useWhen": [
+        "champ de sélection unique dans un formulaire RHF avec validation → utiliser avec `form` + `name` + `options`",
+        "sélection standalone sans formulaire → utiliser avec `value` + `onChange` + `options`",
+        "valeur booléenne stockée comme string → utiliser avec `isBoolean={true}`",
+        "option d'aide contextuelle nécessaire → utiliser avec `helpComponent`"
+      ],
+      "dontUseFor": [
+        "sélection multiple → utiliser MultiSelect",
+        "recherche dans une longue liste → utiliser ComboBox",
+        "filtres URL sans formulaire → utiliser SelectFilter"
+      ],
+      "example": "<Select form={form} name=\"status\" label=\"Statut\" options={[{ label: \"Actif\", value: \"active\" }, { label: \"Inactif\", value: \"inactive\" }]} />",
+      "essential": true
+    },
+    {
+      "name": "TextArea",
+      "category": "Forms",
+      "importPath": "@vigee-designsystem/components/Forms/TextArea",
+      "exportType": "default",
+      "props": [
+        "form?: UseFormReturn<T>",
+        "id?: string",
+        "name: Path<T>",
+        "label?: string",
+        "required?: boolean",
+        "placeholder?: string",
+        "count?: boolean",
+        "max?: number",
+        "descr?: string",
+        "defaultValue?: string",
+        "className?: string",
+        "minHeight?: string",
+        "disabled?: boolean",
+        "onChange?: (e: ChangeEvent) => void",
+        "onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void",
+        "helpComponent?: ReactNode",
+        "rows?: number = 3",
+        "white?: boolean",
+        "fullWidth?: boolean",
+        "rezizable?: boolean",
+        "data-testid?: string"
+      ],
+      "formIntegration": true,
+      "description": "Textarea multi-lignes intégré react-hook-form avec label, compteur de caractères, aide au survol et validation.",
+      "useWhen": [
+        "champ de saisie longue (notes, description, commentaire) dans un formulaire react-hook-form Vigee",
+        "besoin d'un compteur de caractères avec limite (`max`)",
+        "affichage d'une aide contextuelle via `helpComponent`",
+        "textarea redimensionnable (`rezizable`) dans un formulaire structuré"
+      ],
+      "dontUseFor": [
+        "saisie courte sur une seule ligne → utiliser Input",
+        "saisie de notes structurées avec contexte métier → utiliser Notes"
+      ],
+      "example": "<TextArea form={form} name=\"description\" label=\"Description\" placeholder=\"Décrivez le projet...\" rows={5} max={500} required />",
+      "essential": true
+    },
+    {
+      "name": "Switch",
+      "category": "Forms",
+      "importPath": "@vigee-designsystem/components/Forms/Switch",
+      "exportType": "default",
+      "props": [
+        "form?: UseFormReturn<T>",
+        "label?: string",
+        "placeholder?: string",
+        "required?: boolean",
+        "name?: Path<T>",
+        "descr?: string",
+        "onChange?: (value: boolean) => void",
+        "value?: boolean",
+        "className?: string",
+        "children?: ReactNode",
+        "disabled?: boolean = false",
+        "inverted?: boolean = false",
+        "icon?: ReactNode",
+        "pending?: boolean = false",
+        "data-testid?: string"
+      ],
+      "formIntegration": true,
+      "description": "Toggle on/off intégré react-hook-form ou contrôlé manuellement, affiché dans un encadré arrondi avec label, description et icône optionnelle.",
+      "useWhen": [
+        "activer/désactiver une option dans un formulaire react-hook-form → utiliser avec `form` + `name`",
+        "toggle contrôlé hors formulaire → utiliser avec `value` + `onChange`",
+        "logique inversée (ex: \"désactiver les notifications\") → utiliser avec `inverted`",
+        "état en attente de réponse serveur → utiliser avec `pending`"
+      ],
+      "dontUseFor": [
+        "sélection parmi plusieurs options exclusives → utiliser Select",
+        "activation d'une option parmi une liste de choix booléens groupés → utiliser Toggles",
+        "case à cocher dans un formulaire → utiliser Checkboxes"
+      ],
+      "example": "<Switch form={form} name=\"isActive\" label=\"Activer le service\" descr=\"Le service sera disponible immédiatement.\" />",
+      "essential": true
+    },
+    {
+      "name": "Checkboxes",
+      "category": "Forms",
+      "importPath": "@vigee-designsystem/components/Forms/Checkboxes",
+      "exportType": "default",
+      "props": [
+        "form: UseFormReturn<T>",
+        "name: Path<T>",
+        "label?: string",
+        "items: CheckboxItem[]",
+        "max?: number"
+      ],
+      "formIntegration": true,
+      "description": "Groupe de cases à cocher multi-sélection intégré react-hook-form, avec limite optionnelle de sélections.",
+      "useWhen": [
+        "Sélectionner plusieurs options dans un formulaire RHF (ex: préférences, catégories) → utiliser Checkboxes",
+        "Limiter le nombre de choix possibles (ex: \"3 compétences max\") → utiliser Checkboxes avec `max`",
+        "Choix multiples sur une liste courte et fixe → utiliser Checkboxes."
+      ],
+      "dontUseFor": [
+        "Sélection unique parmi plusieurs options → utiliser Select ou Toggles",
+        "Liste dynamique/recherchable → utiliser ComboBox",
+        "Sélection booléenne simple (on/off) → utiliser Switch."
+      ],
+      "example": "<Checkboxes form={form} name=\"categories\" label=\"Catégories\" items={[{ label: \"Sport\", value: \"sport\" }, { label: \"Culture\", value: \"culture\" }]} max={2} />",
+      "essential": true
+    },
+    {
+      "name": "DatePicker",
+      "category": "Forms",
+      "importPath": "@vigee-designsystem/components/Forms/DatePicker",
+      "exportType": "default",
+      "props": [
+        "label?: string",
+        "form: UseFormReturn<T>",
+        "name: Path<T>",
+        "className?: string",
+        "starting_date?: Date | null",
+        "ending_date?: Date | null",
+        "disabled?: boolean",
+        "disabledKeys?: boolean",
+        "returnString?: boolean",
+        "years?: boolean",
+        "defaultValue?: string",
+        "required?: boolean",
+        "classNameInput?: string",
+        "classNameButton?: string"
+      ],
+      "formIntegration": true,
+      "description": "Sélecteur de date intégré react-hook-form avec saisie clavier (DD/MM/YYYY) ou calendrier popover, supportant des bornes min/max.",
+      "useWhen": [
+        "champ de date dans un formulaire react-hook-form avec validation",
+        "besoin de restreindre la plage de dates sélectionnables via `starting_date` / `ending_date`",
+        "retour de valeur en string ISO (`returnString`) ou en objet Date selon le backend",
+        "saisie clavier désactivée au profit d'un bouton calendrier (`disabledKeys`)"
+      ],
+      "dontUseFor": [
+        "plage de deux dates (début + fin) → utiliser DatePickerRange",
+        "filtre de date hors formulaire → utiliser DatePickerFilter",
+        "présélection de périodes courantes → utiliser DatePickerWithPresets"
+      ],
+      "example": "<DatePicker form={form} name=\"birthdate\" label=\"Date de naissance\" required returnString />",
+      "essential": true
+    },
+    {
+      "name": "Toggles",
+      "category": "Forms",
+      "importPath": "@vigee-designsystem/components/Forms/Toggles",
+      "exportType": "named",
+      "props": [
+        "form: UseFormReturn<T>",
+        "name: Path<T>",
+        "label?: string",
+        "descr?: string",
+        "className?: string",
+        "optionsClassName?: string",
+        "disabled?: boolean",
+        "options: Option[]",
+        "nowrap?: boolean = false",
+        "multi?: boolean = false",
+        "columns?: number",
+        "variant?: \"default\" | \"small\" = \"default\"",
+        "onChange?: (value: string | string[]) => void",
+        "withCheckbox?: boolean = false",
+        "preventDeselect?: boolean = false",
+        "allowEmpty?: boolean = false",
+        "data-testid?: string"
+      ],
+      "formIntegration": true,
+      "description": "Groupe de boutons toggle (sélection unique ou multiple) intégré react-hook-form, avec support icône, description, checkbox et grille.",
+      "useWhen": [
+        "choix exclusif entre options visuelles dans un formulaire (ex: type de salle, mode de facturation) → utiliser Toggles",
+        "sélection multiple d'options avec rendu carte dans un Form → utiliser Toggles avec `multi`",
+        "options avec icône + description à présenter sous forme de grille → utiliser Toggles avec `columns`"
+      ],
+      "dontUseFor": [
+        "sélection dans une longue liste textuelle → utiliser Select",
+        "filtrage de données hors formulaire → utiliser CheckboxFilter",
+        "cases à cocher simples sans visuel carte → utiliser Checkboxes"
+      ],
+      "example": "<Toggles form={form} name=\"type\" label=\"Type de salle\" options={[{ value: \"reunion\", label: \"Réunion\", icon: <IconReunion /> }, { value: \"bureau\", label: \"Bureau\" }]} />",
+      "essential": true
+    },
+    {
+      "name": "DrawerMobile",
+      "category": "Forms",
+      "importPath": "@vigee-designsystem/components/Forms/DrawerMobile",
+      "exportType": "named",
+      "props": [
+        "title?: string",
+        "description?: string",
+        "children: ReactNode",
+        "trigger: ReactNode",
+        "icon?: ReactNode",
+        "disabled?: boolean",
+        "openForced?: boolean",
+        "cancelButton?: boolean",
+        "setOpenForced?: React.Dispatch<React.SetStateAction<boolean>>",
+        "size?: \"sm\" | \"md\" | \"lg\" = \"sm\""
+      ],
+      "formIntegration": false,
+      "description": "Panneau contextuel responsive : Dialog sur desktop (≥768px) et Drawer bas d'écran sur mobile, avec ScrollArea intégrée.",
+      "useWhen": [
+        "formulaire secondaire déclenché par un bouton dans une liste → encapsuler dans DrawerMobile",
+        "affichage de détails ou d'édition rapide sans quitter la page → utiliser DrawerMobile",
+        "contenu contextuel avec titre/description qui doit s'adapter mobile/desktop automatiquement → utiliser DrawerMobile"
+      ],
+      "dontUseFor": [
+        "navigation entre pages ou étapes multiples → utiliser Stepper",
+        "confirmation d'action destructive → utiliser ActionWithValidation",
+        "panneau latéral persistant → utiliser Drawer"
+      ],
+      "example": "<DrawerMobile title=\"Modifier l'adresse\" trigger={<Button icon=\"edit\" />} size=\"md\">{children}</DrawerMobile>",
+      "essential": true
+    },
+    {
+      "name": "Form",
+      "category": "ui",
+      "importPath": "@vigee-designsystem/components/ui/form",
+      "exportType": "named",
+      "props": [
+        "...: ControllerProps<TFieldValues, TName>"
+      ],
+      "formIntegration": true,
+      "exports": [
+        "Form",
+        "FormControl",
+        "FormDescription",
+        "FormField",
+        "FormItem",
+        "FormLabel",
+        "FormMessage"
+      ],
+      "description": "Primitives de formulaire react-hook-form (Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage) avec gestion d'état et d'erreurs intégrée.",
+      "useWhen": [
+        "wrapping d'un formulaire react-hook-form pour connecter les champs à la validation → utiliser Form + FormField",
+        "afficher le message d'erreur d'un champ → utiliser FormMessage",
+        "associer un label accessible à un input → utiliser FormLabel + FormControl"
+      ],
+      "dontUseFor": [
+        "champ isolé sans formulaire react-hook-form → utiliser directement Input",
+        "formulaire avec état local simple sans validation → utiliser ui/Input directement"
+      ],
+      "example": "<Form {...form}><FormField control={form.control} name=\"email\" render={({ field }) => (<FormItem><FormLabel>Email</FormLabel><FormControl><input {...field} /></FormControl><FormMessage /></FormItem>)} /></Form>",
+      "essential": true
+    },
+    {
+      "name": "PageHeader",
+      "category": "Headers",
+      "importPath": "@vigee-designsystem/components/Headers/PageHeader",
+      "exportType": "named",
+      "props": [
+        "title: string",
+        "subtitle?: string | null",
+        "children?: ReactNode",
+        "small?: boolean",
+        "icon?: ReactNode",
+        "className?: string",
+        "variant?: \"default\" | \"ghost\" = \"default\"",
+        "iconClassName?: string",
+        "classNameTitle?: string",
+        "classNameSubtitle?: string"
+      ],
+      "formIntegration": false,
+      "description": "Bandeau de titre de page avec sous-titre optionnel, icône et zone d'actions à droite.",
+      "useWhen": [
+        "en-tête d'une page principale avec titre + boutons d'action → utiliser PageHeader",
+        "page avec contexte visuel → ajouter `icon` et `subtitle`",
+        "section sans fond blanc (tableau de bord) → utiliser `variant=\"ghost\"`"
+      ],
+      "dontUseFor": [
+        "titre de section interne dans une page → utiliser SectionTitle",
+        "titre de carte ou panneau → utiliser RoundedContainer"
+      ],
+      "example": "<PageHeader title=\"Projets\" subtitle=\"Liste de vos projets actifs\" icon={<FolderIcon />}><Button icon=\"add\" onClick={handleAdd} /></PageHeader>",
+      "essential": true
+    },
+    {
+      "name": "Container",
+      "category": "Container",
+      "importPath": "@vigee-designsystem/components/Container/Container",
       "exportType": "named",
       "props": [
         "children: ReactNode",
-        "isVisible: boolean",
-        "duration?: number",
         "className?: string"
       ],
       "formIntegration": false,
-      "description": "Affiche/masque un contenu avec une animation fade + slide vertical, piloté par un booléen.",
+      "description": "Conteneur blanc avec bordure arrondie pour regrouper visuellement un bloc de contenu dans une page Vigee.",
       "useWhen": [
-        "afficher un message contextuel après une action (succès, erreur) → utiliser FadeInOut",
-        "révéler un panneau ou section conditionnelle avec transition douce → utiliser FadeInOut",
-        "animer l'apparition d'un tooltip ou d'une aide inline → utiliser FadeInOut"
+        "encapsuler une section de page (formulaire, liste, détails) → utiliser Container",
+        "créer une carte de contenu avec fond blanc et bords arrondis → utiliser Container",
+        "structurer verticalement des éléments enfants dans un bloc délimité → utiliser Container"
       ],
       "dontUseFor": [
-        "transition entre pages ou routes → utiliser FadeIn",
-        "contenu toujours visible sans condition → pas besoin d'animation conditionnelle"
+        "contenu nécessitant un padding/layout horizontal spécifique → utiliser LineContainer",
+        "contenu avec coins arrondis et styles avancés → utiliser RoundedContainer"
       ],
-      "example": "<FadeInOut isVisible={isSubmitted}><AlertInfo message=\"Enregistrement réussi\" /></FadeInOut>"
+      "example": "<Container><p>Contenu de la section</p></Container>",
+      "essential": true
+    },
+    {
+      "name": "TypographyH1",
+      "category": "Typography",
+      "importPath": "@vigee-designsystem/components/Typography/Typography",
+      "exportType": "named",
+      "props": [
+        "children: ReactNode",
+        "className?: string"
+      ],
+      "formIntegration": false,
+      "exports": [
+        "TypographyH1",
+        "TypographyH2",
+        "TypographyH3",
+        "TypographyH4",
+        "TypographyBlockquote",
+        "Body",
+        "BodySmall",
+        "Caption"
+      ],
+      "description": "Composants typographiques Vigee (H1→H4, Body, BodySmall, Caption, Blockquote) appliquant les styles de la charte via Tailwind.",
+      "useWhen": [
+        "titre principal de page → utiliser TypographyH1",
+        "titre de section → utiliser TypographyH2",
+        "sous-titre avec couleur primaire → utiliser TypographyH3",
+        "texte courant de contenu → utiliser Body",
+        "métadonnées, labels secondaires → utiliser Caption"
+      ],
+      "dontUseFor": [
+        "titres animés → utiliser TitleGradual",
+        "titre de page avec actions et breadcrumb → utiliser PageHeader"
+      ],
+      "example": "<TypographyH1>Tableau de bord</TypographyH1>",
+      "essential": true
+    },
+    {
+      "name": "EmptyIllustration",
+      "category": "Illustration",
+      "importPath": "@vigee-designsystem/components/Illustration/EmptyIllustration",
+      "exportType": "default",
+      "props": [
+        "text?: string",
+        "buttonLink?: string",
+        "buttonText?: string",
+        "subtitle?: string",
+        "children?: ReactNode",
+        "supportEmail?: string",
+        "button?: boolean = false",
+        "className?: string",
+        "classNameImage?: string",
+        "color?: string = \"text-secondary\"",
+        "image?: ReactNode",
+        "type?: \"street\" | \"projects\" | \"documents\" | \"users\" | \"default\" = \"default\""
+      ],
+      "formIntegration": false,
+      "description": "Placeholder visuel état vide avec illustration thématique, titre, sous-titre et bouton d'action optionnel.",
+      "useWhen": [
+        "liste sans données à afficher (projets, documents, utilisateurs) → afficher un état vide engageant",
+        "page sans résultats après filtrage → guider l'utilisateur vers une action",
+        "onboarding d'une section vierge → orienter vers la création du premier élément"
+      ],
+      "dontUseFor": [
+        "erreurs serveur ou accès refusé → utiliser Error ou Unauthorized",
+        "chargement en cours → utiliser Loader ou DashboardSkeleton"
+      ],
+      "example": "<EmptyIllustration type=\"documents\" text=\"Aucun document\" subtitle=\"Ajoutez votre premier document pour commencer.\" buttonLink=\"/documents/new\" buttonText=\"Créer un document\" />",
+      "essential": true
+    },
+    {
+      "name": "DashboardSkeleton",
+      "category": "Skeletons",
+      "importPath": "@vigee-designsystem/components/Skeletons/Skeletons",
+      "exportType": "default",
+      "props": [
+        "noTop?: boolean"
+      ],
+      "formIntegration": false,
+      "exports": [
+        "MiniInputSkeleton",
+        "ChatBubbleSkeleton",
+        "InputSkeleton",
+        "TaskSkeleton",
+        "PlanningTaskSkeleton",
+        "TicketSkeleton",
+        "TicketsTitleSkeleton",
+        "TicketsSkeleton",
+        "MultiInputsSkeleton",
+        "CalendarSkeleton",
+        "CardSkeleton",
+        "HeaderSkeleton",
+        "CardsSkeleton",
+        "RevenueChartSkeleton",
+        "InvoiceSkeleton",
+        "LatestInvoicesSkeleton",
+        "DashboardSkeleton",
+        "TitleSkeleton",
+        "TableRowSkeleton",
+        "InvoicesMobileSkeleton",
+        "MobileCardSkeleton",
+        "InvoicesTableSkeleton",
+        "TicketResumeSkeleton",
+        "TableSkeleton",
+        "DocumentSkeleton",
+        "DocumentCardSkeleton",
+        "DocumentsListSkeleton",
+        "ModuleTrackerSkeleton",
+        "DocumentViewerSkeleton"
+      ],
+      "description": "Collection de squelettes de chargement animés (shimmer + pulse) pour tâches, tickets, inputs, calendrier et bulles de chat.",
+      "useWhen": [
+        "affichage en attente de données async pour une liste de tâches → utiliser TaskSkeleton / PlanningTaskSkeleton",
+        "chargement d'un formulaire → utiliser InputSkeleton ou MultiInputsSkeleton",
+        "chargement d'une liste de tickets → utiliser TicketsSkeleton",
+        "chargement d'un calendrier → utiliser CalendarSkeleton"
+      ],
+      "dontUseFor": [
+        "chargement d'une page entière → utiliser LoaderPage",
+        "chargement d'un dashboard complet → utiliser DashboardSkeleton",
+        "indicateur de rechargement en arrière-plan → utiliser RefetchIndicator"
+      ],
+      "example": "<TicketsSkeleton className=\"mt-4\" />",
+      "essential": true
+    },
+    {
+      "name": "Error",
+      "category": "Errors",
+      "importPath": "@vigee-designsystem/components/Errors/Error",
+      "exportType": "named",
+      "props": [
+        "title?: string",
+        "subtitle?: string",
+        "children?: ReactNode",
+        "supportEmail?: string",
+        "img?: StaticImageData = error",
+        "onClick?: () => void",
+        "variant?: \"bro\" | \"classic\" = \"bro\""
+      ],
+      "formIntegration": false,
+      "description": "Page d'erreur illustrée avec titre, sous-titre, lien support et bouton de retry, en variante \"bro\" ou \"classic\".",
+      "useWhen": [
+        "erreur inattendue côté serveur/réseau → afficher avec `onClick` pour retry",
+        "absence de données critique → afficher avec `subtitle` explicatif",
+        "besoin de contacter le support → passer `supportEmail`"
+      ],
+      "dontUseFor": [
+        "accès refusé/non autorisé → utiliser Unauthorized",
+        "message d'information non bloquant → utiliser AlertInfo"
+      ],
+      "example": "<Error title=\"Impossible de charger les données\" subtitle=\"Vérifiez votre connexion.\" onClick={() => refetch()} supportEmail=\"support@vigee.fr\" />",
+      "essential": true
     },
     {
       "name": "Avatar",
@@ -69,7 +649,331 @@
         "groupe d'avatars empilés → utiliser ui/Avatar directement",
         "contexte sans image utilisateur → utiliser une icône simple"
       ],
-      "example": "<Avatar userId={user.id} alt={user.name} className=\"w-10 h-10\" />"
+      "example": "<Avatar userId={user.id} alt={user.name} className=\"w-10 h-10\" />",
+      "essential": true
+    },
+    {
+      "name": "Badge",
+      "category": "ui",
+      "importPath": "@vigee-designsystem/components/ui/badge",
+      "exportType": "named",
+      "props": [
+        "className?",
+        "variant?: \"default\" | \"secondary\" | \"destructive\" | \"outline\"",
+        "...: BadgeProps"
+      ],
+      "formIntegration": false,
+      "description": "Étiquette visuelle inline pour signaler un statut, une catégorie ou un compteur sur un élément UI.",
+      "useWhen": [
+        "afficher le statut d'une entité (actif, archivé, en attente) → utiliser Badge",
+        "indiquer un type ou une catégorie sur une carte ou une ligne de tableau → utiliser Badge",
+        "signaler un compteur ou une nouveauté sur un élément → utiliser Badge"
+      ],
+      "dontUseFor": [
+        "actions utilisateur → utiliser Button",
+        "notifications système avec message détaillé → utiliser AlertInfo"
+      ],
+      "example": "<Badge variant=\"destructive\">Annulé</Badge>",
+      "essential": true
+    },
+    {
+      "name": "Dialog",
+      "category": "ui",
+      "importPath": "@vigee-designsystem/components/ui/dialog",
+      "exportType": "named",
+      "props": [
+        "className?",
+        "...: React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>"
+      ],
+      "formIntegration": false,
+      "exports": [
+        "Dialog",
+        "DialogPortal",
+        "DialogOverlay",
+        "DialogClose",
+        "DialogTrigger",
+        "DialogContent",
+        "DialogHeader",
+        "DialogFooter",
+        "DialogTitle",
+        "DialogDescription"
+      ],
+      "description": "Modale centrée avec overlay, animation d'entrée/sortie et bouton de fermeture intégré, basée sur Radix Dialog.",
+      "useWhen": [
+        "confirmation d'une action critique → utiliser Dialog",
+        "affichage d'un formulaire secondaire sans quitter la page → utiliser Dialog",
+        "présentation d'un détail contextuel nécessitant le focus utilisateur → utiliser Dialog"
+      ],
+      "dontUseFor": [
+        "contenu latéral ou panneau glissant → utiliser Sheet",
+        "actions destructives avec double confirmation → utiliser AlertDialog",
+        "contenu riche sur mobile nécessitant un tiroir → utiliser Drawer"
+      ],
+      "example": "<Dialog><DialogTrigger asChild><Button icon=\"info\" /></DialogTrigger><DialogContent><DialogHeader><DialogTitle>Titre</DialogTitle><DialogDescription>Description</DialogDescription></DialogHeader></DialogContent></Dialog>",
+      "essential": true
+    },
+    {
+      "name": "Drawer",
+      "category": "Drawer",
+      "importPath": "@vigee-designsystem/components/Drawer/Drawer",
+      "exportType": "named",
+      "props": [
+        "children: ReactNode",
+        "trigger?: ReactNode",
+        "title?: ReactNode",
+        "hideTitle?: boolean = false",
+        "description?: string",
+        "icon?: ReactNode",
+        "open?: boolean",
+        "onClose?: () => void",
+        "onOpenChange?: (open: boolean) => void",
+        "className?: string",
+        "cancelable?: boolean = false",
+        "fullScreen?: boolean = false",
+        "classNameContent?: string = ''",
+        "dismissible?: boolean = true",
+        "headerComponent?: ReactNode",
+        "direction?: 'bottom' | 'left' | 'right' = 'bottom'",
+        "large?: boolean = false"
+      ],
+      "formIntegration": false,
+      "description": "Panneau glissant (vaul) depuis le bas, la droite ou la gauche, avec titre, description, icône et contenu libre.",
+      "useWhen": [
+        "afficher un formulaire contextuel sans quitter la page → utiliser Drawer",
+        "afficher un détail ou une fiche latérale → utiliser Drawer avec direction=\"right\"",
+        "flux en plusieurs étapes sur mobile → utiliser Drawer avec fullScreen={true}",
+        "panneau contrôlé programmatiquement (open/onOpenChange) → utiliser Drawer sans trigger"
+      ],
+      "dontUseFor": [
+        "confirmation destructive courte → utiliser ActionWithValidation",
+        "contenu segmenté en onglets dans un panneau → utiliser SheetDialog",
+        "sélection d'une valeur dans une liste → utiliser ComboBoxResponsive"
+      ],
+      "example": "<Drawer open={open} onOpenChange={setOpen} title=\"Modifier la tâche\" hideTitle>{form}</Drawer> — titre lu par les lecteurs d'écran, non affiché",
+      "essential": true
+    },
+    {
+      "name": "Popover",
+      "category": "ui",
+      "importPath": "@vigee-designsystem/components/ui/popover",
+      "exportType": "named",
+      "props": [
+        "className?",
+        "align?: = \"center\"",
+        "sideOffset?: = 4",
+        "...: React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>"
+      ],
+      "formIntegration": false,
+      "exports": [
+        "Popover",
+        "PopoverTrigger",
+        "PopoverContent"
+      ],
+      "description": "Popover flottant Radix UI avec animation et positionnement automatique, pour afficher du contenu contextuel ancré à un déclencheur.",
+      "useWhen": [
+        "afficher des options/détails supplémentaires au clic sur un bouton",
+        "saisie inline sans ouvrir un Dialog",
+        "formulaire court contextuel (filtre, date, couleur) ancré à un élément"
+      ],
+      "dontUseFor": [
+        "contenu long ou structuré nécessitant une pleine page → utiliser Sheet",
+        "confirmation d'action destructive → utiliser AlertDialog",
+        "sélection dans une liste → utiliser Select"
+      ],
+      "example": "<Popover><PopoverTrigger asChild><Button icon=\"settings\" /></PopoverTrigger><PopoverContent>Contenu contextuel</PopoverContent></Popover>",
+      "essential": true
+    },
+    {
+      "name": "Tooltip",
+      "category": "ui",
+      "importPath": "@vigee-designsystem/components/ui/tooltip",
+      "exportType": "named",
+      "props": [
+        "className?",
+        "sideOffset?: = 4",
+        "collisionPadding?: = 8",
+        "...: React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>"
+      ],
+      "formIntegration": false,
+      "exports": [
+        "Tooltip",
+        "TooltipTrigger",
+        "TooltipContent",
+        "TooltipProvider"
+      ],
+      "description": "Bulle d'information contextuelle au survol, basée sur Radix UI, avec animation et positionnement automatique.",
+      "useWhen": [
+        "icône sans libellé nécessitant une explication → envelopper avec Tooltip",
+        "bouton d'action dont le rôle n'est pas évident → ajouter un TooltipContent",
+        "information complémentaire non critique à afficher au survol sans encombrer l'UI."
+      ],
+      "dontUseFor": [
+        "contenu interactif complexe (liens, boutons) dans la bulle → utiliser HoverCard",
+        "messages d'alerte importants → utiliser AlertInfo."
+      ],
+      "example": "<TooltipProvider><Tooltip><TooltipTrigger><Button icon=\"info\" /></TooltipTrigger><TooltipContent>Informations supplémentaires</TooltipContent></Tooltip></TooltipProvider>",
+      "essential": true
+    },
+    {
+      "name": "Separator",
+      "category": "ui",
+      "importPath": "@vigee-designsystem/components/ui/separator",
+      "exportType": "named",
+      "props": [
+        "className?",
+        "orientation?: = \"horizontal\"",
+        "decorative?: = true",
+        "...: React.ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>"
+      ],
+      "formIntegration": false,
+      "description": "Ligne de séparation visuelle horizontale ou verticale basée sur Radix UI, accessible et stylée avec la couleur `border` du thème.",
+      "useWhen": [
+        "diviser des sections dans une carte ou un panneau → utiliser Separator",
+        "séparer des items dans un menu ou une liste → utiliser Separator",
+        "tracer une ligne entre un header et son contenu → utiliser Separator"
+      ],
+      "dontUseFor": [
+        "structurer des blocs de contenu avec espacement → utiliser Container",
+        "créer des sections titrées → utiliser SectionHeading"
+      ],
+      "example": "<Separator orientation=\"horizontal\" />",
+      "essential": true
+    },
+    {
+      "name": "TabMobile",
+      "category": "Tabs",
+      "importPath": "@vigee-designsystem/components/Tabs/TabMobile",
+      "exportType": "named",
+      "props": [
+        "onChange?: (value: T) => void",
+        "defaultValue?: string",
+        "value?: string",
+        "query?: string",
+        "options: TabOption<T>[]",
+        "children?: ReactNode",
+        "className?: string",
+        "startTransition?: (callback: () => void) => void",
+        "fullWidth?: boolean",
+        "variant?: \"default\" | \"light\" | \"mini\" | \"big\" = \"default\"",
+        "pageName?: string = \"page\""
+      ],
+      "formIntegration": false,
+      "description": "Onglets navigables (valeur, URL ou query param) avec badges compteurs, icônes, statuts colorés et tooltips, optimisés mobile.",
+      "useWhen": [
+        "navigation entre vues filtrées via query param (ex: statut commande) → utiliser avec `query`",
+        "navigation entre pages via `href` par onglet",
+        "affichage d'un compteur par onglet (ex: tâches en attente) → utiliser `count`",
+        "taille d'onglet variable selon contexte → utiliser `variant` (\"mini\", \"big\", \"light\")"
+      ],
+      "dontUseFor": [
+        "navigation principale de l'app → utiliser Sidebar",
+        "onglets simples sans badges ni query params → utiliser TabsResponsive",
+        "filtres multiples simultanés → utiliser SelectMultiple"
+      ],
+      "example": "<TabMobile options={[{ name: \"Actifs\", value: \"active\", count: 12 }, { name: \"Archivés\", value: \"archived\" }]} query=\"status\" defaultValue=\"active\" />",
+      "essential": true
+    },
+    {
+      "name": "Pagination",
+      "category": "Tables",
+      "importPath": "@vigee-designsystem/components/Tables/Pagination",
+      "exportType": "default",
+      "props": [
+        "totalPages: number",
+        "paramName?: string = \"page\""
+      ],
+      "formIntegration": false,
+      "description": "Pagination URL-based pour tables et listes, synchronisée avec les search params Next.js — se cache automatiquement si une seule page.",
+      "useWhen": [
+        "table avec résultats paginés côté serveur → afficher la navigation entre pages",
+        "plusieurs listes paginées sur la même page → utiliser `paramName` distinct par liste",
+        "navigation paginée sans état client (URL comme source de vérité) → utiliser ce composant."
+      ],
+      "dontUseFor": [
+        "pagination avec état client pur (sans URL) → utiliser DataTable",
+        "filtres complexes combinés à la pagination → utiliser FilterableSelect."
+      ],
+      "example": "<Pagination totalPages={10} paramName=\"page\" />",
+      "essential": true
+    },
+    {
+      "name": "DeleteAction",
+      "category": "Buttons",
+      "importPath": "@vigee-designsystem/components/Buttons/DeleteAction",
+      "exportType": "named",
+      "props": [
+        "alertTitle: string",
+        "alertSubTitle?: string",
+        "buttonText?: string",
+        "deleteAction: () => void",
+        "className?: string",
+        "isPending?: boolean",
+        "tooltip?: string",
+        "classNameIcon?: string"
+      ],
+      "formIntegration": false,
+      "description": "Bouton corbeille avec modale de confirmation AlertDialog intégrée pour sécuriser les suppressions.",
+      "useWhen": [
+        "supprimer une entité (utilisateur, projet, document) avec confirmation obligatoire → utiliser DeleteAction",
+        "action de suppression dans une ligne de tableau → utiliser DeleteAction",
+        "suppression avec état de chargement asynchrone → utiliser DeleteAction avec isPending"
+      ],
+      "dontUseFor": [
+        "action destructrice sans confirmation requise → utiliser Button",
+        "suppression groupée de plusieurs éléments → utiliser ActionWithValidation"
+      ],
+      "example": "<DeleteAction alertTitle=\"Supprimer ce projet ?\" alertSubTitle=\"Cette action est irréversible.\" deleteAction={() => handleDelete(id)} isPending={isPending} />",
+      "essential": true
+    },
+    {
+      "name": "AlertInfo",
+      "category": "Alerts",
+      "importPath": "@vigee-designsystem/components/Alerts/AlertInfo",
+      "exportType": "named",
+      "props": [
+        "title: string",
+        "description?: string",
+        "type: \"neutral\" | \"informative\" | \"destructive\" | \"warning\" | \"question\" | \"success\" | \"special\"",
+        "className?: string",
+        "link?: string"
+      ],
+      "formIntegration": false,
+      "description": "Bandeau d'alerte contextuel avec icône, titre, description optionnelle et lien externe, déclinable en 7 niveaux sémantiques.",
+      "useWhen": [
+        "confirmer une action réussie (type=\"success\")",
+        "signaler une erreur ou un blocage (type=\"destructive\")",
+        "avertir l'utilisateur d'un risque (type=\"warning\")",
+        "afficher une info contextuelle dans une page ou un formulaire (type=\"informative\")"
+      ],
+      "dontUseFor": [
+        "retours de validation champ par champ → utiliser Form",
+        "messages éphémères/toasts → utiliser Toaster"
+      ],
+      "example": "<AlertInfo type=\"warning\" title=\"Données non sauvegardées\" description=\"Vos modifications seront perdues si vous quittez la page.\" />"
+    },
+    {
+      "name": "FadeInOut",
+      "category": "Animation",
+      "importPath": "@vigee-designsystem/components/Animation/FadeInOut",
+      "exportType": "named",
+      "props": [
+        "children: ReactNode",
+        "isVisible: boolean",
+        "duration?: number = 0.3",
+        "className?: string"
+      ],
+      "formIntegration": false,
+      "description": "Affiche/masque un contenu avec une animation fade + slide vertical, piloté par un booléen.",
+      "useWhen": [
+        "afficher un message contextuel après une action (succès, erreur) → utiliser FadeInOut",
+        "révéler un panneau ou section conditionnelle avec transition douce → utiliser FadeInOut",
+        "animer l'apparition d'un tooltip ou d'une aide inline → utiliser FadeInOut"
+      ],
+      "dontUseFor": [
+        "transition entre pages ou routes → utiliser FadeIn",
+        "contenu toujours visible sans condition → pas besoin d'animation conditionnelle"
+      ],
+      "example": "<FadeInOut isVisible={isSubmitted}><AlertInfo message=\"Enregistrement réussi\" /></FadeInOut>"
     },
     {
       "name": "ActionWithValidation",
@@ -112,7 +1016,7 @@
         "onClick?: () => void",
         "linkBtn?: boolean",
         "className?: string",
-        "back?: boolean",
+        "back?: boolean = false",
         "current?: string"
       ],
       "formIntegration": false,
@@ -130,45 +1034,6 @@
       "example": "<Back href=\"/projets\" where=\"Projets\" />"
     },
     {
-      "name": "Button",
-      "category": "Buttons",
-      "importPath": "@vigee-designsystem/components/Buttons/Button",
-      "exportType": "named",
-      "props": [
-        "children?: ReactNode",
-        "onClick?: (e: MouseEvent) => void",
-        "onPointerDown?: (e: MouseEvent) => void",
-        "type?: \"button\" | \"submit\" | \"reset\"",
-        "disabled?: boolean",
-        "href?: string",
-        "className?: string",
-        "pending?: boolean",
-        "variant?: | \"default\"",
-        "icon?: keyof typeof iconMap",
-        "iconLeft?: keyof typeof iconMap",
-        "iconComponent?: ReactNode",
-        "tooltip?: string",
-        "big?: boolean",
-        "classNameIcon?: string",
-        "subtle?: boolean",
-        "data-testid?: string"
-      ],
-      "formIntegration": false,
-      "description": "Bouton polyvalent Vigee avec icônes Pika intégrées, états pending/disabled, navigation href et tooltip optionnel.",
-      "useWhen": [
-        "action iconique sans libellé dans une interface (ex: éditer, supprimer, télécharger) → `icon` seul",
-        "navigation vers une page → `href`",
-        "état de chargement async → `pending={true}`",
-        "action avec label uniquement pour validation finale → `children` + `type=\"submit\"`"
-      ],
-      "dontUseFor": [
-        "validation de formulaire avec logique de confirmation → utiliser ActionWithValidation",
-        "ajout d'entité dédié → utiliser ButtonAdd",
-        "soumission de formulaire stylisée → utiliser ButtonSubmit"
-      ],
-      "example": "<Button icon=\"pen\" subtle tooltip=\"Modifier\" /> — geste discret dans une ligne de liste (petite icône grise)"
-    },
-    {
       "name": "ButtonAdd",
       "category": "Buttons",
       "importPath": "@vigee-designsystem/components/Buttons/ButtonAdd",
@@ -176,7 +1041,7 @@
       "props": [
         "text: string",
         "icon: ReactNode",
-        "type?: \"button\" | \"submit\" | \"reset\"",
+        "type?: \"button\" | \"submit\" | \"reset\" = \"button\"",
         "onClick?: () => void",
         "className?: string",
         "href?: string"
@@ -215,44 +1080,16 @@
       "example": "<ButtonSubmit />"
     },
     {
-      "name": "DeleteAction",
-      "category": "Buttons",
-      "importPath": "@vigee-designsystem/components/Buttons/DeleteAction",
-      "exportType": "named",
-      "props": [
-        "alertTitle: string",
-        "alertSubTitle?: string",
-        "buttonText?: string",
-        "deleteAction: () => void",
-        "className?: string",
-        "isPending?: boolean",
-        "tooltip?: string",
-        "classNameIcon?: string"
-      ],
-      "formIntegration": false,
-      "description": "Bouton corbeille avec modale de confirmation AlertDialog intégrée pour sécuriser les suppressions.",
-      "useWhen": [
-        "supprimer une entité (utilisateur, projet, document) avec confirmation obligatoire → utiliser DeleteAction",
-        "action de suppression dans une ligne de tableau → utiliser DeleteAction",
-        "suppression avec état de chargement asynchrone → utiliser DeleteAction avec isPending"
-      ],
-      "dontUseFor": [
-        "action destructrice sans confirmation requise → utiliser Button",
-        "suppression groupée de plusieurs éléments → utiliser ActionWithValidation"
-      ],
-      "example": "<DeleteAction alertTitle=\"Supprimer ce projet ?\" alertSubTitle=\"Cette action est irréversible.\" deleteAction={() => handleDelete(id)} isPending={isPending} />"
-    },
-    {
       "name": "ShimmerButton",
       "category": "Buttons",
       "importPath": "@vigee-designsystem/components/Buttons/ShimmerButton",
       "exportType": "default",
       "props": [
-        "shimmerColor?: string",
-        "shimmerSize?: string",
-        "borderRadius?: string",
-        "shimmerDuration?: string",
-        "background?: string",
+        "shimmerColor?: string = \"#ffffff\"",
+        "shimmerSize?: string = \"0.1em\"",
+        "borderRadius?: string = \"100px\"",
+        "shimmerDuration?: string = \"3s\"",
+        "background?: string = \"#f87171\"",
         "className?: string",
         "children?: ReactNode"
       ],
@@ -279,11 +1116,11 @@
         "title?: string",
         "subtitle?: string",
         "data: Data[]",
-        "color?: string",
+        "color?: string = \"#000\"",
         "container?: boolean",
         "keys?: Key[]",
-        "euro?: boolean; // Prop pour activer le formatage en euro",
-        "noY?: boolean"
+        "euro?: boolean = false",
+        "noY?: boolean = false"
       ],
       "formIntegration": false,
       "description": "Graphique à barres verticales (Recharts) avec tooltip, labels formatés (k/M/€) et support multi-séries via `keys`.",
@@ -337,9 +1174,9 @@
         "data: LineChartData[]",
         "color?: string",
         "container?: boolean",
-        "keys?: Key[]",
-        "euro?: boolean; // Prop pour activer le formatage en euro",
-        "height?: number"
+        "keys?: Key[] = [{ dataKey: \"total\", color: color }]",
+        "euro?: boolean = false",
+        "height?: number = 350"
       ],
       "formIntegration": false,
       "description": "Graphique en aires (area chart) avec dégradé pour visualiser l'évolution d'une ou plusieurs métriques dans le temps.",
@@ -367,7 +1204,7 @@
         "color?: string",
         "container?: boolean",
         "colors?: string[]",
-        "startAngle?: number"
+        "startAngle?: number = 360"
       ],
       "formIntegration": false,
       "description": "Graphique en anneau (donut) Recharts pour visualiser la répartition proportionnelle de données catégorielles.",
@@ -393,11 +1230,11 @@
         "value?: string",
         "onChange: (value: string | undefined) => void",
         "label?: string",
-        "placeholder?: string",
+        "placeholder?: string = \"Sélectionnez...\"",
         "items: Item[]",
         "icon?: ReactNode",
         "className?: string",
-        "triggerOnHover?: boolean"
+        "triggerOnHover?: boolean = false"
       ],
       "formIntegration": false,
       "description": "Sélecteur searchable avec popover, recherche intégrée et déselection, pour choisir une valeur parmi une liste d'items.",
@@ -419,7 +1256,7 @@
       "importPath": "@vigee-designsystem/components/Container/Collapsible",
       "exportType": "default",
       "props": [
-        "defaultOpen?: boolean",
+        "defaultOpen?: boolean = false",
         "className: string",
         "children: ReactNode",
         "trigger: ReactNode"
@@ -437,28 +1274,6 @@
         "liste d'items tous indépendamment rétractables → utiliser Accordion"
       ],
       "example": "<Collapsible trigger={<Button icon=\"chevron-down\" />} className=\"w-full\">Contenu masqué</Collapsible>"
-    },
-    {
-      "name": "Container",
-      "category": "Container",
-      "importPath": "@vigee-designsystem/components/Container/Container",
-      "exportType": "named",
-      "props": [
-        "children: ReactNode",
-        "className?: string"
-      ],
-      "formIntegration": false,
-      "description": "Conteneur blanc avec bordure arrondie pour regrouper visuellement un bloc de contenu dans une page Vigee.",
-      "useWhen": [
-        "encapsuler une section de page (formulaire, liste, détails) → utiliser Container",
-        "créer une carte de contenu avec fond blanc et bords arrondis → utiliser Container",
-        "structurer verticalement des éléments enfants dans un bloc délimité → utiliser Container"
-      ],
-      "dontUseFor": [
-        "contenu nécessitant un padding/layout horizontal spécifique → utiliser LineContainer",
-        "contenu avec coins arrondis et styles avancés → utiliser RoundedContainer"
-      ],
-      "example": "<Container><p>Contenu de la section</p></Container>"
     },
     {
       "name": "LineContainer",
@@ -499,9 +1314,9 @@
         "value: Date | undefined",
         "onChange: (date: Date | undefined) => void",
         "className?: string",
-        "placeholder?: string",
-        "presets?: DatePreset[]",
-        "showPresets?: boolean"
+        "placeholder?: string = \"Pick a date\"",
+        "presets?: DatePreset[] = defaultPresets",
+        "showPresets?: boolean = true"
       ],
       "formIntegration": false,
       "description": "Sélecteur de date unique avec calendrier et raccourcis prédéfinis (aujourd'hui, demain, dans une semaine…) en français.",
@@ -529,8 +1344,8 @@
         "description?: string",
         "image?: ReactNode",
         "autoCloseMs?: number",
-        "withAiSpark?: boolean",
-        "lockWhileLoading?: boolean",
+        "withAiSpark?: boolean = false",
+        "lockWhileLoading?: boolean = true",
         "className?: string",
         "classNameImage?: string"
       ],
@@ -555,7 +1370,7 @@
       "exportType": "named",
       "props": [
         "documents: ViewableDocument[]",
-        "initialIndex?: number",
+        "initialIndex?: number = 0",
         "open: boolean",
         "onOpenChange: (open: boolean) => void",
         "onRotate?: (doc: ViewableDocument, rotations: RotationChange) => void",
@@ -606,8 +1421,15 @@
       "category": "DocumentViewer",
       "importPath": "@vigee-designsystem/components/DocumentViewer/parts/states",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "label?: string = 'Chargement du document…'"
+      ],
       "formIntegration": false,
+      "exports": [
+        "LoadingState",
+        "EmptyState",
+        "PageSkeleton"
+      ],
       "description": "États visuels internes du DocumentViewer : chargement global, message vide, et squelette de page PDF en cours de rendu.",
       "useWhen": [
         "document en cours de fetch → utiliser `LoadingState`",
@@ -661,7 +1483,7 @@
         "rotateLeftLabel: string",
         "rotateRightLabel: string",
         "onRotate: (page: number, direction: 1 | -1) => void",
-        "onLoadSuccess: (info: { numPages: number"
+        "onLoadSuccess: (info: { numPages: number }) => void"
       ],
       "formIntegration": false,
       "description": "Affiche toutes les pages d'un PDF depuis une URL, avec rotation par page et gestion des états de chargement/erreur.",
@@ -718,14 +1540,13 @@
         "sizeLabel: string | null",
         "showZoom: boolean",
         "showDownload: boolean",
-        "labels: {",
-        "close: string",
-        "download: string",
-        "zoomIn: string",
-        "zoomOut: string",
-        "fitWidth: string",
-        "delete: string",
-        "pageCount: (n: number) => string"
+        "labels: { close: string; download: string; zoomIn: string; zoomOut: string; fitWidth: string; delete: string; pageCount: (n: number) => string; }",
+        "onClose: () => void",
+        "onZoomIn: () => void",
+        "onZoomOut: () => void",
+        "onResetZoom: () => void",
+        "onDownload: () => void",
+        "onDelete?: () => void"
       ],
       "formIntegration": false,
       "description": "Barre d'outils du visualiseur de documents : titre, pagination, zoom PDF et téléchargement.",
@@ -741,60 +1562,18 @@
       "example": "<Toolbar doc={doc} index={0} total={3} numPages={5} isImage={false} zoom={1} fitMode=\"fit\" zoomMin={0.5} zoomMax={3} sizeLabel=\"2 Mo\" showZoom showDownload labels={labels} onClose={handleClose} onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} onResetZoom={handleResetZoom} onDownload={handleDownload} />"
     },
     {
-      "name": "Drawer",
-      "category": "Drawer",
-      "importPath": "@vigee-designsystem/components/Drawer/Drawer",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": false,
-      "description": "Panneau glissant (vaul) depuis le bas, la droite ou la gauche, avec titre, description, icône et contenu libre.",
-      "useWhen": [
-        "afficher un formulaire contextuel sans quitter la page → utiliser Drawer",
-        "afficher un détail ou une fiche latérale → utiliser Drawer avec direction=\"right\"",
-        "flux en plusieurs étapes sur mobile → utiliser Drawer avec fullScreen={true}",
-        "panneau contrôlé programmatiquement (open/onOpenChange) → utiliser Drawer sans trigger"
-      ],
-      "dontUseFor": [
-        "confirmation destructive courte → utiliser ActionWithValidation",
-        "contenu segmenté en onglets dans un panneau → utiliser SheetDialog",
-        "sélection d'une valeur dans une liste → utiliser ComboBoxResponsive"
-      ],
-      "example": "<Drawer open={open} onOpenChange={setOpen} title=\"Modifier la tâche\" hideTitle>{form}</Drawer> — titre lu par les lecteurs d'écran, non affiché"
-    },
-    {
-      "name": "Error",
-      "category": "Errors",
-      "importPath": "@vigee-designsystem/components/Errors/Error",
-      "exportType": "named",
-      "props": [
-        "title?: string",
-        "subtitle?: string",
-        "children?: ReactNode",
-        "supportEmail?: string",
-        "img?: StaticImageData",
-        "onClick?: () => void",
-        "variant?: \"bro\" | \"classic\""
-      ],
-      "formIntegration": false,
-      "description": "Page d'erreur illustrée avec titre, sous-titre, lien support et bouton de retry, en variante \"bro\" ou \"classic\".",
-      "useWhen": [
-        "erreur inattendue côté serveur/réseau → afficher avec `onClick` pour retry",
-        "absence de données critique → afficher avec `subtitle` explicatif",
-        "besoin de contacter le support → passer `supportEmail`"
-      ],
-      "dontUseFor": [
-        "accès refusé/non autorisé → utiliser Unauthorized",
-        "message d'information non bloquant → utiliser AlertInfo"
-      ],
-      "example": "<Error title=\"Impossible de charger les données\" subtitle=\"Vérifiez votre connexion.\" onClick={() => refetch()} supportEmail=\"support@vigee.fr\" />"
-    },
-    {
       "name": "FadeIn",
       "category": "FadeIn",
       "importPath": "@vigee-designsystem/components/FadeIn/FadeIn",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "...: React.ComponentPropsWithoutRef<typeof motion.div>"
+      ],
       "formIntegration": false,
+      "exports": [
+        "FadeIn",
+        "FadeInStagger"
+      ],
       "description": "Anime l'apparition d'un bloc en fondu + glissement vers le haut au scroll, avec support du mode reduced-motion et du stagger group.",
       "useWhen": [
         "révéler une section ou carte au scroll → utiliser FadeIn",
@@ -816,7 +1595,7 @@
         "queryKey: string",
         "label: string",
         "className?: string",
-        "defaultChecked?: boolean"
+        "defaultChecked?: boolean = false"
       ],
       "formIntegration": false,
       "description": "Filtre booléen synchronisé avec l'URL via nuqs — coche/décoche pour ajouter un paramètre query string à la navigation.",
@@ -840,13 +1619,13 @@
       "props": [
         "label?: string",
         "withArrows?: boolean",
-        "className?: string",
+        "className?: string = \"\"",
         "defaultValue?: string",
-        "displayHour?: boolean",
-        "queryKey?: string",
+        "displayHour?: boolean = false",
+        "queryKey?: string = \"start_date\"",
         "minDate?: Date",
         "maxDate?: Date",
-        "canChoosePastDay?: boolean",
+        "canChoosePastDay?: boolean = false",
         "minHour?: string",
         "maxHour?: string"
       ],
@@ -870,7 +1649,18 @@
       "category": "Filters",
       "importPath": "@vigee-designsystem/components/Filters/Filter",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "queryKey: string",
+        "options: { label: string; value: string; icon?: ReactNode }[]",
+        "placeholder?: string",
+        "defaultValue?: string",
+        "searchable?: boolean",
+        "clearable?: boolean",
+        "clearToValue?: string",
+        "multi?: boolean = false",
+        "maxVisibleItems?: number",
+        "compactWhenSelected?: boolean = false"
+      ],
       "formIntegration": false,
       "description": "Filtre URL-driven (single ou multi) avec synchronisation nuqs/searchParams, optionnellement searchable via Popover+Command.",
       "useWhen": [
@@ -886,29 +1676,6 @@
       "example": "<Filter queryKey=\"status\" options={[{ label: \"Actif\", value: \"active\" }, { label: \"Inactif\", value: \"inactive\" }]} placeholder=\"Statut\" searchable clearable />"
     },
     {
-      "name": "generateWeekOptions",
-      "category": "Filters",
-      "importPath": "@vigee-designsystem/components/Filters/PeriodFilters",
-      "exportType": "named",
-      "props": [
-        "years?: {",
-        "value: string",
-        "label: string"
-      ],
-      "formIntegration": false,
-      "description": "Filtre de période (jour/semaine/mois/année) synchronisé avec les query params URL via nuqs, avec sélecteurs dynamiques.",
-      "useWhen": [
-        "dashboard avec filtrage temporel par période → utiliser PeriodFilters",
-        "page analytics nécessitant navigation jour/semaine/mois/année dans l'URL → utiliser PeriodFilters",
-        "vue planning ou rapport avec changement de granularité temporelle → utiliser PeriodFilters"
-      ],
-      "dontUseFor": [
-        "sélection d'une plage de dates libre → utiliser DatePickerRange",
-        "filtre de date unique sans notion de période → utiliser DatePickerFilter"
-      ],
-      "example": "<PeriodFilters years={[{ label: \"2024\", value: \"2024\" }, { label: \"2025\", value: \"2025\" }]} defaultPeriod=\"month\" />"
-    },
-    {
       "name": "NumberFilter",
       "category": "Filters",
       "importPath": "@vigee-designsystem/components/Filters/NumberFilter",
@@ -918,10 +1685,10 @@
         "icon?: ReactNode",
         "min?: number",
         "max?: number",
-        "step?: number",
+        "step?: number = 1",
         "className?: string",
         "placeholder?: string",
-        "defaultValue?: number"
+        "defaultValue?: number = 0"
       ],
       "formIntegration": false,
       "description": "Input numérique synchronisé avec un query param URL via nuqs, pour filtrer des listes par valeur numérique.",
@@ -937,6 +1704,34 @@
       "example": "<NumberFilter queryKey=\"minQuantity\" placeholder=\"Quantité min\" min={1} icon={<PackageIcon />} />"
     },
     {
+      "name": "PeriodFilters",
+      "category": "Filters",
+      "importPath": "@vigee-designsystem/components/Filters/PeriodFilters",
+      "exportType": "named",
+      "props": [
+        "years?: { value: string; label: string; }[] = [ { label: \"Cette année\", value: new Date().getFullYear().toString() }, ]",
+        "day?: boolean",
+        "showDay?: boolean = true",
+        "week?: boolean",
+        "month?: boolean",
+        "year?: boolean",
+        "defaultPeriod?: PeriodFilterViewType = \"year\"",
+        "startTransition?: (callback: () => void) => void"
+      ],
+      "formIntegration": false,
+      "description": "Filtre de période (jour/semaine/mois/année) synchronisé avec les query params URL via nuqs, avec sélecteurs dynamiques.",
+      "useWhen": [
+        "dashboard avec filtrage temporel par période → utiliser PeriodFilters",
+        "page analytics nécessitant navigation jour/semaine/mois/année dans l'URL → utiliser PeriodFilters",
+        "vue planning ou rapport avec changement de granularité temporelle → utiliser PeriodFilters"
+      ],
+      "dontUseFor": [
+        "sélection d'une plage de dates libre → utiliser DatePickerRange",
+        "filtre de date unique sans notion de période → utiliser DatePickerFilter"
+      ],
+      "example": "<PeriodFilters years={[{ label: \"2024\", value: \"2024\" }, { label: \"2025\", value: \"2025\" }]} defaultPeriod=\"month\" />"
+    },
+    {
       "name": "SelectFilter",
       "category": "Filters",
       "importPath": "@vigee-designsystem/components/Filters/SelectFilter",
@@ -944,7 +1739,9 @@
       "props": [
         "statusName: string",
         "placeholder?: string",
-        "status?: { label: string; value: string; icon?: ReactNode"
+        "status: { label: string; value: string; icon?: ReactNode }[]",
+        "className?: string",
+        "defaultValue?: string"
       ],
       "formIntegration": false,
       "description": "Filtre par sélection simple piloté par les search params URL, réinitialise la pagination à la page 1 à chaque changement.",
@@ -969,7 +1766,7 @@
         "options: SelectMultipleOption[]",
         "placeholder?: string",
         "icon?: ReactNode",
-        "queryKey?: string"
+        "queryKey?: string = \"equipments\""
       ],
       "formIntegration": false,
       "description": "Filtre multi-sélection piloté par les search params URL, avec badges cliquables pour les valeurs actives.",
@@ -993,7 +1790,13 @@
       "props": [
         "searchParam: string",
         "placeholder?: string",
-        "status?: { label: string; value: string; icon?: ReactNode"
+        "status: { label: string; value: string; icon?: ReactNode }[]",
+        "className?: string",
+        "classNameWrapper?: string",
+        "shallow?: boolean = true",
+        "defaultValue?: string",
+        "clearOnDefault?: boolean = true",
+        "icon?: ReactNode"
       ],
       "formIntegration": false,
       "description": "Select lié à un query param URL (nuqs) pour filtrer des listes via l'URL sans rechargement de page.",
@@ -1017,7 +1820,10 @@
       "props": [
         "name: string",
         "placeholder?: string",
-        "options: { label: string; value: string"
+        "options: { label: string; value: string }[]",
+        "type?: string = \"string\"",
+        "defaultValue?: string",
+        "className?: string"
       ],
       "formIntegration": false,
       "description": "Select synchronisé avec l'URL (query string) via nuqs pour filtrer des listes sans état React local.",
@@ -1034,30 +1840,34 @@
       "example": "<UrlFilter name=\"status\" placeholder=\"Statut\" options={[{ label: \"Actif\", value: \"active\" }, { label: \"Inactif\", value: \"inactive\" }]} />"
     },
     {
-      "name": "Checkboxes",
+      "name": "AlertDialog",
       "category": "Forms",
-      "importPath": "@vigee-designsystem/components/Forms/Checkboxes",
-      "exportType": "default",
+      "importPath": "@vigee-designsystem/components/Forms/AlertDialog",
+      "exportType": "named",
       "props": [
-        "form: UseFormReturn<T>",
-        "name: Path<T>",
-        "label?: string",
-        "items: CheckboxItem[]",
-        "max?: number"
+        "btnSubAlert?: ReactNode",
+        "onClick: () => void",
+        "onCancel?: () => void",
+        "colorBtn?: \"outline\" | \"destructive\" = \"outline\"",
+        "trigger?: ReactNode",
+        "btnQuestion: string",
+        "isPending?: boolean",
+        "isOpen?: boolean",
+        "cancelLabel?: string = \"Annuler\"",
+        "confirmLabel?: string = \"Confirmer\""
       ],
-      "formIntegration": true,
-      "description": "Groupe de cases à cocher multi-sélection intégré react-hook-form, avec limite optionnelle de sélections.",
+      "formIntegration": false,
+      "description": "Modale de confirmation avec titre, description optionnelle et boutons Annuler/Confirmer, typiquement pour valider une action destructive.",
       "useWhen": [
-        "Sélectionner plusieurs options dans un formulaire RHF (ex: préférences, catégories) → utiliser Checkboxes",
-        "Limiter le nombre de choix possibles (ex: \"3 compétences max\") → utiliser Checkboxes avec `max`",
-        "Choix multiples sur une liste courte et fixe → utiliser Checkboxes."
+        "suppression d'une ressource nécessitant une confirmation explicite → utiliser AlertDialog",
+        "action irréversible déclenchée par un bouton → utiliser AlertDialog",
+        "soumission critique avec état pending à gérer → utiliser AlertDialog"
       ],
       "dontUseFor": [
-        "Sélection unique parmi plusieurs options → utiliser Select ou Toggles",
-        "Liste dynamique/recherchable → utiliser ComboBox",
-        "Sélection booléenne simple (on/off) → utiliser Switch."
+        "suppression directe sans confirmation → utiliser DeleteAction",
+        "action avec validation de formulaire → utiliser ActionWithValidation"
       ],
-      "example": "<Checkboxes form={form} name=\"categories\" label=\"Catégories\" items={[{ label: \"Sport\", value: \"sport\" }, { label: \"Culture\", value: \"culture\" }]} max={2} />"
+      "example": "<AlertDialog btnQuestion=\"Supprimer ce projet ?\" btnSubAlert=\"Cette action est irréversible.\" onClick={handleDelete} onCancel={handleCancel} trigger={<Button icon=\"trash\" />} />"
     },
     {
       "name": "CheckCircle",
@@ -1067,7 +1877,7 @@
       "props": [
         "checked: boolean",
         "onCheckedChange: (checked: boolean) => void",
-        "size?: \"md\" | \"lg\"",
+        "size?: \"md\" | \"lg\" = \"md\"",
         "disabled?: boolean",
         "aria-label?: string",
         "data-testid?: string"
@@ -1092,8 +1902,8 @@
         "form?: UseFormReturn<z.infer<T> & FieldValues>",
         "name: Path<z.infer<T> & FieldValues>",
         "label?: string",
-        "placeholder?: string",
-        "required?: boolean",
+        "placeholder?: string = \"Sélectionnez...\"",
+        "required?: boolean = true",
         "items: Item[]",
         "icon?: ReactNode",
         "onChange: (value: string | undefined) => void"
@@ -1122,7 +1932,7 @@
         "label?: string",
         "sublabel?: string",
         "placeholder?: string",
-        "required?: boolean",
+        "required?: boolean = true",
         "name?: Path<T>",
         "descr?: string",
         "children?: ReactNode",
@@ -1131,14 +1941,13 @@
         "onChange?: (value: string) => void",
         "value?: string",
         "helpComponent?: ReactNode",
-        "isBoolean?: boolean",
-        "options?: {",
-        "label: string",
-        "value: string",
-        "icon?: ReactNode",
-        "color?: string",
-        "disabled?: boolean",
-        "groupLabel?: string"
+        "isBoolean?: boolean = false",
+        "options?: { label: string; value: string; icon?: ReactNode; color?: string; disabled?: boolean; groupLabel?: string; }[]",
+        "variant?: \"default\" | \"outlined\" = \"default\"",
+        "searchable?: boolean = true",
+        "multi?: boolean = false",
+        "modal?: boolean = false",
+        "data-testid?: string"
       ],
       "formIntegration": true,
       "description": "Sélecteur avec recherche intégrée et support multi-valeurs, connecté à react-hook-form via Popover/Command.",
@@ -1154,42 +1963,6 @@
         "filtrage par URL côté liste → utiliser SelectSearchParam"
       ],
       "example": "<CommandListSelect form={form} name=\"status\" label=\"Statut\" options={[{ label: \"Actif\", value: \"active\" }, { label: \"Inactif\", value: \"inactive\" }]} />"
-    },
-    {
-      "name": "DatePicker",
-      "category": "Forms",
-      "importPath": "@vigee-designsystem/components/Forms/DatePicker",
-      "exportType": "default",
-      "props": [
-        "label?: string",
-        "form: UseFormReturn<T>",
-        "name: Path<T>",
-        "className?: string",
-        "starting_date?: Date | null",
-        "ending_date?: Date | null",
-        "disabled?: boolean",
-        "disabledKeys?: boolean",
-        "returnString?: boolean",
-        "years?: boolean",
-        "defaultValue?: string",
-        "required?: boolean",
-        "classNameInput?: string",
-        "classNameButton?: string"
-      ],
-      "formIntegration": true,
-      "description": "Sélecteur de date intégré react-hook-form avec saisie clavier (DD/MM/YYYY) ou calendrier popover, supportant des bornes min/max.",
-      "useWhen": [
-        "champ de date dans un formulaire react-hook-form avec validation",
-        "besoin de restreindre la plage de dates sélectionnables via `starting_date` / `ending_date`",
-        "retour de valeur en string ISO (`returnString`) ou en objet Date selon le backend",
-        "saisie clavier désactivée au profit d'un bouton calendrier (`disabledKeys`)"
-      ],
-      "dontUseFor": [
-        "plage de deux dates (début + fin) → utiliser DatePickerRange",
-        "filtre de date hors formulaire → utiliser DatePickerFilter",
-        "présélection de périodes courantes → utiliser DatePickerWithPresets"
-      ],
-      "example": "<DatePicker form={form} name=\"birthdate\" label=\"Date de naissance\" required returnString />"
     },
     {
       "name": "DatePicker",
@@ -1228,7 +2001,7 @@
         "label?: string",
         "onChange?: (date: DateRange) => void",
         "disabledDays?: Matcher | Matcher[] | undefined",
-        "disabled?: boolean",
+        "disabled?: boolean = false",
         "date?: DateRange | undefined",
         "setDate?: React.Dispatch<React.SetStateAction<DateRange | undefined>>"
       ],
@@ -1279,49 +2052,62 @@
       "example": "<DatePickerRange form={form} name=\"periode\" label=\"Période\" required disabledDates={{ before: new Date() }} />"
     },
     {
-      "name": "Input",
+      "name": "DrawerMobileWithoutContext",
       "category": "Forms",
-      "importPath": "@vigee-designsystem/components/Forms/Input",
-      "exportType": "default",
+      "importPath": "@vigee-designsystem/components/Forms/DrawerMobileWithoutContext",
+      "exportType": "named",
       "props": [
-        "form?: UseFormReturn<T>",
-        "label?: string",
-        "placeholder?: string",
-        "type?: string",
-        "required?: boolean",
-        "requiredFields?: boolean",
-        "name?: Path<T>",
-        "descr?: string",
-        "className?: string",
+        "title?: string",
+        "description?: string",
+        "children: ReactNode",
+        "trigger: ReactNode",
+        "icon?: ReactNode",
         "disabled?: boolean",
-        "id?: string",
-        "min?: number | string",
-        "max?: number | string",
-        "step?: number",
-        "helpComponent?: ReactNode",
-        "onChange?: (e: ChangeEvent) => void",
-        "value?: string",
-        "minimalist?: boolean",
-        "maxLength?: number",
-        "link?: string | null",
-        "white?: boolean",
-        "autoFocus?: boolean",
-        "data-testid?: string"
+        "openForced?: boolean",
+        "cancelButton?: boolean",
+        "setOpenForced?: React.Dispatch<React.SetStateAction<boolean>>",
+        "size?: \"sm\" | \"md\" | \"lg\" = \"sm\""
       ],
-      "formIntegration": true,
-      "description": "Input texte intégré react-hook-form pour formulaires Vigee, avec label, validation, compteur de caractères et lien externe optionnel.",
+      "formIntegration": false,
+      "description": "Drawer (mobile) / Dialog (desktop) responsive auto-switché, sans context externe requis, pour afficher du contenu ou des formulaires dans un panneau flottant.",
       "useWhen": [
-        "formulaire avec `react-hook-form` → utiliser avec `form` + `name`",
-        "champ texte/email/number/password dans un `Form`",
-        "affichage d'aide contextuelle → utiliser `helpComponent`",
-        "input standalone sans form → utiliser sans `form` ni `name`, avec `value` + `onChange`"
+        "afficher un formulaire secondaire dans un panneau sans setup de context",
+        "ouvrir un sous-formulaire depuis une ligne de tableau",
+        "afficher des détails supplémentaires au clic sur un élément",
+        "encapsuler un contenu long avec ScrollArea automatique sur mobile et desktop."
       ],
       "dontUseFor": [
-        "sélection dans une liste → utiliser Select",
-        "recherche avec suggestions → utiliser ComboBox",
-        "saisie longue multi-lignes → utiliser TextArea"
+        "gestion d'état d'ouverture contrôlée depuis le parent → utiliser Drawer",
+        "contenu nécessitant un contexte partagé entre composants → utiliser useDrawerContext."
       ],
-      "example": "<Input form={form} name=\"email\" label=\"Email\" placeholder=\"john@example.com\" type=\"email\" required />"
+      "example": "<DrawerMobileWithoutContext title=\"Modifier\" trigger={<Button icon=\"edit\" />} size=\"md\">{children}</DrawerMobileWithoutContext>"
+    },
+    {
+      "name": "InlineText",
+      "category": "Forms",
+      "importPath": "@vigee-designsystem/components/Forms/InlineText",
+      "exportType": "named",
+      "props": [
+        "value: string",
+        "onCommit: (next: string) => void",
+        "placeholder?: string",
+        "disabled?: boolean",
+        "maxLength?: number = 255",
+        "fitContent?: boolean = false",
+        "className?: string",
+        "aria-label?: string",
+        "data-testid?: string"
+      ],
+      "formIntegration": false,
+      "description": "Texte éditable en place, sans cadre : se lit comme un libellé, se modifie en tapant dedans. Entrée ou perte de focus enregistre, Échap annule.",
+      "useWhen": [
+        "renommer un élément directement dans une liste ou une carte (titre de tâche, nom d'item) sans ouvrir de formulaire → utiliser InlineText"
+      ],
+      "dontUseFor": [
+        "champ de formulaire avec label et validation → utiliser Forms/Input",
+        "texte multi-lignes → utiliser Forms/TextArea"
+      ],
+      "example": "<InlineText fitContent value={task.title} onCommit={rename} /> — le champ prend la largeur de son texte, pour coller un repère juste après le nom"
     },
     {
       "name": "InputDropZoneFile",
@@ -1332,7 +2118,7 @@
         "form?: UseFormReturn<T>",
         "name: Path<T>",
         "extensions?: string[]",
-        "multiple?: boolean",
+        "multiple?: boolean = false",
         "accept?: string"
       ],
       "formIntegration": true,
@@ -1357,11 +2143,11 @@
       "props": [
         "form?: UseFormReturn<T>",
         "name: Path<T>",
-        "label?: string",
-        "placeholder?: string",
+        "label?: string = \"Téléphone mobile\"",
+        "placeholder?: string = \"ex : 0695069999\"",
         "description?: string",
-        "required?: boolean",
-        "disabled?: boolean",
+        "required?: boolean = false",
+        "disabled?: boolean = false",
         "className?: string"
       ],
       "formIntegration": true,
@@ -1385,10 +2171,10 @@
       "props": [
         "title?: string",
         "unit?: string",
-        "interval?: number",
-        "min?: number",
-        "max?: number",
-        "start?: number",
+        "interval?: number = 0.5",
+        "min?: number = 0.5",
+        "max?: number = 100",
+        "start?: number = 1",
         "form?: UseFormReturn<T>",
         "name: Path<T>",
         "onChange?: (e: number) => void"
@@ -1415,7 +2201,7 @@
         "form: UseFormReturn<TFormValues>",
         "name: Path<TFormValues>",
         "label?: string",
-        "disabled?: boolean",
+        "disabled?: boolean = false",
         "className?: string",
         "required?: boolean"
       ],
@@ -1440,7 +2226,7 @@
       "props": [
         "value: number",
         "onChange: (next: number) => void",
-        "step?: number",
+        "step?: number = 0.5",
         "disabled?: boolean",
         "className?: string",
         "data-testid?: string"
@@ -1458,38 +2244,31 @@
       "example": "<RatingSlider value={note} onChange={setNote} />"
     },
     {
-      "name": "resolveInlineCommit",
-      "category": "Forms",
-      "importPath": "@vigee-designsystem/components/Forms/InlineText",
-      "exportType": "named",
-      "props": [
-        "value: string",
-        "onCommit: (next: string) => void",
-        "placeholder?: string",
-        "disabled?: boolean",
-        "maxLength?: number",
-        "fitContent?: boolean",
-        "className?: string",
-        "aria-label?: string",
-        "data-testid?: string"
-      ],
-      "formIntegration": false,
-      "description": "Texte éditable en place, sans cadre : se lit comme un libellé, se modifie en tapant dedans. Entrée ou perte de focus enregistre, Échap annule.",
-      "useWhen": [
-        "renommer un élément directement dans une liste ou une carte (titre de tâche, nom d'item) sans ouvrir de formulaire → utiliser InlineText"
-      ],
-      "dontUseFor": [
-        "champ de formulaire avec label et validation → utiliser Forms/Input",
-        "texte multi-lignes → utiliser Forms/TextArea"
-      ],
-      "example": "<InlineText fitContent value={task.title} onCommit={rename} /> — le champ prend la largeur de son texte, pour coller un repère juste après le nom"
-    },
-    {
       "name": "SearchSelectAsync",
       "category": "Forms",
       "importPath": "@vigee-designsystem/components/Forms/SelectSearchAsync",
       "exportType": "default",
-      "props": [],
+      "props": [
+        "classname?: string",
+        "name?: Path<T>",
+        "form?: UseFormReturn<T>",
+        "disabled?: boolean = false",
+        "placeholder?: string = \"Rechercher...\"",
+        "loadOptions: (query: string) => Promise<Option[]>",
+        "isClearable?: boolean = true",
+        "preprocessOnChange?: (e: OnChangeValue<Option, IsMulti>) => any",
+        "defaultOptions?: Option[] | boolean",
+        "defaultValue?: IsMulti extends true ? MultiValue<Option> : SingleValue<Option>",
+        "value?: PropsValue<Option>",
+        "label?: string",
+        "isMulti?: IsMulti",
+        "noOptionsMessage?: string = \"Aucun résultat\"",
+        "onChange?: (newValue: OnChangeValue<Option, IsMulti>, actionMeta: ActionMeta<Option>) => void",
+        "isSearchable?: boolean = true",
+        "customErrorMessage?: string",
+        "menuPlacement?: \"auto\" | \"bottom\" | \"top\" = \"auto\"",
+        "autofocus?: boolean = false"
+      ],
       "formIntegration": true,
       "description": "Select avec recherche asynchrone (react-select/async) intégrable dans un Form react-hook-form ou en standalone, mono ou multi-valeur.",
       "useWhen": [
@@ -1514,7 +2293,7 @@
         "title: string",
         "subtitle?: string",
         "className?: string",
-        "variant?: \"default\" | \"muted\""
+        "variant?: \"default\" | \"muted\" = \"default\""
       ],
       "formIntegration": false,
       "description": "Titre de section H2 stylisé avec sous-titre optionnel pour structurer visuellement un formulaire ou une page.",
@@ -1539,7 +2318,7 @@
         "label?: string",
         "descr?: string",
         "options: SegmentedOption[]",
-        "size?: Size",
+        "size?: Size = 'sm'",
         "disabled?: boolean",
         "className?: string",
         "value?: string",
@@ -1572,7 +2351,7 @@
         "className?: string",
         "optionsClassName?: string",
         "disabled?: boolean",
-        "nowrap?: boolean",
+        "nowrap?: boolean = true",
         "data-testid?: string"
       ],
       "formIntegration": false,
@@ -1588,53 +2367,25 @@
       "example": "<SegmentedToggle value={mode} onChange={setMode} options={[{ value: \"a\", label: \"A\", icon: <IconA /> }, { value: \"b\", label: \"B\" }]} />"
     },
     {
-      "name": "Select",
-      "category": "Forms",
-      "importPath": "@vigee-designsystem/components/Forms/Select",
-      "exportType": "default",
-      "props": [
-        "form?: UseFormReturn<T>",
-        "label?: string",
-        "sublabel?: string",
-        "placeholder?: string",
-        "required?: boolean",
-        "name?: Path<T>",
-        "descr?: string",
-        "children?: ReactNode",
-        "className?: string",
-        "disabled?: boolean",
-        "onChange?: (value: string) => void",
-        "value?: string",
-        "helpComponent?: ReactNode",
-        "isBoolean?: boolean",
-        "options?: {",
-        "label: string",
-        "value: string",
-        "icon?: ReactNode",
-        "color?: string",
-        "disabled?: boolean"
-      ],
-      "formIntegration": true,
-      "description": "Select déroulant intégré react-hook-form (ou standalone) avec label, aide contextuelle HoverCard et support booléen.",
-      "useWhen": [
-        "champ de sélection unique dans un formulaire RHF avec validation → utiliser avec `form` + `name` + `options`",
-        "sélection standalone sans formulaire → utiliser avec `value` + `onChange` + `options`",
-        "valeur booléenne stockée comme string → utiliser avec `isBoolean={true}`",
-        "option d'aide contextuelle nécessaire → utiliser avec `helpComponent`"
-      ],
-      "dontUseFor": [
-        "sélection multiple → utiliser MultiSelect",
-        "recherche dans une longue liste → utiliser ComboBox",
-        "filtres URL sans formulaire → utiliser SelectFilter"
-      ],
-      "example": "<Select form={form} name=\"status\" label=\"Statut\" options={[{ label: \"Actif\", value: \"active\" }, { label: \"Inactif\", value: \"inactive\" }]} />"
-    },
-    {
       "name": "SelectSearch",
       "category": "Forms",
       "importPath": "@vigee-designsystem/components/Forms/SelectSearch",
       "exportType": "default",
-      "props": [],
+      "props": [
+        "name: Path<T>",
+        "form?: UseFormReturn<T>",
+        "disabled?: boolean = false",
+        "placeholder?: string = \"Rechercher...\"",
+        "isClearable?: boolean = true",
+        "preprocessOnChange?: (e: OnChangeValue<Option, IsMulti>) => any",
+        "options: Option[]",
+        "label?: string",
+        "isMulti?: IsMulti",
+        "defaultOptions?: Option[]",
+        "defaultValue?: IsMulti extends true ? MultiValue<Option> : SingleValue<Option>",
+        "classNameContainer?: string",
+        "sublabel?: string"
+      ],
       "formIntegration": true,
       "description": "Select avec recherche intégrée (react-select) connecté à react-hook-form, support mono et multi-sélection avec options statiques.",
       "useWhen": [
@@ -1657,94 +2408,27 @@
       "props": [
         "value: number",
         "onChange?: (value: number) => void",
-        "readOnly?: boolean",
-        "disabled?: boolean",
-        "labels?: string[]",
+        "readOnly?: boolean = false",
+        "disabled?: boolean = false",
+        "labels?: string[] = DEFAULT_LABELS",
         "placeholder?: string",
-        "size?: \"md\" | \"lg\"",
-        "testIdPrefix?: string",
+        "size?: \"md\" | \"lg\" = \"md\"",
+        "testIdPrefix?: string = \"rating\"",
         "className?: string"
       ],
-      "formIntegration": false
-    },
-    {
-      "name": "Switch",
-      "category": "Forms",
-      "importPath": "@vigee-designsystem/components/Forms/Switch",
-      "exportType": "default",
-      "props": [
-        "form?: UseFormReturn<T>",
-        "label?: string",
-        "placeholder?: string",
-        "required?: boolean",
-        "name?: Path<T>",
-        "descr?: string",
-        "onChange?: (value: boolean) => void",
-        "value?: boolean",
-        "className?: string",
-        "children?: ReactNode",
-        "disabled?: boolean",
-        "inverted?: boolean",
-        "icon?: ReactNode",
-        "pending?: boolean",
-        "data-testid?: string"
-      ],
-      "formIntegration": true,
-      "description": "Toggle on/off intégré react-hook-form ou contrôlé manuellement, affiché dans un encadré arrondi avec label, description et icône optionnelle.",
+      "formIntegration": false,
+      "description": "Notation sur 5 étoiles contrôlée par le parent (`value` / `onChange`), avec le libellé de la note sous les étoiles ; recliquer la note choisie la remet à zéro.",
       "useWhen": [
-        "activer/désactiver une option dans un formulaire react-hook-form → utiliser avec `form` + `name`",
-        "toggle contrôlé hors formulaire → utiliser avec `value` + `onChange`",
-        "logique inversée (ex: \"désactiver les notifications\") → utiliser avec `inverted`",
-        "état en attente de réponse serveur → utiliser avec `pending`"
+        "recueillir une note de satisfaction ou d'évaluation (recette, avis client) → utiliser avec `value` + `onChange`",
+        "afficher une note déjà donnée, sans interaction → utiliser `readOnly`",
+        "bloquer la saisie pendant un enregistrement → utiliser `disabled`"
       ],
       "dontUseFor": [
-        "sélection parmi plusieurs options exclusives → utiliser Select",
-        "activation d'une option parmi une liste de choix booléens groupés → utiliser Toggles",
-        "case à cocher dans un formulaire → utiliser Checkboxes"
+        "note sur une échelle continue ou sur plus de 5 → utiliser RatingSlider",
+        "choix oui / non → utiliser Switch",
+        "champ branché sur react-hook-form par `form` + `name` → ce composant ne l'est pas : garder la note dans un état et la reporter dans le formulaire"
       ],
-      "example": "<Switch form={form} name=\"isActive\" label=\"Activer le service\" descr=\"Le service sera disponible immédiatement.\" />"
-    },
-    {
-      "name": "TextArea",
-      "category": "Forms",
-      "importPath": "@vigee-designsystem/components/Forms/TextArea",
-      "exportType": "default",
-      "props": [
-        "form?: UseFormReturn<T>",
-        "id?: string",
-        "name: Path<T>",
-        "label?: string",
-        "required?: boolean",
-        "placeholder?: string",
-        "count?: boolean",
-        "max?: number",
-        "descr?: string",
-        "defaultValue?: string",
-        "className?: string",
-        "minHeight?: string",
-        "disabled?: boolean",
-        "onChange?: (e: ChangeEvent) => void",
-        "onBlur?: (e: React.FocusEvent<HTMLTextAreaElement>) => void",
-        "helpComponent?: ReactNode",
-        "rows?: number",
-        "white?: boolean",
-        "fullWidth?: boolean",
-        "rezizable?: boolean",
-        "data-testid?: string"
-      ],
-      "formIntegration": true,
-      "description": "Textarea multi-lignes intégré react-hook-form avec label, compteur de caractères, aide au survol et validation.",
-      "useWhen": [
-        "champ de saisie longue (notes, description, commentaire) dans un formulaire react-hook-form Vigee",
-        "besoin d'un compteur de caractères avec limite (`max`)",
-        "affichage d'une aide contextuelle via `helpComponent`",
-        "textarea redimensionnable (`rezizable`) dans un formulaire structuré"
-      ],
-      "dontUseFor": [
-        "saisie courte sur une seule ligne → utiliser Input",
-        "saisie de notes structurées avec contexte métier → utiliser Notes"
-      ],
-      "example": "<TextArea form={form} name=\"description\" label=\"Description\" placeholder=\"Décrivez le projet...\" rows={5} max={500} required />"
+      "example": "<StarRating value={rating} onChange={setRating} placeholder=\"Votre avis\" testIdPrefix=\"review\" />"
     },
     {
       "name": "TimePicker",
@@ -1756,7 +2440,7 @@
         "label?: string",
         "sublabel?: string",
         "placeholder?: string",
-        "required?: boolean",
+        "required?: boolean = true",
         "name?: Path<T>",
         "descr?: string",
         "children?: ReactNode",
@@ -1766,7 +2450,7 @@
         "value?: string",
         "helpComponent?: ReactNode",
         "isBoolean?: boolean",
-        "step?: number",
+        "step?: number = 15",
         "minTime?: string",
         "maxTime?: string"
       ],
@@ -1790,7 +2474,10 @@
       "category": "Forms",
       "importPath": "@vigee-designsystem/components/Forms/TitleBold",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?: string",
+        "title: string"
+      ],
       "formIntegration": false,
       "description": "Titre de section H2 gras en slate-400, utilisé pour structurer visuellement les blocs d'un formulaire.",
       "useWhen": [
@@ -1804,130 +2491,18 @@
       "example": "<TitleBold title=\"Informations personnelles\" />"
     },
     {
-      "name": "Toggles",
-      "category": "Forms",
-      "importPath": "@vigee-designsystem/components/Forms/Toggles",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": true,
-      "description": "Groupe de boutons toggle (sélection unique ou multiple) intégré react-hook-form, avec support icône, description, checkbox et grille.",
-      "useWhen": [
-        "choix exclusif entre options visuelles dans un formulaire (ex: type de salle, mode de facturation) → utiliser Toggles",
-        "sélection multiple d'options avec rendu carte dans un Form → utiliser Toggles avec `multi`",
-        "options avec icône + description à présenter sous forme de grille → utiliser Toggles avec `columns`"
-      ],
-      "dontUseFor": [
-        "sélection dans une longue liste textuelle → utiliser Select",
-        "filtrage de données hors formulaire → utiliser CheckboxFilter",
-        "cases à cocher simples sans visuel carte → utiliser Checkboxes"
-      ],
-      "example": "<Toggles form={form} name=\"type\" label=\"Type de salle\" options={[{ value: \"reunion\", label: \"Réunion\", icon: <IconReunion /> }, { value: \"bureau\", label: \"Bureau\" }]} />"
-    },
-    {
-      "name": "useAlertContext",
-      "category": "Forms",
-      "importPath": "@vigee-designsystem/components/Forms/AlertDialog",
-      "exportType": "named",
-      "props": [
-        "btnSubAlert?: ReactNode",
-        "onClick: () => void",
-        "onCancel?: () => void",
-        "colorBtn?: \"outline\" | \"destructive\"",
-        "trigger?: ReactNode",
-        "btnQuestion: string",
-        "isPending?: boolean",
-        "isOpen?: boolean",
-        "cancelLabel?: string",
-        "confirmLabel?: string"
-      ],
-      "formIntegration": false,
-      "description": "Modale de confirmation avec titre, description optionnelle et boutons Annuler/Confirmer, typiquement pour valider une action destructive.",
-      "useWhen": [
-        "suppression d'une ressource nécessitant une confirmation explicite → utiliser AlertDialog",
-        "action irréversible déclenchée par un bouton → utiliser AlertDialog",
-        "soumission critique avec état pending à gérer → utiliser AlertDialog"
-      ],
-      "dontUseFor": [
-        "suppression directe sans confirmation → utiliser DeleteAction",
-        "action avec validation de formulaire → utiliser ActionWithValidation"
-      ],
-      "example": "<AlertDialog btnQuestion=\"Supprimer ce projet ?\" btnSubAlert=\"Cette action est irréversible.\" onClick={handleDelete} onCancel={handleCancel} trigger={<Button icon=\"trash\" />} />"
-    },
-    {
-      "name": "useDrawerContext",
-      "category": "Forms",
-      "importPath": "@vigee-designsystem/components/Forms/DrawerMobile",
-      "exportType": "named",
-      "props": [
-        "title?: string",
-        "description?: string",
-        "children: ReactNode",
-        "trigger: ReactNode",
-        "icon?: ReactNode",
-        "disabled?: boolean",
-        "openForced?: boolean",
-        "cancelButton?: boolean",
-        "setOpenForced?: React.Dispatch<React.SetStateAction<boolean>>",
-        "size?: \"sm\" | \"md\" | \"lg\""
-      ],
-      "formIntegration": false,
-      "description": "Panneau contextuel responsive : Dialog sur desktop (≥768px) et Drawer bas d'écran sur mobile, avec ScrollArea intégrée.",
-      "useWhen": [
-        "formulaire secondaire déclenché par un bouton dans une liste → encapsuler dans DrawerMobile",
-        "affichage de détails ou d'édition rapide sans quitter la page → utiliser DrawerMobile",
-        "contenu contextuel avec titre/description qui doit s'adapter mobile/desktop automatiquement → utiliser DrawerMobile"
-      ],
-      "dontUseFor": [
-        "navigation entre pages ou étapes multiples → utiliser Stepper",
-        "confirmation d'action destructive → utiliser ActionWithValidation",
-        "panneau latéral persistant → utiliser Drawer"
-      ],
-      "example": "<DrawerMobile title=\"Modifier l'adresse\" trigger={<Button icon=\"edit\" />} size=\"md\">{children}</DrawerMobile>"
-    },
-    {
-      "name": "useDrawerContext",
-      "category": "Forms",
-      "importPath": "@vigee-designsystem/components/Forms/DrawerMobileWithoutContext",
-      "exportType": "named",
-      "props": [
-        "title?: string",
-        "description?: string",
-        "children: ReactNode",
-        "trigger: ReactNode",
-        "icon?: ReactNode",
-        "disabled?: boolean",
-        "openForced?: boolean",
-        "cancelButton?: boolean",
-        "setOpenForced?: React.Dispatch<React.SetStateAction<boolean>>",
-        "size?: \"sm\" | \"md\" | \"lg\""
-      ],
-      "formIntegration": false,
-      "description": "Drawer (mobile) / Dialog (desktop) responsive auto-switché, sans context externe requis, pour afficher du contenu ou des formulaires dans un panneau flottant.",
-      "useWhen": [
-        "afficher un formulaire secondaire dans un panneau sans setup de context",
-        "ouvrir un sous-formulaire depuis une ligne de tableau",
-        "afficher des détails supplémentaires au clic sur un élément",
-        "encapsuler un contenu long avec ScrollArea automatique sur mobile et desktop."
-      ],
-      "dontUseFor": [
-        "gestion d'état d'ouverture contrôlée depuis le parent → utiliser Drawer",
-        "contenu nécessitant un contexte partagé entre composants → utiliser useDrawerContext."
-      ],
-      "example": "<DrawerMobileWithoutContext title=\"Modifier\" trigger={<Button icon=\"edit\" />} size=\"md\">{children}</DrawerMobileWithoutContext>"
-    },
-    {
       "name": "ContentGuard",
       "category": "Guards",
       "importPath": "@vigee-designsystem/components/Guards/ContentGuard",
       "exportType": "named",
       "props": [
         "children: ReactNode",
-        "isLoading?: boolean",
-        "isError?: boolean",
-        "isEmpty?: boolean",
-        "LoadingComponent?: ReactElement | ComponentType",
-        "ErrorComponent?: ReactElement | ComponentType",
-        "EmptyComponent?: ReactElement | ComponentType"
+        "isLoading?: boolean = false",
+        "isError?: boolean = false",
+        "isEmpty?: boolean = false",
+        "LoadingComponent?: ReactElement | ComponentType = <TableSkeleton />",
+        "ErrorComponent?: ReactElement | ComponentType = <Error />",
+        "EmptyComponent?: ReactElement | ComponentType = <EmptyIllustration />"
       ],
       "formIntegration": false,
       "description": "Garde conditionnel qui affiche loading / erreur / vide ou le contenu réel selon l'état d'un fetch.",
@@ -1944,41 +2519,14 @@
       "example": "<ContentGuard isLoading={isLoading} isError={isError} isEmpty={!data?.length}><DataTable data={data} /></ContentGuard>"
     },
     {
-      "name": "PageHeader",
-      "category": "Headers",
-      "importPath": "@vigee-designsystem/components/Headers/PageHeader",
-      "exportType": "named",
-      "props": [
-        "title: string",
-        "subtitle?: string | null",
-        "children?: ReactNode",
-        "small?: boolean",
-        "icon?: ReactNode",
-        "className?: string",
-        "variant?: \"default\" | \"ghost\"",
-        "iconClassName?: string",
-        "classNameTitle?: string",
-        "classNameSubtitle?: string"
-      ],
-      "formIntegration": false,
-      "description": "Bandeau de titre de page avec sous-titre optionnel, icône et zone d'actions à droite.",
-      "useWhen": [
-        "en-tête d'une page principale avec titre + boutons d'action → utiliser PageHeader",
-        "page avec contexte visuel → ajouter `icon` et `subtitle`",
-        "section sans fond blanc (tableau de bord) → utiliser `variant=\"ghost\"`"
-      ],
-      "dontUseFor": [
-        "titre de section interne dans une page → utiliser SectionTitle",
-        "titre de carte ou panneau → utiliser RoundedContainer"
-      ],
-      "example": "<PageHeader title=\"Projets\" subtitle=\"Liste de vos projets actifs\" icon={<FolderIcon />}><Button icon=\"add\" onClick={handleAdd} /></PageHeader>"
-    },
-    {
       "name": "EmptyDocuments",
       "category": "Illustration",
       "importPath": "@vigee-designsystem/components/Illustration/EmptyDocuments",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "color?: string",
+        "className?: string"
+      ],
       "formIntegration": false,
       "description": "Illustration SVG d'état vide pour les listes ou pages sans documents.",
       "useWhen": [
@@ -1993,43 +2541,14 @@
       "example": "<EmptyDocuments color=\"text-primary\" className=\"mx-auto\" />"
     },
     {
-      "name": "EmptyIllustration",
-      "category": "Illustration",
-      "importPath": "@vigee-designsystem/components/Illustration/EmptyIllustration",
-      "exportType": "default",
-      "props": [
-        "text?: string",
-        "buttonLink?: string",
-        "buttonText?: string",
-        "subtitle?: string",
-        "children?: ReactNode",
-        "supportEmail?: string",
-        "button?: boolean",
-        "className?: string",
-        "classNameImage?: string",
-        "color?: string",
-        "image?: ReactNode",
-        "type?: \"street\" | \"projects\" | \"documents\" | \"users\" | \"default\""
-      ],
-      "formIntegration": false,
-      "description": "Placeholder visuel état vide avec illustration thématique, titre, sous-titre et bouton d'action optionnel.",
-      "useWhen": [
-        "liste sans données à afficher (projets, documents, utilisateurs) → afficher un état vide engageant",
-        "page sans résultats après filtrage → guider l'utilisateur vers une action",
-        "onboarding d'une section vierge → orienter vers la création du premier élément"
-      ],
-      "dontUseFor": [
-        "erreurs serveur ou accès refusé → utiliser Error ou Unauthorized",
-        "chargement en cours → utiliser Loader ou DashboardSkeleton"
-      ],
-      "example": "<EmptyIllustration type=\"documents\" text=\"Aucun document\" subtitle=\"Ajoutez votre premier document pour commencer.\" buttonLink=\"/documents/new\" buttonText=\"Créer un document\" />"
-    },
-    {
       "name": "EmptyProjects",
       "category": "Illustration",
       "importPath": "@vigee-designsystem/components/Illustration/EmptyProjects",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "color?: string",
+        "className?: string"
+      ],
       "formIntegration": false,
       "description": "Illustration SVG d'état vide pour une liste ou page de projets, avec couleur et taille personnalisables.",
       "useWhen": [
@@ -2048,7 +2567,10 @@
       "category": "Illustration",
       "importPath": "@vigee-designsystem/components/Illustration/EmptyUsers",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "color?: string",
+        "className?: string"
+      ],
       "formIntegration": false,
       "description": "Illustration SVG \"liste d'utilisateurs vide\" pour les états zéro-donnée dans les vues de gestion d'utilisateurs.",
       "useWhen": [
@@ -2074,8 +2596,8 @@
         "subtitle?: string",
         "img?: StaticImageData",
         "children?: ReactNode",
-        "width?: number",
-        "height?: number"
+        "width?: number = 500",
+        "height?: number = 500"
       ],
       "formIntegration": false,
       "description": "Panneau illustratif pleine hauteur sur fond primaire, avec image animée (framer-motion), titre bicolore et sous-titre — typiquement la colonne gauche d'une page de login ou d'onboarding.",
@@ -2095,7 +2617,13 @@
       "category": "Informations",
       "importPath": "@vigee-designsystem/components/Informations/AlertInfo",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "title: string",
+        "description?: string",
+        "type: \"neutral\" | \"informative\" | \"destructive\" | \"warning\" | \"question\" | \"success\" | \"special\"",
+        "className?: string",
+        "link?: string"
+      ],
       "formIntegration": false,
       "description": "Bandeau d'alerte contextuel avec icône, titre, description optionnelle et lien externe, décliné en 7 niveaux sémantiques.",
       "useWhen": [
@@ -2137,8 +2665,8 @@
       "exportType": "default",
       "props": [
         "stats: StatItem[]",
-        "columns?: number",
-        "small?: boolean",
+        "columns?: number = 3",
+        "small?: boolean = false",
         "className?: string"
       ],
       "formIntegration": false,
@@ -2160,7 +2688,12 @@
       "category": "KPI",
       "importPath": "@vigee-designsystem/components/KPI/NumberTicket",
       "exportType": "default",
-      "props": [],
+      "props": [
+        "value: number",
+        "direction?: \"up\" | \"down\" = \"up\"",
+        "className?: string",
+        "delay?: number = 0"
+      ],
       "formIntegration": false,
       "description": "Affiche un nombre animé qui défile jusqu'à sa valeur cible dès que le composant entre dans le viewport.",
       "useWhen": [
@@ -2213,9 +2746,16 @@
         "value: string | number",
         "unit?: \"€\" | \"h\" | \"%\" | string",
         "sublabel?: ReactNode",
-        "accent?: StatWidgetAccent",
+        "accent?: StatWidgetAccent = \"indigo\"",
         "icon?: ReactNode",
-        "trend?: { value: string; type: \"positive\" | \"negative\" | \"neutral\""
+        "trend?: { value: string; type: \"positive\" | \"negative\" | \"neutral\" }",
+        "footer?: ReactNode",
+        "detail?: ReactNode",
+        "children?: ReactNode",
+        "sparkline?: number[]",
+        "valueClassName?: string",
+        "className?: string",
+        "data-testid?: string"
       ],
       "formIntegration": false,
       "description": "Carte KPI premium sur fond blanc : libellé, grande valeur, sous-libellé, accent coloré, footer et popover de détail optionnel. Style « cockpit de pilotage ».",
@@ -2238,7 +2778,7 @@
       "exportType": "named",
       "props": [
         "title: string",
-        "columns?: 1 | 2 | 3 | 4",
+        "columns?: 1 | 2 | 3 | 4 = 3",
         "action?: ReactNode",
         "children: ReactNode",
         "className?: string",
@@ -2308,7 +2848,9 @@
       "category": "Loaders",
       "importPath": "@vigee-designsystem/components/Loaders/Spinner",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?: string"
+      ],
       "formIntegration": false,
       "description": "Indicateur de chargement circulaire animé, à intégrer inline dans un bouton, une carte ou une zone de contenu.",
       "useWhen": [
@@ -2327,7 +2869,7 @@
       "importPath": "@vigee-designsystem/components/Login/Copyright",
       "exportType": "default",
       "props": [
-        "clientName?: string"
+        "clientName?: string = \"Vigee\""
       ],
       "formIntegration": false,
       "description": "Affiche le pied de page de copyright avec l'année courante, le nom du client et un lien vers Vigee.",
@@ -2350,10 +2892,10 @@
         "logo: StaticImageData",
         "clientName?: string",
         "variant?: \"default\" | \"destructive\" | \"outline\" | \"secondary\" | \"ghost\"",
-        "callbackUrl?: string",
-        "noCopyright?: boolean",
-        "imageWidth?: number",
-        "imageHeight?: number"
+        "callbackUrl?: string = \"/\"",
+        "noCopyright?: boolean = false",
+        "imageWidth?: number = 90",
+        "imageHeight?: number = 90"
       ],
       "formIntegration": false,
       "description": "Page de connexion complète avec email/mot de passe, validation Zod et authentification via NextAuth credentials.",
@@ -2394,16 +2936,20 @@
       "example": "<VariableLogo title=\"Vigee\" href=\"/dashboard\" big white />"
     },
     {
-      "name": "AnimatedListItem",
+      "name": "AnimatedList",
       "category": "magicui",
       "importPath": "@vigee-designsystem/components/magicui/animated-list",
       "exportType": "named",
       "props": [
         "className?: string",
         "children: ReactNode",
-        "delay?: number"
+        "delay?: number = 1000"
       ],
       "formIntegration": false,
+      "exports": [
+        "AnimatedList",
+        "AnimatedListItem"
+      ],
       "description": "Affiche une liste d'éléments qui apparaissent un par un avec animation spring, en boucle à intervalle configurable.",
       "useWhen": [
         "feed de notifications animé sur un dashboard ou landing page → utiliser AnimatedList",
@@ -2422,13 +2968,13 @@
       "exportType": "named",
       "props": [
         "className?: string",
-        "size?: number",
-        "duration?: number",
-        "borderWidth?: number",
-        "anchor?: number",
-        "colorFrom?: string",
-        "colorTo?: string",
-        "delay?: number"
+        "size?: number = 200",
+        "duration?: number = 15",
+        "borderWidth?: number = 1.5",
+        "anchor?: number = 90",
+        "colorFrom?: string = \"#ffaa40\"",
+        "colorTo?: string = \"#9c40ff\"",
+        "delay?: number = 0"
       ],
       "formIntegration": false,
       "description": "Effet de bordure animée avec un faisceau lumineux qui tourne autour d'un conteneur pour attirer l'attention.",
@@ -2451,7 +2997,7 @@
       "exportType": "named",
       "props": [
         "children: JSX.Element",
-        "width?: \"fit-content\" | \"100%\"",
+        "width?: \"fit-content\" | \"100%\" = \"fit-content\"",
         "boxColor?: string",
         "duration?: number"
       ],
@@ -2475,16 +3021,15 @@
       "exportType": "named",
       "props": [
         "className?: string",
-        "magnification?: number",
-        "distance?: number",
-        "direction?: \"top\" | \"middle\" | \"bottom\"",
+        "magnification?: number = DEFAULT_MAGNIFICATION",
+        "distance?: number = DEFAULT_DISTANCE",
+        "direction?: \"top\" | \"middle\" | \"bottom\" = \"bottom\"",
         "children: ReactNode"
       ],
       "formIntegration": false,
       "exports": [
         "Dock",
-        "DockIcon",
-        "dockVariants"
+        "DockIcon"
       ],
       "description": "Barre de navigation style macOS avec effet de grossissement magnétique au survol, basée sur Framer Motion.",
       "useWhen": [
@@ -2504,10 +3049,10 @@
       "importPath": "@vigee-designsystem/components/magicui/hero-video-dialog",
       "exportType": "default",
       "props": [
-        "animationStyle?: AnimationStyle",
+        "animationStyle?: AnimationStyle = \"from-center\"",
         "videoSrc: string",
         "thumbnailSrc: string",
-        "thumbnailAlt?: string",
+        "thumbnailAlt?: string = \"Video thumbnail\"",
         "className?: string"
       ],
       "formIntegration": false,
@@ -2531,10 +3076,10 @@
       "props": [
         "className?: string",
         "reverse?: boolean",
-        "pauseOnHover?: boolean",
+        "pauseOnHover?: boolean = false",
         "children?: ReactNode",
-        "vertical?: boolean",
-        "repeat?: number"
+        "vertical?: boolean = false",
+        "repeat?: number = 4"
       ],
       "formIntegration": false,
       "description": "Défilement infini en boucle d'éléments enfants, horizontalement ou verticalement, avec pause optionnelle au survol.",
@@ -2557,8 +3102,8 @@
       "props": [
         "words: string",
         "delayMultiple?: number",
-        "wrapperFramerProps?: Variants",
-        "framerProps?: Variants",
+        "wrapperFramerProps?: Variants = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.2, }, }, }",
+        "framerProps?: Variants = { hidden: { y: 20, opacity: 0 }, show: { y: 0, opacity: 1 }, }",
         "className?: string"
       ],
       "formIntegration": false,
@@ -2582,7 +3127,7 @@
       "exportType": "default",
       "props": [
         "trigger: string | ReactNode",
-        "items: DropDownMenuItemType[],",
+        "items: DropDownMenuItemType[]",
         "menuClassName?: string"
       ],
       "formIntegration": false,
@@ -2607,18 +3152,29 @@
         "logo?: StaticImageData",
         "background?: string",
         "dark?: boolean",
-        "text?: string",
+        "text?: string = `black`",
         "children: ReactNode",
         "noLogo?: boolean",
-        "navigation: {",
-        "name: string",
-        "href: string",
-        "icon: ReactNode",
-        "iconFill?: ReactNode",
-        "slug: string",
-        "highlight?: boolean",
-        "notifications?: number | undefined | null",
-        "persist?: boolean"
+        "navigation: { name: string; href: string; icon: ReactNode; iconFill?: ReactNode; slug: string; highlight?: boolean; notifications?: number | undefined | null; persist?: boolean; }[]",
+        "menu?: boolean = false",
+        "logoSmall?: StaticImageData",
+        "title?: string",
+        "width?: number",
+        "height?: number",
+        "withSelect?: boolean",
+        "selectOptions?: { value: string; label: string }[]",
+        "onChangeSelect?: (selected: string) => void",
+        "valueSelect?: string",
+        "classNameSelect?: string",
+        "selectPlaceHolder?: string",
+        "defaultValueSelect?: string",
+        "bgColor?: string",
+        "className?: string",
+        "hiddenMobile?: boolean = false",
+        "signout?: () => void",
+        "persistQuery?: string",
+        "open?: boolean = true",
+        "commandComponent?: ReactNode"
       ],
       "formIntegration": false,
       "description": "Barre de navigation latérale rétractable avec logo, liens actifs, badges de notifications et bouton de déconnexion.",
@@ -2641,16 +3197,16 @@
       "importPath": "@vigee-designsystem/components/ProgressBar/ProgressCircle",
       "exportType": "default",
       "props": [
-        "max: number",
-        "value: number",
-        "min: number",
+        "max: number = 100",
+        "value: number = 0",
+        "min: number = 0",
         "gaugePrimaryColor: string",
-        "gaugeSecondaryColor?: string",
+        "gaugeSecondaryColor?: string = \"#E2E8F0\"",
         "className?: string",
         "text?: string",
         "textClassName?: string",
         "label?: ReactNode",
-        "strokeWidth?: number"
+        "strokeWidth?: number = 10"
       ],
       "formIntegration": false,
       "description": "Jauge circulaire SVG animée affichant un pourcentage calculé entre min et max, avec couleurs configurables.",
@@ -2673,8 +3229,8 @@
       "exportType": "named",
       "props": [
         "isRefetching: boolean",
-        "className?: string",
-        "size?: 'sm' | 'md'"
+        "className?: string = ''",
+        "size?: 'sm' | 'md' = 'md'"
       ],
       "formIntegration": false,
       "description": "Indicateur visuel animé (spinner → check → icône repeat) positionné en absolu pour signaler un refetch de données en cours.",
@@ -2696,10 +3252,18 @@
       "importPath": "@vigee-designsystem/components/Select/MultiSelect",
       "exportType": "named",
       "props": [
-        "options: {",
-        "label: string",
-        "value: string",
-        "icon?: React.ComponentType<{ className?: string"
+        "options: { /** The text to display for the option. */ label: string; /** The unique value associated with the option. */ value: string; /** Optional icon component to display alongside the option. */ icon?: React.ComponentType<{ className?: string }>; }[]",
+        "onValueChange: (value: string[]) => void",
+        "defaultValue?: string[] = []",
+        "placeholder?: string = \"Sélectionner des options\"",
+        "animation?: number = 0",
+        "maxCount?: number = 3",
+        "modalPopover?: boolean = false",
+        "asChild?: boolean = false",
+        "className?: string",
+        "label?: string",
+        "required?: boolean = false",
+        "variant?: \"default\" | \"secondary\" | \"destructive\" | \"inverted\""
       ],
       "formIntegration": false,
       "description": "Sélecteur multi-valeurs avec popover, recherche intégrée, badges de sélection et option \"tout sélectionner\".",
@@ -2722,16 +3286,16 @@
       "exportType": "named",
       "props": [
         "options: SelectOption[]",
-        "placeholder?: string",
+        "placeholder?: string = \"Sélectionnez une valeur\"",
         "onChange: (value: string | undefined) => void",
         "className?: string",
         "disabled?: boolean",
         "defaultValue?: string",
         "label?: string",
         "value?: string",
-        "clearable?: boolean",
+        "clearable?: boolean = false",
         "classNameContent?: string",
-        "compactWhenSelected?: boolean"
+        "compactWhenSelected?: boolean = false"
       ],
       "formIntegration": false,
       "description": "Select déroulant contrôlé/non-contrôlé avec support groupes, icônes par option et bouton clear intégré.",
@@ -2786,10 +3350,10 @@
         "children?: ReactNode",
         "icon?: ReactNode",
         "headerActions?: ReactNode",
-        "side?: \"left\" | \"right\" | \"top\" | \"bottom\"",
-        "size?: \"sm\" | \"md\" | \"lg\"",
-        "scroll?: boolean",
-        "sheet?: boolean"
+        "side?: \"left\" | \"right\" | \"top\" | \"bottom\" = \"bottom\"",
+        "size?: \"sm\" | \"md\" | \"lg\" = \"md\"",
+        "scroll?: boolean = true",
+        "sheet?: boolean = false"
       ],
       "formIntegration": false,
       "description": "Panneau latéral/modal adaptatif : Dialog centré sur desktop, Sheet glissante sur mobile, avec titre, description et contenu personnalisable.",
@@ -2817,10 +3381,11 @@
         "description?: string",
         "children?: ReactNode",
         "icon?: ReactNode",
-        "side?: \"left\" | \"right\" | \"top\" | \"bottom\"",
-        "scroll?: boolean",
-        "forceSheet?: boolean",
-        "className?: string"
+        "side?: \"left\" | \"right\" | \"top\" | \"bottom\" = \"bottom\"",
+        "scroll?: boolean = true",
+        "forceSheet?: boolean = false",
+        "className?: string",
+        "size?: \"sm\" | \"md\" | \"lg\""
       ],
       "formIntegration": false,
       "description": "Panneau Sheet (mobile) ou Dialog (desktop) responsive à état contrôlé externement, avec titre, description et icône optionnels.",
@@ -2840,7 +3405,23 @@
       "category": "Sidebar",
       "importPath": "@vigee-designsystem/components/Sidebar/app-sidebar",
       "exportType": "default",
-      "props": [],
+      "props": [
+        "items: MenuItem[]",
+        "bottomItems?: MenuItem[]",
+        "itemsSwitcher?: SwitcherItem[]",
+        "showSwitcher?: boolean = true",
+        "logo?: string",
+        "logoSmall?: string",
+        "pathname: string",
+        "user?: { name: string; email: string; avatar: string }",
+        "links: Links[]",
+        "headerComponent?: ReactNode",
+        "switcher?: boolean",
+        "classNameItems?: string",
+        "hoverBackground?: string = \"bg-slate-800\"",
+        "footerSlot?: ReactNode",
+        "activeSlug?: string"
+      ],
       "formIntegration": false,
       "description": "Barre de navigation latérale principale de l'application, avec items de menu, badges de notifications, switcher de contexte et footer utilisateur.",
       "useWhen": [
@@ -2860,10 +3441,8 @@
       "importPath": "@vigee-designsystem/components/Sidebar/footer-sidebar",
       "exportType": "default",
       "props": [
-        "user: {",
-        "name: string",
-        "email: string",
-        "avatar: string"
+        "user: { name: string; email: string; avatar: string; }",
+        "links: { name: string; icon: ReactNode; href?: string; onClick?: () => Promise<void> | void; }[]"
       ],
       "formIntegration": false,
       "description": "Bouton utilisateur en pied de sidebar affichant avatar/nom/email avec un menu déroulant de liens et actions.",
@@ -2905,7 +3484,14 @@
       "category": "Sidebar",
       "importPath": "@vigee-designsystem/components/Sidebar/switcher-sidebar",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "items: SwitcherItem[]",
+        "menuTitle?: string",
+        "logo?: string",
+        "logoSmall?: string",
+        "showSwitcher?: boolean = true",
+        "currentPath?: string"
+      ],
       "formIntegration": false,
       "description": "Switcher de contexte dans la sidebar : permet de naviguer entre les apps principales et les projets via un dropdown avec logo et item actif auto-détecté.",
       "useWhen": [
@@ -2921,44 +3507,21 @@
       "example": "<SwitcherSidebar items={appItems} menuTitle=\"Espace\" logo=\"/logo.svg\" logoSmall=\"/icon.svg\" showSwitcher={true} />"
     },
     {
-      "name": "DashboardSkeleton",
-      "category": "Skeletons",
-      "importPath": "@vigee-designsystem/components/Skeletons/Skeletons",
-      "exportType": "default",
-      "props": [
-        "noTop?: boolean"
-      ],
-      "formIntegration": false,
-      "description": "Collection de squelettes de chargement animés (shimmer + pulse) pour tâches, tickets, inputs, calendrier et bulles de chat.",
-      "useWhen": [
-        "affichage en attente de données async pour une liste de tâches → utiliser TaskSkeleton / PlanningTaskSkeleton",
-        "chargement d'un formulaire → utiliser InputSkeleton ou MultiInputsSkeleton",
-        "chargement d'une liste de tickets → utiliser TicketsSkeleton",
-        "chargement d'un calendrier → utiliser CalendarSkeleton"
-      ],
-      "dontUseFor": [
-        "chargement d'une page entière → utiliser LoaderPage",
-        "chargement d'un dashboard complet → utiliser DashboardSkeleton",
-        "indicateur de rechargement en arrière-plan → utiliser RefetchIndicator"
-      ],
-      "example": "<TicketsSkeleton className=\"mt-4\" />"
-    },
-    {
       "name": "GridPattern",
       "category": "SplashScreen",
       "importPath": "@vigee-designsystem/components/SplashScreen/GridPattern",
       "exportType": "named",
       "props": [
-        "width?: number",
-        "height?: number",
-        "x?: number",
-        "y?: number",
-        "strokeDasharray?: any",
-        "numSquares?: number",
+        "width?: number = 40",
+        "height?: number = 40",
+        "x?: number = -1",
+        "y?: number = -1",
+        "strokeDasharray?: any = 0",
+        "numSquares?: number = 50",
         "className?: string",
-        "maxOpacity?: number",
-        "duration?: number",
-        "repeatDelay?: number"
+        "maxOpacity?: number = 0.5",
+        "duration?: number = 4",
+        "repeatDelay?: number = 0.5"
       ],
       "formIntegration": false,
       "description": "Fond SVG animé avec une grille de carrés qui clignotent aléatoirement via Framer Motion, pour habiller visuellement une page.",
@@ -3001,7 +3564,11 @@
       "category": "SplashScreen",
       "importPath": "@vigee-designsystem/components/SplashScreen/SplashScreenManager",
       "exportType": "default",
-      "props": [],
+      "props": [
+        "className?: string",
+        "dark?: boolean",
+        "children: ReactNode"
+      ],
       "formIntegration": false,
       "description": "Affiche un écran de chargement (SplashScreen) au premier rendu, puis remplace par le contenu enfant une fois l'animation terminée.",
       "useWhen": [
@@ -3020,12 +3587,11 @@
       "category": "Stepper",
       "importPath": "@vigee-designsystem/components/Stepper/Stepper",
       "exportType": "named",
-      "props": [],
-      "formIntegration": false,
-      "exports": [
-        "Stepper",
-        "useStepper"
+      "props": [
+        "stepper: StepperHook<StepContent>",
+        "className?: string"
       ],
+      "formIntegration": false,
       "description": "Indicateur visuel de progression multi-étapes avec hook `useStepper` pour naviguer entre étapes nommées.",
       "useWhen": [
         "formulaire découpé en étapes séquentielles (onboarding, création guidée) → utiliser `Stepper` + `useStepper`",
@@ -3053,9 +3619,9 @@
         "lines?: number",
         "className?: string",
         "tableHook?: TanstackTable<TData>",
-        "displayBottomRowsSkeleton?: boolean",
+        "displayBottomRowsSkeleton?: boolean = false",
         "rowClassname?: string",
-        "classNames?: ClassNames",
+        "classNames?: ClassNames = {}",
         "onReachBottom?: () => void"
       ],
       "formIntegration": false,
@@ -3074,30 +3640,16 @@
       "example": "<DataTable columns={columns} data={projets} onRowClick={(row) => router.push(`/projets/${row.original.id}`)} lines={20} />"
     },
     {
-      "name": "Pagination",
-      "category": "Tables",
-      "importPath": "@vigee-designsystem/components/Tables/Pagination",
-      "exportType": "default",
-      "props": [],
-      "formIntegration": false,
-      "description": "Pagination URL-based pour tables et listes, synchronisée avec les search params Next.js — se cache automatiquement si une seule page.",
-      "useWhen": [
-        "table avec résultats paginés côté serveur → afficher la navigation entre pages",
-        "plusieurs listes paginées sur la même page → utiliser `paramName` distinct par liste",
-        "navigation paginée sans état client (URL comme source de vérité) → utiliser ce composant."
-      ],
-      "dontUseFor": [
-        "pagination avec état client pur (sans URL) → utiliser DataTable",
-        "filtres complexes combinés à la pagination → utiliser FilterableSelect."
-      ],
-      "example": "<Pagination totalPages={10} paramName=\"page\" />"
-    },
-    {
       "name": "TableSearch",
       "category": "Tables",
       "importPath": "@vigee-designsystem/components/Tables/Search",
       "exportType": "default",
-      "props": [],
+      "props": [
+        "className?: string",
+        "inputClassName?: string",
+        "placeholder?: string",
+        "variant?: \"default\" | \"light\" = \"default\""
+      ],
       "formIntegration": false,
       "description": "Champ de recherche debounced (300ms) qui synchronise la saisie utilisateur avec le paramètre URL `query` et remet la pagination à 1.",
       "useWhen": [
@@ -3110,39 +3662,6 @@
         "filtres multi-critères combinés → utiliser CheckboxFilter ou SelectFilter."
       ],
       "example": "<TableSearch placeholder=\"Rechercher un client...\" variant=\"default\" />"
-    },
-    {
-      "name": "TabMobile",
-      "category": "Tabs",
-      "importPath": "@vigee-designsystem/components/Tabs/TabMobile",
-      "exportType": "named",
-      "props": [
-        "onChange?: (value: T) => void",
-        "defaultValue?: string",
-        "value?: string",
-        "query?: string",
-        "options: TabOption<T>[]",
-        "children?: ReactNode",
-        "className?: string",
-        "startTransition?: (callback: () => void) => void",
-        "fullWidth?: boolean",
-        "variant?: \"default\" | \"light\" | \"mini\" | \"big\"",
-        "pageName?: string"
-      ],
-      "formIntegration": false,
-      "description": "Onglets navigables (valeur, URL ou query param) avec badges compteurs, icônes, statuts colorés et tooltips, optimisés mobile.",
-      "useWhen": [
-        "navigation entre vues filtrées via query param (ex: statut commande) → utiliser avec `query`",
-        "navigation entre pages via `href` par onglet",
-        "affichage d'un compteur par onglet (ex: tâches en attente) → utiliser `count`",
-        "taille d'onglet variable selon contexte → utiliser `variant` (\"mini\", \"big\", \"light\")"
-      ],
-      "dontUseFor": [
-        "navigation principale de l'app → utiliser Sidebar",
-        "onglets simples sans badges ni query params → utiliser TabsResponsive",
-        "filtres multiples simultanés → utiliser SelectMultiple"
-      ],
-      "example": "<TabMobile options={[{ name: \"Actifs\", value: \"active\", count: 12 }, { name: \"Archivés\", value: \"archived\" }]} query=\"status\" defaultValue=\"active\" />"
     },
     {
       "name": "TabsResponsive",
@@ -3158,9 +3677,9 @@
         "children?: ReactNode",
         "fullWidth?: boolean",
         "className?: string",
-        "selectLimit?: number",
+        "selectLimit?: number = 4",
         "startTransition?: (callback: () => void) => void",
-        "variation?: \"default\" | \"rounded\" | \"rounded-blue\" | \"rounded-green\""
+        "variation?: \"default\" | \"rounded\" | \"rounded-blue\" | \"rounded-green\" = \"default\""
       ],
       "formIntegration": false,
       "description": "Onglets adaptatifs (tabs → select selon le nombre d'options et la taille d'écran) avec support query string, navigation href et badges de comptage.",
@@ -3200,32 +3719,14 @@
       "example": "<Tooltip message=\"Supprimer l'élément\"><Button icon=\"trash\" onClick={handleDelete} /></Tooltip>"
     },
     {
-      "name": "TypographyH1",
-      "category": "Typography",
-      "importPath": "@vigee-designsystem/components/Typography/Typography",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": false,
-      "description": "Composants typographiques Vigee (H1→H4, Body, BodySmall, Caption, Blockquote) appliquant les styles de la charte via Tailwind.",
-      "useWhen": [
-        "titre principal de page → utiliser TypographyH1",
-        "titre de section → utiliser TypographyH2",
-        "sous-titre avec couleur primaire → utiliser TypographyH3",
-        "texte courant de contenu → utiliser Body",
-        "métadonnées, labels secondaires → utiliser Caption"
-      ],
-      "dontUseFor": [
-        "titres animés → utiliser TitleGradual",
-        "titre de page avec actions et breadcrumb → utiliser PageHeader"
-      ],
-      "example": "<TypographyH1>Tableau de bord</TypographyH1>"
-    },
-    {
       "name": "Accordion",
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/accordion",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "...: React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>"
+      ],
       "formIntegration": false,
       "exports": [
         "Accordion",
@@ -3251,7 +3752,11 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/alert",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "variant?: \"default\" | \"destructive\"",
+        "...: React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>"
+      ],
       "formIntegration": false,
       "exports": [
         "Alert",
@@ -3275,7 +3780,10 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/alert-dialog",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "...: React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Overlay>"
+      ],
       "formIntegration": false,
       "exports": [
         "AlertDialog",
@@ -3308,7 +3816,10 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/avatar",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "...: React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>"
+      ],
       "formIntegration": false,
       "exports": [
         "Avatar",
@@ -3328,41 +3839,16 @@
       "example": "<Avatar><AvatarImage src={user.photoUrl} alt={user.name} /><AvatarFallback>AB</AvatarFallback></Avatar>"
     },
     {
-      "name": "Badge",
-      "category": "ui",
-      "importPath": "@vigee-designsystem/components/ui/badge",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": false,
-      "exports": [
-        "Badge",
-        "badgeVariants"
-      ],
-      "description": "Étiquette visuelle inline pour signaler un statut, une catégorie ou un compteur sur un élément UI.",
-      "useWhen": [
-        "afficher le statut d'une entité (actif, archivé, en attente) → utiliser Badge",
-        "indiquer un type ou une catégorie sur une carte ou une ligne de tableau → utiliser Badge",
-        "signaler un compteur ou une nouveauté sur un élément → utiliser Badge"
-      ],
-      "dontUseFor": [
-        "actions utilisateur → utiliser Button",
-        "notifications système avec message détaillé → utiliser AlertInfo"
-      ],
-      "example": "<Badge variant=\"destructive\">Annulé</Badge>"
-    },
-    {
       "name": "Button",
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/button",
       "exportType": "named",
       "props": [
-        "asChild?: boolean"
+        "asChild?: boolean = false",
+        "variant?: \"default\" | \"destructive\" | \"outline\" | \"secondary\" | \"ghost\" | \"link\"",
+        "size?: \"default\" | \"sm\" | \"lg\" | \"icon\""
       ],
       "formIntegration": false,
-      "exports": [
-        "Button",
-        "buttonVariants"
-      ],
       "description": "Primitif bouton Radix/CVA avec variantes visuelles et tailles, base de tous les boutons du DS Vigee.",
       "useWhen": [
         "composant de bas niveau à étendre via `asChild` pour rendre un lien ou un élément custom comme bouton",
@@ -3382,7 +3868,12 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/calendar",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "classNames?",
+        "showOutsideDays?: = true",
+        "...: CalendarProps"
+      ],
       "formIntegration": false,
       "description": "Sélecteur de date(s) visuel basé sur react-day-picker, stylisé Vigee, avec navigation mois et support plage de dates.",
       "useWhen": [
@@ -3402,7 +3893,10 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/card",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "...: React.HTMLAttributes<HTMLDivElement>"
+      ],
       "formIntegration": false,
       "exports": [
         "Card",
@@ -3426,12 +3920,46 @@
       "example": "<Card title=\"Informations client\"><CardContent><p>Nom : Dupont</p></CardContent></Card>"
     },
     {
+      "name": "Carousel",
+      "category": "ui",
+      "importPath": "@vigee-designsystem/components/ui/carousel",
+      "exportType": "named",
+      "props": [
+        "prevText?: string",
+        "nextText?: string",
+        "opts?: CarouselOptions",
+        "plugins?: CarouselPlugin",
+        "orientation?: \"horizontal\" | \"vertical\" = \"horizontal\"",
+        "setApi?: (api: CarouselApi) => void"
+      ],
+      "formIntegration": false,
+      "exports": [
+        "Carousel",
+        "CarouselContent",
+        "CarouselItem",
+        "CarouselPrevious",
+        "CarouselNext"
+      ],
+      "description": "Carrousel de slides horizontal ou vertical basé sur Embla, avec navigation clavier et boutons précédent/suivant.",
+      "useWhen": [
+        "afficher une galerie d'images ou de cards en défilement → utiliser Carousel + CarouselContent + CarouselItem",
+        "présenter des étapes ou contenus paginés visuellement → utiliser Carousel avec orientation=\"horizontal\"",
+        "exposer un accès programmatique au carousel → utiliser Carousel avec setApi pour récupérer l'instance Embla"
+      ],
+      "dontUseFor": [
+        "navigation entre vues ou onglets → utiliser TabsResponsive",
+        "affichage d'une liste scrollable longue → utiliser ScrollArea"
+      ],
+      "example": "<Carousel><CarouselContent><CarouselItem>Slide 1</CarouselItem></CarouselContent><CarouselPrevious /><CarouselNext /></Carousel>"
+    },
+    {
       "name": "ChartContainer",
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/chart",
       "exportType": "named",
       "props": [
-        "config: ChartConfig"
+        "config: ChartConfig",
+        "children: React.ComponentProps<typeof RechartsPrimitive.ResponsiveContainer>[\"children\"]"
       ],
       "formIntegration": false,
       "exports": [
@@ -3459,7 +3987,9 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/checkbox",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "data-testid?: string"
+      ],
       "formIntegration": false,
       "description": "Primitive checkbox Radix UI stylée Vigee, avec support data-testid et états checked/disabled/focus.",
       "useWhen": [
@@ -3502,7 +4032,10 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/command",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "...: React.ComponentPropsWithoutRef<typeof CommandPrimitive>"
+      ],
       "formIntegration": false,
       "exports": [
         "Command",
@@ -3533,7 +4066,9 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/context-menu",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "inset?: boolean"
+      ],
       "formIntegration": false,
       "exports": [
         "ContextMenu",
@@ -3566,43 +4101,14 @@
       "example": "<ContextMenu><ContextMenuTrigger><div>Clic droit ici</div></ContextMenuTrigger><ContextMenuContent><ContextMenuItem>Éditer</ContextMenuItem><ContextMenuItem>Supprimer</ContextMenuItem></ContextMenuContent></ContextMenu>"
     },
     {
-      "name": "Dialog",
-      "category": "ui",
-      "importPath": "@vigee-designsystem/components/ui/dialog",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": false,
-      "exports": [
-        "Dialog",
-        "DialogPortal",
-        "DialogOverlay",
-        "DialogClose",
-        "DialogTrigger",
-        "DialogContent",
-        "DialogHeader",
-        "DialogFooter",
-        "DialogTitle",
-        "DialogDescription"
-      ],
-      "description": "Modale centrée avec overlay, animation d'entrée/sortie et bouton de fermeture intégré, basée sur Radix Dialog.",
-      "useWhen": [
-        "confirmation d'une action critique → utiliser Dialog",
-        "affichage d'un formulaire secondaire sans quitter la page → utiliser Dialog",
-        "présentation d'un détail contextuel nécessitant le focus utilisateur → utiliser Dialog"
-      ],
-      "dontUseFor": [
-        "contenu latéral ou panneau glissant → utiliser Sheet",
-        "actions destructives avec double confirmation → utiliser AlertDialog",
-        "contenu riche sur mobile nécessitant un tiroir → utiliser Drawer"
-      ],
-      "example": "<Dialog><DialogTrigger asChild><Button icon=\"info\" /></DialogTrigger><DialogContent><DialogHeader><DialogTitle>Titre</DialogTitle><DialogDescription>Description</DialogDescription></DialogHeader></DialogContent></Dialog>"
-    },
-    {
       "name": "Drawer",
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/drawer",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "shouldScaleBackground?: = true",
+        "...: React.ComponentProps<typeof DrawerPrimitive.Root>"
+      ],
       "formIntegration": false,
       "exports": [
         "Drawer",
@@ -3634,7 +4140,9 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/dropdown-menu",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "inset?: boolean"
+      ],
       "formIntegration": false,
       "exports": [
         "DropdownMenu",
@@ -3667,40 +4175,16 @@
       "example": "<DropdownMenu><DropdownMenuTrigger asChild><Button icon=\"more\" /></DropdownMenuTrigger><DropdownMenuContent><DropdownMenuItem>Modifier</DropdownMenuItem><DropdownMenuItem>Supprimer</DropdownMenuItem></DropdownMenuContent></DropdownMenu>"
     },
     {
-      "name": "Form",
-      "category": "ui",
-      "importPath": "@vigee-designsystem/components/ui/form",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": true,
-      "exports": [
-        "Form",
-        "FormControl",
-        "FormDescription",
-        "FormField",
-        "FormItem",
-        "FormLabel",
-        "FormMessage",
-        "useFormField"
-      ],
-      "description": "Primitives de formulaire react-hook-form (Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage) avec gestion d'état et d'erreurs intégrée.",
-      "useWhen": [
-        "wrapping d'un formulaire react-hook-form pour connecter les champs à la validation → utiliser Form + FormField",
-        "afficher le message d'erreur d'un champ → utiliser FormMessage",
-        "associer un label accessible à un input → utiliser FormLabel + FormControl"
-      ],
-      "dontUseFor": [
-        "champ isolé sans formulaire react-hook-form → utiliser directement Input",
-        "formulaire avec état local simple sans validation → utiliser ui/Input directement"
-      ],
-      "example": "<Form {...form}><FormField control={form.control} name=\"email\" render={({ field }) => (<FormItem><FormLabel>Email</FormLabel><FormControl><input {...field} /></FormControl><FormMessage /></FormItem>)} /></Form>"
-    },
-    {
       "name": "HoverCard",
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/hover-card",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "align?: = \"center\"",
+        "sideOffset?: = 4",
+        "...: React.ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>"
+      ],
       "formIntegration": false,
       "exports": [
         "HoverCard",
@@ -3724,7 +4208,11 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/input",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "type?",
+        "...: InputProps"
+      ],
       "formIntegration": false,
       "description": "Primitif input HTML stylisé Vigee : champ texte brut avec gestion focus, disabled et upload de fichier.",
       "useWhen": [
@@ -3744,7 +4232,10 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/label",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "...: React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & VariantProps<typeof labelVariants>"
+      ],
       "formIntegration": false,
       "description": "Label accessible Radix UI, stylisé Vigee, à associer à un champ de formulaire via `htmlFor`.",
       "useWhen": [
@@ -3763,7 +4254,11 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/navigation-menu",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "children?",
+        "...: React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Root>"
+      ],
       "formIntegration": false,
       "exports": [
         "NavigationMenu",
@@ -3773,7 +4268,6 @@
         "NavigationMenuLink",
         "NavigationMenuList",
         "NavigationMenuTrigger",
-        "navigationMenuTriggerStyle",
         "NavigationMenuViewport"
       ],
       "description": "Barre de navigation horizontale avec sous-menus animés, basée sur Radix NavigationMenu — pour les navs principales desktop.",
@@ -3795,10 +4289,7 @@
       "importPath": "@vigee-designsystem/components/ui/phone-input",
       "exportType": "named",
       "props": [
-        "disabled?: boolean",
-        "value: RPNInput.Country",
-        "onChange: (value: RPNInput.Country) => void",
-        "options: CountrySelectOption[]"
+        "onChange?: (value: RPNInput.Value) => void"
       ],
       "formIntegration": false,
       "description": "Input téléphonique international avec sélecteur de pays (drapeau + indicatif) basé sur react-phone-number-input, format E.164.",
@@ -3814,36 +4305,15 @@
       "example": "<PhoneInput value={phone} onChange={(value) => setPhone(value)} defaultCountry=\"FR\" />"
     },
     {
-      "name": "Popover",
-      "category": "ui",
-      "importPath": "@vigee-designsystem/components/ui/popover",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": false,
-      "exports": [
-        "Popover",
-        "PopoverTrigger",
-        "PopoverContent"
-      ],
-      "description": "Popover flottant Radix UI avec animation et positionnement automatique, pour afficher du contenu contextuel ancré à un déclencheur.",
-      "useWhen": [
-        "afficher des options/détails supplémentaires au clic sur un bouton",
-        "saisie inline sans ouvrir un Dialog",
-        "formulaire court contextuel (filtre, date, couleur) ancré à un élément"
-      ],
-      "dontUseFor": [
-        "contenu long ou structuré nécessitant une pleine page → utiliser Sheet",
-        "confirmation d'action destructive → utiliser AlertDialog",
-        "sélection dans une liste → utiliser Select"
-      ],
-      "example": "<Popover><PopoverTrigger asChild><Button icon=\"settings\" /></PopoverTrigger><PopoverContent>Contenu contextuel</PopoverContent></Popover>"
-    },
-    {
       "name": "Progress",
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/progress",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "value?",
+        "...: React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>"
+      ],
       "formIntegration": false,
       "description": "Barre de progression horizontale Radix UI pour afficher un pourcentage d'avancement (0–100).",
       "useWhen": [
@@ -3863,7 +4333,10 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/radio-group",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "...: React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>"
+      ],
       "formIntegration": false,
       "exports": [
         "RadioGroup",
@@ -3887,7 +4360,11 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/scroll-area",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "children?",
+        "...: React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>"
+      ],
       "formIntegration": false,
       "exports": [
         "ScrollArea",
@@ -3910,7 +4387,11 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/select",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "children?",
+        "...: React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>"
+      ],
       "formIntegration": false,
       "exports": [
         "Select",
@@ -3937,30 +4418,15 @@
       "example": "<Select onValueChange={setValue}><SelectTrigger><SelectValue placeholder=\"Choisir...\" /></SelectTrigger><SelectContent><SelectItem value=\"a\">Option A</SelectItem></SelectContent></Select>"
     },
     {
-      "name": "Separator",
-      "category": "ui",
-      "importPath": "@vigee-designsystem/components/ui/separator",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": false,
-      "description": "Ligne de séparation visuelle horizontale ou verticale basée sur Radix UI, accessible et stylée avec la couleur `border` du thème.",
-      "useWhen": [
-        "diviser des sections dans une carte ou un panneau → utiliser Separator",
-        "séparer des items dans un menu ou une liste → utiliser Separator",
-        "tracer une ligne entre un header et son contenu → utiliser Separator"
-      ],
-      "dontUseFor": [
-        "structurer des blocs de contenu avec espacement → utiliser Container",
-        "créer des sections titrées → utiliser SectionHeading"
-      ],
-      "example": "<Separator orientation=\"horizontal\" />"
-    },
-    {
       "name": "Sheet",
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/sheet",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "...: React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>",
+        "side?: \"top\" | \"bottom\" | \"left\" | \"right\""
+      ],
       "formIntegration": false,
       "exports": [
         "Sheet",
@@ -3992,7 +4458,12 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/sidebar",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "side?: \"left\" | \"right\" = \"left\"",
+        "variant?: \"sidebar\" | \"floating\" | \"inset\" = \"sidebar\"",
+        "collapsible?: \"offcanvas\" | \"icon\" | \"none\" = \"offcanvas\"",
+        "size?: \"default\" | \"sm\" | \"lg\""
+      ],
       "formIntegration": false,
       "exports": [
         "Sidebar",
@@ -4017,8 +4488,7 @@
         "SidebarProvider",
         "SidebarRail",
         "SidebarSeparator",
-        "SidebarTrigger",
-        "useSidebar"
+        "SidebarTrigger"
       ],
       "description": "Primitive de mise en page sidebar responsive : drawer mobile via Sheet, rail rétractable desktop avec état persisté en cookie.",
       "useWhen": [
@@ -4038,7 +4508,10 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/skeleton",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "...: React.HTMLAttributes<HTMLDivElement>"
+      ],
       "formIntegration": false,
       "description": "Bloc de chargement animé (pulse) pour masquer le contenu en attente de données.",
       "useWhen": [
@@ -4057,7 +4530,10 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/slider",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "...: React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root>"
+      ],
       "formIntegration": false,
       "description": "Primitif Radix UI pour sélectionner une valeur numérique dans une plage via un curseur glissant.",
       "useWhen": [
@@ -4075,7 +4551,10 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/switch",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "...: React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>"
+      ],
       "formIntegration": false,
       "description": "Interrupteur bascule (on/off) basé sur Radix UI Switch, pour activer ou désactiver une option de façon binaire.",
       "useWhen": [
@@ -4093,7 +4572,9 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/table",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "wrapperClassName?: string"
+      ],
       "formIntegration": false,
       "exports": [
         "Table",
@@ -4122,7 +4603,10 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/tabs",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "...: React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>"
+      ],
       "formIntegration": false,
       "exports": [
         "Tabs",
@@ -4147,7 +4631,10 @@
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/textarea",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "...: TextareaProps"
+      ],
       "formIntegration": false,
       "description": "Textarea stylisée Vigee, compatible ref-forwarding, pour saisie de texte multi-lignes dans les formulaires.",
       "useWhen": [
@@ -4180,122 +4667,17 @@
       "example": "<Toaster />"
     },
     {
-      "name": "Toggle",
-      "category": "ui",
-      "importPath": "@vigee-designsystem/components/ui/toggle",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": false,
-      "exports": [
-        "Toggle",
-        "toggleVariants"
-      ],
-      "description": "Bouton bascule accessible (on/off) basé sur Radix UI, avec variantes default/outline et tailles sm/default/lg.",
-      "useWhen": [
-        "activation d'un mode bold/italic dans un éditeur de texte → utiliser Toggle",
-        "bouton filtre visuel pressé/non-pressé → utiliser Toggle",
-        "option binaire isolée sans libellé formulaire → utiliser Toggle"
-      ],
-      "dontUseFor": [
-        "état on/off avec libellé texte dans un formulaire → utiliser Switch",
-        "groupe de toggles liés → utiliser ToggleGroup",
-        "sélection parmi plusieurs options → utiliser Tabs"
-      ],
-      "example": "<Toggle variant=\"outline\" size=\"sm\" aria-label=\"Gras\" pressed={bold} onPressedChange={setBold} />"
-    },
-    {
-      "name": "ToggleGroup",
-      "category": "ui",
-      "importPath": "@vigee-designsystem/components/ui/toggle-group",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": false,
-      "exports": [
-        "ToggleGroup",
-        "ToggleGroupItem"
-      ],
-      "description": "Groupe de boutons toggle mutuellement exclusifs ou à sélection multiple, basé sur Radix UI, avec variants et tailles partagés.",
-      "useWhen": [
-        "sélection d'un mode parmi plusieurs options (vue liste/grille/carte) → utiliser ToggleGroup",
-        "filtre visuel par type avec état actif visible → utiliser ToggleGroup",
-        "barre d'outils avec options activables groupées → utiliser ToggleGroup"
-      ],
-      "dontUseFor": [
-        "sélection multiple avec labels longs → utiliser MultiSelect",
-        "navigation entre vues avec URL → utiliser TabsResponsive",
-        "filtres combinables avec recherche → utiliser CheckboxFilter"
-      ],
-      "example": "<ToggleGroup type=\"single\" defaultValue=\"list\"><ToggleGroupItem value=\"list\">Liste</ToggleGroupItem><ToggleGroupItem value=\"grid\">Grille</ToggleGroupItem></ToggleGroup>"
-    },
-    {
-      "name": "Tooltip",
-      "category": "ui",
-      "importPath": "@vigee-designsystem/components/ui/tooltip",
-      "exportType": "named",
-      "props": [],
-      "formIntegration": false,
-      "exports": [
-        "Tooltip",
-        "TooltipTrigger",
-        "TooltipContent",
-        "TooltipProvider"
-      ],
-      "description": "Bulle d'information contextuelle au survol, basée sur Radix UI, avec animation et positionnement automatique.",
-      "useWhen": [
-        "icône sans libellé nécessitant une explication → envelopper avec Tooltip",
-        "bouton d'action dont le rôle n'est pas évident → ajouter un TooltipContent",
-        "information complémentaire non critique à afficher au survol sans encombrer l'UI."
-      ],
-      "dontUseFor": [
-        "contenu interactif complexe (liens, boutons) dans la bulle → utiliser HoverCard",
-        "messages d'alerte importants → utiliser AlertInfo."
-      ],
-      "example": "<TooltipProvider><Tooltip><TooltipTrigger><Button icon=\"info\" /></TooltipTrigger><TooltipContent>Informations supplémentaires</TooltipContent></Tooltip></TooltipProvider>"
-    },
-    {
-      "name": "type CarouselApi",
-      "category": "ui",
-      "importPath": "@vigee-designsystem/components/ui/carousel",
-      "exportType": "named",
-      "props": [
-        "prevText?: string",
-        "nextText?: string",
-        "opts?: CarouselOptions",
-        "plugins?: CarouselPlugin",
-        "orientation?: \"horizontal\" | \"vertical\"",
-        "setApi?: (api: CarouselApi) => void"
-      ],
-      "formIntegration": false,
-      "exports": [
-        "type CarouselApi",
-        "Carousel",
-        "CarouselContent",
-        "CarouselItem",
-        "CarouselPrevious",
-        "CarouselNext"
-      ],
-      "description": "Carrousel de slides horizontal ou vertical basé sur Embla, avec navigation clavier et boutons précédent/suivant.",
-      "useWhen": [
-        "afficher une galerie d'images ou de cards en défilement → utiliser Carousel + CarouselContent + CarouselItem",
-        "présenter des étapes ou contenus paginés visuellement → utiliser Carousel avec orientation=\"horizontal\"",
-        "exposer un accès programmatique au carousel → utiliser Carousel avec setApi pour récupérer l'instance Embla"
-      ],
-      "dontUseFor": [
-        "navigation entre vues ou onglets → utiliser TabsResponsive",
-        "affichage d'une liste scrollable longue → utiliser ScrollArea"
-      ],
-      "example": "<Carousel><CarouselContent><CarouselItem>Slide 1</CarouselItem></CarouselContent><CarouselPrevious /><CarouselNext /></Carousel>"
-    },
-    {
-      "name": "type ToastProps",
+      "name": "ToastProvider",
       "category": "ui",
       "importPath": "@vigee-designsystem/components/ui/toast",
       "exportType": "named",
-      "props": [],
+      "props": [
+        "className?",
+        "...: React.ComponentPropsWithoutRef<typeof ToastPrimitives.Viewport>",
+        "variant?: \"default\" | \"destructive\""
+      ],
       "formIntegration": false,
       "exports": [
-        "type ToastProps",
-        "type ToastActionElement",
         "ToastProvider",
         "ToastViewport",
         "Toast",
@@ -4315,6 +4697,61 @@
         "informations contextuelles statiques dans la page → utiliser AlertInfo"
       ],
       "example": "<Toast variant=\"destructive\"><ToastTitle>Erreur</ToastTitle><ToastDescription>Une erreur est survenue.</ToastDescription><ToastClose /></Toast>"
+    },
+    {
+      "name": "Toggle",
+      "category": "ui",
+      "importPath": "@vigee-designsystem/components/ui/toggle",
+      "exportType": "named",
+      "props": [
+        "className?",
+        "variant?: \"default\" | \"outline\"",
+        "size?: \"default\" | \"sm\" | \"lg\"",
+        "...: React.ComponentPropsWithoutRef<typeof TogglePrimitive.Root> & VariantProps<typeof toggleVariants>"
+      ],
+      "formIntegration": false,
+      "description": "Bouton bascule accessible (on/off) basé sur Radix UI, avec variantes default/outline et tailles sm/default/lg.",
+      "useWhen": [
+        "activation d'un mode bold/italic dans un éditeur de texte → utiliser Toggle",
+        "bouton filtre visuel pressé/non-pressé → utiliser Toggle",
+        "option binaire isolée sans libellé formulaire → utiliser Toggle"
+      ],
+      "dontUseFor": [
+        "état on/off avec libellé texte dans un formulaire → utiliser Switch",
+        "groupe de toggles liés → utiliser ToggleGroup",
+        "sélection parmi plusieurs options → utiliser Tabs"
+      ],
+      "example": "<Toggle variant=\"outline\" size=\"sm\" aria-label=\"Gras\" pressed={bold} onPressedChange={setBold} />"
+    },
+    {
+      "name": "ToggleGroup",
+      "category": "ui",
+      "importPath": "@vigee-designsystem/components/ui/toggle-group",
+      "exportType": "named",
+      "props": [
+        "className?",
+        "variant?",
+        "size?",
+        "children?",
+        "...: React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> & VariantProps<typeof toggleVariants>"
+      ],
+      "formIntegration": false,
+      "exports": [
+        "ToggleGroup",
+        "ToggleGroupItem"
+      ],
+      "description": "Groupe de boutons toggle mutuellement exclusifs ou à sélection multiple, basé sur Radix UI, avec variants et tailles partagés.",
+      "useWhen": [
+        "sélection d'un mode parmi plusieurs options (vue liste/grille/carte) → utiliser ToggleGroup",
+        "filtre visuel par type avec état actif visible → utiliser ToggleGroup",
+        "barre d'outils avec options activables groupées → utiliser ToggleGroup"
+      ],
+      "dontUseFor": [
+        "sélection multiple avec labels longs → utiliser MultiSelect",
+        "navigation entre vues avec URL → utiliser TabsResponsive",
+        "filtres combinables avec recherche → utiliser CheckboxFilter"
+      ],
+      "example": "<ToggleGroup type=\"single\" defaultValue=\"list\"><ToggleGroupItem value=\"list\">Liste</ToggleGroupItem><ToggleGroupItem value=\"grid\">Grille</ToggleGroupItem></ToggleGroup>"
     },
     {
       "name": "ByVigee",
@@ -4343,17 +4780,29 @@
       "importPath": "@vigee-designsystem/components/WorkInProgress/WorkInProgress",
       "exportType": "named",
       "props": [
-        "title?: string",
-        "subtitle?: string",
+        "title?: string = \"En cours de développement\"",
+        "subtitle?: string = \"Cette section sera disponible très prochainement.\"",
         "progress?: number",
-        "showIllustration?: boolean",
-        "showProgress?: boolean",
+        "showIllustration?: boolean = true",
+        "showProgress?: boolean = true",
         "children?: ReactNode",
         "className?: string",
         "eta?: string",
         "data-testid?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Bloc d'attente « en cours de développement » : illustration, titre, sous-titre, barre de progression (animée, ou réglée par `progress`) et date estimée de livraison.",
+      "useWhen": [
+        "annoncer une section ou une page pas encore livrée → utiliser avec `title`, `subtitle` et `eta`",
+        "montrer l'avancement d'un travail dont on connaît le pourcentage → passer `progress` (0 à 100)",
+        "ajouter une action sous le bloc → passer des `children`"
+      ],
+      "dontUseFor": [
+        "écran ou liste vide faute de données → utiliser EmptyIllustration",
+        "chargement de données → utiliser les Skeletons",
+        "erreur de chargement → utiliser Error"
+      ],
+      "example": "<WorkInProgress title=\"Export comptable\" subtitle=\"Disponible très prochainement.\" eta=\"Décembre 2026\" />"
     },
     {
       "name": "WorkInProgressIllustration",
@@ -4364,9 +4813,78 @@
         "color?: string",
         "className?: string"
       ],
-      "formIntegration": false
+      "formIntegration": false,
+      "description": "Illustration SVG animée « travail en cours » (halo et particules), qui prend la couleur de texte passée dans `color`.",
+      "useWhen": [
+        "composer soi-même un écran d'attente avec cette illustration → utiliser avec `color` (une classe de couleur de texte) et `className` pour la taille"
+      ],
+      "dontUseFor": [
+        "annoncer une section en cours de développement → utiliser WorkInProgress, le bloc complet",
+        "écran ou liste vide → utiliser EmptyIllustration"
+      ],
+      "example": "<WorkInProgressIllustration color=\"text-primary\" className=\"w-40 h-40\" />"
     }
   ],
+  "iconMap": {
+    "send": "PiSendPlaneHorizontalStroke",
+    "view": "PiEye02OnStroke",
+    "add": "PiPlusSquareStroke",
+    "download": "PiDownloadDownStroke",
+    "trash": "PiDeleteDustbin01Stroke",
+    "upload": "PiUploadUpStroke",
+    "import": "PiFileArrowUpStroke",
+    "fileAdd": "PiFilePlusStroke",
+    "annotationStar": "PiAnnotationStarStroke",
+    "back": "PiArrowLeftStroke",
+    "edit": "PiPencilEditBoxStroke",
+    "pen": "PiPencilEditStroke",
+    "flag": "PiFlagStroke",
+    "arrowLeft": "PiArrowLeftCircleStroke",
+    "userAdd": "PiUserPlusStroke",
+    "user": "PiUserCircleStroke",
+    "copy": "PiCopyCopiedStroke",
+    "chevron": "PiChevronRightStroke",
+    "chevronLeft": "PiChevronLeftStroke",
+    "search": "PiSearchDefaultStroke",
+    "plus": "PiPlusDefaultStroke",
+    "camera": "PiCameraStroke",
+    "filter": "PiFilterLinesStroke",
+    "calendar": "PiCalendarFilledStroke",
+    "refresh": "PiRefreshStroke",
+    "logout": "PiLogOutRightStroke",
+    "navigation": "PiNavigationSlantStroke",
+    "chevronDown": "PiChevronDownStroke",
+    "chevronUp": "PiChevronUpStroke",
+    "github": "PiGithubStroke",
+    "google": "PiGoogleStroke",
+    "apple": "PiAppleLogoStroke",
+    "dots": "PiThreeDotsMenuHorizontalStroke",
+    "check": "PiCheckTickSingleStroke",
+    "clock": "PiClockDefaultStroke",
+    "phone": "PiPhoneDefaultStroke",
+    "ai": "PiOpenaiStroke",
+    "settings": "PiUserSettingsStroke",
+    "stats": "PiBarchartDefaultStroke",
+    "hourglass": "PiHourglassStroke",
+    "list": "PiListPlusStroke",
+    "seeMore": "PiListSearchStroke",
+    "cancel": "PiRotateLeftStroke",
+    "cross": "XIcon",
+    "home": "PiHomeDefaultStroke",
+    "contacts": "PiContactsBookStroke",
+    "chat": "PiChatDefaultStroke",
+    "play": "PiPlayCircleStroke",
+    "pause": "PiPauseCircleStroke",
+    "link": "PiLinkHorizontalStroke",
+    "thumbsUp": "PiThumbReactionLikeStroke",
+    "chatAdd": "PiChatPlusStroke",
+    "rdvAdd": "PiCalendarPlusStroke",
+    "plusCircle": "PiPlusCircleStroke",
+    "repeat": "PiRepeatSquareStroke",
+    "instagram": "PiInstagramStroke",
+    "facebook": "PiFacebookStroke",
+    "configuration": "PiSettings02Stroke"
+  },
   "icons": {
     "importPath": "@vigee-designsystem/icons/PikaIcons",
     "count": 4372,
@@ -8744,82 +9262,5 @@
       "PiCrossCircleStroke",
       "PiCrossCircleDuoCross"
     ]
-  },
-  "iconMap": {
-    "send": "PiSendPlaneHorizontalStroke",
-    "view": "PiEye02OnStroke",
-    "add": "PiPlusSquareStroke",
-    "download": "PiDownloadDownStroke",
-    "trash": "PiDeleteDustbin01Stroke",
-    "upload": "PiUploadUpStroke",
-    "import": "PiFileArrowUpStroke",
-    "fileAdd": "PiFilePlusStroke",
-    "annotationStar": "PiAnnotationStarStroke",
-    "back": "PiArrowLeftStroke",
-    "edit": "PiPencilEditBoxStroke",
-    "pen": "PiPencilEditStroke",
-    "flag": "PiFlagStroke",
-    "arrowLeft": "PiArrowLeftCircleStroke",
-    "userAdd": "PiUserPlusStroke",
-    "user": "PiUserCircleStroke",
-    "copy": "PiCopyCopiedStroke",
-    "chevron": "PiChevronRightStroke",
-    "chevronLeft": "PiChevronLeftStroke",
-    "search": "PiSearchDefaultStroke",
-    "plus": "PiPlusDefaultStroke",
-    "camera": "PiCameraStroke",
-    "filter": "PiFilterLinesStroke",
-    "calendar": "PiCalendarFilledStroke",
-    "refresh": "PiRefreshStroke",
-    "logout": "PiLogOutRightStroke",
-    "navigation": "PiNavigationSlantStroke",
-    "chevronDown": "PiChevronDownStroke",
-    "chevronUp": "PiChevronUpStroke",
-    "github": "PiGithubStroke",
-    "google": "PiGoogleStroke",
-    "apple": "PiAppleLogoStroke",
-    "dots": "PiThreeDotsMenuHorizontalStroke",
-    "check": "PiCheckTickSingleStroke",
-    "clock": "PiClockDefaultStroke",
-    "phone": "PiPhoneDefaultStroke",
-    "ai": "PiOpenaiStroke",
-    "settings": "PiUserSettingsStroke",
-    "stats": "PiBarchartDefaultStroke",
-    "hourglass": "PiHourglassStroke",
-    "list": "PiListPlusStroke",
-    "seeMore": "PiListSearchStroke",
-    "cancel": "PiRotateLeftStroke",
-    "cross": "XIcon",
-    "home": "PiHomeDefaultStroke",
-    "contacts": "PiContactsBookStroke",
-    "chat": "PiChatDefaultStroke",
-    "play": "PiPlayCircleStroke",
-    "pause": "PiPauseCircleStroke",
-    "link": "PiLinkHorizontalStroke",
-    "thumbsUp": "PiThumbReactionLikeStroke",
-    "chatAdd": "PiChatPlusStroke",
-    "rdvAdd": "PiCalendarPlusStroke",
-    "plusCircle": "PiPlusCircleStroke",
-    "repeat": "PiRepeatSquareStroke",
-    "instagram": "PiInstagramStroke",
-    "facebook": "PiFacebookStroke",
-    "configuration": "PiSettings02Stroke"
-  },
-  "patterns": {
-    "form": "import { useForm } from 'react-hook-form';\nimport { zodResolver } from '@hookform/resolvers/zod';\nimport { Form } from '@vigee-designsystem/components/ui/form';\nimport Input from '@vigee-designsystem/components/Forms/Input';\nimport Select from '@vigee-designsystem/components/Forms/Select';\nimport Switch from '@vigee-designsystem/components/Forms/Switch';\n\nconst form = useForm({ resolver: zodResolver(schema), defaultValues: {...} });\n<Form {...form}><form onSubmit={form.handleSubmit(onSubmit)}>\n  <Input form={form} name=\"field\" label=\"Label\" />\n</form></Form>",
-    "dialog": "import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@vigee-designsystem/components/ui/dialog';\n\n<Dialog><DialogTrigger asChild><Button>Open</Button></DialogTrigger>\n<DialogContent><DialogHeader><DialogTitle>Title</DialogTitle></DialogHeader>\n  {/* content */}\n<DialogFooter><Button>Confirm</Button></DialogFooter>\n</DialogContent></Dialog>",
-    "table": "import { DataTable } from '@vigee-designsystem/components/Tables/DataTable';\nimport { ColumnDef } from '@tanstack/react-table';\n\nconst columns: ColumnDef<T>[] = [{ accessorKey: 'name', header: 'Nom' }];\n<DataTable columns={columns} data={data} />",
-    "toast": "import { toast } from 'sonner';\n\ntoast.success('Message de succès');\ntoast.error('Message d\\'erreur');",
-    "dropdown": "import { DropdownMenu } from '@vigee-designsystem/components/Menus/DropdownMenu';\n\n<DropdownMenu items={[{ label: 'Edit', onClick: handleEdit }]} />",
-    "sheet": "import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@vigee-designsystem/components/ui/sheet';\n\n<Sheet><SheetTrigger asChild><Button>Open</Button></SheetTrigger>\n<SheetContent><SheetHeader><SheetTitle>Title</SheetTitle></SheetHeader>\n  {/* content */}\n</SheetContent></Sheet>"
-  },
-  "rules": [
-    "UTILISE UNIQUEMENT les composants listés dans cet index — ne recrée jamais un composant existant.",
-    "Pour les formulaires, utilise TOUJOURS le pattern react-hook-form + zodResolver + composants Forms/ (Input, Select, Switch, etc.).",
-    "NE PAS utiliser ui/input, ui/select, ui/checkbox directement — utiliser les wrappers Forms/Input, Forms/Select, Forms/Checkboxes.",
-    "Les composants ui/ (dialog, sheet, accordion, etc.) sont des primitives Radix/shadcn : utilise-les directement pour le layout.",
-    "Pour les icônes, utiliser le shortcut iconMap du Button (icon='add') quand possible, sinon importer depuis PikaIcons.",
-    "Respecter les import paths exacts : @vigee-designsystem/components/{Category}/{Component} ou @vigee-designsystem/icons/PikaIcons.",
-    "Ne jamais importer depuis des chemins relatifs vers le design system — toujours utiliser l'alias @vigee-designsystem/."
-  ]
+  }
 }

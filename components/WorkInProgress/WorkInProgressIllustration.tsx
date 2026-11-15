@@ -1,3 +1,9 @@
+/**
+ * @description Illustration SVG animée « travail en cours » (halo et particules), qui prend la couleur de texte passée dans `color`.
+ * @useWhen composer soi-même un écran d'attente avec cette illustration → utiliser avec `color` (une classe de couleur de texte) et `className` pour la taille
+ * @dontUseFor annoncer une section en cours de développement → utiliser WorkInProgress, le bloc complet | écran ou liste vide → utiliser EmptyIllustration
+ * @example <WorkInProgressIllustration color="text-primary" className="w-40 h-40" />
+ */
 "use client";
 
 import { motion } from "framer-motion";
