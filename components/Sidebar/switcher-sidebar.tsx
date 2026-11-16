@@ -82,7 +82,7 @@ export function SwitcherSidebar({
   const activePath = clientPath || currentPath;
 
   // Trouver l'item actif basé sur le path courant
-  const activeItem = items.find((item) => {
+  const matchedItem = items.find((item) => {
     // Apps indépendantes — détecter par préfixe de route
     if (activePath?.startsWith("/leads") && item.slug.startsWith("/leads"))
       return true;
@@ -131,6 +131,11 @@ export function SwitcherSidebar({
     }
     return false;
   });
+  // Hors de toute app (ex. /profil) ou sur un projet absent de la liste, le
+  // sélecteur reste sur le Studio, comme le menu : il n'affiche plus
+  // « Sélectionner » à qui a un Studio.
+  const activeItem =
+    matchedItem ?? items.find((item) => item.type === "studio");
 
   // Ordre d'affichage : items principaux (apps + studio) en haut, projets au milieu,
   // items "bottom" (Mail, Vigee System) tout en bas après la liste des projets.
