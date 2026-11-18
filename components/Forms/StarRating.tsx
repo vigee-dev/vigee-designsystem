@@ -2,7 +2,7 @@
  * @description Notation sur 5 étoiles contrôlée par le parent (`value` / `onChange`), avec le libellé de la note sous les étoiles ; recliquer la note choisie la remet à zéro.
  * @useWhen recueillir une note de satisfaction ou d'évaluation (recette, avis client) → utiliser avec `value` + `onChange` | afficher une note déjà donnée, sans interaction → utiliser `readOnly` | bloquer la saisie pendant un enregistrement → utiliser `disabled`
  * @dontUseFor note sur une échelle continue ou sur plus de 5 → utiliser RatingSlider | choix oui / non → utiliser Switch | champ branché sur react-hook-form par `form` + `name` → ce composant ne l'est pas : garder la note dans un état et la reporter dans le formulaire
- * @example <StarRating value={rating} onChange={setRating} placeholder="Votre avis" testIdPrefix="review" />
+ * @example <StarRating value={rating} onChange={setRating} placeholder="Votre avis" testIdPrefix="review" tone="ink" />
  */
 "use client";
 
@@ -35,6 +35,8 @@ interface Props {
   placeholder?: string;
   /** Taille des étoiles. */
   size?: "md" | "lg";
+  /** Couleur des étoiles pleines : ambre (défaut) ou encre, la couleur principale Vigee. */
+  tone?: "amber" | "ink";
   /** Préfixe des data-testid (ex: "review" → "review-star-3"). */
   testIdPrefix?: string;
   className?: string;
@@ -52,6 +54,7 @@ export function StarRating({
   labels = DEFAULT_LABELS,
   placeholder,
   size = "md",
+  tone = "amber",
   testIdPrefix = "rating",
   className,
 }: Props) {
@@ -102,7 +105,7 @@ export function StarRating({
                 className={cn(
                   starSize,
                   "transition-colors",
-                  filled ? "text-amber-400" : "text-slate-300",
+                  filled ? (tone === "ink" ? "text-slate-900" : "text-amber-400") : "text-slate-300",
                 )}
               />
             </button>
@@ -111,7 +114,7 @@ export function StarRating({
       </div>
 
       {display > 0 && labels[display] ? (
-        <span className="text-xs font-medium text-amber-500">
+        <span className={cn("text-xs font-medium", tone === "ink" ? "text-slate-600" : "text-amber-500")}>
           {labels[display]}
         </span>
       ) : (
