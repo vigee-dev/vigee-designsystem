@@ -113,15 +113,18 @@ export function StarRating({
         })}
       </div>
 
-      {display > 0 && labels[display] ? (
-        <span className={cn("text-xs font-medium", tone === "ink" ? "text-slate-600" : "text-amber-500")}>
-          {labels[display]}
-        </span>
-      ) : (
-        placeholder && (
-          <span className="text-xs text-slate-400">{placeholder}</span>
-        )
-      )}
+      {/* La ligne du libellé garde sa place, vide ou non : sinon tout bouge au survol. */}
+      <span
+        className={cn(
+          "h-4 text-xs leading-4",
+          display > 0 && labels[display]
+            ? cn("font-medium", tone === "ink" ? "text-slate-600" : "text-amber-500")
+            : "text-slate-400",
+        )}
+        aria-live="polite"
+      >
+        {display > 0 && labels[display] ? labels[display] : placeholder ?? ""}
+      </span>
     </div>
   );
 }
