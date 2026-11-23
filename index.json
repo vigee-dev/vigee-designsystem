@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-11-20T10:37:53.775Z",
+  "generatedAt": "2026-11-23T10:13:36.580Z",
   "readme": "Design system Vigee. Lis `rules`, puis les composants de `essentials` : ce sont les premières fiches de `components` (essential: true). Chaque fiche dit à quoi sert le composant (description), quand l'utiliser (useWhen), quand ne pas l'utiliser (dontUseFor), ses propriétés (props : « nom?: type = défaut ») et un exemple. Avant de créer un élément d'interface, cherche-le ici par son nom ou par son usage ; s'il n'existe pas, dis-le dans le ticket plutôt que d'en créer un à côté. `patterns` donne les assemblages courants (formulaire, dialogue, tableau). Les icônes sont à la fin : `iconMap` pour les raccourcis du Button, `icons.names` pour le reste.",
   "rules": [
     "UTILISE UNIQUEMENT les composants listés dans cet index — ne recrée jamais un composant existant.",
@@ -2640,6 +2640,56 @@
       "example": "<AlertInfo type=\"warning\" title=\"Données non sauvegardées\" description=\"Vos modifications seront perdues si vous quittez la page.\" />"
     },
     {
+      "name": "BreakdownList",
+      "category": "KPI",
+      "importPath": "@vigee-designsystem/components/KPI/BreakdownList",
+      "exportType": "named",
+      "props": [
+        "title: string",
+        "subtitle?: string",
+        "rows: BreakdownRow[]",
+        "note?: string",
+        "testIdPrefix?: string = \"breakdown\"",
+        "className?: string",
+        "data-testid?: string"
+      ],
+      "formIntegration": false,
+      "description": "Une ventilation en liste : chaque ligne a son libellé, une barre fine à sa part, le nombre et le pourcentage ; une ligne qui a des sous-lignes se déplie sur elles (élément natif `details`, sans état).",
+      "useWhen": [
+        "répartir un total par lieu, source ou catégorie (pays, puis régions de France) → utiliser BreakdownList",
+        "une ventilation secondaire au pied d'un KpiPanel → utiliser BreakdownList"
+      ],
+      "dontUseFor": [
+        "plusieurs colonnes de chiffres par ligne → utiliser Tables",
+        "une évolution dans le temps → utiliser un graphe (Charts)",
+        "des étapes qui se suivent → utiliser FunnelSteps"
+      ],
+      "example": "<BreakdownList title=\"Pays\" subtitle=\"30 derniers jours\" rows={[{ id: \"france\", label: \"France\", value: \"1 032\", percent: 87, children: regions }]} note=\"D'après l'adresse IP, approximatif\" testIdPrefix=\"leads-dashboard-site-country\" />"
+    },
+    {
+      "name": "FunnelSteps",
+      "category": "KPI",
+      "importPath": "@vigee-designsystem/components/KPI/FunnelSteps",
+      "exportType": "named",
+      "props": [
+        "steps: FunnelStep[]",
+        "testIdPrefix?: string = \"funnel\"",
+        "className?: string"
+      ],
+      "formIntegration": false,
+      "description": "Les étapes d'un parcours en lignes fines : icône, libellé, barre fine à la part de l'étape d'avant, ligne de détail colorée dans le sens de l'écart, et le chiffre à droite ; une étape mise en avant passe en vert.",
+      "useWhen": [
+        "montrer un entonnoir (visites → échanges → rendez-vous, prospects → signés) avec la part de chaque étape → utiliser FunnelSteps",
+        "lister quelques indicateurs liés, chiffre à droite, dans un KpiPanel → utiliser FunnelSteps"
+      ],
+      "dontUseFor": [
+        "des indicateurs sans lien entre eux → utiliser StatWidget",
+        "une évolution dans le temps → utiliser un graphe (Charts)",
+        "un tableau de plusieurs colonnes → utiliser Tables"
+      ],
+      "example": "<FunnelSteps steps={[{ id: \"conversations\", label: \"Échanges\", value: 41, detail: \"3 % des visites\", barPercent: 3, icon: <PiChatChattingStroke /> }]} testIdPrefix=\"leads-dashboard-site\" />"
+    },
+    {
       "name": "KPI",
       "category": "KPI",
       "importPath": "@vigee-designsystem/components/KPI/KPIs",
@@ -2658,6 +2708,34 @@
         "valeurs sans navigation ni contexte dashboard → utiliser NumberTicker"
       ],
       "example": "<KPI stats={[{ name: \"Projets\", children: \"42\", stat: \"+5\", href: \"/projets\" }, { name: \"Utilisateurs\", children: \"128\", href: \"/users\" }]} />"
+    },
+    {
+      "name": "KpiPanel",
+      "category": "KPI",
+      "importPath": "@vigee-designsystem/components/KPI/KpiPanel",
+      "exportType": "named",
+      "props": [
+        "title: string",
+        "subtitle?: string",
+        "action?: ReactNode",
+        "children: ReactNode",
+        "footer?: ReactNode",
+        "halo?: KpiPanelHalo = \"emerald\"",
+        "className?: string",
+        "data-testid?: string"
+      ],
+      "formIntegration": false,
+      "description": "Bloc unique d'un tableau de bord : titre et période en tête, commande à droite (pastille « en direct », filtre), contenu libre, pied de bloc sur fond gris doux ; halo de couleur très léger en haut à gauche, derrière le chiffre principal.",
+      "useWhen": [
+        "réunir dans un seul bloc tout ce qui raconte un même sujet (le site, une campagne, un produit) : chiffre héros, étapes, ventilations → utiliser KpiPanel",
+        "mettre une ventilation secondaire (pays, campagnes) sous le contenu principal → passer `footer`"
+      ],
+      "dontUseFor": [
+        "plusieurs indicateurs indépendants côte à côte → utiliser StatWidgetGroup",
+        "un indicateur isolé → utiliser StatWidget",
+        "une page de chiffres au style épuré → utiliser epure/EpurePage et EpureCard de l'application"
+      ],
+      "example": "<KpiPanel title=\"Site\" subtitle=\"30 derniers jours\" action={<LivePill />} footer={<BreakdownList title=\"Pays\" rows={rows} />} data-testid=\"leads-dashboard-site\"><FunnelSteps steps={steps} /></KpiPanel>"
     },
     {
       "name": "NumberKPI",
