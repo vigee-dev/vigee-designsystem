@@ -31,6 +31,8 @@ interface Props<T extends FieldValues> {
   required?: boolean;
   classNameInput?: string;
   classNameButton?: string;
+  /** Posé sur le champ de saisie (ou le bouton calendrier sans saisie clavier), pour les tests E2E. */
+  "data-testid"?: string;
 }
 
 export default function DatePicker<T extends FieldValues>({
@@ -47,6 +49,7 @@ export default function DatePicker<T extends FieldValues>({
   required,
   classNameInput,
   classNameButton,
+  "data-testid": dataTestId,
 }: Props<T>) {
   const setToMidnight = (date: Date): Date => {
     const midnightDate = new Date(date);
@@ -132,6 +135,7 @@ export default function DatePicker<T extends FieldValues>({
               <FormControl>
                 {!disabledKeys ? (
                   <Input
+                    data-testid={dataTestId}
                     value={field.value ? convertDateToString(field.value) : inputValue}
                     onChange={e => {
                       const date = handleInputChange(e);
@@ -149,6 +153,7 @@ export default function DatePicker<T extends FieldValues>({
                   />
                 ) : (
                   <Button
+                    data-testid={dataTestId}
                     disabled={disabled}
                     variant={"outline"}
                     className={cn(`pl-3 text-left font-display font-medium bg-input border-none`, !field.value && "text-muted-foreground", classNameButton)}>
