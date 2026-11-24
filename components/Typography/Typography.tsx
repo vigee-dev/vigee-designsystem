@@ -26,19 +26,21 @@ export function TypographyBlockquote({ children }: { children: React.ReactNode }
   return <blockquote className="mt-6 border-l-2 pl-6 italic">{children}</blockquote>;
 }
 
-// Style commun à tous les bodies — police héritée du body (Geist),
-// tracking légèrement aéré + line-height confortable pour la lecture longue
-// dans un studio web. À appliquer sur tout texte qui n'est pas titre / label / code.
-const BODY_BASE = "font-normal text-foreground/85 leading-relaxed tracking-[-0.005em]";
+// Style commun à tous les bodies — police héritée du body (Geist) et
+// line-height confortable pour la lecture longue dans un studio web.
+// L'interlettrage est légèrement resserré, et de moins en moins à mesure que
+// le texte rapetisse : -0,011em à 15 px, -0,006em à 13 px, rien à 12 px.
+// À appliquer sur tout texte qui n'est pas titre / label / code.
+const BODY_BASE = "font-normal text-foreground/85 leading-relaxed";
 
 export function Body({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <p className={cn(BODY_BASE, "text-[15px]", className)}>{children}</p>;
+  return <p className={cn(BODY_BASE, "text-[15px] tracking-[-0.011em]", className)}>{children}</p>;
 }
 
 export function BodySmall({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <p className={cn(BODY_BASE, "text-[13px]", className)}>{children}</p>;
+  return <p className={cn(BODY_BASE, "text-[13px] tracking-[-0.006em]", className)}>{children}</p>;
 }
 
 export function Caption({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <p className={cn(BODY_BASE, "text-xs text-foreground/65", className)}>{children}</p>;
+  return <p className={cn(BODY_BASE, "text-xs tracking-normal text-foreground/65", className)}>{children}</p>;
 }
