@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-11-23T14:49:28.201Z",
+  "generatedAt": "2026-11-24T13:59:42.740Z",
   "readme": "Design system Vigee. Lis `rules`, puis les composants de `essentials` : ce sont les premières fiches de `components` (essential: true). Chaque fiche dit à quoi sert le composant (description), quand l'utiliser (useWhen), quand ne pas l'utiliser (dontUseFor), ses propriétés (props : « nom?: type = défaut ») et un exemple. Avant de créer un élément d'interface, cherche-le ici par son nom ou par son usage ; s'il n'existe pas, dis-le dans le ticket plutôt que d'en créer un à côté. `patterns` donne les assemblages courants (formulaire, dialogue, tableau). Les icônes sont à la fin : `iconMap` pour les raccourcis du Button, `icons.names` pour le reste.",
   "rules": [
     "UTILISE UNIQUEMENT les composants listés dans cet index — ne recrée jamais un composant existant.",
@@ -4269,7 +4269,8 @@
       "exports": [
         "HoverCard",
         "HoverCardTrigger",
-        "HoverCardContent"
+        "HoverCardContent",
+        "HoverCardPortal"
       ],
       "description": "Carte flottante affichée au survol d'un élément déclencheur, pour révéler des infos contextuelles sans clic.",
       "useWhen": [
