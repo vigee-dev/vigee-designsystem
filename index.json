@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-11-24T17:55:22.721Z",
+  "generatedAt": "2026-11-25T13:51:37.348Z",
   "readme": "Design system Vigee. Lis `rules`, puis les composants de `essentials` : ce sont les premières fiches de `components` (essential: true). Chaque fiche dit à quoi sert le composant (description), quand l'utiliser (useWhen), quand ne pas l'utiliser (dontUseFor), ses propriétés (props : « nom?: type = défaut ») et un exemple. Avant de créer un élément d'interface, cherche-le ici par son nom ou par son usage ; s'il n'existe pas, dis-le dans le ticket plutôt que d'en créer un à côté. `patterns` donne les assemblages courants (formulaire, dialogue, tableau). Les icônes sont à la fin : `iconMap` pour les raccourcis du Button, `icons.names` pour le reste.",
   "rules": [
     "UTILISE UNIQUEMENT les composants listés dans cet index — ne recrée jamais un composant existant.",
@@ -975,6 +975,30 @@
         "contenu toujours visible sans condition → pas besoin d'animation conditionnelle"
       ],
       "example": "<FadeInOut isVisible={isSubmitted}><AlertInfo message=\"Enregistrement réussi\" /></FadeInOut>"
+    },
+    {
+      "name": "LogoMark",
+      "category": "Avatar",
+      "importPath": "@vigee-designsystem/components/Avatar/LogoMark",
+      "exportType": "named",
+      "props": [
+        "src: string",
+        "alt: string",
+        "logo: ReturnType<typeof useLogoMark>",
+        "className?: string",
+        "data-testid?: string"
+      ],
+      "formIntegration": false,
+      "description": "Petit logo sans bord ni arrondi, invisible tant qu'il n'est pas chargé et retiré s'il n'existe pas ; `useLogoMark` dit à l'appelant s'il remplace un libellé (nom du client, du projet).",
+      "useWhen": [
+        "logo d'un client au début d'une ligne ou d'une carte, à la place de son nom → `const logo = useLogoMark(enabled)` puis `<LogoMark logo={logo} … />` et cacher le nom quand `logo.replacesLabel`",
+        "logo servi par une route qui répond 404 quand il n'y en a pas → rien ne s'affiche, le nom revient"
+      ],
+      "dontUseFor": [
+        "poser ou changer un logo → utiliser Forms/LogoUploader",
+        "photo d'un utilisateur → utiliser Avatar/Avatar"
+      ],
+      "example": "const logo = useLogoMark(isTeam); <LogoMark src={`/api/clients/${id}/logo`} alt={name} logo={logo} data-testid={`tickets-client-logo-${id}`} />{!logo.replacesLabel && name}"
     },
     {
       "name": "ActionWithValidation",
@@ -2135,6 +2159,35 @@
         "saisie de données structurées → utiliser Input"
       ],
       "example": "<InputDropZoneFile form={form} name=\"documents\" extensions={[\".pdf\", \".docx\"]} accept=\".pdf,.docx\" multiple />"
+    },
+    {
+      "name": "LogoUploader",
+      "category": "Forms",
+      "importPath": "@vigee-designsystem/components/Forms/LogoUploader",
+      "exportType": "named",
+      "props": [
+        "src?: string | null",
+        "alt: string",
+        "onPick: (file: File) => void | Promise<void>",
+        "placeholder?: ReactNode",
+        "disabled?: boolean = false",
+        "accept?: string = \"image/png,image/jpeg,image/webp,image/gif\"",
+        "className?: string",
+        "data-testid?: string"
+      ],
+      "formIntegration": false,
+      "description": "Logo rond cliquable (entreprise, client) : aperçu immédiat du fichier choisi, icône à la place quand il n'y a pas de logo, lecture seule possible ; le fichier est rendu à l'appelant qui l'envoie.",
+      "useWhen": [
+        "poser ou changer le logo d'un client, d'une organisation, d'un projet hors formulaire → passer `src` et `onPick`",
+        "logo absent → `placeholder` (ex. une mallette)",
+        "utilisateur sans droit d'écriture → `disabled` (rien ne s'affiche s'il n'y a pas de logo non plus)"
+      ],
+      "dontUseFor": [
+        "photo de profil d'un utilisateur dans un formulaire react-hook-form → utiliser Forms/ProfileImageUploader",
+        "petit logo dans une ligne de liste → utiliser Avatar/LogoMark",
+        "fichiers non-image → utiliser Forms/InputDropZone"
+      ],
+      "example": "<LogoUploader src={logoUrl} alt={client.name} placeholder={<PiBriefcaseJobDuoSolid className=\"h-7 w-7 text-slate-400\" />} onPick={uploadLogo} data-testid=\"project-client-logo-input\" />"
     },
     {
       "name": "PhoneNumber",
