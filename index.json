@@ -1,6 +1,6 @@
 {
   "version": "1.4.29",
-  "generatedAt": "2026-11-25T13:51:37.348Z",
+  "generatedAt": "2026-11-26T10:34:16.349Z",
   "readme": "Design system Vigee. Lis `rules`, puis les composants de `essentials` : ce sont les premières fiches de `components` (essential: true). Chaque fiche dit à quoi sert le composant (description), quand l'utiliser (useWhen), quand ne pas l'utiliser (dontUseFor), ses propriétés (props : « nom?: type = défaut ») et un exemple. Avant de créer un élément d'interface, cherche-le ici par son nom ou par son usage ; s'il n'existe pas, dis-le dans le ticket plutôt que d'en créer un à côté. `patterns` donne les assemblages courants (formulaire, dialogue, tableau). Les icônes sont à la fin : `iconMap` pour les raccourcis du Button, `icons.names` pour le reste.",
   "rules": [
     "UTILISE UNIQUEMENT les composants listés dans cet index — ne recrée jamais un composant existant.",
@@ -3736,6 +3736,31 @@
         "progression en pourcentage sans étapes nommées → utiliser ProgressBar"
       ],
       "example": "<Stepper stepper={useStepper(0, [\"Informations\", \"Documents\", \"Confirmation\"])} />"
+    },
+    {
+      "name": "StepTrail",
+      "category": "Stepper",
+      "importPath": "@vigee-designsystem/components/Stepper/StepTrail",
+      "exportType": "named",
+      "props": [
+        "steps: StepTrailItem[]",
+        "onSelect?: (key: string) => void",
+        "activeKey?: string",
+        "disabled?: boolean",
+        "testIdPrefix?: string = \"step-trail\"",
+        "className?: string"
+      ],
+      "formIntegration": false,
+      "description": "Étapes verticales en pastilles (cochée, en cours, à venir) qui se déroulent vers le bas avec l'avancement ; chaque pastille peut être cliquable pour y placer l'avancement.",
+      "useWhen": [
+        "sous-étapes d'une étape de frise (cadrage, développement) qu'on lit d'un coup d'œil et qu'on peut avancer ou faire revenir d'un clic → utiliser `StepTrail`",
+        "montrer ce qui est franchi, l'étape en cours et seulement la suivante → utiliser `StepTrail`"
+      ],
+      "dontUseFor": [
+        "formulaire découpé en étapes avec navigation suivant/précédent → utiliser Stepper",
+        "liste de vérifications réussies ou échouées → utiliser une liste à coches"
+      ],
+      "example": "<StepTrail steps={[{ key: \"code\", label: \"Étude du code\", mark: \"done\" }, { key: \"internal\", label: \"Étude interne\", mark: \"current\" }, { key: \"validation\", label: \"Validation interne\", mark: \"next\" }]} onSelect={(key) => move(key)} testIdPrefix=\"scoping-step\" />"
     },
     {
       "name": "DataTable",
